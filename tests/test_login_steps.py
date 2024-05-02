@@ -49,7 +49,7 @@ def step_nhs_sign_in_page_visible():
     if check_signin_button_exists():
         assert True, "NHS signin button is visible"
     else:
-        assert False, "NHS signin button is not visible"    
+        assert False, "NHS signin button is not visible"
 
 @when(cfparse("I provide the {emailAddress} and {password}"))
 @when("I provide the <emailAddress> and <password>")
@@ -62,11 +62,11 @@ def provide_credentials(emailAddress, password, shared_data):
         clear_password()
         clear_emailAddress()
         enter_email_address(emailAddress)
-    elif "long_email_address" in emailAddress:   
+    elif "long_email_address" in emailAddress:
         emailAddress = generate_random_string(65) + "nhs.net"
         enter_email_address(emailAddress)
         enter_password(password)
-    elif "long_password" in password:   
+    elif "long_password" in password:
         password = generate_random_string(65)
         enter_email_address(emailAddress)
         enter_password(password)
@@ -76,12 +76,12 @@ def provide_credentials(emailAddress, password, shared_data):
         password=config["credentials"]["ravs_password"]
         if password == "":
             assert False, "Please provide RAVs password as environment variable"
-        enter_password(password)    
+        enter_password(password)
     else:
         enter_email_address(emailAddress)
-        enter_password(password)        
+        enter_password(password)
     shared_data['emailAddress'] = emailAddress
-    shared_data['password'] = password        
+    shared_data['password'] = password
 
 @when("the NHS sign in button is clicked")
 def click_nhssignin():
@@ -97,14 +97,14 @@ def verify_signin_status(status, shared_data):
             assert check_password_error_alert_exists()
             assert get_password_missing_error_text() == "This field cannot be left blank"
         elif data['emailAddress'] == "None" and "valid" not in data["emailAddress"].lower():
-            assert check_emailAddress_error_alert_exists() 
-            assert check_found_some_errors_alert_exists()  
-            assert get_emailAddress_missing_error_text() == "This field cannot be left blank"      
+            assert check_emailAddress_error_alert_exists()
+            assert check_found_some_errors_alert_exists()
+            assert get_emailAddress_missing_error_text() == "This field cannot be left blank"
         elif "long_email_address" in data['emailAddress']:
-            assert check_emailAddress_error_alert_exists()   
-            assert get_emailAddress_missing_error_text() == "This field cannot be left blank"      
+            assert check_emailAddress_error_alert_exists()
+            assert get_emailAddress_missing_error_text() == "This field cannot be left blank"
         elif "valid" in data['emailAddress'] and status.lower()=="pass":
-            assert check_logout_button_exists() 
+            assert check_logout_button_exists()
             click_logout_button()
         else:
             assert check_unable_to_sign_in_error_exists()

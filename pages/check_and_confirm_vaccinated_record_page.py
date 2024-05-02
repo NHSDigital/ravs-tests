@@ -10,16 +10,16 @@ VACCINATOR_ORGANISATION_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row'
 VACCINATOR_SITE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Site']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 VACCINATOR_CARE_MODEL_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Care model']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 PATIENT_CHOSEN_VACCINE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Please select which vaccine the patient wants to receive.']/following-sibling::dd[@class='nhsuk-summary-list__value']")
-PATIENT_CHOSEN_VACCINE_TYPE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccine']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_CHOSEN_VACCINE_TYPE_LABEL_ELEMENT = ("(//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccine']/following-sibling::dd[@class='nhsuk-summary-list__value'])[1]")
 PATIENT_ELIGIBLE_FOR_VACCINE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Is the patient eligible for the vaccine?']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_ELIGIBLE_FOR_VACCINE_ANSWER_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Is the patient eligible for the vaccine?']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
 PATIENT_ELIGIBILITY_TYPE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Eligibility type']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_ELIGIBILITY_TYPE_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Eligibility type']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
-PATIENT_ELEGIBILITY_ASSESSING_CLINICIAN_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessing clinician']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_ELIGIBILITY_ASSESSING_CLINICIAN_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessing clinician']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_ELIGIBILITY_ASSESSING_CLINICIAN_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Eligibility type']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
-PATIENT_ELEGIBILITY_ASSESSMENT_DATE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessment date']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_ELIGIBILITY_ASSESSMENT_DATE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessment date']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_ELIGIBILITY_ASSESSMENT_DATE_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessment date']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
-PATIENT_ELEGIBILITY_ASSESSMENT_OUTCOME_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessment outcome']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_ELIGIBILITY_ASSESSMENT_OUTCOME_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessment outcome']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_ELIGIBILITY_ASSESSMENT_OUTCOME_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Assessment outcome']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
 PATIENT_ELIGIBILITY_ASSESSMENT_COMMENTS_LABEL_ELEMENT = ("(//div[@class='nhsuk-summary-list__row']/dt[text()='Comments']/following-sibling::dd[@class='nhsuk-summary-list__value'])[1]")
 CHANGE_PATIENT_ELIGIBILITY_ASSESSMENT_COMMENTS_BUTTON = ("(//div[@class='nhsuk-summary-list__row']/dt[text()='Comments']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change'])[1]")
@@ -37,7 +37,7 @@ PATIENT_VACCINATED_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[
 CHANGE_PATIENT_VACCINATED_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Have you vaccinated the patient?']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
 PATIENT_VACCINATION_DATE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccination date']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_VACCINATION_DATE_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccination date']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
-PATIENT_VACCINATION_VACCINE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccine']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_VACCINATED_VACCINE_LABEL_ELEMENT = ("(//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccine']/following-sibling::dd[@class='nhsuk-summary-list__value'])[2]")
 CHANGE_PATIENT_VACCINATION_VACCINE_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccine']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
 PATIENT_VACCINATION_ROUTE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccination route']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_VACCINATION_ROUTE_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccination route']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
@@ -45,7 +45,7 @@ PATIENT_VACCINATION_BATCH_NUMBER_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-l
 CHANGE_PATIENT_VACCINATION_BATCH_NUMBER_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Batch number']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
 PATIENT_VACCINATION_BATCH_EXPIRY_DATE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Batch expiry date']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_VACCINATION_BATCH_EXPIRY_DATE_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Batch expiry date']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
-PATIENT_VACCINATION_DOSE_AMOUNT_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Dose amount']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_VACCINATION_DOSE_AMOUNT_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Dose amount (ml)']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_VACCINATION_DOSE_AMOUNT_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Dose amount']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
 PATIENT_VACCINATION_PRESCRIBING_METHOD_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Prescribing method']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 CHANGE_PATIENT_VACCINATION_PRESCRIBING_METHOD_BUTTON = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Prescribing method']/following-sibling::dd[@class='nhsuk-summary-list__actions']/button[text()='Change']")
@@ -167,13 +167,13 @@ def get_patient_eligibility_type_vaccine_value():
     return find_element_and_perform_action(PATIENT_ELIGIBILITY_TYPE_LABEL_ELEMENT, "get_text")
 
 def get_patient_eligibility_assessing_clinician_vaccine_value():
-    return find_element_and_perform_action(PATIENT_ELEGIBILITY_ASSESSING_CLINICIAN_LABEL_ELEMENT, "get_text")
+    return find_element_and_perform_action(PATIENT_ELIGIBILITY_ASSESSING_CLINICIAN_LABEL_ELEMENT, "get_text")
 
 def get_patient_eligibility_assessment_date_value():
-    return find_element_and_perform_action(PATIENT_ELEGIBILITY_ASSESSMENT_DATE_LABEL_ELEMENT, "get_text")
+    return find_element_and_perform_action(PATIENT_ELIGIBILITY_ASSESSMENT_DATE_LABEL_ELEMENT, "get_text")
 
 def get_patient_eligibility_assessment_outcome_value():
-    return find_element_and_perform_action(PATIENT_ELEGIBILITY_ASSESSMENT_OUTCOME_LABEL_ELEMENT, "get_text")
+    return find_element_and_perform_action(PATIENT_ELIGIBILITY_ASSESSMENT_OUTCOME_LABEL_ELEMENT, "get_text")
 
 def get_patient_eligibility_assessment_comments_value():
     return find_element_and_perform_action(PATIENT_ELIGIBILITY_ASSESSMENT_COMMENTS_LABEL_ELEMENT, "get_text")
@@ -199,8 +199,8 @@ def get_patient_vaccinated_value():
 def get_patient_vaccinated_date_value():
     return find_element_and_perform_action(PATIENT_VACCINATION_DATE_LABEL_ELEMENT, "get_text")
 
-def get_patient_vaccinated_chosen_vaccine_date_value():
-    return find_element_and_perform_action(PATIENT_VACCINATION_VACCINE_LABEL_ELEMENT, "get_text")
+def get_patient_vaccinated_chosen_vaccine_value():
+    return find_element_and_perform_action(PATIENT_VACCINATED_VACCINE_LABEL_ELEMENT, "get_text")
 
 def get_patient_vaccination_route_value():
     return find_element_and_perform_action(PATIENT_VACCINATION_ROUTE_LABEL_ELEMENT, "get_text")

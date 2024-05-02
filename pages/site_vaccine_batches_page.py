@@ -1,6 +1,6 @@
 from init_helpers import *
 
-ADD_BATCH_BUTTON = ("//button[text()='Add batch']") 
+ADD_BATCH_BUTTON = ("//button[text()='Add batch']")
 SELECT_SITE_RADIOBUTTON = ("#SiteId")
 BACK_BUTTON_ON_VACCINE_BATCHES_PAGE = ("//a[@href='/site-vaccines']")
 COVID_VACCINE_RADIOBUTTON = ("//input[@class='nhsuk-radios__input' and @id='VaccineProgramId' and @value='1']")
@@ -37,47 +37,47 @@ def check_required_field_error_appears_for_expiry_DAY(wait):
 
 def enter_expiry_date(date):
     day, month, year = date.split('/')
-    find_element_and_perform_action(EXPIRY_DATE_DAY_INPUT_FIELD, "input_text", day)  
-    find_element_and_perform_action(EXPIRY_DATE_MONTH_INPUT_FIELD, "input_text", month)  
-    find_element_and_perform_action(EXPIRY_DATE_YEAR_INPUT_FIELD, "input_text", year)  
+    find_element_and_perform_action(EXPIRY_DATE_DAY_INPUT_FIELD, "input_text",day)
+    find_element_and_perform_action(EXPIRY_DATE_MONTH_INPUT_FIELD,"input_text", month)
+    find_element_and_perform_action(EXPIRY_DATE_YEAR_INPUT_FIELD, "input_text",year)
 
 def enter_flu_batch_number(batchnumber):
-    find_element_and_perform_action(FLU_BATCH_NUMBER_INPUT_FIELD, "input_text", batchnumber)  
+    find_element_and_perform_action(FLU_BATCH_NUMBER_INPUT_FIELD, "input_text",batchnumber)
 
 def enter_covid_batch_number_prefix(batchnumber):
-    find_element_and_perform_action(COVID_BATCH_NUMBER_PREFIX_INPUT_FIELD, "input_text", batchnumber)  
+    find_element_and_perform_action(COVID_BATCH_NUMBER_PREFIX_INPUT_FIELD,"input_text", batchnumber)
 
 def enter_covid_batch_number_suffix(batchnumber):
-    find_element_and_perform_action(COVID_BATCH_NUMBER_SUFFIX_INPUT_FIELD, "input_text", batchnumber)  
+    find_element_and_perform_action(COVID_BATCH_NUMBER_SUFFIX_INPUT_FIELD,"input_text", batchnumber)
 
 def click_back_button_on_vaccine_batches_page():
-    find_element_and_perform_action(BACK_BUTTON_ON_VACCINE_BATCHES_PAGE, "click")   
+    find_element_and_perform_action(BACK_BUTTON_ON_VACCINE_BATCHES_PAGE,"click")
 
 def click_select_vaccines_label():
     release_mouse()
-    find_element_and_perform_action(SELECT_VACCINES_LABEL, "click")   
+    find_element_and_perform_action(SELECT_VACCINES_LABEL, "click")
 
 def click_cancel_adding_vaccine_batches_button():
-    find_element_and_perform_action(CANCEL_ADDING_VACCINE_BATCHES_BUTTON, "click")   
+    find_element_and_perform_action(CANCEL_ADDING_VACCINE_BATCHES_BUTTON,"click")
 
 def click_confirm_vaccine_choices_button():
-    find_element_and_perform_action(CONFIRM_VACCINE_CHOICES_BUTTON, "click")  
+    find_element_and_perform_action(CONFIRM_VACCINE_CHOICES_BUTTON, "click")
 
 def Click_add_batch_button():
-    find_element_and_perform_action(ADD_BATCH_BUTTON, "click")   
+    find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
 
 def check_add_batch_button_exists():
-    return check_element_exists(ADD_BATCH_BUTTON, True) 
+    return check_element_exists(ADD_BATCH_BUTTON, True)
 
 def click_site_radio_button(site):
     element = (f"//label[text()='{site}']/preceding-sibling::input[@id='SiteId']")
-    find_element_and_perform_action(element, "click")   
+    find_element_and_perform_action(element, "click")
 
 def click_covid_vaccine_radiobutton():
-    find_element_and_perform_action(COVID_VACCINE_RADIOBUTTON, "click")   
+    find_element_and_perform_action(COVID_VACCINE_RADIOBUTTON, "click")
 
 def click_flu_vaccine_radiobutton():
-    find_element_and_perform_action(FLU_VACCINE_RADIOBUTTON, "click_checkbox")   
+    find_element_and_perform_action(FLU_VACCINE_RADIOBUTTON, "click_checkbox")
 
 def click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
     xpath_map = {
@@ -86,13 +86,13 @@ def click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
         "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @id='CovidVaccineId' and @value='3']",
         "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @id='CovidVaccineId' and @value='4']",
         "ppikevax xbb.1.5": "//input[@class='nhsuk-radios__input' and @id='CovidVaccineId' and @value='5']"
-    }    
+    }
     element = xpath_map.get(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
     else:
         print("Invalid vaccine type")
-    
+
 
 def click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
     xpath_map = {
@@ -103,8 +103,8 @@ def click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
         "supemtek - qivr": "//input[@class='nhsuk-radios__input' and @id='FluVaccineId' and @value='10']",
         "fluad tetra - aqiv": "//input[@class='nhsuk-radios__input' and @id='FluVaccineId' and @value='12']",
         "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @id='FluVaccineId' and @value='13']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @id='FluVaccineId' and @value='14']"                     
-    }    
+        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @id='FluVaccineId' and @value='14']"
+    }
     element = xpath_map.get(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")

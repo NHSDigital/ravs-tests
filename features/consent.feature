@@ -34,16 +34,16 @@
 # Scenario Outline: Choose vaccine type page should be visible
 #   Given I am on the choose vaccine page
 #   When I check the <vaccineType> vaccine checkbox
-#   Then I should be able to continue to screen patient    
+#   Then I should be able to continue to screen patient
 
 # Examples:
-# |vaccineType  | 
+# |vaccineType  |
 # |covid        |
 # |seasonal Flu |
 
 
 # @consent
-# Scenario Outline: Record consent, select consentType 
+# Scenario Outline: Record consent, select consentType
 #   Given I am on the Record consent page for covid vaccine
 #   When I select, Yes they consent, radio button
 #   And I select <consentType> from dropdown

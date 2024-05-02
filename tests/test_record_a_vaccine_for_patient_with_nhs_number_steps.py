@@ -14,7 +14,8 @@ from pages.patient_details_page import *
 from pages.delete_vaccination_page import *
 import logging
 from init_helpers import *
-from conftest import * 
+from conftest import *
+from helpers.datetimeHelper import *
 
 features_directory = get_working_directory() + "features"
 
@@ -27,7 +28,6 @@ def shared_data():
 
     yield data
     data.clear()
-
 
 @scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a vaccine with nhs number')
 def test_record_a_vaccine_with_nhs_number(navigate_and_login):
@@ -111,28 +111,28 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data):
         attach_screenshot("check_and_confirm_screen_before_assertion")
         assert get_patient_name_value() == shared_data["patient_name"]
         assert get_patient_address_value() == shared_data["address"]
-        assert get_dose_amount_value() == shared_data["dose_amount"]
-        assert get_vaccine_product_name_details() == shared_data["vaccine_type2"]
-        assert get_vaccine_date_details() == shared_data["vaccine_type2"]
-        assert get_assessment_date_value() == shared_data['eligibility_assessment_date']
-        assert get_vaccine_date_details() == shared_data['vaccination_date']
+        assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
+        assert get_patient_vaccine_type_chosen_vaccine_value() == shared_data["chosen_vaccine_type"]
+        assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["vaccine_type2"]
+        assert standardize_date_format(get_patient_eligibility_assessment_date_value()) == shared_data['eligibility_assessment_date']
+        assert standardize_date_format(get_patient_vaccinated_date_value()) == shared_data['vaccination_date']
         assert shared_data["date_of_birth"] in get_patient_dob_value()
         attach_screenshot("check_and_confirm_screen_after_assertion")
 
-@then("when I click confirm and save button, the immunisation hitsory of the patient should be updated in the patient details page")
+@then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
 def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):
     attach_screenshot("patient_details_screen_with_immunisation_history")
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower():
         click_confirm_details_and_save_button()
         if "covid" in shared_data["chosen_vaccine"].lower():
-            index = 1        
+            index = 1
         else:
             index = 2
-        
+
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
         assert get_vaccine_program_details(index) == shared_data["chosen_vaccine"]
-        assert standardize_date_format(get_vaccine_date_details(index))   == standardize_date_format(shared_data["vaccination_date"])
+        assert standardize_date_format(get_vaccine_date_details(index)) == standardize_date_format(shared_data["vaccination_date"])
         click_delete_history_button(shared_data["chosen_vaccine"])
         attach_screenshot("delete_history_button_clicked")
         click_delete_vaccination_button()

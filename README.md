@@ -29,6 +29,7 @@ Make use of this repository template to expedite your project setup and enhance 
   - [Contributing](#contributing)
   - [Contacts](#contacts)
   - [Licence](#licence)
+  - [Setup Make in windows](#setup-make-in-windows)
 
 ## Setup
 
@@ -110,3 +111,15 @@ Provide a way to contact the owners of this project. It can be a team, an indivi
 Unless stated otherwise, the codebase is released under the MIT License. This covers both the codebase and any sample code in the documentation.
 
 Any HTML or Markdown documentation is [© Crown Copyright](https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/) and available under the terms of the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+## Setup Make in windows
+
+Launch a new powershell window as an admin and run this command to install chocolatey
+
+```Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))```
+
+Then install make using
+
+```choco install make```
+
+

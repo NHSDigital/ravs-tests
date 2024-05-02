@@ -18,7 +18,7 @@ class BasePlaywrightHelper:
         self.browser = None
         self.context = None
         self.page = None
-       
+
     def launch_chromium(self, headless_mode):
         try:
             self.browser = self.playwright.chromium.launch(headless=headless_mode, args=["--fullscreen"])
@@ -64,7 +64,7 @@ class BasePlaywrightHelper:
         ua_string_android_samsung_internet = 'Mozilla/5.0 (Linux; Android 13; K; Pixel 4 XL) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/24.0 Chrome/117.0.0.0 Mobile Safari/537.36'
         ua_string_iphone_safari = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1'
         ua_string_iphone_chrome = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/123.0.6312.52 Mobile/15E148 Safari/604.1'
-        
+
         try:
             if "iphone_12" == device_name.lower():
                 self.browser = self.playwright.webkit.launch(headless=headless_mode)
@@ -98,7 +98,7 @@ class BasePlaywrightHelper:
     def close_browser(self):
         try:
             if self.context:
-                self.context.close()             
+                self.context.close()
             if self.browser:
                 self.browser.close()
             print("Browser closed successfully.")
@@ -109,7 +109,7 @@ class BasePlaywrightHelper:
         print(f"Navigating to URL: {url}")
         self.page.goto(url)
         self.page.wait_for_load_state()
-   
+
 
     def wait_for_page_to_load(self, timeout=10):
         self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
@@ -132,7 +132,7 @@ class BasePlaywrightHelper:
             print(f"Error waiting for element {selector} to disappear: {e}")
 
     def check_element_exists(self, selector, wait=False):
-        self.wait_for_page_to_load()        
+        self.wait_for_page_to_load()
         try:
             element = self.page.locator(selector)
             if wait == True:
@@ -141,26 +141,26 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Element - {selector} not found: {e}")
             return False
-        
+
     def scroll_into_view(self, selector):
         element=self.page.locator(selector)
         element.scroll_into_view_if_needed()
-        
+
     def clear_element(self, selector):
         self.wait_for_page_to_load()
         try:
             element=self.page.locator(selector)
             element.clear()
             print(f"Cleared text from the {selector} successfully.")
-        except Exception as e: 
+        except Exception as e:
             print(f"Exception: {e}. Element - {selector} not found.")
             raise ElementNotFoundException(f"Element not found: {selector}")
-        
+
     def release_mouse(self):
         self.page.mouse.move(100, 100)
         self.page.mouse.down()
         self.page.mouse.up()
-        
+
     def find_element_and_perform_action(self, selector, action, inputValue=None):
         self.wait_for_page_to_load()
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
@@ -240,12 +240,12 @@ class BasePlaywrightHelper:
             if self.playwright:
                 self.playwright.stop()
         except Exception as e:
-            print(f"An error occurred during browser cleanup: {e}")                
+            print(f"An error occurred during browser cleanup: {e}")
 
 class PlaywrightHelper(BasePlaywrightHelper):
     def __init__(self, working_directory, config):
         super().__init__(working_directory, config)
-        
+
         try:
             browser_name = config["browser"].lower()
             headless_mode = config["headless_mode"].lower() == "true"
@@ -264,4 +264,4 @@ class PlaywrightHelper(BasePlaywrightHelper):
             else:
                 print(f"Unsupported browser: {browser_name}")
         except Exception as e:
-            print(f"Error launching browser: {e}")        
+            print(f"Error launching browser: {e}")

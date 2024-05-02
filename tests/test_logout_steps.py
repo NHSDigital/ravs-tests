@@ -14,7 +14,6 @@ scenarios(f'{features_directory}/logout.feature')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 @pytest.fixture(scope='function')
 def shared_data():
     return {}

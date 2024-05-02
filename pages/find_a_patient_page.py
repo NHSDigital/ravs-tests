@@ -1,9 +1,9 @@
 from datetime import datetime
 from init_helpers import *
 
-SEARCH_BY_PDS_TAB_ELEMENT = ("//a[text()='By demographics']") 
-SEARCH_BY_NHS_NUMBER_TAB_ELEMENT = ("//a[text()='By NHS number']") 
-SEARCH_BY_RECORDS_TAB_ELEMENT = ("//a[text()='By local records']") 
+SEARCH_BY_PDS_TAB_ELEMENT = ("//a[text()='By demographics']")
+SEARCH_BY_NHS_NUMBER_TAB_ELEMENT = ("//a[text()='By NHS number']")
+SEARCH_BY_RECORDS_TAB_ELEMENT = ("//a[text()='By local records']")
 FIRSTNAME_INPUT_ELEMENT = ("#FirstName")
 LASTNAME_INPUT_ELEMENT = ("#LastName")
 DATEOFBIRTH_INPUT_ELEMENT = ("#DateOfBirth")
@@ -29,34 +29,34 @@ def enter_surname(surname):
     find_element_and_perform_action(LASTNAME_INPUT_ELEMENT, "input_text", surname)
 
 def enter_dateofbirth(dob):
-    find_element_and_perform_action(DATEOFBIRTH_INPUT_ELEMENT, "input_text", dob)    
+    find_element_and_perform_action(DATEOFBIRTH_INPUT_ELEMENT, "input_text", dob)
 
 def select_gender(gender):
-    find_element_and_perform_action(GENDER_DROPDOWN_ELEMENT, "select_option", gender)        
+    find_element_and_perform_action(GENDER_DROPDOWN_ELEMENT, "select_option", gender)
 
 def enter_postcode(postcode):
     find_element_and_perform_action(POSTCODE_INPUT_ELEMENT, "input_text", postcode)
 
 def enter_NHSNumber(nhsNumber):
-    find_element_and_perform_action(NHS_NUMBER_INPUT_ELEMENT, "input_text", nhsNumber)    
+    find_element_and_perform_action(NHS_NUMBER_INPUT_ELEMENT, "input_text", nhsNumber)
 
 def click_search_byNHSNumber_tab():
-    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_TAB_ELEMENT, "click")    
+    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_TAB_ELEMENT, "click")
 
 def click_search_byPatientDetails_tab():
-    find_element_and_perform_action(SEARCH_BY_PDS_TAB_ELEMENT, "click")     
+    find_element_and_perform_action(SEARCH_BY_PDS_TAB_ELEMENT, "click")
 
 def click_search_byNHSNumber_tab():
-    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_TAB_ELEMENT, "click")     
+    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_TAB_ELEMENT, "click")
 
 def click_search_byRecords_tab():
-    find_element_and_perform_action(SEARCH_BY_RECORDS_TAB_ELEMENT, "click")     
+    find_element_and_perform_action(SEARCH_BY_RECORDS_TAB_ELEMENT, "click")
 
 def check_search_for_patient_button_visible():
-    return check_element_exists(SEARCH_BUTTON_ELEMENT, False)   
+    return check_element_exists(SEARCH_BUTTON_ELEMENT, False)
 
 def click_search_for_patient_button():
-    find_element_and_perform_action(SEARCH_BUTTON_ELEMENT, "click")   
+    find_element_and_perform_action(SEARCH_BUTTON_ELEMENT, "click")
 
 def click_search_by_pds_tab():
     find_element_and_perform_action(SEARCH_BY_PDS_TAB_ELEMENT, "click")
@@ -114,14 +114,14 @@ def check_patient_dob_search_result_exists(dob, wait):
             raise ValueError("Unable to parse date: {}".format(dob))
 
     formatted_date = f"{dob_datetime.day}/{dob_datetime.month}/{dob_datetime.year}"
-    
+
     element = f"//td[text()='{formatted_date}']"
 
     return check_element_exists(element, wait)
 
 def check_patient_address_search_result_exists(address, wait):
-    parts = address.rsplit(",", 1) 
-    address = parts[0].strip()  
-    postcode = parts[1].strip() 
+    parts = address.rsplit(",", 1)
+    address = parts[0].strip()
+    postcode = parts[1].strip()
     element = (f"//td[contains(text(), '{address}') and contains(., '{postcode}')]")
     return check_element_exists(element, wait)

@@ -7,8 +7,8 @@ from playwright.sync_api import sync_playwright
 import allure
 
 playwright_helper_instance = None
-api_helper = None
-datetime_helper = None
+api_helper_instance = None
+datetime_helper_instance = None
 chrome_binary_path = None
 config = None
 
@@ -32,18 +32,18 @@ def get_mobile_devices():
         }
 
 def initialize_helpers():
-    global api_helper, datetime_helper, playwright_helper_instance, config
+    global api_helper_instance, datetime_helper_instance, playwright_helper_instance, config
 
     working_directory = get_working_directory()
-   
+
     if playwright_helper_instance is None:
-        playwright_helper_instance = PlaywrightHelper(working_directory, config)  
+        playwright_helper_instance = PlaywrightHelper(working_directory, config)
 
-    if api_helper is None:
-        api_helper = ApiHelper()
+    if api_helper_instance is None:
+        api_helper_instance = ApiHelper()
 
-    if datetime_helper is None:
-        datetime_helper = DatetimeHelper()        
+    if datetime_helper_instance is None:
+        datetime_helper_instance = DatetimeHelper()
 
 def load_config_from_env():
     config = {
@@ -56,7 +56,7 @@ def load_config_from_env():
             "ravs_password": os.environ.get("RAVS_PASSWORD", "")
         }
     }
-    return config      
+    return config
 
 def attach_screenshot(filename):
     if config["browser"] == "mobile":
@@ -78,13 +78,13 @@ def initialize_session():
 def playwright_helper():
     return playwright_helper_instance
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def api_helper():
-    return api_helper
+    return api_helper_instance
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def datetime_helper():
-    return datetime_helper
+    return datetime_helper_instance
 
 def get_app_url(test_environment):
     if test_environment is not None and "dev" in test_environment:
@@ -138,3 +138,13 @@ def find_element_and_perform_action(element, action, inputValue=None):
 
 def release_mouse():
     return playwright_helper_instance.release_mouse()
+
+def format_date(date, browser):
+    return datetime_helper_instance.format_date(date, browser)
+
+def standardize_date_format(date):
+    return datetime_helper_instance.standardize_date_format(date)
+
+def get_date_value(date):
+    return datetime_helper_instance.get_date_value(date)
+

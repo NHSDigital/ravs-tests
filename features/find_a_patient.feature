@@ -16,7 +16,7 @@ Feature: Find a patient
   Scenario: Search without entering patient details
     Given I am on the find a patient by pds details page
     When I click the search button
-    Then the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode   
+    Then the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode
 
   @findpatient
   Scenario Outline: Search by NHS number

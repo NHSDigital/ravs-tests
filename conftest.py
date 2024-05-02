@@ -35,62 +35,12 @@ def report_browser_version(request):
     else:
         logging.info(config["browser"].upper() + f" browser version is : {browser_version}")
 
-def format_date(date, browser):
-    try:
-        parsed_date = datetime.strptime(date, '%d/%m/%Y')
-        if browser == "safari" or browser == "mobile":
-            return parsed_date.strftime('%m/%d/%Y')
-        else:
-            return parsed_date.strftime('%d/%m/%Y')
-    except ValueError:
-        try:
-            parsed_date = datetime.strptime(date, '%Y-%m-%d')
-            if browser == "safari" or browser == "mobile":
-                return parsed_date.strftime('%m/%d/%Y')
-            else:
-                return parsed_date.strftime('%d/%m/%Y')
-        except ValueError:
-            try:
-                parsed_date = datetime.strptime(date, '%Y.%m.%d')
-                if browser == "safari" or browser == "mobile":
-                    return parsed_date.strftime('%m/%d/%Y')
-                else:
-                    return parsed_date.strftime('%d/%m/%Y')
-            except ValueError:
-                raise ValueError("Invalid date format. Date should be in the format dd/mm/yyyy, yyyy-mm-dd, or yyyy.%m.%d.")
+
 
 def format_nhs_number(nhs_number):
     # Use regular expressions to insert spaces in the phone number
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
-
-def get_date_value(date):
-    if "today" in date.lower():
-        parts = date.split("-")
-
-        if len(parts) > 1:
-            offset = int(parts[1].strip())
-        else:
-            offset = 0
-
-        return (datetime.today() - timedelta(days=offset)).date()
-    else:
-        return datetime.strptime(date, "%Y-%m-%d").date()
-    
-def standardize_date_format(date_str):
-    try:
-        # Try parsing the date as '%d/%m/%Y'
-        parsed_date = datetime.strptime(date_str, '%d/%m/%Y')
-        return parsed_date.strftime('%d/%m/%Y')
-    except ValueError:
-        try:
-            # If parsing fails, try parsing as '%m/%d/%Y'
-            parsed_date = datetime.strptime(date_str, '%m/%d/%Y')
-            # Format the parsed date to '%d/%m/%Y'
-            return parsed_date.strftime('%d/%m/%Y')
-        except ValueError:
-            # If parsing as both formats fails, return the original string
-            return date_str
 
 @pytest.fixture(scope='function')
 def playwright_helper(request):
@@ -101,8 +51,8 @@ def playwright_helper(request):
         except Exception as e:
             print(f"An error occurred during teardown: {e}")
             raise
-  
-    request.addfinalizer(teardown)    
+
+    request.addfinalizer(teardown)
     return helper
 
 # Fixture for site parameter
@@ -113,6 +63,11 @@ def site(request):
 # Fixture for care_model parameter
 @pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event"])
 def care_model(request):
+    return request.param
+
+# Fixture for covid vaccination types parameter
+@pytest.fixture(params=["Comirnaty Original/Omicron BA.4-5", "Comirnaty 30 Omicron XBB.1.5", "Comirnaty 3 Omicron XBB.1.5", "Comirnaty 10 Omicron XBB.1.5", "Spikevax XBB.1.5"])
+def covid_vaccine_type(request):
     return request.param
 
 # Fixture for navigating and logging in
@@ -145,7 +100,7 @@ def navigate_to_ravs(request):
 # Fixture for clicking back button
 @pytest.fixture(scope='function')
 def click_back_button_recording_consent(request):
-    click_back_button()   
+    click_back_button()
 
 # Fixture for logging in and navigating to appointments
 @pytest.fixture(scope='function')
@@ -156,7 +111,7 @@ def login_and_navigate_to_appointments(site, care_model,  navigate_and_login):
         enter_carehome_name("WHITESTONES CARE HOME")
     click_continue_to_record_a_vaccination_homepage()
     click_appointments_nav_link()
-    
+
 def set_vaccinator_location(site, care_model):
     select_site(site)
     select_care_model(care_model)
@@ -180,11 +135,11 @@ def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_
     attach_screenshot("user_has_selected_site")
     select_care_model(care_model)
     if care_model == "Care Home":
-        enter_carehome_name("WHITESTONES CARE HOME")    
+        enter_carehome_name("WHITESTONES CARE HOME")
     attach_screenshot("user_has_selected_site")
-    attach_screenshot("user_has_selected_care_model")    
+    attach_screenshot("user_has_selected_care_model")
     click_continue_to_record_a_vaccination_homepage()
-    attach_screenshot("user_has_clicked_continue_to_ravs_homepage")    
+    attach_screenshot("user_has_clicked_continue_to_ravs_homepage")
     click_appointments_nav_link()
     current_date = datetime.now()
     fromDate = datetime(2023, 12, 1)
@@ -192,7 +147,7 @@ def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_
     click_active_from_date()
     toDate = datetime.today()
     set_to_date(toDate)
-    click_active_to_date_today()    
+    click_active_to_date_today()
     click_first_patient()
 
 # Fixture for logging in and navigating to find a patient
@@ -206,16 +161,16 @@ def login_and_navigate_to_find_a_patient(request, login_and_set_vaccinator_locat
 
 # Fixture for logging in and finding a patient by NHS number
 @pytest.fixture(scope='function')
-def login_and_find_a_patient_by_NHS_Number(request, login_and_navigate_to_find_a_patient, nhs_number):   
-   enter_NHSNumber(nhs_number)
-   click_search_for_patient_button()    
+def login_and_find_a_patient_by_NHS_Number(request, login_and_navigate_to_find_a_patient, nhs_number):
+    enter_NHSNumber(nhs_number)
+    click_search_for_patient_button()
 
 # Fixture for navigating to find a patient by PDS search page
 @pytest.fixture(scope='function')
 def login_and_navigate_to_find_a_patient_by_pds_search_page(request):
     set_vaccinator_location()
     click_pds_search_nav_link()
-    
+
 # Fixture for navigating to appointments open first patient and clicking choose vaccine
 @pytest.fixture(scope='function')
 def goto_appointments_open_first_patient_and_click_choose_vaccine(request, login_and_navigate_to_appointments_open_first_patient):
@@ -224,24 +179,24 @@ def goto_appointments_open_first_patient_and_click_choose_vaccine(request, login
 # Fixture for navigating to appointments open first patient and clicking choose covid vaccine
 @pytest.fixture(scope='function')
 def goto_appointments_open_first_patient_and_click_choose_covid_vaccine(request, goto_appointments_open_first_patient_and_click_choose_vaccine):
-    click_covid_radiobutton()    
+    click_covid_radiobutton()
 
 # Fixture for navigating to appointments open first patient and clicking choose seasonal flu vaccine
 @pytest.fixture(scope='function')
 def goto_appointments_open_first_patient_and_click_choose_seasonal_flu_vaccine(request, goto_appointments_open_first_patient_and_click_choose_vaccine):
-    click_flu_radiobutton()       
+    click_flu_radiobutton()
 
 # # Fixture for selecting covid vaccine and going to record consent
 # @pytest.fixture(scope='function')
 # def select_covid_vaccine_and_goto_record_consent(request, goto_appointments_open_first_patient_and_click_choose_covid_vaccine):
-#     click_continue_to_record_consent_button()       
+#     click_continue_to_record_consent_button()
 
 # Fixture for logging out
 @pytest.fixture(scope='function')
 def logout(request, navigate_and_login):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists():
-            click_navbar_toggler()     
+            click_navbar_toggler()
             attach_screenshot("clicked_navbar_toggler")
     click_logout_button()
     attach_screenshot("clicked_log_out_button")
@@ -252,7 +207,7 @@ def click_find_a_patient_and_search_with_nhsnumber(nhs_number):
             click_navlinkbar_toggler()
     click_find_a_patient_nav_link()
     enter_NHSNumber(nhs_number)
-    click_search_for_patient_button()    
+    click_search_for_patient_button()
     attach_screenshot("entered_nhs_number_as" + nhs_number + "_and_clicked_search_for_patient_button")
 
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
@@ -307,10 +262,10 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_continue_to_vaccinate_button()
         attach_screenshot("clicked_continue_to_vaccinate_button")
     else:
-        click_no_to_consent()   
+        click_no_to_consent()
         if no_consent_reason is not None:
-            select_reason_for_no_consent(no_consent_reason)   
-        attach_screenshot("patient_decided_to_not_consent")         
+            select_reason_for_no_consent(no_consent_reason)
+        attach_screenshot("patient_decided_to_not_consent")
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
@@ -330,9 +285,9 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         click_prescribing_method(prescribing_method)
         click_continue_to_check_and_confirm_screen_button()
     else:
-        click_not_vaccinated_radiobutton()   
+        click_not_vaccinated_radiobutton()
         if no_vaccination_reason is not None:
-            select_reason_for_no_vaccination(no_vaccination_reason)    
+            select_reason_for_no_vaccination(no_vaccination_reason)
             click_save_and_return_button_on_record_vaccinated_page
         attach_screenshot("patient_decided_to_not_vaccinate")
         click_save_and_return_button_on_record_vaccinated_page()

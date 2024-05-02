@@ -47,6 +47,8 @@ class ApiRequestBase:
             return None
 
 class ApiHelper(ApiRequestBase):
+    def __init__(self):
+        super().__init__()
 
     @staticmethod
     def post_request_datafiles(url, headers=None, data=None):
