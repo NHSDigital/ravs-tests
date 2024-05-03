@@ -60,11 +60,6 @@ class BasePlaywrightHelper:
             print(f"Error launching Firefox: {e}")
 
     def launch_mobile_browser(self, device_name, headless_mode):
-        ua_string_android_chrome = 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.40 Mobile Safari/537.36'
-        ua_string_android_samsung_internet = 'Mozilla/5.0 (Linux; Android 13; K; Pixel 4 XL) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/24.0 Chrome/117.0.0.0 Mobile Safari/537.36'
-        ua_string_iphone_safari = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1'
-        ua_string_iphone_chrome = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/123.0.6312.52 Mobile/15E148 Safari/604.1'
-
         try:
             if "iphone_12" == device_name.lower():
                 self.browser = self.playwright.webkit.launch(headless=headless_mode)
