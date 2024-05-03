@@ -1,0 +1,127 @@
+name: Run Tests
+
+on:
+  # push:
+  #   branches:
+  #     - master
+  # schedule:
+  #     - cron: "0 8 * * *"
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Stop and remove all containers
+        run: |
+          docker stop $(docker ps -q) || true
+          docker rm $(docker ps -aq) || true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build the Docker image
+        run: docker build -t playwright-tests -f Docker/tests.dockerfile .
+
+      - name: Run Docker container
+        id: run-container
+        run: |
+          docker run -d --name playwright-tests \
+            --memory 8g \
+            -e RAVS_PASSWORD="${{ secrets.RAVS_PASSWORD }}" \
+            -e HEADLESS_MODE="true" \
+            -e TEST_ENVIRONMENT="qa" \
+            -e BROWSER="chrome" \
+            -e MARKER="" \
+            -e AGENTS=3 \
+            -p 5050:5050 \
+            playwright-tests
+          while true; do
+            if docker logs playwright-tests 2>&1 | grep -q "Server started"; then
+              echo "Website URL:"
+              break
+            else
+              echo "Waiting for the allure report to be uploaded..."
+              sleep 5
+            fi
+          done
+
+      - name: Start Docker container
+        run: |
+          docker start playwright-tests
+          docker exec playwright-tests bash -c "python3 -m http.server 5050" &
+
+      - name: Find Allure report directory
+        run: |
+          container_id=$(docker ps -qf "name=playwright-tests")
+          echo "Container ID: $container_id"
+          allure_directory=$(docker exec $container_id find /tmp -type d -name "allure-report" -print -quit)
+          echo "Allure Directory: $allure_directory"
+          if [[ -n "$allure_directory" ]]; then
+            echo "ALLURE_DIRECTORY=$allure_directory" >> $GITHUB_ENV
+
+            # Create a temporary directory to store the contents
+            temp_dir="$(mktemp -d)"
+            echo "Temporary Directory: $temp_dir"
+
+            # Copy the contents of allure_directory to the temporary directory
+            docker cp "$container_id":"$allure_directory"/. "$temp_dir"
+
+            # Archive the contents of the temporary directory
+            (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
+
+            # Set the path of Allure report archive as output
+            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
+
+            # Set the environment variable for the archive path
+            export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
+            echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
+
+            # Check if tar was generated successfully
+            if [ $? -eq 0 ]; then
+              echo "Tar archive generated successfully."
+
+              # Echo the path of the tar file
+              echo "Path of the tar file: $ALLURE_REPORT_ARCHIVE"
+
+              # List the contents of the tar file
+              tar -tf "$ALLURE_REPORT_ARCHIVE"
+            else
+              echo "Failed to generate tar archive."
+            fi
+          else
+            echo "Allure directory not found or is empty."
+          fi
+
+      - name: Upload Allure report archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report
+          path: /tmp/allure-report.tar.gz
+
+      - name: Retrieve and extract Allure report artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: allure-report
+          path: allure-report
+
+      - name: List contents of the downloaded artifact
+        run: |
+          ls -l allure-report
+
+      - name: Unzip the tar file
+        run: |
+          tar -xzvf allure-report/allure-report.tar.gz -C allure-report
+
+      - name: List contents after unzipping
+        run: |
+          ls -l allure-report
+
+      - name: Start Python server
+        run: |
+          cd allure-report
+          python3 -m http.server 8000 > server.log 2>&1 &
