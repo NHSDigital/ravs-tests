@@ -218,7 +218,7 @@ def get_patient_vaccination_prescribing_method_value():
     return find_element_and_perform_action(PATIENT_VACCINATION_PRESCRIBING_METHOD_LABEL_ELEMENT, "get_text")
 
 def get_patient_vaccination_vaccinator_value():
-    return find_element_and_perform_action(PATIENT_VACCINATION_VACCINE_LABEL_ELEMENT, "get_text")
+    return find_element_and_perform_action(PATIENT_VACCINATION_VACCINATOR_LABEL_ELEMENT, "get_text")
 
 def get_patient_vaccination_comments_value():
     return find_element_and_perform_action(PATIENT_VACCINATION_COMMENTS_LABEL_ELEMENT, "get_text")
