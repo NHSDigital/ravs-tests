@@ -210,8 +210,10 @@ def click_find_a_patient_and_search_with_nhsnumber(nhs_number):
     click_search_for_patient_button()
     attach_screenshot("entered_nhs_number_as" + nhs_number + "_and_clicked_search_for_patient_button")
 
-def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
+def click_on_patient_name(name):
     click_on_patient_name_search_result(name)
+
+def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
     click_choose_vaccine_button()
     attach_screenshot("clicked_on_patient_" + name + "_and_clicked_choose_vaccine_button")

@@ -1,4 +1,4 @@
-eligibility_types = [
+covid_eligibility_types = [
     "Residents in care homes",
     "Staff working in care homes",
     "Healthcare workers",
