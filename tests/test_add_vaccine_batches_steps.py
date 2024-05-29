@@ -9,7 +9,7 @@ from pages.site_vaccine_batches_page import *
 from pages.site_vaccine_batches_confirm_page import *
 import logging
 from init_helpers import *
-from conftest import * 
+from conftest import *
 
 features_directory = get_working_directory() + "features"
 
@@ -64,11 +64,11 @@ def i_select_site_vaccine_and_vaccinetype_for_batch(site, vaccine, vaccinetype, 
         click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccinetype)
     shared_data['site'] = site
     shared_data['vaccine'] = vaccine
-    shared_data['vaccinetype'] = vaccinetype 
+    shared_data['vaccinetype'] = vaccinetype
     if "covid" in shared_data['vaccine'].lower():
         enter_covid_batch_number_prefix(batchprefix)
         enter_covid_batch_number_suffix(batchsuffix)
-    elif"flu" in shared_data['vaccine'].lower():
+    elif "flu" in shared_data['vaccine'].lower():
         enter_flu_batch_number(batchprefix)
     attach_screenshot("entered_batch_number")
 
@@ -77,7 +77,7 @@ def i_enter_batchprefix_and_batchsuffix(batchprefix, batchsuffix, shared_data):
     if "covid" in shared_data['vaccine'].lower():
         enter_covid_batch_number_prefix(batchprefix)
         enter_covid_batch_number_suffix(batchsuffix)
-    elif"flu" in shared_data['vaccine'].lower():
+    elif "flu" in shared_data['vaccine'].lower():
         enter_flu_batch_number(batchprefix)
     attach_screenshot("entered_batch_number")
 
@@ -94,7 +94,7 @@ def i_click_add_batch_button():
 
 @when("I click confirm choices button")
 def i_click_confirm_choices_button():
-    click_confirm_vaccine_choices_button()
+    click_confirm_vaccine_batch_choices_button()
     attach_screenshot("clicked_confirm_choices_button")
 
 @when("I click confirm button")

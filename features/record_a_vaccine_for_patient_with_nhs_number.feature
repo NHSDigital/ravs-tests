@@ -2,11 +2,11 @@ Feature: Record vaccine
 
 @recordvaccine
 Scenario Outline: Record a vaccine with nhs number
-    Given I login to RAVS and get patient details for <nhs_number> with option <index>
-    And set the vaccinator details with <site> and <care_model>
+    Given I login to RAVS and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date>
+    And I set the vaccinator details with <site> and <care_model>
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
-    When I click choose vaccine button and choose the <chosen_vaccine>, <vaccine_type, <batch_number> with <batch_expiry_date> and click continue
+    When I click choose vaccine button and choose the <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date> and click continue
     And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details with <dose_amount> and date as <vaccination_date> and click Continue to Check and confirm screen
@@ -14,13 +14,14 @@ Scenario Outline: Record a vaccine with nhs number
     And when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page
 
 Examples:
-    | index | site | care_model | nhs_number   | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob | address | chosen_vaccine | vaccine_type | batch_number | batch_expiry_date | dose_amount |
-    | 1 | NEELIMA HOUSE | Vaccination Centre | 9693632109   |  yes        | today | yes     | yes  | today | Bill GARTON | 	23/6/1946 | 	1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SDYY2-12 | 19/10/2025  | 0.3 |
-    | 2 | FRAZER HOUSE | Hospital Hub | 9470040228   |  yes  | today-1 |  yes     | yes  | today  | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 | Comirnaty 30 Omicron XBB.1.5 | sb12345-12 | 19/2/2026 | 0.3 |
-    | 3 | NEELIMA HOUSE | Care Home | 9470057589   |  yes    | today-2  | yes     | yes  | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG |  COVID-19 | Comirnaty 3 Omicron XBB.1.5 | SDYY2-13 | 19/20/2026 | 0.3 |
-    | 4 | NEELIMA HOUSE | Home Of Housebound Patient | 9472710255   |  yes     | today-3     | yes     | yes  | today-2 | DELICE PINKER | 	10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | Comirnaty 10 Omicron XBB.1.5 | SDYY2-14 | 19/20/2026 | 0.3 |
-    | 5 | NEELIMA HOUSE | Off-site Outreach Event | 9473629885   |  yes    | today-4     | yes     | yes   | today-3 | MARGIE PUCKEY | 	27/5/1924 | 	MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | COVID-19 | Spikevax XBB.1.5 | SDYY2-15 | 19/20/2026 | 0.3 |
-    | 6 | FRAZER HOUSE | Vaccination Centre | 9437540233   |  yes    | today -5    | yes     | yes  | today-2 | RANDY FOGDEN | 	8/6/1961 | 		10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19 | Spikevax XBB.1.5 | SDYY2-16 | 19/20/2026 | 0.3 |
+    | index | nhs_number | site | care_model |  eligibility | assess_date | consent | vaccination | vaccination_date | name | dob | address | chosen_vaccine | vaccine_type | batch_number | batch_expiry_date | dose_amount |
+    | 0 | 9693632109 | NEELIMA HOUSE | Vaccination Centre |    yes        | today | yes     | yes  | today | Bill GARTON | 	23/6/1946 | 	1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SDYY2-12 | 19/10/2025  | 0.3 |
+    | 1 | 9693632109 | NEELIMA HOUSE | Vaccination Centre |   yes        | today | yes     | yes  | today-1 | Bill GARTON | 	23/6/1946 | 	1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SDYY2-12 | 19/10/2025  | 0.3 |
+    | 2 | 9470040228 | FRAZER HOUSE | Hospital Hub |   yes  | today-1 |  yes     | yes  | today  | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 | Comirnaty 30 Omicron XBB.1.5 | sb12345-12 | 19/2/2026 | 0.3 |
+    | 3 | 9470057589   | NEELIMA HOUSE | Care Home |   yes    | today-2  | yes     | yes  | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG |  COVID-19 | Comirnaty 3 Omicron XBB.1.5 | SDYY2-13 | 19/20/2026 | 0.3 |
+    | 4 | 9472710255   | NEELIMA HOUSE | Home Of Housebound Patient |   yes     | today-3     | yes     | yes  | today-2 | DELICE PINKER | 	10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | Comirnaty 10 Omicron XBB.1.5 | SDYY2-14 | 19/20/2026 | 0.3 |
+    | 5 | 9473629885   | NEELIMA HOUSE | Off-site Outreach Event |   yes    | today-4     | yes     | yes   | today-3 | MARGIE PUCKEY | 	27/5/1924 | 	MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | COVID-19 | Spikevax XBB.1.5 | SDYY2-15 | 19/20/2026 | 0.3 |
+    | 6 | 9437540233   | FRAZER HOUSE | Vaccination Centre |   yes    | today -5    | yes     | yes  | today-2 | RANDY FOGDEN | 	8/6/1961 | 		10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19 | Spikevax XBB.1.5 | SDYY2-16 | 19/20/2026 | 0.3 |
     | 7 | 9474374228  | NEELIMA HOUSE | Hospital Hub |  yes    | today-6    | yes     | yes  | today-3 | ORINDA JUDD | 	20/7/1963 |  2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL | COVID-19 | Spikevax XBB.1.5 | SDYY2-17 | 19/20/2026 | 0.3 |
     | 8 | 9437580812  | NEELIMA HOUSE | Care Home |  yes    | today-7     | yes     | yes  | today-7 | INDIGO CATCHESIDE | 		1/3/1959  |  	12 CANBERRA STREET, MANCHESTER, M11 4WL | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SDYY2-18 | 19/20/2026 | 0.3 |
     | 9 | 9437599165   |  NEELIMA HOUSE | Home Of Housebound Patient  | yes    | today-30    | yes     | yes   | today-30 | CAWRDAV BOBBETT | 			21/7/1959  |  		127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN | COVID-19 | Comirnaty 30 Omicron XBB.1.5 | SDYY2-18 | 19/20/2026 | 0.5 |

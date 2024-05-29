@@ -1,4 +1,10 @@
 import pytest
+from pages.add_vaccines_page import *
+from pages.settings_page import *
+from pages.site_vaccine_batches_page import *
+from pages.site_vaccines_page import *
+from pages.site_vaccine_batches_confirm_page import *
+from pages.site_vaccines_check_and_confirm_page import *
 from pages.home_page import *
 from pages.login_page import *
 from pages.nhs_signin_page import *
@@ -229,13 +235,58 @@ def choose_vaccine_and_vaccine_type_for_patient(vaccine, vaccine_type):
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
-def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, assessing_clinician, assessment_date, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
+def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batchprefix, batchsuffix, expirydate):
+    if config["browser"] == "mobile":
+        if check_navlink_bar_toggle_exists():
+            click_navlinkbar_toggler()
+    click_settings_nav_link()
+    Click_vaccines_settings()
+    Click_add_vaccines_button()
+    click_site_radio_button(site)
+    if "covid" in vaccine.lower():
+      click_covid_vaccine_checkbox()
+      click_covid_vaccine_type_checkbox(vaccineType)
+    elif "flu" in vaccine.lower():
+        click_flu_vaccine_checkbox()
+        click_flu_vaccine_type_checkbox(vaccineType)
+    Click_add_vaccine_button()
+    if check_vaccine_already_added_warning_message_exists(site, vaccineType) == False:
+        click_confirm_vaccine_choices_button()
+        click_confirm_details_and_save_vaccines_button()
+    Click_add_batches_button()
+    click_site_radio_button(site)
+    if "covid" in vaccine.lower():
+        click_covid_vaccine_radiobutton()
+        click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccineType)
+    elif "flu" in vaccine.lower():
+        click_flu_vaccine_radiobutton()
+        click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccineType)
+    if "covid" in vaccine.lower():
+        enter_covid_batch_number_prefix(batchprefix)
+        enter_covid_batch_number_suffix(batchsuffix)
+    elif "flu" in 'vaccine'.lower():
+        enter_flu_batch_number(batchprefix)
+    attach_screenshot("entered_batch_number")
+    enter_expiry_date(expirydate)
+    attach_screenshot("entered_expiry_date")
+    Click_add_batch_button()
+    attach_screenshot("clicked_add_batch_button")
+    click_confirm_vaccine_batch_choices_button()
+    attach_screenshot("clicked_confirm_choices_button")
+    click_confirm_button()
+    attach_screenshot("clicked_confirm_choices_button")
+    if check_batch_already_exists_error_is_displayed() == True:
+        click_find_a_patient_nav_link()
+
+def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
     select_assessing_clinician_with_name_and_council(assessing_clinician)
     enter_comments_for_assessing_patient(assessment_comments)
     set_assessment_date(assessment_date)
     if eligible_decision.lower() == 'yes':
         click_eligible_yes_radiobutton()
         select_eligibility_type(eligibility_type)
+        if eligibility_type == "Healthcare workers":
+            select_staff_role(staff_role)
         attach_screenshot("clicked_eligibility_yes_and_selected_eligibility_type")
     else:
         click_eligible_no_radiobutton()
@@ -250,7 +301,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         select_assessment_no_vaccination_reason(eligibility_assessment_no_vaccine_given_reason)
         attach_screenshot("select_patient_not_given_vaccine_after_assessing")
         click_save_and_return_button_on_assessment_screen()
-        attach_screenshot("clicked_save_and_retrun_on_assessment_screen")
+        attach_screenshot("clicked_save_and_return_on_assessment_screen")
 
 def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
@@ -271,7 +322,7 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision,  vaccination_date, vaccine, vaccine_type2, vaccination_route,  batch_number, batch_number_to_select, batch_expiry_date, dose_amount, prescribing_method, vaccinator, vaccination_comments, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision,  vaccination_date, vaccine, vaccine_type2, vaccination_route,  batch_number, batch_expiry_date, dose_amount, prescribing_method, vaccinator, vaccination_comments, no_vaccination_reason=None):
     select_vaccinator_name_and_council(vaccinator)
     enter_vaccination_comments(vaccination_comments)
     set_vaccination_date(vaccination_date)
@@ -279,13 +330,18 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         click_yes_vaccinated_radiobutton()
         if "covid" in (vaccine).lower():
             click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
-        else:
+        elif "flu" in (vaccine).lower():
             click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
         select_vaccination_route(vaccination_route)
+        batch_number_to_select = batch_number + " - " + batch_expiry_date
         select_batch_number(batch_number_to_select)
         enter_dose_amount_value(dose_amount)
         click_prescribing_method(prescribing_method)
-        click_continue_to_check_and_confirm_screen_button()
+        if click_continue_to_check_and_confirm_screen_button() == True:
+            vaccination_date = format_date(vaccination_date, "safari")
+            set_vaccination_date(vaccination_date)
+            select_batch_number(batch_number_to_select)
+            click_continue_to_check_and_confirm_screen_button()
     else:
         click_not_vaccinated_radiobutton()
         if no_vaccination_reason is not None:

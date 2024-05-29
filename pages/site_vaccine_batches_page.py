@@ -6,7 +6,7 @@ BACK_BUTTON_ON_VACCINE_BATCHES_PAGE = ("//a[@href='/site-vaccines']")
 COVID_VACCINE_RADIOBUTTON = ("//input[@class='nhsuk-radios__input' and @id='VaccineProgramId' and @value='1']")
 FLU_VACCINE_RADIOBUTTON = ("//input[@class='nhsuk-radios__input' and @id='VaccineProgramId' and @value='2']")
 CANCEL_ADDING_VACCINE_BATCHES_BUTTON = ("//button[text()='Cancel']")
-CONFIRM_VACCINE_CHOICES_BUTTON = ("//button[text()='Confirm choices']")
+CONFIRM_VACCINE_BATCHES_CHOICES_BUTTON = ("//button[text()='Confirm choices']")
 SELECT_VACCINES_LABEL = ("//legend[text()='Select vaccines']")
 FLU_BATCH_NUMBER_INPUT_FIELD = ("#FluBatchNumber")
 COVID_BATCH_NUMBER_PREFIX_INPUT_FIELD = ("#CovidBatchNumberPrefix")
@@ -60,8 +60,8 @@ def click_select_vaccines_label():
 def click_cancel_adding_vaccine_batches_button():
     find_element_and_perform_action(CANCEL_ADDING_VACCINE_BATCHES_BUTTON,"click")
 
-def click_confirm_vaccine_choices_button():
-    find_element_and_perform_action(CONFIRM_VACCINE_CHOICES_BUTTON, "click")
+def click_confirm_vaccine_batch_choices_button():
+    find_element_and_perform_action(CONFIRM_VACCINE_BATCHES_CHOICES_BUTTON, "click")
 
 def Click_add_batch_button():
     find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
