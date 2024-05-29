@@ -18,7 +18,7 @@ VACCINATION_ROUTE_DROPDOWN_ELEMENT = ("#VaccinationRouteId")
 BATCH_NUMBER_DROPDOWN_ELEMENT = ("#BatchNumber")
 BATCH_EXPIRY_DATE_READONLY_ELEMENT = ("#BatchExpiryDate")
 DOSE_AMOUNT_READONLY_ELEMENT = ("#DoseAmount")
-
+VACCINATION_DATE_INCORRECT_ERROR = ("#VaccinationDateError")
 
 def get_batch_expiry_date_value():
     return find_element_and_perform_action(BATCH_EXPIRY_DATE_READONLY_ELEMENT, "get_text")
@@ -30,7 +30,8 @@ def enter_dose_amount_value(dose_amount):
     find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "type", dose_amount)
 
 def set_vaccination_date(date):
-     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "type_text", date)
+    find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "clear")
+    find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "type_text", date)
 
 def enter_vaccination_comments(comments):
     find_element_and_perform_action(VACCINATION_COMMENTS_ELEMENT, "type_text", comments)
@@ -48,38 +49,43 @@ def click_not_vaccinated_radiobutton():
     find_element_and_perform_action(NO_VACCINATED_RADIO_BUTTON, "click")
 
 def select_vaccinator_name_and_council(nameandcouncil):
-    find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "select_option", nameandcouncil)  
+    find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "select_option", nameandcouncil)
 
 def select_vaccination_route(route):
-    find_element_and_perform_action(VACCINATION_ROUTE_DROPDOWN_ELEMENT, "select_option", route) 
+    find_element_and_perform_action(VACCINATION_ROUTE_DROPDOWN_ELEMENT, "select_option", route)
 
 def select_batch_number(batchNumber):
-    find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click") 
-    find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)   
+    find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
+    find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
 
 def select_consent_given_by_from_dropdown(givenBy):
-    find_element_and_perform_action(CONSENT_GIVEN_BY_DROPDOWN_ELEMENT, "select_option", givenBy)  
+    find_element_and_perform_action(CONSENT_GIVEN_BY_DROPDOWN_ELEMENT, "select_option", givenBy)
 
 def select_consentType(consentType):
-    find_element_and_perform_action(CONSENT_TYPE_DROPDOWN_ELEMENT, "select_option", consentType)  
+    find_element_and_perform_action(CONSENT_TYPE_DROPDOWN_ELEMENT, "select_option", consentType)
 
 def select_reason_for_no_vaccination(reason):
-    find_element_and_perform_action(NO_VACCINATION_REASON_DROPDOWN_ELEMENT, "select_option", reason)  
+    find_element_and_perform_action(NO_VACCINATION_REASON_DROPDOWN_ELEMENT, "select_option", reason)
 
 def click_save_and_return_button_on_record_vaccinated_page():
-    find_element_and_perform_action(SAVE_AND_RETURN_BUTTON, "click")        
+    find_element_and_perform_action(SAVE_AND_RETURN_BUTTON, "click")
 
 def click_continue_to_check_and_confirm_screen_button():
-    find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")            
+    find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
+    if check_vaccination_date_incorrect_error_exists() == True:
+        return True
 
 def check_continue_to_check_and_confirm_screen_button_exists():
-    return check_element_exists(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)      
+    return check_element_exists(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
 
 def check_required_alert_exists(wait):
-    return check_element_exists(REQUIRED_ALERT_BUTTON, wait)          
+    return check_element_exists(REQUIRED_ALERT_BUTTON, wait)
 
 def check_name_of_person_consenting_input_element_exists(wait):
     return check_element_exists(NAME_OF_PERSON_CONSENTING_INPUT_ELEMENT, wait)
+
+def check_vaccination_date_incorrect_error_exists():
+    return check_element_exists(VACCINATION_DATE_INCORRECT_ERROR, False)
 
 def check_relation_to_parent_input_element_exists(wait):
     return check_element_exists(RELATION_TO_PATIENT_INPUT_ELEMENT, wait)
@@ -103,7 +109,7 @@ def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinate
         "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='3']",
         "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='4']",
         "ppikevax xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='5']"
-    }    
+    }
     element = xpath_map.get(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
@@ -115,7 +121,7 @@ def click_prescribing_method(prescribing_method):
         "national protocol (np)": "//label[@for='PrescribingMethodId-1']",
         "patient group directions (pgd)": "//label[@for='PrescribingMethodId-2']",
         "patient specific directions (psd)": "//label[@for='PrescribingMethodId-3']",
-    }    
+    }
     element = xpath_map.get(prescribing_method.lower())
     if element:
         find_element_and_perform_action(element, "click")
@@ -132,8 +138,8 @@ def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_
         "supemtek - qivr": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='10']",
         "fluad tetra - aqiv": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='12']",
         "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='13']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='14']"                     
-    }    
+        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='14']"
+    }
     element = xpath_map.get(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")

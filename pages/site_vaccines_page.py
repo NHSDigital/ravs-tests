@@ -4,9 +4,17 @@ ADD_VACCINES_BUTTON = ("//button [text()='Add vaccines']")
 ADD_BATCHES_BUTTON = ("//button [text()='Add batches']")
 SELECT_SITE_DROPDOWN = ("//select[@name='SiteId']")
 BACK_BUTTON_ON_VACCINES_PAGE = ("//a[@href='/settings']")
+CONFIRM_CHOICES_BUTTON = ("//button[text()='Confirm choices']")
+CANCEL_BUTTON = ("//button[text()='Cancel']")
 
 def click_back_button_on_vaccines_page():
     find_element_and_perform_action(BACK_BUTTON_ON_VACCINES_PAGE, "click")
+
+def click_confirm_vaccine_choices_button():
+    find_element_and_perform_action(CONFIRM_CHOICES_BUTTON, "click")
+
+def click_cancel_vaccine_choices_button():
+    find_element_and_perform_action(CANCEL_BUTTON, "click")
 
 def Click_add_vaccines_button():
     find_element_and_perform_action(ADD_VACCINES_BUTTON,"click")

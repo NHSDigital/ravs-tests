@@ -107,6 +107,7 @@ class BasePlaywrightHelper:
 
 
     def wait_for_page_to_load(self, timeout=10):
+        self.page.wait_for_selector('*')
         self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
 
     def find_elements(self, selector):
@@ -164,6 +165,8 @@ class BasePlaywrightHelper:
         try:
             self.page.wait_for_selector(selector)
             element=self.page.locator(selector)
+            self.page.set_viewport_size({"width": 1500, "height":1500})
+            element.scroll_into_view_if_needed()
             if action.lower() == "click":
                 element.click()
                 print(f"Clicked the {selector} successfully.")
