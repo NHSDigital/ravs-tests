@@ -3,9 +3,9 @@ from init_helpers import *
 ADD_VACCINE_BUTTON = ("//button[text()='Add vaccine']")
 ADD_BATCHES_BUTTON = ("//button[text()='Add batches']")
 SELECT_SITE_DROPDOWN = ("//select[@name='SiteId']")
-BACK_BUTTON_ON_VACCINES_PAGE = ("//a[@href='/settings']")
-COVID_VACCINE_CHECK_BOX = ("//input[@class='nhsuk-checkboxes__input' and @id='VaccineProgramIds' and @value='1']")
-FLU_VACCINE_CHECK_BOX = ("//input[@class='nhsuk-checkboxes__input' and @id='VaccineProgramIds' and @value='2']")
+BACK_BUTTON_ON_VACCINES_PAGE = ("(//a[@href='/settings'])[2]")
+COVID_VACCINE_CHECK_BOX = ("//input[@class='nhsuk-checkboxes__input' and @name='VaccineProgramIds' and @value='1']")
+FLU_VACCINE_CHECK_BOX = ("//input[@class='nhsuk-checkboxes__input' and @name='VaccineProgramIds' and @value='2']")
 CANCEL_ADDING_VACCINES_BUTTON = ("//button[text()='Cancel']")
 CONFIRM_VACCINE_CHOICES_BUTTON = ("//button[text()='Confirm choices']")
 SELECT_VACCINES_LABEL = ("//legend[text()='Select vaccines']")
@@ -29,6 +29,12 @@ def Click_add_vaccine_button():
 def check_add_vaccine_button_exists():
     return check_element_exists(ADD_VACCINE_BUTTON, True)
 
+def check_add_vaccine_button_enabled():
+    return check_element_enabled(ADD_VACCINE_BUTTON, True)
+
+def check_confirm_choices_button_enabled():
+    return check_element_enabled(CONFIRM_VACCINE_CHOICES_BUTTON, True)
+
 def click_site_radio_button(site):
     element = (f"//label[text()='{site}']/preceding-sibling::input[@id='SiteId']")
     find_element_and_perform_action(element, "click")
@@ -41,11 +47,11 @@ def click_flu_vaccine_checkbox():
 
 def click_covid_vaccine_type_checkbox(vaccinetype):
     xpath_map = {
-        "comirnaty original/omicron ba.4-5": "//input[@class='nhsuk-checkboxes__input' and @id='CovidVaccineIds' and @value='1']",
-        "comirnaty 30 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @id='CovidVaccineIds' and @value='2']",
-        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @id='CovidVaccineIds' and @value='3']",
-        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @id='CovidVaccineIds' and @value='4']",
-        "ppikevax xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @id='CovidVaccineIds' and @value='5']"
+        "comirnaty original/omicron ba.4-5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='1']",
+        "comirnaty 30 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='2']",
+        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='3']",
+        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='4']",
+        "spikevax xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='5']"
     }
     element = xpath_map.get(vaccinetype.lower())
     if element:
@@ -56,14 +62,14 @@ def click_covid_vaccine_type_checkbox(vaccinetype):
 
 def click_flu_vaccine_type_checkbox(vaccinetype):
     xpath_map = {
-        "fluenz tetra - laiv": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='6']",
-        "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='7']",
-        "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='8']",
-        "flucelvax tetra - qivc": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='9']",
-        "supemtek - qivr": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='10']",
-        "fluad tetra - aqiv": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='12']",
-        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='13']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-checkboxes__input' and @id='FluVaccineIds' and @value='14']"
+        "fluenz tetra - laiv": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='6']",
+        "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='7']",
+        "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='8']",
+        "flucelvax tetra - qivc": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='9']",
+        "supemtek - qivr": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='10']",
+        "fluad tetra - aqiv": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='11']",
+        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='12']",
+        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='13']"
     }
     element = xpath_map.get(vaccinetype.lower())
     if element:

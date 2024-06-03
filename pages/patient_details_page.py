@@ -22,10 +22,23 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
     time.sleep(5)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
+    COVID_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='COVID-19'])"
+    FLU_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Flu'])"
+
+    count = 0
+
     if "covid" in chosen_vaccine.lower():
-        SHOW_ALL_BUTTON = SHOW_ALL_BUTTON_COVID_RECORDS
+        if check_element_exists(COVID_HISTORY_ELEMENT):
+            count = 1
+            SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
     elif "flu" in chosen_vaccine.lower():
-        SHOW_ALL_BUTTON = SHOW_ALL_BUTTON_FLU_RECORDS
+        if check_element_exists(FLU_HISTORY_ELEMENT):
+            count = 1
+            if check_element_exists(COVID_HISTORY_ELEMENT):
+                SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[2]"
+            else:
+                SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
+
 
     if check_element_exists(SHOW_ALL_BUTTON):
         show_all_button_text = find_element_and_perform_action(SHOW_ALL_BUTTON, "get_text")
@@ -37,10 +50,8 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
             return count
         else:
             print("No immunisation history records found.")
-            return 0
-    else:
-        print("Show all button not found. Assuming no records exist.")
-        return 0
+            return count
+
 
 def get_immunisation_history_details_of_vaccine(index):
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)

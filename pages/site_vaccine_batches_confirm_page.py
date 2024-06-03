@@ -24,7 +24,7 @@ def check_date_is_displayed(date):
     return check_element_exists(element, True)
 
 def check_batch_already_exists_error_is_displayed():
-    return check_element_exists(ERROR_BATCH_ALREADY_EXISTS, True)
+    return check_element_exists(ERROR_BATCH_ALREADY_EXISTS, False)
 
 def click_confirm_button():
     find_element_and_perform_action(CONFIRM_BUTTON, "click")

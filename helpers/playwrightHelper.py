@@ -80,7 +80,14 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, filename):
         screenshot_path = os.path.join(self.screenshots_dir, f'before_action_{filename}.png')
-        self.page.screenshot(path=screenshot_path)
+        try:
+            self.page.screenshot(path=screenshot_path, timeout=3000)
+        except Exception as error:
+            if "Timeout" in str(error):  # Check if "Timeout" is in the error message
+                print('Screenshot taking timed out, ignoring...')
+                return None  # or handle the timeout error accordingly
+            else:
+                raise error
         return screenshot_path
 
     def get_browser_version(self):
@@ -138,6 +145,17 @@ class BasePlaywrightHelper:
             print(f"Element - {selector} not found: {e}")
             return False
 
+    def check_element_enabled(self, selector, wait=False):
+        self.wait_for_page_to_load()
+        try:
+            element = self.page.locator(selector)
+            if wait == True:
+                self.page.wait_for_selector(selector)
+            return element.is_enabled()
+        except Exception as e:
+            print(f"Element - {selector} not found: {e}")
+            return False
+
     def scroll_into_view(self, selector):
         element=self.page.locator(selector)
         element.scroll_into_view_if_needed()
@@ -160,16 +178,18 @@ class BasePlaywrightHelper:
     def find_element_and_perform_action(self, selector, action, inputValue=None):
         self.wait_for_page_to_load()
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
-        before_screenshot_path = os.path.join(self.screenshots_dir, f'before_action_{selector_filename}.png')
-        self.page.screenshot(path=before_screenshot_path)
+        self.capture_screenshot(selector_filename)
         try:
             self.page.wait_for_selector(selector)
             element=self.page.locator(selector)
             self.page.set_viewport_size({"width": 1500, "height":1500})
             element.scroll_into_view_if_needed()
             if action.lower() == "click":
-                element.click()
-                print(f"Clicked the {selector} successfully.")
+                if element.is_enabled() and element.is_visible():
+                    element.click()
+                    print(f"Clicked the {selector} successfully.")
+                else:
+                    print(f"Element with {selector} is not enabled.")
             elif action.lower() == "input_text":
                 text = element.text_content()
                 if text != '':
@@ -200,8 +220,7 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Exception: {e}. Element not found: {selector}")
             raise ElementNotFoundException(f"Element not found: {selector}")
-        after_screenshot_path = os.path.join(self.screenshots_dir, f'after_action_{selector_filename}.png')
-        self.page.screenshot(path=after_screenshot_path)
+        self.capture_screenshot(selector_filename)
 
     def get_current_url(self):
         self.wait_for_page_to_load()

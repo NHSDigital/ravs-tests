@@ -33,27 +33,27 @@ def shared_data():
 def test_record_a_vaccine_with_nhs_number(navigate_and_login):
     pass
 
-@given(parse("I login to RAVS and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {vaccine_type}, {batch_number} with {batch_expiry_date}"))
-def step_login_to_ravs(nhs_number, index, chosen_vaccine, batch_number, vaccine_type, batch_expiry_date, shared_data):
+@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {vaccine_type}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batch_number, vaccine_type, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
     shared_data["chosen_vaccine_type"] = vaccine_type
     shared_data["batch_number"] = batch_number
-    shared_data["batch_expiry_date"] = batch_expiry_date
-    if "-" in batch_number:
-        batch_prefix, batch_suffix = batch_number.split("-", 1)
-    else:
-        raise ValueError("Invalid batch number format. It should contain a '-' character.")
-    check_vaccine_and_batch_exists_in_site(shared_data["site"], chosen_vaccine, vaccine_type, batch_prefix, batch_suffix, batch_expiry_date)
-    return shared_data
-
-@given(parse("I set the vaccinator details with {site} and {care_model}"))
-def step_set_vaccinator_details(site, care_model, shared_data):
     set_vaccinator_location(site, care_model)
     shared_data["site"] = site
     shared_data["care_model"] = care_model
+    shared_data["vaccinated_type2"] = get_vaccination_type(index, chosen_vaccine)
 
+    today_str = datetime.today().strftime('%d/%m/%Y')
+    today = datetime.strptime(today_str, '%d/%m/%Y')
+    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
+        batch_expiry_date = today + timedelta(days=7)
+        batch_expiry_date = batch_expiry_date.strftime('%d/m/%y')
+    shared_data["batch_expiry_date"] = batch_expiry_date
+    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["vaccinated_type2"], batch_number, batch_expiry_date)
+    return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
 def step_search_for_patient(shared_data):
@@ -96,21 +96,20 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
         record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
 
-@when(parse("I record {vaccination} details with {dose_amount} and date as {vaccination_date} and click Continue to Check and confirm screen"))
-def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shared_data, vaccination, vaccination_date, dose_amount):
+@when(parse("I record {vaccination} details and date as {vaccination_date} and click Continue to Check and confirm screen"))
+def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shared_data, vaccination, vaccination_date):
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "Yes".lower():
         if shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
             shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
-            shared_data["vaccinated_type2"] = get_vaccination_type(shared_data["index"], shared_data["chosen_vaccine"])
             shared_data["vaccination_route"] = get_vaccination_route(shared_data["index"])
-            shared_data["dose_amount"] = dose_amount
+            shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["vaccinated_type2"]))
             shared_data["prescribing_method"] = get_prescribing_method(shared_data["index"])
             shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["vaccinated_type2"] + "vaccination given on " + vaccination_date + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_route"], shared_data["batch_number"], shared_data["batch_expiry_date"], dose_amount, shared_data["prescribing_method"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_route"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["prescribing_method"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
 
 @then(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))
@@ -151,3 +150,4 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
         shared_data.clear()
+ 

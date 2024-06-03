@@ -106,9 +106,9 @@ def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinate
     xpath_map = {
         "comirnaty original/omicron ba.4-5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='1']",
         "comirnaty 30 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='2']",
-        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='3']",
-        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='4']",
-        "ppikevax xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='5']"
+        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='3']",
+        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='4']",
+        "spikevax xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='5']"
     }
     element = xpath_map.get(vaccinetype.lower())
     if element:
@@ -136,9 +136,9 @@ def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_
         "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='8']",
         "flucelvax tetra - qivc": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='9']",
         "supemtek - qivr": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='10']",
-        "fluad tetra - aqiv": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='12']",
-        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='13']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='14']"
+        "fluad tetra - aqiv": "//input[@class='nhsuk-radios__input' and @name='VaccineId' and @value='11']",
+        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='12']",
+        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='13']"
     }
     element = xpath_map.get(vaccinetype.lower())
     if element:
