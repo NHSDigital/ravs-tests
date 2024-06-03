@@ -21,6 +21,7 @@ from test_data.models.no_consent_reasons import no_consent_reasons
 from test_data.models.no_vaccination_reasons import assessment_vaccine_not_given_reasons
 from test_data.models.covid_eligibility_types import covid_eligibility_types
 from test_data.models.flu_eligibility_types import flu_eligibility_types
+from test_data.models.vaccine_type_dose_amounts import vaccine_type_dose_amounts
 import random
 
 def get_wrapped_index(index, length):
@@ -29,10 +30,15 @@ def get_wrapped_index(index, length):
     try:
         index = int(index)
     except ValueError:
-        return 0
+        return get_random_index(length)
     if index < 0 or index >= length:
-        return 0
+        return get_random_index(length)
     return index
+
+def get_random_index(length):
+    if length <= 0:
+        return 0
+    return random.randint(0, length - 1)
 
 def get_eligibility_type(index, vaccine):
     if vaccine.lower() == "covid-19":
@@ -80,3 +86,5 @@ def get_vaccinator(index):
 def get_vaccination_not_given_reason(index):
     return assessment_vaccine_not_given_reasons[get_wrapped_index(index, len(assessment_vaccine_not_given_reasons))]
 
+def get_vaccine_dose_amount(vaccine_type):
+    return vaccine_type_dose_amounts.get(vaccine_type, "Unknown vaccine type")

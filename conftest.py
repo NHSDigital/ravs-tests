@@ -41,8 +41,6 @@ def report_browser_version(request):
     else:
         logging.info(config["browser"].upper() + f" browser version is : {browser_version}")
 
-
-
 def format_nhs_number(nhs_number):
     # Use regular expressions to insert spaces in the phone number
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
@@ -235,48 +233,73 @@ def choose_vaccine_and_vaccine_type_for_patient(vaccine, vaccine_type):
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
-def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batchprefix, batchsuffix, expirydate):
+def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_number, expirydate):
     if config["browser"] == "mobile":
         if check_navlink_bar_toggle_exists():
             click_navlinkbar_toggler()
+    attach_screenshot("before_clicking_settings")
     click_settings_nav_link()
+    attach_screenshot("before_clicking_vaccines")
     Click_vaccines_settings()
+    attach_screenshot("before_clicking_add_vaccines")
     Click_add_vaccines_button()
+    attach_screenshot("before_clicking_site_radio_button")
     click_site_radio_button(site)
     if "covid" in vaccine.lower():
+      attach_screenshot("before_clicking_covid_vaccine_checkbox")
       click_covid_vaccine_checkbox()
+      attach_screenshot("before_clicking_covid_vaccinetype_checkbox")
       click_covid_vaccine_type_checkbox(vaccineType)
     elif "flu" in vaccine.lower():
+        attach_screenshot("before_clicking_flu_vaccine_checkbox")
         click_flu_vaccine_checkbox()
+        attach_screenshot("before_clicking_flu_vaccine_type_checkbox")
         click_flu_vaccine_type_checkbox(vaccineType)
-    Click_add_vaccine_button()
+    time.sleep(5)
     if check_vaccine_already_added_warning_message_exists(site, vaccineType) == False:
-        click_confirm_vaccine_choices_button()
-        click_confirm_details_and_save_vaccines_button()
+        if check_add_vaccine_button_enabled() == True:
+            attach_screenshot("before_clicking_add_vaccine_button")
+            Click_add_vaccine_button()
+        if check_confirm_choices_button_enabled() == True:
+            click_confirm_vaccine_choices_button()
+            if check_confirm_details_and_save_button_exists() == True:
+                click_confirm_details_and_save_vaccines_button()
+                if check_vaccine_already_exists_error_exists() == True:
+                    click_settings_nav_link()
+                    Click_vaccines_settings()
+        else:
+            click_back_button_on_vaccines_page()
+            Click_vaccines_settings()
+    else:
+        click_back_button_on_vaccines_page()
+        Click_vaccines_settings()
     Click_add_batches_button()
     click_site_radio_button(site)
     if "covid" in vaccine.lower():
+        if "-" in batch_number:
+            batch_prefix, batch_suffix = batch_number.split("-", 1)
+        else:
+            raise ValueError("Invalid batch number format. It should contain a '-' character.")
         click_covid_vaccine_radiobutton()
         click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccineType)
+        enter_covid_batch_number_prefix(batch_prefix)
+        enter_covid_batch_number_suffix(batch_suffix)
     elif "flu" in vaccine.lower():
         click_flu_vaccine_radiobutton()
         click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccineType)
-    if "covid" in vaccine.lower():
-        enter_covid_batch_number_prefix(batchprefix)
-        enter_covid_batch_number_suffix(batchsuffix)
-    elif "flu" in 'vaccine'.lower():
-        enter_flu_batch_number(batchprefix)
+        enter_flu_batch_number(batch_number)
     attach_screenshot("entered_batch_number")
+
     enter_expiry_date(expirydate)
     attach_screenshot("entered_expiry_date")
-    Click_add_batch_button()
-    attach_screenshot("clicked_add_batch_button")
-    click_confirm_vaccine_batch_choices_button()
+    if check_add_batch_button_enabled() == True:
+        Click_add_batch_button()
+        attach_screenshot("clicked_add_batch_button")
+        click_confirm_vaccine_batch_choices_button()
+        attach_screenshot("clicked_confirm_choices_button")
+        click_confirm_button()
     attach_screenshot("clicked_confirm_choices_button")
-    click_confirm_button()
-    attach_screenshot("clicked_confirm_choices_button")
-    if check_batch_already_exists_error_is_displayed() == True:
-        click_find_a_patient_nav_link()
+    click_find_a_patient_nav_link()
 
 def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
     select_assessing_clinician_with_name_and_council(assessing_clinician)
@@ -301,6 +324,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         select_assessment_no_vaccination_reason(eligibility_assessment_no_vaccine_given_reason)
         attach_screenshot("select_patient_not_given_vaccine_after_assessing")
         click_save_and_return_button_on_assessment_screen()
+        time.sleep(3)
         attach_screenshot("clicked_save_and_return_on_assessment_screen")
 
 def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, no_consent_reason=None):
@@ -333,7 +357,7 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         elif "flu" in (vaccine).lower():
             click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
         select_vaccination_route(vaccination_route)
-        batch_number_to_select = batch_number + " - " + batch_expiry_date
+        batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         select_batch_number(batch_number_to_select)
         enter_dose_amount_value(dose_amount)
         click_prescribing_method(prescribing_method)

@@ -121,6 +121,12 @@ def check_element_exists(element, wait=False):
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
+def check_element_enabled(element, wait=False):
+    try:
+        return playwright_helper_instance.check_element_enabled(element, wait)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
 def scroll_into_view(element):
     return playwright_helper_instance.scroll_into_view(element)
 
