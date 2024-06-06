@@ -51,7 +51,7 @@ def load_config_from_env():
         "headless_mode": os.environ.get("HEADLESS_MODE",""),
         "browser": os.environ.get("BROWSER", "chrome"),
         "device": os.environ.get("DEVICE", "iphone_12"),
-        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 10)),
+        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 3)),
         "credentials": {
             "ravs_password": os.environ.get("RAVS_PASSWORD", "")
         }

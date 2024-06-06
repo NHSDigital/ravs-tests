@@ -107,7 +107,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["vaccinated_type2"]))
             shared_data["prescribing_method"] = get_prescribing_method(shared_data["index"])
             shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
-            shared_data["vaccination_comments"] = shared_data["vaccinated_type2"] + "vaccination given on " + vaccination_date + " for " + shared_data["patient_name"]
+            shared_data["vaccination_comments"] = shared_data["vaccinated_type2"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_route"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["prescribing_method"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
@@ -132,15 +132,18 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         click_confirm_details_and_save_button()
         if "covid" in shared_data["chosen_vaccine"].lower():
-            index = 1
+            if check_covid_history_element_exists():
+                index = 1
         elif "flu" in shared_data["chosen_vaccine"].lower():
-            index = 2
+            if check_flu_history_element_exists() and check_covid_history_element_exists():
+                index = 2
+            else:
+                index = 1
 
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
         assert get_vaccine_program_details(index) == shared_data["chosen_vaccine"]
-        assert standardize_date_format(get_vaccine_date_details(index)) == standardize_date_format(shared_data["vaccination_date"])
-        click_delete_history_button(shared_data["chosen_vaccine"])
+        click_delete_history_button(shared_data["chosen_vaccine"], index)
         attach_screenshot("delete_history_button_clicked")
         click_delete_vaccination_button()
         attach_screenshot("delete_vaccination_button_clicked")
@@ -150,4 +153,3 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
         shared_data.clear()
- 

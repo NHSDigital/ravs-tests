@@ -30,6 +30,25 @@ Make use of this repository template to expedite your project setup and enhance 
   - [Contacts](#contacts)
   - [Licence](#licence)
   - [Setup Make in windows](#setup-make-in-windows)
+- [WSL Set Up](#wsl-set-up)
+  - [Windows WSL Installation](#windows-wsl-installation)
+  - [Set up Visual Code to develop with WSL (optional)](#set-up-visual-code-to-develop-with-wsl-optional)
+  - [Install pytest](#install-pytest)
+  - [Git commits](#git-commits)
+- [RAVS Playwright Pytest BDD Tests](#ravs-playwright-pytest-bdd-tests)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites-1)
+    - [Installation](#installation)
+  - [Docker](#docker)
+    - [Build Docker Image](#build-docker-image)
+    - [Run Docker Container](#run-docker-container)
+    - [Usage](#usage-1)
+    - [Configuration](#configuration-1)
+    - [Folder Structure](#folder-structure)
+    - [Test Run Report](#test-run-report)
+  - [Contributing](#contributing-1)
+  - [License](#license)
 
 ## Setup
 
@@ -122,4 +141,158 @@ Then install make using
 
 ```choco install make```
 
+After installing make
+
+```make githook-run```
+
+# WSL Set Up
+
+## Windows WSL Installation
+
+[Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+
+__Notes:__
+- Unless otherwise specified, all commands are being run inside the Linux shell not Windows.
+- Before we get started, Windows WSL users may wish to run this command (in the Linux shell) to set the default path to home. Alternatively set the path in windows terminal - this will allow multiple profiles:
+
+```
+echo -e '\n# Set default path to linux home directory\ncd ~' >> ~/.bashrc
+
+source ~/.bashrc
+```
+
+- The WSL Ubuntu version might need openssl package to be updated, so run:
+
+```
+sudo apt upgrade && sudo apt update
+```
+
+(An out of date version of openssl will create problems with the self-signed certificate scripts.)
+
+## Set up Visual Code to develop with WSL (optional)
+
+[Configure Visual Studio Code to develop in WSL](VSCODE.md)
+
+## Install pytest
+
+```bash
+pip install -U pytest
+sudo apt-get update
+sudo apt-get install jq
+```
+## Git commits
+
+In order to make git commits to this repo, you need to use the following command in terminal
+
+```bash
+wsl
+```
+Need to configure git credentials in wsl and this is the command to make commits to the repo
+
+```bash
+PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit -m "commit message"
+```
+
+# RAVS Playwright Pytest BDD Tests
+
+This is a project for setting up and running end-to-end tests using Playwright, Pytest, and the Behavior-Driven Development (BDD) approach. It utilizes the dependency injection design pattern to provide a flexible and modular testing framework. It provides a flexible and modular testing framework, allowing for easy integration into future projects.
+
+## Features
+
+- **Playwright**: A Python library for automating browsers based on the powerful Playwright toolset.
+- **Pytest**: A testing framework that makes it easy to write simple and scalable tests.
+- **Behavior-Driven Development (BDD)**: A methodology for writing tests in simple, natural language constructs, making them more accessible to non-technical stakeholders.
+- **Dependency Injection**: The project leverages the dependency injection design pattern to manage dependencies and promote code reusability and testability.
+
+## Getting Started
+
+### Prerequisites
+
+- Python installed on your machine
+- Pip package manager
+
+### Installation
+
+1. Clone this repository:
+
+  ```bash
+  git clone git@github.com:NHSDigital/ravs-tests.git
+  ```
+2. Navigate to the project directory:
+
+  ```bash
+  cd ravs-tests
+  ```
+
+3. Install dependencies:
+
+  ```bash
+  pip install -r requirements.txt
+  ```
+## Docker
+
+### Build Docker Image
+
+Build the Docker image using the following command:
+
+```bash
+docker build -t your_docker_image_name -f Docker/tests.dockerfile .
+```
+### Run Docker Container
+
+Run the Docker container using the following command:
+
+```bash
+docker run -it -p 5050:5050 \
+  -e RAVS_PASSWORD=$env:RAVS_PASSWORD \
+  -e HEADLESS_MODE="true" \
+  -e TEST_ENVIRONMENT="qa" \
+  -e BROWSER="chrome" \
+  -e DEVICE="iphone_12" \
+  -e MARKER="login" \
+  -e AGENTS=3 \
+  your_docker_image_name
+```
+Replace your_docker_image_name with the desired name for your Docker image. This command will run the Docker container with the specified environment variables, including the password, headless mode, test environment, browser, and device configuration.
+
+### Usage
+
+1. Write your feature files using Gherkin syntax in the `features` directory.
+2. Implement your step definitions in the `steps` directory using Python.
+3. Run the tests using the following command:
+
+    ```bash
+    # For Windows
+    scoop install allure
+
+    # For Linux
+    apt-get update && apt-get install -y allure
+
+    # Set the password, headless mode, test environment, and browser variables and run the tests
+    $env:RAVS_PASSWORD = "YourPasswordHere"; $env:HEADLESS_MODE = "false"; $env:TEST_ENVIRONMENT= "qa"; $env:BROWSER= "chrome" tox
+    ```
+### Configuration
+
+- Modify the `pytest.ini` file to configure Pytest options and plugins.
+- Update the `tox.ini` file to define the test environments and configurations.
+
+### Folder Structure
+- features
+- steps
+- pages
+- helpers
+- pages
+- Docker
+
+### Test Run Report
+
+The latest test run report can be found ([here](https://allure-report-ravs.netlify.app/#))
+
+## Contributing
+
+Contributions are welcome! If you have suggestions, improvements, or new features to add, feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

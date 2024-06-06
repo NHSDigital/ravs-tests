@@ -22,6 +22,15 @@ from test_data.models.no_vaccination_reasons import assessment_vaccine_not_given
 from test_data.models.covid_eligibility_types import covid_eligibility_types
 from test_data.models.flu_eligibility_types import flu_eligibility_types
 from test_data.models.vaccine_type_dose_amounts import vaccine_type_dose_amounts
+from test_data.models.flu_vaccine_add_batch_radio_button_xpath_map import flu_vaccine_add_batch_radio_button_xpath_map
+from test_data.models.covid_vaccine_add_batch_radio_button_xpath_map import covid_vaccine_add_batch_radio_button_xpath_map
+from test_data.models.flu_vaccine_add_batch_radio_button_xpath_map import flu_vaccine_add_batch_radio_button_xpath_map
+from test_data.models.covid_add_vaccine_check_box_xpath_map import covid_add_vaccine_check_box_xpath_map
+from test_data.models.flu_add_vaccine_check_box_xpath_map import flu_add_vaccine_check_box_xpath_map
+from test_data.models.covid_consent_vaccine_radio_button_xpath_map import covid_consent_vaccine_radio_button_xpath_map
+from test_data.models.flu_consent_vaccine_radio_button_xpath_map import flu_consent_vaccine_radio_button_xpath_map
+from test_data.models.flu_vaccine_radio_button_xpath_map import flu_vaccine_radio_button_xpath_map
+from test_data.models.covid_vaccine_radio_button_xpath_map import covid_vaccine_radio_button_xpath_map
 import random
 
 def get_wrapped_index(index, length):
@@ -88,3 +97,27 @@ def get_vaccination_not_given_reason(index):
 
 def get_vaccine_dose_amount(vaccine_type):
     return vaccine_type_dose_amounts.get(vaccine_type, "Unknown vaccine type")
+
+def get_flu_consent_vaccine_xpath(vaccine_type):
+    return flu_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_covid_consent_vaccine_xpath(vaccine_type):
+    return covid_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_flu_add_vaccine_checkbox_xpath(vaccine_type):
+    return flu_add_vaccine_check_box_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_covid_add_vaccine_checkbox_xpath(vaccine_type):
+    return covid_add_vaccine_check_box_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_flu_vaccine_add_batch_radio_button_xpath(vaccine_type):
+    return flu_vaccine_add_batch_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_covid_vaccine_add_batch_radio_button_xpath(vaccine_type):
+    return covid_vaccine_add_batch_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_flu_vaccine_xpath(vaccine_type):
+    return flu_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_covid_vaccine_xpath(vaccine_type):
+    return covid_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")

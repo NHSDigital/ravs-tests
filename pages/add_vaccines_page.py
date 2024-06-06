@@ -1,4 +1,5 @@
 from init_helpers import *
+from test_data.get_values_from_models import get_flu_add_vaccine_checkbox_xpath, get_covid_add_vaccine_checkbox_xpath
 
 ADD_VACCINE_BUTTON = ("//button[text()='Add vaccine']")
 ADD_BATCHES_BUTTON = ("//button[text()='Add batches']")
@@ -46,14 +47,7 @@ def click_flu_vaccine_checkbox():
     find_element_and_perform_action(FLU_VACCINE_CHECK_BOX, "click_checkbox")
 
 def click_covid_vaccine_type_checkbox(vaccinetype):
-    xpath_map = {
-        "comirnaty original/omicron ba.4-5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='1']",
-        "comirnaty 30 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='2']",
-        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='3']",
-        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='4']",
-        "spikevax xbb.1.5": "//input[@class='nhsuk-checkboxes__input' and @name='CovidVaccineIds' and @value='5']"
-    }
-    element = xpath_map.get(vaccinetype.lower())
+    element = get_covid_add_vaccine_checkbox_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click_checkbox")
     else:
@@ -61,17 +55,7 @@ def click_covid_vaccine_type_checkbox(vaccinetype):
 
 
 def click_flu_vaccine_type_checkbox(vaccinetype):
-    xpath_map = {
-        "fluenz tetra - laiv": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='6']",
-        "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='7']",
-        "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='8']",
-        "flucelvax tetra - qivc": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='9']",
-        "supemtek - qivr": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='10']",
-        "fluad tetra - aqiv": "//input[@class='nhsuk-checkboxes__input' and @name='FluVaccineIds' and @value='11']",
-        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='12']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='13']"
-    }
-    element = xpath_map.get(vaccinetype.lower())
+    element = get_flu_add_vaccine_checkbox_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click_checkbox")
     else:

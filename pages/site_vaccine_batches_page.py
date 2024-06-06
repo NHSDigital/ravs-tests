@@ -1,4 +1,5 @@
 from init_helpers import *
+from test_data.get_values_from_models import get_flu_vaccine_add_batch_radio_button_xpath, get_covid_vaccine_add_batch_radio_button_xpath
 
 ADD_BATCH_BUTTON = ("//button[text()='Add batch']")
 SELECT_SITE_RADIOBUTTON = ("#SiteId")
@@ -83,14 +84,7 @@ def click_flu_vaccine_radiobutton():
     find_element_and_perform_action(FLU_VACCINE_RADIOBUTTON, "click_checkbox")
 
 def click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
-    xpath_map = {
-        "comirnaty original/omicron ba.4-5": "//input[@class='nhsuk-radios__input' and @name='CovidVaccineId' and @value='1']",
-        "comirnaty 30 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='CovidVaccineId' and @value='2']",
-        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='CovidVaccineId' and @value='3']",
-        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='CovidVaccineId' and @value='4']",
-        "spikevax xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='CovidVaccineId' and @value='5']"
-    }
-    element = xpath_map.get(vaccinetype.lower())
+    element = get_covid_vaccine_add_batch_radio_button_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
     else:
@@ -98,17 +92,7 @@ def click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
 
 
 def click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
-    xpath_map = {
-        "fluenz tetra - laiv": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='6']",
-        "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='7']",
-        "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='8']",
-        "flucelvax tetra - qivc": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='9']",
-        "supemtek - qivr": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='10']",
-        "fluad tetra - aqiv": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='11']",
-        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='12']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='13']"
-    }
-    element = xpath_map.get(vaccinetype.lower())
+    element = get_flu_vaccine_add_batch_radio_button_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
     else:
