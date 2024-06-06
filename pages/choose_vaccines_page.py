@@ -1,4 +1,5 @@
 from init_helpers import *
+from test_data.get_values_from_models import get_covid_consent_vaccine_xpath, get_flu_consent_vaccine_xpath
 
 COVID_RADIOBUTTON = ("#VaccineProgramId-1")
 FLU_RADIOBUTTON = ("#VaccineProgramId-2")
@@ -13,14 +14,8 @@ def click_back_button_choosing_vaccine_for_patient():
     find_element_and_perform_action(BACK_ELEMENT, "click")
 
 def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccinetype):
-    xpath_map = {
-        "comirnaty original/omicron ba.4-5": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='1']",
-        "comirnaty 30 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='2']",
-        "comirnaty 3 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='3']",
-        "comirnaty 10 omicron xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='4']",
-        "spikevax xbb.1.5": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='5']"
-    }
-    element = xpath_map.get(vaccinetype.lower())
+
+    element = get_covid_consent_vaccine_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
     else:
@@ -28,18 +23,8 @@ def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_p
 
 
 def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccinetype):
-    xpath_map = {
-        "fluenz tetra - laiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='6']",
-        "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='7']",
-        "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='8']",
-        "flucelvax tetra - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='9']",
-        "supemtek - qivr": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='10']",
-        "fluad tetra - aqiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='11']",
-        "cell-based quadrivalent - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='12']",
-        "adjuvanted quadrivalent - aqiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='13']"
 
-    }
-    element = xpath_map.get(vaccinetype.lower())
+    element = get_flu_consent_vaccine_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
     else:

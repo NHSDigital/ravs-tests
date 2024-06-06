@@ -113,9 +113,9 @@ class BasePlaywrightHelper:
         self.page.wait_for_load_state()
 
 
-    def wait_for_page_to_load(self, timeout=10):
+    def wait_for_page_to_load(self, timeout=1):
         self.page.wait_for_selector('*')
-        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
+        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
