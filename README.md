@@ -269,7 +269,7 @@ Replace your_docker_image_name with the desired name for your Docker image. This
     apt-get update && apt-get install -y allure
 
     # Set the password, headless mode, test environment, and browser variables and run the tests
-    $env:RAVS_PASSWORD = "YourPasswordHere"; $env:HEADLESS_MODE = "false"; $env:TEST_ENVIRONMENT= "qa"; $env:BROWSER= "chrome" tox
+    $env:RAVS_PASSWORD = "YourPasswordHere"; $env:HEADLESS_MODE = "false"; $env:TEST_ENVIRONMENT= "qa"; $env:BROWSER= "chrome"; $env:DEVICE= "iphone_12" ; $env:MARKER= "" ; $env:AGENTS= 3 tox
     ```
 ### Configuration
 
