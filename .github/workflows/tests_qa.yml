@@ -41,7 +41,7 @@ jobs:
             -p 5050:5050 \
             playwright-tests
           while true; do
-            if docker logs playwright-tests 2>&1 | grep -q "Server started"; then
+            if docker logs playwright-tests 2>&1 | grep -q "Report successfully generated to allure-report"; then
               echo "Website URL:"
               break
             else
