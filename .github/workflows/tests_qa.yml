@@ -56,8 +56,6 @@ jobs:
           echo "Container ID: $container_id"
           allure_directory=$(docker exec $container_id find / -type d -name "allure-report" -print -quit)
           echo "Allure Directory: $allure_directory"
-          ls -la "$allure_directory"
-          tree "$allure_directory"
           if [[ -n "$allure_directory" ]]; then
             echo "ALLURE_DIRECTORY=$allure_directory" >> $GITHUB_ENV
 
@@ -88,9 +86,14 @@ jobs:
             echo "Allure directory not found or is empty."
           fi
 
+      - name: Check contents of Allure report directory
+        run: ls -la "$allure_directory"
+
+      - name: List contents of Allure report directory
+        run: tree "$allure_directory"
+
       - name: Check contents of gh-pages before moving
         run: ls -la gh-pages
-          tree gh-pages
 
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
@@ -98,7 +101,9 @@ jobs:
 
       - name: Check contents of gh-pages after moving
         run: ls -la gh-pages
-          tree gh-pages
+
+      - name: Check contents of gh-pages after moving
+        run: tree gh-pages
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
