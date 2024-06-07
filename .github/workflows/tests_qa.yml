@@ -45,11 +45,6 @@ jobs:
             fi
           done
 
-      - name: Start Docker container
-        run: |
-          docker start playwright-tests
-          docker exec playwright-tests bash -c "python3 -m http.server 5050" &
-
       - name: Find and upload Allure report directory
         run: |
           container_id=$(docker ps -qf "name=playwright-tests")
@@ -84,7 +79,6 @@ jobs:
           else
               echo "Allure directory not found or is empty."
           fi
-
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
