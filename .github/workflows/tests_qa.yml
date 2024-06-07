@@ -1,11 +1,6 @@
-name: Run Tests
+name: Run Tests and Publish Allure Report
 
 on:
-  # push:
-  #   branches:
-  #     - master
-  # schedule:
-  #     - cron: "0 8 * * *"
   workflow_dispatch:
 
 jobs:
@@ -42,7 +37,6 @@ jobs:
             playwright-tests
           while true; do
             if docker logs playwright-tests 2>&1 | grep -q "Report successfully generated to allure-report"; then
-              echo "Website URL:"
               break
             else
               echo "Waiting for the allure report to be uploaded..."
@@ -50,12 +44,7 @@ jobs:
             fi
           done
 
-      - name: Start Docker container
-        run: |
-          docker start playwright-tests
-          docker exec playwright-tests bash -c "python3 -m http.server 5050" &
-
-      - name: Find Allure report directory
+      - name: Find and upload Allure report directory
         run: |
           container_id=$(docker ps -qf "name=playwright-tests")
           echo "Container ID: $container_id"
@@ -72,62 +61,20 @@ jobs:
             docker cp "$container_id":"$allure_directory"/. "$temp_dir"
 
             # Archive the contents of the temporary directory
-            (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
+            (cd "$temp_dir" && tar -czf allure-report.tar.gz .)
 
-            # Set the path of Allure report archive as output
-            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
-
-            # Set the environment variable for the archive path
-            export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
-            echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
-
-            # Check if tar was generated successfully
-            if [ $? -eq 0 ]; then
-              echo "Tar archive generated successfully."
-
-              # Echo the path of the tar file
-              echo "Path of the tar file: $ALLURE_REPORT_ARCHIVE"
-
-              # List the contents of the tar file
-              tar -tf "$ALLURE_REPORT_ARCHIVE"
-            else
-              echo "Failed to generate tar archive."
-            fi
+            # Unpack the archive into the gh-pages directory
+            mkdir gh-pages
+            tar -xzf "$temp_dir/allure-report.tar.gz" -C gh-pages
           else
             echo "Allure directory not found or is empty."
           fi
 
-      - name: Upload Allure report archive
-        uses: actions/upload-artifact@v2
-        with:
-          name: allure-report
-          path: /tmp/allure-report.tar.gz
-
-      - name: Retrieve and extract Allure report artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: allure-report
-          path: allure-report
-
-      - name: List contents of the downloaded artifact
-        run: |
-          ls -l allure-report
-
-      - name: Unzip the tar file
-        run: |
-          tar -xzvf allure-report/allure-report.tar.gz -C allure-report
-
-      - name: List contents after unzipping
-        run: |
-          ls -l allure-report
-
-      - name: Start Python server
-        run: |
-          cd allure-report
-          python3 -m http.server 8000 > server.log 2>&1 &
-
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
-          publish_dir: ./allure-report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages
+
+      - name: Clean up
+        run: docker stop $(docker ps -q) || true
