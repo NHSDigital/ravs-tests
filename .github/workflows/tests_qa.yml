@@ -58,6 +58,8 @@ jobs:
           echo "Allure Directory: $allure_directory"
           if [[ -n "$allure_directory" ]]; then
             echo "ALLURE_DIRECTORY=$allure_directory" >> $GITHUB_ENV
+            ls -la $allure_directory
+          fi
 
             # Create a temporary directory to store the contents
             temp_dir="$(mktemp -d)"
@@ -81,29 +83,15 @@ jobs:
             # Unpack the archive into the gh-pages directory
             mkdir gh-pages
             tar -xzf "$temp_dir/allure-report.tar.gz" -C gh-pages
+            echo ls -la gh-pages
 
           else
             echo "Allure directory not found or is empty."
           fi
 
-      - name: Check if Allure directory exists in Docker container
-        run: docker exec $container_id ls -la /app
-
-      - name: List contents of Allure report directory
-        run: docker exec $container_id tree "$allure_directory"
-
-      - name: Check contents of gh-pages before moving
-        run: ls -la gh-pages
-
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
         run: mv gh-pages/* .
-
-      - name: Check contents of gh-pages after moving
-        run: ls -la gh-pages
-
-      - name: Check contents of gh-pages after moving
-        run: tree gh-pages
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
