@@ -31,7 +31,7 @@ jobs:
             -e HEADLESS_MODE="true" \
             -e TEST_ENVIRONMENT="qa" \
             -e BROWSER="chrome" \
-            -e MARKER="login" \
+            -e MARKER="logout" \
             -e AGENTS=3 \
             -p 5050:5050 \
             playwright-tests
@@ -64,7 +64,7 @@ jobs:
             echo "Temporary Directory: $temp_dir"
 
             # Suspend all processes within the container
-            docker exec $container_id pkill -STOP -u all
+            docker exec $container_id pkill -STOP -u root
 
             # Lock the Allure report directory
             docker exec $container_id chmod 400 "$allure_directory"
