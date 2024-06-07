@@ -1,4 +1,4 @@
-name: RAVS TESTS - QA
+name: RAVS TESTS - DEV
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
             --memory 8g \
             -e RAVS_PASSWORD="${{ secrets.RAVS_PASSWORD }}" \
             -e HEADLESS_MODE="true" \
-            -e TEST_ENVIRONMENT="qa" \
+            -e TEST_ENVIRONMENT="dev" \
             -e BROWSER="chrome" \
             -e MARKER="" \
             -e AGENTS=3 \
