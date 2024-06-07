@@ -86,11 +86,11 @@ jobs:
             echo "Allure directory not found or is empty."
           fi
 
-      - name: Check contents of Allure report directory
-        run: ls -la "$allure_directory"
+      - name: Check if Allure directory exists in Docker container
+        run: docker exec $container_id ls -la /app
 
       - name: List contents of Allure report directory
-        run: tree "$allure_directory"
+        run: docker exec $container_id tree "$allure_directory"
 
       - name: Check contents of gh-pages before moving
         run: ls -la gh-pages
