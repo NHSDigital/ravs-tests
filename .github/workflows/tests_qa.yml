@@ -73,7 +73,7 @@ jobs:
             docker cp "$container_id":"$allure_directory"/. "$temp_dir"
 
             # Archive the contents of the temporary directory
-            (cd "$temp_dir" && tar --ignore-failed-read -czf allure-report.tar.gz .)
+            tar -czf "$temp_dir/allure-report.tar.gz" -C "$temp_dir" . || [[ $? -eq 1 ]]
 
             # Unlock the Allure report directory
             docker exec $container_id chmod 755 "$allure_directory"
