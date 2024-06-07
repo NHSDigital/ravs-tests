@@ -80,7 +80,9 @@ jobs:
 
             # Unpack the archive into the gh-pages directory
             mkdir gh-pages
-              tar -xzf "$temp_dir/allure-report.tar.gz" -C gh-pages
+            tar -xzf "$temp_dir/allure-report.tar.gz" -C gh-pages
+
+            mv gh-pages/* .
           else
               echo "Allure directory not found or is empty."
           fi
