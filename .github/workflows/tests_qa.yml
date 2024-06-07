@@ -44,6 +44,11 @@ jobs:
             fi
           done
 
+      - name: Start Docker container
+        run: |
+          docker start playwright-tests
+          docker exec playwright-tests bash -c "python3 -m http.server 5050" &
+
       - name: Find and upload Allure report directory
         run: |
           container_id=$(docker ps -qf "name=playwright-tests")
