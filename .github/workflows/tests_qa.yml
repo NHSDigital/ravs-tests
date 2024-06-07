@@ -1,6 +1,11 @@
 name: RAVS TESTS - QA
 
 on:
+  push:
+    branches:
+      - master
+  schedule:
+      - cron: "0 7 * * *"
   workflow_dispatch:
 
 jobs:
