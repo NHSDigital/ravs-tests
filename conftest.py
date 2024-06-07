@@ -60,7 +60,7 @@ def playwright_helper(request):
     return helper
 
 # Fixture for site parameter
-@pytest.fixture(params=["NEELIMA HOUSE", "FRAZER HOUSE", "PAUL TOWERS"])
+@pytest.fixture(params=["NEELIMA HOUSE", "ALBERT HOUSE", "ST JOHN'S HOUSE"])
 def site(request):
     return request.param
 
@@ -359,6 +359,7 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         select_vaccination_route(vaccination_route)
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         select_batch_number(batch_number_to_select)
+        time.sleep(3)
         enter_dose_amount_value(dose_amount)
         click_prescribing_method(prescribing_method)
         if click_continue_to_check_and_confirm_screen_button() == True:
