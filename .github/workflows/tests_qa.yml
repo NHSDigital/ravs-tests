@@ -93,5 +93,21 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: gh-pages
 
+      - name: Get GitHub Pages URL
+        id: pages-url
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const repo = context.repo.repo;
+            const owner = context.repo.owner;
+            const pagesUrl = `https://${owner}.github.io/${repo}`;
+            core.setOutput('pages_url', pagesUrl);
+
+      - name: Output GitHub Pages URL
+        run: |
+          echo "GitHub Pages URL: ${{ steps.pages-url.outputs.pages_url }}"
+
       - name: Clean up
         run: docker stop $(docker ps -q) || true
+
+
