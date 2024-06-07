@@ -83,6 +83,7 @@ def i_enter_batchprefix_and_batchsuffix(batchprefix, batchsuffix, shared_data):
 
 @when(parse("I enter {expirydate}"))
 def i_enter_expiryDate(expirydate, shared_data):
+    expirydate = format_date(str(get_date_value(expirydate)), config["browser"])
     enter_expiry_date(expirydate)
     shared_data['expiryDate'] = expirydate
     attach_screenshot("entered_expiry_date")

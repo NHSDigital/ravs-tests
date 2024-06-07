@@ -21,5 +21,5 @@ Feature: Add Batches to vaccine
     Then the batch is already added to site warning should appear
 
 Examples:
-|site          | vaccine  | vaccinetype | batchprefix | batchsuffix | expirydate |
-|NEELIMA HOUSE | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SD7YY2 | 24 | 2/6/2024 |
+|site          | vaccine  | vaccinetype | batchprefix | batchsuffix | expirydate      |
+|NEELIMA HOUSE | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SD7YY2 | 24 | today+90|

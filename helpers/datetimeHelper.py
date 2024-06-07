@@ -49,14 +49,20 @@ class BaseDatetimeHelper:
     @staticmethod
     def get_date_value(date):
         if "today" in date.lower():
-            parts = date.split("-")
+            if "-" in date.lower():
+                parts = date.split("-")
+            elif "+" in date.lower():
+                parts = date.split("+")
 
             if len(parts) > 1:
                 offset = int(parts[1].strip())
             else:
                 offset = 0
 
-            return (datetime.today() - timedelta(days=offset)).date()
+            if "-" in date.lower():
+                return (datetime.today() - timedelta(days=offset)).date()
+            elif "+" in date.lower():
+                return (datetime.today() + timedelta(days=offset)).date()
         else:
             return datetime.strptime(date, "%Y-%m-%d").date()
 
