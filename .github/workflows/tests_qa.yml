@@ -63,6 +63,9 @@ jobs:
             temp_dir="$(mktemp -d)"
             echo "Temporary Directory: $temp_dir"
 
+            # Suspend all processes within the container
+            docker exec $container_id pkill -STOP -u all
+
             # Lock the Allure report directory
             docker exec $container_id chmod 400 "$allure_directory"
 
