@@ -31,12 +31,13 @@ jobs:
             -e HEADLESS_MODE="true" \
             -e TEST_ENVIRONMENT="qa" \
             -e BROWSER="chrome" \
-            -e MARKER="" \
+            -e MARKER="login" \
             -e AGENTS=3 \
             -p 5050:5050 \
             playwright-tests
           while true; do
             if docker logs playwright-tests 2>&1 | grep -q "Report successfully generated to allure-report"; then
+              echo "Website URL:"
               break
             else
               echo "Waiting for the allure report to be uploaded..."
@@ -62,18 +63,25 @@ jobs:
             temp_dir="$(mktemp -d)"
             echo "Temporary Directory: $temp_dir"
 
+            # Lock the Allure report directory
+            docker exec $container_id chmod 400 "$allure_directory"
+
             # Copy the contents of allure_directory to the temporary directory
             docker cp "$container_id":"$allure_directory"/. "$temp_dir"
 
             # Archive the contents of the temporary directory
             (cd "$temp_dir" && tar --ignore-failed-read -czf allure-report.tar.gz .)
 
+            # Unlock the Allure report directory
+            docker exec $container_id chmod 755 "$allure_directory"
+
             # Unpack the archive into the gh-pages directory
             mkdir gh-pages
-            tar -xzf "$temp_dir/allure-report.tar.gz" -C gh-pages
+              tar -xzf "$temp_dir/allure-report.tar.gz" -C gh-pages
           else
-            echo "Allure directory not found or is empty."
+              echo "Allure directory not found or is empty."
           fi
+
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
