@@ -81,11 +81,10 @@ class BasePlaywrightHelper:
     def capture_screenshot(self, filename):
         screenshot_path = os.path.join(self.screenshots_dir, f'before_action_{filename}.png')
         try:
-            self.page.screenshot(path=screenshot_path, timeout=3000)
+            self.page.screenshot(path=screenshot_path)
         except Exception as error:
             if "Timeout" in str(error):
                 print('Screenshot taking timed out, ignoring...')
-                self.page.screenshot(path=screenshot_path)
                 return None
             else:
                 raise error
