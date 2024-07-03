@@ -12,6 +12,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        location: ['UK']
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
