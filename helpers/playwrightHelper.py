@@ -21,44 +21,11 @@ class BasePlaywrightHelper:
 
     def launch_chromium(self, headless_mode):
         try:
-            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-
-            self.browser = self.playwright.chromium.launch(headless=headless_mode, args=[
-                "--disable-blink-features=AutomationControlled",
-                "--start-maximized"
-            ])
-
-            self.context = self.browser.new_context(
-                user_agent=user_agent,
-                viewport={"width": 1920, "height": 1080},
-                locale='en-US',
-                geolocation={"latitude": 37.7749, "longitude": -122.4194},
-                permissions=['geolocation'],
-                bypass_csp=True  # This bypasses Content-Security-Policy (if needed)
-            )
-
+            self.browser = self.playwright.chromium.launch(headless=headless_mode, args=["--fullscreen"])
+            self.context = self.browser.new_context()
             self.page = self.context.new_page()
-
-            # Function to add stealth-like properties
-            def add_stealth_properties(page):
-                page.evaluate_on_new_document("""
-                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
-                window.chrome = { runtime: {} };
-                Object.defineProperty(navigator, 'plugins', {
-                    get: () => [1, 2, 3, 4, 5],
-                });
-                Object.defineProperty(navigator, 'languages', {
-                    get: () => ['en-US', 'en'],
-                });
-                """)
-
-            # Add stealth-like properties
-            add_stealth_properties(self.page)
-
-            self.logger.info("Browser launched successfully in headless mode: %s", headless_mode)
-
         except Exception as e:
-            self.logger.error(f"Error launching Chromium: {e}")
+            print(f"Error launching Chromium: {e}")
 
     def launch_edge(self, headless_mode):
         try:
