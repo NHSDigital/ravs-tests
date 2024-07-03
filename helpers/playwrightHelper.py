@@ -21,8 +21,16 @@ class BasePlaywrightHelper:
 
     def launch_chromium(self, headless_mode):
         try:
-            self.browser = self.playwright.chromium.launch(headless=headless_mode, args=["--fullscreen"])
-            self.context = self.browser.new_context()
+            self.browser = self.playwright.chromium.launch(
+                headless=headless_mode,
+                args=["--fullscreen"]
+            )
+            self.context = self.browser.new_context(
+                geolocation={"latitude": 51.5074, "longitude": -0.1278},  # London, UK
+                permissions=["geolocation"],
+                locale="en-GB",
+                timezone_id="Europe/London"
+            )
             self.page = self.context.new_page()
         except Exception as e:
             print(f"Error launching Chromium: {e}")
