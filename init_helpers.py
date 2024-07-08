@@ -66,7 +66,10 @@ def attach_screenshot(filename):
     else:
         filename = config["browser"].upper() + "_" + get_browser_version() + "_" + filename + "_"
 
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    directory = os.path.dirname(filename)
+    if directory:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+
     logging.debug(f"Filename: {filename}")
 
     try:
