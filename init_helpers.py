@@ -5,6 +5,7 @@ from helpers.playwrightHelper import PlaywrightHelper
 import pytest
 from playwright.sync_api import sync_playwright
 import allure
+import logging
 
 playwright_helper_instance = None
 api_helper_instance = None
@@ -59,12 +60,21 @@ def load_config_from_env():
     return config
 
 def attach_screenshot(filename):
+    logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
         filename = config["browser"].upper() + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + "_"
     else:
         filename = config["browser"].upper() + "_" + get_browser_version() + "_" + filename + "_"
-    screenshot = capture_screenshot(filename)
-    allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    logging.debug(f"Filename: {filename}")
+
+    try:
+        screenshot = capture_screenshot(filename)
+        logging.debug(f"Screenshot saved at: {screenshot}")
+        allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+    except Exception as e:
+        logging.error(f"Failed to capture screenshot: {e}")
 
 config = load_config_from_env()
 
