@@ -62,9 +62,9 @@ def load_config_from_env():
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
-        filename = config["browser"].upper() + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + "_"
+        filename = config["browser"].upper() + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + ".png"
     else:
-        filename = config["browser"].upper() + "_" + get_browser_version() + "_" + filename + "_"
+        filename = config["browser"].upper() + "_" + get_browser_version() + "_" + filename + "_" + ".png"
 
     directory = os.path.dirname(filename)
     if directory:
