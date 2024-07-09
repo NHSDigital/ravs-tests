@@ -90,6 +90,8 @@ jobs:
             mkdir -p "$static_dir"
             echo "Static Directory: $static_dir"
 
+            sleep 10
+
             # Copy the contents of allure_directory to the static temporary directory
             docker cp "$container_id":"$allure_directory"/. "$static_dir"
 
