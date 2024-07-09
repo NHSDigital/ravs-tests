@@ -45,8 +45,8 @@ jobs:
             -p 5050:5050 \
             playwright-tests
           while true; do
-            if docker logs playwright-tests 2>&1 | grep -q "Server started at "; then
-              echo "Report successfully generated. Server started"
+            if docker logs playwright-tests 2>&1 | grep -q "Server started "; then
+              echo "Report successfully generated."
               break
             else
               echo "Waiting for the Allure report to be generated..."
@@ -72,37 +72,17 @@ jobs:
             temp_dir="$(mktemp -d)"
             echo "Temporary Directory: $temp_dir"
 
-            # # Copy the contents of allure_directory to the temporary directory
-            # docker cp "$container_id":"$allure_directory"/. "$temp_dir"
+            # Copy the contents of allure_directory to the temporary directory
+            docker cp "$container_id":"$allure_directory"/. "$temp_dir"
 
-            # # Archive the contents of the temporary directory
-            # (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
-
-            # # Set the path of Allure report archive as output
-            # echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
-
-            # # Set the environment variable for the archive path
-            # export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
-            # echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
-
-            # Create a static temporary directory to store the contents
-            static_dir="/tmp/allure-static-dir"
-            mkdir -p "$static_dir"
-            echo "Static Directory: $static_dir"
-
-            sleep 10
-
-            # Copy the contents of allure_directory to the static temporary directory
-            docker cp "$container_id":"$allure_directory"/. "$static_dir"
-
-            # Archive the contents of the static temporary directory
-            (cd "$static_dir" && tar -czf allure-report.tar.gz .)
+            # Archive the contents of the temporary directory
+            (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
 
             # Set the path of Allure report archive as output
-            echo "::set-output name=allure_report_archive::$(realpath "$static_dir/allure-report.tar.gz")"
+            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
 
             # Set the environment variable for the archive path
-            export ALLURE_REPORT_ARCHIVE=$(realpath "$static_dir/allure-report.tar.gz")
+            export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
             echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
 
             # Check if tar was generated successfully
@@ -139,15 +119,15 @@ jobs:
 
       - name: Unzip the tar file
         run: |
-          tar -xzvf allure-report/allure-report.tar.gz -C allure-report/extracted
+          tar -xzvf allure-report/allure-report.tar.gz -C allure-report
 
       - name: List contents after unzipping
         run: |
-          ls -l allure-report/extracted
+          ls -l allure-report
 
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
-        run: mv allure-report/extracted/* .
+        run: mv allure-report/* .
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
