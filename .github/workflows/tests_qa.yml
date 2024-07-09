@@ -129,8 +129,9 @@ jobs:
       - name: Move Allure report files
         # run: mv allure-report/* .
         run: |
-          mv allure-report/* ./allure-report/
-          mv allure-report/.??* ./allure-report/
+          mkdir -p allure-report
+          cp -r allure-report/* ./allure-report/
+          cp -r allure-report/.??* ./allure-report/
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
