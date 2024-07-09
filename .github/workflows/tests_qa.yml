@@ -40,7 +40,7 @@ jobs:
             -e HEADLESS_MODE="true" \
             -e TEST_ENVIRONMENT="qa" \
             -e BROWSER="chrome" \
-            -e MARKER="logout" \
+            -e MARKER="login" \
             -e AGENTS=3 \
             -p 5050:5050 \
             playwright-tests
@@ -127,14 +127,13 @@ jobs:
 
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
-        run: mv allure-report allure-report-root
-
+        run: mv allure-report/* .
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report-root
+          publish_dir: .
 
       - name: Check contents of gh-pages
         run: ls -la
