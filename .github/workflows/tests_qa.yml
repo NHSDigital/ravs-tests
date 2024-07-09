@@ -75,14 +75,24 @@ jobs:
             # Copy the contents of allure_directory to the temporary directory
             docker cp "$container_id":"$allure_directory"/. "$temp_dir"
 
+            # # Archive the contents of the temporary directory
+            # (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
+
+            # # Set the path of Allure report archive as output
+            # echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
+
+            # # Set the environment variable for the archive path
+            # export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
+            # echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
+
             # Archive the contents of the temporary directory
-            (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
+            (cd "$temp_dir" && tar -czf allure-report.tar.gz .)
 
             # Set the path of Allure report archive as output
-            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
+            echo "::set-output name=allure_report_archive::$(realpath "$temp_dir/allure-report.tar.gz")"
 
             # Set the environment variable for the archive path
-            export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
+            export ALLURE_REPORT_ARCHIVE=$(realpath "$temp_dir/allure-report.tar.gz")
             echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
 
             # Check if tar was generated successfully
@@ -119,15 +129,15 @@ jobs:
 
       - name: Unzip the tar file
         run: |
-          tar -xzvf allure-report/allure-report.tar.gz -C allure-report
+          tar -xzvf allure-report/allure-report.tar.gz -C allure-report/extracted
 
       - name: List contents after unzipping
         run: |
-          ls -l allure-report
+          ls -l allure-report/extracted
 
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
-        run: mv allure-report/* .
+        run: mv allure-report/extracted/* .
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
