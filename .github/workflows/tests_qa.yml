@@ -57,6 +57,7 @@ jobs:
       - name: Start Docker container
         run: |
           docker start playwright-tests
+          docker exec playwright-tests bash -c "python3 -m http.server 5050" &
           sleep 5
 
       - name: Find and upload Allure report directory
@@ -105,7 +106,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: allure-report
-          path: ${{ env.ALLURE_REPORT_ARCHIVE }}
+          # path: ${{ env.ALLURE_REPORT_ARCHIVE }}
+          path: /tmp/allure-report.tar.gz
 
       - name: Retrieve and extract Allure report artifact
         uses: actions/download-artifact@v2
@@ -125,6 +127,11 @@ jobs:
         run: |
           ls -l allure-report
 
+      - name: Start Python server
+        run: |
+          cd allure-report
+          python3 -m http.server 8000 > server.log 2>&1 &
+
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
         run: mv allure-report/* .
@@ -133,7 +140,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: allure-report
 
       - name: Check contents of gh-pages
         run: ls -la
