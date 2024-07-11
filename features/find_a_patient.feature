@@ -33,7 +33,7 @@ Feature: Find a patient
       | 9449306621  | Not found                | 20110509    | KT21 1LJ  |
       | 9449306613  | Briar Anderton           | 20/5/1990   | 123 Main Vyt, AB12 3CE  |
       | 9449306605  | Srinivasarao Patel       | 03/03/2020  | 	4 Calicut Lane2, Line 2, Line 3, SLOUGH, Berkshire, KT21 1EJ  |
-      | 9449306494  | Reynolds Ryan            | 27/3/2001   | 39 Barton Road, RG10 9DF  |
+      | 9449306494  | Reynolds Ryan            | 27/3/2001   | 	40 Queen Street London, EC4R 1DD  |
       | 9469997956  | SOLOMON DAZLEY           | 20160130    | 	10 BROOK STREET, LANCASTER, LA1 1SL   |
       | 9469998626  | JONNY CONOPO             | 20150305    | 	1 DAISY BANK, LANCASTER, LA1 3JW   |
       | 9470004272  | JOJO LANE                | 20150706    | 	10 RAKESMOOR LANE, BARROW-IN-FURNESS, LA14 4LG  |
