@@ -105,8 +105,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: allure-report
-          # path: ${{ env.ALLURE_REPORT_ARCHIVE }}
-          path: /tmp/allure-report.tar.gz
+          path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
       - name: Retrieve and extract Allure report artifact
         uses: actions/download-artifact@v2
