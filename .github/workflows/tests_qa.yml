@@ -138,10 +138,13 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./
 
       - name: Check contents of gh-pages
         run: ls -la
+
+      - name: Verify files
+        run: ls -R
 
       - name: Get GitHub Pages URL
         id: pages-url
