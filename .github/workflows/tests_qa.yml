@@ -144,7 +144,8 @@ jobs:
         run: ls -la
 
       - name: Verify files
-        run: ls -R
+        run: |
+          ls -R
           cat allure-report/index.html
 
       - name: Get GitHub Pages URL
