@@ -24,6 +24,18 @@ def select_eligibility_type(type):
     else:
         click_eligible_yes_radiobutton()
 
+def click_legal_mechanism(legal_mechanism):
+    xpath_map = {
+        "national protocol (np)": "//label[@for='LegalMechanismId-1']",
+        "patient group directions (pgd)": "//label[@for='LegalMechanismId-2']",
+        "patient specific directions (psd)": "//label[@for='LegalMechanismId-3']",
+    }
+    element = xpath_map.get(legal_mechanism.lower())
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Invalid vaccine type")
+
 def check_eligibility_type_is_visible():
     return check_element_exists(ELIGIBILITY_TYPE_DROPDOWN_ELEMENT)
 

@@ -233,6 +233,9 @@ def choose_vaccine_and_vaccine_type_for_patient(vaccine, vaccine_type):
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
+def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineType,batch_number, expirydate):
+    pass
+
 def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_number, expirydate):
     if config["browser"] == "mobile":
         if check_navlink_bar_toggle_exists():
@@ -301,7 +304,8 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_numb
     attach_screenshot("clicked_confirm_choices_button")
     click_find_a_patient_nav_link()
 
-def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
+def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
+    click_legal_mechanism(legal_mechanism)
     select_assessing_clinician_with_name_and_council(assessing_clinician)
     enter_comments_for_assessing_patient(assessment_comments)
     set_assessment_date(assessment_date)
@@ -346,7 +350,7 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision,  vaccination_date, vaccine, vaccine_type2, vaccination_route,  batch_number, batch_expiry_date, dose_amount, prescribing_method, vaccinator, vaccination_comments, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision,  vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, legal_mechanism, vaccinator, vaccination_comments, no_vaccination_reason=None):
     select_vaccinator_name_and_council(vaccinator)
     enter_vaccination_comments(vaccination_comments)
     set_vaccination_date(vaccination_date)
@@ -356,12 +360,11 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
             click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
         elif "flu" in (vaccine).lower():
             click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
-        select_vaccination_route(vaccination_route)
+        select_vaccination_site(vaccination_site)
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         select_batch_number(batch_number_to_select)
         time.sleep(3)
         enter_dose_amount_value(dose_amount)
-        click_prescribing_method(prescribing_method)
         if click_continue_to_check_and_confirm_screen_button() == True:
             vaccination_date = format_date(vaccination_date, "safari")
             set_vaccination_date(vaccination_date)

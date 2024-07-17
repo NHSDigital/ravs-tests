@@ -120,7 +120,6 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-
     def wait_for_page_to_load(self, timeout=1):
         self.page.wait_for_selector('*', timeout=timeout * 100)
         self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
@@ -143,7 +142,6 @@ class BasePlaywrightHelper:
             print(f"Error waiting for element {selector} to disappear: {e}")
 
     def check_element_exists(self, selector, wait=False):
-        self.wait_for_page_to_load()
         try:
             element = self.page.locator(selector)
             if wait == True:
@@ -154,7 +152,6 @@ class BasePlaywrightHelper:
             return False
 
     def check_element_enabled(self, selector, wait=False):
-        self.wait_for_page_to_load()
         try:
             element = self.page.locator(selector)
             if wait == True:
@@ -169,7 +166,6 @@ class BasePlaywrightHelper:
         element.scroll_into_view_if_needed()
 
     def clear_element(self, selector):
-        self.wait_for_page_to_load()
         try:
             element=self.page.locator(selector)
             element.clear()
@@ -184,7 +180,6 @@ class BasePlaywrightHelper:
         self.page.mouse.up()
 
     def find_element_and_perform_action(self, selector, action, inputValue=None):
-        self.wait_for_page_to_load()
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
         self.capture_screenshot(selector_filename)
         try:
@@ -231,7 +226,6 @@ class BasePlaywrightHelper:
         self.capture_screenshot(selector_filename)
 
     def get_current_url(self):
-        self.wait_for_page_to_load()
         return self.page.url()
 
     def get_accessibility_violations(self):
@@ -239,7 +233,6 @@ class BasePlaywrightHelper:
             current_url = self.get_current_url(self.page)
 
             self.page.goto(current_url)
-            self.wait_for_page_to_load(self.page)
 
             axe = self.page.accessibility
             results = axe.check()

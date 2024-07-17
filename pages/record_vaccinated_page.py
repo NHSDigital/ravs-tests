@@ -15,7 +15,7 @@ NO_VACCINATION_REASON_DROPDOWN_ELEMENT = ("#NoVaccinationReasonId")
 CONSENT_GIVEN_BY_DROPDOWN_ELEMENT = ("#ConsentTypeId")
 VACCINATION_DATE_INPUT_ELEMENT = ("#VaccinationDate")
 VACCINATION_COMMENTS_ELEMENT = ("#VaccinationComments")
-VACCINATION_ROUTE_DROPDOWN_ELEMENT = ("#VaccinationRouteId")
+VACCINATION_SITE_DROPDOWN_ELEMENT = ("#VaccinationSiteId")
 BATCH_NUMBER_DROPDOWN_ELEMENT = ("#BatchNumber")
 BATCH_EXPIRY_DATE_READONLY_ELEMENT = ("#BatchExpiryDate")
 DOSE_AMOUNT_READONLY_ELEMENT = ("#DoseAmount")
@@ -52,8 +52,8 @@ def click_not_vaccinated_radiobutton():
 def select_vaccinator_name_and_council(nameandcouncil):
     find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "select_option", nameandcouncil)
 
-def select_vaccination_route(route):
-    find_element_and_perform_action(VACCINATION_ROUTE_DROPDOWN_ELEMENT, "select_option", route)
+def select_vaccination_site(site):
+    find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
 
 def select_batch_number(batchNumber):
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
@@ -110,17 +110,6 @@ def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinate
     else:
         print("Invalid vaccine type")
 
-def click_prescribing_method(prescribing_method):
-    xpath_map = {
-        "national protocol (np)": "//label[@for='PrescribingMethodId-1']",
-        "patient group directions (pgd)": "//label[@for='PrescribingMethodId-2']",
-        "patient specific directions (psd)": "//label[@for='PrescribingMethodId-3']",
-    }
-    element = xpath_map.get(prescribing_method.lower())
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
 
 
 def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):

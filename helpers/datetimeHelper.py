@@ -89,6 +89,22 @@ class BaseDatetimeHelper:
                 # If parsing as both formats fails, return the original string
                 return date_str
 
+    @staticmethod
+    def date_format_with_day_of_week(date_str):
+        try:
+            # Try parsing the date as '%d/%m/%Y'
+            parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
+            return parsed_date.strftime("%A %d %B %Y")
+        except ValueError:
+            try:
+                # If parsing fails, try parsing as '%m/%d/%Y'
+                parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
+                # Format the parsed date to '%d/%m/%Y'
+                return parsed_date.strftime("%A %d %B %Y")
+            except ValueError:
+                # If parsing as both formats fails, return the original string
+                return date_str
+
 
 class DatetimeHelper(BaseDatetimeHelper):
     def __init__(self):
