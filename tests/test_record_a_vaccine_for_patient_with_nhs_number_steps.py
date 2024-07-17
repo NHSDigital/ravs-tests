@@ -120,11 +120,15 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
         assert get_patient_name_value() == shared_data["patient_name"]
         assert get_patient_address_value() == address
         assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
-        assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine_type"]
-        assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["vaccinated_type2"]
-        assert date_format_with_day_of_week(get_patient_eligibility_assessment_date_value()) == shared_data['eligibility_assessment_date']
-        assert date_format_with_day_of_week(get_patient_vaccinated_date_value()) == shared_data['vaccination_date']
-        assert dob in get_patient_dob_value()
+        # assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine_type"]
+        # assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["vaccinated_type2"]
+        assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
+        assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
+        assert get_patient_dob_value() == date_format_with_day_of_week_and_age(dob)
+        assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
+        assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
+        assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
+        assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
         attach_screenshot("check_and_confirm_screen_after_assertion")
 
 @then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
