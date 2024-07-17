@@ -249,10 +249,10 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_numb
     attach_screenshot("before_clicking_site_radio_button")
     click_site_radio_button(site)
     if "covid" in vaccine.lower():
-      attach_screenshot("before_clicking_covid_vaccine_checkbox")
-      click_covid_vaccine_checkbox()
-      attach_screenshot("before_clicking_covid_vaccinetype_checkbox")
-      click_covid_vaccine_type_checkbox(vaccineType)
+        attach_screenshot("before_clicking_covid_vaccine_checkbox")
+        click_covid_vaccine_checkbox()
+        attach_screenshot("before_clicking_covid_vaccinetype_checkbox")
+        click_covid_vaccine_type_checkbox(vaccineType)
     elif "flu" in vaccine.lower():
         attach_screenshot("before_clicking_flu_vaccine_checkbox")
         click_flu_vaccine_checkbox()
