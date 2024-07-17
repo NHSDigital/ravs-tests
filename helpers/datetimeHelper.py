@@ -90,6 +90,26 @@ class BaseDatetimeHelper:
                 return date_str
 
     @staticmethod
+    def date_format_with_day_of_week_and_age(date_str):
+        try:
+            # Try parsing the date as '%d/%m/%Y'
+            parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
+        except ValueError:
+            try:
+                # If parsing fails, try parsing as '%m/%d/%Y'
+                parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
+            except ValueError:
+                # If parsing as both formats fails, return the original string
+                return date_str
+
+        today = datetime.today()
+        age = today.year - parsed_date.year - ((today.month, today.day) < (parsed_date.month, parsed_date.day))
+
+        # Format the parsed date to 'Day dd Month yyyy (aged xx)'
+        formatted_date = parsed_date.strftime("%d %B %Y")
+        return f"{formatted_date} (aged {age})"
+
+    @staticmethod
     def date_format_with_day_of_week(date_str):
         try:
             # Try parsing the date as '%d/%m/%Y'
@@ -104,6 +124,22 @@ class BaseDatetimeHelper:
             except ValueError:
                 # If parsing as both formats fails, return the original string
                 return date_str
+
+    @staticmethod
+    def date_format_with_name_of_month(date_str):
+        try:
+            # Try parsing the date as '%d/%m/%Y'
+            parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
+        except ValueError:
+            try:
+                # If parsing fails, try parsing as '%m/%d/%Y'
+                parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
+            except ValueError:
+                # If parsing as both formats fails, return the original string
+                return date_str
+
+        # Format the parsed date to 'dd MMMM yyyy'
+        return parsed_date.strftime("%d %B %Y")
 
 
 class DatetimeHelper(BaseDatetimeHelper):
