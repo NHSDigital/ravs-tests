@@ -91,7 +91,6 @@ def i_enter_batchprefix_and_batchsuffix(batchprefix, batchsuffix, shared_data):
         enter_flu_batch_number(batchprefix)
     attach_screenshot("entered_batch_number")
 
-
 @when(parse("I enter {expirydate}"))
 def i_enter_expiryDate(expirydate, shared_data):
     expirydate = format_date(str(get_date_value(expirydate)), config["browser"])
@@ -99,18 +98,15 @@ def i_enter_expiryDate(expirydate, shared_data):
     shared_data["expiryDate"] = expirydate
     attach_screenshot("entered_expiry_date")
 
-
 @when("I click Add batch button")
 def i_click_add_batch_button():
     Click_add_batch_button()
     attach_screenshot("clicked_add_batch_button")
 
-
 @when("I click confirm choices button")
 def i_click_confirm_choices_button():
     click_confirm_vaccine_batch_choices_button()
     attach_screenshot("clicked_confirm_choices_button")
-
 
 @when("I click confirm button")
 def i_click_confirm_button():

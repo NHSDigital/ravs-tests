@@ -161,5 +161,4 @@ def click_back_button():
     find_element_and_perform_action(BACK_BUTTON, "click")
 
 def check_choose_vaccine_button_exists():
-    wait_for_page_to_load()
     return check_element_exists(CHOOSE_VACCINE_BUTTON, True)

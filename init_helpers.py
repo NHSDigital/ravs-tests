@@ -164,6 +164,9 @@ def format_date(date, browser):
 def standardize_date_format(date):
     return datetime_helper_instance.standardize_date_format(date)
 
+def date_format_with_day_of_week(date):
+    return datetime_helper_instance.date_format_with_day_of_week(date)
+
 def get_date_value(date):
     return datetime_helper_instance.get_date_value(date)
 

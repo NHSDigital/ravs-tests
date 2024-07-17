@@ -37,7 +37,7 @@ def check_confirm_choices_button_enabled():
     return check_element_enabled(CONFIRM_VACCINE_CHOICES_BUTTON, True)
 
 def click_site_radio_button(site):
-    element = (f"//label[text()='{site}']/preceding-sibling::input[@id='SiteId']")
+    element = (f"//label[text()='{site}']/preceding-sibling::input[@name='SiteId']")
     find_element_and_perform_action(element, "click")
 
 def click_covid_vaccine_checkbox():
