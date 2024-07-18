@@ -49,7 +49,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
         batch_expiry_date = today + timedelta(days=7)
-        batch_expiry_date = batch_expiry_date.strftime('%d/m/%y')
+        batch_expiry_date = batch_expiry_date.strftime('%e/m/%y')
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date)
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["vaccinated_type2"], batch_number, batch_expiry_date)
@@ -94,6 +94,8 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         name_of_person_consenting = "Automation tester"
         relationship_to_patient = "RAVS tester"
         shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+            shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
         record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
 
@@ -108,6 +110,8 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["vaccinated_type2"]))
             shared_data["legal_mechanism"] = get_legal_mechanism(shared_data["index"])
             shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+            if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+                shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
             shared_data["vaccination_comments"] = shared_data["vaccinated_type2"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["legal_mechanism"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])

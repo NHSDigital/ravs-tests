@@ -78,13 +78,13 @@ class BaseDatetimeHelper:
         try:
             # Try parsing the date as '%d/%m/%Y'
             parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
-            return parsed_date.strftime("%d/%m/%Y")
+            return parsed_date.strftime("%e/%m/%Y")
         except ValueError:
             try:
                 # If parsing fails, try parsing as '%m/%d/%Y'
                 parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
                 # Format the parsed date to '%d/%m/%Y'
-                return parsed_date.strftime("%d/%m/%Y")
+                return parsed_date.strftime("%e/%m/%Y")
             except ValueError:
                 # If parsing as both formats fails, return the original string
                 return date_str
@@ -106,7 +106,7 @@ class BaseDatetimeHelper:
         age = today.year - parsed_date.year - ((today.month, today.day) < (parsed_date.month, parsed_date.day))
 
         # Format the parsed date to 'Day dd Month yyyy (aged xx)'
-        formatted_date = parsed_date.strftime("%d %B %Y")
+        formatted_date = parsed_date.strftime("%e %B %Y")
         return f"{formatted_date} (aged {age})"
 
     @staticmethod
@@ -114,13 +114,13 @@ class BaseDatetimeHelper:
         try:
             # Try parsing the date as '%d/%m/%Y'
             parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
-            return parsed_date.strftime("%A %d %B %Y")
+            return parsed_date.strftime("%A %e %B %Y")
         except ValueError:
             try:
                 # If parsing fails, try parsing as '%m/%d/%Y'
                 parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
                 # Format the parsed date to '%d/%m/%Y'
-                return parsed_date.strftime("%A %d %B %Y")
+                return parsed_date.strftime("%A %e %B %Y")
             except ValueError:
                 # If parsing as both formats fails, return the original string
                 return date_str
@@ -136,10 +136,10 @@ class BaseDatetimeHelper:
                 parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
             except ValueError:
                 # If parsing as both formats fails, return the original string
-                return date_str
+                return date_str.strftime("%e %B %Y")
 
         # Format the parsed date to 'dd MMMM yyyy'
-        return parsed_date.strftime("%d %B %Y")
+        return parsed_date.strftime("%e %B %Y")
 
 
 class DatetimeHelper(BaseDatetimeHelper):

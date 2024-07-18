@@ -50,7 +50,8 @@ def click_not_vaccinated_radiobutton():
     find_element_and_perform_action(NO_VACCINATED_RADIO_BUTTON, "click")
 
 def select_vaccinator_name_and_council(nameandcouncil):
-    find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "select_option", nameandcouncil)
+    if check_element_enabled(VACCINATOR_DROPDOWN_ELEMENT):
+        find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "select_option", nameandcouncil)
 
 def select_vaccination_site(site):
     find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
