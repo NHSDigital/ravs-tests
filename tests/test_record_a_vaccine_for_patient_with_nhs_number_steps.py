@@ -128,7 +128,7 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
         assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["vaccinated_type2"]
         assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
         assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
-        assert get_patient_dob_value() == date_format_with_day_of_week_and_age(dob)
+        assert get_patient_dob_value() == date_format_with_age(dob)
         assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
         assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
         assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']

@@ -109,7 +109,6 @@ class BaseDatetimeHelper:
         today = datetime.today()
         age = today.year - parsed_date.year - ((today.month, today.day) < (parsed_date.month, parsed_date.day))
 
-        # Manually format the date to include the day of the week, day without leading zero, full month name, and year
         day = parsed_date.day  # Day without leading zero
         month = parsed_date.strftime('%B')  # Full month name
         year = parsed_date.year  # Full year
