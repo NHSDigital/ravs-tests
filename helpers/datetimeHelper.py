@@ -94,7 +94,7 @@ class BaseDatetimeHelper:
         return f"{day}/{month}/{year}"
 
     @staticmethod
-    def date_format_with_day_of_week_and_age(date_str):
+    def date_format_with_age(date_str):
         try:
             # Try parsing the date as '%d/%m/%Y'
             parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
@@ -110,12 +110,11 @@ class BaseDatetimeHelper:
         age = today.year - parsed_date.year - ((today.month, today.day) < (parsed_date.month, parsed_date.day))
 
         # Manually format the date to include the day of the week, day without leading zero, full month name, and year
-        day_of_week = parsed_date.strftime('%A')
         day = parsed_date.day  # Day without leading zero
         month = parsed_date.strftime('%B')  # Full month name
         year = parsed_date.year  # Full year
 
-        return f"{day_of_week} {day} {month} {year} (aged {age})"
+        return f"{day} {month} {year} (aged {age})"
 
     @staticmethod
     def date_format_with_day_of_week(date_str):
