@@ -127,7 +127,7 @@ class BasePlaywrightHelper:
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def wait_for_element_to_appear(self, selector, timeout=50):
+    def wait_for_element_to_appear(self, selector, timeout=20):
         try:
             self.page.wait_for_selector(selector, timeout=timeout, state='visible')
             print(f"Element {selector} appeared on the page.")
