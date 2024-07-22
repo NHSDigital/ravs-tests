@@ -97,7 +97,6 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
             shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
         else:
             shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
-            
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
         record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
 
