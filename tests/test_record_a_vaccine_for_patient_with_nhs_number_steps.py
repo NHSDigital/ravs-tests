@@ -49,7 +49,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
         batch_expiry_date = today + timedelta(days=7)
-        batch_expiry_date = batch_expiry_date.strftime('%e/m/%y')
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date)
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["vaccinated_type2"], batch_number, batch_expiry_date)
