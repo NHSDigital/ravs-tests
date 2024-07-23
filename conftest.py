@@ -165,8 +165,8 @@ def login_and_navigate_to_find_a_patient(request, login_and_set_vaccinator_locat
 
 # Fixture for logging in and finding a patient by NHS number
 @pytest.fixture(scope='function')
-def login_and_find_a_patient_by_NHS_Number(request, login_and_navigate_to_find_a_patient, nhs_number):
-    enter_NHSNumber(nhs_number)
+def login_and_find_a_patient_by_nhs_number(request, login_and_navigate_to_find_a_patient, nhs_number):
+    enter_nhs_number(nhs_number)
     click_search_for_patient_button()
 
 # Fixture for navigating to find a patient by PDS search page
@@ -210,7 +210,7 @@ def click_find_a_patient_and_search_with_nhsnumber(nhs_number):
         if check_navlink_bar_toggle_exists():
             click_navlinkbar_toggler()
     click_find_a_patient_nav_link()
-    enter_NHSNumber(nhs_number)
+    enter_nhs_number(nhs_number)
     click_search_for_patient_button()
     attach_screenshot("entered_nhs_number_as" + nhs_number + "_and_clicked_search_for_patient_button")
 
