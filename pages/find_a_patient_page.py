@@ -1,101 +1,89 @@
 from datetime import datetime
 from init_helpers import *
 
-SEARCH_BY_PDS_TAB_ELEMENT = ("//a[text()='By demographics']")
-SEARCH_BY_NHS_NUMBER_TAB_ELEMENT = ("//a[text()='By NHS number']")
-SEARCH_BY_RECORDS_TAB_ELEMENT = ("//a[text()='By local records']")
-FIRSTNAME_INPUT_ELEMENT = ("#FirstName")
-LASTNAME_INPUT_ELEMENT = ("#LastName")
-DATEOFBIRTH_INPUT_ELEMENT = ("#DateOfBirth")
-GENDER_DROPDOWN_ELEMENT = ("#GenderId")
-POSTCODE_INPUT_ELEMENT = ("#Postcode")
-NHS_NUMBER_INPUT_ELEMENT = ("#NhsNumber")
-SEARCH_BUTTON_ELEMENT = ("//button[text()='Search']")
-FIRSTNAME_INPUT_ERROR_LABEL = ("#FirstNameError")
-LASTNAME_INPUT_ERROR_LABEL = ("#LastNameError")
-DOB_INPUT_REQUIRED_ERROR_LABEL = ("#DateOfBirthRequiredError2")
-DOB_INPUT_VALID_ERROR_LABEL = ("#DateOfBirthRequiredError1")
-GENDER_INPUT_ERROR_LABEL = ("#GenderIdError")
+# Common
+SEARCH_BY_DEMOGRAPHICS_LINK = ("//a[text()='By demographics']")
+SEARCH_BY_NHS_NUMBER_LINK = ("//a[text()='By NHS number']")
+SEARCH_BY_LOCAL_RECORDS_LINK = ("//a[text()='By local records']")
+SEARCH_BUTTON = ("//button[text()='Search']")
+
+# Shared
+NHS_NUMBER_INPUT = ("#NhsNumber")
+
+FIRST_NAME_INPUT = ("#FirstName")
+LAST_NAME_INPUT = ("#LastName")
+GENDER_SELECT = ("#GenderId")
+POSTCODE_INPUT = ("#Postcode")
+DATE_OF_BIRTH_INPUT = ("#DateOfBirth")
+
+NHS_NUMBER_INPUT_ERROR_LABEL= ("#VaccineProgramIdError")
+FIRST_NAME_INPUT_ERROR_LABEL = ("#FirstNameError")
+LAST_NAME_INPUT_ERROR_LABEL = ("#LastNameError")
+GENDER_SELECT_ERROR_LABEL = ("#GenderIdError")
 POSTCODE_INPUT_ERROR_LABEL = ("#PostcodeError")
-# NHSNUMBER_INPUT_ERROR_LABEL= ("#NhsNumberError")
-NHSNUMBER_INPUT_ERROR_LABEL= ("//span[text()='NHS number cannot be found']")
-NHSNUMBER_INPUT_ELEMENT=("#NhsNumber")
+DOB_INPUT_ERROR_LABEL = ("#DateOfBirth > span[id^=DateOfBirthRequiredError]")
+
 CREATE_NEW_PATIENT_BUTTON = ("//button[text()='Create new patient']")
 
-def enter_forename(forename):
-    find_element_and_perform_action(FIRSTNAME_INPUT_ELEMENT, "input_text", forename)
+def enter_first_name(first_name):
+    find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
 
-def enter_surname(surname):
-    find_element_and_perform_action(LASTNAME_INPUT_ELEMENT, "input_text", surname)
+def enter_last_name(last_name):
+    find_element_and_perform_action(LAST_NAME_INPUT, "input_text", last_name)
 
-def enter_dateofbirth(dob):
-    find_element_and_perform_action(DATEOFBIRTH_INPUT_ELEMENT, "input_text", dob)
+def enter_dob(dob):
+    find_element_and_perform_action(DATE_OF_BIRTH_INPUT, "input_text", dob)
 
 def select_gender(gender):
-    find_element_and_perform_action(GENDER_DROPDOWN_ELEMENT, "select_option", gender)
+    find_element_and_perform_action(GENDER_SELECT, "select_option", gender)
 
 def enter_postcode(postcode):
-    find_element_and_perform_action(POSTCODE_INPUT_ELEMENT, "input_text", postcode)
+    find_element_and_perform_action(POSTCODE_INPUT, "input_text", postcode)
 
-def enter_NHSNumber(nhsNumber):
-    find_element_and_perform_action(NHS_NUMBER_INPUT_ELEMENT, "input_text", nhsNumber)
+def enter_nhs_number(nhsNumber):
+    find_element_and_perform_action(NHS_NUMBER_INPUT, "input_text", nhsNumber)
 
-def click_search_byNHSNumber_tab():
-    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_TAB_ELEMENT, "click")
+def click_search_by_nhs_number_link():
+    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_LINK, "click")
 
-def click_search_byPatientDetails_tab():
-    find_element_and_perform_action(SEARCH_BY_PDS_TAB_ELEMENT, "click")
+def click_search_by_demographics_link():
+    find_element_and_perform_action(SEARCH_BY_DEMOGRAPHICS_LINK, "click")
 
-def click_search_byNHSNumber_tab():
-    find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_TAB_ELEMENT, "click")
-
-def click_search_byRecords_tab():
-    find_element_and_perform_action(SEARCH_BY_RECORDS_TAB_ELEMENT, "click")
+def click_search_by_local_records_link():
+    find_element_and_perform_action(SEARCH_BY_LOCAL_RECORDS_LINK, "click")
 
 def check_search_for_patient_button_visible():
-    return check_element_exists(SEARCH_BUTTON_ELEMENT, False)
+    return check_element_exists(SEARCH_BUTTON, False)
 
 def click_search_for_patient_button():
-    find_element_and_perform_action(SEARCH_BUTTON_ELEMENT, "click")
+    find_element_and_perform_action(SEARCH_BUTTON, "click")
 
-def click_search_by_pds_tab():
-    find_element_and_perform_action(SEARCH_BY_PDS_TAB_ELEMENT, "click")
+def check_error_appears_for_first_name(wait):
+    return check_element_exists(FIRST_NAME_INPUT_ERROR_LABEL, wait)
 
-def click_search_by_records_tab():
-    find_element_and_perform_action(SEARCH_BY_RECORDS_TAB_ELEMENT, "click")
+def get_nhs_number_error_message_text():
+    return find_element_and_perform_action(NHS_NUMBER_INPUT_ERROR_LABEL, "get_text")
 
-def check_required_field_error_appears_for_forename(wait):
-    return check_element_exists(FIRSTNAME_INPUT_ERROR_LABEL, wait)
+def get_first_name_error_message_text():
+    return find_element_and_perform_action(FIRST_NAME_INPUT_ERROR_LABEL, "get_text")
 
-def check_required_field_error_appears_for_surname(wait):
-    return check_element_exists(LASTNAME_INPUT_ERROR_LABEL, wait)
+def get_last_name_error_message_text():
+    return find_element_and_perform_action(LAST_NAME_INPUT_ERROR_LABEL, "get_text")
 
-def check_required_field_error_appears_for_dob(wait):
-    return check_element_exists(DOB_INPUT_REQUIRED_ERROR_LABEL, wait)
-
-def check_valid_field_error_appears_for_dob(wait):
-    return check_element_exists(DOB_INPUT_VALID_ERROR_LABEL, wait)
-
-def check_required_field_error_appears_for_gender(wait):
-    return check_element_exists(GENDER_INPUT_ERROR_LABEL, wait)
-
-def check_required_field_error_appears_for_postcode(wait):
-    return check_element_exists(POSTCODE_INPUT_ERROR_LABEL, wait)
-
-def check_required_field_error_appears_for_nhsNumber(wait):
-    return check_element_exists(NHSNUMBER_INPUT_ERROR_LABEL, wait)
+def get_dob_error_message_text():
+    return find_element_and_perform_action(DOB_INPUT_ERROR_LABEL, "get_text")
 
 def check_patient_name_search_result_exists(name, wait):
     element = (f"//span[text()='{name}']")
     return check_element_exists(element, wait)
 
-def check_patient_nhsnumber_search_result_exists(nhsnumber, wait):
-    element = (f"//td[text()='{nhsnumber}']")
+def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
+    element = (f"//td[text()='{nhsNumber}']")
     return check_element_exists(element, wait)
 
-def check_patient_not_found_message_exists(nhsnumber, wait):
-    element = (f"//h3[contains(text(), 'No result found for') and contains(., '{nhsnumber}')]")
-    return check_element_exists(element)
+def check_patient_not_found_message_exists(nhsNumber, wait):
+    element = (f"//h3[contains(text(), 'No result found for') and contains(., '{nhsNumber}')]")
+    return check_element_exists(element, wait)
 
 def check_create_new_patient_button_exists(wait):
     return check_element_exists(CREATE_NEW_PATIENT_BUTTON, wait)
