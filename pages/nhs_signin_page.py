@@ -49,5 +49,4 @@ def get_emailAddress_missing_error_text():
     return find_element_and_perform_action(ALERT_TEXT_EMAILADDRESS, "get_text")
 
 def check_unable_to_sign_in_error_exists():
-    wait_for_page_to_load()
     return check_element_exists(ERROR_UNABLE_TO_SIGN_IN, True)

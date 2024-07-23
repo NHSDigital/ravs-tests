@@ -8,10 +8,8 @@ def navigate_to_ravs_login_page(url):
     wait_for_element_to_appear(ACCEPT_COOKIES_ELEMENT)
     if check_element_exists(ACCEPT_COOKIES_ELEMENT):
         find_element_and_perform_action(ACCEPT_COOKIES_ELEMENT, "click")
-    wait_for_page_to_load()
 
 def check_login_button_exists():
-    wait_for_page_to_load()
     return check_element_exists(LOGIN_BUTTON_ELEMENT, True)
 
 def click_login_button():

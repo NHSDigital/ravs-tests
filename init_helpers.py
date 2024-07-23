@@ -62,9 +62,9 @@ def load_config_from_env():
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
-        filename = config["browser"] + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + ".png"
+        filename = config["test_environment"] + "_" + config["browser"] + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + ".png"
     else:
-        filename = config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
+        filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
 
     directory = os.path.dirname(filename)
     if directory:
@@ -163,6 +163,15 @@ def format_date(date, browser):
 
 def standardize_date_format(date):
     return datetime_helper_instance.standardize_date_format(date)
+
+def date_format_with_day_of_week(date):
+    return datetime_helper_instance.date_format_with_day_of_week(date)
+
+def date_format_with_age(date):
+    return datetime_helper_instance.date_format_with_age(date)
+
+def date_format_with_name_of_month(date):
+    return datetime_helper_instance.date_format_with_name_of_month(date)
 
 def get_date_value(date):
     return datetime_helper_instance.get_date_value(date)

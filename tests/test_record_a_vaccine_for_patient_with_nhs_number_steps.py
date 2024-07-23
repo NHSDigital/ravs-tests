@@ -49,7 +49,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
         batch_expiry_date = today + timedelta(days=7)
-        batch_expiry_date = batch_expiry_date.strftime('%d/m/%y')
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date)
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["vaccinated_type2"], batch_number, batch_expiry_date)
@@ -75,6 +75,7 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, vaccine_ty
 @when(parse("I assess the patient's {eligibility} with the details and date as {assess_date} and click continue to record consent screen button"))
 def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, assess_date):
     shared_data['eligible_decision'] = eligibility
+    shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
@@ -83,7 +84,7 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(shared_data["index"])
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
     shared_data['assessment_comments'] = "Assessment comments " + assess_date + shared_data["patient_name"]
-    assess_patient_with_details_and_click_continue_to_consent(eligibility, shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], assess_date, shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
+    assess_patient_with_details_and_click_continue_to_consent(eligibility, shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
 
 @when(parse("I record {consent} with the details and click continue to vaccinate button"))
 def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, consent):
@@ -92,7 +93,10 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         shared_data['consent_given_by'] = get_consent_given_by(shared_data["index"])
         name_of_person_consenting = "Automation tester"
         relationship_to_patient = "RAVS tester"
-        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+            shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
+        else:
+            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
         record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
 
@@ -103,13 +107,16 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
         if shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
             shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
-            shared_data["vaccination_route"] = get_vaccination_route(shared_data["index"])
+            shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["vaccinated_type2"]))
-            shared_data["prescribing_method"] = get_prescribing_method(shared_data["index"])
-            shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+            shared_data["legal_mechanism"] = get_legal_mechanism(shared_data["index"])
+            if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+                shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
+            else:
+                shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["vaccinated_type2"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_route"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["prescribing_method"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["legal_mechanism"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
 
 @then(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))
@@ -119,11 +126,15 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
         assert get_patient_name_value() == shared_data["patient_name"]
         assert get_patient_address_value() == address
         assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
-        assert get_patient_vaccine_type_chosen_vaccine_value() == shared_data["chosen_vaccine_type"]
-        assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["vaccinated_type2"]
-        assert standardize_date_format(get_patient_eligibility_assessment_date_value()) == shared_data['eligibility_assessment_date']
-        assert standardize_date_format(get_patient_vaccinated_date_value()) == shared_data['vaccination_date']
-        assert dob in get_patient_dob_value()
+        assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine"]
+        assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["vaccinated_type2"]
+        assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
+        assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
+        assert get_patient_dob_value() == date_format_with_age(dob)
+        assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
+        assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
+        assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
+        assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
         attach_screenshot("check_and_confirm_screen_after_assertion")
 
 @then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")

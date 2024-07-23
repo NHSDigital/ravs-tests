@@ -1,6 +1,14 @@
 name: RAVS TESTS - DEV
 
 on:
+  push:
+    branches:
+      - '**'   # Triggers on push to any branch
+  pull_request:
+    branches:
+      - '**'   # Triggers on PR to any branch
+  schedule:
+      - cron: "0 7 * * *"
   workflow_dispatch:
 
 jobs:
