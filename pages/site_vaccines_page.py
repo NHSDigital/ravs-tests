@@ -1,7 +1,7 @@
 from init_helpers import *
 
-ADD_VACCINES_BUTTON = ("//button [text()='Add vaccines']")
-ADD_BATCHES_BUTTON = ("//button [text()='Add batches']")
+ADD_VACCINES_BUTTON = ("//a[text()='Add vaccines']")
+ADD_BATCHES_BUTTON = ("//a[text()='Add batches']")
 SELECT_SITE_DROPDOWN = ("//select[@name='SiteId']")
 BACK_BUTTON_ON_VACCINES_PAGE = ("(//a[@href='/settings'])[2]")
 CONFIRM_CHOICES_BUTTON = ("//button[text()='Confirm choices']")
