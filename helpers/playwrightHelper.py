@@ -1,5 +1,5 @@
 import time
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError
 from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
@@ -183,7 +183,7 @@ class BasePlaywrightHelper:
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
         self.capture_screenshot(selector_filename)
         try:
-            self.page.wait_for_selector(selector)
+            self.page.wait_for_selector(selector, timeout=10000)
             element=self.page.locator(selector)
             self.page.set_viewport_size({"width": 1500, "height":1500})
             element.scroll_into_view_if_needed()
@@ -220,9 +220,11 @@ class BasePlaywrightHelper:
                     print(f"{selector} checkbox is already checked.")
             else:
                 print(f"Unsupported action: {action}")
+        except TimeoutError:
+            pytest.fail(f"Timeout waiting for selector: {selector} to perform {action}")
         except Exception as e:
             print(f"Exception: {e}. Element not found: {selector}")
-            raise ElementNotFoundException(f"Element not found: {selector}")
+            raise ElementNotFoundException(f"Element not found: {selector} to perform {action}")
         self.capture_screenshot(selector_filename)
 
     def get_current_url(self):
