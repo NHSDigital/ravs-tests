@@ -63,7 +63,7 @@ jobs:
         run: |
           container_id=$(docker ps -qf "name=playwright-tests")
           echo "Container ID: $container_id"
-          allure_directory=$(docker exec $container_id find / -type d -name "allure-report" -print -quit)
+          allure_directory=$(docker exec $container_id find / -path /proc -prune -o -type d -name "allure-report" -print -quit)
           echo "Allure Directory: $allure_directory"
           if [[ -n "$allure_directory" ]]; then
             echo "ALLURE_DIRECTORY=$allure_directory" >> $GITHUB_ENV
@@ -165,3 +165,8 @@ jobs:
 
       - name: Clean up
         run: docker stop $(docker ps -q) || true
+
+      - name: Notify Slack on success
+        if: success()
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Ravs tests finished running for the QA environment ! Check the Allure report: https://nhsdigital.github.io/ravs-tests/#"}' ${{ secrets.SLACK_WEBHOOK_URL }}

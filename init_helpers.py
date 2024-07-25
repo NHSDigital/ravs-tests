@@ -86,6 +86,8 @@ mobile_devices = get_mobile_devices()
 @pytest.fixture(scope="session", autouse=True)
 def initialize_session():
     initialize_helpers()
+    yield
+    quit_browser()
 
 @pytest.fixture(scope="session")
 def playwright_helper():
