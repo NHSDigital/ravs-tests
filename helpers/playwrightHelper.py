@@ -183,7 +183,7 @@ class BasePlaywrightHelper:
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
         self.capture_screenshot(selector_filename)
         try:
-            self.page.wait_for_selector(selector, timeout=5000)
+            # self.page.wait_for_selector(selector, timeout=5000)
             element=self.page.locator(selector)
             self.page.set_viewport_size({"width": 1500, "height":1500})
             element.scroll_into_view_if_needed()
