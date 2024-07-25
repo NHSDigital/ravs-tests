@@ -14,7 +14,9 @@ FIRST_NAME_INPUT = ("#FirstName")
 LAST_NAME_INPUT = ("#LastName")
 GENDER_SELECT = ("#GenderId")
 POSTCODE_INPUT = ("#Postcode")
-DATE_OF_BIRTH_INPUT = ("#DateOfBirth")
+DOB_DAY_INPUT = ("//label[text()='Day']/following-sibling::input")
+DOB_MONTH_INPUT = ("//label[text()='Month']/following-sibling::input")
+DOB_YEAR_INPUT = ("//label[text()='Year']/following-sibling::input")
 
 NHS_NUMBER_INPUT_ERROR_LABEL= ("#VaccineProgramIdError")
 FIRST_NAME_INPUT_ERROR_LABEL = ("#FirstNameError")
@@ -31,8 +33,22 @@ def enter_first_name(first_name):
 def enter_last_name(last_name):
     find_element_and_perform_action(LAST_NAME_INPUT, "input_text", last_name)
 
+def enter_dob_day(dob_day):
+    find_element_and_perform_action(DOB_DAY_INPUT, "input_text", str(dob_day))
+
+def enter_dob_month(dob_month):
+    find_element_and_perform_action(DOB_MONTH_INPUT, "input_text", str(dob_month))
+
+def enter_dob_year(dob_year):
+    find_element_and_perform_action(DOB_YEAR_INPUT, "input_text", str(dob_year))
+
 def enter_dob(dob):
-    find_element_and_perform_action(DATE_OF_BIRTH_INPUT, "input_text", dob)
+    format="%d/%m/%Y"
+    date = datetime.strptime(dob, format)
+
+    enter_dob_day(date.day)
+    enter_dob_month(date.month)
+    enter_dob_year(date.year)
 
 def select_gender(gender):
     find_element_and_perform_action(GENDER_SELECT, "select_option", gender)
@@ -74,7 +90,7 @@ def get_dob_error_message_text():
     return find_element_and_perform_action(DOB_INPUT_ERROR_LABEL, "get_text")
 
 def check_patient_name_search_result_exists(name, wait):
-    element = (f"//span[text()='{name}']")
+    element = (f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{name.lower()}')]")
     return check_element_exists(element, wait)
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
