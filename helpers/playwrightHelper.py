@@ -120,7 +120,7 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-    def wait_for_page_to_load(self, timeout=1):
+    def wait_for_page_to_load(self, timeout=3):
         self.page.wait_for_selector('*', timeout=timeout * 100)
         self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
 
@@ -183,7 +183,7 @@ class BasePlaywrightHelper:
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
         self.capture_screenshot(selector_filename)
         try:
-            self.page.wait_for_selector(selector, timeout=10000)
+            self.page.wait_for_selector(selector, timeout=5000)
             element=self.page.locator(selector)
             self.page.set_viewport_size({"width": 1500, "height":1500})
             element.scroll_into_view_if_needed()
@@ -195,29 +195,33 @@ class BasePlaywrightHelper:
                     print(f"Element with {selector} is not enabled.")
             elif action.lower() == "input_text":
                 text = element.text_content()
-                if text != '':
-                    element.clear()
-                element.fill(inputValue)
-                print(f"Entered text into the {selector} successfully.")
+                if element.is_visible():
+                    if text != '':
+                        element.clear()
+                    element.fill(inputValue)
+                    print(f"Entered text into the {selector} successfully.")
             elif action.lower() == "type_text":
-                text = element.text_content()
-                if text != '':
-                    element.clear()
-                element.type(inputValue)
-                print(f"Entered text into the {selector} successfully.")
+                if element.is_visible():
+                    text = element.text_content()
+                    if text != '':
+                        element.clear()
+                    element.type(inputValue)
+                    print(f"Entered text into the {selector} successfully.")
             elif action.lower() == "get_text":
                 text = element.text_content()
                 print(f"Text from the {selector}: {text}")
                 return text
             elif action.lower() == "select_option":
-                element.select_option(inputValue)
-                print(f"Selected option with value '{inputValue}' from the {selector} successfully.")
+                if element.is_visible():
+                    element.select_option(inputValue)
+                    print(f"Selected option with value '{inputValue}' from the {selector} successfully.")
             elif action.lower() == "click_checkbox":
-                if not element.is_checked():
-                    element.check()
-                    print(f"{selector} checkbox checked successfully.")
-                else:
-                    print(f"{selector} checkbox is already checked.")
+                if element.is_visible():
+                    if not element.is_checked():
+                        element.check()
+                        print(f"{selector} checkbox checked successfully.")
+                    else:
+                        print(f"{selector} checkbox is already checked.")
             else:
                 print(f"Unsupported action: {action}")
         except TimeoutError:

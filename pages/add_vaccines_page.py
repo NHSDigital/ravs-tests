@@ -48,7 +48,7 @@ def click_flu_vaccine_checkbox():
 
 def click_covid_vaccine_type_checkbox(vaccinetype):
     element = get_covid_add_vaccine_checkbox_xpath(vaccinetype.lower())
-    if element:
+    if check_element_exists(element):
         find_element_and_perform_action(element, "click_checkbox")
     else:
         print("Invalid vaccine type")
