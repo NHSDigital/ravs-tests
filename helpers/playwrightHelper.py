@@ -225,7 +225,7 @@ class BasePlaywrightHelper:
             else:
                 print(f"Unsupported action: {action}")
         except TimeoutError:
-           print(f"Timeout waiting for selector: {selector} to perform {action}")
+            print(f"Timeout waiting for selector: {selector} to perform {action}")
         except Exception as e:
             print(f"Exception: {e}. Element not found: {selector}")
             raise ElementNotFoundException(f"Element not found: {selector} to perform {action}")
