@@ -105,8 +105,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: allure-report
-          # path: ${{ env.ALLURE_REPORT_ARCHIVE }}
-          path: /tmp/allure-report.tar.gz
+          path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
       - name: Retrieve and extract Allure report artifact
         uses: actions/download-artifact@v2
@@ -133,16 +132,22 @@ jobs:
 
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
-        run: mv allure-report/* .
+        run: cp -r allure-report/* .
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
+          publish_dir: ./
+          keep_files: true
 
       - name: Check contents of gh-pages
         run: ls -la
+
+      - name: Verify files
+        run: |
+          ls -R
+          cat allure-report/index.html
 
       - name: Get GitHub Pages URL
         id: pages-url
