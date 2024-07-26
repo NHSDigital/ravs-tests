@@ -52,7 +52,7 @@ def load_config_from_env():
         "headless_mode": os.environ.get("HEADLESS_MODE",""),
         "browser": os.environ.get("BROWSER", "chrome"),
         "device": os.environ.get("DEVICE", "iphone_12"),
-        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 3)),
+        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 1)),
         "credentials": {
             "ravs_password": os.environ.get("RAVS_PASSWORD", "")
         }
@@ -127,7 +127,7 @@ def get_current_url():
 def find_elements(selector):
     return playwright_helper_instance.find_elements(selector)
 
-def wait_for_page_to_load(timeout=10):
+def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
 def check_element_exists(element, wait=False):
