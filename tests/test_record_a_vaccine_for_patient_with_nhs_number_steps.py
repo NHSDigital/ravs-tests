@@ -109,7 +109,6 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["vaccinated_type2"]))
-            shared_data["legal_mechanism"] = get_legal_mechanism(shared_data["index"])
             if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             else:

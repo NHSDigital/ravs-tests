@@ -28,10 +28,10 @@ Feature: Find a patient
       Examples:
       | nhsNumber   | name                     | dateofbirth | address   |
       | 9693632109  | Bill GARTON              | 23/6/1946   | 	1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW  |
-      | 9449304424  | COMFORT11 Jones          | 9/3/2018    | 	Ifyoucan113, GDA11 UCL6, KT17 1NA  |
-      | 9449305552  | Prasad Patel             | 14/2/2020   | 	Caretakers Flat, Line2121, Line323, HYDERABAD, Country, EN2 6SN   |
+      | 9449304424  | COMFORT26th Jones        | 9/3/2018    | 	Ifyoucan113, 26TH, KT17 1NA  |
+      | 9449305552  | Milton Jacob             | 4/7/2024   | 	12, OATLANDS ROAD, EN3 5LJ   |
       | 9449306621  | Not found                | 20110509    | KT21 1LJ  |
-      | 9449306613  | Briar Anderton           | 20/5/1990   | 123 Main Vyt, AB12 3CE  |
+      | 9449306613  | Briar Anderton           | 20/5/1990   | 	27 Ryde Vale Road, LONDON, SW12 9JQ  |
       | 9449306605  | Srinivasarao Patel       | 03/03/2020  | 	4 Calicut Lane2, Line 2, Line 3, SLOUGH, Berkshire, KT21 1EJ  |
       | 9449306494  | Reynolds Ryan            | 27/3/2001   | 	40 Queen Street London, EC4R 1DD  |
       | 9469997956  | SOLOMON DAZLEY           | 20160130    | 	10 BROOK STREET, LANCASTER, LA1 1SL   |
