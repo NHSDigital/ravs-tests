@@ -89,6 +89,9 @@ def get_last_name_error_message_text():
 def get_dob_error_message_text():
     return find_element_and_perform_action(DOB_INPUT_ERROR_LABEL, "get_text")
 
+def get_postcode_error_message_text():
+    return find_element_and_perform_action(POSTCODE_INPUT_ERROR_LABEL, "get_text")
+
 def check_patient_name_search_result_exists(name, wait):
     element = (f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{name.lower()}')]")
     return check_element_exists(element, wait)
@@ -97,8 +100,16 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     element = (f"//td[text()='{nhsNumber}']")
     return check_element_exists(element, wait)
 
-def check_patient_not_found_message_exists(nhsNumber, wait):
+def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = (f"//h3[contains(text(), 'No result found for') and contains(., '{nhsNumber}')]")
+    return check_element_exists(element, wait)
+
+def check_patient_not_found_message_exists(wait):
+    element = (f"//h3[contains(text(), 'No result found')]")
+    return check_element_exists(element, wait)
+
+def check_patient_multiple_results_found_message_exists(wait):
+    element = (f"//h3[contains(text(), 'More than one result found')]")
     return check_element_exists(element, wait)
 
 def check_create_new_patient_button_exists(wait):
