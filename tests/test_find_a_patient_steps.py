@@ -5,6 +5,9 @@ from pages.find_a_patient_page import *
 import logging
 from init_helpers import *
 from conftest import *
+from faker import Faker
+
+fake = Faker()
 
 features_directory = get_working_directory() + "features"
 
@@ -57,9 +60,23 @@ def step_given_i_am_on_the_find_a_patient_by_demographics_page(navigate_and_logi
   step_select_site_and_care_model(site, care_model)
   click_search_by_demographics_link()
 
-@given(parse('I click the search button'))
-def step_i_click_the_search_button():
+@given('I am on the find a patient by local records page')
+def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
+  step_select_site_and_care_model(site, care_model)
+  click_search_by_local_records_link()
+
+@given('I am on the create a new patient page')
+def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
+  step_select_site_and_care_model(site, care_model)
+  click_search_by_local_records_link()
+
+@when('I click the search button')
+def step_click_search_button():
   click_search_for_patient_button()
+
+@when('I click the create a new patient button')
+def step_click_create_a_new_patient_button():
+  click_create_a_new_patient_button()
 
 @when('I click the find a patient navigation link')
 def step_i_click_the_search_button():
@@ -134,6 +151,11 @@ def step_assert_create_new_patient_button_exists():
     attach_screenshot("check_create_new_patient_button_is_visible")
     assert check_create_new_patient_button_exists(True) == True
 
+@then("I can see an option to review the search tips")
+def step_assert_search_tips_link_exists():
+    attach_screenshot("check_assert_search_tips_link_is_visible")
+    assert check_search_tips_link_exists(True) == True
+
 @given(parse("I enter the mandatory patient details {firstName}, {lastName}, and {dob}"))
 def step_add_mandatory_patient_information(firstName, lastName, dob):
     enter_first_name(firstName)
@@ -146,8 +168,18 @@ def step_select_gender(gender):
     select_gender(gender)
     attach_screenshot("select_gender")
 
-@given(parse("I enter postcode {postcode}"))
-def step_i_enter_postcode(postcode):
+@given(parse("I enter the postcode {postcode}"))
+def step_enter_postcode(postcode):
     enter_postcode(postcode)
-    attach_screenshot("add_postcode")
+    attach_screenshot("enter_postcode")
 
+@given("I enter the mandatory patient details for a new patient")
+def step_add_mandatory_patient_information(shared_data):
+    shared_data["first_name"] = fake.first_name()
+    shared_data["last_name"] = fake.last_name()
+    shared_data["dob"] = fake.date_of_birth().strftime("%d/%m/%Y")
+
+    enter_first_name(shared_data["first_name"])
+    enter_last_name(shared_data["last_name"])
+    enter_dob(shared_data["dob"])
+    attach_screenshot("add_mandatory_new_patient_information")

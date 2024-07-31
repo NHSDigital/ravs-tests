@@ -26,6 +26,7 @@ POSTCODE_INPUT_ERROR_LABEL = ("#PostcodeError")
 DOB_INPUT_ERROR_LABEL = ("#DateOfBirth > span[id^=DateOfBirthRequiredError]")
 
 CREATE_NEW_PATIENT_BUTTON = ("//button[text()='Create new patient']")
+SEARCH_TIPS_LINK = ("//a[text()='search tips']")
 
 def enter_first_name(first_name):
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
@@ -74,6 +75,9 @@ def check_search_for_patient_button_visible():
 def click_search_for_patient_button():
     find_element_and_perform_action(SEARCH_BUTTON, "click")
 
+def click_create_a_new_patient_button():
+    find_element_and_perform_action(CREATE_NEW_PATIENT_BUTTON, "click")
+
 def check_error_appears_for_first_name(wait):
     return check_element_exists(FIRST_NAME_INPUT_ERROR_LABEL, wait)
 
@@ -101,11 +105,11 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     return check_element_exists(element, wait)
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
-    element = (f"//h3[contains(text(), 'No result found for') and contains(., '{nhsNumber}')]")
+    element = (f"//h3[contains(text(), 'No result') and contains(., '{nhsNumber}')]")
     return check_element_exists(element, wait)
 
 def check_patient_not_found_message_exists(wait):
-    element = (f"//h3[contains(text(), 'No result found')]")
+    element = (f"//h3[contains(text(), 'No result')]")
     return check_element_exists(element, wait)
 
 def check_patient_multiple_results_found_message_exists(wait):
@@ -114,6 +118,9 @@ def check_patient_multiple_results_found_message_exists(wait):
 
 def check_create_new_patient_button_exists(wait):
     return check_element_exists(CREATE_NEW_PATIENT_BUTTON, wait)
+
+def check_search_tips_link_exists(wait):
+    return check_element_exists(SEARCH_TIPS_LINK, wait)
 
 def click_on_patient_name_search_result(name):
     element = (f"//span[text()='{name}']")
