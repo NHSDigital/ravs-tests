@@ -100,6 +100,10 @@ def check_patient_name_search_result_exists(name, wait):
     element = (f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{name.lower()}')]")
     return check_element_exists(element, wait)
 
+def check_patient_postcode_search_result_exists(postcode, wait):
+    element = (f"//td[text()='{postcode}']")
+    return check_element_exists(element, wait)
+
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     element = (f"//td[text()='{nhsNumber}']")
     return check_element_exists(element, wait)
@@ -147,3 +151,7 @@ def check_patient_address_search_result_exists(address, wait):
     postcode = parts[1].strip()
     element = (f"//td[contains(text(), '{address}') and contains(., '{postcode}')]")
     return check_element_exists(element, wait)
+
+def get_patient_added_message(firstName):
+    element = (f"//p[contains(text(),'{firstName}')]")
+    return find_element_and_perform_action(element, "get_text")
