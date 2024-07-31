@@ -153,25 +153,31 @@ Feature: Find a patient
       | John      | Preston  | 14/03/2003 |
 
   @findpatient @createpatient
-  Scenario Outline: Local: Created patient can be found using local search
+  Scenario: Local: Created patient can be found using local search
     Given I am on the find a patient by demographics page
-    And I enter the mandatory patient details for a new patient
-    When I click the search button
+    And I generate random data for a new patient
+    And I enter the new patient details
+    And I click the search button
     And I click the create a new patient button
-    Then I can see an option to review the search tips
-    Examples:
-      | firstName | lastName | dob        |
-      | John      | Preston  | 14/03/2003 |
-
-  @findpatient @createpatient
-  Scenario Outline: Local: Created patient cannot be found using demographic search
-    Given I am on the find a patient by local records page
-    And I enter the mandatory patient details <firstName>, <lastName>, and <dob>
+    And I enter the new patient details
+    When I click the check and confirm button
+    Then I can check and confirm the patient information is correct
+    When I click the confirm and save button
+    Then I can see the patient added confirmation message
+    And I click the find a patient by local records link
+    And I enter the new patient details
     When I click the search button
-    Then I can see a message that no results are found for the patient
-    And I can see an option to review the search tips
-    #And I can see an option to create a new patient
+    Then I can see the patient's local record in the search results
 
-    Examples:
-      | firstName | lastName | dob        |
-      | John      | Preston  | 14/03/2003 |
+  # @findpatient @createpatient
+  # Scenario Outline: Local: Created patient cannot be found using demographic search
+  #   Given I am on the find a patient by local records page
+  #   And I enter the mandatory patient details <firstName>, <lastName>, and <dob>
+  #   When I click the search button
+  #   Then I can see a message that no results are found for the patient
+  #   And I can see an option to review the search tips
+  #   #And I can see an option to create a new patient
+
+  #   Examples:
+  #     | firstName | lastName | dob        |
+  #     | John      | Preston  | 14/03/2003 |
