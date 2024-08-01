@@ -157,4 +157,5 @@ jobs:
       - name: Notify Slack on success
         if: success()
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Ravs tests finished running for the DEV environment ! Check the Allure report: https://nhsdigital.github.io/ravs-tests/#"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          BRANCH_NAME=$(echo $GITHUB_REF | sed 's|refs/heads/||')
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Ravs tests finished running for the DEV environment on branch $BRANCH_NAME! Check the Allure report: https://nhsdigital.github.io/ravs-tests/#\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
