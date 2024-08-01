@@ -5,6 +5,7 @@ from helpers.playwrightHelper import PlaywrightHelper
 import pytest
 from playwright.sync_api import sync_playwright
 import allure
+import logging
 
 playwright_helper_instance = None
 api_helper_instance = None
@@ -51,7 +52,7 @@ def load_config_from_env():
         "headless_mode": os.environ.get("HEADLESS_MODE",""),
         "browser": os.environ.get("BROWSER", "chrome"),
         "device": os.environ.get("DEVICE", "iphone_12"),
-        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 10)),
+        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 1)),
         "credentials": {
             "ravs_password": os.environ.get("RAVS_PASSWORD", "")
         }
@@ -59,12 +60,24 @@ def load_config_from_env():
     return config
 
 def attach_screenshot(filename):
+    logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
-        filename = config["browser"].upper() + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + "_"
+        filename = config["test_environment"] + "_" + config["browser"] + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + ".png"
     else:
-        filename = config["browser"].upper() + "_" + get_browser_version() + "_" + filename + "_"
-    screenshot = capture_screenshot(filename)
-    allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+        filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
+
+    directory = os.path.dirname(filename)
+    if directory:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+    logging.debug(f"Filename: {filename}")
+
+    try:
+        screenshot = capture_screenshot(filename)
+        logging.debug(f"Screenshot saved at: {screenshot}")
+        allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+    except Exception as e:
+        logging.error(f"Failed to capture screenshot: {e}")
 
 config = load_config_from_env()
 
@@ -73,6 +86,8 @@ mobile_devices = get_mobile_devices()
 @pytest.fixture(scope="session", autouse=True)
 def initialize_session():
     initialize_helpers()
+    yield
+    quit_browser()
 
 @pytest.fixture(scope="session")
 def playwright_helper():
@@ -112,12 +127,18 @@ def get_current_url():
 def find_elements(selector):
     return playwright_helper_instance.find_elements(selector)
 
-def wait_for_page_to_load(timeout=10):
+def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
 def check_element_exists(element, wait=False):
     try:
         return playwright_helper_instance.check_element_exists(element, wait)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
+def check_element_enabled(element, wait=False):
+    try:
+        return playwright_helper_instance.check_element_enabled(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
@@ -144,6 +165,15 @@ def format_date(date, browser):
 
 def standardize_date_format(date):
     return datetime_helper_instance.standardize_date_format(date)
+
+def date_format_with_day_of_week(date):
+    return datetime_helper_instance.date_format_with_day_of_week(date)
+
+def date_format_with_age(date):
+    return datetime_helper_instance.date_format_with_age(date)
+
+def date_format_with_name_of_month(date):
+    return datetime_helper_instance.date_format_with_name_of_month(date)
 
 def get_date_value(date):
     return datetime_helper_instance.get_date_value(date)

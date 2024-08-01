@@ -1,5 +1,5 @@
 import time
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError
 from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
@@ -21,8 +21,16 @@ class BasePlaywrightHelper:
 
     def launch_chromium(self, headless_mode):
         try:
-            self.browser = self.playwright.chromium.launch(headless=headless_mode, args=["--fullscreen"])
-            self.context = self.browser.new_context()
+            self.browser = self.playwright.chromium.launch(
+                headless=headless_mode,
+                args=["--fullscreen"]
+            )
+            self.context = self.browser.new_context(
+                geolocation={"latitude": 51.5074, "longitude": -0.1278},  # London, UK
+                permissions=["geolocation"],
+                locale="en-GB",
+                timezone_id="Europe/London"
+            )
             self.page = self.context.new_page()
         except Exception as e:
             print(f"Error launching Chromium: {e}")
@@ -80,7 +88,14 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, filename):
         screenshot_path = os.path.join(self.screenshots_dir, f'before_action_{filename}.png')
-        self.page.screenshot(path=screenshot_path)
+        try:
+            self.page.screenshot(path=screenshot_path)
+        except Exception as error:
+            if "Timeout" in str(error):
+                print('Screenshot taking timed out, ignoring...')
+                return None
+            else:
+                raise error
         return screenshot_path
 
     def get_browser_version(self):
@@ -105,14 +120,14 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-
-    def wait_for_page_to_load(self, timeout=10):
-        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
+    def wait_for_page_to_load(self, timeout=0.2):
+        self.page.wait_for_selector('*', timeout=timeout * 100)
+        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def wait_for_element_to_appear(self, selector, timeout=50):
+    def wait_for_element_to_appear(self, selector, timeout=20):
         try:
             self.page.wait_for_selector(selector, timeout=timeout, state='visible')
             print(f"Element {selector} appeared on the page.")
@@ -127,7 +142,6 @@ class BasePlaywrightHelper:
             print(f"Error waiting for element {selector} to disappear: {e}")
 
     def check_element_exists(self, selector, wait=False):
-        self.wait_for_page_to_load()
         try:
             element = self.page.locator(selector)
             if wait == True:
@@ -137,12 +151,21 @@ class BasePlaywrightHelper:
             print(f"Element - {selector} not found: {e}")
             return False
 
+    def check_element_enabled(self, selector, wait=False):
+        try:
+            element = self.page.locator(selector)
+            if wait == True:
+                self.page.wait_for_selector(selector)
+            return element.is_enabled()
+        except Exception as e:
+            print(f"Element - {selector} not found: {e}")
+            return False
+
     def scroll_into_view(self, selector):
         element=self.page.locator(selector)
         element.scroll_into_view_if_needed()
 
     def clear_element(self, selector):
-        self.wait_for_page_to_load()
         try:
             element=self.page.locator(selector)
             element.clear()
@@ -157,51 +180,58 @@ class BasePlaywrightHelper:
         self.page.mouse.up()
 
     def find_element_and_perform_action(self, selector, action, inputValue=None):
-        self.wait_for_page_to_load()
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
-        before_screenshot_path = os.path.join(self.screenshots_dir, f'before_action_{selector_filename}.png')
-        self.page.screenshot(path=before_screenshot_path)
+        self.capture_screenshot(selector_filename)
         try:
-            self.page.wait_for_selector(selector)
             element=self.page.locator(selector)
+            self.page.set_viewport_size({"width": 1500, "height":1500})
+            element.scroll_into_view_if_needed()
             if action.lower() == "click":
-                element.click()
-                print(f"Clicked the {selector} successfully.")
+                if element.is_visible():
+                    if element.is_enabled():
+                        element.click()
+                        print(f"Clicked the {selector} successfully.")
+                else:
+                    print(f"Element with {selector} is not enabled.")
             elif action.lower() == "input_text":
                 text = element.text_content()
-                if text != '':
-                    element.clear()
-                element.fill(inputValue)
-                print(f"Entered text into the {selector} successfully.")
+                if element.is_visible():
+                    if text != '':
+                        element.clear()
+                    element.fill(inputValue)
+                    print(f"Entered text into the {selector} successfully.")
             elif action.lower() == "type_text":
-                text = element.text_content()
-                if text != '':
-                    element.clear()
-                element.type(inputValue)
-                print(f"Entered text into the {selector} successfully.")
+                if element.is_visible():
+                    text = element.text_content()
+                    if text != '':
+                        element.clear()
+                    element.type(inputValue)
+                    print(f"Entered text into the {selector} successfully.")
             elif action.lower() == "get_text":
                 text = element.text_content()
                 print(f"Text from the {selector}: {text}")
                 return text
             elif action.lower() == "select_option":
-                element.select_option(inputValue)
-                print(f"Selected option with value '{inputValue}' from the {selector} successfully.")
+                if element.is_visible():
+                    element.select_option(inputValue)
+                    print(f"Selected option with value '{inputValue}' from the {selector} successfully.")
             elif action.lower() == "click_checkbox":
-                if not element.is_checked():
-                    element.check()
-                    print(f"{selector} checkbox checked successfully.")
-                else:
-                    print(f"{selector} checkbox is already checked.")
+                if element.is_visible():
+                    if not element.is_checked():
+                        element.check()
+                        print(f"{selector} checkbox checked successfully.")
+                    else:
+                        print(f"{selector} checkbox is already checked.")
             else:
                 print(f"Unsupported action: {action}")
+        except TimeoutError:
+            print(f"Timeout waiting for selector: {selector} to perform {action}")
         except Exception as e:
             print(f"Exception: {e}. Element not found: {selector}")
-            raise ElementNotFoundException(f"Element not found: {selector}")
-        after_screenshot_path = os.path.join(self.screenshots_dir, f'after_action_{selector_filename}.png')
-        self.page.screenshot(path=after_screenshot_path)
+            raise ElementNotFoundException(f"Element not found: {selector} to perform {action}")
+        self.capture_screenshot(selector_filename)
 
     def get_current_url(self):
-        self.wait_for_page_to_load()
         return self.page.url()
 
     def get_accessibility_violations(self):
@@ -209,7 +239,6 @@ class BasePlaywrightHelper:
             current_url = self.get_current_url(self.page)
 
             self.page.goto(current_url)
-            self.wait_for_page_to_load(self.page)
 
             axe = self.page.accessibility
             results = axe.check()

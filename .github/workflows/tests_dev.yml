@@ -1,24 +1,23 @@
-name: RAVS TESTS - QA
+name: RAVS TESTS - DEV
 
 on:
   push:
     branches:
-      - master
+      - '**'   # Triggers on push to any branch
+  pull_request:
+    branches:
+      - '**'   # Triggers on PR to any branch
   schedule:
-      - cron: "0 7 * * *"
+      - cron: "30 7 * * *"
   workflow_dispatch:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        location: ['UK']
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Stop and remove all containers
         run: |
@@ -26,7 +25,7 @@ jobs:
           docker rm $(docker ps -aq) || true
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v1
 
       - name: Build the Docker image
         run: docker build -t playwright-tests -f Docker/tests.dockerfile .
@@ -38,7 +37,7 @@ jobs:
             --memory 8g \
             -e RAVS_PASSWORD="${{ secrets.RAVS_PASSWORD }}" \
             -e HEADLESS_MODE="true" \
-            -e TEST_ENVIRONMENT="qa" \
+            -e TEST_ENVIRONMENT="dev" \
             -e BROWSER="chrome" \
             -e MARKER="" \
             -e AGENTS=3 \
@@ -102,13 +101,13 @@ jobs:
           fi
 
       - name: Upload Allure report archive
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: allure-report
           path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
       - name: Retrieve and extract Allure report artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v2
         with:
           name: allure-report
           path: allure-report
@@ -125,29 +124,18 @@ jobs:
         run: |
           ls -l allure-report
 
-      - name: Start Python server
-        run: |
-          cd allure-report
-          python3 -m http.server 8000 > server.log 2>&1 &
-
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
-        run: cp -r allure-report/* .
+        run: mv allure-report/* .
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          keep_files: true
+          publish_dir: .
 
       - name: Check contents of gh-pages
         run: ls -la
-
-      - name: Verify files
-        run: |
-          ls -R
-          cat allure-report/index.html
 
       - name: Get GitHub Pages URL
         id: pages-url
@@ -169,4 +157,5 @@ jobs:
       - name: Notify Slack on success
         if: success()
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Ravs tests finished running for the QA environment ! Check the Allure report: https://nhsdigital.github.io/ravs-tests/#"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          BRANCH_NAME=$(echo $GITHUB_REF | sed 's|refs/heads/||')
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Ravs tests finished running for the DEV environment on branch $BRANCH_NAME! Check the Allure report: https://nhsdigital.github.io/ravs-tests/#\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
