@@ -2,6 +2,7 @@ name: "Scan secrets"
 description: "Scan secrets"
 runs:
   using: "composite"
+  timeout-minutes: 60
   steps:
     - name: "Scan secrets"
       shell: bash
