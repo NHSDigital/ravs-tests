@@ -107,7 +107,7 @@ jobs:
           path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
       - name: Retrieve and extract Allure report artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: allure-report
           path: allure-report
