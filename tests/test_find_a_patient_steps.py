@@ -29,27 +29,27 @@ scenarios(f'{features_directory}/find_a_patient.feature')
 
 @given('I am on the find a patient by pds details page')
 def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
-  site = "ST JOHN'S HOUSE"
-  care_model = "Vaccination Centre"
-  select_site(site)
-  select_care_model(care_model)
-  click_continue_to_record_a_vaccination_homepage()
-  if config["browser"] == "mobile":
-      if check_navlink_bar_toggle_exists():
-          click_navlinkbar_toggler()
-  click_find_a_patient_nav_link()
-  click_search_by_demographics_link()
+    site = "ST JOHN'S HOUSE"
+    care_model = "Vaccination Centre"
+    select_site(site)
+    select_care_model(care_model)
+    click_continue_to_record_a_vaccination_homepage()
+    if config["browser"] == "mobile":
+        if check_navlink_bar_toggle_exists():
+            click_navlinkbar_toggler()
+    click_find_a_patient_nav_link()
+    click_search_by_demographics_link()
 
 def step_select_site_and_care_model(site, care_model):
-  site = "ST JOHN'S HOUSE"
-  care_model = "Vaccination Centre"
-  select_site(site)
-  select_care_model(care_model)
-  click_continue_to_record_a_vaccination_homepage()
-  if config["browser"] == "mobile":
-      if check_navlink_bar_toggle_exists():
-          click_navlinkbar_toggler()
-  click_find_a_patient_nav_link()
+    site = "ST JOHN'S HOUSE"
+    care_model = "Vaccination Centre"
+    select_site(site)
+    select_care_model(care_model)
+    click_continue_to_record_a_vaccination_homepage()
+    if config["browser"] == "mobile":
+        if check_navlink_bar_toggle_exists():
+            click_navlinkbar_toggler()
+    click_find_a_patient_nav_link()
 
 @when("I click the find a patient navigation link")
 def step_i_click_the_find_a_patient_nav_link():
@@ -60,7 +60,7 @@ def step_i_click_the_find_a_patient_nav_link():
 
 @then('the alert message should appear for nhs number')
 def the_alert_messages_should_appear_nhs_number():
-  attach_screenshot("required_alerts_should_appear_for_nhsNumber")
+    attach_screenshot("required_alerts_should_appear_for_nhsNumber")
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
@@ -68,7 +68,7 @@ def logged_into_ravs_app(site, care_model):
 
 @given('I am on the PDS search page')
 def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
-  pass
+    pass
 
 @given('I am on the find a patient by nhs number page')
 def step_i_am_on_the_find_a_patient_by_nhs_number_page(navigate_and_login):
@@ -77,24 +77,24 @@ def step_i_am_on_the_find_a_patient_by_nhs_number_page(navigate_and_login):
 
 @given('I am on the find a patient by demographics page')
 def step_given_i_am_on_the_find_a_patient_by_demographics_page(navigate_and_login):
-  step_select_site_and_care_model(site, care_model)
-  click_search_by_demographics_link()
+    step_select_site_and_care_model(site, care_model)
+    click_search_by_demographics_link()
 
 @then('I am on the find a patient by local records page')
 @given('I am on the find a patient by local records page')
 def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
-  step_select_site_and_care_model(site, care_model)
-  click_search_by_local_records_link()
+    step_select_site_and_care_model(site, care_model)
+    click_search_by_local_records_link()
 
 @given('I click the find a patient by local records link')
 @then('I click the find a patient by local records link')
 def step_click_the_find_a_patient_by_local_records_link():
-  click_search_by_local_records_link()
+    click_search_by_local_records_link()
 
 @given('I am on the create a new patient page')
 def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
-  step_select_site_and_care_model(site, care_model)
-  click_search_by_local_records_link()
+    step_select_site_and_care_model(site, care_model)
+    click_search_by_local_records_link()
 
 @then('the find a patient page should be displayed')
 def the_pds_search_section_should_be_displayed():
@@ -104,24 +104,24 @@ def the_pds_search_section_should_be_displayed():
 @given('I click the search button')
 @when('I click the search button')
 def step_click_search_button():
-  click_search_for_patient_button()
+    click_search_for_patient_button()
 
 @given('I click the create a new patient button')
 @when('I click the create a new patient button')
 def step_click_create_a_new_patient_button():
-  click_create_a_new_patient_button()
+    click_create_a_new_patient_button()
 
 @when('I click the check and confirm button')
 def step_click_check_and_confirm_button():
-  click_check_and_confirm_button()
+    click_check_and_confirm_button()
 
 @when('I click the confirm and save button')
 def step_click_confirm_and_save_button():
-  click_confirm_and_save_button()
+    click_confirm_and_save_button()
 
 @when('I click the find a patient navigation link')
 def step_i_click_the_search_button():
-  click_search_for_patient_button()
+    click_search_for_patient_button()
 
 @when(parse('I enter a valid {nhsNumber}'))
 @given(parse('I enter {nhsNumber} as the nhs number'))
@@ -134,42 +134,42 @@ def step_i_clear_the_nhs_number():
 
 @then(parse('I can see an nhs number error message {errorMessage}'))
 def step_error_message_appears_for_nhs_number(errorMessage):
-  attach_screenshot("error_message_appears_for_nhs_number")
-  assert errorMessage in get_nhs_number_error_message_text()
+    attach_screenshot("error_message_appears_for_nhs_number")
+    assert errorMessage in get_nhs_number_error_message_text()
 
 @then('the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode')
 def the_alert_messages_should_appear_forename_surname_dob_gender_postcode():
-  attach_screenshot("alert_messages_should_appear_for_missing_fields")
-  assert check_required_field_error_appears_for_forename(False) == True
-  assert check_required_field_error_appears_for_surname(False) == True
-  assert check_required_field_error_appears_for_dob(False) == True
+    attach_screenshot("alert_messages_should_appear_for_missing_fields")
+    assert check_required_field_error_appears_for_forename(False) == True
+    assert check_required_field_error_appears_for_surname(False) == True
+    assert check_required_field_error_appears_for_dob(False) == True
 
 @then('the alert messages should appear for first name, surname, and date of birth')
 def step_the_alert_messages_should_appear_forename_surname_dob_gender_postcode():
-  attach_screenshot("alert_messages_should_appear_for_missing_fields")
-  assert "Enter the first name" in get_first_name_error_message_text()
-  assert "Enter the last name" in get_last_name_error_message_text()
-  assert "Enter the date of birth" in get_dob_error_message_text()
+    attach_screenshot("alert_messages_should_appear_for_missing_fields")
+    assert "Enter the first name" in get_first_name_error_message_text()
+    assert "Enter the last name" in get_last_name_error_message_text()
+    assert "Enter the date of birth" in get_dob_error_message_text()
 
 @then(parse('I can see a first name error message {errorMessage}'))
 def step_error_message_appears_for_first_name(errorMessage):
-  attach_screenshot("error_message_appears_for_first_name")
-  assert errorMessage in get_first_name_error_message_text()
+    attach_screenshot("error_message_appears_for_first_name")
+    assert errorMessage in get_first_name_error_message_text()
 
 @then(parse('I can see a last name error message {errorMessage}'))
 def step_error_message_appears_for_last_name(errorMessage):
-  attach_screenshot("error_message_appears_for_last_name")
-  assert errorMessage in get_last_name_error_message_text()
+    attach_screenshot("error_message_appears_for_last_name")
+    assert errorMessage in get_last_name_error_message_text()
 
 @then(parse('I can see a dob error message {errorMessage}'))
 def step_error_message_appears_for_dob(errorMessage):
-  attach_screenshot("error_message_appears_for_dob")
-  assert errorMessage in get_dob_error_message_text()
+    attach_screenshot("error_message_appears_for_dob")
+    assert errorMessage in get_dob_error_message_text()
 
 @then(parse('I can see a postcode error message {errorMessage}'))
 def step_error_message_appears_for_postcode(errorMessage):
-  attach_screenshot("error_message_appears_for_postcode")
-  assert errorMessage in get_postcode_error_message_text()
+    attach_screenshot("error_message_appears_for_postcode")
+    assert errorMessage in get_postcode_error_message_text()
 
 @then(parse("I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dateofbirth} and address: {address}"))
 def step_patient_information_page_should_be_available(name, nhsNumber, dateofbirth, address):
@@ -249,22 +249,22 @@ def step_enter_postcode(postcode):
 @given("I generate random data for a new patient")
 def step_generate_random_patient_details(shared_data):
 
-  gender = [
-    "Female",
-    "Male",
-    "Other",
-    "Unknown"
-]
+    gender = [
+       "Female",
+       "Male",
+       "Other",
+       "Unknown"
+       ]
   
-  shared_data["first_name"] = fake.first_name()
-  shared_data["last_name"] = fake.last_name()
-  shared_data["gender"] = random.choice(gender)
-  shared_data["postcode"] = fake.postcode()
-  # dob is presented without leading zeros on the patient added page, so they are stripped here
-  dob = fake.date_of_birth()
-  day, month, year = str(dob.day), str(dob.month), str(dob.year)
-  dob_string = f"{day}/{month}/{year}"
-  shared_data["dob"] = dob_string
+    shared_data["first_name"] = fake.first_name()
+    shared_data["last_name"] = fake.last_name()
+    shared_data["gender"] = random.choice(gender)
+    shared_data["postcode"] = fake.postcode()
+    # dob is presented without leading zeros on the patient added page, so they are stripped here
+    dob = fake.date_of_birth()
+    day, month, year = str(dob.day), str(dob.month), str(dob.year)
+    dob_string = f"{day}/{month}/{year}"
+    shared_data["dob"] = dob_string
 
 @given("I enter the new patient details")
 @when("I enter the new patient details")
@@ -279,12 +279,12 @@ def step_add_mandatory_patient_information(shared_data):
 
 @then("I can check and confirm the patient information is correct")
 def step_patient_information_page_should_be_available(shared_data):
-  attach_screenshot("patient_information_is_correct")
-  assert shared_data["first_name"] in get_first_name_field_text()
-  assert shared_data["last_name"] in get_last_name_field_text()
-  assert shared_data["gender"] in get_gender_field_text()
-  assert shared_data["postcode"] in get_postcode_field_text()
-  assert shared_data["dob"] in get_date_of_birth_field_text()
+    attach_screenshot("patient_information_is_correct")
+    assert shared_data["first_name"] in get_first_name_field_text()
+    assert shared_data["last_name"] in get_last_name_field_text()
+    assert shared_data["gender"] in get_gender_field_text()
+    assert shared_data["postcode"] in get_postcode_field_text()
+    assert shared_data["dob"] in get_date_of_birth_field_text()
 
 @then("I can see the patient added confirmation message")
 def step_patient_added_message_should_be_available(shared_data):

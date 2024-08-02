@@ -216,15 +216,3 @@ Feature: Find a patient
     And I enter the new patient details
     When I click the search button
     Then I can see the patient's local record in the search results
-    
-  # @findpatient @createpatient
-  # Scenario Outline: Local: Created patient cannot be found using demographic search
-  #   Given I am on the find a patient by local records page
-  #   And I enter the mandatory patient details <firstName>, <lastName>, and <dob>
-  #   When I click the search button
-  #   Then I can see a message that no results are found for the patient
-  #   And I can see an option to review the search tips
-  #   #And I can see an option to create a new patient
-  #   Examples:
-  #     | firstName | lastName | dob        |
-  #     | John      | Preston  | 14/03/2003 |
