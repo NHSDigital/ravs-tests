@@ -14,12 +14,12 @@ def select_vaccinator_organisation(vaccinatorOrganisation):
     find_element_and_perform_action(VACCINATOR_ORGANISATION_DROPDOWN_ELEMENT, "select_option", vaccinatorOrganisation)
 
 def select_site(site):
-    find_element_and_perform_action(SITE_DROPDOWN_ELEMENT, "select_option",site)
+    find_element_and_perform_action(SITE_DROPDOWN_ELEMENT, "select_option", site)
     attach_screenshot("user_has_selected_site")
 
-def select_care_model(caremodel):
-    find_element_and_perform_action(CARE_MODEL_DROPDOWN_ELEMENT,"select_option",caremodel)
-    attach_screenshot("user_has_selected_caremodel")
+def select_care_model(careModel):
+    find_element_and_perform_action(CARE_MODEL_DROPDOWN_ELEMENT,"select_option", careModel)
+    attach_screenshot("user_has_selected_care_model")
 
 def enter_carehome_name(name):
     find_element_and_perform_action(CAREHOME_NAME_INPUT_ELEMENT, "input_text", name)
