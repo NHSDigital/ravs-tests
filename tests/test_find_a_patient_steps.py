@@ -54,7 +54,7 @@ def step_select_site_and_care_model(site, care_model):
 @when("I click the find a patient navigation link")
 def step_i_click_the_find_a_patient_nav_link():
     if config["browser"] == "mobile":
-      if check_navlink_bar_toggle_exists():
+        if check_navlink_bar_toggle_exists():
             click_navlinkbar_toggler()
     click_find_a_patient_nav_link()
 
@@ -183,13 +183,13 @@ def step_patient_information_page_should_be_available(name, nhsNumber, dateofbir
 def patient_information_page_should_be_available(name, nhsNumber, dateofbirth, address):
     attach_screenshot("patient_information_page_should_be_visible")
     if name.lower() != "Not found".lower():
-      assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True
-      assert check_patient_name_search_result_exists(name, True) == True
-      assert check_patient_dob_search_result_exists(dateofbirth, True) == True
-      assert check_patient_address_search_result_exists(address, True) == True
+        assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True
+        assert check_patient_name_search_result_exists(name, True) == True
+        assert check_patient_dob_search_result_exists(dateofbirth, True) == True
+        assert check_patient_address_search_result_exists(address, True) == True
     else:
-       assert check_patient_nhs_number_not_found_message_exists(format_nhs_number(nhsNumber), True) == True
-       assert check_create_new_patient_button_exists(True) == True
+        assert check_patient_nhs_number_not_found_message_exists(format_nhs_number(nhsNumber), True) == True
+        assert check_create_new_patient_button_exists(True) == True
 
 @then("I can see the patient's local record in the search results")
 def step_patient_information_page_should_be_available(shared_data):
@@ -250,12 +250,12 @@ def step_enter_postcode(postcode):
 def step_generate_random_patient_details(shared_data):
 
     gender = [
-       "Female",
-       "Male",
-       "Other",
-       "Unknown"
-       ]
-  
+        "Female",
+        "Male",
+        "Other",
+        "Unknown"
+        ]
+
     shared_data["first_name"] = fake.first_name()
     shared_data["last_name"] = fake.last_name()
     shared_data["gender"] = random.choice(gender)
@@ -288,6 +288,5 @@ def step_patient_information_page_should_be_available(shared_data):
 
 @then("I can see the patient added confirmation message")
 def step_patient_added_message_should_be_available(shared_data):
-   
-   patient_added_message = get_patient_added_message(shared_data["first_name"])
-   assert f'{shared_data["first_name"]} {shared_data["last_name"]} with date of birth {shared_data["dob"]} has been added to RAVS' in patient_added_message
+    patient_added_message = get_patient_added_message(shared_data["first_name"])
+    assert f'{shared_data["first_name"]} {shared_data["last_name"]} with date of birth {shared_data["dob"]} has been added to RAVS' in patient_added_message
