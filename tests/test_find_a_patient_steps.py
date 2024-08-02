@@ -21,6 +21,10 @@ logger = logging.getLogger(__name__)
 def shared_data():
     return {}
 
+@scenario(f'{features_directory}/find_a_patient.feature', 'Find a patient page should launch')
+def test_find_a_patient_page_should_launch(site, care_model, navigate_and_login):
+    pass
+
 scenarios(f'{features_directory}/find_a_patient.feature')
 
 def step_select_site_and_care_model(site, care_model):
@@ -200,6 +204,7 @@ def step_select_gender(gender):
     attach_screenshot("select_gender")
 
 @given(parse("I enter the postcode {postcode}"))
+@when(parse("I enter the postcode {postcode}"))
 def step_enter_postcode(postcode):
     enter_postcode(postcode)
     attach_screenshot("enter_postcode")
