@@ -26,14 +26,6 @@ def test_find_a_patient_page_should_launch(site, care_model, navigate_and_login)
     pass
 
 scenarios(f'{features_directory}/find_a_patient.feature')
-         
-# @scenario(f'{features_directory}/find_a_patient.feature', 'Search for an NHS number with fewer than 10 characters')
-# def test_search_for_nhs_number_with_fewer_than_10_chars():
-#     pass
-
-# @scenario(f'{features_directory}/find_a_patient.feature', 'Entering and then clearing the NHS Number shows an error to enter the NHS number')
-# def test_enter_clear_nhs_number_error():
-#     pass
 
 def step_select_site_and_care_model(site, care_model):
   site = "ST JOHN'S HOUSE"
