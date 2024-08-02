@@ -112,6 +112,10 @@ def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = (f"//h3[contains(text(), 'No result') and contains(., '{nhsNumber}')]")
     return check_element_exists(element, wait)
 
+def check_patient_nhs_number_not_found_message_exists(nhsnumber, wait):
+    element = (f"//h3[contains(text(), 'No result found for') and contains(., '{nhsnumber}')]")
+    return check_element_exists(element, wait)
+
 def check_patient_not_found_message_exists(wait):
     element = (f"//h3[contains(text(), 'No result')]")
     return check_element_exists(element, wait)
@@ -155,3 +159,24 @@ def check_patient_address_search_result_exists(address, wait):
 def get_patient_added_message(firstName):
     element = (f"//p[contains(text(),'{firstName}')]")
     return find_element_and_perform_action(element, "get_text")
+
+def check_required_field_error_appears_for_forename(wait):
+    return check_element_exists(FIRST_NAME_INPUT_ERROR_LABEL, wait)
+
+def check_required_field_error_appears_for_surname(wait):
+    return check_element_exists(LAST_NAME_INPUT_ERROR_LABEL, wait)
+
+def check_required_field_error_appears_for_dob(wait):
+    return check_element_exists(DOB_INPUT_ERROR_LABEL, wait)
+
+def check_valid_field_error_appears_for_dob(wait):
+    return check_element_exists(DOB_INPUT_ERROR_LABEL, wait)
+
+def check_required_field_error_appears_for_gender(wait):
+    return check_element_exists(GENDER_SELECT_ERROR_LABEL, wait)
+
+def check_required_field_error_appears_for_postcode(wait):
+    return check_element_exists(POSTCODE_INPUT_ERROR_LABEL, wait)
+
+def check_required_field_error_appears_for_nhsNumber(wait):
+    return check_element_exists(NHS_NUMBER_INPUT_ERROR_LABEL, wait)
