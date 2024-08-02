@@ -21,6 +21,10 @@ logger = logging.getLogger(__name__)
 def shared_data():
     return {}
 
+@scenario(f'{features_directory}/find_a_patient.feature', 'Find a patient page should launch')
+def test_find_a_patient_page_should_launch(site, care_model, navigate_and_login):
+    pass
+
 scenarios(f'{features_directory}/find_a_patient.feature')
          
 # @scenario(f'{features_directory}/find_a_patient.feature', 'Search for an NHS number with fewer than 10 characters')
