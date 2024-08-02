@@ -49,6 +49,10 @@ def step_i_click_the_find_a_patient_nav_link():
             click_navlinkbar_toggler()
     click_find_a_patient_nav_link()
 
+@given("I am logged into the RAVS app")
+def logged_into_ravs_app(site, care_model):
+    set_vaccinator_location(site, care_model)
+
 @given('I am on the PDS search page')
 def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
   pass
@@ -78,6 +82,11 @@ def step_click_the_find_a_patient_by_local_records_link():
 def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
   step_select_site_and_care_model(site, care_model)
   click_search_by_local_records_link()
+
+@then('the find a patient page should be displayed')
+def the_pds_search_section_should_be_displayed():
+    attach_screenshot("find_a_patient_page_should_be_displayed")
+    assert check_search_for_patient_button_visible()
 
 @given('I click the search button')
 @when('I click the search button')

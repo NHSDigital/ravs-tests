@@ -1,5 +1,11 @@
 Feature: Find a patient
 
+@findpatient
+  Scenario: Find a patient page should launch
+    Given I am logged into the RAVS app
+    When I click the find a patient navigation link
+    Then the find a patient page should be displayed
+    
   @findpatient
   Scenario Outline: NHS Number: Searching with invalid NHS number shows an error
     Given I am on the find a patient by nhs number page
