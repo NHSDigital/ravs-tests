@@ -58,7 +58,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
 @given("I search for a patient with the NHS number in the find a patient screen")
 def step_search_for_patient(shared_data):
     nhs_number = shared_data["nhs_number"]
-    click_find_a_patient_and_search_with_nhsnumber(nhs_number)
+    click_find_a_patient_and_search_with_nhs_number(nhs_number)
 
 @given(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):

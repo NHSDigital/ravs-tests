@@ -35,8 +35,8 @@ def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
     select_care_model(care_model)
     click_continue_to_record_a_vaccination_homepage()
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     click_find_a_patient_nav_link()
     click_search_by_demographics_link()
 
@@ -47,15 +47,15 @@ def step_select_site_and_care_model(site, care_model):
     select_care_model(care_model)
     click_continue_to_record_a_vaccination_homepage()
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     click_find_a_patient_nav_link()
 
 @when("I click the find a patient navigation link")
 def step_i_click_the_find_a_patient_nav_link():
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     click_find_a_patient_nav_link()
 
 @then('the alert message should appear for nhs number')
