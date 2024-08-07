@@ -77,6 +77,9 @@ def get_consenting_clinician(index):
 def get_no_consent_reason(index):
     return no_consent_reasons[get_wrapped_index(index, len(no_consent_reasons))]
 
+def get_vaccine_to_choose_from(index):
+    return vaccine_types[index]
+
 def get_vaccination_type(index, vaccine):
     if vaccine.lower() == "covid-19":
         return covid_vaccine_types[get_wrapped_index(index, len(covid_vaccine_types))]
