@@ -115,7 +115,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
                 shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["vaccinated_type2"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["legal_mechanism"] , shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_date"], chosen_vaccine, shared_data["vaccinated_type2"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["legal_mechanism"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
 
 @then(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))

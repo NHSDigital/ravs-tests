@@ -10,6 +10,7 @@ DASHBOARD_NAV_ELEMENT = ("//a[text()='Dashboard']")
 FIND_A_PATIENT_NAV_ELEMENT = ("//a[text()='Find a patient']")
 REPORTS_NAV_ELEMENT = ("//a[text()='Reports']")
 SETTINGS_NAV_ELEMENT = ("//a[@href='/settings']")
+MANAGE_USERS_NAV_ELEMENT = ("//a[@href='/manage-users']")
 WORKFLOWS_NAV_ELEMENT = ("//a[text()='/Workflows']")
 NAV_BAR_TOGGLER = ("//button[@class='navbar-toggler']")
 NAV_LINK_BAR_TOGGLER = ("//button[@class='navbar-toggler p-2']")
@@ -62,6 +63,9 @@ def click_reports_nav_link():
 
 def click_settings_nav_link():
     find_element_and_perform_action(SETTINGS_NAV_ELEMENT, "click")
+
+def click_manage_users_nav_link():
+    find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
 
 def click_workflows_nav_link():
     find_element_and_perform_action(WORKFLOWS_NAV_ELEMENT, "click")
