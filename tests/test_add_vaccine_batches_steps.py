@@ -45,8 +45,8 @@ def logged_into_homepage(login_and_navigate_to_homepage):
 @when("I am on the vaccine settings page")
 def i_am_on_settings_page():
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     click_settings_nav_link()
     Click_vaccines_settings()
 

@@ -160,8 +160,8 @@ def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_
 def login_and_navigate_to_find_a_patient(request, login_and_set_vaccinator_location):
     set_vaccinator_location()
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     click_find_a_patient_nav_link()
 
 # Fixture for logging in and finding a patient by NHS number
@@ -206,10 +206,10 @@ def logout(request, navigate_and_login):
     click_logout_button()
     attach_screenshot("clicked_log_out_button")
 
-def click_find_a_patient_and_search_with_nhsnumber(nhs_number):
+def click_find_a_patient_and_search_with_nhs_number(nhs_number):
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     click_find_a_patient_nav_link()
     enter_nhs_number(nhs_number)
     click_search_for_patient_button()
@@ -217,6 +217,15 @@ def click_find_a_patient_and_search_with_nhsnumber(nhs_number):
 
 def click_on_patient_name(name):
     click_on_patient_name_search_result(name)
+
+def click_find_a_patient_top_nav_bar():
+    click_find_a_patient_nav_link()
+
+def click_settings_top_nav_bar():
+    click_settings_nav_link()
+
+def click_manage_users_top_nav_bar():
+    click_manage_users_nav_link()
 
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
@@ -239,8 +248,8 @@ def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineTyp
 
 def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_number, expirydate):
     if config["browser"] == "mobile":
-        if check_navlink_bar_toggle_exists():
-            click_navlinkbar_toggler()
+        if check_nav_link_bar_toggle_exists():
+            click_nav_link_bar_toggler()
     attach_screenshot("before_clicking_settings")
     click_settings_nav_link()
     attach_screenshot("before_clicking_vaccines")
@@ -364,7 +373,7 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         select_vaccination_site(vaccination_site)
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         select_batch_number(batch_number_to_select)
-        time.sleep(3)
+        time.sleep(5)
         enter_dose_amount_value(dose_amount)
         if click_continue_to_check_and_confirm_screen_button() == True:
             vaccination_date = format_date(vaccination_date, "safari")
@@ -379,4 +388,3 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("patient_decided_to_not_vaccinate")
         click_save_and_return_button_on_record_vaccinated_page()
         attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
-
