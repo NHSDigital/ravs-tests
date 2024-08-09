@@ -28,7 +28,7 @@ def test_Vaccine_already_added_to_site_warning_should_appear():
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
-   set_vaccinator_location(site, care_model)
+    set_vaccinator_location(site, care_model)
 
 @given("I am on the RAVS home page")
 def logged_into_homepage(login_and_navigate_to_homepage):
@@ -37,7 +37,7 @@ def logged_into_homepage(login_and_navigate_to_homepage):
 @when("I am on the vaccine settings page")
 def i_am_on_vaccine_settings_page():
     if config["browser"] == "mobile":
-      if check_nav_link_bar_toggle_exists():
+        if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
     click_settings_nav_link()
     Click_vaccines_settings()
@@ -55,8 +55,8 @@ def the_add_vaccines_page_should_launch():
 def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccineType, shared_data):
     click_site_radio_button(site)
     if "covid" in vaccine.lower():
-      click_covid_vaccine_checkbox()
-      click_covid_vaccine_type_checkbox(vaccineType)
+        click_covid_vaccine_checkbox()
+        click_covid_vaccine_type_checkbox(vaccineType)
     elif "flu" in vaccine.lower():
         click_flu_vaccine_checkbox()
         click_flu_vaccine_type_checkbox(vaccineType)
