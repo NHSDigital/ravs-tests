@@ -27,6 +27,7 @@ DOB_INPUT_ERROR_LABEL = ("#DateOfBirth > span[id^=DateOfBirthRequiredError]")
 
 CREATE_NEW_PATIENT_BUTTON = ("//button[text()='Create new patient']")
 SEARCH_TIPS_LINK = ("//a[text()='search tips']")
+PATIENT_NAME_LINK = ("//span[@class='nhsuk-action-link__text']")
 
 def enter_first_name(first_name):
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
@@ -68,6 +69,9 @@ def click_search_by_demographics_link():
 
 def click_search_by_local_records_link():
     find_element_and_perform_action(SEARCH_BY_LOCAL_RECORDS_LINK, "click")
+
+def click_patient_name_link():
+    find_element_and_perform_action(PATIENT_NAME_LINK, "click")
 
 def check_search_for_patient_button_visible():
     return check_element_exists(SEARCH_BUTTON, False)
