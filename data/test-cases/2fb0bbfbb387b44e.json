@@ -1,0 +1,458 @@
+{
+  "uid" : "2fb0bbfbb387b44e",
+  "name" : "Record a vaccine with nhs number [11-9437541817-ALBERT HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-1-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-Comirnaty 10 Omicron XBB.1.5-SDYY2-18D-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "e499c31239543da7bc0d0e734f084cf3",
+  "time" : {
+    "start" : 1723362747549,
+    "stop" : 1723362889771,
+    "duration" : 142222
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 == 2\n +  where 0 = int(0)\n +  and   2 = int(2)",
+  "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_immunisation_history_should_be_updated at 0x7f300e796b60>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[11-9437541817-ALBERT HOUSE-Vaccination Centre-yes-...INDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-Comirnaty 10 Omicron XBB.1.5-SDYY2-18D-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 08/08/2024FLORINDA DUNNER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18D', 'care_model': 'Vaccination Centre', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 08/08/2024FLORINDA DUNNER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18D', 'care_model': 'Vaccination Centre', ...}\n\n    @then(\"when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page\")\n    def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            click_confirm_details_and_save_button()\n            if \"covid\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_covid_history_element_exists():\n                    index = 1\n            elif \"flu\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_flu_history_element_exists() and check_covid_history_element_exists():\n                    index = 2\n                else:\n                    index = 1\n    \n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n            assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\n            assert get_vaccine_program_details(index) == shared_data[\"chosen_vaccine\"]\n            click_delete_history_button(shared_data[\"chosen_vaccine\"], index)\n            attach_screenshot(\"delete_history_button_clicked\")\n            click_delete_vaccination_button()\n            attach_screenshot(\"delete_vaccination_button_clicked\")\n            time.sleep(10)\n            shared_data.clear()\n        else:\n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>           assert int(immunisation_history_records_count_after_vaccination) == int(shared_data[\"immunisation_history_records_count_before_vaccination\"])\nE           assert 0 == 2\nE            +  where 0 = int(0)\nE            +  and   2 = int(2)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:164: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 == 2\n +  where 0 = int(0)\n +  and   2 = int(2)",
+    "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_immunisation_history_should_be_updated at 0x7f300e796b60>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[11-9437541817-ALBERT HOUSE-Vaccination Centre-yes-...INDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-Comirnaty 10 Omicron XBB.1.5-SDYY2-18D-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 08/08/2024FLORINDA DUNNER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18D', 'care_model': 'Vaccination Centre', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 08/08/2024FLORINDA DUNNER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18D', 'care_model': 'Vaccination Centre', ...}\n\n    @then(\"when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page\")\n    def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            click_confirm_details_and_save_button()\n            if \"covid\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_covid_history_element_exists():\n                    index = 1\n            elif \"flu\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_flu_history_element_exists() and check_covid_history_element_exists():\n                    index = 2\n                else:\n                    index = 1\n    \n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n            assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\n            assert get_vaccine_program_details(index) == shared_data[\"chosen_vaccine\"]\n            click_delete_history_button(shared_data[\"chosen_vaccine\"], index)\n            attach_screenshot(\"delete_history_button_clicked\")\n            click_delete_vaccination_button()\n            attach_screenshot(\"delete_vaccination_button_clicked\")\n            time.sleep(10)\n            shared_data.clear()\n        else:\n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>           assert int(immunisation_history_records_count_after_vaccination) == int(shared_data[\"immunisation_history_records_count_before_vaccination\"])\nE           assert 0 == 2\nE            +  where 0 = int(0)\nE            +  and   2 = int(2)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:164: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Vaccination Centre and get patient details for 9437541817 with option 11 and choose to vaccinate with vaccine details as COVID-19, Comirnaty 10 Omicron XBB.1.5, SDYY2-18D with 19/10/2026",
+      "time" : {
+        "start" : 1723362747549,
+        "stop" : 1723362839662,
+        "duration" : 92113
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "aaa5fe558c55c73a",
+        "name" : "qa_chrome_127.0.6533.99_user_has_selected_site.png",
+        "source" : "aaa5fe558c55c73a.png",
+        "type" : "image/png",
+        "size" : 58115
+      }, {
+        "uid" : "d52f6d9e3bf4a849",
+        "name" : "qa_chrome_127.0.6533.99_user_has_selected_care_model.png",
+        "source" : "d52f6d9e3bf4a849.png",
+        "type" : "image/png",
+        "size" : 58893
+      }, {
+        "uid" : "292f9a5f8210d94b",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_settings.png",
+        "source" : "292f9a5f8210d94b.png",
+        "type" : "image/png",
+        "size" : 58791
+      }, {
+        "uid" : "f5337f59bd4afdef",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_vaccines.png",
+        "source" : "f5337f59bd4afdef.png",
+        "type" : "image/png",
+        "size" : 37731
+      }, {
+        "uid" : "b64e38e25405770a",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_add_vaccines.png",
+        "source" : "b64e38e25405770a.png",
+        "type" : "image/png",
+        "size" : 119502
+      }, {
+        "uid" : "d0d4cdbf196d6aae",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_site_radio_button.png",
+        "source" : "d0d4cdbf196d6aae.png",
+        "type" : "image/png",
+        "size" : 87434
+      }, {
+        "uid" : "d046dfd213d2774d",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "d046dfd213d2774d.png",
+        "type" : "image/png",
+        "size" : 98107
+      }, {
+        "uid" : "f6a2ae250c84ca56",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "f6a2ae250c84ca56.png",
+        "type" : "image/png",
+        "size" : 119220
+      }, {
+        "uid" : "7e32fea8e7f0b461",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_add_vaccine_button.png",
+        "source" : "7e32fea8e7f0b461.png",
+        "type" : "image/png",
+        "size" : 119570
+      }, {
+        "uid" : "1f98f477015753e0",
+        "name" : "qa_chrome_127.0.6533.99_entered_batch_number.png",
+        "source" : "1f98f477015753e0.png",
+        "type" : "image/png",
+        "size" : 105251
+      }, {
+        "uid" : "57b4f186caa34be0",
+        "name" : "qa_chrome_127.0.6533.99_entered_expiry_date.png",
+        "source" : "57b4f186caa34be0.png",
+        "type" : "image/png",
+        "size" : 105950
+      }, {
+        "uid" : "658134a6f27daf89",
+        "name" : "qa_chrome_127.0.6533.99_clicked_add_batch_button.png",
+        "source" : "658134a6f27daf89.png",
+        "type" : "image/png",
+        "size" : 106978
+      }, {
+        "uid" : "ba5196ed78312d4",
+        "name" : "qa_chrome_127.0.6533.99_clicked_confirm_choices_button.png",
+        "source" : "ba5196ed78312d4.png",
+        "type" : "image/png",
+        "size" : 68770
+      }, {
+        "uid" : "603c641e2d1c5b94",
+        "name" : "qa_chrome_127.0.6533.99_clicked_confirm_choices_button.png",
+        "source" : "603c641e2d1c5b94.png",
+        "type" : "image/png",
+        "size" : 85336
+      }, {
+        "uid" : "1a7e802009ab849c",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_settings.png",
+        "source" : "1a7e802009ab849c.png",
+        "type" : "image/png",
+        "size" : 59598
+      }, {
+        "uid" : "1012523d0f327777",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_vaccines.png",
+        "source" : "1012523d0f327777.png",
+        "type" : "image/png",
+        "size" : 37692
+      }, {
+        "uid" : "c6d4132af792e6db",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_add_vaccines.png",
+        "source" : "c6d4132af792e6db.png",
+        "type" : "image/png",
+        "size" : 119502
+      }, {
+        "uid" : "e13185b7fa42f5e8",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_site_radio_button.png",
+        "source" : "e13185b7fa42f5e8.png",
+        "type" : "image/png",
+        "size" : 87434
+      }, {
+        "uid" : "b4f31216b0e3366c",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "b4f31216b0e3366c.png",
+        "type" : "image/png",
+        "size" : 98107
+      }, {
+        "uid" : "c75a9458275b96d2",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "c75a9458275b96d2.png",
+        "type" : "image/png",
+        "size" : 119220
+      }, {
+        "uid" : "e80b61c3bf666a40",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_add_vaccine_button.png",
+        "source" : "e80b61c3bf666a40.png",
+        "type" : "image/png",
+        "size" : 119533
+      }, {
+        "uid" : "2c08aa875526db08",
+        "name" : "qa_chrome_127.0.6533.99_entered_batch_number.png",
+        "source" : "2c08aa875526db08.png",
+        "type" : "image/png",
+        "size" : 105563
+      }, {
+        "uid" : "8b2769c3ee3b344f",
+        "name" : "qa_chrome_127.0.6533.99_entered_expiry_date.png",
+        "source" : "8b2769c3ee3b344f.png",
+        "type" : "image/png",
+        "size" : 106252
+      }, {
+        "uid" : "f02895a4709f3bcc",
+        "name" : "qa_chrome_127.0.6533.99_clicked_add_batch_button.png",
+        "source" : "f02895a4709f3bcc.png",
+        "type" : "image/png",
+        "size" : 105773
+      }, {
+        "uid" : "62194e54d9873084",
+        "name" : "qa_chrome_127.0.6533.99_clicked_confirm_choices_button.png",
+        "source" : "62194e54d9873084.png",
+        "type" : "image/png",
+        "size" : 67733
+      }, {
+        "uid" : "c3519987829d3771",
+        "name" : "qa_chrome_127.0.6533.99_clicked_confirm_choices_button.png",
+        "source" : "c3519987829d3771.png",
+        "type" : "image/png",
+        "size" : 82508
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 26,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1723362839662,
+        "stop" : 1723362840678,
+        "duration" : 1016
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "54d794eb0ba5aca1",
+        "name" : "qa_chrome_127.0.6533.99_entered_nhs_number_as9437541817_and_clicked_search_for_patient_button.png",
+        "source" : "54d794eb0ba5aca1.png",
+        "type" : "image/png",
+        "size" : 60785
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient FLORINDA DUNNER",
+      "time" : {
+        "start" : 1723362840678,
+        "stop" : 1723362841126,
+        "duration" : 448
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f27ec87d71c57c98",
+        "name" : "qa_chrome_127.0.6533.99_before_clicking_patient_name.png",
+        "source" : "f27ec87d71c57c98.png",
+        "type" : "image/png",
+        "size" : 60651
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, Comirnaty 10 Omicron XBB.1.5, SDYY2-18D with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1723362841126,
+        "stop" : 1723362847935,
+        "duration" : 6809
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9981a3c1d5cccf9c",
+        "name" : "qa_chrome_127.0.6533.99_clicked_on_patient_FLORINDA DUNNER_and_clicked_choose_vaccine_button.png",
+        "source" : "9981a3c1d5cccf9c.png",
+        "type" : "image/png",
+        "size" : 91110
+      }, {
+        "uid" : "85fd0cca2270f61d",
+        "name" : "qa_chrome_127.0.6533.99_selected_vaccine_COVID-19_and_Comirnaty 10 Omicron XBB.1.5_and_clicked_continue_button.png",
+        "source" : "85fd0cca2270f61d.png",
+        "type" : "image/png",
+        "size" : 130153
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-3 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1723362847935,
+        "stop" : 1723362884576,
+        "duration" : 36641
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "98d3802573e40d20",
+        "name" : "qa_chrome_127.0.6533.99_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "98d3802573e40d20.png",
+        "type" : "image/png",
+        "size" : 140688
+      }, {
+        "uid" : "18086f6697d01f24",
+        "name" : "qa_chrome_127.0.6533.99_select_patient_not_given_vaccine_after_assessing.png",
+        "source" : "18086f6697d01f24.png",
+        "type" : "image/png",
+        "size" : 146259
+      }, {
+        "uid" : "be257bd7303fdf3b",
+        "name" : "qa_chrome_127.0.6533.99_clicked_save_and_return_on_assessment_screen.png",
+        "source" : "be257bd7303fdf3b.png",
+        "type" : "image/png",
+        "size" : 140266
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1723362884577,
+        "stop" : 1723362884577,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1723362884577,
+        "stop" : 1723362884577,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I need to be able to see the patient FLORINDA DUNNER, 27/3/1957, 32 HOLLAND ROAD, MANCHESTER, M8 4NP and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1723362884577,
+        "stop" : 1723362884577,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1723362884578,
+        "stop" : 1723362889771,
+        "duration" : 5193
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 == 2\n +  where 0 = int(0)\n +  and   2 = int(2)",
+      "statusTrace" : "AssertionError: assert 0 == 2\n +  where 0 = int(0)\n +  and   2 = int(2)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "823475e55bc04e8a",
+        "name" : "qa_chrome_127.0.6533.99_patient_details_screen_with_immunisation_history.png",
+        "source" : "823475e55bc04e8a.png",
+        "type" : "image/png",
+        "size" : 140266
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 9,
+    "attachmentsCount" : 34,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "d2f2910677b5"
+  }, {
+    "name" : "thread",
+    "value" : "1064-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "32 HOLLAND ROAD, MANCHESTER, M8 4NP"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-3"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-18D"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "27/3/1957"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "11"
+  }, {
+    "name" : "name",
+    "value" : "FLORINDA DUNNER"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437541817"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Comirnaty 10 Omicron XBB.1.5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "2fb0bbfbb387b44e.json",
+  "parameterValues" : [ "32 HOLLAND ROAD, MANCHESTER, M8 4NP", "today-3", "19/10/2026", "SDYY2-18D", "Vaccination Centre", "COVID-19", "yes", "27/3/1957", "yes", "11", "FLORINDA DUNNER", "9437541817", "ALBERT HOUSE", "yes", "today-1", "Comirnaty 10 Omicron XBB.1.5" ]
+}
