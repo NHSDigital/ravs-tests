@@ -4,16 +4,16 @@
   "children" : [ {
     "name" : "Product defects",
     "children" : [ {
-      "name" : "AssertionError: assert False\n +  where False = check_search_for_patient_button_visible()",
+      "name" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9732596996', True)",
       "children" : [ {
-        "name" : "Find a patient page should launch [ALBERT HOUSE-Care Home]",
-        "uid" : "3a378a22c7d1ba90",
-        "parentUid" : "438856f5c76040abb629c9fcbbbbfaf9",
+        "name" : "Search by NHS number [9732596996-Lisa WORTHY-30/6/2024-10 NORTON PARK VIEW, SHEFFIELD, S8 8GS]",
+        "uid" : "4298f82991ede78",
+        "parentUid" : "7457ea2f55487149a916bee0bb252226",
         "status" : "failed",
         "time" : {
-          "start" : 1723533038482,
-          "stop" : 1723533074091,
-          "duration" : 35609
+          "start" : 1723534599639,
+          "stop" : 1723534667364,
+          "duration" : 67725
         },
         "flaky" : false,
         "newFailed" : false,
@@ -21,20 +21,20 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "Care Home", "ALBERT HOUSE" ]
+        "parameters" : [ "10 NORTON PARK VIEW, SHEFFIELD, S8 8GS", "30/6/2024", "Lisa WORTHY", "9732596996" ]
       } ],
-      "uid" : "438856f5c76040abb629c9fcbbbbfaf9"
+      "uid" : "7457ea2f55487149a916bee0bb252226"
     }, {
-      "name" : "AssertionError: assert False is True\n +  where False = check_age_based_warning_exists()",
+      "name" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_not_found_message_exists('944 930 6621', True)\n +    where '944 930 6621' = format_nhs_number('9449306621')",
       "children" : [ {
-        "name" : "Display warning based on age when recording a vaccine [9692237893-4-covid]",
-        "uid" : "4d2d69831b74af6a",
-        "parentUid" : "bd08773f850375b7e5284cdb89220559",
+        "name" : "Search by NHS number [9449306621-Not found-20110509-KT21 1LJ]",
+        "uid" : "7af0ef8ab01acc17",
+        "parentUid" : "f2008c4d5095a6abdc690d92227b0931",
         "status" : "failed",
         "time" : {
-          "start" : 1723533069014,
-          "stop" : 1723533357190,
-          "duration" : 288176
+          "start" : 1723534667418,
+          "stop" : 1723534705073,
+          "duration" : 37655
         },
         "flaky" : false,
         "newFailed" : false,
@@ -42,71 +42,20 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "4", "9692237893", "covid" ]
-      }, {
-        "name" : "Display warning based on age when recording a vaccine [9474335761-4-covid]",
-        "uid" : "1bdcb864dacbca94",
-        "parentUid" : "bd08773f850375b7e5284cdb89220559",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723533357241,
-          "stop" : 1723533500745,
-          "duration" : 143504
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "4", "9474335761", "covid" ]
-      }, {
-        "name" : "Display warning based on age when recording a vaccine [9450153485-3-covid]",
-        "uid" : "dc0dd2a38959f182",
-        "parentUid" : "bd08773f850375b7e5284cdb89220559",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723533500768,
-          "stop" : 1723533850884,
-          "duration" : 350116
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "3", "9450153485", "covid" ]
-      }, {
-        "name" : "Display warning based on age when recording a vaccine [9470472918-3-covid]",
-        "uid" : "8a9affdd6c76d122",
-        "parentUid" : "bd08773f850375b7e5284cdb89220559",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723533850907,
-          "stop" : 1723534052706,
-          "duration" : 201799
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "3", "9470472918", "covid" ]
+        "parameters" : [ "KT21 1LJ", "20110509", "Not found", "9449306621" ]
       } ],
-      "uid" : "bd08773f850375b7e5284cdb89220559"
+      "uid" : "f2008c4d5095a6abdc690d92227b0931"
     }, {
-      "name" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+      "name" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)",
       "children" : [ {
-        "name" : "Record a vaccine with nhs number [4-9472710255-NEELIMA HOUSE-Home Of Housebound Patient-yes-today-3-yes-yes-today-2-DELICE PINKER-10/11/1926-HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH-COVID-19-Comirnaty 10 Omicron XBB.1.5-SDYY2-14A-19/10/2026]",
-        "uid" : "3d8f74dbb5e31881",
-        "parentUid" : "bcf6079ad556b3d78b7a6cbf3fb7956a",
+        "name" : "NHS Number: Existing patients can be found using their NHS number [9693632109-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW]",
+        "uid" : "6f277575b7ed676c",
+        "parentUid" : "141141385f5f57c3790dd0f70342d3f7",
         "status" : "failed",
         "time" : {
-          "start" : 1723534231586,
-          "stop" : 1723534863851,
-          "duration" : 632265
+          "start" : 1723535153322,
+          "stop" : 1723535220074,
+          "duration" : 66752
         },
         "flaky" : false,
         "newFailed" : false,
@@ -114,58 +63,20 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH", "today-3", "19/10/2026", "SDYY2-14A", "Home Of Housebound Patient", "COVID-19", "yes", "10/11/1926", "yes", "4", "DELICE PINKER", "9472710255", "NEELIMA HOUSE", "yes", "today-2", "Comirnaty 10 Omicron XBB.1.5" ]
-      }, {
-        "name" : "Record a vaccine with nhs number [10-9474335052-NEELIMA HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-2-AMERY PIGGOTT-20/4/1968-10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ-COVID-19-Comirnaty 3 Omicron XBB.1.5-SDYY2-18C-19/10/2026]",
-        "uid" : "64f736aa1391be45",
-        "parentUid" : "bcf6079ad556b3d78b7a6cbf3fb7956a",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723534931705,
-          "stop" : 1723535556207,
-          "duration" : 624502
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ", "today-2", "19/10/2026", "SDYY2-18C", "Off-site Outreach Event", "COVID-19", "yes", "20/4/1968", "yes", "10", "AMERY PIGGOTT", "9474335052", "NEELIMA HOUSE", "yes", "today-2", "Comirnaty 3 Omicron XBB.1.5" ]
+        "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill GARTON", "9693632109" ]
       } ],
-      "uid" : "bcf6079ad556b3d78b7a6cbf3fb7956a"
-    }, {
-      "name" : "AssertionError: assert 0 == 15\n +  where 0 = int(0)\n +  and   15 = int(15)",
-      "children" : [ {
-        "name" : "Record a vaccine with nhs number [6-9437540233-NEELIMA HOUSE-Vaccination Centre-yes-today-5-yes-yes-today-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-16A-19/10/2026]",
-        "uid" : "756229c7bf81d609",
-        "parentUid" : "344cdfe6ec7dfa1864c0f7c889126237",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723534317679,
-          "stop" : 1723534461182,
-          "duration" : 143503
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG", "today-5", "19/10/2026", "SDYY2-16A", "Vaccination Centre", "COVID-19", "yes", "8/6/1961", "yes", "6", "RANDY FOGDEN", "9437540233", "NEELIMA HOUSE", "yes", "today-2", "Spikevax XBB.1.5" ]
-      } ],
-      "uid" : "344cdfe6ec7dfa1864c0f7c889126237"
+      "uid" : "141141385f5f57c3790dd0f70342d3f7"
     }, {
       "name" : "AssertionError: assert None == '0.3'\n +  where None = get_patient_vaccination_dose_amount_value()",
       "children" : [ {
-        "name" : "Record a vaccine with nhs number [7-9474374228-NEELIMA HOUSE-Hospital Hub-yes-today-6-yes-yes-today-3-ORINDA JUDD-20/7/1963-2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL-COVID-19-Spikevax XBB.1.5-SDYY2-17A-19/10/2026]",
-        "uid" : "6d6493e17ab510f1",
+        "name" : "Record a vaccine with nhs number [5-9473629885-NEELIMA HOUSE-Off-site Outreach Event-yes-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-COVID-19-Spikevax XBB.1.5-SDYY2-15A-19/10/2026]",
+        "uid" : "bdf8e4e973fb3995",
         "parentUid" : "a87c9ef24a7dcd79c74b46221798fff0",
         "status" : "failed",
         "time" : {
-          "start" : 1723534494675,
-          "stop" : 1723535119956,
-          "duration" : 625281
+          "start" : 1723535404221,
+          "stop" : 1723535492478,
+          "duration" : 88257
         },
         "flaky" : false,
         "newFailed" : false,
@@ -173,148 +84,9 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL", "today-6", "19/10/2026", "SDYY2-17A", "Hospital Hub", "COVID-19", "yes", "20/7/1963", "yes", "7", "ORINDA JUDD", "9474374228", "NEELIMA HOUSE", "yes", "today-3", "Spikevax XBB.1.5" ]
-      }, {
-        "name" : "Record a vaccine with nhs number [9-9437599165-NEELIMA HOUSE-Home Of Housebound Patient-yes-today-30-yes-yes-today-30-CAWRDAV BOBBETT-21/7/1959-127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN-COVID-19-Comirnaty 30 Omicron XBB.1.5-SDYY2-18B-19/10/2026]",
-        "uid" : "347f652781b506d4",
-        "parentUid" : "a87c9ef24a7dcd79c74b46221798fff0",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723534724905,
-          "stop" : 1723534899055,
-          "duration" : 174150
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN", "today-30", "19/10/2026", "SDYY2-18B", "Home Of Housebound Patient", "COVID-19", "yes", "21/7/1959", "yes", "9", "CAWRDAV BOBBETT", "9437599165", "NEELIMA HOUSE", "yes", "today-30", "Comirnaty 30 Omicron XBB.1.5" ]
+        "parameters" : [ "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB", "today-4", "19/10/2026", "SDYY2-15A", "Off-site Outreach Event", "COVID-19", "yes", "27/5/1924", "yes", "5", "MARGIE PUCKEY", "9473629885", "NEELIMA HOUSE", "yes", "today-3", "Spikevax XBB.1.5" ]
       } ],
       "uid" : "a87c9ef24a7dcd79c74b46221798fff0"
-    }, {
-      "name" : "AssertionError: assert None == '0.2'\n +  where None = get_patient_vaccination_dose_amount_value()",
-      "children" : [ {
-        "name" : "Record a vaccine with nhs number [2-9470040228-NEELIMA HOUSE-Hospital Hub-yes-today-1-yes-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-Comirnaty 30 Omicron XBB.1.5-SB12345-12A-19/2/2026]",
-        "uid" : "c7580640b52f4ce6",
-        "parentUid" : "89ca5f45eb0d94ea547d40555257e643",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723534516844,
-          "stop" : 1723534692040,
-          "duration" : 175196
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN", "today-1", "19/2/2026", "SB12345-12A", "Hospital Hub", "COVID-19", "yes", "14/12/1922", "yes", "2", "HERBERT HAAG", "9470040228", "NEELIMA HOUSE", "yes", "today", "Comirnaty 30 Omicron XBB.1.5" ]
-      }, {
-        "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-Quadrivalent Influenza vaccine - QIVe-SDYY2-14B-19/10/2026]",
-        "uid" : "a32e26b09104a7a4",
-        "parentUid" : "89ca5f45eb0d94ea547d40555257e643",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723535365359,
-          "stop" : 1723535989004,
-          "duration" : 623645
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "19/10/2026", "SDYY2-14B", "Off-site Outreach Event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today", "Quadrivalent Influenza vaccine - QIVe" ]
-      } ],
-      "uid" : "89ca5f45eb0d94ea547d40555257e643"
-    }, {
-      "name" : "AssertionError: assert 0 == 3\n +  where 0 = int(0)\n +  and   3 = int(3)",
-      "children" : [ {
-        "name" : "Record a vaccine with nhs number [8-9474376638-ALBERT HOUSE-Care Home-yes-today-32-yes-yes-today-30-PHYLLIDA ZYLKO-6/2/1968-BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG-Flu-Fluenz Tetra - LAIV-SDYY2-18F-19/10/2026]",
-        "uid" : "40c525033f747d88",
-        "parentUid" : "ef7b43d0333182cf3a64637f8f0ac3ae",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723535187294,
-          "stop" : 1723535332719,
-          "duration" : 145425
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG", "today-32", "19/10/2026", "SDYY2-18F", "Care Home", "Flu", "yes", "6/2/1968", "yes", "8", "PHYLLIDA ZYLKO", "9474376638", "ALBERT HOUSE", "yes", "today-30", "Fluenz Tetra - LAIV" ]
-      } ],
-      "uid" : "ef7b43d0333182cf3a64637f8f0ac3ae"
-    }, {
-      "name" : "AssertionError: assert 0 == 18\n +  where 0 = int(0)\n +  and   18 = int(18)",
-      "children" : [ {
-        "name" : "Record a vaccine with nhs number [9-9474405174-ALBERT HOUSE-Home Of Housebound Patient-yes-today-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-Fluenz Tetra - LAIV-SDYY2-19A-19/10/2026]",
-        "uid" : "8fe5618d5c67835b",
-        "parentUid" : "81165aa85e3a44b77167afd9c547b136",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723535300855,
-          "stop" : 1723535445166,
-          "duration" : 144311
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today", "19/10/2026", "SDYY2-19A", "Home Of Housebound Patient", "Flu", "yes", "4/9/1965", "yes", "9", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today", "Fluenz Tetra - LAIV" ]
-      } ],
-      "uid" : "81165aa85e3a44b77167afd9c547b136"
-    }, {
-      "name" : "AssertionError: assert 0 == 1\n +  where 0 = int(0)\n +  and   1 = int(1)",
-      "children" : [ {
-        "name" : "Record a vaccine with nhs number [1-9450141444-ALBERT HOUSE-Care Home-yes-today-4-yes-yes-today-2-BRANDIE DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-Supemtek - QIVr-SDYY2-21A-19/10/2026]",
-        "uid" : "8aa6bfc2e48e0425",
-        "parentUid" : "fb35e8b75d27048793e740dd55366ab9",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723535648635,
-          "stop" : 1723535792853,
-          "duration" : 144218
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF", "today-4", "19/10/2026", "SDYY2-21A", "Care Home", "Flu", "yes", "25/8/1992", "yes", "1", "BRANDIE DYBLE", "9450141444", "ALBERT HOUSE", "yes", "today-2", "Supemtek - QIVr" ]
-      } ],
-      "uid" : "fb35e8b75d27048793e740dd55366ab9"
-    }, {
-      "name" : "AssertionError: assert 0 == 4\n +  where 0 = int(0)\n +  and   4 = int(4)",
-      "children" : [ {
-        "name" : "Record a vaccine with nhs number [2-9450141711-ALBERT HOUSE-Home Of Housebound Patient-yes-today-2-yes-yes-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-Fluad Tetra - aQIV-SDYY2-22A-19/10/2026]",
-        "uid" : "52f872b7f482898f",
-        "parentUid" : "12b5432f618ff60b48205f74046c42ca",
-        "status" : "failed",
-        "time" : {
-          "start" : 1723535761570,
-          "stop" : 1723535903097,
-          "duration" : 141527
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY", "today-2", "19/10/2026", "SDYY2-22A", "Home Of Housebound Patient", "Flu", "yes", "24/6/1992", "yes", "2", "KRISTIA SIDAWAY", "9450141711", "ALBERT HOUSE", "yes", "today-1", "Fluad Tetra - aQIV" ]
-      } ],
-      "uid" : "12b5432f618ff60b48205f74046c42ca"
     } ],
     "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
   } ]
