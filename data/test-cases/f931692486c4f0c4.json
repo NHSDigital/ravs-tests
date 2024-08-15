@@ -1,0 +1,173 @@
+{
+  "uid" : "f931692486c4f0c4",
+  "name" : "Vaccine already added to site warning should appear [NEELIMA HOUSE-Flu-Fluenz Tetra - LAIV]",
+  "fullName" : "/app/features/add_vaccines.feature:Vaccine already added to site warning should appear",
+  "historyId" : "a8aa27b0635eae8880b4ff47f75d8f73",
+  "time" : {
+    "start" : 1723708290086,
+    "stop" : 1723708685522,
+    "duration" : 395436
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Fluenz Tetra - LAIV')",
+  "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f964164b1a0>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[NEELIMA HOUSE-Flu-Fluenz Tetra - LAIV]>>\nkwargs = {'shared_data': {'site': 'NEELIMA HOUSE', 'vaccineType': 'Fluenz Tetra - LAIV'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'NEELIMA HOUSE', 'vaccineType': 'Fluenz Tetra - LAIV'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Fluenz Tetra - LAIV')\n\ntests/test_add_vaccine_steps.py:70: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Fluenz Tetra - LAIV')",
+    "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f964164b1a0>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[NEELIMA HOUSE-Flu-Fluenz Tetra - LAIV]>>\nkwargs = {'shared_data': {'site': 'NEELIMA HOUSE', 'vaccineType': 'Fluenz Tetra - LAIV'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'NEELIMA HOUSE', 'vaccineType': 'Fluenz Tetra - LAIV'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Fluenz Tetra - LAIV')\n\ntests/test_add_vaccine_steps.py:70: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1723708290086,
+        "stop" : 1723708503941,
+        "duration" : 213855
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "efadf1e9bed0b2db",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_site.png",
+        "source" : "efadf1e9bed0b2db.png",
+        "type" : "image/png",
+        "size" : 36709
+      }, {
+        "uid" : "d304e3006c0db9",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_care_model.png",
+        "source" : "d304e3006c0db9.png",
+        "type" : "image/png",
+        "size" : 36741
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1723708503941,
+        "stop" : 1723708534539,
+        "duration" : 30598
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccines button",
+      "time" : {
+        "start" : 1723708534540,
+        "stop" : 1723708564756,
+        "duration" : 30216
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I select NEELIMA HOUSE, Flu, Fluenz Tetra - LAIV",
+      "time" : {
+        "start" : 1723708564756,
+        "stop" : 1723708685406,
+        "duration" : 120650
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the vaccine is already added to site warning should appear",
+      "time" : {
+        "start" : 1723708685406,
+        "stop" : 1723708685522,
+        "duration" : 116
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Fluenz Tetra - LAIV')",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Fluenz Tetra - LAIV')\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "90731142fde3ca9a",
+        "name" : "dev_chrome_127.0.6533.119_vaccine_already_added_warning_message_exists.png",
+        "source" : "90731142fde3ca9a.png",
+        "type" : "image/png",
+        "size" : 33258
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "f4b5a3c5e903"
+  }, {
+    "name" : "thread",
+    "value" : "1067-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "vaccineType",
+    "value" : "Fluenz Tetra - LAIV"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "f931692486c4f0c4.json",
+  "parameterValues" : [ "NEELIMA HOUSE", "Flu", "Fluenz Tetra - LAIV" ]
+}
