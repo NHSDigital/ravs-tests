@@ -1,0 +1,461 @@
+{
+  "uid" : "1307dfc608094b61",
+  "name" : "Record a vaccine with nhs number [3-9450144699-ALBERT HOUSE-Off-site Outreach Event-yes-today-1-yes-yes-today-1-HOPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-Cell-based Quadrivalent - QIVc-SDYY2-23A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "b3f57c2cc641fd62bfcc87a9b007b6cd",
+  "time" : {
+    "start" : 1723800991591,
+    "stop" : 1723801851809,
+    "duration" : 860218
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f5cc45a28e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[3-9450144699-ALBERT HOUSE-Off-site Outreach Event-...OPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-Cell-based Quadrivalent - QIVc-SDYY2-23A-19/10/2026]>>\nkwargs = {'address': '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB', 'dob': '10/1/1993', 'name': 'HOPE TULLY', 'shared_data': {'ass... TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Off-site Outreach Event', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 15/08/2024HOPE TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Off-site Outreach Event', ...}\nname = 'HOPE TULLY', dob = '10/1/1993'\naddress = '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.5'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:127: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f5cc45a28e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[3-9450144699-ALBERT HOUSE-Off-site Outreach Event-...OPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-Cell-based Quadrivalent - QIVc-SDYY2-23A-19/10/2026]>>\nkwargs = {'address': '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB', 'dob': '10/1/1993', 'name': 'HOPE TULLY', 'shared_data': {'ass... TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Off-site Outreach Event', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 15/08/2024HOPE TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Off-site Outreach Event', ...}\nname = 'HOPE TULLY', dob = '10/1/1993'\naddress = '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.5'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:127: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Off-site Outreach Event and get patient details for 9450144699 with option 3 and choose to vaccinate with vaccine details as Flu, Cell-based Quadrivalent - QIVc, SDYY2-23A with 19/10/2026",
+      "time" : {
+        "start" : 1723800991591,
+        "stop" : 1723801080051,
+        "duration" : 88460
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a82fd3d12fcd84af",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_site.png",
+        "source" : "a82fd3d12fcd84af.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "ef43df7cd1959bf1",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_care_model.png",
+        "source" : "ef43df7cd1959bf1.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "516fb5ae671cacd5",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "516fb5ae671cacd5.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "a4bfc20ba36c624a",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "a4bfc20ba36c624a.png",
+        "type" : "image/png",
+        "size" : 37692
+      }, {
+        "uid" : "9c0de811c9a7c046",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "9c0de811c9a7c046.png",
+        "type" : "image/png",
+        "size" : 127948
+      }, {
+        "uid" : "1b3d22247792b636",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "1b3d22247792b636.png",
+        "type" : "image/png",
+        "size" : 73798
+      }, {
+        "uid" : "2104a19c71dad875",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "2104a19c71dad875.png",
+        "type" : "image/png",
+        "size" : 84685
+      }, {
+        "uid" : "e95cad5e66cccf52",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "e95cad5e66cccf52.png",
+        "type" : "image/png",
+        "size" : 106803
+      }, {
+        "uid" : "df67b840a3c7dada",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_add_vaccine_button.png",
+        "source" : "df67b840a3c7dada.png",
+        "type" : "image/png",
+        "size" : 107118
+      }, {
+        "uid" : "aed339733a3a77ff",
+        "name" : "dev_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "aed339733a3a77ff.png",
+        "type" : "image/png",
+        "size" : 119581
+      }, {
+        "uid" : "20ffecc464ee6730",
+        "name" : "dev_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "20ffecc464ee6730.png",
+        "type" : "image/png",
+        "size" : 88220
+      }, {
+        "uid" : "a038b5c4952c2d3e",
+        "name" : "dev_chrome_127.0.6533.119_clicked_add_batch_button.png",
+        "source" : "a038b5c4952c2d3e.png",
+        "type" : "image/png",
+        "size" : 90649
+      }, {
+        "uid" : "ba8d1c6ae34bf21f",
+        "name" : "dev_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "ba8d1c6ae34bf21f.png",
+        "type" : "image/png",
+        "size" : 66967
+      }, {
+        "uid" : "6a3eb3fdf63a4ca",
+        "name" : "dev_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "6a3eb3fdf63a4ca.png",
+        "type" : "image/png",
+        "size" : 82936
+      }, {
+        "uid" : "cb9c90a8fe7a2bc7",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "cb9c90a8fe7a2bc7.png",
+        "type" : "image/png",
+        "size" : 59498
+      }, {
+        "uid" : "c0c6e39bdfde0107",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "c0c6e39bdfde0107.png",
+        "type" : "image/png",
+        "size" : 37648
+      }, {
+        "uid" : "2843144c869efa87",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "2843144c869efa87.png",
+        "type" : "image/png",
+        "size" : 127948
+      }, {
+        "uid" : "e854f0f6a759cfcc",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "e854f0f6a759cfcc.png",
+        "type" : "image/png",
+        "size" : 73798
+      }, {
+        "uid" : "dd02be021540d996",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "dd02be021540d996.png",
+        "type" : "image/png",
+        "size" : 84685
+      }, {
+        "uid" : "b1bada67729c7fab",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "b1bada67729c7fab.png",
+        "type" : "image/png",
+        "size" : 106803
+      }, {
+        "uid" : "ca56c805596afb40",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_add_vaccine_button.png",
+        "source" : "ca56c805596afb40.png",
+        "type" : "image/png",
+        "size" : 107129
+      }, {
+        "uid" : "e5da40c0995653b7",
+        "name" : "dev_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "e5da40c0995653b7.png",
+        "type" : "image/png",
+        "size" : 119588
+      }, {
+        "uid" : "68b781853dd24608",
+        "name" : "dev_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "68b781853dd24608.png",
+        "type" : "image/png",
+        "size" : 88132
+      }, {
+        "uid" : "8a743861816e1cbc",
+        "name" : "dev_chrome_127.0.6533.119_clicked_add_batch_button.png",
+        "source" : "8a743861816e1cbc.png",
+        "type" : "image/png",
+        "size" : 89246
+      }, {
+        "uid" : "3ba12a06f25540a9",
+        "name" : "dev_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "3ba12a06f25540a9.png",
+        "type" : "image/png",
+        "size" : 66141
+      }, {
+        "uid" : "263386583250836d",
+        "name" : "dev_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "263386583250836d.png",
+        "type" : "image/png",
+        "size" : 80636
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 26,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1723801080052,
+        "stop" : 1723801081155,
+        "duration" : 1103
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "99f41c3b94de6e42",
+        "name" : "dev_chrome_127.0.6533.119_entered_nhs_number_as9450144699_and_clicked_search_for_patient_button.png",
+        "source" : "99f41c3b94de6e42.png",
+        "type" : "image/png",
+        "size" : 74592
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient HOPE TULLY",
+      "time" : {
+        "start" : 1723801081155,
+        "stop" : 1723801081615,
+        "duration" : 460
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5f2d4024bac9ddf1",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_patient_name.png",
+        "source" : "5f2d4024bac9ddf1.png",
+        "type" : "image/png",
+        "size" : 74686
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, Cell-based Quadrivalent - QIVc, SDYY2-23A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1723801081615,
+        "stop" : 1723801118337,
+        "duration" : 36722
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "65b2d20362de27b6",
+        "name" : "dev_chrome_127.0.6533.119_clicked_on_patient_HOPE TULLY_and_clicked_choose_vaccine_button.png",
+        "source" : "65b2d20362de27b6.png",
+        "type" : "image/png",
+        "size" : 101640
+      }, {
+        "uid" : "70304807626b6032",
+        "name" : "dev_chrome_127.0.6533.119_selected_vaccine_Flu_and_Cell-based Quadrivalent - QIVc_and_clicked_continue_button.png",
+        "source" : "70304807626b6032.png",
+        "type" : "image/png",
+        "size" : 117620
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1723801118337,
+        "stop" : 1723801361275,
+        "duration" : 242938
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f95689b297716752",
+        "name" : "dev_chrome_127.0.6533.119_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "f95689b297716752.png",
+        "type" : "image/png",
+        "size" : 117620
+      }, {
+        "uid" : "7c9fefd90388a93d",
+        "name" : "dev_chrome_127.0.6533.119_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "7c9fefd90388a93d.png",
+        "type" : "image/png",
+        "size" : 117620
+      }, {
+        "uid" : "b5a17a4b4a5ff247",
+        "name" : "dev_chrome_127.0.6533.119_clicked_continue_to_record_consent_button.png",
+        "source" : "b5a17a4b4a5ff247.png",
+        "type" : "image/png",
+        "size" : 117723
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1723801361275,
+        "stop" : 1723801513004,
+        "duration" : 151729
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7075c6918072463e",
+        "name" : "dev_chrome_127.0.6533.119_before_selecting_consent_clinician.png",
+        "source" : "7075c6918072463e.png",
+        "type" : "image/png",
+        "size" : 117723
+      }, {
+        "uid" : "6602251c4309e83e",
+        "name" : "dev_chrome_127.0.6533.119_clicked_continue_to_vaccinate_button.png",
+        "source" : "6602251c4309e83e.png",
+        "type" : "image/png",
+        "size" : 117717
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1723801513004,
+        "stop" : 1723801821058,
+        "duration" : 308054
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7cbf791bebe7c70e",
+        "name" : "dev_chrome_127.0.6533.119_entered_vaccination_details.png",
+        "source" : "7cbf791bebe7c70e.png",
+        "type" : "image/png",
+        "size" : 117717
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient HOPE TULLY, 10/1/1993, 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1723801821059,
+        "stop" : 1723801851809,
+        "duration" : 30750
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+      "statusTrace" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e0321541a583c64c",
+        "name" : "dev_chrome_127.0.6533.119_check_and_confirm_screen_before_assertion.png",
+        "source" : "e0321541a583c64c.png",
+        "type" : "image/png",
+        "size" : 117717
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 37,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "400777fb186a"
+  }, {
+    "name" : "thread",
+    "value" : "1069-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-23A"
+  }, {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "10/1/1993"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "3"
+  }, {
+    "name" : "name",
+    "value" : "HOPE TULLY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450144699"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Cell-based Quadrivalent - QIVc"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "1307dfc608094b61.json",
+  "parameterValues" : [ "2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB", "today-1", "19/10/2026", "SDYY2-23A", "Off-site Outreach Event", "Flu", "yes", "10/1/1993", "yes", "3", "HOPE TULLY", "9450144699", "ALBERT HOUSE", "yes", "today-1", "Cell-based Quadrivalent - QIVc" ]
+}
