@@ -4,6 +4,8 @@ from test_data.models.vaccinator_sites import vaccinator_sites
 from test_data.models.vaccine_types import vaccine_types
 from test_data.models.covid_vaccine_types import covid_vaccine_types
 from test_data.models.flu_vaccine_types import flu_vaccine_types
+from test_data.models.rsv_vaccine_types import rsv_vaccine_types
+from test_data.models.pertussis_vaccine_types import pertussis_vaccine_types
 from test_data.models.job_roles import job_roles
 from test_data.models.consent_decision import consent_decision
 from test_data.models.eligible_decision import eligible_decision
@@ -85,6 +87,10 @@ def get_vaccination_type(index, vaccine):
         return covid_vaccine_types[get_wrapped_index(index, len(covid_vaccine_types))]
     elif vaccine.lower() == "flu":
         return flu_vaccine_types[get_wrapped_index(index, len(flu_vaccine_types))]
+    elif vaccine.lower() == "respiratory syncytial virus (rsv)":
+        return rsv_vaccine_types[get_wrapped_index(index, len(rsv_vaccine_types))]
+    elif vaccine.lower() == "pertussis":
+        return pertussis_vaccine_types[get_wrapped_index(index, len(pertussis_vaccine_types))]
 
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
@@ -103,6 +109,9 @@ def get_vaccine_dose_amount(vaccine_type):
 
 def get_flu_consent_vaccine_xpath(vaccine_type):
     return flu_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_rsv_consent_vaccine_xpath(vaccine_type):
+    return rsv_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
 
 def get_covid_consent_vaccine_xpath(vaccine_type):
     return covid_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
