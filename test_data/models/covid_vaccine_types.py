@@ -3,5 +3,6 @@ covid_vaccine_types = [
     "Comirnaty 30 Omicron XBB.1.5",
     "Comirnaty 3 Omicron XBB.1.5",
     "Comirnaty 10 Omicron XBB.1.5",
-    "Spikevax XBB.1.5"
+    "Spikevax XBB.1.5",
+    "Comirnaty 10 JN.1"
 ]
