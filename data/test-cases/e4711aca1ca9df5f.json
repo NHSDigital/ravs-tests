@@ -1,0 +1,458 @@
+{
+  "uid" : "e4711aca1ca9df5f",
+  "name" : "Record a vaccine with nhs number [1-9693632109-NEELIMA HOUSE-Vaccination Centre-yes-today-1-yes-yes-today-1-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-Comirnaty Original/Omicron BA.4-5-SDYY2-12B-19/10/2025]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "649ee1c7fedb00d40ae6ca3887523162",
+  "time" : {
+    "start" : 1724055477926,
+    "stop" : 1724056039451,
+    "duration" : 561525
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 == 36\n +  where 0 = int(0)\n +  and   36 = int(36)",
+  "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_immunisation_history_should_be_updated at 0x7fed94932ac0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[1-9693632109-NEELIMA HOUSE-Vaccination Centre-yes-...T AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-Comirnaty Original/Omicron BA.4-5-SDYY2-12B-19/10/2025]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 18/08/2024Bill GARTON', 'batch_expiry_date': '19/10/2025', 'batch_number': 'SDYY2-12B', 'care_model': 'Vaccination Centre', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 18/08/2024Bill GARTON', 'batch_expiry_date': '19/10/2025', 'batch_number': 'SDYY2-12B', 'care_model': 'Vaccination Centre', ...}\n\n    @then(\"when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page\")\n    def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            click_confirm_details_and_save_button()\n            if \"covid\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_covid_history_element_exists():\n                    index = 1\n            elif \"flu\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_flu_history_element_exists() and check_covid_history_element_exists():\n                    index = 2\n                else:\n                    index = 1\n    \n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n            assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\n            assert get_vaccine_program_details(index) == shared_data[\"chosen_vaccine\"]\n            click_delete_history_button(shared_data[\"chosen_vaccine\"], index)\n            attach_screenshot(\"delete_history_button_clicked\")\n            click_delete_vaccination_button()\n            attach_screenshot(\"delete_vaccination_button_clicked\")\n            time.sleep(10)\n            shared_data.clear()\n        else:\n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>           assert int(immunisation_history_records_count_after_vaccination) == int(shared_data[\"immunisation_history_records_count_before_vaccination\"])\nE           assert 0 == 36\nE            +  where 0 = int(0)\nE            +  and   36 = int(36)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:164: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 == 36\n +  where 0 = int(0)\n +  and   36 = int(36)",
+    "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_immunisation_history_should_be_updated at 0x7fed94932ac0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[1-9693632109-NEELIMA HOUSE-Vaccination Centre-yes-...T AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-Comirnaty Original/Omicron BA.4-5-SDYY2-12B-19/10/2025]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 18/08/2024Bill GARTON', 'batch_expiry_date': '19/10/2025', 'batch_number': 'SDYY2-12B', 'care_model': 'Vaccination Centre', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 18/08/2024Bill GARTON', 'batch_expiry_date': '19/10/2025', 'batch_number': 'SDYY2-12B', 'care_model': 'Vaccination Centre', ...}\n\n    @then(\"when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page\")\n    def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            click_confirm_details_and_save_button()\n            if \"covid\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_covid_history_element_exists():\n                    index = 1\n            elif \"flu\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_flu_history_element_exists() and check_covid_history_element_exists():\n                    index = 2\n                else:\n                    index = 1\n    \n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n            assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\n            assert get_vaccine_program_details(index) == shared_data[\"chosen_vaccine\"]\n            click_delete_history_button(shared_data[\"chosen_vaccine\"], index)\n            attach_screenshot(\"delete_history_button_clicked\")\n            click_delete_vaccination_button()\n            attach_screenshot(\"delete_vaccination_button_clicked\")\n            time.sleep(10)\n            shared_data.clear()\n        else:\n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>           assert int(immunisation_history_records_count_after_vaccination) == int(shared_data[\"immunisation_history_records_count_before_vaccination\"])\nE           assert 0 == 36\nE            +  where 0 = int(0)\nE            +  and   36 = int(36)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:164: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with NEELIMA HOUSE and Vaccination Centre and get patient details for 9693632109 with option 1 and choose to vaccinate with vaccine details as COVID-19, Comirnaty Original/Omicron BA.4-5, SDYY2-12B with 19/10/2025",
+      "time" : {
+        "start" : 1724055477926,
+        "stop" : 1724055630016,
+        "duration" : 152090
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e232305f8e6f0742",
+        "name" : "qa_chrome_127.0.6533.119_user_has_selected_site.png",
+        "source" : "e232305f8e6f0742.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "d0a034c7cbd16ecd",
+        "name" : "qa_chrome_127.0.6533.119_user_has_selected_care_model.png",
+        "source" : "d0a034c7cbd16ecd.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "122a03446614788c",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "122a03446614788c.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "a0eecf243f376bd6",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "a0eecf243f376bd6.png",
+        "type" : "image/png",
+        "size" : 37692
+      }, {
+        "uid" : "b69a0ece9febe604",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "b69a0ece9febe604.png",
+        "type" : "image/png",
+        "size" : 119849
+      }, {
+        "uid" : "70b43ea715a3ebb8",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "70b43ea715a3ebb8.png",
+        "type" : "image/png",
+        "size" : 87360
+      }, {
+        "uid" : "6fd057127d37058c",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "6fd057127d37058c.png",
+        "type" : "image/png",
+        "size" : 98118
+      }, {
+        "uid" : "70b8968060e8c213",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "70b8968060e8c213.png",
+        "type" : "image/png",
+        "size" : 119525
+      }, {
+        "uid" : "209362569925d48c",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccine_button.png",
+        "source" : "209362569925d48c.png",
+        "type" : "image/png",
+        "size" : 119830
+      }, {
+        "uid" : "c110995e048f1294",
+        "name" : "qa_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "c110995e048f1294.png",
+        "type" : "image/png",
+        "size" : 105287
+      }, {
+        "uid" : "c2018119629a5d20",
+        "name" : "qa_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "c2018119629a5d20.png",
+        "type" : "image/png",
+        "size" : 105884
+      }, {
+        "uid" : "a64f5e02b8aaf288",
+        "name" : "qa_chrome_127.0.6533.119_clicked_add_batch_button.png",
+        "source" : "a64f5e02b8aaf288.png",
+        "type" : "image/png",
+        "size" : 106555
+      }, {
+        "uid" : "c5c42c21b354c41b",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "c5c42c21b354c41b.png",
+        "type" : "image/png",
+        "size" : 68786
+      }, {
+        "uid" : "8a00b7162bf40240",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "8a00b7162bf40240.png",
+        "type" : "image/png",
+        "size" : 68824
+      }, {
+        "uid" : "d608a5a1a58d6154",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "d608a5a1a58d6154.png",
+        "type" : "image/png",
+        "size" : 59498
+      }, {
+        "uid" : "ad0ca94dbf80e2c8",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "ad0ca94dbf80e2c8.png",
+        "type" : "image/png",
+        "size" : 37692
+      }, {
+        "uid" : "8b1841bc46e65389",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "8b1841bc46e65389.png",
+        "type" : "image/png",
+        "size" : 119849
+      }, {
+        "uid" : "e4ed5c34ea228e5f",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "e4ed5c34ea228e5f.png",
+        "type" : "image/png",
+        "size" : 87360
+      }, {
+        "uid" : "632357777eb75dac",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "632357777eb75dac.png",
+        "type" : "image/png",
+        "size" : 98118
+      }, {
+        "uid" : "ba09459e4653d4d3",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "ba09459e4653d4d3.png",
+        "type" : "image/png",
+        "size" : 119525
+      }, {
+        "uid" : "26ebf68afddcbcfb",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccine_button.png",
+        "source" : "26ebf68afddcbcfb.png",
+        "type" : "image/png",
+        "size" : 119836
+      }, {
+        "uid" : "4b11f3810c4b3ca2",
+        "name" : "qa_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "4b11f3810c4b3ca2.png",
+        "type" : "image/png",
+        "size" : 105166
+      }, {
+        "uid" : "6964e48fb15086d0",
+        "name" : "qa_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "6964e48fb15086d0.png",
+        "type" : "image/png",
+        "size" : 105753
+      }, {
+        "uid" : "ba5e23a788c6ccf3",
+        "name" : "qa_chrome_127.0.6533.119_clicked_add_batch_button.png",
+        "source" : "ba5e23a788c6ccf3.png",
+        "type" : "image/png",
+        "size" : 105613
+      }, {
+        "uid" : "473e72c15fd1d640",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "473e72c15fd1d640.png",
+        "type" : "image/png",
+        "size" : 68732
+      }, {
+        "uid" : "d07b0f9656aabeb9",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "d07b0f9656aabeb9.png",
+        "type" : "image/png",
+        "size" : 68774
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 26,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1724055630016,
+        "stop" : 1724055631098,
+        "duration" : 1082
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d658c43a7098c552",
+        "name" : "qa_chrome_127.0.6533.119_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "d658c43a7098c552.png",
+        "type" : "image/png",
+        "size" : 60439
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1724055631099,
+        "stop" : 1724055631579,
+        "duration" : 480
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c103551f29af706",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_patient_name.png",
+        "source" : "c103551f29af706.png",
+        "type" : "image/png",
+        "size" : 60463
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, Comirnaty Original/Omicron BA.4-5, SDYY2-12B with 19/10/2025 and click continue",
+      "time" : {
+        "start" : 1724055631579,
+        "stop" : 1724055728147,
+        "duration" : 96568
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4fb101c2d29c2570",
+        "name" : "qa_chrome_127.0.6533.119_clicked_on_patient_Bill GARTON_and_clicked_choose_vaccine_button.png",
+        "source" : "4fb101c2d29c2570.png",
+        "type" : "image/png",
+        "size" : 85508
+      }, {
+        "uid" : "1c4b2e662b566286",
+        "name" : "qa_chrome_127.0.6533.119_selected_vaccine_COVID-19_and_Comirnaty Original/Omicron BA.4-5_and_clicked_continue_button.png",
+        "source" : "1c4b2e662b566286.png",
+        "type" : "image/png",
+        "size" : 105622
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1724055728148,
+        "stop" : 1724056034284,
+        "duration" : 306136
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5817b17b27ecf367",
+        "name" : "qa_chrome_127.0.6533.119_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "5817b17b27ecf367.png",
+        "type" : "image/png",
+        "size" : 105622
+      }, {
+        "uid" : "78ae533a54bb1ff0",
+        "name" : "qa_chrome_127.0.6533.119_select_patient_not_given_vaccine_after_assessing.png",
+        "source" : "78ae533a54bb1ff0.png",
+        "type" : "image/png",
+        "size" : 105622
+      }, {
+        "uid" : "e47236c18df4af49",
+        "name" : "qa_chrome_127.0.6533.119_clicked_save_and_return_on_assessment_screen.png",
+        "source" : "e47236c18df4af49.png",
+        "type" : "image/png",
+        "size" : 105622
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1724056034285,
+        "stop" : 1724056034285,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1724056034285,
+        "stop" : 1724056034285,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I need to be able to see the patient Bill GARTON, 23/6/1946, 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1724056034285,
+        "stop" : 1724056034285,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1724056034285,
+        "stop" : 1724056039451,
+        "duration" : 5166
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 == 36\n +  where 0 = int(0)\n +  and   36 = int(36)",
+      "statusTrace" : "AssertionError: assert 0 == 36\n +  where 0 = int(0)\n +  and   36 = int(36)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "26f6dc49d3c33142",
+        "name" : "qa_chrome_127.0.6533.119_patient_details_screen_with_immunisation_history.png",
+        "source" : "26f6dc49d3c33142.png",
+        "type" : "image/png",
+        "size" : 105622
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 9,
+    "attachmentsCount" : 34,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "44356930f164"
+  }, {
+    "name" : "thread",
+    "value" : "1070-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2025"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-12B"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "1"
+  }, {
+    "name" : "name",
+    "value" : "Bill GARTON"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9693632109"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Comirnaty Original/Omicron BA.4-5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "e4711aca1ca9df5f.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today-1", "19/10/2025", "SDYY2-12B", "Vaccination Centre", "COVID-19", "yes", "23/6/1946", "yes", "1", "Bill GARTON", "9693632109", "NEELIMA HOUSE", "yes", "today-1", "Comirnaty Original/Omicron BA.4-5" ]
+}
