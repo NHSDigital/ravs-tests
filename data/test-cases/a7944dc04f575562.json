@@ -1,0 +1,464 @@
+{
+  "uid" : "a7944dc04f575562",
+  "name" : "Record a vaccine with nhs number [1-9450141444-ALBERT HOUSE-Care Home-yes-today-4-yes-yes-today-2-BRANDIE DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-Supemtek - QIVr-SDYY2-21A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "60399747590cf4460689741f6d79fc64",
+  "time" : {
+    "start" : 1724058777758,
+    "stop" : 1724059338692,
+    "duration" : 560934
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 == 1\n +  where 0 = int(0)\n +  and   1 = int(1)",
+  "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_immunisation_history_should_be_updated at 0x7f21991feac0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[1-9450141444-ALBERT HOUSE-Care Home-yes-today-4-ye...E DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-Supemtek - QIVr-SDYY2-21A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 15/08/2024BRANDIE DYBLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-21A', 'care_model': 'Care Home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 15/08/2024BRANDIE DYBLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-21A', 'care_model': 'Care Home', ...}\n\n    @then(\"when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page\")\n    def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            click_confirm_details_and_save_button()\n            if \"covid\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_covid_history_element_exists():\n                    index = 1\n            elif \"flu\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_flu_history_element_exists() and check_covid_history_element_exists():\n                    index = 2\n                else:\n                    index = 1\n    \n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n            assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\n            assert get_vaccine_program_details(index) == shared_data[\"chosen_vaccine\"]\n            click_delete_history_button(shared_data[\"chosen_vaccine\"], index)\n            attach_screenshot(\"delete_history_button_clicked\")\n            click_delete_vaccination_button()\n            attach_screenshot(\"delete_vaccination_button_clicked\")\n            time.sleep(10)\n            shared_data.clear()\n        else:\n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>           assert int(immunisation_history_records_count_after_vaccination) == int(shared_data[\"immunisation_history_records_count_before_vaccination\"])\nE           assert 0 == 1\nE            +  where 0 = int(0)\nE            +  and   1 = int(1)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:164: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 == 1\n +  where 0 = int(0)\n +  and   1 = int(1)",
+    "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_immunisation_history_should_be_updated at 0x7f21991feac0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[1-9450141444-ALBERT HOUSE-Care Home-yes-today-4-ye...E DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-Supemtek - QIVr-SDYY2-21A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 15/08/2024BRANDIE DYBLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-21A', 'care_model': 'Care Home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 15/08/2024BRANDIE DYBLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-21A', 'care_model': 'Care Home', ...}\n\n    @then(\"when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page\")\n    def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            click_confirm_details_and_save_button()\n            if \"covid\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_covid_history_element_exists():\n                    index = 1\n            elif \"flu\" in shared_data[\"chosen_vaccine\"].lower():\n                if check_flu_history_element_exists() and check_covid_history_element_exists():\n                    index = 2\n                else:\n                    index = 1\n    \n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n            assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\n            assert get_vaccine_program_details(index) == shared_data[\"chosen_vaccine\"]\n            click_delete_history_button(shared_data[\"chosen_vaccine\"], index)\n            attach_screenshot(\"delete_history_button_clicked\")\n            click_delete_vaccination_button()\n            attach_screenshot(\"delete_vaccination_button_clicked\")\n            time.sleep(10)\n            shared_data.clear()\n        else:\n            immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>           assert int(immunisation_history_records_count_after_vaccination) == int(shared_data[\"immunisation_history_records_count_before_vaccination\"])\nE           assert 0 == 1\nE            +  where 0 = int(0)\nE            +  and   1 = int(1)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:164: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Care Home and get patient details for 9450141444 with option 1 and choose to vaccinate with vaccine details as Flu, Supemtek - QIVr, SDYY2-21A with 19/10/2026",
+      "time" : {
+        "start" : 1724058777759,
+        "stop" : 1724058989265,
+        "duration" : 211506
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4ac3c95f6b7b565f",
+        "name" : "qa_chrome_127.0.6533.119_user_has_selected_site.png",
+        "source" : "4ac3c95f6b7b565f.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "fa451f0b9f301d90",
+        "name" : "qa_chrome_127.0.6533.119_user_has_selected_care_model.png",
+        "source" : "fa451f0b9f301d90.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "ed3e0347d58cea7e",
+        "name" : "qa_chrome_127.0.6533.119_user_has_entered_care_home_details.png",
+        "source" : "ed3e0347d58cea7e.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "5a95a96ef5601c51",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "5a95a96ef5601c51.png",
+        "type" : "image/png",
+        "size" : 58656
+      }, {
+        "uid" : "740f5b4ad81f1363",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "740f5b4ad81f1363.png",
+        "type" : "image/png",
+        "size" : 37692
+      }, {
+        "uid" : "8adb0a4512ef9e23",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "8adb0a4512ef9e23.png",
+        "type" : "image/png",
+        "size" : 119849
+      }, {
+        "uid" : "c61524956af4ef22",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "c61524956af4ef22.png",
+        "type" : "image/png",
+        "size" : 87360
+      }, {
+        "uid" : "850c8f51e98d889e",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "850c8f51e98d889e.png",
+        "type" : "image/png",
+        "size" : 98115
+      }, {
+        "uid" : "773c46aac5636c91",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "773c46aac5636c91.png",
+        "type" : "image/png",
+        "size" : 113686
+      }, {
+        "uid" : "5be9665e1be6a97e",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccine_button.png",
+        "source" : "5be9665e1be6a97e.png",
+        "type" : "image/png",
+        "size" : 114016
+      }, {
+        "uid" : "391359f18de3a08c",
+        "name" : "qa_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "391359f18de3a08c.png",
+        "type" : "image/png",
+        "size" : 87392
+      }, {
+        "uid" : "933bcd0c2c902945",
+        "name" : "qa_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "933bcd0c2c902945.png",
+        "type" : "image/png",
+        "size" : 87922
+      }, {
+        "uid" : "47c0b225a99a1830",
+        "name" : "qa_chrome_127.0.6533.119_clicked_add_batch_button.png",
+        "source" : "47c0b225a99a1830.png",
+        "type" : "image/png",
+        "size" : 102141
+      }, {
+        "uid" : "f0128c748b1250b3",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "f0128c748b1250b3.png",
+        "type" : "image/png",
+        "size" : 65745
+      }, {
+        "uid" : "3f9f25ea1f29b5a",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "3f9f25ea1f29b5a.png",
+        "type" : "image/png",
+        "size" : 65766
+      }, {
+        "uid" : "afecb906cdc044ea",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "afecb906cdc044ea.png",
+        "type" : "image/png",
+        "size" : 59498
+      }, {
+        "uid" : "b00fec5db0bdc8ec",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "b00fec5db0bdc8ec.png",
+        "type" : "image/png",
+        "size" : 37682
+      }, {
+        "uid" : "a967ef8fd082ff2a",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "a967ef8fd082ff2a.png",
+        "type" : "image/png",
+        "size" : 119849
+      }, {
+        "uid" : "cdc5e26d543e3676",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "cdc5e26d543e3676.png",
+        "type" : "image/png",
+        "size" : 87360
+      }, {
+        "uid" : "7cb829105b094613",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "7cb829105b094613.png",
+        "type" : "image/png",
+        "size" : 98115
+      }, {
+        "uid" : "b5a712f46ad657ae",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "b5a712f46ad657ae.png",
+        "type" : "image/png",
+        "size" : 113686
+      }, {
+        "uid" : "c46610ca26b655bc",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_add_vaccine_button.png",
+        "source" : "c46610ca26b655bc.png",
+        "type" : "image/png",
+        "size" : 114018
+      }, {
+        "uid" : "3a23d26fbb2c7d92",
+        "name" : "qa_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "3a23d26fbb2c7d92.png",
+        "type" : "image/png",
+        "size" : 87396
+      }, {
+        "uid" : "52767a0b6b85b2f2",
+        "name" : "qa_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "52767a0b6b85b2f2.png",
+        "type" : "image/png",
+        "size" : 87930
+      }, {
+        "uid" : "8a520122a2c6bdd3",
+        "name" : "qa_chrome_127.0.6533.119_clicked_add_batch_button.png",
+        "source" : "8a520122a2c6bdd3.png",
+        "type" : "image/png",
+        "size" : 104543
+      }, {
+        "uid" : "22647e02d86e5f63",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "22647e02d86e5f63.png",
+        "type" : "image/png",
+        "size" : 66527
+      }, {
+        "uid" : "d00e0c7622ab4d94",
+        "name" : "qa_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "d00e0c7622ab4d94.png",
+        "type" : "image/png",
+        "size" : 66552
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 27,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1724058989265,
+        "stop" : 1724058990329,
+        "duration" : 1064
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d27424f77b37eff1",
+        "name" : "qa_chrome_127.0.6533.119_entered_nhs_number_as9450141444_and_clicked_search_for_patient_button.png",
+        "source" : "d27424f77b37eff1.png",
+        "type" : "image/png",
+        "size" : 59880
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient BRANDIE DYBLE",
+      "time" : {
+        "start" : 1724058990329,
+        "stop" : 1724058990829,
+        "duration" : 500
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6ce0d55904074674",
+        "name" : "qa_chrome_127.0.6533.119_before_clicking_patient_name.png",
+        "source" : "6ce0d55904074674.png",
+        "type" : "image/png",
+        "size" : 59910
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, Supemtek - QIVr, SDYY2-21A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1724058990830,
+        "stop" : 1724059027415,
+        "duration" : 36585
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7a5b71a7b506fb81",
+        "name" : "qa_chrome_127.0.6533.119_clicked_on_patient_BRANDIE DYBLE_and_clicked_choose_vaccine_button.png",
+        "source" : "7a5b71a7b506fb81.png",
+        "type" : "image/png",
+        "size" : 83755
+      }, {
+        "uid" : "bf7bd0a3ec2092eb",
+        "name" : "qa_chrome_127.0.6533.119_selected_vaccine_Flu_and_Supemtek - QIVr_and_clicked_continue_button.png",
+        "source" : "bf7bd0a3ec2092eb.png",
+        "type" : "image/png",
+        "size" : 127201
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-4 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1724059027415,
+        "stop" : 1724059333519,
+        "duration" : 306104
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d26de0f0f0db6ebc",
+        "name" : "qa_chrome_127.0.6533.119_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "d26de0f0f0db6ebc.png",
+        "type" : "image/png",
+        "size" : 127201
+      }, {
+        "uid" : "7fedfbd254ea2901",
+        "name" : "qa_chrome_127.0.6533.119_select_patient_not_given_vaccine_after_assessing.png",
+        "source" : "7fedfbd254ea2901.png",
+        "type" : "image/png",
+        "size" : 127201
+      }, {
+        "uid" : "48bd9da6dd8b9f26",
+        "name" : "qa_chrome_127.0.6533.119_clicked_save_and_return_on_assessment_screen.png",
+        "source" : "48bd9da6dd8b9f26.png",
+        "type" : "image/png",
+        "size" : 127201
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1724059333520,
+        "stop" : 1724059333520,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I record yes details and date as today-2 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1724059333520,
+        "stop" : 1724059333520,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I need to be able to see the patient BRANDIE DYBLE, 25/8/1992, 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1724059333520,
+        "stop" : 1724059333520,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1724059333520,
+        "stop" : 1724059338692,
+        "duration" : 5172
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 == 1\n +  where 0 = int(0)\n +  and   1 = int(1)",
+      "statusTrace" : "AssertionError: assert 0 == 1\n +  where 0 = int(0)\n +  and   1 = int(1)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4779157c40a1c21c",
+        "name" : "qa_chrome_127.0.6533.119_patient_details_screen_with_immunisation_history.png",
+        "source" : "4779157c40a1c21c.png",
+        "type" : "image/png",
+        "size" : 127201
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 9,
+    "attachmentsCount" : 35,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "44356930f164"
+  }, {
+    "name" : "thread",
+    "value" : "1067-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-4"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-21A"
+  }, {
+    "name" : "care_model",
+    "value" : "Care Home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "25/8/1992"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "1"
+  }, {
+    "name" : "name",
+    "value" : "BRANDIE DYBLE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450141444"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-2"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Supemtek - QIVr"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "a7944dc04f575562.json",
+  "parameterValues" : [ "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF", "today-4", "19/10/2026", "SDYY2-21A", "Care Home", "Flu", "yes", "25/8/1992", "yes", "1", "BRANDIE DYBLE", "9450141444", "ALBERT HOUSE", "yes", "today-2", "Supemtek - QIVr" ]
+}
