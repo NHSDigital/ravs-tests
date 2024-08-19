@@ -31,6 +31,8 @@ from test_data.models.covid_add_vaccine_check_box_xpath_map import covid_add_vac
 from test_data.models.flu_add_vaccine_check_box_xpath_map import flu_add_vaccine_check_box_xpath_map
 from test_data.models.covid_consent_vaccine_radio_button_xpath_map import covid_consent_vaccine_radio_button_xpath_map
 from test_data.models.flu_consent_vaccine_radio_button_xpath_map import flu_consent_vaccine_radio_button_xpath_map
+from test_data.models.rsv_consent_vaccine_radio_button_xpath_map import rsv_consent_vaccine_radio_button_xpath_map
+from test_data.models.pertussis_consent_vaccine_radio_button_xpath_map import pertussis_consent_vaccine_radio_button_xpath_map
 from test_data.models.flu_vaccine_radio_button_xpath_map import flu_vaccine_radio_button_xpath_map
 from test_data.models.covid_vaccine_radio_button_xpath_map import covid_vaccine_radio_button_xpath_map
 import random
@@ -95,6 +97,9 @@ def get_vaccination_type(index, vaccine):
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
 
+def get_care_model(index):
+    return care_models[get_wrapped_index(index, len(care_models))]
+
 def get_legal_mechanism(index):
     return legal_mechanism[get_wrapped_index(index, len(legal_mechanism))]
 
@@ -112,6 +117,9 @@ def get_flu_consent_vaccine_xpath(vaccine_type):
 
 def get_rsv_consent_vaccine_xpath(vaccine_type):
     return rsv_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_pertussis_consent_vaccine_xpath(vaccine_type):
+    return pertussis_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
 
 def get_covid_consent_vaccine_xpath(vaccine_type):
     return covid_consent_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")

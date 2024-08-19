@@ -364,10 +364,11 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision,  vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, legal_mechanism, vaccinator, vaccination_comments, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, no_vaccination_reason=None):
     select_vaccinator_name_and_council(vaccinator)
     enter_vaccination_comments(vaccination_comments)
     set_vaccination_date(vaccination_date)
+    click_care_model_option(care_model)
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
         if "covid" in (vaccine).lower():

@@ -1,5 +1,5 @@
 from init_helpers import *
-from test_data.get_values_from_models import get_covid_consent_vaccine_xpath, get_flu_consent_vaccine_xpath
+from test_data.get_values_from_models import get_covid_consent_vaccine_xpath, get_flu_consent_vaccine_xpath, get_rsv_consent_vaccine_xpath, get_pertussis_consent_vaccine_xpath
 
 COVID_RADIOBUTTON = ("#VaccineProgramId-1")
 FLU_RADIOBUTTON = ("#VaccineProgramId-2")
@@ -31,7 +31,7 @@ def click_vaccine_radiobutton(vaccine):
         print("Vaccine not available at site")
 
 def click_delivery_team_radiobutton(deliveryTeam):
-    element = f"//input[@name='VaccineProgramId']/following-sibling::label[text()='{deliveryTeam}']"
+    element = f"//input[@name='SiteId']/following-sibling::label[text()='{deliveryTeam}']"
     if element:
         find_element_and_perform_action(element, "click")
     else:
@@ -59,7 +59,12 @@ def click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_pag
     else:
         print("Invalid vaccine type")
 
-
+def click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type):
+    element = get_pertussis_consent_vaccine_xpath(vaccine_type.lower())
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Invalid vaccine type")
 
 def check_back_button_exists():
     return check_element_exists(BACK_ELEMENT, True)
