@@ -23,7 +23,7 @@ CHANGE_RECORD_CONSENT_PAGE_DETAILS_BUTTON = ("//button[text()='Change record con
 PATIENT_VACCINATED_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccinated?']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 PATIENT_VACCINATION_DATE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Date']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 PATIENT_VACCINE_LABEL_ELEMENT = ("(//div[@class='nhsuk-summary-list__row']/dt[text()='Vaccine']/following-sibling::dd[@class='nhsuk-summary-list__value'])[1]")
-PATIENT_VACCINE_PRODUCT_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Product']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+PATIENT_VACCINE_PRODUCT_LABEL_ELEMENT = ("(//div[@class='nhsuk-summary-list__row']/dt[text()='Product']/following-sibling::dd[@class='nhsuk-summary-list__value'])[1]")
 PATIENT_VACCINE_BATCH_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Batch']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 PATIENT_VACCINE_BATCH_EXPIRY_DATE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Expiry date']/following-sibling::dd[@class='nhsuk-summary-list__value']")
 PATIENT_VACCINATION_SITE_LABEL_ELEMENT = ("//div[@class='nhsuk-summary-list__row']/dt[text()='Site']/following-sibling::dd[@class='nhsuk-summary-list__value']")
