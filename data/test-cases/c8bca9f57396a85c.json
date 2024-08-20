@@ -1,0 +1,155 @@
+{
+  "uid" : "c8bca9f57396a85c",
+  "name" : "Add vaccines page should launch [ALBERT HOUSE-Off-site Outreach Event]",
+  "fullName" : "/app/features/add_vaccines.feature:Add vaccines page should launch",
+  "historyId" : "7b9228d96c464836877c6e1deb2a69fb",
+  "time" : {
+    "start" : 1724140274266,
+    "stop" : 1724140456393,
+    "duration" : 182127
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_add_vaccine_button_exists()",
+  "statusTrace" : "fixturefunc = <function the_add_vaccines_page_should_launch at 0x7f1426e72de0>\nrequest = <FixtureRequest for <Function test_add_vaccines_page_should_launch[ALBERT HOUSE-Off-site Outreach Event]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the add vaccines page should be launched')\n    def the_add_vaccines_page_should_launch():\n        attach_screenshot(\"add_vaccines_page_should_launch\")\n>       assert check_add_vaccine_button_exists() == True\nE       assert False == True\nE        +  where False = check_add_vaccine_button_exists()\n\ntests/test_add_vaccine_steps.py:52: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_add_vaccine_button_exists()",
+    "statusTrace" : "fixturefunc = <function the_add_vaccines_page_should_launch at 0x7f1426e72de0>\nrequest = <FixtureRequest for <Function test_add_vaccines_page_should_launch[ALBERT HOUSE-Off-site Outreach Event]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the add vaccines page should be launched')\n    def the_add_vaccines_page_should_launch():\n        attach_screenshot(\"add_vaccines_page_should_launch\")\n>       assert check_add_vaccine_button_exists() == True\nE       assert False == True\nE        +  where False = check_add_vaccine_button_exists()\n\ntests/test_add_vaccine_steps.py:52: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1724140274267,
+        "stop" : 1724140335453,
+        "duration" : 61186
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "17ef5c789332b1aa",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_site.png",
+        "source" : "17ef5c789332b1aa.png",
+        "type" : "image/png",
+        "size" : 58821
+      }, {
+        "uid" : "d86f9319571b6254",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_care_model.png",
+        "source" : "d86f9319571b6254.png",
+        "type" : "image/png",
+        "size" : 58821
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1724140335454,
+        "stop" : 1724140395986,
+        "duration" : 60532
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccines button",
+      "time" : {
+        "start" : 1724140395986,
+        "stop" : 1724140426259,
+        "duration" : 30273
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the add vaccines page should be launched",
+      "time" : {
+        "start" : 1724140426259,
+        "stop" : 1724140456393,
+        "duration" : 30134
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_add_vaccine_button_exists()",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_add_vaccine_button_exists()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "615987ff8731aed4",
+        "name" : "dev_chrome_127.0.6533.119_add_vaccines_page_should_launch.png",
+        "source" : "615987ff8731aed4.png",
+        "type" : "image/png",
+        "size" : 58821
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "1bec5512ca7d"
+  }, {
+    "name" : "thread",
+    "value" : "1066-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "c8bca9f57396a85c.json",
+  "parameterValues" : [ "Off-site Outreach Event", "ALBERT HOUSE" ]
+}
