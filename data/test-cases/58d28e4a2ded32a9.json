@@ -1,0 +1,425 @@
+{
+  "uid" : "58d28e4a2ded32a9",
+  "name" : "Record a vaccine with nhs number [2-9470040228-NEELIMA HOUSE-Hospital Hub-yes-today-1-yes-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-Comirnaty 30 Omicron XBB.1.5-SB12345-12A-19/2/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "dfc6b637abee53877ab6095ebaf79924",
+  "time" : {
+    "start" : 1724231263384,
+    "stop" : 1724233287885,
+    "duration" : 2024501
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == '0.2'\n +  where None = get_patient_vaccination_dose_amount_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f463c11a8e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9470040228-NEELIMA HOUSE-Hospital Hub-yes-today-...4/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-Comirnaty 30 Omicron XBB.1.5-SB12345-12A-19/2/2026]>>\nkwargs = {'address': '10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN', 'dob': '14/12/1922', 'name': 'HERBERT HAAG', 'shared_dat...2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'SB12345-12A', 'care_model': 'Hospital Hub', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 20/08/2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'SB12345-12A', 'care_model': 'Hospital Hub', ...}\nname = 'HERBERT HAAG', dob = '14/12/1922'\naddress = '10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.2'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:127: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == '0.2'\n +  where None = get_patient_vaccination_dose_amount_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f463c11a8e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9470040228-NEELIMA HOUSE-Hospital Hub-yes-today-...4/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-Comirnaty 30 Omicron XBB.1.5-SB12345-12A-19/2/2026]>>\nkwargs = {'address': '10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN', 'dob': '14/12/1922', 'name': 'HERBERT HAAG', 'shared_dat...2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'SB12345-12A', 'care_model': 'Hospital Hub', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 20/08/2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'SB12345-12A', 'care_model': 'Hospital Hub', ...}\nname = 'HERBERT HAAG', dob = '14/12/1922'\naddress = '10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.2'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:127: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with NEELIMA HOUSE and Hospital Hub and get patient details for 9470040228 with option 2 and choose to vaccinate with vaccine details as COVID-19, Comirnaty 30 Omicron XBB.1.5, SB12345-12A with 19/2/2026",
+      "time" : {
+        "start" : 1724231263385,
+        "stop" : 1724232485313,
+        "duration" : 1221928
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "69e8ff8756dbba82",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_site.png",
+        "source" : "69e8ff8756dbba82.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "93662c8df64a1361",
+        "name" : "dev_chrome_127.0.6533.119_user_has_selected_care_model.png",
+        "source" : "93662c8df64a1361.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "628337b0d09055aa",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "628337b0d09055aa.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "e0c9a78000d479db",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "e0c9a78000d479db.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "a88b85d0b930da31",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "a88b85d0b930da31.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "4ea955fe96e036fa",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "4ea955fe96e036fa.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "c2f25b8a853abaa9",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "c2f25b8a853abaa9.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "4569ecf6ea047d3d",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "4569ecf6ea047d3d.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "8b01034cd542a15c",
+        "name" : "dev_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "8b01034cd542a15c.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "c27fd64558e24cc0",
+        "name" : "dev_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "c27fd64558e24cc0.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "b5b03a4fcdb03b5",
+        "name" : "dev_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "b5b03a4fcdb03b5.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "399ff76499bee9f0",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_settings.png",
+        "source" : "399ff76499bee9f0.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "b9f4c852afaaa3e5",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_vaccines.png",
+        "source" : "b9f4c852afaaa3e5.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "f50e765893663280",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_add_vaccines.png",
+        "source" : "f50e765893663280.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "d461629f880279b0",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_site_radio_button.png",
+        "source" : "d461629f880279b0.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "bb7f3b3ea08acffc",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "bb7f3b3ea08acffc.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "cd8c06ea84549486",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "cd8c06ea84549486.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "48408e6b1fa9edd0",
+        "name" : "dev_chrome_127.0.6533.119_entered_batch_number.png",
+        "source" : "48408e6b1fa9edd0.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "73e4ab5f579c7c75",
+        "name" : "dev_chrome_127.0.6533.119_entered_expiry_date.png",
+        "source" : "73e4ab5f579c7c75.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "8ea5657bd5cde64e",
+        "name" : "dev_chrome_127.0.6533.119_clicked_confirm_choices_button.png",
+        "source" : "8ea5657bd5cde64e.png",
+        "type" : "image/png",
+        "size" : 60161
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 20,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1724232485314,
+        "stop" : 1724232486383,
+        "duration" : 1069
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cbb756f7840cc8bd",
+        "name" : "dev_chrome_127.0.6533.119_entered_nhs_number_as9470040228_and_clicked_search_for_patient_button.png",
+        "source" : "cbb756f7840cc8bd.png",
+        "type" : "image/png",
+        "size" : 61082
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient HERBERT HAAG",
+      "time" : {
+        "start" : 1724232486383,
+        "stop" : 1724232487613,
+        "duration" : 1230
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d9c745d57933f270",
+        "name" : "dev_chrome_127.0.6533.119_before_clicking_patient_name.png",
+        "source" : "d9c745d57933f270.png",
+        "type" : "image/png",
+        "size" : 61113
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, Comirnaty 30 Omicron XBB.1.5, SB12345-12A with 19/2/2026 and click continue",
+      "time" : {
+        "start" : 1724232487613,
+        "stop" : 1724232524318,
+        "duration" : 36705
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b902c253133c5d62",
+        "name" : "dev_chrome_127.0.6533.119_clicked_on_patient_HERBERT HAAG_and_clicked_choose_vaccine_button.png",
+        "source" : "b902c253133c5d62.png",
+        "type" : "image/png",
+        "size" : 84136
+      }, {
+        "uid" : "30395f88ef09022",
+        "name" : "dev_chrome_127.0.6533.119_selected_vaccine_COVID-19_and_Comirnaty 30 Omicron XBB.1.5_and_clicked_continue_button.png",
+        "source" : "30395f88ef09022.png",
+        "type" : "image/png",
+        "size" : 136872
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1724232524318,
+        "stop" : 1724232797522,
+        "duration" : 273204
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9982503fa9bc28e0",
+        "name" : "dev_chrome_127.0.6533.119_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "9982503fa9bc28e0.png",
+        "type" : "image/png",
+        "size" : 136872
+      }, {
+        "uid" : "6209048f4d5a2b4f",
+        "name" : "dev_chrome_127.0.6533.119_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "6209048f4d5a2b4f.png",
+        "type" : "image/png",
+        "size" : 136872
+      }, {
+        "uid" : "af395d6cf233b6a0",
+        "name" : "dev_chrome_127.0.6533.119_clicked_continue_to_record_consent_button.png",
+        "source" : "af395d6cf233b6a0.png",
+        "type" : "image/png",
+        "size" : 121454
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1724232797523,
+        "stop" : 1724232949183,
+        "duration" : 151660
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cd829fa3b0984994",
+        "name" : "dev_chrome_127.0.6533.119_before_selecting_consent_clinician.png",
+        "source" : "cd829fa3b0984994.png",
+        "type" : "image/png",
+        "size" : 121454
+      }, {
+        "uid" : "491fefdaa0295e0c",
+        "name" : "dev_chrome_127.0.6533.119_clicked_continue_to_vaccinate_button.png",
+        "source" : "491fefdaa0295e0c.png",
+        "type" : "image/png",
+        "size" : 121447
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1724232949183,
+        "stop" : 1724233257186,
+        "duration" : 308003
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "96a4b144af887c28",
+        "name" : "dev_chrome_127.0.6533.119_entered_vaccination_details.png",
+        "source" : "96a4b144af887c28.png",
+        "type" : "image/png",
+        "size" : 121447
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient HERBERT HAAG, 14/12/1922, 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1724233257187,
+        "stop" : 1724233287885,
+        "duration" : 30698
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == '0.2'\n +  where None = get_patient_vaccination_dose_amount_value()",
+      "statusTrace" : "AssertionError: assert None == '0.2'\n +  where None = get_patient_vaccination_dose_amount_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9259156f6e74e0d",
+        "name" : "dev_chrome_127.0.6533.119_check_and_confirm_screen_before_assertion.png",
+        "source" : "9259156f6e74e0d.png",
+        "type" : "image/png",
+        "size" : 121447
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 31,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "395a7437c04c"
+  }, {
+    "name" : "thread",
+    "value" : "1066-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/2/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SB12345-12A"
+  }, {
+    "name" : "care_model",
+    "value" : "Hospital Hub"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "14/12/1922"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "2"
+  }, {
+    "name" : "name",
+    "value" : "HERBERT HAAG"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9470040228"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Comirnaty 30 Omicron XBB.1.5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "58d28e4a2ded32a9.json",
+  "parameterValues" : [ "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN", "today-1", "19/2/2026", "SB12345-12A", "Hospital Hub", "COVID-19", "yes", "14/12/1922", "yes", "2", "HERBERT HAAG", "9470040228", "NEELIMA HOUSE", "yes", "today", "Comirnaty 30 Omicron XBB.1.5" ]
+}
