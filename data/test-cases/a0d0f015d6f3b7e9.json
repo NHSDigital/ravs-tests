@@ -1,0 +1,161 @@
+{
+  "uid" : "a0d0f015d6f3b7e9",
+  "name" : "Add vaccine batches page should launch [NEELIMA HOUSE-Care Home]",
+  "fullName" : "/app/features/add_batches.feature:Add vaccine batches page should launch",
+  "historyId" : "1dfe8030687719ea86a2d0b0b9615a16",
+  "time" : {
+    "start" : 1724312447259,
+    "stop" : 1724312689943,
+    "duration" : 242684
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_add_batch_button_exists()",
+  "statusTrace" : "fixturefunc = <function the_add_vaccine_batches_page_should_launch at 0x7f6519e509a0>\nrequest = <FixtureRequest for <Function test_add_vaccine_batches_page_should_launch[NEELIMA HOUSE-Care Home]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then(\"the add vaccine batches page should be launched\")\n    def the_add_vaccine_batches_page_should_launch():\n        attach_screenshot(\"add_vaccine_batches_page_should_launch\")\n>       assert check_add_batch_button_exists() == True\nE       assert False == True\nE        +  where False = check_add_batch_button_exists()\n\ntests/test_add_vaccine_batches_steps.py:62: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_add_batch_button_exists()",
+    "statusTrace" : "fixturefunc = <function the_add_vaccine_batches_page_should_launch at 0x7f6519e509a0>\nrequest = <FixtureRequest for <Function test_add_vaccine_batches_page_should_launch[NEELIMA HOUSE-Care Home]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then(\"the add vaccine batches page should be launched\")\n    def the_add_vaccine_batches_page_should_launch():\n        attach_screenshot(\"add_vaccine_batches_page_should_launch\")\n>       assert check_add_batch_button_exists() == True\nE       assert False == True\nE        +  where False = check_add_batch_button_exists()\n\ntests/test_add_vaccine_batches_steps.py:62: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1724312447259,
+        "stop" : 1724312568987,
+        "duration" : 121728
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5a74fc77bd2da5d",
+        "name" : "dev_chrome_128.0.6613.84_user_has_selected_site.png",
+        "source" : "5a74fc77bd2da5d.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "d0622c08b8f2932c",
+        "name" : "dev_chrome_128.0.6613.84_user_has_selected_care_model.png",
+        "source" : "d0622c08b8f2932c.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "2de6f2ba8a38e960",
+        "name" : "dev_chrome_128.0.6613.84_user_has_entered_care_home_details.png",
+        "source" : "2de6f2ba8a38e960.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1724312568988,
+        "stop" : 1724312629518,
+        "duration" : 60530
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add batches button",
+      "time" : {
+        "start" : 1724312629518,
+        "stop" : 1724312659790,
+        "duration" : 30272
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the add vaccine batches page should be launched",
+      "time" : {
+        "start" : 1724312659791,
+        "stop" : 1724312689943,
+        "duration" : 30152
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_add_batch_button_exists()",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_add_batch_button_exists()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "13a6a01d5d190a76",
+        "name" : "dev_chrome_128.0.6613.84_add_vaccine_batches_page_should_launch.png",
+        "source" : "13a6a01d5d190a76.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "d0c9533df821"
+  }, {
+    "name" : "thread",
+    "value" : "1066-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add Batches to vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "care_model",
+    "value" : "Care Home"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "a0d0f015d6f3b7e9.json",
+  "parameterValues" : [ "Care Home", "NEELIMA HOUSE" ]
+}
