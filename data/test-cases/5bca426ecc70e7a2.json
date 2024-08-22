@@ -1,0 +1,218 @@
+{
+  "uid" : "5bca426ecc70e7a2",
+  "name" : "Demographics: Existing patients can be found using their optional demographic details [9470006739-JANNETTE-ARD-09/12/2015-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ-LA21 8HZ-Other]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Existing patients can be found using their optional demographic details",
+  "historyId" : "b4750b4b392cbc1d84a8d365ef74e6d1",
+  "time" : {
+    "start" : 1724332037582,
+    "stop" : 1724332166939,
+    "duration" : 129357
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9470006739', True)",
+  "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7f317bf3b240>\nrequest = <FixtureRequest for <Function test_demographics_existing_patients_can_be_found_using_their_optional_demographic_details[9470006739-JANNETTE-ARD-09/12/2015-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ-LA21 8HZ-Other]>>\nkwargs = {'address': '1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ', 'dateofbirth': '09/12/2015', 'name': 'JANNETTE ARD', 'nhsNumber': '9470006739'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'JANNETTE ARD', nhsNumber = '9470006739', dateofbirth = '09/12/2015'\naddress = '1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ'\n\n    @then(parse(\"I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dateofbirth} and address: {address}\"))\n    def step_patient_information_page_should_be_available(name, nhsNumber, dateofbirth, address):\n        attach_screenshot(\"patient_information_page_should_be_visible\")\n>       assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_nhs_number_search_result_exists('9470006739', True)\n\ntests/test_find_a_patient_steps.py:177: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9470006739', True)",
+    "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7f317bf3b240>\nrequest = <FixtureRequest for <Function test_demographics_existing_patients_can_be_found_using_their_optional_demographic_details[9470006739-JANNETTE-ARD-09/12/2015-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ-LA21 8HZ-Other]>>\nkwargs = {'address': '1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ', 'dateofbirth': '09/12/2015', 'name': 'JANNETTE ARD', 'nhsNumber': '9470006739'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'JANNETTE ARD', nhsNumber = '9470006739', dateofbirth = '09/12/2015'\naddress = '1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ'\n\n    @then(parse(\"I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dateofbirth} and address: {address}\"))\n    def step_patient_information_page_should_be_available(name, nhsNumber, dateofbirth, address):\n        attach_screenshot(\"patient_information_page_should_be_visible\")\n>       assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_nhs_number_search_result_exists('9470006739', True)\n\ntests/test_find_a_patient_steps.py:177: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1724332037582,
+        "stop" : 1724332133820,
+        "duration" : 96238
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "18ac7178e0b43a66",
+        "name" : "dev_chrome_128.0.6613.84_user_has_selected_site.png",
+        "source" : "18ac7178e0b43a66.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "534e6cfbd7e967dd",
+        "name" : "dev_chrome_128.0.6613.84_user_has_selected_care_model.png",
+        "source" : "534e6cfbd7e967dd.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the mandatory patient details JANNETTE, ARD, and 09/12/2015",
+      "time" : {
+        "start" : 1724332133820,
+        "stop" : 1724332135529,
+        "duration" : 1709
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b835ee7f3491ca81",
+        "name" : "dev_chrome_128.0.6613.84_add_mandatory_patient_information.png",
+        "source" : "b835ee7f3491ca81.png",
+        "type" : "image/png",
+        "size" : 85935
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode LA21 8HZ",
+      "time" : {
+        "start" : 1724332135529,
+        "stop" : 1724332136032,
+        "duration" : 503
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ba1f60db26318b0a",
+        "name" : "dev_chrome_128.0.6613.84_enter_postcode.png",
+        "source" : "ba1f60db26318b0a.png",
+        "type" : "image/png",
+        "size" : 87478
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Other",
+      "time" : {
+        "start" : 1724332136032,
+        "stop" : 1724332136462,
+        "duration" : 430
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dd78d06699fceec0",
+        "name" : "dev_chrome_128.0.6613.84_select_gender.png",
+        "source" : "dd78d06699fceec0.png",
+        "type" : "image/png",
+        "size" : 87092
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1724332136462,
+        "stop" : 1724332136796,
+        "duration" : 334
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient's information in the search results, showing their name: JANNETTE ARD, nhs number: 9470006739, dob: 09/12/2015 and address: 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ",
+      "time" : {
+        "start" : 1724332136796,
+        "stop" : 1724332166939,
+        "duration" : 30143
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9470006739', True)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9470006739', True)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7513b9910a0a4fc6",
+        "name" : "dev_chrome_128.0.6613.84_patient_information_page_should_be_visible.png",
+        "source" : "7513b9910a0a4fc6.png",
+        "type" : "image/png",
+        "size" : 86886
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 6,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "95c4904e2512"
+  }, {
+    "name" : "thread",
+    "value" : "1064-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ"
+  }, {
+    "name" : "dob",
+    "value" : "09/12/2015"
+  }, {
+    "name" : "firstName",
+    "value" : "JANNETTE"
+  }, {
+    "name" : "gender",
+    "value" : "Other"
+  }, {
+    "name" : "lastName",
+    "value" : "ARD"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9470006739"
+  }, {
+    "name" : "postcode",
+    "value" : "LA21 8HZ"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "5bca426ecc70e7a2.json",
+  "parameterValues" : [ "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ", "09/12/2015", "JANNETTE", "Other", "ARD", "9470006739", "LA21 8HZ" ]
+}
