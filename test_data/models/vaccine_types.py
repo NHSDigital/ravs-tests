@@ -1,4 +1,6 @@
 vaccine_types = [
     "COVID-19",
-    "Flu"
+    "Flu",
+    "Pertussis",
+    "Respiratory syncytial virus (RSV)"
 ]
