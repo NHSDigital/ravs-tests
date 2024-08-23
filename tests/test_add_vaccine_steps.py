@@ -28,8 +28,7 @@ def test_Vaccine_already_added_to_site_warning_should_appear():
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
-    # set_vaccinator_location(site, care_model)
-    pass
+    set_vaccinator_location(site, care_model)
 
 @given("I am on the RAVS home page")
 def logged_into_homepage(login_and_navigate_to_homepage):

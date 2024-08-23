@@ -110,10 +110,10 @@ def click_back_button_recording_consent(request):
 # Fixture for logging in and navigating to appointments
 @pytest.fixture(scope='function')
 def login_and_navigate_to_appointments(site, care_model,  navigate_and_login):
-    # select_site(site)
-    # select_care_model(care_model)
-    # if care_model == "Care Home":
-    #     enter_carehome_name("WHITESTONES CARE HOME")
+    select_site(site)
+    select_care_model(care_model)
+    if care_model == "Care Home":
+        enter_carehome_name("WHITESTONES CARE HOME")
     click_continue_to_record_a_vaccination_homepage()
     click_appointments_nav_link()
 
@@ -158,7 +158,7 @@ def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_
 # Fixture for logging in and navigating to find a patient
 @pytest.fixture(scope='function')
 def login_and_navigate_to_find_a_patient(request, login_and_set_vaccinator_location):
-    # set_vaccinator_location()
+    set_vaccinator_location()
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
@@ -173,7 +173,7 @@ def login_and_find_a_patient_by_nhs_number(request, login_and_navigate_to_find_a
 # Fixture for navigating to find a patient by PDS search page
 @pytest.fixture(scope='function')
 def login_and_navigate_to_find_a_patient_by_pds_search_page(request):
-    # set_vaccinator_location()
+    set_vaccinator_location()
     click_pds_search_nav_link()
 
 # Fixture for navigating to appointments open first patient and clicking choose vaccine
@@ -233,16 +233,12 @@ def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     attach_screenshot("clicked_on_patient_" + name + "_and_clicked_choose_vaccine_button")
     return immunisation_history_records
 
-def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
-    click_delivery_team_radiobutton(site)
+def choose_vaccine_and_vaccine_type_for_patient(vaccine, vaccine_type):
     if "covid" in vaccine.lower():
         click_covid_radiobutton()
         click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
     elif "flu" in vaccine.lower():
         click_flu_radiobutton()
-        click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
-    elif "rsv" in vaccine.lower():
-        click_rsv_radiobutton()
         click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
@@ -364,11 +360,10 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision,  vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, legal_mechanism, vaccinator, vaccination_comments, no_vaccination_reason=None):
     select_vaccinator_name_and_council(vaccinator)
     enter_vaccination_comments(vaccination_comments)
     set_vaccination_date(vaccination_date)
-    click_care_model_option(care_model)
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
         if "covid" in (vaccine).lower():
