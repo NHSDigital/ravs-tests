@@ -64,8 +64,7 @@ def the_alert_messages_should_appear_nhs_number():
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
-    # set_vaccinator_location(site, care_model)
-    pass
+    set_vaccinator_location(site, care_model)
 
 @given('I am on the PDS search page')
 def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
