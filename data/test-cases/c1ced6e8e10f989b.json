@@ -1,0 +1,413 @@
+{
+  "uid" : "c1ced6e8e10f989b",
+  "name" : "Record a vaccine with nhs number [10-9474335052-NEELIMA HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-2-AMERY PIGGOTT-20/4/1968-10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ-COVID-19-Comirnaty 3 Omicron XBB.1.5-SDYY2-18C-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "05fc9f03e0b859edb46da7ed4081da5d",
+  "time" : {
+    "start" : 1724494749739,
+    "stop" : 1724497099377,
+    "duration" : 2349638
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'AMERY PIGGOTT'\n +  where None = get_patient_name_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f6790632f20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474335052-NEELIMA HOUSE-Off-site Outreach Even...RY PIGGOTT-20/4/1968-10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ-COVID-19-Comirnaty 3 Omicron XBB.1.5-SDYY2-18C-19/10/2026]>>\nkwargs = {'address': '10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ', 'dob': '20/4/1968', 'name': 'AMERY PIGGOTT', 'shared_data': {'ass...ERY PIGGOTT', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18C', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 22/08/2024AMERY PIGGOTT', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18C', 'care_model': 'Community Pharmacy', ...}\nname = 'AMERY PIGGOTT', dob = '20/4/1968'\naddress = '10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'AMERY PIGGOTT'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'AMERY PIGGOTT'\n +  where None = get_patient_name_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f6790632f20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474335052-NEELIMA HOUSE-Off-site Outreach Even...RY PIGGOTT-20/4/1968-10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ-COVID-19-Comirnaty 3 Omicron XBB.1.5-SDYY2-18C-19/10/2026]>>\nkwargs = {'address': '10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ', 'dob': '20/4/1968', 'name': 'AMERY PIGGOTT', 'shared_data': {'ass...ERY PIGGOTT', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18C', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 22/08/2024AMERY PIGGOTT', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18C', 'care_model': 'Community Pharmacy', ...}\nname = 'AMERY PIGGOTT', dob = '20/4/1968'\naddress = '10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'AMERY PIGGOTT'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with NEELIMA HOUSE and Off-site Outreach Event and get patient details for 9474335052 with option 10 and choose to vaccinate with vaccine details as COVID-19, Comirnaty 3 Omicron XBB.1.5, SDYY2-18C with 19/10/2026",
+      "time" : {
+        "start" : 1724494749739,
+        "stop" : 1724495970522,
+        "duration" : 1220783
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3de4d128caa7360f",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_settings.png",
+        "source" : "3de4d128caa7360f.png",
+        "type" : "image/png",
+        "size" : 36312
+      }, {
+        "uid" : "529272d5cefca471",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_vaccines.png",
+        "source" : "529272d5cefca471.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "8c3a96b883ffe12e",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_add_vaccines.png",
+        "source" : "8c3a96b883ffe12e.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "b0d72dbd18b5cf52",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_site_radio_button.png",
+        "source" : "b0d72dbd18b5cf52.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "a6cf14d02e726dcd",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "a6cf14d02e726dcd.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "8af8b093002cfc6b",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "8af8b093002cfc6b.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "1ab833fcc7ac4440",
+        "name" : "dev_chrome_128.0.6613.84_entered_batch_number.png",
+        "source" : "1ab833fcc7ac4440.png",
+        "type" : "image/png",
+        "size" : 70083
+      }, {
+        "uid" : "bceec51e77ec53cc",
+        "name" : "dev_chrome_128.0.6613.84_entered_expiry_date.png",
+        "source" : "bceec51e77ec53cc.png",
+        "type" : "image/png",
+        "size" : 70014
+      }, {
+        "uid" : "277f2a5b98fd7d3c",
+        "name" : "dev_chrome_128.0.6613.84_clicked_confirm_choices_button.png",
+        "source" : "277f2a5b98fd7d3c.png",
+        "type" : "image/png",
+        "size" : 70060
+      }, {
+        "uid" : "bb2be63647e957c4",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_settings.png",
+        "source" : "bb2be63647e957c4.png",
+        "type" : "image/png",
+        "size" : 70156
+      }, {
+        "uid" : "6c1b39d87d2b84fe",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_vaccines.png",
+        "source" : "6c1b39d87d2b84fe.png",
+        "type" : "image/png",
+        "size" : 69917
+      }, {
+        "uid" : "81e81be720edff",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_add_vaccines.png",
+        "source" : "81e81be720edff.png",
+        "type" : "image/png",
+        "size" : 69818
+      }, {
+        "uid" : "63e37d2826d57bf9",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_site_radio_button.png",
+        "source" : "63e37d2826d57bf9.png",
+        "type" : "image/png",
+        "size" : 69668
+      }, {
+        "uid" : "f2cda380b4764739",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "f2cda380b4764739.png",
+        "type" : "image/png",
+        "size" : 69565
+      }, {
+        "uid" : "b20aa3e4e40e68b2",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "b20aa3e4e40e68b2.png",
+        "type" : "image/png",
+        "size" : 69918
+      }, {
+        "uid" : "c02ab315318a992f",
+        "name" : "dev_chrome_128.0.6613.84_entered_batch_number.png",
+        "source" : "c02ab315318a992f.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "aa8ab002a7a77ead",
+        "name" : "dev_chrome_128.0.6613.84_entered_expiry_date.png",
+        "source" : "aa8ab002a7a77ead.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "2f35fb3c5a7a2447",
+        "name" : "dev_chrome_128.0.6613.84_clicked_confirm_choices_button.png",
+        "source" : "2f35fb3c5a7a2447.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 18,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1724495970522,
+        "stop" : 1724496061285,
+        "duration" : 90763
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "da028886f61c090c",
+        "name" : "dev_chrome_128.0.6613.84_entered_nhs_number_as9474335052_and_clicked_search_for_patient_button.png",
+        "source" : "da028886f61c090c.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient AMERY PIGGOTT",
+      "time" : {
+        "start" : 1724496061286,
+        "stop" : 1724496091617,
+        "duration" : 30331
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "977098aaef5dd376",
+        "name" : "dev_chrome_128.0.6613.84_before_clicking_patient_name.png",
+        "source" : "977098aaef5dd376.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, Comirnaty 3 Omicron XBB.1.5, SDYY2-18C with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1724496091617,
+        "stop" : 1724496247927,
+        "duration" : 156310
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "814ddc7805ff42a9",
+        "name" : "dev_chrome_128.0.6613.84_clicked_on_patient_AMERY PIGGOTT_and_clicked_choose_vaccine_button.png",
+        "source" : "814ddc7805ff42a9.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "75198f61a656b287",
+        "name" : "dev_chrome_128.0.6613.84_selected_vaccine_COVID-19_and_Comirnaty 3 Omicron XBB.1.5_and_clicked_continue_button.png",
+        "source" : "75198f61a656b287.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-2 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1724496247928,
+        "stop" : 1724496520232,
+        "duration" : 272304
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "63d343b30398eafb",
+        "name" : "dev_chrome_128.0.6613.84_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "63d343b30398eafb.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "98b41dd5be70c129",
+        "name" : "dev_chrome_128.0.6613.84_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "98b41dd5be70c129.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "376637e7fab9723f",
+        "name" : "dev_chrome_128.0.6613.84_clicked_continue_to_record_consent_button.png",
+        "source" : "376637e7fab9723f.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1724496520232,
+        "stop" : 1724496701544,
+        "duration" : 181312
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fa08c4f997b0690c",
+        "name" : "dev_chrome_128.0.6613.84_before_selecting_consent_clinician.png",
+        "source" : "fa08c4f997b0690c.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "84badd28cdd9edb7",
+        "name" : "dev_chrome_128.0.6613.84_clicked_continue_to_vaccinate_button.png",
+        "source" : "84badd28cdd9edb7.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-2 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1724496701545,
+        "stop" : 1724497069060,
+        "duration" : 367515
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f9a48e7b45903787",
+        "name" : "dev_chrome_128.0.6613.84_entered_vaccination_details.png",
+        "source" : "f9a48e7b45903787.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient AMERY PIGGOTT, 20/4/1968, 10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1724497069060,
+        "stop" : 1724497099377,
+        "duration" : 30317
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == 'AMERY PIGGOTT'\n +  where None = get_patient_name_value()",
+      "statusTrace" : "AssertionError: assert None == 'AMERY PIGGOTT'\n +  where None = get_patient_name_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "141b96f4149e9f76",
+        "name" : "dev_chrome_128.0.6613.84_check_and_confirm_screen_before_assertion.png",
+        "source" : "141b96f4149e9f76.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 29,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "396801c1839d"
+  }, {
+    "name" : "thread",
+    "value" : "1070-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-18C"
+  }, {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "20/4/1968"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "10"
+  }, {
+    "name" : "name",
+    "value" : "AMERY PIGGOTT"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9474335052"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-2"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Comirnaty 3 Omicron XBB.1.5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "c1ced6e8e10f989b.json",
+  "parameterValues" : [ "10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ", "today-2", "19/10/2026", "SDYY2-18C", "Off-site Outreach Event", "COVID-19", "yes", "20/4/1968", "yes", "10", "AMERY PIGGOTT", "9474335052", "NEELIMA HOUSE", "yes", "today-2", "Comirnaty 3 Omicron XBB.1.5" ]
+}
