@@ -1,0 +1,413 @@
+{
+  "uid" : "99afdc87481a1113",
+  "name" : "Record a vaccine with nhs number [8-9474376638-ALBERT HOUSE-Care Home-yes-today-32-yes-yes-today-30-PHYLLIDA ZYLKO-6/2/1968-BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG-Flu-Fluenz Tetra - LAIV-SDYY2-18F-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "8bd43ea450fa26a9dc57ed7f3a0b9296",
+  "time" : {
+    "start" : 1724667582463,
+    "stop" : 1724669932309,
+    "duration" : 2349846
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'PHYLLIDA ZYLKO'\n +  where None = get_patient_name_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fe09d1e6f20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[8-9474376638-ALBERT HOUSE-Care Home-yes-today-32-y.../2/1968-BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG-Flu-Fluenz Tetra - LAIV-SDYY2-18F-19/10/2026]>>\nkwargs = {'address': 'BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG', 'dob': '6/2/1968', 'name': 'PHYLLIDA ZY...h_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18F', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 25/07/2024PHYLLIDA ZYLKO', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18F', 'care_model': 'Vaccination centre open to the public', ...}\nname = 'PHYLLIDA ZYLKO', dob = '6/2/1968'\naddress = 'BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'PHYLLIDA ZYLKO'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'PHYLLIDA ZYLKO'\n +  where None = get_patient_name_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fe09d1e6f20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[8-9474376638-ALBERT HOUSE-Care Home-yes-today-32-y.../2/1968-BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG-Flu-Fluenz Tetra - LAIV-SDYY2-18F-19/10/2026]>>\nkwargs = {'address': 'BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG', 'dob': '6/2/1968', 'name': 'PHYLLIDA ZY...h_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18F', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 25/07/2024PHYLLIDA ZYLKO', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18F', 'care_model': 'Vaccination centre open to the public', ...}\nname = 'PHYLLIDA ZYLKO', dob = '6/2/1968'\naddress = 'BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'PHYLLIDA ZYLKO'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Care Home and get patient details for 9474376638 with option 8 and choose to vaccinate with vaccine details as Flu, Fluenz Tetra - LAIV, SDYY2-18F with 19/10/2026",
+      "time" : {
+        "start" : 1724667582463,
+        "stop" : 1724668803421,
+        "duration" : 1220958
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f27b44eed9f87b3c",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_settings.png",
+        "source" : "f27b44eed9f87b3c.png",
+        "type" : "image/png",
+        "size" : 36779
+      }, {
+        "uid" : "2c25aff09b5725dc",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_vaccines.png",
+        "source" : "2c25aff09b5725dc.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "f505cf267f49ba91",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_add_vaccines.png",
+        "source" : "f505cf267f49ba91.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "feab3c2da710e616",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_site_radio_button.png",
+        "source" : "feab3c2da710e616.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "82f71d3195600914",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "82f71d3195600914.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "75dc26b4e08d8ec4",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "75dc26b4e08d8ec4.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "a4e37512306dbd53",
+        "name" : "qa_chrome_128.0.6613.84_entered_batch_number.png",
+        "source" : "a4e37512306dbd53.png",
+        "type" : "image/png",
+        "size" : 70254
+      }, {
+        "uid" : "3a215f3d21c09c51",
+        "name" : "qa_chrome_128.0.6613.84_entered_expiry_date.png",
+        "source" : "3a215f3d21c09c51.png",
+        "type" : "image/png",
+        "size" : 69971
+      }, {
+        "uid" : "19ef5b3d6b14bcbc",
+        "name" : "qa_chrome_128.0.6613.84_clicked_confirm_choices_button.png",
+        "source" : "19ef5b3d6b14bcbc.png",
+        "type" : "image/png",
+        "size" : 69744
+      }, {
+        "uid" : "62b8e9417019c2c6",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_settings.png",
+        "source" : "62b8e9417019c2c6.png",
+        "type" : "image/png",
+        "size" : 69920
+      }, {
+        "uid" : "3782c51bc7dd669f",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_vaccines.png",
+        "source" : "3782c51bc7dd669f.png",
+        "type" : "image/png",
+        "size" : 69957
+      }, {
+        "uid" : "c7e5c36c260d277f",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_add_vaccines.png",
+        "source" : "c7e5c36c260d277f.png",
+        "type" : "image/png",
+        "size" : 70125
+      }, {
+        "uid" : "fb5dbcbe6ad20737",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_site_radio_button.png",
+        "source" : "fb5dbcbe6ad20737.png",
+        "type" : "image/png",
+        "size" : 69917
+      }, {
+        "uid" : "25e75a27ad1b0054",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "25e75a27ad1b0054.png",
+        "type" : "image/png",
+        "size" : 69878
+      }, {
+        "uid" : "6772015c38d0c72d",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "6772015c38d0c72d.png",
+        "type" : "image/png",
+        "size" : 69671
+      }, {
+        "uid" : "aa6c45c9d9d72dc5",
+        "name" : "qa_chrome_128.0.6613.84_entered_batch_number.png",
+        "source" : "aa6c45c9d9d72dc5.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "cc182460041f6051",
+        "name" : "qa_chrome_128.0.6613.84_entered_expiry_date.png",
+        "source" : "cc182460041f6051.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "4c6b7b55930cf2bf",
+        "name" : "qa_chrome_128.0.6613.84_clicked_confirm_choices_button.png",
+        "source" : "4c6b7b55930cf2bf.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 18,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1724668803421,
+        "stop" : 1724668894169,
+        "duration" : 90748
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "78c979dba3054c94",
+        "name" : "qa_chrome_128.0.6613.84_entered_nhs_number_as9474376638_and_clicked_search_for_patient_button.png",
+        "source" : "78c979dba3054c94.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient PHYLLIDA ZYLKO",
+      "time" : {
+        "start" : 1724668894169,
+        "stop" : 1724668924499,
+        "duration" : 30330
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f946fb24e0f219ff",
+        "name" : "qa_chrome_128.0.6613.84_before_clicking_patient_name.png",
+        "source" : "f946fb24e0f219ff.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, Fluenz Tetra - LAIV, SDYY2-18F with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1724668924499,
+        "stop" : 1724669080827,
+        "duration" : 156328
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3b6980b2b13c73c0",
+        "name" : "qa_chrome_128.0.6613.84_clicked_on_patient_PHYLLIDA ZYLKO_and_clicked_choose_vaccine_button.png",
+        "source" : "3b6980b2b13c73c0.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "a25c5cb38db84b84",
+        "name" : "qa_chrome_128.0.6613.84_selected_vaccine_Flu_and_Fluenz Tetra - LAIV_and_clicked_continue_button.png",
+        "source" : "a25c5cb38db84b84.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-32 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1724669080828,
+        "stop" : 1724669353149,
+        "duration" : 272321
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cb108fee0fc35cd3",
+        "name" : "qa_chrome_128.0.6613.84_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "cb108fee0fc35cd3.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "72f182219406b019",
+        "name" : "qa_chrome_128.0.6613.84_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "72f182219406b019.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "80bbc7b0400845d3",
+        "name" : "qa_chrome_128.0.6613.84_clicked_continue_to_record_consent_button.png",
+        "source" : "80bbc7b0400845d3.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1724669353150,
+        "stop" : 1724669534442,
+        "duration" : 181292
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9d4a435cc6dafd13",
+        "name" : "qa_chrome_128.0.6613.84_before_selecting_consent_clinician.png",
+        "source" : "9d4a435cc6dafd13.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "57d81dd6cc84e80a",
+        "name" : "qa_chrome_128.0.6613.84_clicked_continue_to_vaccinate_button.png",
+        "source" : "57d81dd6cc84e80a.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-30 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1724669534442,
+        "stop" : 1724669901977,
+        "duration" : 367535
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "98a42610b016d997",
+        "name" : "qa_chrome_128.0.6613.84_entered_vaccination_details.png",
+        "source" : "98a42610b016d997.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient PHYLLIDA ZYLKO, 6/2/1968, BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1724669901977,
+        "stop" : 1724669932309,
+        "duration" : 30332
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == 'PHYLLIDA ZYLKO'\n +  where None = get_patient_name_value()",
+      "statusTrace" : "AssertionError: assert None == 'PHYLLIDA ZYLKO'\n +  where None = get_patient_name_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6fafa9c1dc057fa7",
+        "name" : "qa_chrome_128.0.6613.84_check_and_confirm_screen_before_assertion.png",
+        "source" : "6fafa9c1dc057fa7.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 29,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a6495205ac5d"
+  }, {
+    "name" : "thread",
+    "value" : "1066-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-32"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-18F"
+  }, {
+    "name" : "care_model",
+    "value" : "Care Home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "6/2/1968"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "8"
+  }, {
+    "name" : "name",
+    "value" : "PHYLLIDA ZYLKO"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9474376638"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-30"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Fluenz Tetra - LAIV"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "99afdc87481a1113.json",
+  "parameterValues" : [ "BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG", "today-32", "19/10/2026", "SDYY2-18F", "Care Home", "Flu", "yes", "6/2/1968", "yes", "8", "PHYLLIDA ZYLKO", "9474376638", "ALBERT HOUSE", "yes", "today-30", "Fluenz Tetra - LAIV" ]
+}
