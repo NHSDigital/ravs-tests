@@ -22,13 +22,13 @@ EXPIRY_MONTH_INPUT_ERROR_LABEL = ("#ExpiryDate_2IdError")
 EXPIRY_YEAR_INPUT_ERROR_LABEL = ("#ExpiryDate_3IdError")
 REACTIVATE_BATCH_CONFIRMATION_BUTTON = ("//button[text()='Reactivate']")
 
-def check_batch_number_exists(batch_number):
+def check_batch_number_exists(batch_number, wait):
     element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']")
-    return check_element_exists(element, False)
+    return check_element_exists(element, wait)
 
-def check_batch_number_is_active(batch_number):
+def check_batch_number_is_active(batch_number, wait):
     element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']/following-sibling::td/strong[not(contains(.,'Inactive'))]")
-    return check_element_exists(element, False)
+    return check_element_exists(element, wait)
 
 def click_reactivate_batch_link(batch_number):
     element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']/following-sibling::td/a[text()='Reactivate batch']")

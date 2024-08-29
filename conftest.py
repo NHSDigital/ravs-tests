@@ -243,7 +243,10 @@ def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
         click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
     elif "rsv" in vaccine.lower():
         click_rsv_radiobutton()
-        click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
+        click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
+    elif "pertussis" in vaccine.lower():
+        click_pertussis_radiobutton()
+        click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
@@ -260,24 +263,31 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccine_type, batch_nu
     # add site vaccine if it doesn't already exist
     check_site_vaccine_exists(site, vaccine, vaccine_type, batch_number, expiry_date)
     
+    # add vaccine type if it doesn't exist
+    check_site_vaccine_type_exists(site, vaccine, vaccine_type, batch_number, expiry_date)
+
     # Add the vaccine and vaccine type to the site, with an active batch, if needed
-    check_batch_number_exists_and_is_active(site, vaccine_type, batch_number, expiry_date)
+    check_batch_number_exists_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
 
 def check_site_vaccine_exists(site, vaccine, vaccine_type, batch_number, expiry_date):
-    select_site(site)
-    if not check_vaccine_has_been_added(vaccine, False):
+    time.sleep(3)
+    if not check_vaccine_has_been_added(site, vaccine, False):
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
 
-def check_batch_number_exists_and_is_active(site, vaccine_type, batch_number, expiry_date):
-    select_site(site)
-    click_view_product(vaccine_type)
-    if not check_batch_number_exists(batch_number):
+def check_site_vaccine_type_exists(site, vaccine, vaccine_type, batch_number, expiry_date):
+    if not check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
+        add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
+
+def check_batch_number_exists_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date):
+    click_view_product(site, vaccine_type)
+    if not check_batch_number_exists(batch_number, False):
         # create a new batch
-        add_site_vaccine_batch(batch_number, expiry_date)
+        add_vaccine_type_batch(batch_number, expiry_date)
     else: 
         # Creating a new batch number will automatically make it active
         # Only need to check the batch status if the batch number already exists 
-        if not check_batch_number_is_active(batch_number):
+
+        if not check_batch_number_is_active(batch_number, True):
           # reactivate batch
           click_reactivate_batch_link(batch_number)
           click_reactivate_batch_confirmation_button()
@@ -297,17 +307,18 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     click_continue_button()
 
     # vaccines_add_batch_page
-    enter_batch_number(batch_number)
+    enter_batch_number_prefix_and_suffix(batch_number)
+    
     enter_expiry_date(expiry_date)
     click_continue_button()
 
     # vaccines_check_and_confirm_page
     click_confirm_button()
 
-def add_site_vaccine_batch(batch_number, expiry_date):
+def add_vaccine_type_batch(batch_number, expiry_date):
     click_add_batch_button()
     # vaccines_add_batch_page
-    enter_batch_number(batch_number)
+    enter_batch_number_prefix_and_suffix(batch_number)
     enter_expiry_date(expiry_date)
     click_continue_button()
 
@@ -315,10 +326,7 @@ def add_site_vaccine_batch(batch_number, expiry_date):
     click_confirm_button()
 
 def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
-    click_legal_mechanism(legal_mechanism)
-    select_assessing_clinician_with_name_and_council(assessing_clinician)
-    enter_comments_for_assessing_patient(assessment_comments)
-    set_assessment_date(assessment_date)
+
     if eligible_decision.lower() == 'yes':
         click_eligible_yes_radiobutton()
         select_eligibility_type(eligibility_type)
@@ -328,18 +336,28 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
     else:
         click_eligible_no_radiobutton()
         attach_screenshot("clicked_patient_not_eligible_radiobutton")
+
+    set_assessment_date(assessment_date)
+
+    click_legal_mechanism(legal_mechanism)
+
+    select_assessing_clinician_with_name_and_council(assessing_clinician)
+
     if assessment_outcome.lower() == "give vaccine":
         click_give_vaccine_radiobutton()
         attach_screenshot("clicked_patient_give_vaccine_radio_button")
-        click_continue_to_record_consent_button()
-        attach_screenshot("clicked_continue_to_record_consent_button")
     else:
         click_vaccine_not_given_radiobutton()
         select_assessment_no_vaccination_reason(eligibility_assessment_no_vaccine_given_reason)
         attach_screenshot("select_patient_not_given_vaccine_after_assessing")
         click_save_and_return_button_on_assessment_screen()
-        time.sleep(3)
         attach_screenshot("clicked_save_and_return_on_assessment_screen")
+
+    enter_comments_for_assessing_patient(assessment_comments)
+    
+    click_continue_to_record_consent_button()
+    attach_screenshot("clicked_continue_to_record_consent_button")
+
 
 def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
