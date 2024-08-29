@@ -2,7 +2,7 @@ import pytest
 from pages.add_vaccines_page import *
 from pages.settings_page import *
 from pages.site_vaccine_batches_page import *
-from pages.site_vaccines_page import *
+from pages.vaccines_page import *
 from pages.site_vaccine_batches_confirm_page import *
 from pages.site_vaccines_check_and_confirm_page import *
 from pages.home_page import *
@@ -16,6 +16,9 @@ from pages.assess_patient_page import *
 from pages.vaccinator_location_page import *
 from pages.record_consent_page import *
 from pages.record_vaccinated_page import *
+from pages.vaccines_choose_site_page import *
+from pages.choose_vaccine_page import *
+from pages.vaccines_add_batch_page import *
 from init_helpers import *
 from datetime import datetime, timedelta
 from allure_commons.types import LabelType
@@ -221,9 +224,6 @@ def click_on_patient_name(name):
 def click_find_a_patient_top_nav_bar():
     click_find_a_patient_nav_link()
 
-def click_settings_top_nav_bar():
-    click_settings_nav_link()
-
 def click_manage_users_top_nav_bar():
     click_manage_users_nav_link()
 
@@ -247,76 +247,72 @@ def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
-def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineType,batch_number, expirydate):
+def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineType, batch_number, expirydate):
     pass
 
-def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_number, expirydate):
+def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccine_type, batch_number, expiry_date):
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-    attach_screenshot("before_clicking_settings")
-    click_settings_nav_link()
-    attach_screenshot("before_clicking_vaccines")
-    Click_vaccines_settings()
-    attach_screenshot("before_clicking_add_vaccines")
-    Click_add_vaccines_button()
-    attach_screenshot("before_clicking_site_radio_button")
-    click_site_radio_button(site)
-    if "covid" in vaccine.lower():
-        attach_screenshot("before_clicking_covid_vaccine_checkbox")
-        click_covid_vaccine_checkbox()
-        attach_screenshot("before_clicking_covid_vaccinetype_checkbox")
-        click_covid_vaccine_type_checkbox(vaccineType)
-    elif "flu" in vaccine.lower():
-        attach_screenshot("before_clicking_flu_vaccine_checkbox")
-        click_flu_vaccine_checkbox()
-        attach_screenshot("before_clicking_flu_vaccine_type_checkbox")
-        click_flu_vaccine_type_checkbox(vaccineType)
-    time.sleep(5)
-    if check_vaccine_already_added_warning_message_exists(site, vaccineType) == False:
-        if check_add_vaccine_button_enabled() == True:
-            attach_screenshot("before_clicking_add_vaccine_button")
-            Click_add_vaccine_button()
-        if check_confirm_choices_button_enabled() == True:
-            click_confirm_vaccine_choices_button()
-            if check_confirm_details_and_save_button_exists() == True:
-                click_confirm_details_and_save_vaccines_button()
-                if check_vaccine_already_exists_error_exists() == True:
-                    click_settings_nav_link()
-                    Click_vaccines_settings()
-        else:
-            click_back_button_on_vaccines_page()
-            Click_vaccines_settings()
-    else:
-        click_back_button_on_vaccines_page()
-        Click_vaccines_settings()
-    Click_add_batches_button()
-    click_site_radio_button(site)
-    if "covid" in vaccine.lower():
-        if "-" in batch_number:
-            batch_prefix, batch_suffix = batch_number.split("-", 1)
-        else:
-            raise ValueError("Invalid batch number format. It should contain a '-' character.")
-        click_covid_vaccine_radiobutton()
-        click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccineType)
-        enter_covid_batch_number_prefix(batch_prefix)
-        enter_covid_batch_number_suffix(batch_suffix)
-    elif "flu" in vaccine.lower():
-        click_flu_vaccine_radiobutton()
-        click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccineType)
-        enter_flu_batch_number(batch_number)
-    attach_screenshot("entered_batch_number")
 
-    enter_expiry_date(expirydate)
-    attach_screenshot("entered_expiry_date")
-    if check_add_batch_button_enabled() == True:
-        Click_add_batch_button()
-        attach_screenshot("clicked_add_batch_button")
-        click_confirm_vaccine_batch_choices_button()
-        attach_screenshot("clicked_confirm_choices_button")
-        click_confirm_button()
-    attach_screenshot("clicked_confirm_choices_button")
-    click_find_a_patient_nav_link()
+    click_vaccines_nav_link()
+
+    # add site vaccine if it doesn't already exist
+    check_site_vaccine_exists(site, vaccine, vaccine_type, batch_number, expiry_date)
+    
+    # Add the vaccine and vaccine type to the site, with an active batch, if needed
+    check_batch_number_exists_and_is_active(site, vaccine_type, batch_number, expiry_date)
+
+def check_site_vaccine_exists(site, vaccine, vaccine_type, batch_number, expiry_date):
+    select_site(site)
+    if not check_vaccine_has_been_added(vaccine, False):
+        add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
+
+def check_batch_number_exists_and_is_active(site, vaccine_type, batch_number, expiry_date):
+    select_site(site)
+    click_view_product(vaccine_type)
+    if not check_batch_number_exists(batch_number):
+        # create a new batch
+        add_site_vaccine_batch(batch_number, expiry_date)
+    else: 
+        # Creating a new batch number will automatically make it active
+        # Only need to check the batch status if the batch number already exists 
+        if not check_batch_number_is_active(batch_number):
+          # reactivate batch
+          click_reactivate_batch_link(batch_number)
+          click_reactivate_batch_confirmation_button()
+
+def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
+    # vaccines_page
+    click_add_vaccine_button()
+
+    # vaccines_choose_site_page
+    enter_site_name(site)
+    select_site_from_list(site)
+    click_continue_button()
+
+    # choose_vaccine_page
+    click_vaccine_radiobutton(vaccine)
+    click_vaccine_type_radiobutton(vaccine_type)
+    click_continue_button()
+
+    # vaccines_add_batch_page
+    enter_batch_number(batch_number)
+    enter_expiry_date(expiry_date)
+    click_continue_button()
+
+    # vaccines_check_and_confirm_page
+    click_confirm_button()
+
+def add_site_vaccine_batch(batch_number, expiry_date):
+    click_add_batch_button()
+    # vaccines_add_batch_page
+    enter_batch_number(batch_number)
+    enter_expiry_date(expiry_date)
+    click_continue_button()
+
+    # vaccines_check_and_confirm_page
+    click_confirm_button()
 
 def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
     click_legal_mechanism(legal_mechanism)

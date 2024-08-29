@@ -38,10 +38,10 @@ def enter_vaccination_comments(comments):
     find_element_and_perform_action(VACCINATION_COMMENTS_ELEMENT, "type_text", comments)
 
 def check_yes_vaccinated_radiobutton_exists():
-    check_element_exists(YES_VACCINATED_RADIO_BUTTON, True)
+    return check_element_exists(YES_VACCINATED_RADIO_BUTTON, True)
 
 def check_no_to_vaccinated_radiobutton_exists():
-    check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
+    return check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
 
 def click_yes_vaccinated_radiobutton():
     find_element_and_perform_action(YES_VACCINATED_RADIO_BUTTON, "click")
