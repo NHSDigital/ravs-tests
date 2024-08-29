@@ -1,13 +1,20 @@
 from init_helpers import *
 
-BATCH_NUMBER_INPUT = ("#OtherBatchNumber")
+VACCINE_BATCH_NUMBER_INPUT = ("#OtherBatchNumber")
+BATCH_NUMBER_PREFIX_INPUT = ("#CovidBatchNumberPrefix")
+BATCH_NUMBER_SUFFIX_INPUT = ("#CovidBatchNumberSuffix")
 EXPIRY_DAY_INPUT = ("#ExpiryDate_1")
 EXPIRY_MONTH_INPUT = ("#ExpiryDate_2")
 EXPIRY_YEAR_INPUT = ("#ExpiryDate_3")
 CONTINUE_BUTTON = ("//button[text()='Continue']")
 
-def enter_batch_number(batch_number):
-    find_element_and_perform_action(BATCH_NUMBER_INPUT, "input_text", batch_number)
+def enter_batch_number_prefix_and_suffix(batch_number):
+    prefix, suffix = batch_number.split('-')
+    find_element_and_perform_action(BATCH_NUMBER_PREFIX_INPUT, "input_text", prefix)
+    find_element_and_perform_action(BATCH_NUMBER_SUFFIX_INPUT, "input_text", suffix)
+
+def enter_vaccine_batch_number(batch_number):
+    find_element_and_perform_action(VACCINE_BATCH_NUMBER_INPUT, "input_text", batch_number)
 
 def enter_expiry_date(expiry_date):
     try:
