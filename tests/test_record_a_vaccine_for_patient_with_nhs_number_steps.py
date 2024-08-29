@@ -6,7 +6,7 @@ from pytest_bdd.parsers import parse, cfparse
 from pages.vaccinator_location_page import *
 from pages.add_vaccines_page import *
 from pages.settings_page import *
-from pages.site_vaccines_page import *
+from pages.vaccines_page import *
 from pages.site_vaccine_batches_page import *
 from pages.site_vaccine_batches_confirm_page import *
 from pages.check_and_confirm_vaccinated_record_page import *
@@ -43,7 +43,6 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     # set_vaccinator_location(site, care_model)
     shared_data["site"] = site
     shared_data["care_model"] = get_care_model(index)
-    shared_data["vaccinated_type2"] = get_vaccination_type(index, chosen_vaccine)
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
@@ -52,7 +51,6 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date)
-    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["vaccinated_type2"], batch_number, batch_expiry_date)
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")

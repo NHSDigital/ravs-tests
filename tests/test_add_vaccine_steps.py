@@ -4,7 +4,7 @@ from pytest_bdd.parsers import parse, cfparse
 from pages.vaccinator_location_page import *
 from pages.add_vaccines_page import *
 from pages.settings_page import *
-from pages.site_vaccines_page import *
+from pages.vaccines_page import *
 import logging
 from init_helpers import *
 from conftest import *
