@@ -1,0 +1,131 @@
+{
+  "uid" : "6e2ecbc6928583ca",
+  "name" : "Add batch to vaccine [NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5-SD7YY2-24-today+90]",
+  "fullName" : "/app/features/add_batches.feature:Add batch to vaccine",
+  "historyId" : "816e0df01dffb1a7ed09998f81df379e",
+  "time" : {
+    "start" : 1724964159214,
+    "stop" : 1724964253566,
+    "duration" : 94352
+  },
+  "status" : "failed",
+  "statusMessage" : "NameError: name 'click_settings_nav_link' is not defined",
+  "statusTrace" : "fixturefunc = <function i_am_on_settings_page at 0x7fc49ca0dbc0>\nrequest = <FixtureRequest for <Function test_batch_already_added_to_site_warning_should_appear[NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5-SD7YY2-24-today+90]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @when(\"I am on the vaccine settings page\")\n    def i_am_on_settings_page():\n        if config[\"browser\"] == \"mobile\":\n            if check_nav_link_bar_toggle_exists():\n                click_nav_link_bar_toggler()\n>       click_settings_nav_link()\nE       NameError: name 'click_settings_nav_link' is not defined\n\ntests/test_add_vaccine_batches_steps.py:51: NameError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "NameError: name 'click_settings_nav_link' is not defined",
+    "statusTrace" : "fixturefunc = <function i_am_on_settings_page at 0x7fc49ca0dbc0>\nrequest = <FixtureRequest for <Function test_batch_already_added_to_site_warning_should_appear[NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5-SD7YY2-24-today+90]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @when(\"I am on the vaccine settings page\")\n    def i_am_on_settings_page():\n        if config[\"browser\"] == \"mobile\":\n            if check_nav_link_bar_toggle_exists():\n                click_nav_link_bar_toggler()\n>       click_settings_nav_link()\nE       NameError: name 'click_settings_nav_link' is not defined\n\ntests/test_add_vaccine_batches_steps.py:51: NameError",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1724964159215,
+        "stop" : 1724964253565,
+        "duration" : 94350
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1cdd816f5bc1a3ff",
+        "name" : "dev_chrome_128.0.6613.113_user_has_selected_site.png",
+        "source" : "1cdd816f5bc1a3ff.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "66295efb3d14d519",
+        "name" : "dev_chrome_128.0.6613.113_user_has_selected_care_model.png",
+        "source" : "66295efb3d14d519.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1724964253565,
+        "stop" : 1724964253566,
+        "duration" : 1
+      },
+      "status" : "failed",
+      "statusMessage" : "name 'click_settings_nav_link' is not defined",
+      "statusTrace" : "NameError: name 'click_settings_nav_link' is not defined\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "attachmentsCount" : 2,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "616676c48bfa"
+  }, {
+    "name" : "thread",
+    "value" : "1066-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add Batches to vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "batchprefix",
+    "value" : "SD7YY2"
+  }, {
+    "name" : "batchsuffix",
+    "value" : "24"
+  }, {
+    "name" : "expirydate",
+    "value" : "today+90"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "vaccinetype",
+    "value" : "Comirnaty Original/Omicron BA.4-5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "6e2ecbc6928583ca.json",
+  "parameterValues" : [ "SD7YY2", "24", "today+90", "NEELIMA HOUSE", "COVID-19", "Comirnaty Original/Omicron BA.4-5" ]
+}
