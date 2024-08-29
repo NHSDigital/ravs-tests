@@ -1,0 +1,413 @@
+{
+  "uid" : "2078915cc29d3f4",
+  "name" : "Record a vaccine with nhs number [12-9450140960-ALBERT HOUSE-Hospital Hub-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-Flucelvax Tetra - QIVc-SDYY2-20A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "1c2dbfbab6fdd49ab82b72ee8a6411dd",
+  "time" : {
+    "start" : 1724931037585,
+    "stop" : 1724933297071,
+    "duration" : 2259486
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'DEANA GAMBLES'\n +  where None = get_patient_name_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f4381fcaf20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9450140960-ALBERT HOUSE-Hospital Hub-yes-today-... GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-Flucelvax Tetra - QIVc-SDYY2-20A-19/10/2026]>>\nkwargs = {'address': '10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ', 'dob': '5/9/1993', 'name': 'DEANA GAMBLES', 'shared_...h_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 28/08/2024DEANA GAMBLES', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'care_model': 'Vaccination centre open to the public', ...}\nname = 'DEANA GAMBLES', dob = '5/9/1993'\naddress = '10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'DEANA GAMBLES'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'DEANA GAMBLES'\n +  where None = get_patient_name_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f4381fcaf20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9450140960-ALBERT HOUSE-Hospital Hub-yes-today-... GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-Flucelvax Tetra - QIVc-SDYY2-20A-19/10/2026]>>\nkwargs = {'address': '10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ', 'dob': '5/9/1993', 'name': 'DEANA GAMBLES', 'shared_...h_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 28/08/2024DEANA GAMBLES', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'care_model': 'Vaccination centre open to the public', ...}\nname = 'DEANA GAMBLES', dob = '5/9/1993'\naddress = '10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'DEANA GAMBLES'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Hospital Hub and get patient details for 9450140960 with option 12 and choose to vaccinate with vaccine details as Flu, Flucelvax Tetra - QIVc, SDYY2-20A with 19/10/2026",
+      "time" : {
+        "start" : 1724931037586,
+        "stop" : 1724932228630,
+        "duration" : 1191044
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "28c6f1b3d6c735d8",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_settings.png",
+        "source" : "28c6f1b3d6c735d8.png",
+        "type" : "image/png",
+        "size" : 36312
+      }, {
+        "uid" : "695eff8bafc1c8ab",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_vaccines.png",
+        "source" : "695eff8bafc1c8ab.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "2891aaa2b0f08c4c",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_add_vaccines.png",
+        "source" : "2891aaa2b0f08c4c.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "eaed5a05251bebac",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_site_radio_button.png",
+        "source" : "eaed5a05251bebac.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "4efea809c7d2740",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "4efea809c7d2740.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "81e2efb45c160cae",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "81e2efb45c160cae.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "ed5fb5fd4ac4a6b6",
+        "name" : "dev_chrome_128.0.6613.113_entered_batch_number.png",
+        "source" : "ed5fb5fd4ac4a6b6.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "749a279927068751",
+        "name" : "dev_chrome_128.0.6613.113_entered_expiry_date.png",
+        "source" : "749a279927068751.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "564caef57749b865",
+        "name" : "dev_chrome_128.0.6613.113_clicked_confirm_choices_button.png",
+        "source" : "564caef57749b865.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "b23aaa75fd5a3113",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_settings.png",
+        "source" : "b23aaa75fd5a3113.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "8f4df65b37728662",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_vaccines.png",
+        "source" : "8f4df65b37728662.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "984b31a33f8f7e65",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_add_vaccines.png",
+        "source" : "984b31a33f8f7e65.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "534017a2afb04a06",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_site_radio_button.png",
+        "source" : "534017a2afb04a06.png",
+        "type" : "image/png",
+        "size" : 70164
+      }, {
+        "uid" : "a67bfcc35a34ba4a",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "a67bfcc35a34ba4a.png",
+        "type" : "image/png",
+        "size" : 70199
+      }, {
+        "uid" : "92c086bd02527d44",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "92c086bd02527d44.png",
+        "type" : "image/png",
+        "size" : 70063
+      }, {
+        "uid" : "25dfa3759c6d833b",
+        "name" : "dev_chrome_128.0.6613.113_entered_batch_number.png",
+        "source" : "25dfa3759c6d833b.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "df63136f8490dc11",
+        "name" : "dev_chrome_128.0.6613.113_entered_expiry_date.png",
+        "source" : "df63136f8490dc11.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "554394a8afc4e649",
+        "name" : "dev_chrome_128.0.6613.113_clicked_confirm_choices_button.png",
+        "source" : "554394a8afc4e649.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 18,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1724932228630,
+        "stop" : 1724932319378,
+        "duration" : 90748
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b8b3b41d9c626872",
+        "name" : "dev_chrome_128.0.6613.113_entered_nhs_number_as9450140960_and_clicked_search_for_patient_button.png",
+        "source" : "b8b3b41d9c626872.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient DEANA GAMBLES",
+      "time" : {
+        "start" : 1724932319378,
+        "stop" : 1724932349709,
+        "duration" : 30331
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "385dc812efbbb418",
+        "name" : "dev_chrome_128.0.6613.113_before_clicking_patient_name.png",
+        "source" : "385dc812efbbb418.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, Flucelvax Tetra - QIVc, SDYY2-20A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1724932349709,
+        "stop" : 1724932506036,
+        "duration" : 156327
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9465a5f942e1d0f0",
+        "name" : "dev_chrome_128.0.6613.113_clicked_on_patient_DEANA GAMBLES_and_clicked_choose_vaccine_button.png",
+        "source" : "9465a5f942e1d0f0.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "f9d772264a463a24",
+        "name" : "dev_chrome_128.0.6613.113_selected_vaccine_Flu_and_Flucelvax Tetra - QIVc_and_clicked_continue_button.png",
+        "source" : "f9d772264a463a24.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1724932506037,
+        "stop" : 1724932778359,
+        "duration" : 272322
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "899dad69b02cfc8f",
+        "name" : "dev_chrome_128.0.6613.113_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "899dad69b02cfc8f.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "35669fa8c7625b2c",
+        "name" : "dev_chrome_128.0.6613.113_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "35669fa8c7625b2c.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "2cc5c7af6fc83f12",
+        "name" : "dev_chrome_128.0.6613.113_clicked_continue_to_record_consent_button.png",
+        "source" : "2cc5c7af6fc83f12.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1724932778359,
+        "stop" : 1724932899222,
+        "duration" : 120863
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "991f81f01d3f590d",
+        "name" : "dev_chrome_128.0.6613.113_before_selecting_consent_clinician.png",
+        "source" : "991f81f01d3f590d.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "d6343b294465085b",
+        "name" : "dev_chrome_128.0.6613.113_clicked_continue_to_vaccinate_button.png",
+        "source" : "d6343b294465085b.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1724932899223,
+        "stop" : 1724933266756,
+        "duration" : 367533
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8530dc1cfac413bf",
+        "name" : "dev_chrome_128.0.6613.113_entered_vaccination_details.png",
+        "source" : "8530dc1cfac413bf.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient DEANA GAMBLES, 5/9/1993, 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1724933266756,
+        "stop" : 1724933297071,
+        "duration" : 30315
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == 'DEANA GAMBLES'\n +  where None = get_patient_name_value()",
+      "statusTrace" : "AssertionError: assert None == 'DEANA GAMBLES'\n +  where None = get_patient_name_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "303cfa3cc2118c16",
+        "name" : "dev_chrome_128.0.6613.113_check_and_confirm_screen_before_assertion.png",
+        "source" : "303cfa3cc2118c16.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 29,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "af891d77d2c8"
+  }, {
+    "name" : "thread",
+    "value" : "1069-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-20A"
+  }, {
+    "name" : "care_model",
+    "value" : "Hospital Hub"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "5/9/1993"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "12"
+  }, {
+    "name" : "name",
+    "value" : "DEANA GAMBLES"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450140960"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Flucelvax Tetra - QIVc"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "2078915cc29d3f4.json",
+  "parameterValues" : [ "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ", "today-1", "19/10/2026", "SDYY2-20A", "Hospital Hub", "Flu", "yes", "5/9/1993", "yes", "12", "DEANA GAMBLES", "9450140960", "ALBERT HOUSE", "yes", "today", "Flucelvax Tetra - QIVc" ]
+}
