@@ -284,14 +284,14 @@ def check_batch_number_exists_and_is_active(site, vaccine, vaccine_type, batch_n
     if not check_batch_number_exists(batch_number, False):
         # create a new batch
         add_vaccine_type_batch(batch_number, expiry_date)
-    else: 
+    else:
         # Creating a new batch number will automatically make it active
-        # Only need to check the batch status if the batch number already exists 
+        # Only need to check the batch status if the batch number already exists
 
         if not check_batch_number_is_active(batch_number, True):
-          # reactivate batch
-          click_reactivate_batch_link(batch_number)
-          click_reactivate_batch_confirmation_button()
+            # reactivate batch
+            click_reactivate_batch_link(batch_number)
+            click_reactivate_batch_confirmation_button()
 
 def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     # vaccines_page
@@ -309,7 +309,6 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
 
     # vaccines_add_batch_page
     enter_batch_number_prefix_and_suffix(batch_number)
-    
     enter_expiry_date(expiry_date)
     click_continue_button()
 
@@ -355,7 +354,6 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         attach_screenshot("clicked_save_and_return_on_assessment_screen")
 
     enter_comments_for_assessing_patient(assessment_comments)
-    
     click_continue_to_record_consent_button()
     attach_screenshot("clicked_continue_to_record_consent_button")
 
