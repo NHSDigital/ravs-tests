@@ -1,7 +1,7 @@
 from init_helpers import *
 
 CONFIRM_BUTTON = "//button[text()='Confirm']"
-ERROR_BATCH_ALREADY_EXISTS = ("#CovidBatchNumberAlreadyExistsIdError")
+ERROR_BATCH_ALREADY_EXISTS = "//p[text()='Error! One or more vaccine batches already exist at a site.']"
 
 
 def check_site_name_is_displayed(sitename):
