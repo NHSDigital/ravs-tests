@@ -63,6 +63,9 @@ def get_eligibility_type(index, vaccine):
 def get_assessing_clinician(index):
     return assessing_clinicians[get_wrapped_index(index, len(assessing_clinicians))]
 
+def get_random_assessing_clinician():
+    return assessing_clinicians[get_random_index(len(assessing_clinicians))]
+
 def get_staff_role(index):
     return job_roles[get_wrapped_index(index, len(job_roles))]
 
