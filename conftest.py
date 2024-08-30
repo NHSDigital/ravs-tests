@@ -129,9 +129,10 @@ def set_vaccinator_location(site, care_model):
 
 @pytest.fixture(scope='function')
 def login_and_navigate_to_homepage(request, navigate_and_login):
-    select_site("NEELIMA HOUSE")
-    select_care_model("Vaccination Centre")
-    click_continue_to_record_a_vaccination_homepage()
+    #select_site("NEELIMA HOUSE")
+    #select_care_model("Vaccination Centre")
+    #click_continue_to_record_a_vaccination_homepage()
+    pass
 
 # Fixture for logging in and navigating to appointments open first patient
 @pytest.fixture(scope='function')

@@ -46,10 +46,8 @@ def i_am_on_the_vaccines_page():
 def i_click_add_vaccine():
     click_add_vaccine_button()
 
-@when(parse("I select {site}, {vaccine}, {vaccineType}"))
+@when(parse("I select {site}, {vaccine}, {vaccine_type}"))
 def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):
-    # vaccines_page
-    click_add_vaccine_button()
 
     # vaccines_choose_site_page
     enter_site_name(site)
