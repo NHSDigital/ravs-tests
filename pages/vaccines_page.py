@@ -4,13 +4,14 @@ import re
 ADD_VACCINE_BUTTON = ("//a[text()='Add vaccine']")
 SELECT_SITE_DROPDOWN = ("//select[@name='SiteId']")
 VIEW_PRODUCT_BUTTON = ("//a[text()='View Product']")
-ADD_BATCH_BUTTON = ("//a[text()='Add batch']")
+ADD_BATCH_LINK = ("//a[text()='Add batch']")
 
 def click_add_vaccine_button():
     find_element_and_perform_action(ADD_VACCINE_BUTTON,"click")
 
-def click_add_batch_button():
-    find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
+def click_add_batch_link():
+    element = "(//a[text()='Add batch'])[1]"
+    find_element_and_perform_action(element, "click")
 
 def click_vaccine_type_add_batch_link(site, vaccine_type):
     element = (f"//h1[text() = '{site}']/following-sibling::div//td[text()='{vaccine_type}']/following-sibling::td/a[text()='Add batch']")

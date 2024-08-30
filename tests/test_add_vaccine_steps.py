@@ -35,37 +35,40 @@ def logged_into_ravs_app(site, care_model):
 def logged_into_homepage(login_and_navigate_to_homepage):
     pass
 
-@when("I am on the vaccine settings page")
-def i_am_on_vaccine_settings_page():
+@when("I am on the vaccines page")
+def i_am_on_the_vaccines_page():
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-    click_settings_nav_link()
-    Click_vaccines_settings()
+    click_vaccines_nav_link()
 
-@when("I click add vaccines button")
-def i_click_add_vaccines():
-    Click_add_vaccines_button()
-
-@then('the add vaccines page should be launched')
-def the_add_vaccines_page_should_launch():
-    attach_screenshot("add_vaccines_page_should_launch")
-    assert check_add_vaccine_button_exists() == True
+@when("I click add vaccine button")
+def i_click_add_vaccine():
+    click_add_vaccine_button()
 
 @when(parse("I select {site}, {vaccine}, {vaccineType}"))
-def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccineType, shared_data):
-    click_site_radio_button(site)
-    if "covid" in vaccine.lower():
-        click_covid_vaccine_checkbox()
-        click_covid_vaccine_type_checkbox(vaccineType)
-    elif "flu" in vaccine.lower():
-        click_flu_vaccine_checkbox()
-        click_flu_vaccine_type_checkbox(vaccineType)
-    Click_add_vaccine_button()
+def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):
+    # vaccines_page
+    click_add_vaccine_button()
+
+    # vaccines_choose_site_page
+    enter_site_name(site)
+    select_site_from_list(site)
+    click_continue_button()
+
+    # choose_vaccine_page
+    click_vaccine_radiobutton(vaccine)
+    click_vaccine_type_radiobutton(vaccine_type)
+
     shared_data['site'] = site
-    shared_data['vaccineType'] = vaccineType
+    shared_data['vaccineType'] = vaccine_type
 
 @then("the vaccine is already added to site warning should appear")
 def vaccine_already_added_warning_should_exist(shared_data):
     attach_screenshot("vaccine_already_added_warning_message_exists")
     assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True
+
+@then("the choose site page should be launched")
+def the_choose_site_page_is_launched():
+    attach_screenshot("choose_site_page_should_launch")
+    assert check_choose_site_title_exists(True) == True
