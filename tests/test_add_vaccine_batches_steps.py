@@ -69,25 +69,22 @@ def i_select_site_vaccine_and_vaccinetype_for_batch(site, vaccine, vaccinetype, 
         enter_flu_batch_number(batchprefix)
     attach_screenshot("entered_batch_number")
 
-@when(parse("I enter {batchprefix}, {batchsuffix}"))
-def i_enter_batchprefix_and_batchsuffix(batchprefix, batchsuffix, shared_data):
-    if "covid" in shared_data["vaccine"].lower():
-        enter_covid_batch_number_prefix(batchprefix)
-        enter_covid_batch_number_suffix(batchsuffix)
-    elif "flu" in shared_data["vaccine"].lower():
-        enter_flu_batch_number(batchprefix)
+@when(parse("I enter {batch_number}"))
+def i_enter_batchprefix_and_batchsuffix(batch_number):
+    click_add_batch_link()
+    enter_batch_number_prefix_and_suffix(batch_number)
     attach_screenshot("entered_batch_number")
 
-@when(parse("I enter {expirydate}"))
-def i_enter_expiryDate(expirydate, shared_data):
-    expirydate = format_date(str(get_date_value(expirydate)), config["browser"])
-    enter_expiry_date(expirydate)
-    shared_data["expiryDate"] = expirydate
-    attach_screenshot("entered_expiry_date")
+# @when(parse("I enter {expirydate}"))
+# def i_enter_expiryDate(expirydate, shared_data):
+#     expirydate = format_date(str(get_date_value(expirydate)), config["browser"])
+#     enter_expiry_date(expirydate)
+#     shared_data["expiryDate"] = expirydate
+#     attach_screenshot("entered_expiry_date")
 
 @when("I click Add batch button")
 def i_click_add_batch_button():
-    Click_add_batch_button()
+    click_add_batch_button()
     attach_screenshot("clicked_add_batch_button")
 
 @when("I click confirm choices button")
@@ -101,7 +98,7 @@ def i_click_confirm_button():
     attach_screenshot("clicked_confirm_choices_button")
 
 @then("the batch is already added to site warning should appear")
-def batch_already_added_warning_should_exist(shared_data):
+def batch_already_added_warning_should_exist():
     attach_screenshot("batch_already_added_warning_message_exists")
     assert check_batch_already_exists_error_is_displayed() == True
 
@@ -109,3 +106,7 @@ def batch_already_added_warning_should_exist(shared_data):
 def add_batch_page_should_launch():
     attach_screenshot("add_batch_page_should_launch")
     assert check_add_batch_title_exists(True) == True
+
+@when(parse("I view product for the {vaccine_type} on {site}"))
+def view_product_for_site_and_vaccine_type(vaccine_type, site):
+    click_view_product(site, vaccine_type)
