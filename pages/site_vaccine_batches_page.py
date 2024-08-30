@@ -81,7 +81,7 @@ def click_cancel_adding_vaccine_batches_button():
 def click_confirm_vaccine_batch_choices_button():
     find_element_and_perform_action(CONFIRM_VACCINE_BATCHES_CHOICES_BUTTON, "click")
 
-def Click_add_batch_button():
+def click_add_batch_button():
     find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
 
 def check_add_batch_button_exists():
