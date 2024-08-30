@@ -7,6 +7,10 @@ EXPIRY_DAY_INPUT = ("#ExpiryDate_1")
 EXPIRY_MONTH_INPUT = ("#ExpiryDate_2")
 EXPIRY_YEAR_INPUT = ("#ExpiryDate_3")
 CONTINUE_BUTTON = ("//button[text()='Continue']")
+ADD_BATCH_TITLE = ("//h1[text()='Add batch']")
+
+def check_add_batch_title_exists(wait):
+    return check_element_exists(ADD_BATCH_TITLE, wait)
 
 def enter_batch_number_prefix_and_suffix(batch_number):
     prefix, suffix = batch_number.split('-')

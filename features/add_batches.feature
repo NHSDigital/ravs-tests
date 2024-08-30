@@ -1,12 +1,11 @@
 Feature: Add Batches to vaccine
 
-
 @addbatches
   Scenario: Add vaccine batches page should launch
     Given I am logged into the RAVS app
-    When I am on the vaccine settings page
-    And I click add batches button
-    Then the add vaccine batches page should be launched
+    When I am on the vaccines page
+    And I click add batch link
+    Then the add batch page should be launched
 
 @addbatches
   Scenario Outline: Add batch to vaccine
