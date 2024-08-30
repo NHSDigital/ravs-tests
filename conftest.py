@@ -263,7 +263,7 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccine_type, batch_nu
 
     # add site vaccine if it doesn't already exist
     check_site_vaccine_exists(site, vaccine, vaccine_type, batch_number, expiry_date)
-    
+
     # add vaccine type if it doesn't exist
     check_site_vaccine_type_exists(site, vaccine, vaccine_type, batch_number, expiry_date)
 
