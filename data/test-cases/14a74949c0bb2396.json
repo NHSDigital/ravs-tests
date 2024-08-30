@@ -1,0 +1,143 @@
+{
+  "uid" : "14a74949c0bb2396",
+  "name" : "Add vaccines page should launch [NEELIMA HOUSE-Off-site Outreach Event]",
+  "fullName" : "/app/features/add_vaccines.feature:Add vaccines page should launch",
+  "historyId" : "805e6c684096bdee5c6bc30c3049db85",
+  "time" : {
+    "start" : 1725001620194,
+    "stop" : 1725001741298,
+    "duration" : 121104
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_add_vaccine_button_exists()",
+  "statusTrace" : "fixturefunc = <function the_add_vaccines_page_should_launch at 0x7fb5f139f420>\nrequest = <FixtureRequest for <Function test_add_vaccines_page_should_launch[NEELIMA HOUSE-Off-site Outreach Event]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the add vaccines page should be launched')\n    def the_add_vaccines_page_should_launch():\n        attach_screenshot(\"add_vaccines_page_should_launch\")\n>       assert check_add_vaccine_button_exists() == True\nE       assert False == True\nE        +  where False = check_add_vaccine_button_exists()\n\ntests/test_add_vaccine_steps.py:53: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_add_vaccine_button_exists()",
+    "statusTrace" : "fixturefunc = <function the_add_vaccines_page_should_launch at 0x7fb5f139f420>\nrequest = <FixtureRequest for <Function test_add_vaccines_page_should_launch[NEELIMA HOUSE-Off-site Outreach Event]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the add vaccines page should be launched')\n    def the_add_vaccines_page_should_launch():\n        attach_screenshot(\"add_vaccines_page_should_launch\")\n>       assert check_add_vaccine_button_exists() == True\nE       assert False == True\nE        +  where False = check_add_vaccine_button_exists()\n\ntests/test_add_vaccine_steps.py:53: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1725001620195,
+        "stop" : 1725001620196,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1725001620198,
+        "stop" : 1725001680842,
+        "duration" : 60644
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccines button",
+      "time" : {
+        "start" : 1725001680842,
+        "stop" : 1725001711140,
+        "duration" : 30298
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the add vaccines page should be launched",
+      "time" : {
+        "start" : 1725001711142,
+        "stop" : 1725001741298,
+        "duration" : 30156
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_add_vaccine_button_exists()",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_add_vaccine_button_exists()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e8b872b5ad0b6d6a",
+        "name" : "qa_chrome_128.0.6613.113_add_vaccines_page_should_launch.png",
+        "source" : "e8b872b5ad0b6d6a.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "1f3f230775e6"
+  }, {
+    "name" : "thread",
+    "value" : "1070-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "14a74949c0bb2396.json",
+  "parameterValues" : [ "Off-site Outreach Event", "NEELIMA HOUSE" ]
+}
