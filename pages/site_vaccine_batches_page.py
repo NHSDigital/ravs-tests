@@ -35,7 +35,6 @@ def click_reactivate_batch_link(batch_number):
     find_element_and_perform_action(element, "click")
 
 def click_reactivate_batch_confirmation_button():
-    
     find_element_and_perform_action(REACTIVATE_BATCH_CONFIRMATION_BUTTON, "click")
 
 def check_required_field_error_appears_for_expiry_month(wait):
@@ -81,7 +80,7 @@ def click_cancel_adding_vaccine_batches_button():
 def click_confirm_vaccine_batch_choices_button():
     find_element_and_perform_action(CONFIRM_VACCINE_BATCHES_CHOICES_BUTTON, "click")
 
-def Click_add_batch_button():
+def click_add_batch_button():
     find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
 
 def check_add_batch_button_exists():

@@ -12,5 +12,3 @@ def click_vaccine_radiobutton(vaccine):
 def click_vaccine_type_radiobutton(vaccine_type):
     element = (f"//label[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{vaccine_type.lower()}')]/preceding-sibling::input[@name='VaccineId']")
     find_element_and_perform_action(element, "click")
-
-    
