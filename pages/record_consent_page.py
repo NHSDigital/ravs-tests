@@ -15,10 +15,10 @@ NO_CONSENT_REASON_DROPDOWN_ELEMENT = ("#NoConsentReasonId")
 CONSENT_GIVEN_BY_DROPDOWN_ELEMENT = ("#ConsentTypeId")
 
 def check_yes_to_consent_radiobutton_exists():
-    check_element_exists(YES_CONSENT_RADIO_BUTTON, True)
+    return check_element_exists(YES_CONSENT_RADIO_BUTTON, True)
 
 def check_no_to_consent_radiobutton_exists():
-    check_element_exists(NO_CONSENT_RADIO_BUTTON, True)
+    return check_element_exists(NO_CONSENT_RADIO_BUTTON, True)
 
 def click_yes_to_consent():
     find_element_and_perform_action(YES_CONSENT_RADIO_BUTTON, "click")

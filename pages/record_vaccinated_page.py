@@ -38,10 +38,10 @@ def enter_vaccination_comments(comments):
     find_element_and_perform_action(VACCINATION_COMMENTS_ELEMENT, "type_text", comments)
 
 def check_yes_vaccinated_radiobutton_exists():
-    check_element_exists(YES_VACCINATED_RADIO_BUTTON, True)
+    return check_element_exists(YES_VACCINATED_RADIO_BUTTON, True)
 
 def check_no_to_vaccinated_radiobutton_exists():
-    check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
+    return check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
 
 def click_yes_vaccinated_radiobutton():
     find_element_and_perform_action(YES_VACCINATED_RADIO_BUTTON, "click")
@@ -116,9 +116,15 @@ def click_care_model_option(care_model):
     if element:
         find_element_and_perform_action(element, "click")
     else:
+        print("Invalid vaccine type")def click_care_model_option(care_model):
+    element = (f'//input[@name="CareModelId"]/following-sibling::label[text()="{care_model}"]')
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
         print("Invalid vaccine type")
 
 def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
+    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
     element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
     if element:
         find_element_and_perform_action(element, "click")

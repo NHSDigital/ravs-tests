@@ -7,6 +7,10 @@ EXPANDED_COVID_19_BUTTON = ("(//button[@class='accordion-button'])[1]")
 COLLAPSED_COVID_19_BUTTON = ("(//button[@class='accordion-button collapsed'])[1]")
 EXPANDED_FLU_BUTTON = ("(//button[@class='accordion-button'])[2]")
 COLLAPSED_FLU_BUTTON = ("(//button[@class='accordion-button collapsed'])[2]")
+EXPANDED_RSV_BUTTON = ("(//button[@class='accordion-button'])[3]")
+COLLAPSED_RSV_BUTTON = ("(//button[@class='accordion-button collapsed'])[3]")
+EXPANDED_PERTUSSIS_BUTTON = ("(//button[@class='accordion-button'])[4]")
+COLLAPSED_PERTUSSIS_BUTTON = ("(//button[@class='accordion-button collapsed'])[4]")
 CHECK_IN_AND_RETURN_BUTTON=("//button[text()='Check in and return']")
 CHOOSE_VACCINE_BUTTON=("//button[text()='Choose Vaccine']")
 PATIENT_DID_NOT_SHOW_BUTTON=("//button[text()='Patient did not show']")
@@ -19,12 +23,20 @@ DELETE_HISTORY_BUTTON = ("//span[text()='Delete']")
 VACCINE_SUMMARY_LIST_ROWS_ELEMENTS = ("//dl[@class='nhsuk-summary-list mb-1']")
 COVID_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='COVID-19'])"
 FLU_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Flu'])"
+RSV_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Respiratory syncytial virus (RSV)'])"
+PERTUSSIS_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Pertussis'])"
 
 def check_covid_history_element_exists():
     return check_element_exists(COVID_HISTORY_ELEMENT)
 
 def check_flu_history_element_exists():
     return check_element_exists(FLU_HISTORY_ELEMENT)
+
+def check_rsv_history_element_exists():
+    return check_element_exists(RSV_HISTORY_ELEMENT)
+
+def check_pertussis_history_element_exists():
+    return check_element_exists(PERTUSSIS_HISTORY_ELEMENT)
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     time.sleep(5)
@@ -48,6 +60,32 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
                 count = 1
                 SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
         elif check_element_exists(FLU_HISTORY_ELEMENT):
+            count = 1
+            SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
+
+    elif "rsv" in chosen_vaccine.lower():
+        if check_element_exists(RSV_HISTORY_ELEMENT) and check_element_exists(RSV_HISTORY_ELEMENT):
+            count = 2
+            SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[2]"
+            if (check_element_exists(SHOW_ALL_BUTTON)):
+                count = 2
+            else:
+                count = 1
+                SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
+        elif check_element_exists(RSV_HISTORY_ELEMENT):
+            count = 1
+            SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
+
+    elif "pertussis" in chosen_vaccine.lower():
+        if check_element_exists(PERTUSSIS_HISTORY_ELEMENT) and check_element_exists(PERTUSSIS_HISTORY_ELEMENT):
+            count = 2
+            SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[2]"
+            if (check_element_exists(SHOW_ALL_BUTTON)):
+                count = 2
+            else:
+                count = 1
+                SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
+        elif check_element_exists(PERTUSSIS_HISTORY_ELEMENT):
             count = 1
             SHOW_ALL_BUTTON = "(//button[contains(text(), 'Show all')])[1]"
 
@@ -127,12 +165,20 @@ def click_delete_history_button(vaccine, index):
         element = f"(//span[text()='Delete'])[{index}]"
     elif vaccine.lower() == "flu":
         element = f"(//span[text()='Delete'])[{index}]"
+    elif vaccine.lower() == "respiratory syncytial virus (rsv)":
+        element = f"(//span[text()='Delete'])[{index}]"
+    elif vaccine.lower() == "pertussis":
+        element = f"(//span[text()='Delete'])[{index}]"
     find_element_and_perform_action(element, "click")
 
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
         element = f"(//span[text()='Edit'])[{index}]"
     elif vaccine.lower() == "flu":
+        element = f"(//span[text()='Edit'])[{index}]"
+    elif vaccine.lower() == "respiratory syncytial virus (rsv)":
+        element = f"(//span[text()='Edit'])[{index}]"
+    elif vaccine.lower() == "pertussis":
         element = f"(//span[text()='Edit'])[{index}]"
     find_element_and_perform_action(element, "click")
 
@@ -147,6 +193,21 @@ def click_collapse_covid_history():
 
 def click_expand_flu_history():
     find_element_and_perform_action(COLLAPSED_FLU_BUTTON, "click")
+
+def click_collapse_flu_history():
+    find_element_and_perform_action(EXPANDED_FLU_BUTTON, "click")
+
+def click_expand_rsv_history():
+    find_element_and_perform_action(COLLAPSED_RSV_BUTTON, "click")
+
+def click_collapse_rsv_history():
+    find_element_and_perform_action(EXPANDED_RSV_BUTTON, "click")
+
+def click_expand_pertussis_history():
+    find_element_and_perform_action(COLLAPSED_PERTUSSIS_BUTTON, "click")
+
+def click_collapse_pertussis_history():
+    find_element_and_perform_action(EXPANDED_PERTUSSIS_BUTTON, "click")
 
 def click_check_in_and_return_button():
     find_element_and_perform_action(CHECK_IN_AND_RETURN_BUTTON, "click")
