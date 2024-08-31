@@ -1,0 +1,173 @@
+{
+  "uid" : "487ff32af7158c01",
+  "name" : "Vaccine already added to site warning should appear [NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5]",
+  "fullName" : "/app/features/add_vaccines.feature:Vaccine already added to site warning should appear",
+  "historyId" : "9f1089f9bc7885117e14e2eaf82891e5",
+  "time" : {
+    "start" : 1725091248603,
+    "stop" : 1725091523937,
+    "duration" : 275334
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Comirnaty Original/Omicron BA.4-5')",
+  "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f93107e37e0>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5]>>\nkwargs = {'shared_data': {'site': 'NEELIMA HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'NEELIMA HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Comirnaty Original/Omicron BA.4-5')\n\ntests/test_add_vaccine_steps.py:71: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Comirnaty Original/Omicron BA.4-5')",
+    "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f93107e37e0>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5]>>\nkwargs = {'shared_data': {'site': 'NEELIMA HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'NEELIMA HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Comirnaty Original/Omicron BA.4-5')\n\ntests/test_add_vaccine_steps.py:71: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1725091248604,
+        "stop" : 1725091342504,
+        "duration" : 93900
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "deaf43907ff550d4",
+        "name" : "dev_chrome_128.0.6613.113_user_has_selected_site.png",
+        "source" : "deaf43907ff550d4.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "c353c1eb32eb925b",
+        "name" : "dev_chrome_128.0.6613.113_user_has_selected_care_model.png",
+        "source" : "c353c1eb32eb925b.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1725091342504,
+        "stop" : 1725091403035,
+        "duration" : 60531
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccines button",
+      "time" : {
+        "start" : 1725091403036,
+        "stop" : 1725091433284,
+        "duration" : 30248
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I select NEELIMA HOUSE, COVID-19, Comirnaty Original/Omicron BA.4-5",
+      "time" : {
+        "start" : 1725091433285,
+        "stop" : 1725091523809,
+        "duration" : 90524
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the vaccine is already added to site warning should appear",
+      "time" : {
+        "start" : 1725091523809,
+        "stop" : 1725091523936,
+        "duration" : 127
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Comirnaty Original/Omicron BA.4-5')",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('NEELIMA HOUSE', 'Comirnaty Original/Omicron BA.4-5')\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ef5e2a703eb4ba7b",
+        "name" : "dev_chrome_128.0.6613.113_vaccine_already_added_warning_message_exists.png",
+        "source" : "ef5e2a703eb4ba7b.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a8b16b04a017"
+  }, {
+    "name" : "thread",
+    "value" : "1069-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "vaccineType",
+    "value" : "Comirnaty Original/Omicron BA.4-5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "487ff32af7158c01.json",
+  "parameterValues" : [ "NEELIMA HOUSE", "COVID-19", "Comirnaty Original/Omicron BA.4-5" ]
+}
