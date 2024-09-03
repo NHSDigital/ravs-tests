@@ -171,7 +171,7 @@ def immunisation_history_should_be_updated(shared_data):
     click_delete_history_link(shared_data["chosen_vaccine"])
     click_delete_vaccination_button()
     shared_data.clear()
-        
+
 @then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
 def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):
     attach_screenshot("patient_details_screen_with_immunisation_history")
