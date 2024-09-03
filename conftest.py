@@ -377,7 +377,6 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
 def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, no_vaccination_reason=None):
-
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
 
