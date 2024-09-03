@@ -17,8 +17,9 @@ from pages.vaccinator_location_page import *
 from pages.record_consent_page import *
 from pages.record_vaccinated_page import *
 from pages.vaccines_choose_site_page import *
-from pages.choose_vaccine_page import *
+from pages.vaccines_choose_vaccine_page import *
 from pages.vaccines_add_batch_page import *
+from pages.vaccines_view_products_page import *
 from init_helpers import *
 from datetime import datetime, timedelta
 from allure_commons.types import LabelType
@@ -236,18 +237,8 @@ def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
 
 def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     click_delivery_team_radiobutton(site)
-    if "covid" in vaccine.lower():
-        click_covid_radiobutton()
-        click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
-    elif "flu" in vaccine.lower():
-        click_flu_radiobutton()
-        click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
-    elif "rsv" in vaccine.lower():
-        click_rsv_radiobutton()
-        click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
-    elif "pertussis" in vaccine.lower():
-        click_pertussis_radiobutton()
-        click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type)
+    click_consent_vaccine_radiobutton(vaccine)
+    click_consent_vaccine_type_radiobutton(vaccine_type)
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
@@ -308,7 +299,7 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     click_continue_button()
 
     # vaccines_add_batch_page
-    enter_batch_number_prefix_and_suffix(batch_number)
+    enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
     click_continue_button()
 
@@ -316,22 +307,29 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     click_confirm_button()
 
 def add_vaccine_type_batch(batch_number, expiry_date):
-    click_add_batch_button()
+    click_add_batch_link()
     # vaccines_add_batch_page
-    enter_batch_number_prefix_and_suffix(batch_number)
+    enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
     click_continue_button()
 
     # vaccines_check_and_confirm_page
     click_confirm_button()
 
-def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
+def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, due_date, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
 
     if eligible_decision.lower() == 'yes':
         click_eligible_yes_radiobutton()
-        select_eligibility_type(eligibility_type)
+
+        if check_eligibility_type_is_enabled():
+            select_eligibility_type(eligibility_type)
+
         if eligibility_type == "Healthcare workers":
-            select_staff_role(staff_role)
+                select_staff_role(staff_role)
+        
+        if eligibility_type == "Pregnancy":
+                enter_due_date(due_date)
+
         attach_screenshot("clicked_eligibility_yes_and_selected_eligibility_type")
     else:
         click_eligible_no_radiobutton()
@@ -378,20 +376,25 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
 def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, no_vaccination_reason=None):
-    select_vaccinator_name_and_council(vaccinator)
-    enter_vaccination_comments(vaccination_comments)
-    set_vaccination_date(vaccination_date)
-    click_care_model_option(care_model)
+
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
         if "covid" in (vaccine).lower():
             click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
         elif "flu" in (vaccine).lower():
             click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+        elif "rsv" in (vaccine).lower():
+            click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+        elif "pertussis" in (vaccine).lower():
+            click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+        set_vaccination_date(vaccination_date)
+        click_care_model_option(care_model)
+        select_vaccinator_name_and_council(vaccinator)
+        enter_vaccination_comments(vaccination_comments)
         select_vaccination_site(vaccination_site)
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         select_batch_number(batch_number_to_select)
-        time.sleep(5)
+        #time.sleep(2)
         enter_dose_amount_value(dose_amount)
         if click_continue_to_check_and_confirm_screen_button() == True:
             vaccination_date = format_date(vaccination_date, "safari")

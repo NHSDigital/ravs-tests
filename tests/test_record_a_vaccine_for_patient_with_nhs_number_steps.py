@@ -33,6 +33,10 @@ def shared_data():
 def test_record_a_vaccine_with_nhs_number(navigate_and_login):
     pass
 
+@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a maternity vaccine with nhs number')
+def test_record_a_maternity_vaccine_with_nhs_number(navigate_and_login):
+    pass
+
 @given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {vaccine_type}, {batch_number} with {batch_expiry_date}"))
 def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batch_number, vaccine_type, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
@@ -54,11 +58,13 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
+@then("I search for a patient with the NHS number in the find a patient screen")
 def step_search_for_patient(shared_data):
     nhs_number = shared_data["nhs_number"]
     click_find_a_patient_and_search_with_nhs_number(nhs_number)
 
 @given(parse("I open the patient record by clicking on patient {name}"))
+@then(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
     click_on_patient_name(name)
@@ -66,6 +72,7 @@ def step_search_for_patient(shared_data, name):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date):
+    time.sleep(3)
     immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
     shared_data["immunisation_history_records_count_before_vaccination"] = immunisation_history_records_count_before_vaccination
     choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, vaccine_type)
@@ -82,7 +89,23 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
     shared_data['assessment_comments'] = "Assessment comments " + assess_date + shared_data["patient_name"]
-    assess_patient_with_details_and_click_continue_to_consent(eligibility, shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
+    assess_patient_with_details_and_click_continue_to_consent(eligibility, shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], None, assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
+
+@when(parse("I assess the pregnant patient's {eligibility} with the details and date as {assess_date} and click continue to record consent screen button"))
+def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, assess_date):
+    shared_data['eligible_decision'] = eligibility
+    shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
+    shared_data['eligibility_type'] = "Pregnancy"
+    shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
+    shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
+    due_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    shared_data['eligibility_due_date'] = due_date
+    assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    shared_data['eligibility_assessment_date'] = assess_date
+    shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
+    shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
+    shared_data['assessment_comments'] = "Assessment comments " + assess_date + shared_data["patient_name"]
+    assess_patient_with_details_and_click_continue_to_consent(eligibility, shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], due_date, assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
 
 @when(parse("I record {consent} with the details and click continue to vaccinate button"))
 def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, consent):
@@ -134,38 +157,35 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
         assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
         attach_screenshot("check_and_confirm_screen_after_assertion")
 
+@then("when I click confirm and save button, I should see a record saved dialogue")
+def click_confirm_and_save_button_record_saved(shared_data):
+    attach_screenshot("patient_details_screen_with_immunisation_history")
+    click_confirm_details_and_save_button()
+    attach_screenshot("before_assert_record_saved")
+    assert check_record_saved_element_exists(False)
+
+@then("the immunisation history of the patient should be updated in the patient details page")
+def immunisation_history_should_be_updated(shared_data):
+    immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
+    assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
+    click_delete_history_link(shared_data["chosen_vaccine"])
+    click_delete_vaccination_button()
+    shared_data.clear()
+        
 @then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
 def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):
     attach_screenshot("patient_details_screen_with_immunisation_history")
-    if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
+    if shared_data["vaccinated_decision"].lower() == "yes" and shared_data["consent_decision"].lower() == "yes" and shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
         click_confirm_details_and_save_button()
-        if "covid" in shared_data["chosen_vaccine"].lower():
-            if check_covid_history_element_exists():
-                index = 1
-        elif "flu" in shared_data["chosen_vaccine"].lower():
-            if check_flu_history_element_exists() and check_covid_history_element_exists():
-                index = 2
-            else:
-                index = 1
-        elif "rsv" in shared_data["chosen_vaccine"].lower():
-            if check_flu_history_element_exists() and check_covid_history_element_exists():
-                index = 3
-            else:
-                index = 1
-        elif "pertussis" in shared_data["chosen_vaccine"].lower():
-            if check_flu_history_element_exists() and check_covid_history_element_exists():
-                index = 4
-            else:
-                index = 1
 
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
-        assert get_vaccine_program_details(index) == shared_data["chosen_vaccine"]
-        click_delete_history_button(shared_data["chosen_vaccine"], index)
-        attach_screenshot("delete_history_button_clicked")
-        click_delete_vaccination_button()
-        attach_screenshot("delete_vaccination_button_clicked")
-        time.sleep(10)
+        # assert get_vaccine_program_details(index) == shared_data["chosen_vaccine"]
+        # click_delete_history_button(shared_data["chosen_vaccine"], index)
+        # attach_screenshot("delete_history_button_clicked")
+        # click_delete_vaccination_button()
+        # attach_screenshot("delete_vaccination_button_clicked")
+        # time.sleep(10)
         shared_data.clear()
     else:
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])

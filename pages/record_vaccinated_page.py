@@ -104,13 +104,6 @@ def enter_relationship_to_patient(relationship):
 def enter_clinician_details(clinician):
     find_element_and_perform_action(RESPONSIBLE_CLINICIAN_INPUT_ELEMENT, "input_text", clinician)
 
-def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = get_covid_vaccine_xpath(vaccinetype.lower())
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
-
 def click_care_model_option(care_model):
     element = (f'//input[@name="CareModelId"]/following-sibling::label[text()="{care_model}"]')
     if element:
@@ -118,7 +111,28 @@ def click_care_model_option(care_model):
     else:
         print("Invalid vaccine type")
 
+def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
+    element = get_covid_vaccine_xpath(vaccinetype.lower())
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Invalid vaccine type")
+
 def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
+    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Invalid vaccine type")
+
+def click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
+    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Invalid vaccine type")
+
+def click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
     element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
     if element:
         find_element_and_perform_action(element, "click")

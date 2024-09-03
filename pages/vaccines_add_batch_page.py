@@ -12,10 +12,14 @@ ADD_BATCH_TITLE = ("//h1[text()='Add batch']")
 def check_add_batch_title_exists(wait):
     return check_element_exists(ADD_BATCH_TITLE, wait)
 
-def enter_batch_number_prefix_and_suffix(batch_number):
-    prefix, suffix = batch_number.split('-')
-    find_element_and_perform_action(BATCH_NUMBER_PREFIX_INPUT, "input_text", prefix)
-    find_element_and_perform_action(BATCH_NUMBER_SUFFIX_INPUT, "input_text", suffix)
+def enter_batch_number(batch_number):
+
+    if check_element_exists(VACCINE_BATCH_NUMBER_INPUT, False):
+        find_element_and_perform_action(VACCINE_BATCH_NUMBER_INPUT, "input_text", batch_number)
+    else:
+        prefix, suffix = batch_number.split('-')
+        find_element_and_perform_action(BATCH_NUMBER_PREFIX_INPUT, "input_text", prefix)
+        find_element_and_perform_action(BATCH_NUMBER_SUFFIX_INPUT, "input_text", suffix)
 
 def enter_vaccine_batch_number(batch_number):
     find_element_and_perform_action(VACCINE_BATCH_NUMBER_INPUT, "input_text", batch_number)

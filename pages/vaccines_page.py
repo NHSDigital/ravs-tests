@@ -9,7 +9,7 @@ ADD_BATCH_LINK = ("//a[text()='Add batch']")
 def click_add_vaccine_button():
     find_element_and_perform_action(ADD_VACCINE_BUTTON,"click")
 
-def click_add_batch_link():
+def click_first_available_add_batch_link():
     element = "(//a[text()='Add batch'])[1]"
     find_element_and_perform_action(element, "click")
 

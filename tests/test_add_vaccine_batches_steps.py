@@ -46,9 +46,9 @@ def i_am_on_the_vaccines_page():
             click_nav_link_bar_toggler()
     click_vaccines_nav_link()
 
-@when("I click add batch link")
-def i_click_add_batch_link():
-    click_add_batch_link()
+@when("I click on an available add batch link")
+def i_click_first_add_batch_link():
+    click_first_available_add_batch_link()
 
 @when(parse("I select {site}, {vaccine}, {vaccinetype} and enter {batchprefix}, {batchsuffix}"))
 def i_select_site_vaccine_and_vaccinetype_for_batch(site, vaccine, vaccinetype, batchprefix, batchsuffix, shared_data):
@@ -72,7 +72,7 @@ def i_select_site_vaccine_and_vaccinetype_for_batch(site, vaccine, vaccinetype, 
 @when(parse("I enter {batch_number}"))
 def i_enter_batchprefix_and_batchsuffix(batch_number):
     click_add_batch_link()
-    enter_batch_number_prefix_and_suffix(batch_number)
+    enter_batch_number(batch_number)
     attach_screenshot("entered_batch_number")
 
 # @when(parse("I enter {expirydate}"))
