@@ -39,7 +39,7 @@ def check_pertussis_history_element_exists():
     return check_element_exists(PERTUSSIS_HISTORY_ELEMENT)
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
-    
+
     count = 0
 
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
@@ -128,7 +128,7 @@ def click_delete_history_button(vaccine, index):
 def click_delete_history_link(vaccine):
     element = (f"//h3[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
     find_element_and_perform_action(element, "click")
-    
+
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
         element = f"(//span[text()='Edit'])[{index}]"

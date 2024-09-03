@@ -260,13 +260,13 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
     if not check_vaccine_has_been_added(site, vaccine, True):
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
         return True
-    
+
     # If the site has the vaccine, but does NOT currently have the vaccine type, then add a site vaccine
     # Adding a vaccine type is the same process as adding a vaccine for a site
     if not check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
         return True
-    
+
     # Open the vaccine type to see the batches.
     # If the batch does NOT currently exist, add a batch
     # This adds an active batch, so we don't need to do further checks
@@ -274,7 +274,7 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
     if not check_batch_number_exists(batch_number, True):
         add_vaccine_type_batch(batch_number, expiry_date)
         return True
-    
+
     # If we get this far, the batch does exists but is currently INACTIVE
     # This reactivates the batch
     if not check_batch_number_is_active(batch_number, True):
@@ -323,7 +323,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
 
         if eligibility_type == "Healthcare workers":
             select_staff_role(staff_role)
-        
+
         if eligibility_type == "Pregnancy" and due_date:
             enter_due_date(due_date)
 
@@ -377,7 +377,6 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
 def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, no_vaccination_reason=None):
-
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
 
@@ -389,7 +388,7 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
             click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
         elif "pertussis" in (vaccine).lower():
             click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
-        
+
         set_vaccination_date(vaccination_date)
         click_care_model_option(care_model)
         select_vaccinator_name_and_council(vaccinator)
