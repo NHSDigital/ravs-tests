@@ -57,7 +57,7 @@ def select_vaccination_site(site):
     find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
 
 def select_batch_number(batchNumber):
-    find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
+    #find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
 
 def select_consent_given_by_from_dropdown(givenBy):
@@ -106,7 +106,7 @@ def enter_clinician_details(clinician):
 
 def click_care_model_option(care_model):
     element = (f'//input[@name="CareModelId"]/following-sibling::label[text()="{care_model}"]')
-    if element:
+    if check_element_exists(element, False):
         find_element_and_perform_action(element, "click")
     else:
         print("Invalid vaccine type")
