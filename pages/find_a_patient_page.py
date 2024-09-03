@@ -197,7 +197,7 @@ def check_record_saved_element_exists(wait):
 
 def check_record_saved_message_appears(name):
     # checks the message exists, includes the patient name, includes a valid time value, and is the expected format
-    
+ 
     element = (f"You successfuly saved {name} record")
     saved_message = find_element_and_perform_action(element, "get_text")
 
