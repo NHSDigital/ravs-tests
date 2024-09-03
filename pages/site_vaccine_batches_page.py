@@ -20,6 +20,10 @@ COVID_BATCH_NUMBER_SUFFIX_ERROR_LABEL = ("#CovidBatchNumberSuffixIdError")
 EXPIRY_DAY_INPUT_ERROR_LABEL = ("#ExpiryDate_1IdError")
 EXPIRY_MONTH_INPUT_ERROR_LABEL = ("#ExpiryDate_2IdError")
 EXPIRY_YEAR_INPUT_ERROR_LABEL = ("#ExpiryDate_3IdError")
+REACTIVATE_BATCH_CONFIRMATION_BUTTON = ("//button[text()='Reactivate']")
+
+def click_reactivate_batch_confirmation_button():
+    find_element_and_perform_action(REACTIVATE_BATCH_CONFIRMATION_BUTTON, "click")
 
 def check_required_field_error_appears_for_expiry_month(wait):
     return check_element_exists(EXPIRY_MONTH_INPUT_ERROR_LABEL, wait)
@@ -64,7 +68,7 @@ def click_cancel_adding_vaccine_batches_button():
 def click_confirm_vaccine_batch_choices_button():
     find_element_and_perform_action(CONFIRM_VACCINE_BATCHES_CHOICES_BUTTON, "click")
 
-def Click_add_batch_button():
+def click_add_batch_button():
     find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
 
 def check_add_batch_button_exists():
@@ -90,14 +94,12 @@ def click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
     else:
         print("Invalid vaccine type")
 
-
 def click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccinetype):
     element = get_flu_vaccine_add_batch_radio_button_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click")
     else:
         print("Invalid vaccine type")
-
 
 def check_vaccine_already_added_warning_message_exists(site, vaccine):
     element = (f"//span[text()='{site} already has {vaccine}']")
