@@ -242,6 +242,12 @@ def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
+def choose_vaccine_and_vaccine_type_only(site, vaccine, vaccine_type):
+    click_delivery_team_radiobutton(site)
+    click_consent_vaccine_radiobutton(vaccine)
+    click_consent_vaccine_type_radiobutton(vaccine_type)
+    attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type)
+
 def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineType, batch_number, expirydate):
     pass
 

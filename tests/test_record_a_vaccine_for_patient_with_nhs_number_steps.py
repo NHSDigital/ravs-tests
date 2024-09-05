@@ -191,3 +191,10 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
         shared_data.clear()
+    
+@given("I capture the cookies")
+async def capture_cookies(context):
+    cookies_string = await context.page.evaluate("() => document.cookie")
+    context.cookies = await cookies_string.split("; ")
+    context.cookies_dict = await dict(cookie.split("=") for cookie in context.cookies)
+
