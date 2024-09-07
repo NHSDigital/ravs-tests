@@ -1,0 +1,413 @@
+{
+  "uid" : "775eeb4c04c3aa53",
+  "name" : "Record a vaccine with nhs number [2-9450141711-ALBERT HOUSE-Home Of Housebound Patient-yes-today-2-yes-yes-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-Fluad Tetra - aQIV-SDYY2-22A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "2b0d99241248f314a20bbf154476575b",
+  "time" : {
+    "start" : 1725708561803,
+    "stop" : 1725710911933,
+    "duration" : 2350130
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'KRISTIA SIDAWAY'\n +  where None = get_patient_name_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f5058d92f20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9450141711-ALBERT HOUSE-Home Of Housebound Patie...IA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-Fluad Tetra - aQIV-SDYY2-22A-19/10/2026]>>\nkwargs = {'address': '41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY', 'dob': '24/6/1992', 'name': 'KRISTIA SIDAWAY', 'sha...TIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-22A', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 05/09/2024KRISTIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-22A', 'care_model': 'Community Pharmacy', ...}\nname = 'KRISTIA SIDAWAY', dob = '24/6/1992'\naddress = '41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'KRISTIA SIDAWAY'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'KRISTIA SIDAWAY'\n +  where None = get_patient_name_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f5058d92f20>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9450141711-ALBERT HOUSE-Home Of Housebound Patie...IA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-Fluad Tetra - aQIV-SDYY2-22A-19/10/2026]>>\nkwargs = {'address': '41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY', 'dob': '24/6/1992', 'name': 'KRISTIA SIDAWAY', 'sha...TIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-22A', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 05/09/2024KRISTIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-22A', 'care_model': 'Community Pharmacy', ...}\nname = 'KRISTIA SIDAWAY', dob = '24/6/1992'\naddress = '41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'KRISTIA SIDAWAY'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Home Of Housebound Patient and get patient details for 9450141711 with option 2 and choose to vaccinate with vaccine details as Flu, Fluad Tetra - aQIV, SDYY2-22A with 19/10/2026",
+      "time" : {
+        "start" : 1725708561803,
+        "stop" : 1725709752732,
+        "duration" : 1190929
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4817b95a8bf562e7",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_settings.png",
+        "source" : "4817b95a8bf562e7.png",
+        "type" : "image/png",
+        "size" : 36779
+      }, {
+        "uid" : "d415f9d2a61240d",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_vaccines.png",
+        "source" : "d415f9d2a61240d.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "11b35e3b2c6034e7",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_add_vaccines.png",
+        "source" : "11b35e3b2c6034e7.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "103fe3a4401defab",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_site_radio_button.png",
+        "source" : "103fe3a4401defab.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "d0bf9efdee94b613",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "d0bf9efdee94b613.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "642f6ddcb17bd2ca",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "642f6ddcb17bd2ca.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "f924aeacd69e042c",
+        "name" : "qa_chrome_128.0.6613.119_entered_batch_number.png",
+        "source" : "f924aeacd69e042c.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "7e0e0f229b763e6b",
+        "name" : "qa_chrome_128.0.6613.119_entered_expiry_date.png",
+        "source" : "7e0e0f229b763e6b.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "d9c67d02e1eb74b3",
+        "name" : "qa_chrome_128.0.6613.119_clicked_confirm_choices_button.png",
+        "source" : "d9c67d02e1eb74b3.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "69ac249366d79717",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_settings.png",
+        "source" : "69ac249366d79717.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "3e703799a4108d3e",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_vaccines.png",
+        "source" : "3e703799a4108d3e.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "bf92fe085983ad3",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_add_vaccines.png",
+        "source" : "bf92fe085983ad3.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "d50355c7c4ff09ae",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_site_radio_button.png",
+        "source" : "d50355c7c4ff09ae.png",
+        "type" : "image/png",
+        "size" : 70164
+      }, {
+        "uid" : "74a05467d8c47a61",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_flu_vaccine_checkbox.png",
+        "source" : "74a05467d8c47a61.png",
+        "type" : "image/png",
+        "size" : 70199
+      }, {
+        "uid" : "6911f4a1f911aad9",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_flu_vaccine_type_checkbox.png",
+        "source" : "6911f4a1f911aad9.png",
+        "type" : "image/png",
+        "size" : 70063
+      }, {
+        "uid" : "e9c40f3f77286ffe",
+        "name" : "qa_chrome_128.0.6613.119_entered_batch_number.png",
+        "source" : "e9c40f3f77286ffe.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "f084c5a4887b7886",
+        "name" : "qa_chrome_128.0.6613.119_entered_expiry_date.png",
+        "source" : "f084c5a4887b7886.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "e7c74a8d6e6276fb",
+        "name" : "qa_chrome_128.0.6613.119_clicked_confirm_choices_button.png",
+        "source" : "e7c74a8d6e6276fb.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 18,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1725709752733,
+        "stop" : 1725709843511,
+        "duration" : 90778
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3c3529c3f0b46d5a",
+        "name" : "qa_chrome_128.0.6613.119_entered_nhs_number_as9450141711_and_clicked_search_for_patient_button.png",
+        "source" : "3c3529c3f0b46d5a.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient KRISTIA SIDAWAY",
+      "time" : {
+        "start" : 1725709843511,
+        "stop" : 1725709873841,
+        "duration" : 30330
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3fd70fb151c58950",
+        "name" : "qa_chrome_128.0.6613.119_before_clicking_patient_name.png",
+        "source" : "3fd70fb151c58950.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, Fluad Tetra - aQIV, SDYY2-22A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1725709873842,
+        "stop" : 1725710030203,
+        "duration" : 156361
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6cc8f064f4199b4a",
+        "name" : "qa_chrome_128.0.6613.119_clicked_on_patient_KRISTIA SIDAWAY_and_clicked_choose_vaccine_button.png",
+        "source" : "6cc8f064f4199b4a.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "6c39708403e02c9",
+        "name" : "qa_chrome_128.0.6613.119_selected_vaccine_Flu_and_Fluad Tetra - aQIV_and_clicked_continue_button.png",
+        "source" : "6c39708403e02c9.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-2 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1725710030204,
+        "stop" : 1725710332776,
+        "duration" : 302572
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ccb5108f0f7a7244",
+        "name" : "qa_chrome_128.0.6613.119_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "ccb5108f0f7a7244.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "6f9bd77d496e1dc9",
+        "name" : "qa_chrome_128.0.6613.119_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "6f9bd77d496e1dc9.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "1eb26e07fea26408",
+        "name" : "qa_chrome_128.0.6613.119_clicked_continue_to_record_consent_button.png",
+        "source" : "1eb26e07fea26408.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1725710332776,
+        "stop" : 1725710514084,
+        "duration" : 181308
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3ca8bb40cc8a97cb",
+        "name" : "qa_chrome_128.0.6613.119_before_selecting_consent_clinician.png",
+        "source" : "3ca8bb40cc8a97cb.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "4b49a528520465db",
+        "name" : "qa_chrome_128.0.6613.119_clicked_continue_to_vaccinate_button.png",
+        "source" : "4b49a528520465db.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1725710514084,
+        "stop" : 1725710881601,
+        "duration" : 367517
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d52a89b8cdc614fc",
+        "name" : "qa_chrome_128.0.6613.119_entered_vaccination_details.png",
+        "source" : "d52a89b8cdc614fc.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient KRISTIA SIDAWAY, 24/6/1992, 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1725710881601,
+        "stop" : 1725710911933,
+        "duration" : 30332
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == 'KRISTIA SIDAWAY'\n +  where None = get_patient_name_value()",
+      "statusTrace" : "AssertionError: assert None == 'KRISTIA SIDAWAY'\n +  where None = get_patient_name_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b0eb1826c1bd6beb",
+        "name" : "qa_chrome_128.0.6613.119_check_and_confirm_screen_before_assertion.png",
+        "source" : "b0eb1826c1bd6beb.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 29,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "d435a1ba9176"
+  }, {
+    "name" : "thread",
+    "value" : "1063-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-22A"
+  }, {
+    "name" : "care_model",
+    "value" : "Home Of Housebound Patient"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "24/6/1992"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "2"
+  }, {
+    "name" : "name",
+    "value" : "KRISTIA SIDAWAY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450141711"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Fluad Tetra - aQIV"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "775eeb4c04c3aa53.json",
+  "parameterValues" : [ "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY", "today-2", "19/10/2026", "SDYY2-22A", "Home Of Housebound Patient", "Flu", "yes", "24/6/1992", "yes", "2", "KRISTIA SIDAWAY", "9450141711", "ALBERT HOUSE", "yes", "today-1", "Fluad Tetra - aQIV" ]
+}
