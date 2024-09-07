@@ -1,0 +1,164 @@
+{
+  "uid" : "8b289c709549b788",
+  "name" : "Display warning based on age when recording a vaccine [9450153485-3-covid]",
+  "fullName" : "features/age_based_warnings.feature:Display warning based on age when recording a vaccine",
+  "historyId" : "417f71c6d86619e87408e9684e8a83b1",
+  "time" : {
+    "start" : 1725697039411,
+    "stop" : 1725697256450,
+    "duration" : 217039
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False is True\n +  where False = check_age_based_warning_exists()",
+  "statusTrace" : "fixturefunc = <function step_warning_messages_should_be_displayed at 0x7fd878bd3060>\nrequest = <FixtureRequest for <Function test_display_warning_based_on_age_when_recording_a_vaccine[9450153485-3-covid]>>\nkwargs = {'expected_warning_count': '3', 'shared_data': {'nhs_number': '9450153485', 'vaccine_type': 'COVID-19'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nexpected_warning_count = '3'\nshared_data = {'nhs_number': '9450153485', 'vaccine_type': 'COVID-19'}\n\n    @then(parse('the system should display the warnings {expected_warning_count}'))\n    def step_warning_messages_should_be_displayed(expected_warning_count, shared_data):\n        attach_screenshot(\"clicked_choose_vaccine_button\")\n        if shared_data['vaccine_type'] == 'covid':\n            vaccine_name = get_vaccine_to_choose_from(0)\n            shared_data['vaccine_type'] = vaccine_name\n            click_vaccine_radiobutton(vaccine_name)\n            warning_count = 0\n            comirnaty_original_omicron_ba_age_above_12 = get_vaccination_type(0, vaccine_name)\n            comirnaty_30_omicron_xbb_age_above_12 = get_vaccination_type(1, vaccine_name)\n            comirnaty_3_omicron_xbb_age_above_6months_to_4 = get_vaccination_type(2, vaccine_name)\n            comirnaty_10_omicron_xbb_age_above_5_to_11 = get_vaccination_type(3, vaccine_name)\n            spikevax_xbb_age_above_18 = get_vaccination_type(4, vaccine_name)\n            vaccine_types = [\n            (comirnaty_original_omicron_ba_age_above_12, [\"9732091169\", \"9692237893\", \"9474335761\", \"9474335761\"]),\n            (comirnaty_30_omicron_xbb_age_above_12, [\"9732091169\", \"9692237893\", \"9474335761\"]),\n            (comirnaty_3_omicron_xbb_age_above_6months_to_4, [\"9474335761\", \"9450153485\", \"9470472918\", \"9473673388\"]),\n            (comirnaty_10_omicron_xbb_age_above_5_to_11, [\"9732091169\", \"9692237893\", \"9450153485\", \"9470472918\", \"9473673388\"]),\n            (spikevax_xbb_age_above_18, [\"9732091169\", \"9692237893\", \"9474335761\", \"9450153485\", \"9470472918\"]),\n        ]\n    \n        for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):\n            click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine)\n            if shared_data[\"nhs_number\"] in warning_nhs_numbers:\n>               assert check_age_based_warning_exists() is True\nE               assert False is True\nE                +  where False = check_age_based_warning_exists()\n\ntests/test_age_based_warnings_steps.py:63: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False is True\n +  where False = check_age_based_warning_exists()",
+    "statusTrace" : "fixturefunc = <function step_warning_messages_should_be_displayed at 0x7fd878bd3060>\nrequest = <FixtureRequest for <Function test_display_warning_based_on_age_when_recording_a_vaccine[9450153485-3-covid]>>\nkwargs = {'expected_warning_count': '3', 'shared_data': {'nhs_number': '9450153485', 'vaccine_type': 'COVID-19'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:897: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nexpected_warning_count = '3'\nshared_data = {'nhs_number': '9450153485', 'vaccine_type': 'COVID-19'}\n\n    @then(parse('the system should display the warnings {expected_warning_count}'))\n    def step_warning_messages_should_be_displayed(expected_warning_count, shared_data):\n        attach_screenshot(\"clicked_choose_vaccine_button\")\n        if shared_data['vaccine_type'] == 'covid':\n            vaccine_name = get_vaccine_to_choose_from(0)\n            shared_data['vaccine_type'] = vaccine_name\n            click_vaccine_radiobutton(vaccine_name)\n            warning_count = 0\n            comirnaty_original_omicron_ba_age_above_12 = get_vaccination_type(0, vaccine_name)\n            comirnaty_30_omicron_xbb_age_above_12 = get_vaccination_type(1, vaccine_name)\n            comirnaty_3_omicron_xbb_age_above_6months_to_4 = get_vaccination_type(2, vaccine_name)\n            comirnaty_10_omicron_xbb_age_above_5_to_11 = get_vaccination_type(3, vaccine_name)\n            spikevax_xbb_age_above_18 = get_vaccination_type(4, vaccine_name)\n            vaccine_types = [\n            (comirnaty_original_omicron_ba_age_above_12, [\"9732091169\", \"9692237893\", \"9474335761\", \"9474335761\"]),\n            (comirnaty_30_omicron_xbb_age_above_12, [\"9732091169\", \"9692237893\", \"9474335761\"]),\n            (comirnaty_3_omicron_xbb_age_above_6months_to_4, [\"9474335761\", \"9450153485\", \"9470472918\", \"9473673388\"]),\n            (comirnaty_10_omicron_xbb_age_above_5_to_11, [\"9732091169\", \"9692237893\", \"9450153485\", \"9470472918\", \"9473673388\"]),\n            (spikevax_xbb_age_above_18, [\"9732091169\", \"9692237893\", \"9474335761\", \"9450153485\", \"9470472918\"]),\n        ]\n    \n        for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):\n            click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine)\n            if shared_data[\"nhs_number\"] in warning_nhs_numbers:\n>               assert check_age_based_warning_exists() is True\nE               assert False is True\nE                +  where False = check_age_based_warning_exists()\n\ntests/test_age_based_warnings_steps.py:63: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1725697039412,
+        "stop" : 1725697132960,
+        "duration" : 93548
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9ddf2a5c46f3445c",
+        "name" : "dev_chrome_128.0.6613.119_user_has_selected_site.png",
+        "source" : "9ddf2a5c46f3445c.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "f40a847035314fe1",
+        "name" : "dev_chrome_128.0.6613.119_user_has_selected_care_model.png",
+        "source" : "f40a847035314fe1.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I search for the patient with NHS number 9450153485",
+      "time" : {
+        "start" : 1725697132960,
+        "stop" : 1725697133593,
+        "duration" : 633
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I proceed to record a vaccine for covid for all products",
+      "time" : {
+        "start" : 1725697133593,
+        "stop" : 1725697135196,
+        "duration" : 1603
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "315f02781e93d79a",
+        "name" : "dev_chrome_128.0.6613.119_clicked_patient_name.png",
+        "source" : "315f02781e93d79a.png",
+        "type" : "image/png",
+        "size" : 37338
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then the system should display the warnings 3",
+      "time" : {
+        "start" : 1725697135196,
+        "stop" : 1725697256450,
+        "duration" : 121254
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False is True\n +  where False = check_age_based_warning_exists()",
+      "statusTrace" : "AssertionError: assert False is True\n +  where False = check_age_based_warning_exists()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a569b8400988b4dd",
+        "name" : "dev_chrome_128.0.6613.119_clicked_choose_vaccine_button.png",
+        "source" : "a569b8400988b4dd.png",
+        "type" : "image/png",
+        "size" : 138379
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "fa81cece57f8"
+  }, {
+    "name" : "thread",
+    "value" : "1069-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Age based warnings"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "expected_warning_count",
+    "value" : "3"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450153485"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "covid"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "8b289c709549b788.json",
+  "parameterValues" : [ "3", "9450153485", "covid" ]
+}
