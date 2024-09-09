@@ -1,21 +1,24 @@
 Feature: Add vaccine to site
 
-  @addvaccine
+
+@addvaccine
   Scenario: Add vaccines page should launch
     Given I am logged into the RAVS app
-    When I am on the vaccines page
-    And I click add vaccine button
-    Then the choose site page should be launched
+    When I am on the vaccine settings page
+    And I click add vaccines button
+    Then the add vaccines page should be launched
 
-  @addvaccine
+@addvaccine
   Scenario Outline: Vaccine already added to site warning should appear
     Given I am on the RAVS home page
-    When I am on the vaccines page
-    And I click add vaccine button
+    When I am on the vaccine settings page
+    And I click add vaccines button
     And I select <site>, <vaccine>, <vaccineType>
     Then the vaccine is already added to site warning should appear
 
-    Examples:
-      | site         | vaccine  | vaccineType                       |
-      | ALBERT HOUSE | COVID-19 | Comirnaty Original/Omicron BA.4-5 |
-      | ALBERT HOUSE | Flu      | Flucelvax Tetra - QIVc            |
+Examples:
+|site          | vaccine  | vaccineType|
+|NEELIMA HOUSE | COVID-19 | Comirnaty Original/Omicron BA.4-5 |
+|NEELIMA HOUSE | Flu      | Fluenz Tetra - LAIV               |
+
+
