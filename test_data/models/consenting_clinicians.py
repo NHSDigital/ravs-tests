@@ -1,8 +1,4 @@
 consenting_clinicians = [
-    "Mark Chapman - mark.chapman1@nhs.net",
-    "Test Clinicians - test@nhs.net",
-    "Test Clinicians - test@nhs.net",
-    "Test Clinicians - test@nhs.net",
-    "Paul Parker - paul.parker13@nhs.net",
-    "Richard Williams - rich.williams1@nhs.net"
+    "Frazer Brindley - NMC (Nursing and Midwifery Council), NMC005",
+    "Paul Parker - GMC (General Medical Council), GMC007"
 ]
