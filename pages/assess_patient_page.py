@@ -17,21 +17,12 @@ CONTINUE_TO_RECORD_CONSENT_BUTTON = ("//button[text()='Continue']")
 ASSESSMENT_NO_VACCINATION_REASON = ("#AssessmentNoVaccinationReasonId")
 ASSESSMENT_DATE_INCORRECT_ERROR_MESSAGE = ("#AssessmentDateError")
 STAFF_ROLE_DROPDOWN_ELEMENT = ("#StaffRoleId")
-DUE_DATE_DAY = ("#ExpectedDueDateDay")
-DUE_DATE_MONTH = ("#ExpectedDueDateMonth")
-DUE_DATE_YEAR = ("#ExpectedDueDateYear")
 
 def select_eligibility_type(type):
     if check_eligibility_type_is_visible() == True:
         find_element_and_perform_action(ELIGIBILITY_TYPE_DROPDOWN_ELEMENT, "select_option", type)
     else:
         click_eligible_yes_radiobutton()
-
-def enter_due_date(due_date):
-    day, month, year = due_date.split('/')
-    find_element_and_perform_action(DUE_DATE_DAY, "input_text", day)
-    find_element_and_perform_action(DUE_DATE_MONTH,"input_text", month)
-    find_element_and_perform_action(DUE_DATE_YEAR, "input_text", year)
 
 def click_legal_mechanism(legal_mechanism):
     xpath_map = {
@@ -47,9 +38,6 @@ def click_legal_mechanism(legal_mechanism):
 
 def check_eligibility_type_is_visible():
     return check_element_exists(ELIGIBILITY_TYPE_DROPDOWN_ELEMENT)
-
-def check_eligibility_type_is_enabled():
-    return check_element_enabled(ELIGIBILITY_TYPE_DROPDOWN_ELEMENT)
 
 def select_assessment_no_vaccination_reason(reason):
     find_element_and_perform_action(ASSESSMENT_NO_VACCINATION_REASON, "select_option", reason)

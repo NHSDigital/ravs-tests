@@ -38,10 +38,10 @@ def enter_vaccination_comments(comments):
     find_element_and_perform_action(VACCINATION_COMMENTS_ELEMENT, "type_text", comments)
 
 def check_yes_vaccinated_radiobutton_exists():
-    return check_element_exists(YES_VACCINATED_RADIO_BUTTON, True)
+    check_element_exists(YES_VACCINATED_RADIO_BUTTON, True)
 
 def check_no_to_vaccinated_radiobutton_exists():
-    return check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
+    check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
 
 def click_yes_vaccinated_radiobutton():
     find_element_and_perform_action(YES_VACCINATED_RADIO_BUTTON, "click")
@@ -57,7 +57,7 @@ def select_vaccination_site(site):
     find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
 
 def select_batch_number(batchNumber):
-    #find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
+    find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
 
 def select_consent_given_by_from_dropdown(givenBy):
@@ -104,13 +104,6 @@ def enter_relationship_to_patient(relationship):
 def enter_clinician_details(clinician):
     find_element_and_perform_action(RESPONSIBLE_CLINICIAN_INPUT_ELEMENT, "input_text", clinician)
 
-def click_care_model_option(care_model):
-    element = (f'//input[@name="CareModelId"]/following-sibling::label[text()="{care_model}"]')
-    if check_element_exists(element, False):
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
-
 def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
     element = get_covid_vaccine_xpath(vaccinetype.lower())
     if element:
@@ -118,21 +111,14 @@ def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinate
     else:
         print("Invalid vaccine type")
 
+def click_care_model_option(care_model):
+    element = f"//input[@name='CareModelId']/following-sibling::label[text()='{care_model}']"
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Invalid vaccine type")
+
 def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
-
-def click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
-
-def click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
     element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
     if element:
         find_element_and_perform_action(element, "click")
