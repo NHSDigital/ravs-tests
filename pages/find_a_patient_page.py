@@ -1,11 +1,15 @@
 from datetime import datetime
 from init_helpers import *
+import re
 
 # Common
 SEARCH_BY_DEMOGRAPHICS_LINK = ("//a[text()='By demographics']")
 SEARCH_BY_NHS_NUMBER_LINK = ("//a[text()='By NHS number']")
 SEARCH_BY_LOCAL_RECORDS_LINK = ("//a[text()='By local records']")
 SEARCH_BUTTON = ("//button[text()='Search']")
+RECORD_SAVED_DIALOGUE = ("//div[text()='Record saved']")
+SUCCESSFULLY_SAVED_MESSAGE = ()
+VIEW_RECORD_LINK = ("//a[text()='View record']")
 
 # Shared
 NHS_NUMBER_INPUT = ("#NhsNumber")
@@ -72,6 +76,9 @@ def click_search_by_local_records_link():
 
 def click_patient_name_link():
     find_element_and_perform_action(PATIENT_NAME_LINK, "click")
+
+def click_view_record():
+    find_element_and_perform_action(VIEW_RECORD_LINK, "click")
 
 def check_search_for_patient_button_visible():
     return check_element_exists(SEARCH_BUTTON, False)
@@ -184,3 +191,20 @@ def check_required_field_error_appears_for_postcode(wait):
 
 def check_required_field_error_appears_for_nhsNumber(wait):
     return check_element_exists(NHS_NUMBER_INPUT_ERROR_LABEL, wait)
+
+def check_record_saved_element_exists(wait):
+    return check_element_exists(RECORD_SAVED_DIALOGUE, wait)
+
+def check_record_saved_message_appears(name):
+    # checks the message exists, includes the patient name, includes a valid time value, and is the expected format
+
+    element = (f"You successfuly saved {name} record")
+    saved_message = find_element_and_perform_action(element, "get_text")
+
+    pattern = r"You successfuly saved (.+) record at (\d{2}:\d{2})"
+
+    # Check if the string matches the pattern
+    if re.match(pattern, saved_message):
+        return True
+    else:
+        return False
