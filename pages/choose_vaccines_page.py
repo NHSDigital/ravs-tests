@@ -27,11 +27,11 @@ def click_back_button_choosing_vaccine_for_patient():
     find_element_and_perform_action(BACK_ELEMENT, "click")
 
 def click_consent_vaccine_radiobutton(vaccine):
-    element = (f"//label[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{vaccine.lower()}')]/preceding-sibling::input[@name='VaccineProgramId']")
+    element = (f"//label[contains(text(), '{vaccine}')]/preceding-sibling::input[@name='VaccineProgramId']")
     find_element_and_perform_action(element, "click")
 
 def click_consent_vaccine_type_radiobutton(vaccine_type):
-    element = (f"//label[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{vaccine_type.lower()}')]/preceding-sibling::input[@name='ConsentVaccineId']")
+    element = (f"//label[contains(text(), '{vaccine_type}')]/preceding-sibling::input[@name='ConsentVaccineId']")
     find_element_and_perform_action(element, "click")
 
 def click_delivery_team_radiobutton(deliveryTeam):
