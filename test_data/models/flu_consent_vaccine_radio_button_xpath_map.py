@@ -1,5 +1,5 @@
 flu_consent_vaccine_radio_button_xpath_map = {
-        "fluenz tetra - laiv": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='6']",
+        "Flucelvax Tetra - QIVc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='6']",
         "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='7']",
         "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='8']",
         "flucelvax tetra - qivc": "//input[@class='nhsuk-radios__input' and @name='ConsentVaccineId' and @value='9']",
