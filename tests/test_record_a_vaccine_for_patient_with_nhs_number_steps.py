@@ -40,7 +40,6 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     shared_data["chosen_vaccine"] = chosen_vaccine
     shared_data["chosen_vaccine_type"] = vaccine_type
     shared_data["batch_number"] = batch_number
-    # set_vaccinator_location(site, care_model)
     shared_data["site"] = site
     shared_data["care_model"] = get_care_model(index)
     shared_data["vaccinated_type2"] = get_vaccination_type(index, chosen_vaccine)
