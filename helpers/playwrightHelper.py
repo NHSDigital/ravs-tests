@@ -4,9 +4,6 @@ from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
 
-class ElementNotFoundException(Exception):
-    pass
-
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
         playwright_instance = sync_playwright().start()
@@ -120,21 +117,21 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-    def wait_for_page_to_load(self, timeout=0.2):
+    def wait_for_page_to_load(self, timeout=0.1):
         self.page.wait_for_selector('*', timeout=timeout * 100)
         self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def wait_for_element_to_appear(self, selector, timeout=20):
+    def wait_for_element_to_appear(self, selector, timeout=5):
         try:
             self.page.wait_for_selector(selector, timeout=timeout, state='visible')
             print(f"Element {selector} appeared on the page.")
         except Exception as e:
             print(f"Error waiting for element {selector} to appear: {e}")
 
-    def wait_for_selector_to_disappear(self, selector, timeout=50):
+    def wait_for_selector_to_disappear(self, selector, timeout=5):
         try:
             self.page.wait_for_selector(selector, state='hidden', timeout=timeout)
             print(f"Element {selector} disappeared from the page.")
