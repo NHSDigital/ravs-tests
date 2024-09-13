@@ -1,0 +1,272 @@
+{
+  "uid" : "1b4e6558064a554",
+  "name" : "Add batch to vaccine [NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5-SD7YY2-24-today+90]",
+  "fullName" : "/app/features/add_batches.feature:Add batch to vaccine",
+  "historyId" : "816e0df01dffb1a7ed09998f81df379e",
+  "time" : {
+    "start" : 1726213566964,
+    "stop" : 1726214085975,
+    "duration" : 519011
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_batch_already_exists_error_is_displayed()",
+  "statusTrace" : "fixturefunc = <function batch_already_added_warning_should_exist at 0x7fbbda745e40>\nrequest = <FixtureRequest for <Function test_batch_already_added_to_site_warning_should_appear[NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5-SD7YY2-24-today+90]>>\nkwargs = {'shared_data': {'expiryDate': '12/12/2024', 'site': 'NEELIMA HOUSE', 'vaccine': 'COVID-19', 'vaccinetype': 'Comirnaty Original/Omicron BA.4-5'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'expiryDate': '12/12/2024', 'site': 'NEELIMA HOUSE', 'vaccine': 'COVID-19', 'vaccinetype': 'Comirnaty Original/Omicron BA.4-5'}\n\n    @then(\"the batch is already added to site warning should appear\")\n    def batch_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"batch_already_added_warning_message_exists\")\n>       assert check_batch_already_exists_error_is_displayed() == True\nE       assert False == True\nE        +  where False = check_batch_already_exists_error_is_displayed()\n\ntests/test_add_vaccine_batches_steps.py:121: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_batch_already_exists_error_is_displayed()",
+    "statusTrace" : "fixturefunc = <function batch_already_added_warning_should_exist at 0x7fbbda745e40>\nrequest = <FixtureRequest for <Function test_batch_already_added_to_site_warning_should_appear[NEELIMA HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5-SD7YY2-24-today+90]>>\nkwargs = {'shared_data': {'expiryDate': '12/12/2024', 'site': 'NEELIMA HOUSE', 'vaccine': 'COVID-19', 'vaccinetype': 'Comirnaty Original/Omicron BA.4-5'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'expiryDate': '12/12/2024', 'site': 'NEELIMA HOUSE', 'vaccine': 'COVID-19', 'vaccinetype': 'Comirnaty Original/Omicron BA.4-5'}\n\n    @then(\"the batch is already added to site warning should appear\")\n    def batch_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"batch_already_added_warning_message_exists\")\n>       assert check_batch_already_exists_error_is_displayed() == True\nE       assert False == True\nE        +  where False = check_batch_already_exists_error_is_displayed()\n\ntests/test_add_vaccine_batches_steps.py:121: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1726213566964,
+        "stop" : 1726213661435,
+        "duration" : 94471
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1515a54028ce6ddf",
+        "name" : "dev_chrome_128.0.6613.137_user_has_selected_site.png",
+        "source" : "1515a54028ce6ddf.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "b4c46bf7b0159f9d",
+        "name" : "dev_chrome_128.0.6613.137_user_has_selected_care_model.png",
+        "source" : "b4c46bf7b0159f9d.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccine settings page",
+      "time" : {
+        "start" : 1726213661436,
+        "stop" : 1726213721966,
+        "duration" : 60530
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add batches button",
+      "time" : {
+        "start" : 1726213721966,
+        "stop" : 1726213752232,
+        "duration" : 30266
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I select NEELIMA HOUSE, COVID-19, Comirnaty Original/Omicron BA.4-5 and enter SD7YY2, 24",
+      "time" : {
+        "start" : 1726213752232,
+        "stop" : 1726213903708,
+        "duration" : 151476
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "839755959ef2d7bd",
+        "name" : "dev_chrome_128.0.6613.137_entered_batch_number.png",
+        "source" : "839755959ef2d7bd.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter today+90",
+      "time" : {
+        "start" : 1726213903709,
+        "stop" : 1726213994638,
+        "duration" : 90929
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "2dfd788b7b3a5814",
+        "name" : "dev_chrome_128.0.6613.137_entered_expiry_date.png",
+        "source" : "2dfd788b7b3a5814.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I click Add batch button",
+      "time" : {
+        "start" : 1726213994638,
+        "stop" : 1726214025037,
+        "duration" : 30399
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d1fd3990a16d4ac6",
+        "name" : "dev_chrome_128.0.6613.137_clicked_add_batch_button.png",
+        "source" : "d1fd3990a16d4ac6.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I click confirm choices button",
+      "time" : {
+        "start" : 1726214025038,
+        "stop" : 1726214055436,
+        "duration" : 30398
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "2aba6301651fcc1f",
+        "name" : "dev_chrome_128.0.6613.137_clicked_confirm_choices_button.png",
+        "source" : "2aba6301651fcc1f.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I click confirm button",
+      "time" : {
+        "start" : 1726214055436,
+        "stop" : 1726214085835,
+        "duration" : 30399
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c159e2723a5bc5f7",
+        "name" : "dev_chrome_128.0.6613.137_clicked_confirm_choices_button.png",
+        "source" : "c159e2723a5bc5f7.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then the batch is already added to site warning should appear",
+      "time" : {
+        "start" : 1726214085835,
+        "stop" : 1726214085975,
+        "duration" : 140
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_batch_already_exists_error_is_displayed()",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_batch_already_exists_error_is_displayed()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a8b6a51a4d4b441",
+        "name" : "dev_chrome_128.0.6613.137_batch_already_added_warning_message_exists.png",
+        "source" : "a8b6a51a4d4b441.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 9,
+    "attachmentsCount" : 8,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "e0abbaf1afcf"
+  }, {
+    "name" : "thread",
+    "value" : "1044-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add Batches to vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "batchprefix",
+    "value" : "SD7YY2"
+  }, {
+    "name" : "batchsuffix",
+    "value" : "24"
+  }, {
+    "name" : "expirydate",
+    "value" : "today+90"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "vaccinetype",
+    "value" : "Comirnaty Original/Omicron BA.4-5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "1b4e6558064a554.json",
+  "parameterValues" : [ "SD7YY2", "24", "today+90", "NEELIMA HOUSE", "COVID-19", "Comirnaty Original/Omicron BA.4-5" ]
+}
