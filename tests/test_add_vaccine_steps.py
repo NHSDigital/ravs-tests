@@ -19,7 +19,7 @@ def shared_data():
     return {}
 
 @scenario(f'{features_directory}/add_vaccines.feature', 'Add vaccines page should launch')
-def test_add_vaccines_page_should_launch(navigate_and_login):
+def test_add_vaccines_page_should_launch(site, care_model, navigate_and_login):
     pass
 
 @scenario(f'{features_directory}/add_vaccines.feature', 'Vaccine already added to site warning should appear')
@@ -28,6 +28,7 @@ def test_Vaccine_already_added_to_site_warning_should_appear():
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
+    # set_vaccinator_location(site, care_model)
     pass
 
 @given("I am on the RAVS home page")

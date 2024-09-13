@@ -1,0 +1,386 @@
+{
+  "uid" : "d8e3aa80428d8a24",
+  "name" : "Record a vaccine with nhs number [6-9437540233-NEELIMA HOUSE-Vaccination Centre-yes-today-5-yes-yes-today-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-16A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "b024c022c8f26dc11001308a7dd699d2",
+  "time" : {
+    "start" : 1726217355355,
+    "stop" : 1726219397999,
+    "duration" : 2042644
+  },
+  "status" : "failed",
+  "statusMessage" : "helpers.playwrightHelper.ElementNotFoundException: Element not found: //input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home'] to perform click",
+  "statusTrace" : "self = <helpers.playwrightHelper.PlaywrightHelper object at 0x7f77e84ead50>\nselector = \"//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']\"\naction = 'click', inputValue = None\n\n    def find_element_and_perform_action(self, selector, action, inputValue=None):\n        selector_filename = \"\".join(c if c.isalnum() else \"_\" for c in selector)\n        self.capture_screenshot(selector_filename)\n        try:\n            element=self.page.locator(selector)\n            self.page.set_viewport_size({\"width\": 1500, \"height\":1500})\n>           element.scroll_into_view_if_needed()\n\nhelpers/playwrightHelper.py:188: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:16909: in scroll_into_view_if_needed\n    self._sync(self._impl_obj.scroll_into_view_if_needed(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:541: in scroll_into_view_if_needed\n    return await self._with_element(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:108: in _with_element\n    handle = await self.element_handle(timeout=timeout)\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:311: in element_handle\n    handle = await self._frame.wait_for_selector(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:323: in wait_for_selector\n    await self._channel.send(\"waitForSelector\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f77e8472a90>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f77e2103740>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.Error: Locator.scroll_into_view_if_needed: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']' is not a valid XPath expression.\nE               at Object.queryAll (<anonymous>:41:25)\nE               at InjectedScript._queryEngineAll (<anonymous>:5168:49)\nE               at InjectedScript.querySelectorAll (<anonymous>:5155:30)\nE               at eval (eval at evaluate (:234:30), <anonymous>:5:35)\nE               at UtilityScript.evaluate (<anonymous>:236:17)\nE               at UtilityScript.<anonymous> (<anonymous>:1:44)\nE           Call log:\nE           waiting for locator(\"//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:514: Error\n\nDuring handling of the above exception, another exception occurred:\n\nfixturefunc = <function step_enter_vaccination_details_and_continue_to_check_and_confirm_screen at 0x7f77e81fad40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[6-9437540233-NEELIMA HOUSE-Vaccination Centre-yes-...oday-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-16A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 08/09/2024RANDY FOGDEN', 'batch_expiry_date': '19/10/2026...er': 'SDYY2-16A', 'care_model': \"Housebound patient's home\", ...}, 'vaccination': 'yes', 'vaccination_date': 'today-2'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:118: in step_enter_vaccination_details_and_continue_to_check_and_confirm_screen\n    enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data[\"vaccinated_decision\"], shared_data[\"care_model\"], shared_data[\"vaccination_date\"], chosen_vaccine, shared_data[\"vaccinated_type2\"], shared_data[\"vaccination_site\"], shared_data[\"batch_number\"], shared_data[\"batch_expiry_date\"], shared_data[\"dose_amount\"], shared_data[\"vaccinator\"], shared_data[\"vaccination_comments\"], shared_data[\"no_vaccination_reason\"])\nconftest.py:371: in enter_vaccine_details_and_click_continue_to_check_and_confirm\n    click_care_model_option(care_model)\npages/record_vaccinated_page.py:117: in click_care_model_option\n    find_element_and_perform_action(element, \"click\")\ninit_helpers.py:158: in find_element_and_perform_action\n    return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <helpers.playwrightHelper.PlaywrightHelper object at 0x7f77e84ead50>\nselector = \"//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']\"\naction = 'click', inputValue = None\n\n    def find_element_and_perform_action(self, selector, action, inputValue=None):\n        selector_filename = \"\".join(c if c.isalnum() else \"_\" for c in selector)\n        self.capture_screenshot(selector_filename)\n        try:\n            element=self.page.locator(selector)\n            self.page.set_viewport_size({\"width\": 1500, \"height\":1500})\n            element.scroll_into_view_if_needed()\n            if action.lower() == \"click\":\n                if element.is_visible():\n                    if element.is_enabled():\n                        element.click()\n                        print(f\"Clicked the {selector} successfully.\")\n                else:\n                    print(f\"Element with {selector} is not enabled.\")\n            elif action.lower() == \"input_text\":\n                text = element.text_content()\n                if element.is_visible():\n                    if text != '':\n                        element.clear()\n                    element.fill(inputValue)\n                    print(f\"Entered text into the {selector} successfully.\")\n            elif action.lower() == \"type_text\":\n                if element.is_visible():\n                    text = element.text_content()\n                    if text != '':\n                        element.clear()\n                    element.type(inputValue)\n                    print(f\"Entered text into the {selector} successfully.\")\n            elif action.lower() == \"get_text\":\n                text = element.text_content()\n                print(f\"Text from the {selector}: {text}\")\n                return text\n            elif action.lower() == \"select_option\":\n                if element.is_visible():\n                    element.select_option(inputValue)\n                    print(f\"Selected option with value '{inputValue}' from the {selector} successfully.\")\n            elif action.lower() == \"click_checkbox\":\n                if element.is_visible():\n                    if not element.is_checked():\n                        element.check()\n                        print(f\"{selector} checkbox checked successfully.\")\n                    else:\n                        print(f\"{selector} checkbox is already checked.\")\n            else:\n                print(f\"Unsupported action: {action}\")\n        except TimeoutError:\n            print(f\"Timeout waiting for selector: {selector} to perform {action}\")\n        except Exception as e:\n            print(f\"Exception: {e}. Element not found: {selector}\")\n>           raise ElementNotFoundException(f\"Element not found: {selector} to perform {action}\")\nE           helpers.playwrightHelper.ElementNotFoundException: Element not found: //input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home'] to perform click\n\nhelpers/playwrightHelper.py:231: ElementNotFoundException",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "helpers.playwrightHelper.ElementNotFoundException: Element not found: //input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home'] to perform click",
+    "statusTrace" : "self = <helpers.playwrightHelper.PlaywrightHelper object at 0x7f77e84ead50>\nselector = \"//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']\"\naction = 'click', inputValue = None\n\n    def find_element_and_perform_action(self, selector, action, inputValue=None):\n        selector_filename = \"\".join(c if c.isalnum() else \"_\" for c in selector)\n        self.capture_screenshot(selector_filename)\n        try:\n            element=self.page.locator(selector)\n            self.page.set_viewport_size({\"width\": 1500, \"height\":1500})\n>           element.scroll_into_view_if_needed()\n\nhelpers/playwrightHelper.py:188: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:16909: in scroll_into_view_if_needed\n    self._sync(self._impl_obj.scroll_into_view_if_needed(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:541: in scroll_into_view_if_needed\n    return await self._with_element(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:108: in _with_element\n    handle = await self.element_handle(timeout=timeout)\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:311: in element_handle\n    handle = await self._frame.wait_for_selector(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:323: in wait_for_selector\n    await self._channel.send(\"waitForSelector\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f77e8472a90>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f77e2103740>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.Error: Locator.scroll_into_view_if_needed: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']' is not a valid XPath expression.\nE               at Object.queryAll (<anonymous>:41:25)\nE               at InjectedScript._queryEngineAll (<anonymous>:5168:49)\nE               at InjectedScript.querySelectorAll (<anonymous>:5155:30)\nE               at eval (eval at evaluate (:234:30), <anonymous>:5:35)\nE               at UtilityScript.evaluate (<anonymous>:236:17)\nE               at UtilityScript.<anonymous> (<anonymous>:1:44)\nE           Call log:\nE           waiting for locator(\"//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:514: Error\n\nDuring handling of the above exception, another exception occurred:\n\nfixturefunc = <function step_enter_vaccination_details_and_continue_to_check_and_confirm_screen at 0x7f77e81fad40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[6-9437540233-NEELIMA HOUSE-Vaccination Centre-yes-...oday-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-16A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 08/09/2024RANDY FOGDEN', 'batch_expiry_date': '19/10/2026...er': 'SDYY2-16A', 'care_model': \"Housebound patient's home\", ...}, 'vaccination': 'yes', 'vaccination_date': 'today-2'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:118: in step_enter_vaccination_details_and_continue_to_check_and_confirm_screen\n    enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data[\"vaccinated_decision\"], shared_data[\"care_model\"], shared_data[\"vaccination_date\"], chosen_vaccine, shared_data[\"vaccinated_type2\"], shared_data[\"vaccination_site\"], shared_data[\"batch_number\"], shared_data[\"batch_expiry_date\"], shared_data[\"dose_amount\"], shared_data[\"vaccinator\"], shared_data[\"vaccination_comments\"], shared_data[\"no_vaccination_reason\"])\nconftest.py:371: in enter_vaccine_details_and_click_continue_to_check_and_confirm\n    click_care_model_option(care_model)\npages/record_vaccinated_page.py:117: in click_care_model_option\n    find_element_and_perform_action(element, \"click\")\ninit_helpers.py:158: in find_element_and_perform_action\n    return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <helpers.playwrightHelper.PlaywrightHelper object at 0x7f77e84ead50>\nselector = \"//input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home']\"\naction = 'click', inputValue = None\n\n    def find_element_and_perform_action(self, selector, action, inputValue=None):\n        selector_filename = \"\".join(c if c.isalnum() else \"_\" for c in selector)\n        self.capture_screenshot(selector_filename)\n        try:\n            element=self.page.locator(selector)\n            self.page.set_viewport_size({\"width\": 1500, \"height\":1500})\n            element.scroll_into_view_if_needed()\n            if action.lower() == \"click\":\n                if element.is_visible():\n                    if element.is_enabled():\n                        element.click()\n                        print(f\"Clicked the {selector} successfully.\")\n                else:\n                    print(f\"Element with {selector} is not enabled.\")\n            elif action.lower() == \"input_text\":\n                text = element.text_content()\n                if element.is_visible():\n                    if text != '':\n                        element.clear()\n                    element.fill(inputValue)\n                    print(f\"Entered text into the {selector} successfully.\")\n            elif action.lower() == \"type_text\":\n                if element.is_visible():\n                    text = element.text_content()\n                    if text != '':\n                        element.clear()\n                    element.type(inputValue)\n                    print(f\"Entered text into the {selector} successfully.\")\n            elif action.lower() == \"get_text\":\n                text = element.text_content()\n                print(f\"Text from the {selector}: {text}\")\n                return text\n            elif action.lower() == \"select_option\":\n                if element.is_visible():\n                    element.select_option(inputValue)\n                    print(f\"Selected option with value '{inputValue}' from the {selector} successfully.\")\n            elif action.lower() == \"click_checkbox\":\n                if element.is_visible():\n                    if not element.is_checked():\n                        element.check()\n                        print(f\"{selector} checkbox checked successfully.\")\n                    else:\n                        print(f\"{selector} checkbox is already checked.\")\n            else:\n                print(f\"Unsupported action: {action}\")\n        except TimeoutError:\n            print(f\"Timeout waiting for selector: {selector} to perform {action}\")\n        except Exception as e:\n            print(f\"Exception: {e}. Element not found: {selector}\")\n>           raise ElementNotFoundException(f\"Element not found: {selector} to perform {action}\")\nE           helpers.playwrightHelper.ElementNotFoundException: Element not found: //input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home'] to perform click\n\nhelpers/playwrightHelper.py:231: ElementNotFoundException",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with NEELIMA HOUSE and Vaccination Centre and get patient details for 9437540233 with option 6 and choose to vaccinate with vaccine details as COVID-19, Spikevax XBB.1.5, SDYY2-16A with 19/10/2026",
+      "time" : {
+        "start" : 1726217355355,
+        "stop" : 1726218546121,
+        "duration" : 1190766
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "60b9c482ee51058d",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_settings.png",
+        "source" : "60b9c482ee51058d.png",
+        "type" : "image/png",
+        "size" : 36352
+      }, {
+        "uid" : "4c852c9cf05b5d1d",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_vaccines.png",
+        "source" : "4c852c9cf05b5d1d.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "f7d75da02f0bcb07",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_add_vaccines.png",
+        "source" : "f7d75da02f0bcb07.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "b056f5a00bd783d3",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_site_radio_button.png",
+        "source" : "b056f5a00bd783d3.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "fe48fa1d197c36e2",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "fe48fa1d197c36e2.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "ef11299aa77093db",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "ef11299aa77093db.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "ce021d951b73452f",
+        "name" : "qa_chrome_128.0.6613.137_entered_batch_number.png",
+        "source" : "ce021d951b73452f.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "bf18bd38ea3bb146",
+        "name" : "qa_chrome_128.0.6613.137_entered_expiry_date.png",
+        "source" : "bf18bd38ea3bb146.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "54a80a8c569f286c",
+        "name" : "qa_chrome_128.0.6613.137_clicked_confirm_choices_button.png",
+        "source" : "54a80a8c569f286c.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "5db8764707da22a1",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_settings.png",
+        "source" : "5db8764707da22a1.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "8c92a6c4dbdcc334",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_vaccines.png",
+        "source" : "8c92a6c4dbdcc334.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "8b7201ff259e8fac",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_add_vaccines.png",
+        "source" : "8b7201ff259e8fac.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "d5abd2aa75f4a7f0",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_site_radio_button.png",
+        "source" : "d5abd2aa75f4a7f0.png",
+        "type" : "image/png",
+        "size" : 69920
+      }, {
+        "uid" : "26c7d166df3bd4e3",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "26c7d166df3bd4e3.png",
+        "type" : "image/png",
+        "size" : 69957
+      }, {
+        "uid" : "144ec17f1b681dd7",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "144ec17f1b681dd7.png",
+        "type" : "image/png",
+        "size" : 70125
+      }, {
+        "uid" : "4a3fb06920d78799",
+        "name" : "qa_chrome_128.0.6613.137_entered_batch_number.png",
+        "source" : "4a3fb06920d78799.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "b787b5274c05f8a4",
+        "name" : "qa_chrome_128.0.6613.137_entered_expiry_date.png",
+        "source" : "b787b5274c05f8a4.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "6ee49cb100ec124",
+        "name" : "qa_chrome_128.0.6613.137_clicked_confirm_choices_button.png",
+        "source" : "6ee49cb100ec124.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 18,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1726218546122,
+        "stop" : 1726218636865,
+        "duration" : 90743
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fd31dd1c80f1bd4b",
+        "name" : "qa_chrome_128.0.6613.137_entered_nhs_number_as9437540233_and_clicked_search_for_patient_button.png",
+        "source" : "fd31dd1c80f1bd4b.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient RANDY FOGDEN",
+      "time" : {
+        "start" : 1726218636865,
+        "stop" : 1726218667184,
+        "duration" : 30319
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "48465624fb914510",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_patient_name.png",
+        "source" : "48465624fb914510.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, Spikevax XBB.1.5, SDYY2-16A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1726218667184,
+        "stop" : 1726218823511,
+        "duration" : 156327
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "790688bb49a33be5",
+        "name" : "qa_chrome_128.0.6613.137_clicked_on_patient_RANDY FOGDEN_and_clicked_choose_vaccine_button.png",
+        "source" : "790688bb49a33be5.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "d96054355a1ba05",
+        "name" : "qa_chrome_128.0.6613.137_selected_vaccine_COVID-19_and_Spikevax XBB.1.5_and_clicked_continue_button.png",
+        "source" : "d96054355a1ba05.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-5 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1726218823512,
+        "stop" : 1726219095868,
+        "duration" : 272356
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "41ae3a08fa960ebb",
+        "name" : "qa_chrome_128.0.6613.137_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "41ae3a08fa960ebb.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "28923aa44613d37e",
+        "name" : "qa_chrome_128.0.6613.137_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "28923aa44613d37e.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "93758fd2f5fa4b96",
+        "name" : "qa_chrome_128.0.6613.137_clicked_continue_to_record_consent_button.png",
+        "source" : "93758fd2f5fa4b96.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1726219095869,
+        "stop" : 1726219277191,
+        "duration" : 181322
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "93f667848edfd0d",
+        "name" : "qa_chrome_128.0.6613.137_before_selecting_consent_clinician.png",
+        "source" : "93f667848edfd0d.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "f64c89f6dac8c8cb",
+        "name" : "qa_chrome_128.0.6613.137_clicked_continue_to_vaccinate_button.png",
+        "source" : "f64c89f6dac8c8cb.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-2 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1726219277191,
+        "stop" : 1726219397999,
+        "duration" : 120808
+      },
+      "status" : "failed",
+      "statusMessage" : "Element not found: //input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home'] to perform click",
+      "statusTrace" : "helpers.playwrightHelper.ElementNotFoundException: Element not found: //input[@name='CareModelId']/following-sibling::label[text()='Housebound patient's home'] to perform click\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 27,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "2d7a5cd97dd8"
+  }, {
+    "name" : "thread",
+    "value" : "1040-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-5"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-16A"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "8/6/1961"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "6"
+  }, {
+    "name" : "name",
+    "value" : "RANDY FOGDEN"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437540233"
+  }, {
+    "name" : "site",
+    "value" : "NEELIMA HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-2"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Spikevax XBB.1.5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "d8e3aa80428d8a24.json",
+  "parameterValues" : [ "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG", "today-5", "19/10/2026", "SDYY2-16A", "Vaccination Centre", "COVID-19", "yes", "8/6/1961", "yes", "6", "RANDY FOGDEN", "9437540233", "NEELIMA HOUSE", "yes", "today-2", "Spikevax XBB.1.5" ]
+}
