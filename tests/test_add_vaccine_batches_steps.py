@@ -34,6 +34,7 @@ def test_batch_already_added_to_site_warning_should_appear():
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
+    # set_vaccinator_location(site, care_model)
     pass
 
 
