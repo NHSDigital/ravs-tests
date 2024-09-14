@@ -1,0 +1,413 @@
+{
+  "uid" : "bd76907f9c128cc",
+  "name" : "Record a vaccine with nhs number [12-9437540233-ALBERT HOUSE-Hospital Hub-yes-today-15-yes-yes-today-7-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-18E-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "173ee43d0e80790c13fdce995c425d48",
+  "time" : {
+    "start" : 1726308662825,
+    "stop" : 1726310982410,
+    "duration" : 2319585
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'RANDY FOGDEN'\n +  where None = get_patient_name_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fbd0d367240>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9437540233-ALBERT HOUSE-Hospital Hub-yes-today-...oday-7-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-18E-19/10/2026]>>\nkwargs = {'address': '10 ASHVILLE TERRACE, MANCHESTER, M40 9WG', 'dob': '8/6/1961', 'name': 'RANDY FOGDEN', 'shared_data': {'as...tch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18E', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 30/08/2024RANDY FOGDEN', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18E', 'care_model': 'Hospital hub for staff and patients', ...}\nname = 'RANDY FOGDEN', dob = '8/6/1961'\naddress = '10 ASHVILLE TERRACE, MANCHESTER, M40 9WG'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'RANDY FOGDEN'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'RANDY FOGDEN'\n +  where None = get_patient_name_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fbd0d367240>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9437540233-ALBERT HOUSE-Hospital Hub-yes-today-...oday-7-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-Spikevax XBB.1.5-SDYY2-18E-19/10/2026]>>\nkwargs = {'address': '10 ASHVILLE TERRACE, MANCHESTER, M40 9WG', 'dob': '8/6/1961', 'name': 'RANDY FOGDEN', 'shared_data': {'as...tch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18E', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 30/08/2024RANDY FOGDEN', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18E', 'care_model': 'Hospital hub for staff and patients', ...}\nname = 'RANDY FOGDEN', dob = '8/6/1961'\naddress = '10 ASHVILLE TERRACE, MANCHESTER, M40 9WG'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n>           assert get_patient_name_value() == shared_data[\"patient_name\"]\nE           AssertionError: assert None == 'RANDY FOGDEN'\nE            +  where None = get_patient_name_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:125: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Hospital Hub and get patient details for 9437540233 with option 12 and choose to vaccinate with vaccine details as COVID-19, Spikevax XBB.1.5, SDYY2-18E with 19/10/2026",
+      "time" : {
+        "start" : 1726308662826,
+        "stop" : 1726309853538,
+        "duration" : 1190712
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7ac18fe822d17a95",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_settings.png",
+        "source" : "7ac18fe822d17a95.png",
+        "type" : "image/png",
+        "size" : 36352
+      }, {
+        "uid" : "4f359faa00d61f23",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_vaccines.png",
+        "source" : "4f359faa00d61f23.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "b9aa97c5b1d2a174",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_add_vaccines.png",
+        "source" : "b9aa97c5b1d2a174.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "d7689f7eb40469fa",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_site_radio_button.png",
+        "source" : "d7689f7eb40469fa.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "158fcf746ecf46a9",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "158fcf746ecf46a9.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "58d93d0141dd7138",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "58d93d0141dd7138.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "f4db2e26035a13f3",
+        "name" : "qa_chrome_128.0.6613.137_entered_batch_number.png",
+        "source" : "f4db2e26035a13f3.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "f8b98722800c94f0",
+        "name" : "qa_chrome_128.0.6613.137_entered_expiry_date.png",
+        "source" : "f8b98722800c94f0.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "3b33108616b4ce06",
+        "name" : "qa_chrome_128.0.6613.137_clicked_confirm_choices_button.png",
+        "source" : "3b33108616b4ce06.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "92719a2ef53281e0",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_settings.png",
+        "source" : "92719a2ef53281e0.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "e246921630e5d7c4",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_vaccines.png",
+        "source" : "e246921630e5d7c4.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "cdc8519d344007d5",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_add_vaccines.png",
+        "source" : "cdc8519d344007d5.png",
+        "type" : "image/png",
+        "size" : 60161
+      }, {
+        "uid" : "8aeb24cdcdeffb6d",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_site_radio_button.png",
+        "source" : "8aeb24cdcdeffb6d.png",
+        "type" : "image/png",
+        "size" : 69920
+      }, {
+        "uid" : "cbcbde3ab4135757",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccine_checkbox.png",
+        "source" : "cbcbde3ab4135757.png",
+        "type" : "image/png",
+        "size" : 69957
+      }, {
+        "uid" : "bec8015c1a339473",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_covid_vaccinetype_checkbox.png",
+        "source" : "bec8015c1a339473.png",
+        "type" : "image/png",
+        "size" : 70125
+      }, {
+        "uid" : "770d3575f37b523c",
+        "name" : "qa_chrome_128.0.6613.137_entered_batch_number.png",
+        "source" : "770d3575f37b523c.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "1d128f3212367040",
+        "name" : "qa_chrome_128.0.6613.137_entered_expiry_date.png",
+        "source" : "1d128f3212367040.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "d92c6471ff14d78d",
+        "name" : "qa_chrome_128.0.6613.137_clicked_confirm_choices_button.png",
+        "source" : "d92c6471ff14d78d.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 18,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1726309853539,
+        "stop" : 1726309944286,
+        "duration" : 90747
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1251307211b77fa1",
+        "name" : "qa_chrome_128.0.6613.137_entered_nhs_number_as9437540233_and_clicked_search_for_patient_button.png",
+        "source" : "1251307211b77fa1.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient RANDY FOGDEN",
+      "time" : {
+        "start" : 1726309944286,
+        "stop" : 1726309974616,
+        "duration" : 30330
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c7f37dfc5186d48",
+        "name" : "qa_chrome_128.0.6613.137_before_clicking_patient_name.png",
+        "source" : "c7f37dfc5186d48.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, Spikevax XBB.1.5, SDYY2-18E with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1726309974617,
+        "stop" : 1726310130945,
+        "duration" : 156328
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "2d40625de5aacf9b",
+        "name" : "qa_chrome_128.0.6613.137_clicked_on_patient_RANDY FOGDEN_and_clicked_choose_vaccine_button.png",
+        "source" : "2d40625de5aacf9b.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "272e896a6544d1b0",
+        "name" : "qa_chrome_128.0.6613.137_selected_vaccine_COVID-19_and_Spikevax XBB.1.5_and_clicked_continue_button.png",
+        "source" : "272e896a6544d1b0.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-15 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1726310130946,
+        "stop" : 1726310403249,
+        "duration" : 272303
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4bb979353545bc27",
+        "name" : "qa_chrome_128.0.6613.137_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "4bb979353545bc27.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "c0cf76393a1d4d5c",
+        "name" : "qa_chrome_128.0.6613.137_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "c0cf76393a1d4d5c.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "3298375cce37976d",
+        "name" : "qa_chrome_128.0.6613.137_clicked_continue_to_record_consent_button.png",
+        "source" : "3298375cce37976d.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1726310403250,
+        "stop" : 1726310584543,
+        "duration" : 181293
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "46b64be7c363ec6d",
+        "name" : "qa_chrome_128.0.6613.137_before_selecting_consent_clinician.png",
+        "source" : "46b64be7c363ec6d.png",
+        "type" : "image/png",
+        "size" : 43251
+      }, {
+        "uid" : "7baccf359e799ee7",
+        "name" : "qa_chrome_128.0.6613.137_clicked_continue_to_vaccinate_button.png",
+        "source" : "7baccf359e799ee7.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-7 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1726310584543,
+        "stop" : 1726310952077,
+        "duration" : 367534
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "49ff61f2254b8a94",
+        "name" : "qa_chrome_128.0.6613.137_entered_vaccination_details.png",
+        "source" : "49ff61f2254b8a94.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient RANDY FOGDEN, 8/6/1961, 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1726310952078,
+        "stop" : 1726310982409,
+        "duration" : 30331
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == 'RANDY FOGDEN'\n +  where None = get_patient_name_value()",
+      "statusTrace" : "AssertionError: assert None == 'RANDY FOGDEN'\n +  where None = get_patient_name_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a1d44374f85f05a3",
+        "name" : "qa_chrome_128.0.6613.137_check_and_confirm_screen_before_assertion.png",
+        "source" : "a1d44374f85f05a3.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 29,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "cf991c45e540"
+  }, {
+    "name" : "thread",
+    "value" : "1042-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-15"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-18E"
+  }, {
+    "name" : "care_model",
+    "value" : "Hospital Hub"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "8/6/1961"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "12"
+  }, {
+    "name" : "name",
+    "value" : "RANDY FOGDEN"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437540233"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-7"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Spikevax XBB.1.5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "bd76907f9c128cc.json",
+  "parameterValues" : [ "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG", "today-15", "19/10/2026", "SDYY2-18E", "Hospital Hub", "COVID-19", "yes", "8/6/1961", "yes", "12", "RANDY FOGDEN", "9437540233", "ALBERT HOUSE", "yes", "today-7", "Spikevax XBB.1.5" ]
+}
