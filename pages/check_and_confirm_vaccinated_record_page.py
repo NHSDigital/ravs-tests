@@ -125,6 +125,7 @@ def get_patient_vaccination_batch_expiry_date_value():
     return find_element_and_perform_action(PATIENT_VACCINE_BATCH_EXPIRY_DATE_LABEL_ELEMENT, "get_text")
 
 def get_patient_vaccination_dose_amount_value():
+    attach_screenshot("vaccination_dose_amount")
     return find_element_and_perform_action(PATIENT_VACCINATION_DOSE_AMOUNT_LABEL_ELEMENT, "get_text")
 
 def get_patient_vaccination_vaccinator_value():
