@@ -8,6 +8,7 @@ PDS_SEARCH_NAV_ELEMENT = ("//a[@href='/patient-search/details']")
 RECORDS_NAV_ELEMENT = ("//a[text()='Records']")
 DASHBOARD_NAV_ELEMENT = ("//a[text()='Dashboard']")
 FIND_A_PATIENT_NAV_ELEMENT = ("//a[text()='Find a patient']")
+VACCINES_NAV_ELEMENT = ("//a[text()='Vaccines']")
 REPORTS_NAV_ELEMENT = ("//a[text()='Reports']")
 SETTINGS_NAV_ELEMENT = ("//a[@href='/settings']")
 MANAGE_USERS_NAV_ELEMENT = ("//a[@href='/manage-users']")
@@ -63,6 +64,9 @@ def click_reports_nav_link():
 
 def click_settings_nav_link():
     find_element_and_perform_action(SETTINGS_NAV_ELEMENT, "click")
+
+def click_vaccines_nav_link():
+    find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
 
 def click_manage_users_nav_link():
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
