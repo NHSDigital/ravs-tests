@@ -1,0 +1,173 @@
+{
+  "uid" : "1c5c48ae456ff991",
+  "name" : "Vaccine already added to site warning should appear [ALBERT HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5]",
+  "fullName" : "/app/features/add_vaccines.feature:Vaccine already added to site warning should appear",
+  "historyId" : "09b9d586f838a349fd119d7177f2652e",
+  "time" : {
+    "start" : 1726478229895,
+    "stop" : 1726478356518,
+    "duration" : 126623
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Comirnaty Original/Omicron BA.4-5')",
+  "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f1a2058f060>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[ALBERT HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5]>>\nkwargs = {'shared_data': {'site': 'ALBERT HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'ALBERT HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Comirnaty Original/Omicron BA.4-5')\n\ntests/test_add_vaccine_steps.py:66: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Comirnaty Original/Omicron BA.4-5')",
+    "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f1a2058f060>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[ALBERT HOUSE-COVID-19-Comirnaty Original/Omicron BA.4-5]>>\nkwargs = {'shared_data': {'site': 'ALBERT HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'ALBERT HOUSE', 'vaccineType': 'Comirnaty Original/Omicron BA.4-5'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Comirnaty Original/Omicron BA.4-5')\n\ntests/test_add_vaccine_steps.py:66: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1726478229896,
+        "stop" : 1726478323998,
+        "duration" : 94102
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3b8806e3560485bb",
+        "name" : "dev_chrome_128.0.6613.137_user_has_selected_site.png",
+        "source" : "3b8806e3560485bb.png",
+        "type" : "image/png",
+        "size" : 59238
+      }, {
+        "uid" : "2011e85ef9e7fa12",
+        "name" : "dev_chrome_128.0.6613.137_user_has_selected_care_model.png",
+        "source" : "2011e85ef9e7fa12.png",
+        "type" : "image/png",
+        "size" : 59238
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I am on the vaccines page",
+      "time" : {
+        "start" : 1726478323998,
+        "stop" : 1726478324337,
+        "duration" : 339
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccine button",
+      "time" : {
+        "start" : 1726478324337,
+        "stop" : 1726478324665,
+        "duration" : 328
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I select ALBERT HOUSE, COVID-19, Comirnaty Original/Omicron BA.4-5",
+      "time" : {
+        "start" : 1726478324665,
+        "stop" : 1726478356379,
+        "duration" : 31714
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the vaccine is already added to site warning should appear",
+      "time" : {
+        "start" : 1726478356381,
+        "stop" : 1726478356518,
+        "duration" : 137
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Comirnaty Original/Omicron BA.4-5')",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Comirnaty Original/Omicron BA.4-5')\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a7985cf104333815",
+        "name" : "dev_chrome_128.0.6613.137_vaccine_already_added_warning_message_exists.png",
+        "source" : "a7985cf104333815.png",
+        "type" : "image/png",
+        "size" : 79862
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "cbd3757dd1c0"
+  }, {
+    "name" : "thread",
+    "value" : "1041-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "vaccineType",
+    "value" : "Comirnaty Original/Omicron BA.4-5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "1c5c48ae456ff991.json",
+  "parameterValues" : [ "ALBERT HOUSE", "COVID-19", "Comirnaty Original/Omicron BA.4-5" ]
+}

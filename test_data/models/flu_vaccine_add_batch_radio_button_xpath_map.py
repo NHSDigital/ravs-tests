@@ -1,5 +1,5 @@
 flu_vaccine_add_batch_radio_button_xpath_map = {
-        "fluenz tetra - laiv": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='6']",
+        "Flucelvax Tetra - QIVc": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='6']",
         "quadrivalent influenza vaccine - qive": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='7']",
         "quadrivalent influvac sub - unit tetra - qive": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='8']",
         "flucelvax tetra - qivc": "//input[@class='nhsuk-radios__input' and @name='FluVaccineId' and @value='9']",
