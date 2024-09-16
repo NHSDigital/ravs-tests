@@ -249,7 +249,6 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_numb
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
     attach_screenshot("before_clicking_settings")
-    click_settings_nav_link()
     attach_screenshot("before_clicking_vaccines")
     Click_vaccines_settings()
     attach_screenshot("before_clicking_add_vaccines")
@@ -276,7 +275,6 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccineType,batch_numb
             if check_confirm_details_and_save_button_exists() == True:
                 click_confirm_details_and_save_vaccines_button()
                 if check_vaccine_already_exists_error_exists() == True:
-                    click_settings_nav_link()
                     Click_vaccines_settings()
         else:
             click_back_button_on_vaccines_page()

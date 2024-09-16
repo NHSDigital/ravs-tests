@@ -23,7 +23,7 @@ def shared_data():
 
 
 @scenario(f"{features_directory}/add_batches.feature", "Add vaccine batches page should launch")
-def test_add_vaccine_batches_page_should_launch(site, care_model, navigate_and_login):
+def test_add_vaccine_batches_page_should_launch(navigate_and_login):
     pass
 
 
@@ -47,8 +47,7 @@ def i_am_on_settings_page():
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-    click_settings_nav_link()
-    Click_vaccines_settings()
+    click_vaccines_nav_link()
 
 
 @when("I click add batches button")

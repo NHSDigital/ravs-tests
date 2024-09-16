@@ -39,7 +39,6 @@ def i_am_on_vaccine_settings_page():
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-    click_settings_nav_link()
     Click_vaccines_settings()
 
 @when("I click add vaccines button")
