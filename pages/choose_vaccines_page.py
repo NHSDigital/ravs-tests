@@ -14,9 +14,6 @@ MIN_INTERVAL_BASED_WARNING = ("//p[contains(text(), 'You may have not reached th
 def click_covid_radiobutton():
     find_element_and_perform_action(COVID_RADIOBUTTON, "click")
 
-def click_flu_radiobutton():
-    find_element_and_perform_action(FLU_RADIOBUTTON, "click")
-
 def click_rsv_radiobutton():
     find_element_and_perform_action(RSV_RADIOBUTTON, "click")
 
@@ -26,13 +23,12 @@ def click_pertussis_radiobutton():
 def click_back_button_choosing_vaccine_for_patient():
     find_element_and_perform_action(BACK_ELEMENT, "click")
 
-def click_consent_vaccine_radiobutton(vaccine):
-    element = (f"//label[contains(text(), '{vaccine}')]/preceding-sibling::input[@name='VaccineProgramId']")
-    find_element_and_perform_action(element, "click")
-
-def click_consent_vaccine_type_radiobutton(vaccine_type):
-    element = (f"//label[contains(text(), '{vaccine_type}')]/preceding-sibling::input[@name='ConsentVaccineId']")
-    find_element_and_perform_action(element, "click")
+def click_vaccine_radiobutton(vaccine):
+    element = f"//input[@name='SiteId']/following-sibling::label[text()='{vaccine}']"
+    if element:
+        find_element_and_perform_action(element, "click")
+    else:
+        print("Vaccine not available at site")
 
 def click_delivery_team_radiobutton(deliveryTeam):
     element = f"//input[@name='SiteId']/following-sibling::label[text()='{deliveryTeam}']"
@@ -47,6 +43,7 @@ def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_p
         find_element_and_perform_action(element, "click")
     else:
         print("Invalid vaccine type")
+
 
 def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type):
     element = get_flu_consent_vaccine_xpath(vaccine_type.lower())
@@ -80,6 +77,9 @@ def check_minimum_interval_based_warning_exists():
 
 def check_covid_radiobutton_exists():
     return check_element_exists(COVID_RADIOBUTTON, True)
+
+def click_flu_radiobutton():
+    find_element_and_perform_action(FLU_RADIOBUTTON, "click")
 
 def check_flu_radiobutton_exists():
     return check_element_exists(COVID_RADIOBUTTON, True)

@@ -4,7 +4,7 @@ from pytest_bdd.parsers import parse, cfparse
 from pages.vaccinator_location_page import *
 from pages.add_vaccines_page import *
 from pages.settings_page import *
-from pages.vaccines_page import *
+from pages.site_vaccines_page import *
 import logging
 from init_helpers import *
 from conftest import *
@@ -19,7 +19,7 @@ def shared_data():
     return {}
 
 @scenario(f'{features_directory}/add_vaccines.feature', 'Add vaccines page should launch')
-def test_add_vaccines_page_should_launch(navigate_and_login):
+def test_add_vaccines_page_should_launch(site, care_model, navigate_and_login):
     pass
 
 @scenario(f'{features_directory}/add_vaccines.feature', 'Vaccine already added to site warning should appear')
@@ -28,44 +28,44 @@ def test_Vaccine_already_added_to_site_warning_should_appear():
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(site, care_model):
+    # set_vaccinator_location(site, care_model)
     pass
 
 @given("I am on the RAVS home page")
 def logged_into_homepage(login_and_navigate_to_homepage):
     pass
 
-@when("I am on the vaccines page")
-def i_am_on_the_vaccines_page():
+@when("I am on the vaccine settings page")
+def i_am_on_vaccine_settings_page():
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-    click_vaccines_nav_link()
+    click_settings_nav_link()
+    Click_vaccines_settings()
 
-@when("I click add vaccine button")
-def i_click_add_vaccine():
-    click_add_vaccine_button()
+@when("I click add vaccines button")
+def i_click_add_vaccines():
+    Click_add_vaccines_button()
 
-@when(parse("I select {site}, {vaccine}, {vaccine_type}"))
-def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):
+@then('the add vaccines page should be launched')
+def the_add_vaccines_page_should_launch():
+    attach_screenshot("add_vaccines_page_should_launch")
+    assert check_add_vaccine_button_exists() == True
 
-    # vaccines_choose_site_page
-    enter_site_name(site)
-    select_site_from_list(site)
-    click_continue_button()
-
-    # choose_vaccine_page
-    click_vaccine_radiobutton(vaccine)
-    click_vaccine_type_radiobutton(vaccine_type)
-
+@when(parse("I select {site}, {vaccine}, {vaccineType}"))
+def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccineType, shared_data):
+    click_site_radio_button(site)
+    if "covid" in vaccine.lower():
+        click_covid_vaccine_checkbox()
+        click_covid_vaccine_type_checkbox(vaccineType)
+    elif "flu" in vaccine.lower():
+        click_flu_vaccine_checkbox()
+        click_flu_vaccine_type_checkbox(vaccineType)
+    Click_add_vaccine_button()
     shared_data['site'] = site
-    shared_data['vaccineType'] = vaccine_type
+    shared_data['vaccineType'] = vaccineType
 
 @then("the vaccine is already added to site warning should appear")
 def vaccine_already_added_warning_should_exist(shared_data):
     attach_screenshot("vaccine_already_added_warning_message_exists")
     assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True
-
-@then("the choose site page should be launched")
-def the_choose_site_page_is_launched():
-    attach_screenshot("choose_site_page_should_launch")
-    assert check_choose_site_title_exists(True) == True
