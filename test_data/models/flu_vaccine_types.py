@@ -1,5 +1,5 @@
 flu_vaccine_types = [
-    "Fluenz Tetra - LAIV",
+    "Flucelvax Tetra - QIVc",
     "Quadrivalent Influenza vaccine - QIVe",
     "Quadrivalent Influvac sub - unit Tetra - QIVe",
     "Flucelvax Tetra - QIVc",

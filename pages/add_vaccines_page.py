@@ -54,14 +54,12 @@ def click_covid_vaccine_type_checkbox(vaccinetype):
     else:
         print("Invalid vaccine type")
 
-
 def click_flu_vaccine_type_checkbox(vaccinetype):
     element = get_flu_add_vaccine_checkbox_xpath(vaccinetype.lower())
     if element:
         find_element_and_perform_action(element, "click_checkbox")
     else:
         print("Invalid vaccine type")
-
 
 def check_vaccine_already_added_warning_message_exists(site, vaccine):
     element = (f"//span[text()='{site} already has {vaccine}']")
