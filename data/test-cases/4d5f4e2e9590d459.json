@@ -1,0 +1,161 @@
+{
+  "uid" : "4d5f4e2e9590d459",
+  "name" : "Vaccine already added to site warning should appear [ALBERT HOUSE-Flu-Flucelvax Tetra - QIVc]",
+  "fullName" : "/app/features/add_vaccines.feature:Vaccine already added to site warning should appear",
+  "historyId" : "a1b3e40f36d0dc3fcd554a7adb8d8390",
+  "time" : {
+    "start" : 1726902786089,
+    "stop" : 1726902823396,
+    "duration" : 37307
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Flucelvax Tetra - QIVc')",
+  "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f090c1e4ae0>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[ALBERT HOUSE-Flu-Flucelvax Tetra - QIVc]>>\nkwargs = {'shared_data': {'site': 'ALBERT HOUSE', 'vaccineType': 'Flucelvax Tetra - QIVc'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'ALBERT HOUSE', 'vaccineType': 'Flucelvax Tetra - QIVc'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Flucelvax Tetra - QIVc')\n\ntests/test_add_vaccine_steps.py:67: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Flucelvax Tetra - QIVc')",
+    "statusTrace" : "fixturefunc = <function vaccine_already_added_warning_should_exist at 0x7f090c1e4ae0>\nrequest = <FixtureRequest for <Function test_Vaccine_already_added_to_site_warning_should_appear[ALBERT HOUSE-Flu-Flucelvax Tetra - QIVc]>>\nkwargs = {'shared_data': {'site': 'ALBERT HOUSE', 'vaccineType': 'Flucelvax Tetra - QIVc'}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'site': 'ALBERT HOUSE', 'vaccineType': 'Flucelvax Tetra - QIVc'}\n\n    @then(\"the vaccine is already added to site warning should appear\")\n    def vaccine_already_added_warning_should_exist(shared_data):\n        attach_screenshot(\"vaccine_already_added_warning_message_exists\")\n>       assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True\nE       AssertionError: assert False == True\nE        +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Flucelvax Tetra - QIVc')\n\ntests/test_add_vaccine_steps.py:67: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1726902786089,
+        "stop" : 1726902818713,
+        "duration" : 32624
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I am on the vaccines page",
+      "time" : {
+        "start" : 1726902818713,
+        "stop" : 1726902820489,
+        "duration" : 1776
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccine button",
+      "time" : {
+        "start" : 1726902820490,
+        "stop" : 1726902820823,
+        "duration" : 333
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I select ALBERT HOUSE, Flu, Flucelvax Tetra - QIVc",
+      "time" : {
+        "start" : 1726902820823,
+        "stop" : 1726902823256,
+        "duration" : 2433
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the vaccine is already added to site warning should appear",
+      "time" : {
+        "start" : 1726902823256,
+        "stop" : 1726902823396,
+        "duration" : 140
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Flucelvax Tetra - QIVc')",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_vaccine_already_added_warning_message_exists('ALBERT HOUSE', 'Flucelvax Tetra - QIVc')\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "df19e4d293b40920",
+        "name" : "qa_chrome_129.0.6668.58_vaccine_already_added_warning_message_exists.png",
+        "source" : "df19e4d293b40920.png",
+        "type" : "image/png",
+        "size" : 104902
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "df0afcaade46"
+  }, {
+    "name" : "thread",
+    "value" : "1046-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "vaccineType",
+    "value" : "Flucelvax Tetra - QIVc"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "4d5f4e2e9590d459.json",
+  "parameterValues" : [ "ALBERT HOUSE", "Flu", "Flucelvax Tetra - QIVc" ]
+}
