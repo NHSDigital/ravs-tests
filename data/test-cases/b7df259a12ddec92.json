@@ -1,0 +1,155 @@
+{
+  "uid" : "b7df259a12ddec92",
+  "name" : "NHS Number: Searching with invalid NHS number shows an error [9753108642-Invalid NHS number]",
+  "fullName" : "/app/features/find_a_patient.feature:NHS Number: Searching with invalid NHS number shows an error",
+  "historyId" : "28d4c73bf02637967afd54e9fefb8df6",
+  "time" : {
+    "start" : 1726905314368,
+    "stop" : 1726905409931,
+    "duration" : 95563
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 'Invalid NHS number' in 'Error: Enter a correct NHS number'\n +  where 'Error: Enter a correct NHS number' = get_nhs_number_error_message_text()",
+  "statusTrace" : "fixturefunc = <function step_error_message_appears_for_nhs_number at 0x7ff7d4924180>\nrequest = <FixtureRequest for <Function test_nhs_number_searching_with_invalid_nhs_number_shows_an_error[9753108642-Invalid NHS number]>>\nkwargs = {'errorMessage': 'Invalid NHS number'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nerrorMessage = 'Invalid NHS number'\n\n    @then(parse('I can see an nhs number error message {errorMessage}'))\n    def step_error_message_appears_for_nhs_number(errorMessage):\n        attach_screenshot(\"error_message_appears_for_nhs_number\")\n>       assert errorMessage in get_nhs_number_error_message_text()\nE       AssertionError: assert 'Invalid NHS number' in 'Error: Enter a correct NHS number'\nE        +  where 'Error: Enter a correct NHS number' = get_nhs_number_error_message_text()\n\ntests/test_find_a_patient_steps.py:139: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 'Invalid NHS number' in 'Error: Enter a correct NHS number'\n +  where 'Error: Enter a correct NHS number' = get_nhs_number_error_message_text()",
+    "statusTrace" : "fixturefunc = <function step_error_message_appears_for_nhs_number at 0x7ff7d4924180>\nrequest = <FixtureRequest for <Function test_nhs_number_searching_with_invalid_nhs_number_shows_an_error[9753108642-Invalid NHS number]>>\nkwargs = {'errorMessage': 'Invalid NHS number'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nerrorMessage = 'Invalid NHS number'\n\n    @then(parse('I can see an nhs number error message {errorMessage}'))\n    def step_error_message_appears_for_nhs_number(errorMessage):\n        attach_screenshot(\"error_message_appears_for_nhs_number\")\n>       assert errorMessage in get_nhs_number_error_message_text()\nE       AssertionError: assert 'Invalid NHS number' in 'Error: Enter a correct NHS number'\nE        +  where 'Error: Enter a correct NHS number' = get_nhs_number_error_message_text()\n\ntests/test_find_a_patient_steps.py:139: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by nhs number page",
+      "time" : {
+        "start" : 1726905314368,
+        "stop" : 1726905408985,
+        "duration" : 94617
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "216c2fcfa3e1c4f2",
+        "name" : "dev_chrome_129.0.6668.58_user_has_selected_site.png",
+        "source" : "216c2fcfa3e1c4f2.png",
+        "type" : "image/png",
+        "size" : 59189
+      }, {
+        "uid" : "346312a134d87004",
+        "name" : "dev_chrome_129.0.6668.58_user_has_selected_care_model.png",
+        "source" : "346312a134d87004.png",
+        "type" : "image/png",
+        "size" : 59189
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter 9753108642 as the nhs number",
+      "time" : {
+        "start" : 1726905408985,
+        "stop" : 1726905409302,
+        "duration" : 317
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1726905409302,
+        "stop" : 1726905409619,
+        "duration" : 317
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see an nhs number error message Invalid NHS number",
+      "time" : {
+        "start" : 1726905409619,
+        "stop" : 1726905409931,
+        "duration" : 312
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 'Invalid NHS number' in 'Error: Enter a correct NHS number'\n +  where 'Error: Enter a correct NHS number' = get_nhs_number_error_message_text()",
+      "statusTrace" : "AssertionError: assert 'Invalid NHS number' in 'Error: Enter a correct NHS number'\n +  where 'Error: Enter a correct NHS number' = get_nhs_number_error_message_text()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7261fd29a1da57e3",
+        "name" : "dev_chrome_129.0.6668.58_error_message_appears_for_nhs_number.png",
+        "source" : "7261fd29a1da57e3.png",
+        "type" : "image/png",
+        "size" : 71143
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "58ddda4a19da"
+  }, {
+    "name" : "thread",
+    "value" : "1041-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "errorMessage",
+    "value" : "Invalid NHS number"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9753108642"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "b7df259a12ddec92.json",
+  "parameterValues" : [ "Invalid NHS number", "9753108642" ]
+}
