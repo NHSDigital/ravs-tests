@@ -133,6 +133,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
+          destination_branch: gh-pages-dev
 
       - name: Check contents of gh-pages
         run: ls -la

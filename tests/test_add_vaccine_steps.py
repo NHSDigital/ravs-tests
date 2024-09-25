@@ -27,11 +27,11 @@ def test_Vaccine_already_added_to_site_warning_should_appear():
     pass
 
 @given("I am logged into the RAVS app")
-def logged_into_ravs_app(site, care_model):
+def logged_into_ravs_app():
     pass
 
 @given("I am on the RAVS home page")
-def logged_into_homepage(login_and_navigate_to_homepage):
+def logged_into_homepage(navigate_and_login):
     pass
 
 @when("I am on the vaccines page")
@@ -43,7 +43,7 @@ def i_am_on_the_vaccines_page():
 
 @when("I click add vaccine button")
 def i_click_add_vaccine():
-    click_add_vaccine_button()
+    vaccines_page.click_add_vaccine_button()
 
 @when(parse("I select {site}, {vaccine}, {vaccine_type}"))
 def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):

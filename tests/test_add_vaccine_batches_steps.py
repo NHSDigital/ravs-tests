@@ -31,11 +31,11 @@ def test_batch_already_added_to_site_warning_should_appear():
     pass
 
 @given("I am logged into the RAVS app")
-def logged_into_ravs_app(site, care_model):
+def logged_into_ravs_app():
     pass
 
 @given("I am on the RAVS home page")
-def logged_into_homepage(login_and_navigate_to_homepage):
+def logged_into_homepage(navigate_and_login):
     pass
 
 @when("I am on the vaccines page")
@@ -47,7 +47,7 @@ def i_am_on_the_vaccines_page():
 
 @when("I click on an available add batch link")
 def i_click_first_add_batch_link():
-    click_first_available_add_batch_link()
+    vaccines_page.click_first_available_add_batch_link()
 
 @when(parse("I select {site}, {vaccine}, {vaccinetype} and enter {batchprefix}, {batchsuffix}"))
 def i_select_site_vaccine_and_vaccinetype_for_batch(site, vaccine, vaccinetype, batchprefix, batchsuffix, shared_data):
@@ -108,4 +108,4 @@ def add_batch_page_should_launch():
 
 @when(parse("I view product for the {vaccine_type} on {site}"))
 def view_product_for_site_and_vaccine_type(vaccine_type, site):
-    click_view_product(site, vaccine_type)
+    vaccines_page.click_view_product(site, vaccine_type)

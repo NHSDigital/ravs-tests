@@ -169,12 +169,42 @@ class BasePlaywrightHelper:
             print(f"Cleared text from the {selector} successfully.")
         except Exception as e:
             print(f"Exception: {e}. Element - {selector} not found.")
-            raise ElementNotFoundException(f"Element not found: {selector}")
 
     def release_mouse(self):
         self.page.mouse.move(100, 100)
         self.page.mouse.down()
         self.page.mouse.up()
+
+    def get_element_by_type(self, locator_type: str, locator_value: str):
+        if locator_type == "role":
+            return self.page.get_by_role(locator_value)
+        elif locator_type == "text":
+            if self.is_regex(locator_value):
+                return self.page.locator(f'text={locator_value}')
+            else:
+                return self.page.get_by_text(locator_value)
+        elif locator_type == "label":
+            return self.page.get_by_label(locator_value)
+        elif locator_type == "placeholder":
+            return self.page.get_by_placeholder(locator_value)
+        elif locator_type == "link":
+            return self.page.get_by_role("link", name=locator_value)
+        elif locator_type == "title":
+            return self.page.get_by_title(locator_value)
+        else:
+            raise ValueError(f"Unsupported locator type: {locator_type}")
+
+    def find_element_with_locator_and_perform_action(self, element, action, inputValue=None):
+        if action == "click":
+            element.click()
+        elif action == "input_text":
+            if inputValue is None:
+                raise ValueError("`inputValue` cannot be None for 'input_text' action.")
+            element.fill(inputValue)
+        elif action == "get_text":
+            return element.inner_text()
+        else:
+            raise ValueError(f"Unsupported action: {action}")
 
     def find_element_and_perform_action(self, selector, action, inputValue=None):
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
@@ -225,7 +255,6 @@ class BasePlaywrightHelper:
             print(f"Timeout waiting for selector: {selector} to perform {action}")
         except Exception as e:
             print(f"Exception: {e}. Element not found: {selector}")
-            raise ElementNotFoundException(f"Element not found: {selector} to perform {action}")
         self.capture_screenshot(selector_filename)
 
     def get_current_url(self):

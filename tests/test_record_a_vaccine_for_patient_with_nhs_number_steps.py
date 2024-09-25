@@ -37,12 +37,12 @@ def test_record_a_vaccine_with_nhs_number(navigate_and_login):
 def test_record_a_maternity_vaccine_with_nhs_number(navigate_and_login):
     pass
 
-@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {vaccine_type}, {batch_number} with {batch_expiry_date}"))
-def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batch_number, vaccine_type, batch_expiry_date, shared_data):
+@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
-    shared_data["chosen_vaccine_type"] = vaccine_type
+    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
     shared_data["care_model"] = get_care_model(index)
@@ -53,7 +53,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
@@ -69,12 +69,12 @@ def step_search_for_patient(shared_data, name):
     click_on_patient_name(name)
     shared_data["patient_name"] = name
 
-@when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
-def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, vaccine_type, batch_number, batch_expiry_date):
+@when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
+def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
     time.sleep(3)
     immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
     shared_data["immunisation_history_records_count_before_vaccination"] = immunisation_history_records_count_before_vaccination
-    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, vaccine_type)
+    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])
 
 @when(parse("I assess the patient's {eligibility} with the details and date as {assess_date} and click continue to record consent screen button"))
 def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, assess_date):
