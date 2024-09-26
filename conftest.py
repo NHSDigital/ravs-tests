@@ -114,6 +114,10 @@ def click_back_button_recording_consent(request):
 # Fixture for logging in and navigating to appointments
 @pytest.fixture(scope='function')
 def login_and_navigate_to_appointments(site, care_model,  navigate_and_login):
+    # select_site(site)
+    # select_care_model(care_model)
+    # if care_model == "Care Home":
+    #     enter_carehome_name("WHITESTONES CARE HOME")
     click_continue_to_record_a_vaccination_homepage()
     click_appointments_nav_link()
 
@@ -126,7 +130,10 @@ def set_vaccinator_location(site, care_model):
 
 @pytest.fixture(scope='function')
 def login_and_navigate_to_homepage(request, navigate_and_login):
-    click_continue_to_record_a_vaccination_homepage()
+    #select_site("NEELIMA HOUSE")
+    #select_care_model("Vaccination Centre")
+    #click_continue_to_record_a_vaccination_homepage()
+    pass
 
 # Fixture for logging in and navigating to appointments open first patient
 @pytest.fixture(scope='function')
@@ -256,20 +263,20 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
 
     # If the site does NOT currently have the vaccine, then add a site vaccine
     # Adding a vaccine also adds a vaccine type and an active batch, so we don't need to do further checks
-    if not vaccines_page.check_vaccine_has_been_added(site, vaccine, True):
+    if not check_vaccine_has_been_added(site, vaccine, True):
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
         return True
 
     # If the site has the vaccine, but does NOT currently have the vaccine type, then add a site vaccine
     # Adding a vaccine type is the same process as adding a vaccine for a site
-    if not vaccines_page.check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
+    if not check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date)
         return True
 
     # Open the vaccine type to see the batches.
     # If the batch does NOT currently exist, add a batch
     # This adds an active batch, so we don't need to do further checks
-    vaccines_page.click_view_product(site, vaccine_type)
+    click_view_product(site, vaccine_type)
     if not check_batch_number_exists(batch_number, True):
         add_vaccine_type_batch(batch_number, expiry_date)
         return True
@@ -282,7 +289,7 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
 
 def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     # vaccines_page
-    vaccines_page.click_add_vaccine_button()
+    click_add_vaccine_button()
 
     # vaccines_choose_site_page
     enter_site_name(site)

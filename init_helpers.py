@@ -157,12 +157,6 @@ def capture_screenshot(filename):
 def find_element_and_perform_action(element, action, inputValue=None):
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
 
-def find_element_with_locator_and_perform_action(element, action, inputValue=None):
-    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)
-
-def get_element_by_type(locator_type, locator_value):
-    return playwright_helper_instance.get_element_by_type(locator_type, locator_value)
-
 def release_mouse():
     return playwright_helper_instance.release_mouse()
 
