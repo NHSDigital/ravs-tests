@@ -1,0 +1,122 @@
+{
+  "uid" : "b897adb8403d3092",
+  "name" : "NHS sign in page should be visible",
+  "fullName" : "features/logout.feature:NHS sign in page should be visible",
+  "historyId" : "807ba16b9c51dae553be51c09f89547b",
+  "time" : {
+    "start" : 1727597152160,
+    "stop" : 1727597218561,
+    "duration" : 66401
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False\n +  where False = check_login_button_exists()",
+  "statusTrace" : "fixturefunc = <function check_logged_out at 0x7fc878a9df80>\nrequest = <FixtureRequest for <Function test_nhs_sign_in_page_should_be_visible>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the user should be logged out successfully')\n    def check_logged_out():\n        attach_screenshot(\"user_should_be_logged_out\")\n>       assert check_login_button_exists()\nE       assert False\nE        +  where False = check_login_button_exists()\n\ntests/test_logout_steps.py:35: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False\n +  where False = check_login_button_exists()",
+    "statusTrace" : "fixturefunc = <function check_logged_out at 0x7fc878a9df80>\nrequest = <FixtureRequest for <Function test_nhs_sign_in_page_should_be_visible>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the user should be logged out successfully')\n    def check_logged_out():\n        attach_screenshot(\"user_should_be_logged_out\")\n>       assert check_login_button_exists()\nE       assert False\nE        +  where False = check_login_button_exists()\n\ntests/test_logout_steps.py:35: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1727597152160,
+        "stop" : 1727597184683,
+        "duration" : 32523
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the logout button",
+      "time" : {
+        "start" : 1727597184684,
+        "stop" : 1727597188373,
+        "duration" : 3689
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the user should be logged out successfully",
+      "time" : {
+        "start" : 1727597188374,
+        "stop" : 1727597218561,
+        "duration" : 30187
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False\n +  where False = check_login_button_exists()",
+      "statusTrace" : "AssertionError: assert False\n +  where False = check_login_button_exists()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e71e7b8dc87b232b",
+        "name" : "dev_chrome_129.0.6668.70_user_should_be_logged_out.png",
+        "source" : "e71e7b8dc87b232b.png",
+        "type" : "image/png",
+        "size" : 37248
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "1ad850e949e2"
+  }, {
+    "name" : "thread",
+    "value" : "1043-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Logout Feature"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "b897adb8403d3092.json",
+  "parameterValues" : [ ]
+}
