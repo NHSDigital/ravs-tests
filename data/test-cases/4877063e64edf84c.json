@@ -1,0 +1,143 @@
+{
+  "uid" : "4877063e64edf84c",
+  "name" : "Add vaccines page should launch [ST JOHN'S HOUSE-Vaccination Centre]",
+  "fullName" : "/app/features/add_vaccines.feature:Add vaccines page should launch",
+  "historyId" : "2afbec971dac7d6c30489cf891aaee21",
+  "time" : {
+    "start" : 1727594182453,
+    "stop" : 1727594243191,
+    "duration" : 60738
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_choose_site_title_exists(True)",
+  "statusTrace" : "fixturefunc = <function the_choose_site_page_is_launched at 0x7faffd97f7e0>\nrequest = <FixtureRequest for <Function test_add_vaccines_page_should_launch[ST JOHN'S HOUSE-Vaccination Centre]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then(\"the choose site page should be launched\")\n    def the_choose_site_page_is_launched():\n        attach_screenshot(\"choose_site_page_should_launch\")\n>       assert check_choose_site_title_exists(True) == True\nE       assert False == True\nE        +  where False = check_choose_site_title_exists(True)\n\ntests/test_add_vaccine_steps.py:72: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_choose_site_title_exists(True)",
+    "statusTrace" : "fixturefunc = <function the_choose_site_page_is_launched at 0x7faffd97f7e0>\nrequest = <FixtureRequest for <Function test_add_vaccines_page_should_launch[ST JOHN'S HOUSE-Vaccination Centre]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then(\"the choose site page should be launched\")\n    def the_choose_site_page_is_launched():\n        attach_screenshot(\"choose_site_page_should_launch\")\n>       assert check_choose_site_title_exists(True) == True\nE       assert False == True\nE        +  where False = check_choose_site_title_exists(True)\n\ntests/test_add_vaccine_steps.py:72: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1727594182453,
+        "stop" : 1727594182454,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I am on the vaccines page",
+      "time" : {
+        "start" : 1727594182454,
+        "stop" : 1727594182839,
+        "duration" : 385
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click add vaccine button",
+      "time" : {
+        "start" : 1727594182839,
+        "stop" : 1727594213084,
+        "duration" : 30245
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the choose site page should be launched",
+      "time" : {
+        "start" : 1727594213085,
+        "stop" : 1727594243191,
+        "duration" : 30106
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_choose_site_title_exists(True)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_choose_site_title_exists(True)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "35eecb5ae60095ec",
+        "name" : "qa_chrome_129.0.6668.70_choose_site_page_should_launch.png",
+        "source" : "35eecb5ae60095ec.png",
+        "type" : "image/png",
+        "size" : 43251
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "6c029ca36895"
+  }, {
+    "name" : "thread",
+    "value" : "1047-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add vaccine to site"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "site",
+    "value" : "ST JOHN'S HOUSE"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "4877063e64edf84c.json",
+  "parameterValues" : [ "Vaccination Centre", "ST JOHN'S HOUSE" ]
+}
