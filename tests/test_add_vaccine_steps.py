@@ -43,11 +43,10 @@ def i_am_on_the_vaccines_page():
 
 @when("I click add vaccine button")
 def i_click_add_vaccine():
-    vaccines_page.click_add_vaccine_button()
+    click_add_vaccine_button()
 
 @when(parse("I select {site}, {vaccine}, {vaccine_type}"))
 def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):
-
     # vaccines_choose_site_page
     enter_site_name(site)
     select_site_from_list(site)

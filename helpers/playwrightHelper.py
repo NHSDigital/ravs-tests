@@ -197,6 +197,8 @@ class BasePlaywrightHelper:
     def find_element_with_locator_and_perform_action(self, element, action, inputValue=None):
         if action == "click":
             element.click()
+        elif action == "select_option":
+            element.select_option(inputValue)
         elif action == "input_text":
             if inputValue is None:
                 raise ValueError("`inputValue` cannot be None for 'input_text' action.")
