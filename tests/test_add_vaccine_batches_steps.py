@@ -23,7 +23,7 @@ def shared_data():
     return {}
 
 @scenario(f"{features_directory}/add_batches.feature", "Add vaccine batches page should launch")
-def test_add_vaccine_batches_page_should_launch(site, care_model, navigate_and_login):
+def test_add_vaccine_batches_page_should_launch(navigate_and_login):
     pass
 
 @scenario(f"{features_directory}/add_batches.feature", "Add batch to vaccine")
@@ -31,12 +31,11 @@ def test_batch_already_added_to_site_warning_should_appear():
     pass
 
 @given("I am logged into the RAVS app")
-def logged_into_ravs_app(site, care_model):
-    # set_vaccinator_location(site, care_model)
+def logged_into_ravs_app():
     pass
 
 @given("I am on the RAVS home page")
-def logged_into_homepage(login_and_navigate_to_homepage):
+def logged_into_homepage(navigate_and_login):
     pass
 
 @when("I am on the vaccines page")
