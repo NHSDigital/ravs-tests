@@ -1,0 +1,178 @@
+{
+  "uid" : "f6454f5fc1957ad5",
+  "name" : "Demographics: Search with an invalid postcode shows an error message [Bill-Garton-23/6/1946-INVALID]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Search with an invalid postcode shows an error message",
+  "historyId" : "1d569f2af68e5863c8cc60a0660126e6",
+  "time" : {
+    "start" : 1728027620914,
+    "stop" : 1728027718491,
+    "duration" : 97577
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1728027620915,
+        "stop" : 1728027715700,
+        "duration" : 94785
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e5ee74488ad294cf",
+        "name" : "qa_chrome_129.0.6668.89_user_has_selected_site.png",
+        "source" : "e5ee74488ad294cf.png",
+        "type" : "image/png",
+        "size" : 59189
+      }, {
+        "uid" : "8138c2c06dce9916",
+        "name" : "qa_chrome_129.0.6668.89_user_has_selected_care_model.png",
+        "source" : "8138c2c06dce9916.png",
+        "type" : "image/png",
+        "size" : 59189
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/6/1946",
+      "time" : {
+        "start" : 1728027715701,
+        "stop" : 1728027717412,
+        "duration" : 1711
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d1125ac994f08d5f",
+        "name" : "qa_chrome_129.0.6668.89_add_mandatory_patient_information.png",
+        "source" : "d1125ac994f08d5f.png",
+        "type" : "image/png",
+        "size" : 86060
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I enter the postcode INVALID",
+      "time" : {
+        "start" : 1728027717413,
+        "stop" : 1728027717863,
+        "duration" : 450
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "189367ca36e83d5a",
+        "name" : "qa_chrome_129.0.6668.89_enter_postcode.png",
+        "source" : "189367ca36e83d5a.png",
+        "type" : "image/png",
+        "size" : 87307
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1728027717863,
+        "stop" : 1728027718202,
+        "duration" : 339
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a postcode error message Enter the full postcode in the correct format",
+      "time" : {
+        "start" : 1728027718202,
+        "stop" : 1728027718491,
+        "duration" : 289
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d9576460eac0ebf",
+        "name" : "qa_chrome_129.0.6668.89_error_message_appears_for_postcode.png",
+        "source" : "d9576460eac0ebf.png",
+        "type" : "image/png",
+        "size" : 92012
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "36111984e217"
+  }, {
+    "name" : "thread",
+    "value" : "1046-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "postcode",
+    "value" : "INVALID"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f6454f5fc1957ad5.json",
+  "parameterValues" : [ "23/6/1946", "Bill", "Garton", "INVALID" ]
+}
