@@ -20,7 +20,7 @@ def shared_data():
     return {}
 
 @given("I am logged into the RAVS app")
-def given_I_login_to_the_ravs_web_app(navigate_and_login):
+def given_I_login_to_the_ravs_web_app(login_and_navigate_to_homepage):
     pass
 
 @when(parse('I search for the patient with NHS number {nhs_number}'))
@@ -42,24 +42,23 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     if shared_data['vaccine_type'] == 'covid':
         vaccine_name = get_vaccine_to_choose_from(0)
         shared_data['vaccine_type'] = vaccine_name
-        click_delivery_team_radiobutton("ALBERT HOUSE")
         click_vaccine_radiobutton(vaccine_name)
         warning_count = 0
-        # comirnaty_original_omicron_ba_age_above_12 = get_vaccination_type(0, vaccine_name)
-        spikevax_jn1_age_above_18 = get_vaccination_type(0, vaccine_name)
-        comirnaty_30_jn1_age_above_12 = get_vaccination_type(1, vaccine_name)
-        comirnaty_10_omicron_jn1_above_5_to_11 = get_vaccination_type(2, vaccine_name)
-        comirnaty_3_omicron_jn1_above_6months_to_4 = get_vaccination_type(3, vaccine_name)
+        comirnaty_original_omicron_ba_age_above_12 = get_vaccination_type(0, vaccine_name)
+        comirnaty_30_omicron_xbb_age_above_12 = get_vaccination_type(1, vaccine_name)
+        comirnaty_3_omicron_xbb_age_above_6months_to_4 = get_vaccination_type(2, vaccine_name)
+        comirnaty_10_omicron_xbb_age_above_5_to_11 = get_vaccination_type(3, vaccine_name)
+        spikevax_xbb_age_above_18 = get_vaccination_type(4, vaccine_name)
         vaccine_types = [
-        (comirnaty_30_jn1_age_above_12, ["9732091169", "9692237893", "9474335761", "9474335761"]),
-        # (comirnaty_30_omicron_xbb_age_above_12, ["9732091169", "9692237893", "9474335761"]),
-        (comirnaty_10_omicron_jn1_above_5_to_11, ["9692237893", "9732091169", "9450153485", "9470472918", "9473673388"]),
-        (comirnaty_3_omicron_jn1_above_6months_to_4, ["9450153485", "9474335761", "9470472918", "9473673388"]),
-        (spikevax_jn1_age_above_18, ["9732091169", "9692237893", "9474335761", "9450153485", "9470472918"]),
+        (comirnaty_original_omicron_ba_age_above_12, ["9732091169", "9692237893", "9474335761", "9474335761"]),
+        (comirnaty_30_omicron_xbb_age_above_12, ["9732091169", "9692237893", "9474335761"]),
+        (comirnaty_3_omicron_xbb_age_above_6months_to_4, ["9474335761", "9450153485", "9470472918", "9473673388"]),
+        (comirnaty_10_omicron_xbb_age_above_5_to_11, ["9732091169", "9692237893", "9450153485", "9470472918", "9473673388"]),
+        (spikevax_xbb_age_above_18, ["9732091169", "9692237893", "9474335761", "9450153485", "9470472918"]),
     ]
 
     for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):
-        click_vaccine_type_radiobutton(vaccine)
+        click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine)
         if shared_data["nhs_number"] in warning_nhs_numbers:
             assert check_age_based_warning_exists() is True
             warning_count += 1
@@ -106,9 +105,8 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data["vaccination_comments"] = shared_data["chosen_vaccine"] + "vaccination given on " + shared_data["vaccination_date"]
     shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
     click_yes_vaccinated_radiobutton()
-    set_vaccination_date(shared_data["vaccination_date"])
     for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):
-        click_vaccine_type_radiobutton(vaccine)
+        click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine)
         if shared_data["nhs_number"] in warning_nhs_numbers:
             assert check_age_based_warning_exists() is True
             warning_count += 1
