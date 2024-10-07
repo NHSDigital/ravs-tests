@@ -148,6 +148,13 @@ class BasePlaywrightHelper:
             print(f"Element - {selector} not found: {e}")
             return False
 
+    def check_element_by_locator_exists(self, element, wait=False):
+        try:
+            return element.is_visible()
+        except Exception as e:
+            print(f"Element - {element} not found: {e}")
+            return False
+
     def check_element_enabled(self, selector, wait=False):
         try:
             element = self.page.locator(selector)
@@ -158,8 +165,18 @@ class BasePlaywrightHelper:
             print(f"Element - {selector} not found: {e}")
             return False
 
+    def check_element_by_locator_enabled(self, element, wait=False):
+        try:
+            return element.is_enabled()
+        except Exception as e:
+            print(f"Element - {element} not found: {e}")
+            return False
+
     def scroll_into_view(self, selector):
         element=self.page.locator(selector)
+        element.scroll_into_view_if_needed()
+
+    def scroll_element_by_locator_into_view(self, element):
         element.scroll_into_view_if_needed()
 
     def clear_element(self, selector):
@@ -170,19 +187,24 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Exception: {e}. Element - {selector} not found.")
 
+
+    def clear_element_by_locator(self, element):
+        try:
+            element.clear()
+            print(f"Cleared text from the {element} successfully.")
+        except Exception as e:
+            print(f"Exception: {e}. Element - {element} not found.")
+
     def release_mouse(self):
         self.page.mouse.move(100, 100)
         self.page.mouse.down()
         self.page.mouse.up()
 
-    def get_element_by_type(self, locator_type: str, locator_value: str):
+    def get_element_by_type(self, locator_type: str, locator_value: str, name: str = None):
         if locator_type == "role":
-            return self.page.get_by_role(locator_value)
+            return self.page.get_by_role(locator_value, name=name)
         elif locator_type == "text":
-            if self.is_regex(locator_value):
-                return self.page.locator(f'text={locator_value}')
-            else:
-                return self.page.get_by_text(locator_value)
+            return self.page.get_by_text(locator_value)
         elif locator_type == "label":
             return self.page.get_by_label(locator_value)
         elif locator_type == "placeholder":
@@ -197,6 +219,8 @@ class BasePlaywrightHelper:
     def find_element_with_locator_and_perform_action(self, element, action, inputValue=None):
         if action == "click":
             element.click()
+        elif action == "check":
+            element.check()
         elif action == "select_option":
             element.select_option(inputValue)
         elif action == "input_text":
