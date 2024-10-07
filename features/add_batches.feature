@@ -16,5 +16,5 @@ Feature: Add Batches to vaccine
     Then the batch is already added to site warning should appear
 
     Examples:
-      | site          | vaccine  | vaccine_type                      | batch_number |
-      | NEELIMA HOUSE | COVID-19 | Comirnaty Original/Omicron BA.4-5 | SD7YY2-24    |
+      | site          | vaccine  | vaccine_type  | batch_number     |
+      | NEELIMA HOUSE | COVID-19 | Spikevax JN.1 | AB2345-Y7890     |
