@@ -4,9 +4,6 @@ from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
 
-class ElementNotFoundException(Exception):
-    pass
-
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
         playwright_instance = sync_playwright().start()
@@ -120,21 +117,21 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-    def wait_for_page_to_load(self, timeout=0.2):
+    def wait_for_page_to_load(self, timeout=0.1):
         self.page.wait_for_selector('*', timeout=timeout * 100)
         self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def wait_for_element_to_appear(self, selector, timeout=20):
+    def wait_for_element_to_appear(self, selector, timeout=5):
         try:
             self.page.wait_for_selector(selector, timeout=timeout, state='visible')
             print(f"Element {selector} appeared on the page.")
         except Exception as e:
             print(f"Error waiting for element {selector} to appear: {e}")
 
-    def wait_for_selector_to_disappear(self, selector, timeout=50):
+    def wait_for_selector_to_disappear(self, selector, timeout=5):
         try:
             self.page.wait_for_selector(selector, state='hidden', timeout=timeout)
             print(f"Element {selector} disappeared from the page.")
@@ -151,6 +148,13 @@ class BasePlaywrightHelper:
             print(f"Element - {selector} not found: {e}")
             return False
 
+    def check_element_by_locator_exists(self, element, wait=False):
+        try:
+            return element.is_visible()
+        except Exception as e:
+            print(f"Element - {element} not found: {e}")
+            return False
+
     def check_element_enabled(self, selector, wait=False):
         try:
             element = self.page.locator(selector)
@@ -161,8 +165,18 @@ class BasePlaywrightHelper:
             print(f"Element - {selector} not found: {e}")
             return False
 
+    def check_element_by_locator_enabled(self, element, wait=False):
+        try:
+            return element.is_enabled()
+        except Exception as e:
+            print(f"Element - {element} not found: {e}")
+            return False
+
     def scroll_into_view(self, selector):
         element=self.page.locator(selector)
+        element.scroll_into_view_if_needed()
+
+    def scroll_element_by_locator_into_view(self, element):
         element.scroll_into_view_if_needed()
 
     def clear_element(self, selector):
@@ -172,12 +186,51 @@ class BasePlaywrightHelper:
             print(f"Cleared text from the {selector} successfully.")
         except Exception as e:
             print(f"Exception: {e}. Element - {selector} not found.")
-            raise ElementNotFoundException(f"Element not found: {selector}")
+
+
+    def clear_element_by_locator(self, element):
+        try:
+            element.clear()
+            print(f"Cleared text from the {element} successfully.")
+        except Exception as e:
+            print(f"Exception: {e}. Element - {element} not found.")
 
     def release_mouse(self):
         self.page.mouse.move(100, 100)
         self.page.mouse.down()
         self.page.mouse.up()
+
+    def get_element_by_type(self, locator_type: str, locator_value: str, name: str = None):
+        if locator_type == "role":
+            return self.page.get_by_role(locator_value, name=name)
+        elif locator_type == "text":
+            return self.page.get_by_text(locator_value)
+        elif locator_type == "label":
+            return self.page.get_by_label(locator_value)
+        elif locator_type == "placeholder":
+            return self.page.get_by_placeholder(locator_value)
+        elif locator_type == "link":
+            return self.page.get_by_role("link", name=locator_value)
+        elif locator_type == "title":
+            return self.page.get_by_title(locator_value)
+        else:
+            raise ValueError(f"Unsupported locator type: {locator_type}")
+
+    def find_element_with_locator_and_perform_action(self, element, action, inputValue=None):
+        if action == "click":
+            element.click()
+        elif action == "check":
+            element.check()
+        elif action == "select_option":
+            element.select_option(inputValue)
+        elif action == "input_text":
+            if inputValue is None:
+                raise ValueError("`inputValue` cannot be None for 'input_text' action.")
+            element.fill(inputValue)
+        elif action == "get_text":
+            return element.inner_text()
+        else:
+            raise ValueError(f"Unsupported action: {action}")
 
     def find_element_and_perform_action(self, selector, action, inputValue=None):
         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
@@ -228,7 +281,6 @@ class BasePlaywrightHelper:
             print(f"Timeout waiting for selector: {selector} to perform {action}")
         except Exception as e:
             print(f"Exception: {e}. Element not found: {selector}")
-            raise ElementNotFoundException(f"Element not found: {selector} to perform {action}")
         self.capture_screenshot(selector_filename)
 
     def get_current_url(self):
