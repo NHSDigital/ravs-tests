@@ -22,17 +22,13 @@ def shared_data():
     return {}
 
 @scenario(f'{features_directory}/find_a_patient.feature', 'Find a patient page should launch')
-def test_find_a_patient_page_should_launch(site, care_model, navigate_and_login):
+def test_find_a_patient_page_should_launch(navigate_and_login):
     pass
 
 scenarios(f'{features_directory}/find_a_patient.feature')
 
 @given('I am on the find a patient by pds details page')
 def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
-    site = "ST JOHN'S HOUSE"
-    care_model = "Vaccination Centre"
-    select_site(site)
-    select_care_model(care_model)
     click_continue_to_record_a_vaccination_homepage()
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
@@ -41,10 +37,6 @@ def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
     click_search_by_demographics_link()
 
 def step_select_site_and_care_model(site, care_model):
-    site = "ST JOHN'S HOUSE"
-    care_model = "Vaccination Centre"
-    select_site(site)
-    select_care_model(care_model)
     click_continue_to_record_a_vaccination_homepage()
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
@@ -63,8 +55,7 @@ def the_alert_messages_should_appear_nhs_number():
     attach_screenshot("required_alerts_should_appear_for_nhsNumber")
 
 @given("I am logged into the RAVS app")
-def logged_into_ravs_app(site, care_model):
-    # set_vaccinator_location(site, care_model)
+def logged_into_ravs_app():
     pass
 
 @given('I am on the PDS search page')
@@ -73,18 +64,15 @@ def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
 
 @given('I am on the find a patient by nhs number page')
 def step_i_am_on_the_find_a_patient_by_nhs_number_page(navigate_and_login):
-    step_select_site_and_care_model(site, care_model)
-    click_search_by_nhs_number_link()
+    pass
 
 @given('I am on the find a patient by demographics page')
 def step_given_i_am_on_the_find_a_patient_by_demographics_page(navigate_and_login):
-    step_select_site_and_care_model(site, care_model)
     click_search_by_demographics_link()
 
 @then('I am on the find a patient by local records page')
 @given('I am on the find a patient by local records page')
 def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
-    step_select_site_and_care_model(site, care_model)
     click_search_by_local_records_link()
 
 @given('I click the find a patient by local records link')
@@ -94,7 +82,6 @@ def step_click_the_find_a_patient_by_local_records_link():
 
 @given('I am on the create a new patient page')
 def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
-    step_select_site_and_care_model(site, care_model)
     click_search_by_local_records_link()
 
 @then('the find a patient page should be displayed')
@@ -172,21 +159,21 @@ def step_error_message_appears_for_postcode(errorMessage):
     attach_screenshot("error_message_appears_for_postcode")
     assert errorMessage in get_postcode_error_message_text()
 
-@then(parse("I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dateofbirth} and address: {address}"))
-def step_patient_information_page_should_be_available(name, nhsNumber, dateofbirth, address):
+@then(parse("I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dob} and address: {address}"))
+def step_patient_information_page_should_be_available(name, nhsNumber, dob, address):
     attach_screenshot("patient_information_page_should_be_visible")
     assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True
     assert check_patient_name_search_result_exists(name, True) == True
-    assert check_patient_dob_search_result_exists(dateofbirth, True) == True
+    assert check_patient_dob_search_result_exists(dob, True) == True
     assert check_patient_address_search_result_exists(address, True) == True
 
-@then(parse("I should be directed to the patient's information page and show {name}, {nhsNumber}, {dateofbirth} and {address} details"))
-def patient_information_page_should_be_available(name, nhsNumber, dateofbirth, address):
+@then(parse("I should be directed to the patient's information page and show {name}, {nhsNumber}, {dob} and {address} details"))
+def patient_information_page_should_be_available(name, nhsNumber, dob, address):
     attach_screenshot("patient_information_page_should_be_visible")
     if name.lower() != "Not found".lower():
         assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True
         assert check_patient_name_search_result_exists(name, True) == True
-        assert check_patient_dob_search_result_exists(dateofbirth, True) == True
+        assert check_patient_dob_search_result_exists(dob, True) == True
         assert check_patient_address_search_result_exists(address, True) == True
     else:
         assert check_patient_nhs_number_not_found_message_exists(format_nhs_number(nhsNumber), True) == True
