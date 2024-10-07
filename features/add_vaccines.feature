@@ -16,6 +16,6 @@ Feature: Add vaccine to site
     Then the vaccine is already added to site warning should appear
 
     Examples:
-      | site         | vaccine  | vaccineType                 |
-      | ALBERT HOUSE | COVID-19 | Spikevax JN.1               |
-      | ALBERT HOUSE | Flu      | Flucelvax Tetra - QIVc      |
+      | site         | vaccine  | vaccineType                       |
+      | ALBERT HOUSE | COVID-19 | Comirnaty Original/Omicron BA.4-5 |
+      | ALBERT HOUSE | Flu      | Flucelvax Tetra - QIVc            |

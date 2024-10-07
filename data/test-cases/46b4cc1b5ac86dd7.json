@@ -1,0 +1,226 @@
+{
+  "uid" : "46b4cc1b5ac86dd7",
+  "name" : "Demographics: Search does not find existing patients if any of their details are wrong [last name-Bill-Gartoni-23/6/1946-DN18 5DW-Male]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Search does not find existing patients if any of their details are wrong",
+  "historyId" : "e5ebaaff199788c0e40c4f0e238e8e36",
+  "time" : {
+    "start" : 1728287018700,
+    "stop" : 1728287116507,
+    "duration" : 97807
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1728287018701,
+        "stop" : 1728287113309,
+        "duration" : 94608
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ef7d33395200786b",
+        "name" : "qa_chrome_129.0.6668.89_user_has_selected_site.png",
+        "source" : "ef7d33395200786b.png",
+        "type" : "image/png",
+        "size" : 59189
+      }, {
+        "uid" : "9b72fbd57dc4913",
+        "name" : "qa_chrome_129.0.6668.89_user_has_selected_care_model.png",
+        "source" : "9b72fbd57dc4913.png",
+        "type" : "image/png",
+        "size" : 59189
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Gartoni, and 23/6/1946",
+      "time" : {
+        "start" : 1728287113309,
+        "stop" : 1728287114973,
+        "duration" : 1664
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e49230aab73d06a3",
+        "name" : "qa_chrome_129.0.6668.89_add_mandatory_patient_information.png",
+        "source" : "e49230aab73d06a3.png",
+        "type" : "image/png",
+        "size" : 86092
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode DN18 5DW",
+      "time" : {
+        "start" : 1728287114973,
+        "stop" : 1728287115422,
+        "duration" : 449
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "11007c2eb78988b5",
+        "name" : "qa_chrome_129.0.6668.89_enter_postcode.png",
+        "source" : "11007c2eb78988b5.png",
+        "type" : "image/png",
+        "size" : 87889
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Male",
+      "time" : {
+        "start" : 1728287115423,
+        "stop" : 1728287115856,
+        "duration" : 433
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "98cbca4bb66a4f63",
+        "name" : "qa_chrome_129.0.6668.89_select_gender.png",
+        "source" : "98cbca4bb66a4f63.png",
+        "type" : "image/png",
+        "size" : 87357
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1728287115856,
+        "stop" : 1728287116190,
+        "duration" : 334
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the patient",
+      "time" : {
+        "start" : 1728287116191,
+        "stop" : 1728287116367,
+        "duration" : 176
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6c91457badea52fd",
+        "name" : "qa_chrome_129.0.6668.89_no_results_found_should_be_visible.png",
+        "source" : "6c91457badea52fd.png",
+        "type" : "image/png",
+        "size" : 87155
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I can see an option to create a new patient",
+      "time" : {
+        "start" : 1728287116367,
+        "stop" : 1728287116507,
+        "duration" : 140
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5b406be996e286a0",
+        "name" : "qa_chrome_129.0.6668.89_check_create_new_patient_button_is_visible.png",
+        "source" : "5b406be996e286a0.png",
+        "type" : "image/png",
+        "size" : 113388
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 7,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "5bc1413cc751"
+  }, {
+    "name" : "thread",
+    "value" : "1044-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "gender",
+    "value" : "Male"
+  }, {
+    "name" : "lastName",
+    "value" : "Gartoni"
+  }, {
+    "name" : "postcode",
+    "value" : "DN18 5DW"
+  }, {
+    "name" : "scenario",
+    "value" : "last name"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "46b4cc1b5ac86dd7.json",
+  "parameterValues" : [ "23/6/1946", "Bill", "Male", "Gartoni", "DN18 5DW", "last name" ]
+}

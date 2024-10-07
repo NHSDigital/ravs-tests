@@ -1,0 +1,226 @@
+{
+  "uid" : "f37c34e54e4138b4",
+  "name" : "Demographics: Search does not find existing patients if any of their details are wrong [postcode-Bill-Garton-23/6/1946-M6 3AA-Male]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Search does not find existing patients if any of their details are wrong",
+  "historyId" : "d60afbfd105108d113640870ead663de",
+  "time" : {
+    "start" : 1728286961018,
+    "stop" : 1728287029628,
+    "duration" : 68610
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1728286961018,
+        "stop" : 1728287026395,
+        "duration" : 65377
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c337987f1f29af52",
+        "name" : "qa_chrome_129.0.6668.89_user_has_selected_site.png",
+        "source" : "c337987f1f29af52.png",
+        "type" : "image/png",
+        "size" : 59189
+      }, {
+        "uid" : "cf0f102127b3b9f9",
+        "name" : "qa_chrome_129.0.6668.89_user_has_selected_care_model.png",
+        "source" : "cf0f102127b3b9f9.png",
+        "type" : "image/png",
+        "size" : 59189
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/6/1946",
+      "time" : {
+        "start" : 1728287026395,
+        "stop" : 1728287028076,
+        "duration" : 1681
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3c30268870881eb1",
+        "name" : "qa_chrome_129.0.6668.89_add_mandatory_patient_information.png",
+        "source" : "3c30268870881eb1.png",
+        "type" : "image/png",
+        "size" : 86060
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode M6 3AA",
+      "time" : {
+        "start" : 1728287028076,
+        "stop" : 1728287028525,
+        "duration" : 449
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4e6568c463fcc8ee",
+        "name" : "qa_chrome_129.0.6668.89_enter_postcode.png",
+        "source" : "4e6568c463fcc8ee.png",
+        "type" : "image/png",
+        "size" : 87489
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Male",
+      "time" : {
+        "start" : 1728287028526,
+        "stop" : 1728287028959,
+        "duration" : 433
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "510a3b7dddfd1c6c",
+        "name" : "qa_chrome_129.0.6668.89_select_gender.png",
+        "source" : "510a3b7dddfd1c6c.png",
+        "type" : "image/png",
+        "size" : 86935
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1728287028960,
+        "stop" : 1728287029293,
+        "duration" : 333
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the patient",
+      "time" : {
+        "start" : 1728287029294,
+        "stop" : 1728287029482,
+        "duration" : 188
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ed50d20fd30a40f4",
+        "name" : "qa_chrome_129.0.6668.89_no_results_found_should_be_visible.png",
+        "source" : "ed50d20fd30a40f4.png",
+        "type" : "image/png",
+        "size" : 86728
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I can see an option to create a new patient",
+      "time" : {
+        "start" : 1728287029482,
+        "stop" : 1728287029628,
+        "duration" : 146
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8adb911942b55781",
+        "name" : "qa_chrome_129.0.6668.89_check_create_new_patient_button_is_visible.png",
+        "source" : "8adb911942b55781.png",
+        "type" : "image/png",
+        "size" : 111579
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 7,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "5bc1413cc751"
+  }, {
+    "name" : "thread",
+    "value" : "1041-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "gender",
+    "value" : "Male"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "postcode",
+    "value" : "M6 3AA"
+  }, {
+    "name" : "scenario",
+    "value" : "postcode"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f37c34e54e4138b4.json",
+  "parameterValues" : [ "23/6/1946", "Bill", "Male", "Garton", "M6 3AA", "postcode" ]
+}
