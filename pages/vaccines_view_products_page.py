@@ -1,7 +1,7 @@
 from init_helpers import *
 import re
 
-ADD_BATCH_LINK = ("(//a[text()='Add batch'])[1]")
+ADD_BATCH_LINK = ("//a[text()='Add batch']")
 
 def click_add_batch_link():
     find_element_and_perform_action(ADD_BATCH_LINK, "click")

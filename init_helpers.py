@@ -136,21 +136,9 @@ def check_element_exists(element, wait=False):
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
-def check_element_by_locator_exists(element, wait=False):
-    try:
-        return playwright_helper_instance.check_element_by_locator_exists(element, wait)
-    except Exception as e:
-        pytest.fail(f"An error occurred: {e}")
-
 def check_element_enabled(element, wait=False):
     try:
         return playwright_helper_instance.check_element_enabled(element, wait)
-    except Exception as e:
-        pytest.fail(f"An error occurred: {e}")
-
-def check_element_by_locator_enabled(element, wait=False):
-    try:
-        return playwright_helper_instance.check_element_by_locator_enabled(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
@@ -168,12 +156,6 @@ def capture_screenshot(filename):
 
 def find_element_and_perform_action(element, action, inputValue=None):
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
-
-def find_element_with_locator_and_perform_action(element, action, inputValue=None):
-    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)
-
-def get_element_by_type(locator_type, locator_value, name=None):
-    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name)
 
 def release_mouse():
     return playwright_helper_instance.release_mouse()
