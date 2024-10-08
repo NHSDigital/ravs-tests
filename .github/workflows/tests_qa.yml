@@ -139,6 +139,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+          destination_branch: gh-pages-qa
           keep_files: true
 
       - name: Check contents of gh-pages
