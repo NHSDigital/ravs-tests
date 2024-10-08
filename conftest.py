@@ -114,10 +114,6 @@ def click_back_button_recording_consent(request):
 # Fixture for logging in and navigating to appointments
 @pytest.fixture(scope='function')
 def login_and_navigate_to_appointments(site, care_model,  navigate_and_login):
-    # select_site(site)
-    # select_care_model(care_model)
-    # if care_model == "Care Home":
-    #     enter_carehome_name("WHITESTONES CARE HOME")
     click_continue_to_record_a_vaccination_homepage()
     click_appointments_nav_link()
 
@@ -130,10 +126,7 @@ def set_vaccinator_location(site, care_model):
 
 @pytest.fixture(scope='function')
 def login_and_navigate_to_homepage(request, navigate_and_login):
-    #select_site("NEELIMA HOUSE")
-    #select_care_model("Vaccination Centre")
-    #click_continue_to_record_a_vaccination_homepage()
-    pass
+    click_continue_to_record_a_vaccination_homepage()
 
 # Fixture for logging in and navigating to appointments open first patient
 @pytest.fixture(scope='function')
@@ -162,8 +155,7 @@ def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_
 
 # Fixture for logging in and navigating to find a patient
 @pytest.fixture(scope='function')
-def login_and_navigate_to_find_a_patient(request, login_and_set_vaccinator_location):
-    # set_vaccinator_location()
+def login_and_navigate_to_find_a_patient(request):
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
