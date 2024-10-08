@@ -1,0 +1,214 @@
+{
+  "uid" : "d08e77c93ab153ff",
+  "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - month-Bill-Garton-23/12/1946-DN18 5DW-Male]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Search does not find existing patients if any of their details are wrong",
+  "historyId" : "ff9ea5cebff9956ef552f742691503f4",
+  "time" : {
+    "start" : 1728409576412,
+    "stop" : 1728409587669,
+    "duration" : 11257
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1728409576412,
+        "stop" : 1728409586648,
+        "duration" : 10236
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/12/1946",
+      "time" : {
+        "start" : 1728409586649,
+        "stop" : 1728409586966,
+        "duration" : 317
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a500aa0c43bace01",
+        "name" : "dev_chrome_129.0.6668.89_add_mandatory_patient_information.png",
+        "source" : "a500aa0c43bace01.png",
+        "type" : "image/png",
+        "size" : 86121
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode DN18 5DW",
+      "time" : {
+        "start" : 1728409586966,
+        "stop" : 1728409587136,
+        "duration" : 170
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "90c9aaf18afc686e",
+        "name" : "dev_chrome_129.0.6668.89_enter_invalid_postcode.png",
+        "source" : "90c9aaf18afc686e.png",
+        "type" : "image/png",
+        "size" : 87915
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Male",
+      "time" : {
+        "start" : 1728409587137,
+        "stop" : 1728409587322,
+        "duration" : 185
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7ae5f9c15faa34ff",
+        "name" : "dev_chrome_129.0.6668.89_select_gender.png",
+        "source" : "7ae5f9c15faa34ff.png",
+        "type" : "image/png",
+        "size" : 87387
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1728409587322,
+        "stop" : 1728409587362,
+        "duration" : 40
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the patient",
+      "time" : {
+        "start" : 1728409587363,
+        "stop" : 1728409587519,
+        "duration" : 156
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8c39d1b5c9eb34f9",
+        "name" : "dev_chrome_129.0.6668.89_no_results_found_should_be_visible.png",
+        "source" : "8c39d1b5c9eb34f9.png",
+        "type" : "image/png",
+        "size" : 87229
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I can see an option to create a new patient",
+      "time" : {
+        "start" : 1728409587520,
+        "stop" : 1728409587669,
+        "duration" : 149
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ec9538ff82b1318c",
+        "name" : "dev_chrome_129.0.6668.89_check_create_new_patient_button_is_visible.png",
+        "source" : "ec9538ff82b1318c.png",
+        "type" : "image/png",
+        "size" : 113472
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "4aca8f976b84"
+  }, {
+    "name" : "thread",
+    "value" : "1044-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "23/12/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "gender",
+    "value" : "Male"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "postcode",
+    "value" : "DN18 5DW"
+  }, {
+    "name" : "scenario",
+    "value" : "dob - month"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d08e77c93ab153ff.json",
+  "parameterValues" : [ "23/12/1946", "Bill", "Male", "Garton", "DN18 5DW", "dob - month" ]
+}
