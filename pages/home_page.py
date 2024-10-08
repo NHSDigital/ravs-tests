@@ -63,6 +63,9 @@ def click_reports_nav_link():
 def click_vaccines_nav_link():
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
 
+def click_vaccines_nav_link():
+    find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
+
 def click_manage_users_nav_link():
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
 
