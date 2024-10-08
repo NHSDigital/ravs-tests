@@ -1,0 +1,194 @@
+{
+  "uid" : "f3663f2a508ec966",
+  "name" : "Record a vaccine with nhs number [11-9437541817-BIRCH HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-1-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-SDYY2-18D-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "91aecc8739b70cc4dbeaad50a6cbcc61",
+  "time" : {
+    "start" : 1728408332736,
+    "stop" : 1728408402875,
+    "duration" : 70139
+  },
+  "status" : "failed",
+  "statusMessage" : "playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"BIRCH HOUSE\")",
+  "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f64b20b82c0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[11-9437541817-BIRCH HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-1-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-SDYY2-18D-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18D', 'chosen_vaccine': 'COVID-19', 'shared_data': {'batch_...'batch_number': 'SDYY2-18D', 'care_model': 'Vaccination centre open to the public', 'chosen_vaccine': 'COVID-19', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:77: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\nconftest.py:231: in choose_vaccine_and_vaccine_type_for_patient\n    click_delivery_team_radiobutton(site)\npages/choose_vaccines_page.py:25: in click_delivery_team_radiobutton\n    find_element_with_locator_and_perform_action(element, \"check\")\ninit_helpers.py:173: in find_element_with_locator_and_perform_action\n    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)\nhelpers/playwrightHelper.py:252: in find_element_with_locator_and_perform_action\n    element.check()\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:15016: in check\n    self._sync(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:141: in check\n    return await self._frame.check(self._selector, strict=True, **params)\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:741: in check\n    await self._channel.send(\"check\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f64b34bb1d0>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f64b02dd4e0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"BIRCH HOUSE\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:514: TimeoutError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"BIRCH HOUSE\")",
+    "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f64b20b82c0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[11-9437541817-BIRCH HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-1-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-SDYY2-18D-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18D', 'chosen_vaccine': 'COVID-19', 'shared_data': {'batch_...'batch_number': 'SDYY2-18D', 'care_model': 'Vaccination centre open to the public', 'chosen_vaccine': 'COVID-19', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:77: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\nconftest.py:231: in choose_vaccine_and_vaccine_type_for_patient\n    click_delivery_team_radiobutton(site)\npages/choose_vaccines_page.py:25: in click_delivery_team_radiobutton\n    find_element_with_locator_and_perform_action(element, \"check\")\ninit_helpers.py:173: in find_element_with_locator_and_perform_action\n    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)\nhelpers/playwrightHelper.py:252: in find_element_with_locator_and_perform_action\n    element.check()\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:15016: in check\n    self._sync(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:141: in check\n    return await self._frame.check(self._selector, strict=True, **params)\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:741: in check\n    await self._channel.send(\"check\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f64b34bb1d0>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f64b02dd4e0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"BIRCH HOUSE\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:514: TimeoutError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Vaccination Centre and get patient details for 9437541817 with option 11 and choose to vaccinate with vaccine details as COVID-19, SDYY2-18D with 19/10/2026",
+      "time" : {
+        "start" : 1728408332737,
+        "stop" : 1728408368073,
+        "duration" : 35336
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1728408368074,
+        "stop" : 1728408368689,
+        "duration" : 615
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e0703fe5eec89eb0",
+        "name" : "dev_chrome_129.0.6668.89_entered_nhs_number_as9437541817_and_clicked_search_for_patient_button.png",
+        "source" : "e0703fe5eec89eb0.png",
+        "type" : "image/png",
+        "size" : 62130
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient FLORINDA DUNNER",
+      "time" : {
+        "start" : 1728408368689,
+        "stop" : 1728408369166,
+        "duration" : 477
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "de3fd635ec0568df",
+        "name" : "dev_chrome_129.0.6668.89_before_clicking_patient_name.png",
+        "source" : "de3fd635ec0568df.png",
+        "type" : "image/png",
+        "size" : 61046
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, SDYY2-18D with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1728408369166,
+        "stop" : 1728408402875,
+        "duration" : 33709
+      },
+      "status" : "failed",
+      "statusMessage" : "Locator.check: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"BIRCH HOUSE\")\n",
+      "statusTrace" : "playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"BIRCH HOUSE\")\n\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dc8bcc2d5283098e",
+        "name" : "dev_chrome_129.0.6668.89_clicked_on_patient_FLORINDA DUNNER_and_clicked_choose_vaccine_button.png",
+        "source" : "dc8bcc2d5283098e.png",
+        "type" : "image/png",
+        "size" : 83813
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7778db241fe3"
+  }, {
+    "name" : "thread",
+    "value" : "1047-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "32 HOLLAND ROAD, MANCHESTER, M8 4NP"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-3"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-18D"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "27/3/1957"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "11"
+  }, {
+    "name" : "name",
+    "value" : "FLORINDA DUNNER"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437541817"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "f3663f2a508ec966.json",
+  "parameterValues" : [ "32 HOLLAND ROAD, MANCHESTER, M8 4NP", "today-3", "19/10/2026", "SDYY2-18D", "Vaccination Centre", "COVID-19", "yes", "27/3/1957", "yes", "11", "FLORINDA DUNNER", "9437541817", "BIRCH HOUSE", "yes", "today-1" ]
+}
