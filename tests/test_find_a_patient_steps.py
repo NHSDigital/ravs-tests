@@ -123,7 +123,7 @@ def step_i_clear_the_nhs_number():
 @then(parse('I can see an nhs number error message {errorMessage}'))
 def step_error_message_appears_for_nhs_number(errorMessage):
     attach_screenshot("error_message_appears_for_nhs_number")
-    assert errorMessage in get_nhs_number_error_message_text()
+    assert check_nhs_number_error_message_text_exists(errorMessage) is True
 
 @then('the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode')
 def the_alert_messages_should_appear_forename_surname_dob_gender_postcode():
@@ -135,29 +135,29 @@ def the_alert_messages_should_appear_forename_surname_dob_gender_postcode():
 @then('the alert messages should appear for first name, surname, and date of birth')
 def step_the_alert_messages_should_appear_forename_surname_dob_gender_postcode():
     attach_screenshot("alert_messages_should_appear_for_missing_fields")
-    assert "Enter the first name" in get_first_name_error_message_text()
-    assert "Enter the last name" in get_last_name_error_message_text()
-    assert "Enter the date of birth" in get_dob_error_message_text()
+    assert check_first_name_error_message_text_exists() is True
+    assert check_last_name_error_message_text_exists() is True
+    assert check_dob_error_message_text_exists() is True
 
 @then(parse('I can see a first name error message {errorMessage}'))
 def step_error_message_appears_for_first_name(errorMessage):
     attach_screenshot("error_message_appears_for_first_name")
-    assert errorMessage in get_first_name_error_message_text()
+    assert check_first_name_error_message_text_exists() is True
 
 @then(parse('I can see a last name error message {errorMessage}'))
 def step_error_message_appears_for_last_name(errorMessage):
     attach_screenshot("error_message_appears_for_last_name")
-    assert errorMessage in get_last_name_error_message_text()
+    assert check_last_name_error_message_text_exists() is True
 
 @then(parse('I can see a dob error message {errorMessage}'))
 def step_error_message_appears_for_dob(errorMessage):
     attach_screenshot("error_message_appears_for_dob")
-    assert errorMessage in get_dob_error_message_text()
+    assert check_dob_error_message_text_exists() is True
 
 @then(parse('I can see a postcode error message {errorMessage}'))
 def step_error_message_appears_for_postcode(errorMessage):
     attach_screenshot("error_message_appears_for_postcode")
-    assert errorMessage in get_postcode_error_message_text()
+    assert check_postcode_invalid_error_message_text_exists() is True
 
 @then(parse("I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dob} and address: {address}"))
 def step_patient_information_page_should_be_available(name, nhsNumber, dob, address):
@@ -176,7 +176,7 @@ def patient_information_page_should_be_available(name, nhsNumber, dob, address):
         assert check_patient_dob_search_result_exists(dob, True) == True
         assert check_patient_address_search_result_exists(address, True) == True
     else:
-        assert check_patient_nhs_number_not_found_message_exists(format_nhs_number(nhsNumber), True) == True
+        assert check_patient_not_found_for_nhs_number_message_exists(format_nhs_number(nhsNumber), True) == True
         assert check_create_new_patient_button_exists(True) == True
 
 @then("I can see the patient's local record in the search results")
@@ -231,8 +231,8 @@ def step_select_gender(gender):
 @given(parse("I enter the postcode {postcode}"))
 @when(parse("I enter the postcode {postcode}"))
 def step_enter_postcode(postcode):
-    enter_postcode(postcode)
-    attach_screenshot("enter_postcode")
+    enter_optional_postcode(postcode)
+    attach_screenshot("enter_invalid_postcode")
 
 @given("I generate random data for a new patient")
 def step_generate_random_patient_details(shared_data):
@@ -248,14 +248,22 @@ def step_generate_random_patient_details(shared_data):
     shared_data["last_name"] = fake.last_name()
     shared_data["gender"] = random.choice(gender)
     shared_data["postcode"] = fake.postcode()
-    # dob is presented without leading zeros on the patient added page, so they are stripped here
     dob = fake.date_of_birth()
     day, month, year = str(dob.day), str(dob.month), str(dob.year)
     dob_string = f"{day}/{month}/{year}"
     shared_data["dob"] = dob_string
 
-@given("I enter the new patient details")
+@given("I enter the new patient details on find by demographics page")
+def step_add_mandatory_patient_information(shared_data):
+    enter_first_name(shared_data["first_name"])
+    enter_last_name(shared_data["last_name"])
+    select_optional_gender(shared_data["gender"])
+    enter_optional_postcode(shared_data["postcode"])
+    enter_dob(shared_data["dob"])
+    attach_screenshot("add_mandatory_new_patient_information")
+
 @when("I enter the new patient details")
+@given("I enter the new patient details on create a new patient page")
 @then("I enter the new patient details")
 def step_add_mandatory_patient_information(shared_data):
     enter_first_name(shared_data["first_name"])

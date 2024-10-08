@@ -15,33 +15,9 @@ def click_site_radiobutton(site):
     element = get_element_by_type("label", site)
     find_element_with_locator_and_perform_action(element, "check")
 
-# def click_covid_radiobutton():
-#     element = get_element_by_type(*COVID_RADIOBUTTON)
-#     find_element_with_locator_and_perform_action(element, "check")
-
-# def click_flu_radiobutton():
-#     element = get_element_by_type(*FLU_RADIOBUTTON)
-#     find_element_with_locator_and_perform_action(element, "check")
-
-# def click_rsv_radiobutton():
-#     element = get_element_by_type(RSV_RADIOBUTTON)
-#     find_element_with_locator_and_perform_action(element, "check")
-
-# def click_pertussis_radiobutton():
-#     element = get_element_by_type(PERTUSSIS_RADIOBUTTON)
-#     find_element_with_locator_and_perform_action(element, "check")
-
 def click_back_button_choosing_vaccine_for_patient():
     element = get_element_by_type(BACK_ELEMENT)
     find_element_with_locator_and_perform_action(element, "click")
-
-# def click_consent_vaccine_radiobutton(vaccine):
-#     element = (f"//label[contains(text(), '{vaccine}')]/preceding-sibling::input[@name='VaccineProgramId']")
-#     find_element_and_perform_action(element, "click")
-
-# def click_consent_vaccine_type_radiobutton(vaccine_type):
-#     element = (f"//label[contains(text(), '{vaccine_type}')]/preceding-sibling::input[@name='ConsentVaccineId']")
-#     find_element_and_perform_action(element, "click")
 
 def click_delivery_team_radiobutton(deliveryTeam):
     element = get_element_by_type("label", deliveryTeam)
@@ -63,34 +39,6 @@ def click_vaccine_radiobutton(vaccine):
         find_element_with_locator_and_perform_action(element, "check")
     else:
         print("Vaccine not available")
-
-# def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type):
-#     element = get_covid_consent_vaccine_xpath(vaccine_type.lower())
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
-# def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type):
-#     element = get_flu_consent_vaccine_xpath(vaccine_type.lower())
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
-# def click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type):
-#     element = get_rsv_consent_vaccine_xpath(vaccine_type.lower())
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
-# def click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_consent_page(vaccine_type):
-#     element = get_pertussis_consent_vaccine_xpath(vaccine_type.lower())
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
 
 def check_back_button_exists():
     return check_element_by_locator_exists(get_element_by_type(*BACK_ELEMENT), True)
