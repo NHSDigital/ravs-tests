@@ -51,6 +51,8 @@ def format_nhs_number(nhs_number):
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
 
+
+
 @pytest.fixture(scope='function')
 def playwright_helper(request):
     helper = PlaywrightHelper(get_working_directory(), config)
