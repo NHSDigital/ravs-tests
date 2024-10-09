@@ -144,6 +144,14 @@ def click_element(element):
     element = get_element_by_type(*element)
     find_element_and_perform_action(element, "click")
 
+def get_element_text(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "get_text")
+
+def clear_element(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "clear")
+
 def check_element(element):
     element = get_element_by_type(*element)
     find_element_and_perform_action(element, "check")
@@ -187,11 +195,11 @@ def check_element_by_locator_enabled(element, wait=False):
 def scroll_into_view(element):
     return playwright_helper_instance.scroll_into_view(element)
 
-def wait_for_element_to_appear(selector):
-    playwright_helper_instance.wait_for_element_to_appear(selector)
+def wait_for_element_to_appear(*selector):
+    playwright_helper_instance.wait_for_element_to_appear(*selector)
 
-def clear_element(element):
-    return playwright_helper_instance.clear_element(element)
+# def clear_element(element):
+#     return playwright_helper_instance.clear_element(element)
 
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
