@@ -63,7 +63,7 @@ def load_config_from_env():
 def sanitize_filename(filename):
     """
     Remove or replace illegal characters in filenames for cross-platform compatibility.
-    For example, Windows does not allow: \ / : * ? " < > |
+    For example, Windows does not allow: \\ / : * ? " < > |
     """
     return re.sub(r'[<>:"/\\|?*]', '_', filename)
 
