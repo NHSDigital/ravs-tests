@@ -127,10 +127,10 @@ def check_last_name_error_message_text_exists():
     return check_if_element_exists(LAST_NAME_INPUT_ERROR_LABEL)
 
 def check_dob_error_message_text_exists():
-   return check_if_element_exists(DOB_INPUT_ERROR_LABEL)
+    return check_if_element_exists(DOB_INPUT_ERROR_LABEL)
 
 def check_postcode_invalid_error_message_text_exists():
-   return check_if_element_exists(POSTCODE_INVALID_INPUT_ERROR_LABEL)
+    return check_if_element_exists(POSTCODE_INVALID_INPUT_ERROR_LABEL)
 
 def check_patient_name_search_result_exists(name, wait):
     element = (f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{name.lower()}')]")
