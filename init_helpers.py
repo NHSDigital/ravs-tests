@@ -1,4 +1,5 @@
 import os
+import re
 from helpers.apiHelper import ApiHelper
 from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
@@ -59,6 +60,13 @@ def load_config_from_env():
     }
     return config
 
+def sanitize_filename(filename):
+    """
+    Remove or replace illegal characters in filenames for cross-platform compatibility.
+    For example, Windows does not allow: \\ / : * ? " < > |
+    """
+    return re.sub(r'[<>:"/\\|?*]', '_', filename)
+
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
@@ -66,16 +74,18 @@ def attach_screenshot(filename):
     else:
         filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
 
-    directory = os.path.dirname(filename)
-    if directory:
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
+    filename = sanitize_filename(filename)
+    directory = os.path.join('data', 'attachments')
+    full_path = os.path.join(directory, filename)
 
-    logging.debug(f"Filename: {filename}")
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+
+    logging.debug(f"Filename: {full_path}")
 
     try:
-        screenshot = capture_screenshot(filename)
+        screenshot = capture_screenshot(full_path)
         logging.debug(f"Screenshot saved at: {screenshot}")
-        allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+        allure.attach.file(screenshot, name=f"{full_path}", attachment_type=allure.attachment_type.PNG)
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
