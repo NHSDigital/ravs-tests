@@ -57,13 +57,13 @@ def enter_last_name(last_name):
     input_text_into_element(LAST_NAME_INPUT,last_name)
 
 def enter_dob_day(dob_day):
-    input_text_into_element(DOB_DAY_INPUT, dob_day)
+    input_text_into_element(DOB_DAY_INPUT, str(dob_day))
 
 def enter_dob_month(dob_month):
-    input_text_into_element(DOB_MONTH_INPUT, dob_month)
+    input_text_into_element(DOB_MONTH_INPUT, str(dob_month))
 
 def enter_dob_year(dob_year):
-    input_text_into_element(DOB_YEAR_INPUT, dob_year)
+    input_text_into_element(DOB_YEAR_INPUT, str(dob_year))
 
 def enter_dob(dob):
     format="%d/%m/%Y"
@@ -78,7 +78,7 @@ def select_optional_gender(gender):
     select_option(GENDER_OPTIONAL_SELECT, str(gender_value))
 
 def enter_optional_postcode(postcode):
-    input_text_into_element(POSTCODE_OPTIONAL_INPUT)
+    input_text_into_element(POSTCODE_OPTIONAL_INPUT, postcode)
 
 def select_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
@@ -118,7 +118,8 @@ def check_error_appears_for_first_name(wait):
     return check_if_element_exists(FIRST_NAME_INPUT_ERROR_LABEL, wait)
 
 def check_nhs_number_error_message_text_exists(errorMessage):
-    return check_if_element_exists("text", f"Error: {errorMessage}")
+    element = ("text", f"Error: {errorMessage}")
+    return check_if_element_exists(element)
 
 def check_first_name_error_message_text_exists():
     return check_if_element_exists(FIRST_NAME_INPUT_ERROR_LABEL)
@@ -147,8 +148,7 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = ("role", "heading", f"No result found for {nhsNumber}")
-    wait_for_element_to_appear(get_element_by_type(*element))
-    return check_element_exists(element, wait)
+    return check_if_element_exists(element, wait)
 
 def check_patient_not_found_message_exists(wait):
     element = (f"//h3[contains(text(), 'No result')]")
