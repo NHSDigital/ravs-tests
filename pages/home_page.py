@@ -19,6 +19,7 @@ def click_nav_link_bar_toggler():
     click_element(NAV_LINK_BAR_TOGGLER)
 
 def check_logout_button_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
     return check_if_element_exists(LOGOUT_NAV_ELEMENT, True)
 
 def check_navbar_toggle_exists_without_waiting():
