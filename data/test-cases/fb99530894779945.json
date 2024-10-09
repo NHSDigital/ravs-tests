@@ -1,0 +1,143 @@
+{
+  "uid" : "fb99530894779945",
+  "name" : "NHS Number: Searching with invalid NHS number shows an error [9753108642-Enter a correct NHS number]",
+  "fullName" : "/app/features/find_a_patient.feature:NHS Number: Searching with invalid NHS number shows an error",
+  "historyId" : "4cb2e2253d26b616069dd8a9fc22175b",
+  "time" : {
+    "start" : 1728478125455,
+    "stop" : 1728478135950,
+    "duration" : 10495
+  },
+  "status" : "failed",
+  "statusMessage" : "TypeError: get_element_by_type() takes from 2 to 3 positional arguments but 4 were given",
+  "statusTrace" : "fixturefunc = <function step_error_message_appears_for_nhs_number at 0x7fcbf06cbf60>\nrequest = <FixtureRequest for <Function test_nhs_number_searching_with_invalid_nhs_number_shows_an_error[9753108642-Enter a correct NHS number]>>\nkwargs = {'errorMessage': 'Enter a correct NHS number'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_find_a_patient_steps.py:126: in step_error_message_appears_for_nhs_number\n    assert check_nhs_number_error_message_text_exists(errorMessage) is True\npages/find_a_patient_page.py:121: in check_nhs_number_error_message_text_exists\n    return check_if_element_exists(\"text\", f\"Error: {errorMessage}\")\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nelement = 'text', wait = 'Error: Enter a correct NHS number'\n\n    def check_if_element_exists(element, wait=False):\n>       element = get_element_by_type(*element)\nE       TypeError: get_element_by_type() takes from 2 to 3 positional arguments but 4 were given\n\ninit_helpers.py:142: TypeError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "TypeError: get_element_by_type() takes from 2 to 3 positional arguments but 4 were given",
+    "statusTrace" : "fixturefunc = <function step_error_message_appears_for_nhs_number at 0x7fcbf06cbf60>\nrequest = <FixtureRequest for <Function test_nhs_number_searching_with_invalid_nhs_number_shows_an_error[9753108642-Enter a correct NHS number]>>\nkwargs = {'errorMessage': 'Enter a correct NHS number'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_find_a_patient_steps.py:126: in step_error_message_appears_for_nhs_number\n    assert check_nhs_number_error_message_text_exists(errorMessage) is True\npages/find_a_patient_page.py:121: in check_nhs_number_error_message_text_exists\n    return check_if_element_exists(\"text\", f\"Error: {errorMessage}\")\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nelement = 'text', wait = 'Error: Enter a correct NHS number'\n\n    def check_if_element_exists(element, wait=False):\n>       element = get_element_by_type(*element)\nE       TypeError: get_element_by_type() takes from 2 to 3 positional arguments but 4 were given\n\ninit_helpers.py:142: TypeError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by nhs number page",
+      "time" : {
+        "start" : 1728478125455,
+        "stop" : 1728478133291,
+        "duration" : 7836
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter 9753108642 as the nhs number",
+      "time" : {
+        "start" : 1728478133291,
+        "stop" : 1728478135705,
+        "duration" : 2414
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1728478135706,
+        "stop" : 1728478135786,
+        "duration" : 80
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see an nhs number error message Enter a correct NHS number",
+      "time" : {
+        "start" : 1728478135786,
+        "stop" : 1728478135950,
+        "duration" : 164
+      },
+      "status" : "failed",
+      "statusMessage" : "get_element_by_type() takes from 2 to 3 positional arguments but 4 were given",
+      "statusTrace" : "TypeError: get_element_by_type() takes from 2 to 3 positional arguments but 4 were given\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "eeaaceee66eb5cf6",
+        "name" : "dev_chrome_129.0.6668.100_error_message_appears_for_nhs_number.png",
+        "source" : "eeaaceee66eb5cf6.png",
+        "type" : "image/png",
+        "size" : 70957
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "8121528f60b7"
+  }, {
+    "name" : "thread",
+    "value" : "1046-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "errorMessage",
+    "value" : "Enter a correct NHS number"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9753108642"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "fb99530894779945.json",
+  "parameterValues" : [ "Enter a correct NHS number", "9753108642" ]
+}

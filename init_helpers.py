@@ -130,6 +130,26 @@ def find_elements(selector):
 def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
+def click_element(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "click")
+
+def check_element(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "check")
+
+def check_if_element_exists(element, wait=False):
+    element = get_element_by_type(*element)
+    return check_element_exists(element, wait)
+
+def input_text_into_element(element, text):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "input_text", text)
+
+def select_option(element, option):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "select_option", option)
+
 def check_element_exists(element, wait=False):
     try:
         return playwright_helper_instance.check_element_exists(element, wait)
