@@ -1,4 +1,5 @@
 import os
+import re
 from helpers.apiHelper import ApiHelper
 from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
@@ -59,6 +60,13 @@ def load_config_from_env():
     }
     return config
 
+def sanitize_filename(filename):
+    """
+    Remove or replace illegal characters in filenames for cross-platform compatibility.
+    For example, Windows does not allow: \\ / : * ? " < > |
+    """
+    return re.sub(r'[<>:"/\\|?*]', '_', filename)
+
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
@@ -66,16 +74,18 @@ def attach_screenshot(filename):
     else:
         filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
 
-    directory = os.path.dirname(filename)
-    if directory:
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
+    filename = sanitize_filename(filename)
+    directory = os.path.join('data', 'attachments')
+    full_path = os.path.join(directory, filename)
 
-    logging.debug(f"Filename: {filename}")
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+
+    logging.debug(f"Filename: {full_path}")
 
     try:
-        screenshot = capture_screenshot(filename)
+        screenshot = capture_screenshot(full_path)
         logging.debug(f"Screenshot saved at: {screenshot}")
-        allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+        allure.attach.file(screenshot, name=f"{full_path}", attachment_type=allure.attachment_type.PNG)
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
@@ -130,6 +140,34 @@ def find_elements(selector):
 def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
+def click_element(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "click")
+
+def get_element_text(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "get_text")
+
+def clear_element(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "clear")
+
+def check_element(element):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "check")
+
+def check_if_element_exists(element, wait=False):
+    element = get_element_by_type(*element)
+    return check_element_exists(element, wait)
+
+def input_text_into_element(element, text):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "input_text", text)
+
+def select_option(element, option):
+    element = get_element_by_type(*element)
+    find_element_and_perform_action(element, "select_option", option)
+
 def check_element_exists(element, wait=False):
     try:
         return playwright_helper_instance.check_element_exists(element, wait)
@@ -157,11 +195,11 @@ def check_element_by_locator_enabled(element, wait=False):
 def scroll_into_view(element):
     return playwright_helper_instance.scroll_into_view(element)
 
-def wait_for_element_to_appear(selector):
-    playwright_helper_instance.wait_for_element_to_appear(selector)
+def wait_for_element_to_appear(*selector):
+    playwright_helper_instance.wait_for_element_to_appear(*selector)
 
-def clear_element(element):
-    return playwright_helper_instance.clear_element(element)
+# def clear_element(element):
+#     return playwright_helper_instance.clear_element(element)
 
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
