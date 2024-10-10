@@ -50,11 +50,11 @@ class BasePlaywrightHelper:
 
     def launch_chrome(self, headless_mode):
         try:
-            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen"])
+            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--disable-gpu", "--no-sandbox"])
             self.context = self.browser.new_context()
             self.page = self.context.new_page()
         except Exception as e:
-            print(f"Error launching Safari: {e}")
+            print(f"Error launching Chrome: {e}")
 
     def launch_firefox(self, headless_mode):
         try:
@@ -131,6 +131,11 @@ class BasePlaywrightHelper:
                 # If it's a selector string, wait for the element to be visible
                 self.page.wait_for_selector(locator_or_element, state='visible', timeout=timeout * 1000)
                 element = self.page.locator(locator_or_element)
+            elif isinstance(locator_or_element, tuple) and locator_or_element[0] == "text":
+                # Handle text selector
+                text_selector = locator_or_element[1]
+                self.page.wait_for_selector(f"text={text_selector}", state='visible', timeout=timeout * 1000)
+                element = self.page.locator(f"text={text_selector}")
             elif isinstance(locator_or_element, object) and hasattr(locator_or_element, 'wait_for'):
                 # If it's a pre-located Playwright Locator, use it directly
                 locator_or_element.wait_for(state='visible', timeout=timeout * 1000)
@@ -139,9 +144,9 @@ class BasePlaywrightHelper:
                 raise ValueError(f"Invalid locator or element type: {type(locator_or_element)}")
 
             print(f"Element with locator '{locator_or_element}' appeared on the page.")
+            return element
         except Exception as e:
             print(f"Error waiting for element '{locator_or_element}' to appear: {e}")
-
 
     def wait_for_selector_to_disappear(self, selector, timeout=5):
         try:
@@ -149,16 +154,6 @@ class BasePlaywrightHelper:
             print(f"Element {selector} disappeared from the page.")
         except Exception as e:
             print(f"Error waiting for element {selector} to disappear: {e}")
-
-    # def check_element_exists(self, selector, wait=False):
-    #     try:
-    #         element = self.page.locator(selector)
-    #         if wait == True:
-    #             self.page.wait_for_selector(selector)
-    #         return element.is_visible()
-    #     except Exception as e:
-    #         print(f"Element - {selector} not found: {e}")
-    #         return False
 
     def check_element_exists(self, locator_or_element, wait=False):
         try:

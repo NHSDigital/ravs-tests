@@ -1,3 +1,4 @@
+import time
 from init_helpers import *
 
 LOGIN_BUTTON_ELEMENT = ("role", "button", "Log In")
@@ -10,6 +11,7 @@ def navigate_to_ravs_login_page(url):
         click_element(ACCEPT_COOKIES_ELEMENT)
 
 def check_login_button_exists():
+    time.sleep(2)
     wait_for_element_to_appear(LOGIN_BUTTON_ELEMENT)
     return check_if_element_exists(LOGIN_BUTTON_ELEMENT, True)
 
