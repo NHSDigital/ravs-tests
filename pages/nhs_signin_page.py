@@ -14,9 +14,10 @@ def navigate_to_nhs_signin_page(url):
     navigate_to_url(url)
 
 def check_signin_button_exists():
-    wait_for_page_to_load()
+    time.sleep(2)
     wait_for_element_to_appear(EMAIL_INPUT_ELEMENT)
     wait_for_element_to_appear(PASSWORD_INPUT_ELEMENT)
+    wait_for_element_to_appear(SIGN_IN_BUTTON_ELEMENT)
     return check_if_element_exists(SIGN_IN_BUTTON_ELEMENT, True)
 
 def click_nhs_signin_button():

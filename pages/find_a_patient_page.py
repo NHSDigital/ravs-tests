@@ -120,6 +120,7 @@ def check_error_appears_for_first_name(wait):
 
 def check_nhs_number_error_message_text_exists(errorMessage):
     element = ("text", f"Error: {errorMessage}")
+    wait_for_element_to_appear(element)
     return check_if_element_exists(element)
 
 def check_first_name_error_message_text_exists():
@@ -145,16 +146,18 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     element = ("role", "cell", nhsNumber)
     time.sleep(2)
-    wait_for_element_to_appear(get_element_by_type(*element))
+    wait_for_element_to_appear(element)
     return check_if_element_exists(element, wait)
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = ("role", "heading", f"No result found for {nhsNumber}")
     time.sleep(2)
+    wait_for_element_to_appear(element)
     return check_if_element_exists(element, wait)
 
 def check_patient_not_found_message_exists(wait):
     element = (f"//h3[contains(text(), 'No result')]")
+    wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_multiple_results_found_message_exists(wait):
