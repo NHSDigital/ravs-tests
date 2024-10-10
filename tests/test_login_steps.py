@@ -97,7 +97,6 @@ def verify_signin_status(status, shared_data):
             assert check_password_error_alert_exists()
             assert get_password_missing_error_text() == "This field cannot be left blank"
         elif data['emailAddress'] == "None" and "valid" not in data["emailAddress"].lower():
-            click_nhs_signin_button()
             assert check_emailAddress_error_alert_exists()
             assert check_found_some_errors_alert_exists()
             assert get_emailAddress_missing_error_text() == "This field cannot be left blank"
