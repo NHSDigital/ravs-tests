@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 from init_helpers import *
 import re
 
@@ -143,11 +144,13 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     element = ("role", "cell", nhsNumber)
+    time.sleep(2)
     wait_for_element_to_appear(get_element_by_type(*element))
     return check_if_element_exists(element, wait)
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = ("role", "heading", f"No result found for {nhsNumber}")
+    time.sleep(2)
     return check_if_element_exists(element, wait)
 
 def check_patient_not_found_message_exists(wait):

@@ -1,3 +1,4 @@
+import time
 from init_helpers import *
 from test_data.get_values_from_models import get_covid_consent_vaccine_xpath, get_flu_consent_vaccine_xpath, get_rsv_consent_vaccine_xpath, get_pertussis_consent_vaccine_xpath
 
@@ -43,6 +44,7 @@ def check_back_button_exists():
     return check_if_element_exists(BACK_ELEMENT, True)
 
 def check_age_based_warning_exists():
+    time.sleep(1)
     return check_if_element_exists(AGE_BASED_WARNING, True)
 
 def check_minimum_interval_based_warning_exists():
