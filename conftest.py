@@ -51,20 +51,18 @@ def format_nhs_number(nhs_number):
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
 
+@pytest.fixture(scope='function')
+def playwright_helper(request):
+    helper = PlaywrightHelper(get_working_directory(), config)
+    def teardown():
+        try:
+            helper.quit_browser()
+        except Exception as e:
+            print(f"An error occurred during teardown: {e}")
+            raise
 
-
-# @pytest.fixture(scope='function')
-# def playwright_helper(request):
-#     helper = PlaywrightHelper(get_working_directory(), config)
-#     def teardown():
-#         try:
-#             helper.quit_browser()
-#         except Exception as e:
-#             print(f"An error occurred during teardown: {e}")
-#             raise
-
-#     request.addfinalizer(teardown)
-#     return helper
+    request.addfinalizer(teardown)
+    return helper
 
 # Fixture for site parameter
 @pytest.fixture(params=["NEELIMA HOUSE", "ALBERT HOUSE", "ST JOHN'S HOUSE"])
