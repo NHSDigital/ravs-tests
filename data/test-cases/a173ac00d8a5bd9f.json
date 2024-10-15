@@ -1,0 +1,194 @@
+{
+  "uid" : "a173ac00d8a5bd9f",
+  "name" : "Record a vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-01-19/10/2025]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "5e6d4bc262db1980cad4a6ed13de65db",
+  "time" : {
+    "start" : 1728978111531,
+    "stop" : 1728978119645,
+    "duration" : 8114
+  },
+  "status" : "failed",
+  "statusMessage" : "NameError: name 'click_consent_vaccine_radiobutton' is not defined",
+  "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f42a581c680>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-t...-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-01-19/10/2025]>>\nkwargs = {'batch_expiry_date': '19/10/2025', 'batch_number': 'SDYY2-01', 'chosen_vaccine': 'COVID-19', 'shared_data': {'batch_e...', 'batch_number': 'SDYY2-01', 'care_model': 'Hospital hub for staff and patients', 'chosen_vaccine': 'COVID-19', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:77: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nsite = 'ALBERT HOUSE', vaccine = 'COVID-19', vaccine_type = 'Spikevax JN.1'\n\n    def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):\n        click_delivery_team_radiobutton(site)\n>       click_consent_vaccine_radiobutton(vaccine)\nE       NameError: name 'click_consent_vaccine_radiobutton' is not defined\n\nconftest.py:232: NameError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "NameError: name 'click_consent_vaccine_radiobutton' is not defined",
+    "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f42a581c680>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-t...-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-01-19/10/2025]>>\nkwargs = {'batch_expiry_date': '19/10/2025', 'batch_number': 'SDYY2-01', 'chosen_vaccine': 'COVID-19', 'shared_data': {'batch_e...', 'batch_number': 'SDYY2-01', 'care_model': 'Hospital hub for staff and patients', 'chosen_vaccine': 'COVID-19', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:77: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nsite = 'ALBERT HOUSE', vaccine = 'COVID-19', vaccine_type = 'Spikevax JN.1'\n\n    def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):\n        click_delivery_team_radiobutton(site)\n>       click_consent_vaccine_radiobutton(vaccine)\nE       NameError: name 'click_consent_vaccine_radiobutton' is not defined\n\nconftest.py:232: NameError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Vaccination Centre and get patient details for 9693632109 with option 0 and choose to vaccinate with vaccine details as COVID-19, SDYY2-01 with 19/10/2025",
+      "time" : {
+        "start" : 1728978111532,
+        "stop" : 1728978114900,
+        "duration" : 3368
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1728978114900,
+        "stop" : 1728978115481,
+        "duration" : 581
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a4806d76f6c4558e",
+        "name" : "dev_chrome_129.0.6668.100_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "a4806d76f6c4558e.png",
+        "type" : "image/png",
+        "size" : 62069
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1728978115481,
+        "stop" : 1728978115947,
+        "duration" : 466
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "60ce18412b9c0850",
+        "name" : "dev_chrome_129.0.6668.100_before_clicking_patient_name.png",
+        "source" : "60ce18412b9c0850.png",
+        "type" : "image/png",
+        "size" : 60979
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, SDYY2-01 with 19/10/2025 and click continue",
+      "time" : {
+        "start" : 1728978115947,
+        "stop" : 1728978119645,
+        "duration" : 3698
+      },
+      "status" : "failed",
+      "statusMessage" : "name 'click_consent_vaccine_radiobutton' is not defined",
+      "statusTrace" : "NameError: name 'click_consent_vaccine_radiobutton' is not defined\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ff565c08ec667a61",
+        "name" : "dev_chrome_129.0.6668.100_clicked_on_patient_Bill GARTON_and_clicked_choose_vaccine_button.png",
+        "source" : "ff565c08ec667a61.png",
+        "type" : "image/png",
+        "size" : 142419
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "3a735ef3b6ad"
+  }, {
+    "name" : "thread",
+    "value" : "1047-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "assess_date",
+    "value" : "today"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2025"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-01"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "0"
+  }, {
+    "name" : "name",
+    "value" : "Bill GARTON"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9693632109"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "a173ac00d8a5bd9f.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2025", "SDYY2-01", "Vaccination Centre", "COVID-19", "yes", "23/6/1946", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
+}
