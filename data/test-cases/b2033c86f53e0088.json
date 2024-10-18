@@ -1,0 +1,194 @@
+{
+  "uid" : "b2033c86f53e0088",
+  "name" : "Record a vaccine with nhs number [6-9437540233-ALBERT HOUSE-Vaccination Centre-yes-today-5-yes-yes-today-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-SDYY2-16A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "aa4b48325b5835120404555c42013eac",
+  "time" : {
+    "start" : 1729237316721,
+    "stop" : 1729237324042,
+    "duration" : 7321
+  },
+  "status" : "failed",
+  "statusMessage" : "NameError: name 'click_consent_vaccine_radiobutton' is not defined",
+  "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f95e3fe4680>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[6-9437540233-ALBERT HOUSE-Vaccination Centre-yes-today-5-yes-yes-today-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-SDYY2-16A-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-16A', 'chosen_vaccine': 'COVID-19', 'shared_data': {'batch_...'batch_number': 'SDYY2-16A', 'care_model': 'Vaccination centre open to the public', 'chosen_vaccine': 'COVID-19', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:77: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nsite = 'ALBERT HOUSE', vaccine = 'COVID-19', vaccine_type = 'Comirnaty 10 JN.1'\n\n    def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):\n        click_delivery_team_radiobutton(site)\n>       click_consent_vaccine_radiobutton(vaccine)\nE       NameError: name 'click_consent_vaccine_radiobutton' is not defined\n\nconftest.py:232: NameError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "NameError: name 'click_consent_vaccine_radiobutton' is not defined",
+    "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f95e3fe4680>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[6-9437540233-ALBERT HOUSE-Vaccination Centre-yes-today-5-yes-yes-today-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-SDYY2-16A-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-16A', 'chosen_vaccine': 'COVID-19', 'shared_data': {'batch_...'batch_number': 'SDYY2-16A', 'care_model': 'Vaccination centre open to the public', 'chosen_vaccine': 'COVID-19', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:77: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nsite = 'ALBERT HOUSE', vaccine = 'COVID-19', vaccine_type = 'Comirnaty 10 JN.1'\n\n    def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):\n        click_delivery_team_radiobutton(site)\n>       click_consent_vaccine_radiobutton(vaccine)\nE       NameError: name 'click_consent_vaccine_radiobutton' is not defined\n\nconftest.py:232: NameError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Vaccination Centre and get patient details for 9437540233 with option 6 and choose to vaccinate with vaccine details as COVID-19, SDYY2-16A with 19/10/2026",
+      "time" : {
+        "start" : 1729237316721,
+        "stop" : 1729237319204,
+        "duration" : 2483
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1729237319204,
+        "stop" : 1729237319855,
+        "duration" : 651
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3fdc52579dd22258",
+        "name" : "dev_chrome_130.0.6723.58_entered_nhs_number_as9437540233_and_clicked_search_for_patient_button.png",
+        "source" : "3fdc52579dd22258.png",
+        "type" : "image/png",
+        "size" : 62219
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient RANDY FOGDEN",
+      "time" : {
+        "start" : 1729237319855,
+        "stop" : 1729237320307,
+        "duration" : 452
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c440df3e7c5a0616",
+        "name" : "dev_chrome_130.0.6723.58_before_clicking_patient_name.png",
+        "source" : "c440df3e7c5a0616.png",
+        "type" : "image/png",
+        "size" : 61231
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, SDYY2-16A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1729237320307,
+        "stop" : 1729237324042,
+        "duration" : 3735
+      },
+      "status" : "failed",
+      "statusMessage" : "name 'click_consent_vaccine_radiobutton' is not defined",
+      "statusTrace" : "NameError: name 'click_consent_vaccine_radiobutton' is not defined\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1faa276d16190048",
+        "name" : "dev_chrome_130.0.6723.58_clicked_on_patient_RANDY FOGDEN_and_clicked_choose_vaccine_button.png",
+        "source" : "1faa276d16190048.png",
+        "type" : "image/png",
+        "size" : 140489
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "645ba03ffecf"
+  }, {
+    "name" : "thread",
+    "value" : "1043-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-5"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-16A"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "8/6/1961"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "6"
+  }, {
+    "name" : "name",
+    "value" : "RANDY FOGDEN"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437540233"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-2"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "b2033c86f53e0088.json",
+  "parameterValues" : [ "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG", "today-5", "19/10/2026", "SDYY2-16A", "Vaccination Centre", "COVID-19", "yes", "8/6/1961", "yes", "6", "RANDY FOGDEN", "9437540233", "ALBERT HOUSE", "yes", "today-2" ]
+}
