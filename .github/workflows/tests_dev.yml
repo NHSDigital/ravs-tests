@@ -126,7 +126,13 @@ jobs:
 
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
-        run: mv allure-report/* .
+        run: |
+          mv allure-report/* .
+          mv allure-report/data ./data
+
+      - name: Ensure screenshots directory exists
+        run: |
+          mkdir -p ./data
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

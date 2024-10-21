@@ -176,6 +176,20 @@ class BasePlaywrightHelper:
             return element.is_enabled()
         return False
 
+    def is_page_responsive(self):
+        try:
+            # Check for a specific element that indicates responsiveness
+            self.page.wait_for_selector('#some_element', timeout=2000)  # Adjust the selector
+            return True
+        except Exception:
+            return False
+
+    def handle_unresponsive_page(self):
+        if not self.is_page_responsive():
+            print("Page is unresponsive. Attempting to reload or take action.")
+            self.page.reload()  # You might want to handle this more gracefully
+            self.wait_for_page_to_load()
+
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):
         # Generate screenshot filename if not provided
         if not screenshot_name:
@@ -185,8 +199,10 @@ class BasePlaywrightHelper:
             else:
                 screenshot_name = "element_action"
 
+        self.wait_for_page_to_load()
+
         # Try to get the element using a helper function
-        element = self.get_element(locator_or_element)
+        element = self.get_element(locator_or_element, wait=True)
 
         if not element:
             print(f"Element not found for action: {action}")
@@ -196,7 +212,7 @@ class BasePlaywrightHelper:
         self.capture_screenshot(screenshot_name + "_before")
 
         # Disable smooth scrolling and ensure element is visible
-        self.wait_for_page_to_load()
+
         self.disable_smooth_scrolling()
         self.wait_for_element_to_appear(element)
 
@@ -333,80 +349,7 @@ class BasePlaywrightHelper:
             window.HTMLElement.prototype.scrollIntoView = () => {};
             window.scrollTo = () => {};
         """)
-
-    # def find_element_and_perform_action(self, locator_or_element, action, inputValue=None):
-    #     # Check if the input is a string (locator) or already an element
-    #     if isinstance(locator_or_element, str):
-    #         selector = locator_or_element
-    #         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
-    #         self.capture_screenshot(selector_filename)
-
-    #         try:
-    #             # Locate the element
-    #             element = self.page.locator(selector)
-    #             self.page.set_viewport_size({"width": 1500, "height": 1500})
-    #             element.scroll_into_view_if_needed()
-    #         except Exception as e:
-    #             print(f"Exception: {e}. Element not found: {selector}")
-    #             return
-    #     else:
-    #         # If already an element, no need to locate
-    #         element = locator_or_element
-
-    #     self.disable_smooth_scrolling()
-    #     self.wait_for_element_to_appear(element)
-
-    #     try:
-    #         # Perform the action based on the passed `action`
-    #         if action.lower() == "click":
-    #             if element.is_visible() and element.is_enabled():
-    #                 element.click()
-    #                 print(f"Clicked the element successfully.")
-    #             else:
-    #                 print(f"Element is either not visible or not enabled.")
-    #         elif action.lower() == "check":
-    #             if element.is_visible() and not element.is_checked():
-    #                 element.check()
-    #                 print("Checkbox checked successfully.")
-    #             elif element.is_checked():
-    #                 print("Checkbox is already checked.")
-    #         elif action.lower() == "select_option":
-    #             if element.is_visible():
-    #                 element.select_option(inputValue)
-    #                 print(f"Selected option '{inputValue}' successfully.")
-    #         elif action == "clear":
-    #             element.fill('')
-    #             print(f"Cleared text from the element: {element}.")
-    #         elif action.lower() == "input_text":
-    #             if inputValue is None:
-    #                 raise ValueError("`inputValue` cannot be None for 'input_text' action.")
-    #             if element.is_visible():
-    #                 if element.text_content() != '':
-    #                     element.clear()  # Clear existing text if necessary
-    #                 element.fill(inputValue)
-    #                 print(f"Entered text '{inputValue}' successfully.")
-    #         elif action.lower() == "get_text":
-    #             text = element.text_content()
-    #             print(f"Text from the element: {text}")
-    #             return text
-    #         elif action.lower() == "type_text":
-    #             if inputValue is None:
-    #                 raise ValueError("`inputValue` cannot be None for 'type_text' action.")
-    #             if element.is_visible():
-    #                 if element.text_content() != '':
-    #                     element.clear()  # Clear existing text
-    #                 element.type(inputValue)
-    #                 print(f"Typed text '{inputValue}' successfully.")
-    #         else:
-    #             print(f"Unsupported action: {action}")
-    #     except TimeoutError:
-    #         print(f"Timeout waiting for element to perform {action}")
-    #     except Exception as e:
-    #         print(f"Exception: {e} during {action} on element.")
-
-    #     # Capture screenshot after action
-    #     if isinstance(locator_or_element, str):
-    #         self.capture_screenshot(selector_filename)
+        self.page.evaluate("() => { window.HTMLElement.prototype.scrollIntoView = function() {} }")
 
     def get_current_url(self):
         return self.page.url()
