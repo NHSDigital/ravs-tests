@@ -1,0 +1,196 @@
+{
+  "uid" : "f1338eaf8044bc16",
+  "name" : "Demographics: Existing patients can be found using their optional demographic details [9470006739-JANNETTE-ARD-09/12/2015-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ-LA21 8HZ-Other]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Existing patients can be found using their optional demographic details",
+  "historyId" : "b4750b4b392cbc1d84a8d365ef74e6d1",
+  "time" : {
+    "start" : 1729522623495,
+    "stop" : 1729522632213,
+    "duration" : 8718
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1729522623495,
+        "stop" : 1729522629446,
+        "duration" : 5951
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details JANNETTE, ARD, and 09/12/2015",
+      "time" : {
+        "start" : 1729522629446,
+        "stop" : 1729522630736,
+        "duration" : 1290
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b21aad1143897bac",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_add_mandatory_patient_information.png",
+        "source" : "b21aad1143897bac.png",
+        "type" : "image/png",
+        "size" : 31229
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode LA21 8HZ",
+      "time" : {
+        "start" : 1729522630737,
+        "stop" : 1729522631036,
+        "duration" : 299
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e17393a3d3814b7b",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_enter_invalid_postcode.png",
+        "source" : "e17393a3d3814b7b.png",
+        "type" : "image/png",
+        "size" : 32723
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Other",
+      "time" : {
+        "start" : 1729522631036,
+        "stop" : 1729522631319,
+        "duration" : 283
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "923f86cb76ea5207",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_select_gender.png",
+        "source" : "923f86cb76ea5207.png",
+        "type" : "image/png",
+        "size" : 32328
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1729522631319,
+        "stop" : 1729522631553,
+        "duration" : 234
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient's information in the search results, showing their name: JANNETTE ARD, nhs number: 9470006739, dob: 09/12/2015 and address: 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ",
+      "time" : {
+        "start" : 1729522631554,
+        "stop" : 1729522632212,
+        "duration" : 658
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3fa9a6535f1e06d5",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_patient_information_page_should_be_visible.png",
+        "source" : "3fa9a6535f1e06d5.png",
+        "type" : "image/png",
+        "size" : 32803
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "795f266a82a5"
+  }, {
+    "name" : "thread",
+    "value" : "1097-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ"
+  }, {
+    "name" : "dob",
+    "value" : "09/12/2015"
+  }, {
+    "name" : "firstName",
+    "value" : "JANNETTE"
+  }, {
+    "name" : "gender",
+    "value" : "Other"
+  }, {
+    "name" : "lastName",
+    "value" : "ARD"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9470006739"
+  }, {
+    "name" : "postcode",
+    "value" : "LA21 8HZ"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f1338eaf8044bc16.json",
+  "parameterValues" : [ "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ", "09/12/2015", "JANNETTE", "Other", "ARD", "9470006739", "LA21 8HZ" ]
+}
