@@ -85,7 +85,7 @@ def attach_screenshot(filename):
     try:
         screenshot = capture_screenshot(full_path)
         logging.debug(f"Screenshot saved at: {screenshot}")
-        allure.attach.file(screenshot, name=f"{full_path}", attachment_type=allure.attachment_type.PNG)
+        allure.attach.file(full_path, name=f"{full_path}", attachment_type=allure.attachment_type.PNG)
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
