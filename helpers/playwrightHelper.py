@@ -1,5 +1,5 @@
 import time
-from playwright.sync_api import sync_playwright, TimeoutError
+from playwright.sync_api import sync_playwright, TimeoutError, Locator
 from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
@@ -50,11 +50,11 @@ class BasePlaywrightHelper:
 
     def launch_chrome(self, headless_mode):
         try:
-            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen"])
+            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--disable-gpu", "--no-sandbox"])
             self.context = self.browser.new_context()
             self.page = self.context.new_page()
         except Exception as e:
-            print(f"Error launching Safari: {e}")
+            print(f"Error launching Chrome: {e}")
 
     def launch_firefox(self, headless_mode):
         try:
@@ -118,220 +118,88 @@ class BasePlaywrightHelper:
         self.page.wait_for_load_state()
 
     def wait_for_page_to_load(self, timeout=0.1):
-        self.page.wait_for_selector('*', timeout=timeout * 100)
-        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 100)
+        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
+        self.page.wait_for_selector('*', timeout=timeout * 1000)
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def wait_for_element_to_appear(self, locator_or_element, timeout=5):
+    def get_element(self, locator_or_element, wait=False, timeout=5):
+        """Utility method to get an element with optional waiting."""
         try:
-            # Check if input is a string (selector) or a pre-located element (Locator)
             if isinstance(locator_or_element, str):
-                # If it's a selector string, wait for the element to be visible
-                self.page.wait_for_selector(locator_or_element, state='visible', timeout=timeout * 1000)
-                element = self.page.locator(locator_or_element)
-            else:
-                # If it's already a pre-located element (Locator), use it directly
-                element = locator_or_element
-                element.wait_for(state='visible', timeout=timeout * 1000)
-
-            print(f"Element with locator '{element}' appeared on the page.")
-        except Exception as e:
-            print(f"Error waiting for element '{locator_or_element}' to appear: {e}")
-
-    def wait_for_selector_to_disappear(self, selector, timeout=5):
-        try:
-            self.page.wait_for_selector(selector, state='hidden', timeout=timeout)
-            print(f"Element {selector} disappeared from the page.")
-        except Exception as e:
-            print(f"Error waiting for element {selector} to disappear: {e}")
-
-    # def check_element_exists(self, selector, wait=False):
-    #     try:
-    #         element = self.page.locator(selector)
-    #         if wait == True:
-    #             self.page.wait_for_selector(selector)
-    #         return element.is_visible()
-    #     except Exception as e:
-    #         print(f"Element - {selector} not found: {e}")
-    #         return False
-
-    def check_element_exists(self, locator_or_element, wait=False):
-        try:
-            # Check if input is a string (selector) or a pre-located element
-            if isinstance(locator_or_element, str):
-                # If it's a selector string, locate the element
-                element = self.page.locator(locator_or_element)
+                # Wait for selector if specified
                 if wait:
-                    self.page.wait_for_selector(locator_or_element)
+                    # Use state='attached' to ensure it's present in the DOM before checking visibility
+                    self.page.wait_for_selector(locator_or_element, state="visible", timeout=timeout * 1000)
+                    element = self.page.locator(locator_or_element)
+
+                    # Ensure the element is visible and ready for interaction
+                    if not element.is_visible():
+                        print(f"Element '{locator_or_element}' found, but it is not visible.")
+                        return None
+                else:
+                    element = self.page.locator(locator_or_element)
             else:
-                # If it's already a pre-located element, use it directly
-                element = locator_or_element
+                element = locator_or_element  # Assume it is already a Locator
 
-            # Check if the element is visible
-            return element.is_visible()
-
+            return element
         except Exception as e:
-            # Handle any errors and return False
-            print(f"Element - {locator_or_element} not found or not visible: {e}")
-            return False
+            print(f"Error retrieving element '{locator_or_element}': {e}")
+            return None
 
-    def check_element_by_locator_exists(self, element, wait=False):
-        try:
-            return element.is_visible()
-        except Exception as e:
-            print(f"Element - {element} not found: {e}")
-            return False
+    def wait_for_element_to_appear(self, locator_or_element, timeout=10):
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                print(f"Timeout: Element '{locator_or_element}' did not appear.")
+                return None
+
+            element = self.get_element(locator_or_element, wait=True)
+            if element and element.is_visible():
+                print(f"Element with locator '{locator_or_element}' appeared on the page.")
+                return element
+
+            time.sleep(0.5)  # Check every 0.5 seconds
+
+    def check_element_exists(self, locator_or_element, wait=False, timeout=5):
+        element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
+        if element:
+            is_visible = element.is_visible()
+            print(f"Element visibility check result: {is_visible}")
+            return is_visible
+        return False
 
     def check_element_enabled(self, selector, wait=False):
-        try:
-            element = self.page.locator(selector)
-            if wait == True:
-                self.page.wait_for_selector(selector)
+        element = self.get_element(selector, wait=wait)
+        if element:
             return element.is_enabled()
-        except Exception as e:
-            print(f"Element - {selector} not found: {e}")
-            return False
+        return False
 
-    def check_element_by_locator_enabled(self, element, wait=False):
-        try:
-            return element.is_enabled()
-        except Exception as e:
-            print(f"Element - {element} not found: {e}")
-            return False
+    def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):
+        # Generate screenshot filename if not provided
+        if not screenshot_name:
+            if isinstance(locator_or_element, str):
+                # Generate a safe filename based on the locator
+                screenshot_name = "".join(c if c.isalnum() else "_" for c in locator_or_element)
+            else:
+                screenshot_name = "element_action"
 
-    def scroll_into_view(self, selector):
-        element=self.page.locator(selector)
-        element.scroll_into_view_if_needed()
+        # Try to get the element using a helper function
+        element = self.get_element(locator_or_element)
 
-    def scroll_element_by_locator_into_view(self, element):
-        element.scroll_into_view_if_needed()
+        if not element:
+            print(f"Element not found for action: {action}")
+            return
 
-    def clear_element(self, selector):
-        try:
-            element=self.page.locator(selector)
-            element.clear()
-            print(f"Cleared text from the {selector} successfully.")
-        except Exception as e:
-            print(f"Exception: {e}. Element - {selector} not found.")
+        # Capture screenshot before performing the action
+        self.capture_screenshot(screenshot_name + "_before")
 
-
-    def clear_element_by_locator(self, element):
-        try:
-            element.clear()
-            print(f"Cleared text from the {element} successfully.")
-        except Exception as e:
-            print(f"Exception: {e}. Element - {element} not found.")
-
-    def release_mouse(self):
-        self.page.mouse.move(100, 100)
-        self.page.mouse.down()
-        self.page.mouse.up()
-
-    def get_element_by_type(self, locator_type: str, locator_value: str, name: str = None):
-        if locator_type == "role":
-            return self.page.get_by_role(locator_value, name=name)
-        elif locator_type == "text":
-            return self.page.get_by_text(locator_value)
-        elif locator_type == "label":
-            return self.page.get_by_label(locator_value)
-        elif locator_type == "placeholder":
-            return self.page.get_by_placeholder(locator_value)
-        elif locator_type == "link":
-            return self.page.get_by_role("link", name=locator_value)
-        elif locator_type == "title":
-            return self.page.get_by_title(locator_value)
-        else:
-            raise ValueError(f"Unsupported locator type: {locator_type}")
-
-    def find_element_with_locator_and_perform_action(self, element, action, inputValue=None):
-        if action == "click":
-            element.click()
-        elif action == "check":
-            element.check()
-        elif action == "select_option":
-            element.select_option(inputValue)
-        elif action == "input_text":
-            if inputValue is None:
-                raise ValueError("`inputValue` cannot be None for 'input_text' action.")
-            element.fill(inputValue)
-        elif action == "get_text":
-            return element.inner_text()
-        else:
-            raise ValueError(f"Unsupported action: {action}")
-
-    # def find_element_and_perform_action(self, selector, action, inputValue=None):
-    #     selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
-    #     self.capture_screenshot(selector_filename)
-    #     try:
-    #         element=self.page.locator(selector)
-    #         self.page.set_viewport_size({"width": 1500, "height":1500})
-    #         element.scroll_into_view_if_needed()
-    #         if action.lower() == "click":
-    #             if element.is_visible():
-    #                 if element.is_enabled():
-    #                     element.click()
-    #                     print(f"Clicked the {selector} successfully.")
-    #             else:
-    #                 print(f"Element with {selector} is not enabled.")
-    #         elif action.lower() == "input_text":
-    #             text = element.text_content()
-    #             if element.is_visible():
-    #                 if text != '':
-    #                     element.clear()
-    #                 element.fill(inputValue)
-    #                 print(f"Entered text into the {selector} successfully.")
-    #         elif action.lower() == "type_text":
-    #             if element.is_visible():
-    #                 text = element.text_content()
-    #                 if text != '':
-    #                     element.clear()
-    #                 element.type(inputValue)
-    #                 print(f"Entered text into the {selector} successfully.")
-    #         elif action.lower() == "get_text":
-    #             text = element.text_content()
-    #             print(f"Text from the {selector}: {text}")
-    #             return text
-    #         elif action.lower() == "select_option":
-    #             if element.is_visible():
-    #                 element.select_option(inputValue)
-    #                 print(f"Selected option with value '{inputValue}' from the {selector} successfully.")
-    #         elif action.lower() == "click_checkbox":
-    #             if element.is_visible():
-    #                 if not element.is_checked():
-    #                     element.check()
-    #                     print(f"{selector} checkbox checked successfully.")
-    #                 else:
-    #                     print(f"{selector} checkbox is already checked.")
-    #         else:
-    #             print(f"Unsupported action: {action}")
-    #     except TimeoutError:
-    #         print(f"Timeout waiting for selector: {selector} to perform {action}")
-    #     except Exception as e:
-    #         print(f"Exception: {e}. Element not found: {selector}")
-    #     self.capture_screenshot(selector_filename)
-
-    def find_element_and_perform_action(self, locator_or_element, action, inputValue=None):
-        # Check if the input is a string (locator) or already an element
-        if isinstance(locator_or_element, str):
-            selector = locator_or_element
-            selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
-            self.capture_screenshot(selector_filename)
-
-            try:
-                # Locate the element
-                element = self.page.locator(selector)
-                self.page.set_viewport_size({"width": 1500, "height": 1500})
-                element.scroll_into_view_if_needed()
-            except Exception as e:
-                print(f"Exception: {e}. Element not found: {selector}")
-                return
-        else:
-            # If already an element, no need to locate
-            element = locator_or_element
-
+        # Disable smooth scrolling and ensure element is visible
+        self.wait_for_page_to_load()
+        self.disable_smooth_scrolling()
         self.wait_for_element_to_appear(element)
+
         try:
             # Perform the action based on the passed `action`
             if action.lower() == "click":
@@ -350,6 +218,9 @@ class BasePlaywrightHelper:
                 if element.is_visible():
                     element.select_option(inputValue)
                     print(f"Selected option '{inputValue}' successfully.")
+            elif action.lower() == "clear":
+                element.fill('')
+                print(f"Cleared text from the element: {element}.")
             elif action.lower() == "input_text":
                 if inputValue is None:
                     raise ValueError("`inputValue` cannot be None for 'input_text' action.")
@@ -377,9 +248,165 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Exception: {e} during {action} on element.")
 
-        # Capture screenshot after action
-        if isinstance(locator_or_element, str):
-            self.capture_screenshot(selector_filename)
+        # Capture screenshot after performing the action
+        self.capture_screenshot(screenshot_name + "_after")
+
+    def wait_for_selector_to_disappear(self, selector, timeout=5):
+        try:
+            self.page.wait_for_selector(selector, state='hidden', timeout=timeout)
+            print(f"Element {selector} disappeared from the page.")
+        except Exception as e:
+            print(f"Error waiting for element {selector} to disappear: {e}")
+
+    def check_element_by_locator_enabled(self, element, wait=False):
+        try:
+            return element.is_enabled()
+        except Exception as e:
+            print(f"Element - {element} not found: {e}")
+            return False
+
+    def scroll_into_view(self, selector):
+        element=self.page.locator(selector)
+        element.scroll_into_view_if_needed()
+
+    def scroll_element_by_locator_into_view(self, element):
+        element.scroll_into_view_if_needed()
+
+    def clear_element(self, selector):
+        try:
+            element=self.page.locator(selector)
+            element.clear()
+            print(f"Cleared text from the {selector} successfully.")
+        except Exception as e:
+            print(f"Exception: {e}. Element - {selector} not found.")
+
+    def release_mouse(self):
+        self.page.mouse.move(100, 100)
+        self.page.mouse.down()
+        self.page.mouse.up()
+
+    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None):
+        # If locator_type_or_selector is just a string, return it as a selector
+        if isinstance(locator_type_or_selector, Locator):
+            return locator_type_or_selector  # Directly return the Locator object
+
+    # If locator_type_or_selector is just a string and locator_value is None, treat it as a selector
+        if isinstance(locator_type_or_selector, str) and locator_value is None:
+            return self.page.locator(locator_type_or_selector)   # Return the string directly
+
+        # Handle known locator types
+        if locator_type_or_selector == "role":
+            return self.page.get_by_role(locator_value, name=name)
+        elif locator_type_or_selector == "text":
+            return self.page.get_by_text(locator_value)
+        elif locator_type_or_selector == "label":
+            return self.page.get_by_label(locator_value)
+        elif locator_type_or_selector == "placeholder":
+            return self.page.get_by_placeholder(locator_value)
+        elif locator_type_or_selector == "xpath":
+            return self.page.locator(locator_value)
+        elif locator_type_or_selector == "link":
+            return self.page.get_by_role("link", name=locator_value)
+        elif locator_type_or_selector == "title":
+            return self.page.get_by_title(locator_value)
+        elif locator_type_or_selector == "row":
+            return self.page.get_by_role("row", name=locator_value)
+        elif locator_type_or_selector == "cell":
+            return self.page.get_by_role("cell", name=locator_value)
+        else:
+            # Log a warning for unsupported locator types
+            print(f"Warning: Unsupported locator type '{locator_type_or_selector}'. Assuming it is a selector.")
+            return locator_value  # Return locator_value assuming it's valid
+
+    def click_cell_in_row(self, row_name: str, cell_index: int):
+        row_element = self.get_element_by_type("row", row_name)
+        cell_element = row_element.get_by_role("cell").nth(cell_index)
+        self.find_element_and_perform_action(cell_element, "click")
+
+    def click_link_in_row(self, row_name: str, link_index: int):
+        row_element = self.get_element_by_type("row", row_name)
+        cell_element = row_element.get_by_role("link").nth(link_index)
+        self.find_element_and_perform_action(cell_element, "click")
+
+    def disable_smooth_scrolling(self):
+        self.page.add_init_script("""
+            window.HTMLElement.prototype.scrollIntoView = () => {};
+            window.scrollTo = () => {};
+        """)
+
+    # def find_element_and_perform_action(self, locator_or_element, action, inputValue=None):
+    #     # Check if the input is a string (locator) or already an element
+    #     if isinstance(locator_or_element, str):
+    #         selector = locator_or_element
+    #         selector_filename = "".join(c if c.isalnum() else "_" for c in selector)
+    #         self.capture_screenshot(selector_filename)
+
+    #         try:
+    #             # Locate the element
+    #             element = self.page.locator(selector)
+    #             self.page.set_viewport_size({"width": 1500, "height": 1500})
+    #             element.scroll_into_view_if_needed()
+    #         except Exception as e:
+    #             print(f"Exception: {e}. Element not found: {selector}")
+    #             return
+    #     else:
+    #         # If already an element, no need to locate
+    #         element = locator_or_element
+
+    #     self.disable_smooth_scrolling()
+    #     self.wait_for_element_to_appear(element)
+
+    #     try:
+    #         # Perform the action based on the passed `action`
+    #         if action.lower() == "click":
+    #             if element.is_visible() and element.is_enabled():
+    #                 element.click()
+    #                 print(f"Clicked the element successfully.")
+    #             else:
+    #                 print(f"Element is either not visible or not enabled.")
+    #         elif action.lower() == "check":
+    #             if element.is_visible() and not element.is_checked():
+    #                 element.check()
+    #                 print("Checkbox checked successfully.")
+    #             elif element.is_checked():
+    #                 print("Checkbox is already checked.")
+    #         elif action.lower() == "select_option":
+    #             if element.is_visible():
+    #                 element.select_option(inputValue)
+    #                 print(f"Selected option '{inputValue}' successfully.")
+    #         elif action == "clear":
+    #             element.fill('')
+    #             print(f"Cleared text from the element: {element}.")
+    #         elif action.lower() == "input_text":
+    #             if inputValue is None:
+    #                 raise ValueError("`inputValue` cannot be None for 'input_text' action.")
+    #             if element.is_visible():
+    #                 if element.text_content() != '':
+    #                     element.clear()  # Clear existing text if necessary
+    #                 element.fill(inputValue)
+    #                 print(f"Entered text '{inputValue}' successfully.")
+    #         elif action.lower() == "get_text":
+    #             text = element.text_content()
+    #             print(f"Text from the element: {text}")
+    #             return text
+    #         elif action.lower() == "type_text":
+    #             if inputValue is None:
+    #                 raise ValueError("`inputValue` cannot be None for 'type_text' action.")
+    #             if element.is_visible():
+    #                 if element.text_content() != '':
+    #                     element.clear()  # Clear existing text
+    #                 element.type(inputValue)
+    #                 print(f"Typed text '{inputValue}' successfully.")
+    #         else:
+    #             print(f"Unsupported action: {action}")
+    #     except TimeoutError:
+    #         print(f"Timeout waiting for element to perform {action}")
+    #     except Exception as e:
+    #         print(f"Exception: {e} during {action} on element.")
+
+    #     # Capture screenshot after action
+    #     if isinstance(locator_or_element, str):
+    #         self.capture_screenshot(selector_filename)
 
     def get_current_url(self):
         return self.page.url()

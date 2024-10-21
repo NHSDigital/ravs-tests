@@ -1,0 +1,311 @@
+{
+  "uid" : "adca510efcfb9a51",
+  "name" : "Local: Created patient can be found using local search",
+  "fullName" : "/app/features/find_a_patient.feature:Local: Created patient can be found using local search",
+  "historyId" : "318f11c97be2b8bb6bebbd84c9bce5b1",
+  "time" : {
+    "start" : 1729522387017,
+    "stop" : 1729522421695,
+    "duration" : 34678
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_name_search_result_exists('Aaron Rowe', True)",
+  "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7f10c927e2a0>\nrequest = <FixtureRequest for <Function test_local_created_patient_can_be_found_using_local_search>>\nkwargs = {'shared_data': {'dob': '8/5/1939', 'first_name': 'Aaron', 'gender': 'Unknown', 'last_name': 'Rowe', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'dob': '8/5/1939', 'first_name': 'Aaron', 'gender': 'Unknown', 'last_name': 'Rowe', ...}\n\n    @then(\"I can see the patient's local record in the search results\")\n    def step_patient_information_page_should_be_available(shared_data):\n        attach_screenshot(\"patient_local_record_should_be_visible\")\n        name = f'{shared_data[\"first_name\"]} {shared_data[\"last_name\"]}'\n        dob = shared_data[\"dob\"]\n        postcode = shared_data[\"postcode\"]\n    \n>       assert check_patient_name_search_result_exists(name, True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_name_search_result_exists('Aaron Rowe', True)\n\ntests/test_find_a_patient_steps.py:189: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_name_search_result_exists('Aaron Rowe', True)",
+    "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7f10c927e2a0>\nrequest = <FixtureRequest for <Function test_local_created_patient_can_be_found_using_local_search>>\nkwargs = {'shared_data': {'dob': '8/5/1939', 'first_name': 'Aaron', 'gender': 'Unknown', 'last_name': 'Rowe', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'dob': '8/5/1939', 'first_name': 'Aaron', 'gender': 'Unknown', 'last_name': 'Rowe', ...}\n\n    @then(\"I can see the patient's local record in the search results\")\n    def step_patient_information_page_should_be_available(shared_data):\n        attach_screenshot(\"patient_local_record_should_be_visible\")\n        name = f'{shared_data[\"first_name\"]} {shared_data[\"last_name\"]}'\n        dob = shared_data[\"dob\"]\n        postcode = shared_data[\"postcode\"]\n    \n>       assert check_patient_name_search_result_exists(name, True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_name_search_result_exists('Aaron Rowe', True)\n\ntests/test_find_a_patient_steps.py:189: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1729522387018,
+        "stop" : 1729522393156,
+        "duration" : 6138
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I generate random data for a new patient",
+      "time" : {
+        "start" : 1729522393156,
+        "stop" : 1729522393156,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the new patient details on find by demographics page",
+      "time" : {
+        "start" : 1729522393156,
+        "stop" : 1729522405021,
+        "duration" : 11865
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "199ab415f3eb4e5e",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_add_mandatory_new_patient_information.png",
+        "source" : "199ab415f3eb4e5e.png",
+        "type" : "image/png",
+        "size" : 51938
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I click the search button",
+      "time" : {
+        "start" : 1729522405022,
+        "stop" : 1729522405270,
+        "duration" : 248
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click the create a new patient button",
+      "time" : {
+        "start" : 1729522405270,
+        "stop" : 1729522406055,
+        "duration" : 785
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the new patient details on create a new patient page",
+      "time" : {
+        "start" : 1729522406055,
+        "stop" : 1729522407752,
+        "duration" : 1697
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "aaf225912eeeddf6",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_add_mandatory_new_patient_information.png",
+        "source" : "aaf225912eeeddf6.png",
+        "type" : "image/png",
+        "size" : 35761
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the check and confirm button",
+      "time" : {
+        "start" : 1729522407753,
+        "stop" : 1729522408004,
+        "duration" : 251
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can check and confirm the patient information is correct",
+      "time" : {
+        "start" : 1729522408004,
+        "stop" : 1729522408573,
+        "duration" : 569
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b94f8d5e91e8b7d1",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_patient_information_is_correct.png",
+        "source" : "b94f8d5e91e8b7d1.png",
+        "type" : "image/png",
+        "size" : 38848
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the confirm and save button",
+      "time" : {
+        "start" : 1729522408573,
+        "stop" : 1729522408772,
+        "duration" : 199
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient added confirmation message",
+      "time" : {
+        "start" : 1729522408772,
+        "stop" : 1729522409397,
+        "duration" : 625
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click the find a patient by local records link",
+      "time" : {
+        "start" : 1729522409397,
+        "stop" : 1729522409637,
+        "duration" : 240
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the new patient details",
+      "time" : {
+        "start" : 1729522409638,
+        "stop" : 1729522421353,
+        "duration" : 11715
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9bc3783ef7d77280",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_add_mandatory_new_patient_information.png",
+        "source" : "9bc3783ef7d77280.png",
+        "type" : "image/png",
+        "size" : 44854
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1729522421353,
+        "stop" : 1729522421604,
+        "duration" : 251
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient's local record in the search results",
+      "time" : {
+        "start" : 1729522421604,
+        "stop" : 1729522421694,
+        "duration" : 90
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_patient_name_search_result_exists('Aaron Rowe', True)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_patient_name_search_result_exists('Aaron Rowe', True)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "67732bbd76b66ccc",
+        "name" : "data/attachments/dev_chrome_130.0.6723.58_patient_local_record_should_be_visible.png",
+        "source" : "67732bbd76b66ccc.png",
+        "type" : "image/png",
+        "size" : 31871
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 14,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "90b4157bf152"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "adca510efcfb9a51.json",
+  "parameterValues" : [ ]
+}
