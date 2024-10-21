@@ -69,23 +69,29 @@ def sanitize_filename(filename):
 
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
+
     if config["browser"] == "mobile":
-        filename = config["test_environment"] + "_" + config["browser"] + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + ".png"
+        filename = f'{config["test_environment"]}_{config["browser"]}_{config["device"]}_{get_browser_version()}_{filename}.png'
     else:
-        filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
+        filename = f'{config["test_environment"]}_{config["browser"]}_{get_browser_version()}_{filename}.png'
 
     filename = sanitize_filename(filename)
     directory = os.path.join('data', 'attachments')
     full_path = os.path.join(directory, filename)
 
-    os.makedirs(os.path.dirname(full_path), exist_ok=True)
-
-    logging.debug(f"Filename: {full_path}")
-
     try:
+        if not os.path.exists(directory):
+            logging.debug(f"Creating directory: {directory}")
+            os.makedirs(directory, exist_ok=True)
+
+        logging.debug(f"Saving screenshot to: {full_path}")
+
         screenshot = capture_screenshot(full_path)
-        logging.debug(f"Screenshot saved at: {screenshot}")
-        allure.attach.file(full_path, name=f"{full_path}", attachment_type=allure.attachment_type.PNG)
+        if screenshot:
+            logging.debug(f"Screenshot saved at: {full_path}")
+            allure.attach.file(screenshot, name=filename, attachment_type=allure.attachment_type.PNG)
+        else:
+            logging.error("Screenshot capture returned no result.")
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
