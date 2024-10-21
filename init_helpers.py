@@ -1,4 +1,5 @@
 import os
+import re
 from helpers.apiHelper import ApiHelper
 from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
@@ -59,6 +60,13 @@ def load_config_from_env():
     }
     return config
 
+def sanitize_filename(filename):
+    """
+    Remove or replace illegal characters in filenames for cross-platform compatibility.
+    For example, Windows does not allow: \\ / : * ? " < > |
+    """
+    return re.sub(r'[<>:"/\\|?*]', '_', filename)
+
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
     if config["browser"] == "mobile":
@@ -66,16 +74,18 @@ def attach_screenshot(filename):
     else:
         filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
 
-    directory = os.path.dirname(filename)
-    if directory:
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
+    filename = sanitize_filename(filename)
+    directory = os.path.join('data', 'attachments')
+    full_path = os.path.join(directory, filename)
 
-    logging.debug(f"Filename: {filename}")
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+
+    logging.debug(f"Filename: {full_path}")
 
     try:
-        screenshot = capture_screenshot(filename)
+        screenshot = capture_screenshot(full_path)
         logging.debug(f"Screenshot saved at: {screenshot}")
-        allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
+        allure.attach.file(screenshot, name=f"{full_path}", attachment_type=allure.attachment_type.PNG)
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
@@ -131,24 +141,30 @@ def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
 def check_element_exists(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    elif isinstance(element, str):
+        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_exists(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
-def check_element_by_locator_exists(element, wait=False):
-    try:
-        return playwright_helper_instance.check_element_by_locator_exists(element, wait)
-    except Exception as e:
-        pytest.fail(f"An error occurred: {e}")
-
 def check_element_enabled(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    elif isinstance(element, str):
+        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_enabled(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
 def check_element_by_locator_enabled(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    else:
+        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_by_locator_enabled(element, wait)
     except Exception as e:
@@ -157,22 +173,31 @@ def check_element_by_locator_enabled(element, wait=False):
 def scroll_into_view(element):
     return playwright_helper_instance.scroll_into_view(element)
 
-def wait_for_element_to_appear(selector):
-    playwright_helper_instance.wait_for_element_to_appear(selector)
-
-def clear_element(element):
-    return playwright_helper_instance.clear_element(element)
+def wait_for_element_to_appear(element):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    else:
+        element = get_element_by_type(element)
+    return playwright_helper_instance.wait_for_element_to_appear(element)
 
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
 
 def find_element_and_perform_action(element, action, inputValue=None):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)  # Unpack the tuple/list
+    else:
+        # If it's a string, treat it as a selector directly
+        element = get_element_by_type(element)
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
 
-def find_element_with_locator_and_perform_action(element, action, inputValue=None):
-    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)
+def click_cell_in_row(row_name, cell_index):
+    return playwright_helper_instance.click_cell_in_row(row_name, cell_index)
 
-def get_element_by_type(locator_type, locator_value, name=None):
+def click_link_in_row(row_name, link_index):
+    return playwright_helper_instance.click_link_in_row(row_name, link_index)
+
+def get_element_by_type(locator_type, locator_value=None, name=None):
     return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name)
 
 def release_mouse():
