@@ -140,53 +140,31 @@ def find_elements(selector):
 def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
-def click_element(element):
-    element = get_element_by_type(*element)
-    find_element_and_perform_action(element, "click")
-
-def get_element_text(element):
-    element = get_element_by_type(*element)
-    find_element_and_perform_action(element, "get_text")
-
-def clear_element(element):
-    element = get_element_by_type(*element)
-    find_element_and_perform_action(element, "clear")
-
-def check_element(element):
-    element = get_element_by_type(*element)
-    find_element_and_perform_action(element, "check")
-
-def check_if_element_exists(element, wait=False):
-    element = get_element_by_type(*element)
-    return check_element_exists(element, wait)
-
-def input_text_into_element(element, text):
-    element = get_element_by_type(*element)
-    find_element_and_perform_action(element, "input_text", text)
-
-def select_option(element, option):
-    element = get_element_by_type(*element)
-    find_element_and_perform_action(element, "select_option", option)
-
 def check_element_exists(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    elif isinstance(element, str):
+        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_exists(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
-def check_element_by_locator_exists(element, wait=False):
-    try:
-        return playwright_helper_instance.check_element_by_locator_exists(element, wait)
-    except Exception as e:
-        pytest.fail(f"An error occurred: {e}")
-
 def check_element_enabled(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    elif isinstance(element, str):
+        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_enabled(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
 def check_element_by_locator_enabled(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    else:
+        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_by_locator_enabled(element, wait)
     except Exception as e:
@@ -195,22 +173,31 @@ def check_element_by_locator_enabled(element, wait=False):
 def scroll_into_view(element):
     return playwright_helper_instance.scroll_into_view(element)
 
-def wait_for_element_to_appear(*selector):
-    playwright_helper_instance.wait_for_element_to_appear(*selector)
-
-# def clear_element(element):
-#     return playwright_helper_instance.clear_element(element)
+def wait_for_element_to_appear(element):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    else:
+        element = get_element_by_type(element)
+    return playwright_helper_instance.wait_for_element_to_appear(element)
 
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
 
 def find_element_and_perform_action(element, action, inputValue=None):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)  # Unpack the tuple/list
+    else:
+        # If it's a string, treat it as a selector directly
+        element = get_element_by_type(element)
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
 
-def find_element_with_locator_and_perform_action(element, action, inputValue=None):
-    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)
+def click_cell_in_row(row_name, cell_index):
+    return playwright_helper_instance.click_cell_in_row(row_name, cell_index)
 
-def get_element_by_type(locator_type, locator_value, name=None):
+def click_link_in_row(row_name, link_index):
+    return playwright_helper_instance.click_link_in_row(row_name, link_index)
+
+def get_element_by_type(locator_type, locator_value=None, name=None):
     return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name)
 
 def release_mouse():

@@ -25,6 +25,12 @@ REACTIVATE_BATCH_CONFIRMATION_BUTTON = ("//button[text()='Reactivate']")
 def click_reactivate_batch_confirmation_button():
     find_element_and_perform_action(REACTIVATE_BATCH_CONFIRMATION_BUTTON, "click")
 
+def get_first_active_batch_number_value():
+    xpath = "(//tbody[@class='nhsuk-table__body']//tr[td[@role='cell'][3]//strong[text()=' Active']][1]//td[@role='cell'])[1]"
+    full_text = find_element_and_perform_action(("xpath", xpath), "get_text")
+    batch_number = full_text.replace('Batch number', '').strip()
+    return batch_number
+
 def check_required_field_error_appears_for_expiry_month(wait):
     return check_element_exists(EXPIRY_MONTH_INPUT_ERROR_LABEL, wait)
 

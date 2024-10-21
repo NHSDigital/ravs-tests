@@ -18,7 +18,7 @@ from pages.record_consent_page import *
 from pages.record_vaccinated_page import *
 from pages.vaccines_choose_site_page import *
 from pages.vaccines_choose_vaccine_page import *
-from pages.vaccines_add_batch_page import *
+from pages.site_vaccines_add_batch_page import *
 from pages.vaccines_view_products_page import *
 from init_helpers import *
 from datetime import datetime, timedelta
@@ -50,7 +50,6 @@ def format_nhs_number(nhs_number):
     # Use regular expressions to insert spaces in the phone number
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
-
 
 
 # @pytest.fixture(scope='function')
@@ -113,12 +112,6 @@ def navigate_to_ravs(request):
 def click_back_button_recording_consent(request):
     click_back_button()
 
-# Fixture for logging in and navigating to appointments
-@pytest.fixture(scope='function')
-def login_and_navigate_to_appointments(site, care_model,  navigate_and_login):
-    click_continue_to_record_a_vaccination_homepage()
-    click_appointments_nav_link()
-
 def set_vaccinator_location(site, care_model):
     select_site(site)
     select_care_model(care_model)
@@ -145,7 +138,6 @@ def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_
     attach_screenshot("user_has_selected_care_model")
     click_continue_to_record_a_vaccination_homepage()
     attach_screenshot("user_has_clicked_continue_to_ravs_homepage")
-    click_appointments_nav_link()
     current_date = datetime.now()
     fromDate = datetime(2023, 12, 1)
     set_from_date(fromDate)
@@ -169,31 +161,10 @@ def login_and_find_a_patient_by_nhs_number(request, login_and_navigate_to_find_a
     enter_nhs_number(nhs_number)
     click_search_for_patient_button()
 
-# Fixture for navigating to find a patient by PDS search page
-@pytest.fixture(scope='function')
-def login_and_navigate_to_find_a_patient_by_pds_search_page(request):
-    # set_vaccinator_location()
-    click_pds_search_nav_link()
-
 # Fixture for navigating to appointments open first patient and clicking choose vaccine
 @pytest.fixture(scope='function')
 def goto_appointments_open_first_patient_and_click_choose_vaccine(request, login_and_navigate_to_appointments_open_first_patient):
     click_choose_vaccine_button()
-
-# Fixture for navigating to appointments open first patient and clicking choose covid vaccine
-@pytest.fixture(scope='function')
-def goto_appointments_open_first_patient_and_click_choose_covid_vaccine(request, goto_appointments_open_first_patient_and_click_choose_vaccine):
-    click_covid_radiobutton()
-
-# Fixture for navigating to appointments open first patient and clicking choose seasonal flu vaccine
-@pytest.fixture(scope='function')
-def goto_appointments_open_first_patient_and_click_choose_seasonal_flu_vaccine(request, goto_appointments_open_first_patient_and_click_choose_vaccine):
-    click_flu_radiobutton()
-
-# # Fixture for selecting covid vaccine and going to record consent
-# @pytest.fixture(scope='function')
-# def select_covid_vaccine_and_goto_record_consent(request, goto_appointments_open_first_patient_and_click_choose_covid_vaccine):
-#     click_continue_to_record_consent_button()
 
 # Fixture for logging out
 @pytest.fixture(scope='function')
@@ -231,15 +202,15 @@ def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
 
 def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     click_delivery_team_radiobutton(site)
-    click_consent_vaccine_radiobutton(vaccine)
-    click_consent_vaccine_type_radiobutton(vaccine_type)
+    click_vaccine_radiobutton(vaccine)
+    click_vaccine_type_radiobutton(vaccine_type)
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
 def choose_vaccine_and_vaccine_type_only(site, vaccine, vaccine_type):
     click_delivery_team_radiobutton(site)
-    click_consent_vaccine_radiobutton(vaccine)
-    click_consent_vaccine_type_radiobutton(vaccine_type)
+    click_vaccine_radiobutton(vaccine)
+    click_vaccine_type_radiobutton(vaccine_type)
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type)
 
 def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineType, batch_number, expirydate):

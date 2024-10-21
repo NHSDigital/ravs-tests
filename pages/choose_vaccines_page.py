@@ -14,48 +14,47 @@ MIN_INTERVAL_BASED_WARNING = ("text", "You may have not reached the minimal inte
 
 def click_site_radiobutton(site):
     element = ("label", site)
-    click_element(element)
+    find_element_and_perform_action(element, "click")
 
 def click_back_button_choosing_vaccine_for_patient():
-    click_element(BACK_ELEMENT)
+    find_element_and_perform_action(BACK_ELEMENT, "click")
 
 def click_delivery_team_radiobutton(deliveryTeam):
     element = ("label", deliveryTeam)
-    if check_if_element_exists(element, True) == True:
-        check_element(element)
+    if check_element_exists(element, True) == True:
+        find_element_and_perform_action(element, "check")
     else:
         print("Delivery team not available at organization")
 
 def click_vaccine_type_radiobutton(vaccine_type):
     element = ("label", vaccine_type)
-    if check_if_element_exists(element, True) == True:
-        check_element(element)
+    if check_element_exists(element, True) == True:
+        find_element_and_perform_action(element, "check")
     else:
         print("Vaccine type not available")
 
 def click_vaccine_radiobutton(vaccine):
     element = ("label", vaccine)
-    if check_if_element_exists(element, True) == True:
-        check_element(element)
+    if check_element_exists(element, True) == True:
+        find_element_and_perform_action(element, "check")
     else:
         print("Vaccine not available")
 
 def check_back_button_exists():
-    return check_if_element_exists(BACK_ELEMENT, True)
+    return check_element_exists(BACK_ELEMENT, True)
 
 def check_age_based_warning_exists():
-    time.sleep(2)
     wait_for_element_to_appear(AGE_BASED_WARNING)
-    return check_if_element_exists(AGE_BASED_WARNING, True)
+    return check_element_exists(AGE_BASED_WARNING, True)
 
 def check_minimum_interval_based_warning_exists():
-    return check_if_element_exists(MIN_INTERVAL_BASED_WARNING, False)
+    return check_element_exists(MIN_INTERVAL_BASED_WARNING, False)
 
 def check_covid_radiobutton_exists():
-    return check_if_element_exists(COVID_RADIOBUTTON, True)
+    return check_element_exists(COVID_RADIOBUTTON, True)
 
 def check_flu_radiobutton_exists():
-    return check_if_element_exists(FLU_RADIOBUTTON, True)
+    return check_element_exists(FLU_RADIOBUTTON, True)
 
 def click_continue_to_assess_patient_button():
-    click_element(CONTINUE_BUTTON)
+    find_element_and_perform_action(CONTINUE_BUTTON, "click")
