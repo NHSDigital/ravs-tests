@@ -65,33 +65,53 @@ def sanitize_filename(filename):
     Remove or replace illegal characters in filenames for cross-platform compatibility.
     For example, Windows does not allow: \\ / : * ? " < > |
     """
-    return re.sub(r'[<>:"/\\|?*]', '_', filename)
+    sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)
+
+    # Remove leading/trailing spaces and periods (invalid in some OS)
+    sanitized = sanitized.strip().strip('.')
+
+    return sanitized
 
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
 
+    # Dynamically generate the filename
     if config["browser"] == "mobile":
         filename = f'{config["test_environment"]}_{config["browser"]}_{config["device"]}_{get_browser_version()}_{filename}.png'
     else:
         filename = f'{config["test_environment"]}_{config["browser"]}_{get_browser_version()}_{filename}.png'
 
+    # Sanitize the filename
     filename = sanitize_filename(filename)
+
+    # Define the directory
     directory = os.path.join('data', 'attachments')
     full_path = os.path.join(directory, filename)
 
+    # Ensure the directory exists
     try:
+        # Check if directory exists, create it if not
         if not os.path.exists(directory):
-            logging.debug(f"Creating directory: {directory}")
+            logging.debug(f"Directory does not exist, creating it: {directory}")
             os.makedirs(directory, exist_ok=True)
 
-        logging.debug(f"Saving screenshot to: {full_path}")
-
-        screenshot = capture_screenshot(full_path)
-        if screenshot:
-            logging.debug(f"Screenshot saved at: {full_path}")
-            allure.attach.file(screenshot, name=filename, attachment_type=allure.attachment_type.PNG)
+        # Confirm that directory creation was successful
+        if os.path.exists(directory):
+            logging.debug(f"Directory verified: {directory}")
         else:
-            logging.error("Screenshot capture returned no result.")
+            logging.error(f"Failed to create directory: {directory}")
+            return  # Abort if directory creation failed
+
+        # Capture the screenshot
+        logging.debug(f"Saving screenshot to: {full_path}")
+        screenshot = capture_screenshot(full_path)
+
+        # Check if screenshot was captured and file exists
+        if screenshot and os.path.exists(full_path):
+            logging.debug(f"Screenshot saved successfully at: {full_path}")
+            allure.attach.file(full_path, name=filename, attachment_type=allure.attachment_type.PNG)
+        else:
+            logging.error(f"Screenshot capture failed or file not found at: {full_path}")
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
