@@ -207,11 +207,6 @@ class BasePlaywrightHelper:
             print(f"Element not found for action: {action}")
             return
 
-        # Capture screenshot before performing the action
-        self.capture_screenshot(screenshot_name + "_before")
-
-        # Disable smooth scrolling and ensure element is visible
-
         self.disable_smooth_scrolling()
         self.wait_for_element_to_appear(element)
 
@@ -262,9 +257,6 @@ class BasePlaywrightHelper:
             print(f"Timeout waiting for element to perform {action}")
         except Exception as e:
             print(f"Exception: {e} during {action} on element.")
-
-        # Capture screenshot after performing the action
-        self.capture_screenshot(screenshot_name + "_after")
 
     def wait_for_selector_to_disappear(self, selector, timeout=5):
         try:
