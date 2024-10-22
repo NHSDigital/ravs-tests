@@ -136,6 +136,8 @@ jobs:
       - name: Move Attachments
         run: |
           mv data/attachments/** .
+          echo "Files moved to current directory."
+          ls -la  # List files to verify they were moved
 
       - name: Upload Attachments
         uses: actions/upload-artifact@v3
@@ -165,12 +167,6 @@ jobs:
 
       - name: Check contents of gh-pages
         run: ls -la
-
-      - name: Check contents of gh-pages
-        run: |
-          git clone --depth 1 --branch ${{ env.DESTINATION_BRANCH }} https://github.com/${{ github.repository }} gh-pages-check
-          cd gh-pages-check
-          ls -la
 
       - name: Get GitHub Pages URL
         id: pages-url
