@@ -137,7 +137,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: screenshots
-          path: allure-report/data/attachments/*
+          path: data/attachments/**
+          if-no-files-found: warn
+          include-hidden-files: false
 
       - name: List contents of data/attachments
         run: ls -l data/attachments
