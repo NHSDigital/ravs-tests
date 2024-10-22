@@ -124,14 +124,14 @@ jobs:
         run: |
           ls -l allure-report
 
-      # # Move the Allure report files to the root of the gh-pages directory
-      # - name: Move Allure report files
-      #   run: |
-      #     mv allure-report/* .
-        # if [ -d "screenshots/data/attachments" ]; then
-        #   mkdir -p data/attachments  # Create the target directory if it doesn't exist
-        #   mv screenshots/data/attachments/* data/attachments/
-        # fi
+      # Move the Allure report files to the root of the gh-pages directory
+      - name: Move Allure report files
+        run: |
+          mv allure-report/* .
+          if [ -d "data/attachments" ]; then
+            mkdir -p data/attachments  # Create the target directory if it doesn't exist
+            mv data/attachments/* data/attachments/
+          fi
 
       # - name: Move Attachments
       #   run: |
