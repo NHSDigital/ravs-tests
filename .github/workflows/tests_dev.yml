@@ -128,10 +128,10 @@ jobs:
       - name: Move Allure report files
         run: |
           mv allure-report/* .
-          if [ -d "screenshots/data/attachments" ]; then
-            mkdir -p data/attachments  # Create the target directory if it doesn't exist
-            mv screenshots/data/attachments/* data/attachments/
-          fi
+        # if [ -d "screenshots/data/attachments" ]; then
+        #   mkdir -p data/attachments  # Create the target directory if it doesn't exist
+        #   mv screenshots/data/attachments/* data/attachments/
+        # fi
 
       - name: Upload Attachments
         uses: actions/upload-artifact@v3
@@ -167,7 +167,7 @@ jobs:
           script: |
             const repo = context.repo.repo;
             const owner = context.repo.owner;
-            const branchName = ${{ env.BRANCH_NAME }};  // Use the branch name you want to reference
+            const branchName = context.ref.split('/').pop();  // Use the branch name you want to reference
             const pagesUrl = `https://${owner}.github.io/${repo}/gh-pages-${branchName}`; // Use backticks for template literals
             core.setOutput('pages_url', pagesUrl);
 
