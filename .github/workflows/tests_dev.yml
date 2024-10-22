@@ -167,8 +167,8 @@ jobs:
           script: |
             const repo = context.repo.repo;
             const owner = context.repo.owner;
-            const branchName = '${{ env.BRANCH_NAME }}'
-            const pagesUrl = https://${owner}.github.io/${repo}/gh-pages-${branchName}`;
+            const branchName = ${{ env.BRANCH_NAME }};  // Use the branch name you want to reference
+            const pagesUrl = `https://${owner}.github.io/${repo}/gh-pages-${branchName}`; // Use backticks for template literals
             core.setOutput('pages_url', pagesUrl);
 
       - name: Output GitHub Pages URL
