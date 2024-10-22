@@ -128,10 +128,16 @@ jobs:
       - name: Move Allure report files
         run: |
           mv allure-report/* .
-          if [ -d "screenshots/before_action_data/attachments" ]; then
+          if [ -d "screenshots/data/attachments" ]; then
             mkdir -p data/attachments  # Create the target directory if it doesn't exist
-            mv screenshots/before_action_data/attachments/* data/attachments/
+            mv screenshots/data/attachments/* data/attachments/
           fi
+
+      - name: Upload Attachments
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: /app/data/attachments/*
 
       - name: List contents of data/attachments
         run: ls -l data/attachments
