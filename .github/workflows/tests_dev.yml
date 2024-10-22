@@ -136,12 +136,20 @@ jobs:
       - name: List contents of data/attachments
         run: ls -l data/attachments
 
+      - name: Get branch name
+        id: get_branch_name
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+
+      - name: Set destination branch for GitHub Pages
+        id: set-destination-branch
+        run: echo "DESTINATION_BRANCH=gh-pages-${{ env.BRANCH_NAME }}" >> $GITHUB_ENV
+
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          destination_branch: gh-pages-dev
+          destination_branch: ${{ env.DESTINATION_BRANCH }}
 
       - name: Check contents of gh-pages
         run: ls -la
@@ -153,7 +161,8 @@ jobs:
           script: |
             const repo = context.repo.repo;
             const owner = context.repo.owner;
-            const pagesUrl = `https://${owner}.github.io/${repo}`;
+            const branchName = '${{ env.BRANCH_NAME }}'
+            const pagesUrl = https://${owner}.github.io/${repo}/gh-pages-${branchName}`;
             core.setOutput('pages_url', pagesUrl);
 
       - name: Output GitHub Pages URL
