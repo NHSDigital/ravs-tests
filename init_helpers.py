@@ -1,5 +1,4 @@
 import os
-import re
 from helpers.apiHelper import ApiHelper
 from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
@@ -60,61 +59,25 @@ def load_config_from_env():
     }
     return config
 
-def sanitize_filename(filename):
-    """
-    Remove or replace illegal characters in filenames for cross-platform compatibility.
-    For example, Windows does not allow: \\ / : * ? " < > |
-    """
-    sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)
-
-    # Remove leading/trailing spaces and periods (invalid in some OS)
-    sanitized = sanitized.strip().strip('.')
-
-    return sanitized
-
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
-
-    # Dynamically generate the filename
     if config["browser"] == "mobile":
-        filename = f'{config["test_environment"]}_{config["browser"]}_{config["device"]}_{get_browser_version()}_{filename}.png'
+        filename = config["test_environment"] + "_" + config["browser"] + "_" + config["device"] + "_" + get_browser_version() + "_" + filename + ".png"
     else:
-        filename = f'{config["test_environment"]}_{config["browser"]}_{get_browser_version()}_{filename}.png'
+        filename = config["test_environment"] + "_" + config["browser"] + "_" + get_browser_version() + "_" + filename + ".png"
 
-    # Sanitize the filename
-    filename = sanitize_filename(filename)
+    directory = os.path.dirname(filename)
+    if directory:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-    # Define the directory
-    directory = os.path.join('data', 'attachments')
-    full_path = os.path.join(directory, filename)
+    logging.debug(f"Filename: {filename}")
 
-    # Ensure the directory exists
     try:
-        # Check if directory exists, create it if not
-        if not os.path.exists(directory):
-            logging.debug(f"Directory does not exist, creating it: {directory}")
-            os.makedirs(directory, exist_ok=True)
-
-        # Confirm that directory creation was successful
-        if os.path.exists(directory):
-            logging.debug(f"Directory verified: {directory}")
-        else:
-            logging.error(f"Failed to create directory: {directory}")
-            return  # Abort if directory creation failed
-
-        # Capture the screenshot
-        logging.debug(f"Saving screenshot to: {full_path}")
-        screenshot = capture_screenshot(full_path)
-
-        # Check if screenshot was captured and file exists
-        if screenshot and os.path.exists(full_path):
-            logging.debug(f"Screenshot saved successfully at: {full_path}")
-            allure.attach.file(screenshot, name=filename, attachment_type=allure.attachment_type.PNG)
-        else:
-            logging.error(f"Screenshot capture failed or file not found at: {full_path}")
+        screenshot = capture_screenshot(filename)
+        logging.debug(f"Screenshot saved at: {screenshot}")
+        allure.attach.file(screenshot, name=f"{filename}", attachment_type=allure.attachment_type.PNG)
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
-
 
 config = load_config_from_env()
 
@@ -168,30 +131,24 @@ def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
 def check_element_exists(element, wait=False):
-    if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)
-    elif isinstance(element, str):
-        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_exists(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
+def check_element_by_locator_exists(element, wait=False):
+    try:
+        return playwright_helper_instance.check_element_by_locator_exists(element, wait)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
 def check_element_enabled(element, wait=False):
-    if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)
-    elif isinstance(element, str):
-        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_enabled(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
 def check_element_by_locator_enabled(element, wait=False):
-    if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)
-    else:
-        element = get_element_by_type(element)
     try:
         return playwright_helper_instance.check_element_by_locator_enabled(element, wait)
     except Exception as e:
@@ -200,31 +157,22 @@ def check_element_by_locator_enabled(element, wait=False):
 def scroll_into_view(element):
     return playwright_helper_instance.scroll_into_view(element)
 
-def wait_for_element_to_appear(element):
-    if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)
-    else:
-        element = get_element_by_type(element)
-    return playwright_helper_instance.wait_for_element_to_appear(element)
+def wait_for_element_to_appear(selector):
+    playwright_helper_instance.wait_for_element_to_appear(selector)
+
+def clear_element(element):
+    return playwright_helper_instance.clear_element(element)
 
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
 
 def find_element_and_perform_action(element, action, inputValue=None):
-    if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)  # Unpack the tuple/list
-    else:
-        # If it's a string, treat it as a selector directly
-        element = get_element_by_type(element)
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
 
-def click_cell_in_row(row_name, cell_index):
-    return playwright_helper_instance.click_cell_in_row(row_name, cell_index)
+def find_element_with_locator_and_perform_action(element, action, inputValue=None):
+    return playwright_helper_instance.find_element_with_locator_and_perform_action(element, action, inputValue)
 
-def click_link_in_row(row_name, link_index):
-    return playwright_helper_instance.click_link_in_row(row_name, link_index)
-
-def get_element_by_type(locator_type, locator_value=None, name=None):
+def get_element_by_type(locator_type, locator_value, name=None):
     return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name)
 
 def release_mouse():

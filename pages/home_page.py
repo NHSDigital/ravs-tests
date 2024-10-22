@@ -1,13 +1,19 @@
 from init_helpers import *
 
-FIND_A_PATIENT_NAV_ELEMENT = ("role", "link", "Find a patient")
-VACCINES_NAV_ELEMENT = ("role", "link", "Vaccines")
-REPORTS_NAV_ELEMENT = ("role", "link", "Reports")
-MANAGE_USERS_NAV_ELEMENT = ("role", "link", "Manage users")
-NHS_LOGO_NAV_ELEMENT = ("role", "link", "NHS Logo Record a vaccination")
-LOGOUT_NAV_ELEMENT = ("role", "link", "Log Out")
+APPOINTMENTS_NAV_ELEMENT = ("//a[@href='/appointment']")
+PDS_SEARCH_NAV_ELEMENT = ("//a[@href='/patient-search/details']")
+RECORDS_NAV_ELEMENT = ("//a[text()='Records']")
+DASHBOARD_NAV_ELEMENT = ("//a[text()='Dashboard']")
+FIND_A_PATIENT_NAV_ELEMENT = ("//a[text()='Find a patient']")
+VACCINES_NAV_ELEMENT = ("//a[text()='Vaccines']")
+REPORTS_NAV_ELEMENT = ("//a[text()='Reports']")
+MANAGE_USERS_NAV_ELEMENT = ("//a[@href='/manage-users']")
+PROFILE_NAV_ELEMENT = ("//a[@href='/profile']")
+LOGOUT_NAV_ELEMENT = ("//a[text()='Log Out']")
+WORKFLOWS_NAV_ELEMENT = ("//a[text()='/Workflows']")
 NAV_BAR_TOGGLER = ("//button[@class='navbar-toggler']")
 NAV_LINK_BAR_TOGGLER = ("//button[@class='navbar-toggler p-2']")
+
 
 def click_logout_button():
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
@@ -19,7 +25,6 @@ def click_nav_link_bar_toggler():
     find_element_and_perform_action(NAV_LINK_BAR_TOGGLER, "click")
 
 def check_logout_button_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
     return check_element_exists(LOGOUT_NAV_ELEMENT, True)
 
 def check_navbar_toggle_exists_without_waiting():
@@ -37,9 +42,20 @@ def check_nav_link_bar_toggle_exists():
 def check_logout_button_exists_without_waiting():
     return check_element_exists(LOGOUT_NAV_ELEMENT, False)
 
-def click_profile_nav_link(email):
-    element = ("role", "link", email)
-    find_element_and_perform_action(element, "click")
+def click_profile_nav_link():
+    find_element_and_perform_action(PROFILE_NAV_ELEMENT, "click")
+
+def click_appointments_nav_link():
+    find_element_and_perform_action(APPOINTMENTS_NAV_ELEMENT, "click")
+
+def click_pds_search_nav_link():
+    find_element_and_perform_action(PDS_SEARCH_NAV_ELEMENT, "click")
+
+def click_records_nav_link():
+    find_element_and_perform_action(RECORDS_NAV_ELEMENT, "click")
+
+def click_dashboard_nav_link():
+    find_element_and_perform_action(DASHBOARD_NAV_ELEMENT, "click")
 
 def click_reports_nav_link():
     find_element_and_perform_action(REPORTS_NAV_ELEMENT, "click")
@@ -47,8 +63,14 @@ def click_reports_nav_link():
 def click_vaccines_nav_link():
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
 
+def click_vaccines_nav_link():
+    find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
+
 def click_manage_users_nav_link():
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
+
+def click_workflows_nav_link():
+    find_element_and_perform_action(WORKFLOWS_NAV_ELEMENT, "click")
 
 def click_find_a_patient_nav_link():
     find_element_and_perform_action(FIND_A_PATIENT_NAV_ELEMENT, "click")
