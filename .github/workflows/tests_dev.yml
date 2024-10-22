@@ -124,7 +124,7 @@ jobs:
         run: |
           ls -l allure-report
 
-      # Move the Allure report files to the root of the gh-pages directory
+      # Move the Allure report files to the root of the git-pages directory
       - name: Move Allure report files
         run: |
           mv allure-report/* .
@@ -150,31 +150,31 @@ jobs:
       # - name: List contents of data/attachments
       #   run: ls -l data/attachments
 
-      - name: Get branch name
-        id: get_branch_name
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+      # - name: Get branch name
+      #   id: get_branch_name
+      #   run: echo "BRANCH_NAME=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
 
-      - name: Set destination branch for GitHub Pages
-        id: set-destination-branch
-        run: echo "DESTINATION_BRANCH=gh-pages-${{ env.BRANCH_NAME }}" >> $GITHUB_ENV
+      # - name: Set destination branch for GitHub Pages
+      #   id: set-destination-branch
+      #   run: echo "DESTINATION_BRANCH=gh-pages-${{ env.BRANCH_NAME }}" >> $GITHUB_ENV
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          destination_branch: gh-pages-dev
+          destination_branch: git-pages-dev
 
-      - name: Check contents of gh-pages
+      - name: Check contents of git-pages
         run: |
-            git fetch origin gh-pages-dev
-            git checkout gh-pages-dev
-            ls -la   # List the contents to verify the deployment
+          git fetch origin git-pages-dev
+          git checkout git-pages-dev || git checkout -b git-pages-dev
+          ls -la  # List the contents to verify the deployment
 
       - name: Get GitHub Pages URL
         id: pages-url
         run: |
-          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{github.event.repository.name }}/gh-pages-dev/"
+          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{github.event.repository.name }}/git-pages-dev/"
 
       - name: Output GitHub Pages URL
         run: |
