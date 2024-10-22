@@ -90,10 +90,6 @@ def attach_screenshot(filename):
     directory = os.path.join(working_dir, 'data', 'attachments')
     full_path = os.path.join(directory, filename)
 
-    logging.debug(f"Saving screenshot to: {full_path}")
-    logging.debug(f"Working directory is: {working_dir}")
-    logging.debug(f"directory is: {directory}")
-
     # Ensure the directory exists
     try:
         # Check if directory exists, create it if not
@@ -110,18 +106,12 @@ def attach_screenshot(filename):
 
         # Capture the screenshot
         logging.debug(f"Saving screenshot to: {full_path}")
-        logging.debug(f"Working directory is: {working_dir}")
         screenshot = capture_screenshot(full_path)
 
         # Check if screenshot was captured and file exists
         if screenshot and os.path.exists(full_path):
-            logging.debug(f"Screenshot saved successfully at: {full_path}")
-            logging.debug(f"Saving screenshot to: {full_path}")
-            logging.debug(f"Working directory is: {working_dir}")
             allure.attach.file(full_path, name=filename, attachment_type=allure.attachment_type.PNG)
             logging.debug(f"Screenshot attached at: {full_path}")
-            logging.debug(f"Saving attachment to: {full_path}")
-            logging.debug(f"Working directory is: {working_dir}")
         else:
             logging.error(f"Screenshot capture failed or file not found at: {full_path}")
     except Exception as e:
