@@ -70,10 +70,12 @@ def sanitize_filename(filename):
     # Remove leading/trailing spaces and periods (invalid in some OS)
     sanitized = sanitized.strip().strip('.')
 
-    return sanitized
+    return sanitized[:200]
 
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
+
+    working_dir = get_working_directory()
 
     # Dynamically generate the filename
     if config["browser"] == "mobile":
@@ -85,8 +87,12 @@ def attach_screenshot(filename):
     filename = sanitize_filename(filename)
 
     # Define the directory
-    directory = os.path.join('data', 'attachments')
+    directory = os.path.join(working_dir, 'data', 'attachments')
     full_path = os.path.join(directory, filename)
+
+    logging.debug(f"Saving screenshot to: {full_path}")
+    logging.debug(f"Working directory is: {working_dir}")
+    logging.debug(f"directory is: {directory}")
 
     # Ensure the directory exists
     try:
@@ -103,7 +109,8 @@ def attach_screenshot(filename):
             return  # Abort if directory creation failed
 
         # Capture the screenshot
-        logging.debug(f"Saving screenshot to: {full_path}")
+        # logging.debug(f"Saving screenshot to: {full_path}")
+        # logging.debug(f"Working directory is: {working_dir}")
         screenshot = capture_screenshot(full_path)
 
         # Check if screenshot was captured and file exists

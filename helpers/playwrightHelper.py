@@ -83,17 +83,16 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Error launching mobile browser for {device_name}: {e}")
 
-    def capture_screenshot(self, filename):
-        screenshot_path = os.path.join(self.screenshots_dir, f'before_action_{filename}.png')
+    def capture_screenshot(self, full_path):
         try:
-            self.page.screenshot(path=screenshot_path)
+            self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):
                 print('Screenshot taking timed out, ignoring...')
                 return None
             else:
                 raise error
-        return screenshot_path
+        return full_path
 
     def get_browser_version(self):
         if self.browser:
