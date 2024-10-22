@@ -39,7 +39,7 @@ jobs:
             -e HEADLESS_MODE="true" \
             -e TEST_ENVIRONMENT="dev" \
             -e BROWSER="chrome" \
-            -e MARKER="logout" \
+            -e MARKER="" \
             -e AGENTS=3 \
             -p 5050:5050 \
             playwright-tests
@@ -128,16 +128,6 @@ jobs:
       - name: Move Allure report files
         run: |
           mv allure-report/* .
-        # if [ -d "data/attachments" ]; then
-          #   mkdir -p data/attachments  # Create the target directory if it doesn't exist
-          #   mv data/attachments/* data/attachments/
-          # fi
-
-      # - name: Move Attachments
-      #   run: |
-      #     mv data/attachments/** .
-      #     echo "Files moved to current directory."
-      #     ls -la  # List files to verify they were moved
 
       - name: Upload Attachments
         uses: actions/upload-artifact@v3
@@ -146,9 +136,6 @@ jobs:
           path: data/attachments/**
           if-no-files-found: warn
           include-hidden-files: false
-
-      # - name: List contents of data/attachments
-      #   run: ls -l data/attachments
 
       - name: Get branch name
         id: get_branch_name
