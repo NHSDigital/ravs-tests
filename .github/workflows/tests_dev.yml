@@ -133,6 +133,10 @@ jobs:
         #   mv screenshots/data/attachments/* data/attachments/
         # fi
 
+      - name: Move Attachments
+        run: |
+          mv data/attachments/** .
+
       - name: Upload Attachments
         uses: actions/upload-artifact@v3
         with:
@@ -161,6 +165,12 @@ jobs:
 
       - name: Check contents of gh-pages
         run: ls -la
+
+      - name: Check contents of gh-pages
+        run: |
+          git clone --depth 1 --branch ${{ env.DESTINATION_BRANCH }} https://github.com/${{ github.repository }} gh-pages-check
+          cd gh-pages-check
+          ls -la
 
       - name: Get GitHub Pages URL
         id: pages-url
