@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4I w
 
       - name: Stop and remove all containers
         run: |
@@ -151,7 +151,7 @@ jobs:
         run: echo "DESTINATION_BRANCH=gh-pages-${{ env.BRANCH_NAME }}" >> $GITHUB_ENV
 
       - name: Deploy Allure report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v2
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
