@@ -101,7 +101,7 @@ jobs:
           fi
 
       - name: Upload Allure report archive
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: ${{ env.ALLURE_REPORT_ARCHIVE }}
@@ -151,7 +151,7 @@ jobs:
         run: echo "DESTINATION_BRANCH=gh-pages-${{ env.BRANCH_NAME }}" >> $GITHUB_ENV
 
       - name: Deploy Allure report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
