@@ -163,21 +163,18 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          destination_branch: ${{ env.DESTINATION_BRANCH }}
+          destination_branch: gh-pages-dev
 
       - name: Check contents of gh-pages
-        run: ls -la
+        run: |
+            git fetch origin gh-pages-dev
+            git checkout gh-pages-dev
+            ls -la   # List the contents to verify the deployment
 
       - name: Get GitHub Pages URL
         id: pages-url
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const repo = context.repo.repo;
-            const owner = context.repo.owner;
-            const branchName = context.ref.split('/').pop();  // Use the branch name you want to reference
-            const pagesUrl = `https://${owner}.github.io/${repo}/gh-pages-${branchName}`; // Use backticks for template literals
-            core.setOutput('pages_url', pagesUrl);
+        run: |
+          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{github.event.repository.name }}/gh-pages-dev/"
 
       - name: Output GitHub Pages URL
         run: |
