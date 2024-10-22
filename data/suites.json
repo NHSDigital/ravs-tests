@@ -2,14 +2,14 @@
   "uid" : "98d3104e051c652961429bf95fa0b5d6",
   "name" : "suites",
   "children" : [ {
-    "name" : "Search by NHS number [9693632109-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW]",
-    "uid" : "87fdcef369f1b626",
+    "name" : "Display warning based on age when recording a vaccine [9692237893-3-covid]",
+    "uid" : "64c64400daeaf84b",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
+    "status" : "failed",
     "time" : {
-      "start" : 1729579442390,
-      "stop" : 1729579452224,
-      "duration" : 9834
+      "start" : 1729580986599,
+      "stop" : 1729581311157,
+      "duration" : 324558
     },
     "flaky" : false,
     "newFailed" : false,
@@ -17,33 +17,16 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill GARTON", "9693632109" ]
+    "parameters" : [ "3", "9692237893", "covid" ]
   }, {
-    "name" : "Display warning based on age when recording a vaccine [9450153485-3-covid]",
-    "uid" : "28f5024017854b65",
+    "name" : "Search without entering nhs number",
+    "uid" : "1fff275f2bf97079",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579442422,
-      "stop" : 1729579481824,
-      "duration" : 39402
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "3", "9450153485", "covid" ]
-  }, {
-    "name" : "Add vaccine batches page should launch",
-    "uid" : "a69f4f251db62e2c",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579450243,
-      "stop" : 1729579451443,
-      "duration" : 1200
+      "start" : 1729580986608,
+      "stop" : 1729580998848,
+      "duration" : 12240
     },
     "flaky" : false,
     "newFailed" : false,
@@ -53,14 +36,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ ]
   }, {
-    "name" : "Add batch to vaccine [ALBERT HOUSE-COVID-19-Spikevax JN.1-AB2345-Y7890]",
-    "uid" : "9882d3b02043febb",
+    "name" : "Add vaccine batches page should launch",
+    "uid" : "d9f8c4469a46befa",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
+    "status" : "passed",
     "time" : {
-      "start" : 1729579451447,
-      "stop" : 1729579459574,
-      "duration" : 8127
+      "start" : 1729580996087,
+      "stop" : 1729580999556,
+      "duration" : 3469
     },
     "flaky" : false,
     "newFailed" : false,
@@ -68,16 +51,67 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "AB2345-Y7890", "ALBERT HOUSE", "COVID-19", "Spikevax JN.1" ]
+    "parameters" : [ ]
   }, {
-    "name" : "Search by NHS number [9732743476-Mike HEESOM-24/10/1992-2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY]",
-    "uid" : "5c6c9bd4a93721e4",
+    "name" : "Search without entering patient details",
+    "uid" : "43d2786c56ed8ac6",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579452227,
-      "stop" : 1729579458392,
-      "duration" : 6165
+      "start" : 1729580998850,
+      "stop" : 1729581009638,
+      "duration" : 10788
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Add batch to vaccine [NEELIMA HOUSE-COVID-19-Spikevax JN.1-AB2345-Y7890]",
+    "uid" : "362ded40aec7fb55",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729580999558,
+      "stop" : 1729581041116,
+      "duration" : 41558
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "AB2345-Y7890", "NEELIMA HOUSE", "COVID-19", "Spikevax JN.1" ]
+  }, {
+    "name" : "Search by NHS number [9693632109-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW]",
+    "uid" : "e1e06eb887b48ef",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581009640,
+      "stop" : 1729581019799,
+      "duration" : 10159
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill GARTON", "9693632109" ]
+  }, {
+    "name" : "Search by NHS number [9732743476-Mike HEESOM-24/10/1992-2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY]",
+    "uid" : "46a63b7160839833",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581019801,
+      "stop" : 1729581029998,
+      "duration" : 10197
     },
     "flaky" : false,
     "newFailed" : false,
@@ -88,13 +122,13 @@
     "parameters" : [ "2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY", "24/10/1992", "Mike HEESOM", "9732743476" ]
   }, {
     "name" : "Search by NHS number [9650594000-Archie STRAIN-30/7/2014-1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ]",
-    "uid" : "abe39fe7347e302e",
+    "uid" : "30ed6a83d5a413ee",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579458395,
-      "stop" : 1729579464887,
-      "duration" : 6492
+      "start" : 1729581030000,
+      "stop" : 1729581039947,
+      "duration" : 9947
     },
     "flaky" : false,
     "newFailed" : false,
@@ -104,31 +138,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ", "30/7/2014", "Archie STRAIN", "9650594000" ]
   }, {
-    "name" : "Error messages should appear when no values are entered",
-    "uid" : "9024a3c415e364f9",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579464780,
-      "stop" : 1729579466168,
-      "duration" : 1388
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ ]
-  }, {
     "name" : "Search by NHS number [9732596996-Lisa WORTHY-30/6/2024-10 NORTON PARK VIEW, SHEFFIELD, S8 8GS]",
-    "uid" : "b440d4436823d369",
+    "uid" : "a0e799dbe43f1d20",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579464889,
-      "stop" : 1729579472045,
-      "duration" : 7156
+      "start" : 1729581039949,
+      "stop" : 1729581051397,
+      "duration" : 11448
     },
     "flaky" : false,
     "newFailed" : false,
@@ -138,14 +155,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "10 NORTON PARK VIEW, SHEFFIELD, S8 8GS", "30/6/2024", "Lisa WORTHY", "9732596996" ]
   }, {
-    "name" : "Display warning based on age when recording a vaccine [9732091169-3-covid]",
-    "uid" : "e8362f3b4afeaea6",
+    "name" : "Add vaccines page should launch",
+    "uid" : "3758055b551b7c9c",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
+    "status" : "failed",
     "time" : {
-      "start" : 1729579466170,
-      "stop" : 1729579501671,
-      "duration" : 35501
+      "start" : 1729581048991,
+      "stop" : 1729581082064,
+      "duration" : 33073
     },
     "flaky" : false,
     "newFailed" : false,
@@ -153,16 +170,16 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "3", "9732091169", "covid" ]
+    "parameters" : [ ]
   }, {
     "name" : "Search by NHS number [9449306621-Not found-20110509-KT21 1LJ]",
-    "uid" : "49857aa89fdcbd6d",
+    "uid" : "c832418e2b3da48e",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579472048,
-      "stop" : 1729579478419,
-      "duration" : 6371
+      "start" : 1729581051399,
+      "stop" : 1729581062066,
+      "duration" : 10667
     },
     "flaky" : false,
     "newFailed" : false,
@@ -173,13 +190,13 @@
     "parameters" : [ "KT21 1LJ", "20110509", "Not found", "9449306621" ]
   }, {
     "name" : "Search by NHS number [9449306605-Srinivasarao Patel-03/03/2020-4 Calicut Lane2, Line 2, Line 3, SLOUGH, Berkshire, KT21 1EJ]",
-    "uid" : "f6e4b20c73d692ad",
+    "uid" : "f6597ca5311cf0f7",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579478422,
-      "stop" : 1729579485007,
-      "duration" : 6585
+      "start" : 1729581062069,
+      "stop" : 1729581072163,
+      "duration" : 10094
     },
     "flaky" : false,
     "newFailed" : false,
@@ -189,31 +206,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "4 Calicut Lane2, Line 2, Line 3, SLOUGH, Berkshire, KT21 1EJ", "03/03/2020", "Srinivasarao Patel", "9449306605" ]
   }, {
-    "name" : "Display warning based on age when recording a vaccine [9470472918-3-covid]",
-    "uid" : "8603e6b60e210cb0",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579481827,
-      "stop" : 1729579517766,
-      "duration" : 35939
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "3", "9470472918", "covid" ]
-  }, {
     "name" : "Search by NHS number [9449306494-Reynolds Ryan-27/3/2001-Jamie Street, Jaketown, KDDTG5, SW16 6JR]",
-    "uid" : "8bc2b2e7d9c3634e",
+    "uid" : "f97f92916444b875",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579485010,
-      "stop" : 1729579492313,
-      "duration" : 7303
+      "start" : 1729581072165,
+      "stop" : 1729581082263,
+      "duration" : 10098
     },
     "flaky" : false,
     "newFailed" : false,
@@ -223,14 +223,31 @@
     "retriesStatusChange" : false,
     "parameters" : [ "Jamie Street, Jaketown, KDDTG5, SW16 6JR", "27/3/2001", "Reynolds Ryan", "9449306494" ]
   }, {
+    "name" : "Vaccine already added to site warning should appear [ALBERT HOUSE-COVID-19-Spikevax JN.1]",
+    "uid" : "ace344100eef604a",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581082239,
+      "stop" : 1729581123286,
+      "duration" : 41047
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "ALBERT HOUSE", "COVID-19", "Spikevax JN.1" ]
+  }, {
     "name" : "Search by NHS number [9469997956-SOLOMON DAZLEY-20160130-10 BROOK STREET, LANCASTER, LA1 1SL]",
-    "uid" : "c9d3de244592262",
+    "uid" : "7eafb019c4c767cd",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579492315,
-      "stop" : 1729579498254,
-      "duration" : 5939
+      "start" : 1729581082266,
+      "stop" : 1729581093507,
+      "duration" : 11241
     },
     "flaky" : false,
     "newFailed" : false,
@@ -241,13 +258,13 @@
     "parameters" : [ "10 BROOK STREET, LANCASTER, LA1 1SL", "20160130", "SOLOMON DAZLEY", "9469997956" ]
   }, {
     "name" : "Search by NHS number [9469998626-JONNY CONOPO-20150305-1 DAISY BANK, LANCASTER, LA1 3JW]",
-    "uid" : "e76eab4afaf08ace",
+    "uid" : "e6e34dff3993f98c",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579498257,
-      "stop" : 1729579505263,
-      "duration" : 7006
+      "start" : 1729581093509,
+      "stop" : 1729581103562,
+      "duration" : 10053
     },
     "flaky" : false,
     "newFailed" : false,
@@ -257,31 +274,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "1 DAISY BANK, LANCASTER, LA1 3JW", "20150305", "JONNY CONOPO", "9469998626" ]
   }, {
-    "name" : "Display warning based on age when recording a vaccine [9692237893-3-covid]",
-    "uid" : "d9dd09c0f76e4b7",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579501674,
-      "stop" : 1729579537318,
-      "duration" : 35644
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "3", "9692237893", "covid" ]
-  }, {
     "name" : "Search by NHS number [9470004272-JOJO LANE-20150706-10 RAKESMOOR LANE, BARROW-IN-FURNESS, LA14 4LG]",
-    "uid" : "f78800cded7da42d",
+    "uid" : "2a0418ddf27d60e4",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579505265,
-      "stop" : 1729579512139,
-      "duration" : 6874
+      "start" : 1729581103564,
+      "stop" : 1729581113712,
+      "duration" : 10148
     },
     "flaky" : false,
     "newFailed" : false,
@@ -292,13 +292,13 @@
     "parameters" : [ "10 RAKESMOOR LANE, BARROW-IN-FURNESS, LA14 4LG", "20150706", "JOJO LANE", "9470004272" ]
   }, {
     "name" : "Search by NHS number [9470006143-TABBY FERN-20150222-CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ]",
-    "uid" : "2056c7a860dc8653",
+    "uid" : "e9178a0d539b6c0e",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579512141,
-      "stop" : 1729579518593,
-      "duration" : 6452
+      "start" : 1729581113714,
+      "stop" : 1729581123829,
+      "duration" : 10115
     },
     "flaky" : false,
     "newFailed" : false,
@@ -308,14 +308,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ", "20150222", "TABBY FERN", "9470006143" ]
   }, {
-    "name" : "Display warning based on age when recording a vaccine [9473673388-2-covid]",
-    "uid" : "50a349e0f77ef20e",
+    "name" : "Vaccine already added to site warning should appear [ALBERT HOUSE-Flu-Flucelvax Tetra - QIVc]",
+    "uid" : "3be8a8a58f5c3a55",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
+    "status" : "failed",
     "time" : {
-      "start" : 1729579517769,
-      "stop" : 1729579573741,
-      "duration" : 55972
+      "start" : 1729581123473,
+      "stop" : 1729581163702,
+      "duration" : 40229
     },
     "flaky" : false,
     "newFailed" : false,
@@ -323,16 +323,16 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "2", "9473673388", "covid" ]
+    "parameters" : [ "ALBERT HOUSE", "Flu", "Flucelvax Tetra - QIVc" ]
   }, {
     "name" : "Search by NHS number [9470006739-JANNETTE ARD-20151209-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ]",
-    "uid" : "4580a447e9a54e85",
+    "uid" : "39fa8098d5455bff",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579518595,
-      "stop" : 1729579525278,
-      "duration" : 6683
+      "start" : 1729581123831,
+      "stop" : 1729581134167,
+      "duration" : 10336
     },
     "flaky" : false,
     "newFailed" : false,
@@ -343,13 +343,13 @@
     "parameters" : [ "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ", "20151209", "JANNETTE ARD", "9470006739" ]
   }, {
     "name" : "Search by NHS number [9470011902-KATEE TUZZIO-20150527-BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN]",
-    "uid" : "3e432d00ff914b97",
+    "uid" : "5e5256ebf767e22d",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579525280,
-      "stop" : 1729579532221,
-      "duration" : 6941
+      "start" : 1729581134169,
+      "stop" : 1729581144206,
+      "duration" : 10037
     },
     "flaky" : false,
     "newFailed" : false,
@@ -360,13 +360,13 @@
     "parameters" : [ "BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN", "20150527", "KATEE TUZZIO", "9470011902" ]
   }, {
     "name" : "Search by NHS number [9470032640-SYBIL PELLING-20151217-50 ST. GEORGES QUAY, LANCASTER, LA1 1SA]",
-    "uid" : "23bddf1ca0c042e7",
+    "uid" : "49478d22f1905d41",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579532224,
-      "stop" : 1729579538530,
-      "duration" : 6306
+      "start" : 1729581144209,
+      "stop" : 1729581154292,
+      "duration" : 10083
     },
     "flaky" : false,
     "newFailed" : false,
@@ -376,31 +376,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "50 ST. GEORGES QUAY, LANCASTER, LA1 1SA", "20151217", "SYBIL PELLING", "9470032640" ]
   }, {
-    "name" : "Display warning based on age when recording a vaccine [9474335761-3-covid]",
-    "uid" : "897852c16528a8ed",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579537321,
-      "stop" : 1729579573214,
-      "duration" : 35893
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "3", "9474335761", "covid" ]
-  }, {
     "name" : "NHS Number: Searching with invalid NHS number shows an error [123456789-Enter 10 digits]",
-    "uid" : "e1426b380cfb0bb9",
+    "uid" : "9326e46991a4dfe4",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579538532,
-      "stop" : 1729579544742,
-      "duration" : 6210
+      "start" : 1729581154294,
+      "stop" : 1729581164556,
+      "duration" : 10262
     },
     "flaky" : false,
     "newFailed" : false,
@@ -410,14 +393,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "Enter 10 digits", "123456789" ]
   }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [last name-Bill-Gartoni-23/6/1946-DN18 5DW-Male]",
-    "uid" : "fa9cec7242421615",
+    "name" : "Display warning based on age when recording a vaccine [9732091169-3-covid]",
+    "uid" : "23ba14d5b4ff4304",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
+    "status" : "failed",
     "time" : {
-      "start" : 1729579544744,
-      "stop" : 1729579553188,
-      "duration" : 8444
+      "start" : 1729581163886,
+      "stop" : 1729581486670,
+      "duration" : 322784
     },
     "flaky" : false,
     "newFailed" : false,
@@ -425,67 +408,16 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "23/6/1946", "Bill", "Male", "Gartoni", "DN18 5DW", "last name" ]
-  }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - day-Bill-Garton-3/6/1946-DN18 5DW-Male]",
-    "uid" : "e6e83d38f0a2c5a6",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579553191,
-      "stop" : 1729579562293,
-      "duration" : 9102
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "3/6/1946", "Bill", "Male", "Garton", "DN18 5DW", "dob - day" ]
-  }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - month-Bill-Garton-23/12/1946-DN18 5DW-Male]",
-    "uid" : "d15dc4296d332709",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579562295,
-      "stop" : 1729579571903,
-      "duration" : 9608
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "23/12/1946", "Bill", "Male", "Garton", "DN18 5DW", "dob - month" ]
-  }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - year-Bill-Garton-23/6/1991-DN18 5DW-Male]",
-    "uid" : "b852ef1f2511be92",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579571906,
-      "stop" : 1729579580983,
-      "duration" : 9077
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "23/6/1991", "Bill", "Male", "Garton", "DN18 5DW", "dob - year" ]
+    "parameters" : [ "3", "9732091169", "covid" ]
   }, {
     "name" : "NHS Number: Searching with invalid NHS number shows an error [9753108642-Enter a correct NHS number]",
-    "uid" : "665c68c31c1de084",
+    "uid" : "cbc348c57d30390c",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579573217,
-      "stop" : 1729579579090,
-      "duration" : 5873
+      "start" : 1729581164558,
+      "stop" : 1729581174627,
+      "duration" : 10069
     },
     "flaky" : false,
     "newFailed" : false,
@@ -496,13 +428,13 @@
     "parameters" : [ "Enter a correct NHS number", "9753108642" ]
   }, {
     "name" : "NHS Number: Searching for a patient without a record returns no results [9449306621]",
-    "uid" : "640e71a958dd6c3f",
+    "uid" : "7ae74310790c105a",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579579092,
-      "stop" : 1729579587207,
-      "duration" : 8115
+      "start" : 1729581174630,
+      "stop" : 1729581184914,
+      "duration" : 10284
     },
     "flaky" : false,
     "newFailed" : false,
@@ -512,82 +444,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "9449306621" ]
   }, {
-    "name" : "Find a patient page should launch",
-    "uid" : "e28218714f16e92b",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579579115,
-      "stop" : 1729579579495,
-      "duration" : 380
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ ]
-  }, {
-    "name" : "Search without entering nhs number",
-    "uid" : "efe0cb70b0671d69",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579579497,
-      "stop" : 1729579585098,
-      "duration" : 5601
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ ]
-  }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [postcode-Bill-Garton-23/6/1946-M6 3AA-Male]",
-    "uid" : "f0dace43ba1aa2ba",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579580985,
-      "stop" : 1729579590078,
-      "duration" : 9093
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "23/6/1946", "Bill", "Male", "Garton", "M6 3AA", "postcode" ]
-  }, {
-    "name" : "Search without entering patient details",
-    "uid" : "220ae8e13903900",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579585100,
-      "stop" : 1729579591570,
-      "duration" : 6470
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ ]
-  }, {
     "name" : "NHS Number: Existing patients can be found using their NHS number [9693632109-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW]",
-    "uid" : "52f137fc59ab1df5",
+    "uid" : "71c5466eb3d210fa",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579587209,
-      "stop" : 1729579593716,
-      "duration" : 6507
+      "start" : 1729581184916,
+      "stop" : 1729581194830,
+      "duration" : 9914
     },
     "flaky" : false,
     "newFailed" : false,
@@ -597,14 +461,65 @@
     "retriesStatusChange" : false,
     "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill GARTON", "9693632109" ]
   }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [gender-Bill-Garton-23/6/1946-DN18 5DW-Female]",
-    "uid" : "dc4491d7371c6fa7",
+    "name" : "Demographics: Existing patients can be found using their mandatory demographic details [9449303762-Pryderi-Warnford-Davis-14/04/2001-1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF]",
+    "uid" : "a48d621c8bd87bb1",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579590081,
-      "stop" : 1729579598596,
-      "duration" : 8515
+      "start" : 1729581194832,
+      "stop" : 1729581205084,
+      "duration" : 10252
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF", "14/04/2001", "Pryderi", "Warnford-Davis", "9449303762" ]
+  }, {
+    "name" : "Demographics: Existing patients can be found using their optional demographic details [9693632109-Bill-Garton-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-DN18 5DW-Male]",
+    "uid" : "ed3f55aafdb9e8f",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581205087,
+      "stop" : 1729581216826,
+      "duration" : 11739
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill", "Male", "Garton", "9693632109", "DN18 5DW" ]
+  }, {
+    "name" : "Demographics: Existing patients can be found using their optional demographic details [9470006739-JANNETTE-ARD-09/12/2015-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ-LA21 8HZ-Other]",
+    "uid" : "e7d17be45051d417",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581216829,
+      "stop" : 1729581230060,
+      "duration" : 13231
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ", "09/12/2015", "JANNETTE", "Other", "ARD", "9470006739", "LA21 8HZ" ]
+  }, {
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [gender-Bill-Garton-23/6/1946-DN18 5DW-Female]",
+    "uid" : "906ec31d4194a0af",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581230062,
+      "stop" : 1729581241645,
+      "duration" : 11583
     },
     "flaky" : false,
     "newFailed" : false,
@@ -615,13 +530,13 @@
     "parameters" : [ "23/6/1946", "Bill", "Female", "Garton", "DN18 5DW", "gender" ]
   }, {
     "name" : "Demographics: Search does not find existing patients if any of their details are wrong [gender-Bill-Garton-23/6/1946-DN18 5DW-Other]",
-    "uid" : "c27e5745d47d6ac0",
+    "uid" : "41564ae03dc9ba24",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579591572,
-      "stop" : 1729579599965,
-      "duration" : 8393
+      "start" : 1729581241647,
+      "stop" : 1729581252497,
+      "duration" : 10850
     },
     "flaky" : false,
     "newFailed" : false,
@@ -631,48 +546,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "23/6/1946", "Bill", "Other", "Garton", "DN18 5DW", "gender" ]
   }, {
-    "name" : "Demographics: Existing patients can be found using their mandatory demographic details [9449303762-Pryderi-Warnford-Davis-14/04/2001-1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF]",
-    "uid" : "85710c7ca6469432",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579593718,
-      "stop" : 1729579601980,
-      "duration" : 8262
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF", "14/04/2001", "Pryderi", "Warnford-Davis", "9449303762" ]
-  }, {
-    "name" : "Demographics: Can search for a patient by their old name, after a name change [Joan-Robertson-19/09/1972-Poppy Roberts-9449310076-1 Canada Road, COBHAM, Surrey, LS15 4LJ]",
-    "uid" : "4b74164bf6cba946",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579598598,
-      "stop" : 1729579606301,
-      "duration" : 7703
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "1 Canada Road, COBHAM, Surrey, LS15 4LJ", "19/09/1972", "Joan", "Robertson", "Poppy Roberts", "9449310076" ]
-  }, {
     "name" : "Demographics: Search does not find existing patients if any of their details are wrong [gender-Bill-Garton-23/6/1946-DN18 5DW-Unknown]",
-    "uid" : "413e3e03ca86968e",
+    "uid" : "2bec42bb860adc93",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579599967,
-      "stop" : 1729579608656,
-      "duration" : 8689
+      "start" : 1729581252499,
+      "stop" : 1729581263396,
+      "duration" : 10897
     },
     "flaky" : false,
     "newFailed" : false,
@@ -682,48 +563,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "23/6/1946", "Bill", "Unknown", "Garton", "DN18 5DW", "gender" ]
   }, {
-    "name" : "Demographics: Existing patients can be found using their optional demographic details [9693632109-Bill-Garton-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-DN18 5DW-Male]",
-    "uid" : "47ee8be1a952ce87",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579601983,
-      "stop" : 1729579611124,
-      "duration" : 9141
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill", "Male", "Garton", "9693632109", "DN18 5DW" ]
-  }, {
-    "name" : "Demographics: Searching for a patient without a record returns no results [Cecile-Elston-18/01/1965]",
-    "uid" : "949706934b6b7dcb",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579606304,
-      "stop" : 1729579614302,
-      "duration" : 7998
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "18/01/1965", "Cecile", "Elston" ]
-  }, {
     "name" : "Demographics: Search without entering patient details shows errors on the mandatory fields [Enter the first name-Enter the last name-Enter the date of birth]",
-    "uid" : "422b330e59c931f6",
+    "uid" : "f092a0d1474cafb2",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579608658,
-      "stop" : 1729579615320,
-      "duration" : 6662
+      "start" : 1729581263398,
+      "stop" : 1729581274927,
+      "duration" : 11529
     },
     "flaky" : false,
     "newFailed" : false,
@@ -733,48 +580,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "Enter the date of birth", "Enter the first name", "Enter the last name" ]
   }, {
-    "name" : "Demographics: Existing patients can be found using their optional demographic details [9470006739-JANNETTE-ARD-09/12/2015-1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ-LA21 8HZ-Other]",
-    "uid" : "fe8086bd4e9f9d99",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579611126,
-      "stop" : 1729579620399,
-      "duration" : 9273
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ", "09/12/2015", "JANNETTE", "Other", "ARD", "9470006739", "LA21 8HZ" ]
-  }, {
-    "name" : "Local: Searching for a patient without a record returns no results [John-Preston-14/03/2003]",
-    "uid" : "a544dbbf4cb9d068",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579614304,
-      "stop" : 1729579622307,
-      "duration" : 8003
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "14/03/2003", "John", "Preston" ]
-  }, {
     "name" : "Demographics: Search with an invalid postcode shows an error message [Bill-Garton-23/6/1946-INVALID]",
-    "uid" : "f8726ad77cae3317",
+    "uid" : "f41cbb394c901287",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579615323,
-      "stop" : 1729579624036,
-      "duration" : 8713
+      "start" : 1729581274929,
+      "stop" : 1729581285230,
+      "duration" : 10301
     },
     "flaky" : false,
     "newFailed" : false,
@@ -784,48 +597,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "23/6/1946", "Bill", "Garton", "INVALID" ]
   }, {
-    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [first name-Bob-Garton-23/6/1946-DN18 5DW-Male]",
-    "uid" : "6d33ab54b141492c",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579620403,
-      "stop" : 1729579629069,
-      "duration" : 8666
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "23/6/1946", "Bob", "Male", "Garton", "DN18 5DW", "first name" ]
-  }, {
-    "name" : "Local: Created patient can be found using local search",
-    "uid" : "8aa9d31004461d92",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "passed",
-    "time" : {
-      "start" : 1729579622310,
-      "stop" : 1729579657348,
-      "duration" : 35038
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ ]
-  }, {
     "name" : "Demographics: Multiple demographic matches shows an error that more than one result is found [Aidan-Smith-23/02/2020]",
-    "uid" : "7b445f16f8ee642",
+    "uid" : "9e091add8591394e",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579624039,
-      "stop" : 1729579631321,
-      "duration" : 7282
+      "start" : 1729581285232,
+      "stop" : 1729581325877,
+      "duration" : 40645
     },
     "flaky" : false,
     "newFailed" : false,
@@ -835,14 +614,99 @@
     "retriesStatusChange" : false,
     "parameters" : [ "23/02/2020", "Aidan", "Smith" ]
   }, {
-    "name" : "Login button is visible",
-    "uid" : "3cf2fa6a02dd592",
+    "name" : "Display warning based on age when recording a vaccine [9474335761-3-covid]",
+    "uid" : "831bdcaedb2cd82d",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581311321,
+      "stop" : 1729581636362,
+      "duration" : 325041
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "3", "9474335761", "covid" ]
+  }, {
+    "name" : "Demographics: Can search for a patient by their old name, after a name change [Joan-Robertson-19/09/1972-Poppy Roberts-9449310076-1 Canada Road, COBHAM, Surrey, LS15 4LJ]",
+    "uid" : "b04d5882dc64ba46",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579629071,
-      "stop" : 1729579630519,
-      "duration" : 1448
+      "start" : 1729581325906,
+      "stop" : 1729581337006,
+      "duration" : 11100
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "1 Canada Road, COBHAM, Surrey, LS15 4LJ", "19/09/1972", "Joan", "Robertson", "Poppy Roberts", "9449310076" ]
+  }, {
+    "name" : "Demographics: Searching for a patient without a record returns no results [Cecile-Elston-18/01/1965]",
+    "uid" : "6147797118b74ff0",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581337008,
+      "stop" : 1729581347378,
+      "duration" : 10370
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "18/01/1965", "Cecile", "Elston" ]
+  }, {
+    "name" : "Local: Searching for a patient without a record returns no results [John-Preston-14/03/2003]",
+    "uid" : "ec13388226b0f238",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581347380,
+      "stop" : 1729581357677,
+      "duration" : 10297
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "14/03/2003", "John", "Preston" ]
+  }, {
+    "name" : "Local: Created patient can be found using local search",
+    "uid" : "5b8d157988669360",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581357679,
+      "stop" : 1729581380831,
+      "duration" : 23152
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Login button is visible",
+    "uid" : "addc19c9323d8ebf",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581380833,
+      "stop" : 1729581386860,
+      "duration" : 6027
     },
     "flaky" : false,
     "newFailed" : false,
@@ -853,13 +717,13 @@
     "parameters" : [ ]
   }, {
     "name" : "NHS sign in page should be visible",
-    "uid" : "a6fa91396da46b55",
+    "uid" : "7dc9c2f5301a0e6b",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579630521,
-      "stop" : 1729579631858,
-      "duration" : 1337
+      "start" : 1729581386862,
+      "stop" : 1729581392791,
+      "duration" : 5929
     },
     "flaky" : false,
     "newFailed" : false,
@@ -870,13 +734,13 @@
     "parameters" : [ ]
   }, {
     "name" : "Sign in should fail based on credentials provided [neelima.guntupalli1@nhs.net-valid-pass-pass]",
-    "uid" : "24e5e15e9fa4a6a6",
+    "uid" : "af70adef7c8cd473",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579631862,
-      "stop" : 1729579637181,
-      "duration" : 5319
+      "start" : 1729581392793,
+      "stop" : 1729581400082,
+      "duration" : 7289
     },
     "flaky" : false,
     "newFailed" : false,
@@ -886,31 +750,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "neelima.guntupalli1@nhs.net-valid", "pass", "pass" ]
   }, {
-    "name" : "Record a vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-01-19/10/2025]",
-    "uid" : "19ad4744096e281c",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
-    "time" : {
-      "start" : 1729579636540,
-      "stop" : 1729579732809,
-      "duration" : 96269
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2025", "SDYY2-01", "Vaccination Centre", "COVID-19", "yes", "23/6/1946", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
-  }, {
     "name" : "Sign in should fail based on credentials provided [None-password-fail]",
-    "uid" : "dc0fea1c5ebc6049",
+    "uid" : "f8143a5216d2e876",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579637183,
-      "stop" : 1729579661917,
-      "duration" : 24734
+      "start" : 1729581400085,
+      "stop" : 1729581407320,
+      "duration" : 7235
     },
     "flaky" : false,
     "newFailed" : false,
@@ -921,13 +768,13 @@
     "parameters" : [ "None", "password", "fail" ]
   }, {
     "name" : "Sign in should fail based on credentials provided [invalid_email_address-password-fail]",
-    "uid" : "27f2ffeee7c1c04f",
+    "uid" : "db09c139b47acde1",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579657351,
-      "stop" : 1729579671508,
-      "duration" : 14157
+      "start" : 1729581407322,
+      "stop" : 1729581414836,
+      "duration" : 7514
     },
     "flaky" : false,
     "newFailed" : false,
@@ -937,31 +784,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "invalid_email_address", "password", "fail" ]
   }, {
-    "name" : "Record a vaccine with nhs number [2-9470040228-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-SB12345-12A-19/2/2026]",
-    "uid" : "c2cb0c284c874e6e",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
-    "time" : {
-      "start" : 1729579666656,
-      "stop" : 1729579762824,
-      "duration" : 96168
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN", "today-1", "19/2/2026", "SB12345-12A", "Hospital Hub", "COVID-19", "yes", "14/12/1922", "yes", "2", "HERBERT HAAG", "9470040228", "BIRCH HOUSE", "yes", "today" ]
-  }, {
     "name" : "Sign in should fail based on credentials provided [long_email_address@nhs.net-password-fail]",
-    "uid" : "a877c8d4daa55332",
+    "uid" : "4361fb18dc523a76",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579671510,
-      "stop" : 1729579684749,
-      "duration" : 13239
+      "start" : 1729581414839,
+      "stop" : 1729581422312,
+      "duration" : 7473
     },
     "flaky" : false,
     "newFailed" : false,
@@ -972,13 +802,13 @@
     "parameters" : [ "long_email_address@nhs.net", "password", "fail" ]
   }, {
     "name" : "NHS sign in page should be visible",
-    "uid" : "a271fd9b6b55a639",
+    "uid" : "cc4821d84110f061",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "passed",
     "time" : {
-      "start" : 1729579684752,
-      "stop" : 1729579691793,
-      "duration" : 7041
+      "start" : 1729581422314,
+      "stop" : 1729581432469,
+      "duration" : 10155
     },
     "flaky" : false,
     "newFailed" : false,
@@ -988,14 +818,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ ]
   }, {
-    "name" : "Record a vaccine with nhs number [4-9472710255-BECCLES HOUSE-Home Of Housebound Patient-yes-today-3-yes-yes-today-2-DELICE PINKER-10/11/1926-HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH-COVID-19-SDYY2-14A-19/10/2026]",
-    "uid" : "7d6920f557174232",
+    "name" : "Record a vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-01-19/10/2025]",
+    "uid" : "c2fdca1f9fcbff11",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579696472,
-      "stop" : 1729579792489,
-      "duration" : 96017
+      "start" : 1729581439197,
+      "stop" : 1729581447581,
+      "duration" : 8384
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1003,16 +833,16 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH", "today-3", "19/10/2026", "SDYY2-14A", "Home Of Housebound Patient", "COVID-19", "yes", "10/11/1926", "yes", "4", "DELICE PINKER", "9472710255", "BECCLES HOUSE", "yes", "today-2" ]
+    "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2025", "SDYY2-01", "Vaccination Centre", "COVID-19", "yes", "23/6/1946", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
   }, {
     "name" : "Record a vaccine with nhs number [1-9693632109-BECCLES HOUSE-Vaccination Centre-yes-today-1-yes-yes-today-1-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-12B-19/10/2025]",
-    "uid" : "a52539f798ab6a47",
+    "uid" : "14b3dcf7656de91d",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579738137,
-      "stop" : 1729579833837,
-      "duration" : 95700
+      "start" : 1729581455171,
+      "stop" : 1729581463846,
+      "duration" : 8675
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1022,14 +852,48 @@
     "retriesStatusChange" : false,
     "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today-1", "19/10/2025", "SDYY2-12B", "Vaccination Centre", "COVID-19", "yes", "23/6/1946", "yes", "1", "Bill GARTON", "9693632109", "BECCLES HOUSE", "yes", "today-1" ]
   }, {
-    "name" : "Record a vaccine with nhs number [3-9470057589-ALBERT HOUSE-Care Home-yes-today-2-yes-yes-today-1-ROGER SEABORNE-13/12/1922-10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG-COVID-19-SDYY2-13A-19/10/2026]",
-    "uid" : "d7708e8487842d6f",
+    "name" : "Record a vaccine with nhs number [2-9470040228-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-SB12345-12A-19/2/2026]",
+    "uid" : "5d65ae2dc6c0f632",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579769162,
-      "stop" : 1729579864819,
-      "duration" : 95657
+      "start" : 1729581471345,
+      "stop" : 1729581480534,
+      "duration" : 9189
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN", "today-1", "19/2/2026", "SB12345-12A", "Hospital Hub", "COVID-19", "yes", "14/12/1922", "yes", "2", "HERBERT HAAG", "9470040228", "BIRCH HOUSE", "yes", "today" ]
+  }, {
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [first name-Bob-Garton-23/6/1946-DN18 5DW-Male]",
+    "uid" : "81fedb2da4e84606",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581486838,
+      "stop" : 1729581498088,
+      "duration" : 11250
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "23/6/1946", "Bob", "Male", "Garton", "DN18 5DW", "first name" ]
+  }, {
+    "name" : "Record a vaccine with nhs number [3-9470057589-ALBERT HOUSE-Care Home-yes-today-2-yes-yes-today-1-ROGER SEABORNE-13/12/1922-10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG-COVID-19-SDYY2-13A-19/10/2026]",
+    "uid" : "7937b8aa92561d1f",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581488281,
+      "stop" : 1729581496998,
+      "duration" : 8717
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1039,14 +903,65 @@
     "retriesStatusChange" : false,
     "parameters" : [ "10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG", "today-2", "19/10/2026", "SDYY2-13A", "Care Home", "COVID-19", "yes", "13/12/1922", "yes", "3", "ROGER SEABORNE", "9470057589", "ALBERT HOUSE", "yes", "today-1" ]
   }, {
-    "name" : "Record a vaccine with nhs number [5-9473629885-BIRCH HOUSE-Off-site Outreach Event-yes-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-COVID-19-SDYY2-15A-19/10/2026]",
-    "uid" : "fbc44d0cb3612711",
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [last name-Bill-Gartoni-23/6/1946-DN18 5DW-Male]",
+    "uid" : "1f3ef3c82c4161cb",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581498090,
+      "stop" : 1729581510268,
+      "duration" : 12178
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "23/6/1946", "Bill", "Male", "Gartoni", "DN18 5DW", "last name" ]
+  }, {
+    "name" : "Record a vaccine with nhs number [4-9472710255-BECCLES HOUSE-Home Of Housebound Patient-yes-today-3-yes-yes-today-2-DELICE PINKER-10/11/1926-HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH-COVID-19-SDYY2-14A-19/10/2026]",
+    "uid" : "26eaf0c767b8611e",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579797813,
-      "stop" : 1729579892815,
-      "duration" : 95002
+      "start" : 1729581504669,
+      "stop" : 1729581514244,
+      "duration" : 9575
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH", "today-3", "19/10/2026", "SDYY2-14A", "Home Of Housebound Patient", "COVID-19", "yes", "10/11/1926", "yes", "4", "DELICE PINKER", "9472710255", "BECCLES HOUSE", "yes", "today-2" ]
+  }, {
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - day-Bill-Garton-3/6/1946-DN18 5DW-Male]",
+    "uid" : "b462894dfec22469",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581510271,
+      "stop" : 1729581522141,
+      "duration" : 11870
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "3/6/1946", "Bill", "Male", "Garton", "DN18 5DW", "dob - day" ]
+  }, {
+    "name" : "Record a vaccine with nhs number [5-9473629885-BIRCH HOUSE-Off-site Outreach Event-yes-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-COVID-19-SDYY2-15A-19/10/2026]",
+    "uid" : "a5cf25c59fa60dcb",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581521895,
+      "stop" : 1729581530226,
+      "duration" : 8331
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1056,14 +971,48 @@
     "retriesStatusChange" : false,
     "parameters" : [ "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB", "today-4", "19/10/2026", "SDYY2-15A", "Off-site Outreach Event", "COVID-19", "yes", "27/5/1924", "yes", "5", "MARGIE PUCKEY", "9473629885", "BIRCH HOUSE", "yes", "today-3" ]
   }, {
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - month-Bill-Garton-23/12/1946-DN18 5DW-Male]",
+    "uid" : "828ef09b37f8ac3f",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581522143,
+      "stop" : 1729581533271,
+      "duration" : 11128
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "23/12/1946", "Bill", "Male", "Garton", "DN18 5DW", "dob - month" ]
+  }, {
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [dob - year-Bill-Garton-23/6/1991-DN18 5DW-Male]",
+    "uid" : "e737c36893daf4a4",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581533273,
+      "stop" : 1729581544452,
+      "duration" : 11179
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "23/6/1991", "Bill", "Male", "Garton", "DN18 5DW", "dob - year" ]
+  }, {
     "name" : "Record a vaccine with nhs number [6-9437540233-ALBERT HOUSE-Vaccination Centre-yes-today-5-yes-yes-today-2-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-SDYY2-16A-19/10/2026]",
-    "uid" : "54e5b3678c91143d",
+    "uid" : "58d1ff13e3df980c",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579839133,
-      "stop" : 1729579935117,
-      "duration" : 95984
+      "start" : 1729581537778,
+      "stop" : 1729581546079,
+      "duration" : 8301
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1073,14 +1022,31 @@
     "retriesStatusChange" : false,
     "parameters" : [ "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG", "today-5", "19/10/2026", "SDYY2-16A", "Vaccination Centre", "COVID-19", "yes", "8/6/1961", "yes", "6", "RANDY FOGDEN", "9437540233", "ALBERT HOUSE", "yes", "today-2" ]
   }, {
+    "name" : "Demographics: Search does not find existing patients if any of their details are wrong [postcode-Bill-Garton-23/6/1946-M6 3AA-Male]",
+    "uid" : "e9592c6071bb6a9f",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729581544455,
+      "stop" : 1729581555669,
+      "duration" : 11214
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "23/6/1946", "Bill", "Male", "Garton", "M6 3AA", "postcode" ]
+  }, {
     "name" : "Record a vaccine with nhs number [7-9474374228-BECCLES HOUSE-Hospital Hub-yes-today-6-yes-yes-today-3-ORINDA JUDD-20/7/1963-2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL-COVID-19-SDYY2-17A-19/10/2026]",
-    "uid" : "f091c6209f6b11b3",
+    "uid" : "c0473bd2a9a2e214",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579870170,
-      "stop" : 1729579965098,
-      "duration" : 94928
+      "start" : 1729581553677,
+      "stop" : 1729581562545,
+      "duration" : 8868
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1091,13 +1057,13 @@
     "parameters" : [ "2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL", "today-6", "19/10/2026", "SDYY2-17A", "Hospital Hub", "COVID-19", "yes", "20/7/1963", "yes", "7", "ORINDA JUDD", "9474374228", "BECCLES HOUSE", "yes", "today-3" ]
   }, {
     "name" : "Record a vaccine with nhs number [8-9437580812-BIRCH HOUSE-Care Home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-SDYY2-18A-19/10/2026]",
-    "uid" : "93e9ed67b55d9216",
+    "uid" : "762229a3ef4ccb3f",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579898148,
-      "stop" : 1729579993355,
-      "duration" : 95207
+      "start" : 1729581563667,
+      "stop" : 1729581571998,
+      "duration" : 8331
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1108,13 +1074,13 @@
     "parameters" : [ "12 CANBERRA STREET, MANCHESTER, M11 4WL", "today-7", "19/10/2026", "SDYY2-18A", "Care Home", "COVID-19", "yes", "1/3/1959", "yes", "8", "INDIGO CATCHESIDE", "9437580812", "BIRCH HOUSE", "yes", "today-7" ]
   }, {
     "name" : "Record a vaccine with nhs number [9-9437599165-ALBERT HOUSE-Home Of Housebound Patient-yes-today-30-yes-yes-today-30-CAWRDAV BOBBETT-21/7/1959-127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN-COVID-19-SDYY2-18B-19/10/2026]",
-    "uid" : "1809d53b72b40042",
+    "uid" : "b8b886a68d89a45f",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579940534,
-      "stop" : 1729580034712,
-      "duration" : 94178
+      "start" : 1729581570275,
+      "stop" : 1729581579159,
+      "duration" : 8884
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1125,13 +1091,13 @@
     "parameters" : [ "127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN", "today-30", "19/10/2026", "SDYY2-18B", "Home Of Housebound Patient", "COVID-19", "yes", "21/7/1959", "yes", "9", "CAWRDAV BOBBETT", "9437599165", "ALBERT HOUSE", "yes", "today-30" ]
   }, {
     "name" : "Record a vaccine with nhs number [10-9474335052-BECCLES HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-2-AMERY PIGGOTT-20/4/1968-10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ-COVID-19-SDYY2-18C-19/10/2026]",
-    "uid" : "b2ded933a26ed93f",
+    "uid" : "63dd8e29bfd781f2",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579972990,
-      "stop" : 1729580030670,
-      "duration" : 57680
+      "start" : 1729581579710,
+      "stop" : 1729581588374,
+      "duration" : 8664
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1142,13 +1108,13 @@
     "parameters" : [ "10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ", "today-2", "19/10/2026", "SDYY2-18C", "Off-site Outreach Event", "COVID-19", "yes", "20/4/1968", "yes", "10", "AMERY PIGGOTT", "9474335052", "BECCLES HOUSE", "yes", "today-2" ]
   }, {
     "name" : "Record a vaccine with nhs number [11-9437541817-BIRCH HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-1-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-COVID-19-SDYY2-18D-19/10/2026]",
-    "uid" : "3e88df1a7f03fd5a",
+    "uid" : "cd509f45bb1c76da",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729579999124,
-      "stop" : 1729580094862,
-      "duration" : 95738
+      "start" : 1729581586859,
+      "stop" : 1729581625506,
+      "duration" : 38647
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1158,31 +1124,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "32 HOLLAND ROAD, MANCHESTER, M8 4NP", "today-3", "19/10/2026", "SDYY2-18D", "Vaccination Centre", "COVID-19", "yes", "27/3/1957", "yes", "11", "FLORINDA DUNNER", "9437541817", "BIRCH HOUSE", "yes", "today-1" ]
   }, {
-    "name" : "Record a vaccine with nhs number [8-9474376638-BECCLES HOUSE-Care Home-yes-today-32-yes-yes-today-30-PHYLLIDA ZYLKO-6/2/1968-BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG-Flu-SDYY2-18F-19/10/2026]",
-    "uid" : "c79857c2eeff9e27",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
-    "time" : {
-      "start" : 1729580036370,
-      "stop" : 1729580053640,
-      "duration" : 17270
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG", "today-32", "19/10/2026", "SDYY2-18F", "Care Home", "Flu", "yes", "6/2/1968", "yes", "8", "PHYLLIDA ZYLKO", "9474376638", "BECCLES HOUSE", "yes", "today-30" ]
-  }, {
     "name" : "Record a vaccine with nhs number [12-9437540233-ALBERT HOUSE-Hospital Hub-yes-today-15-yes-yes-today-7-RANDY FOGDEN-8/6/1961-10 ASHVILLE TERRACE, MANCHESTER, M40 9WG-COVID-19-SDYY2-18E-19/10/2026]",
-    "uid" : "64fd0bb537f1992f",
+    "uid" : "d8f30f60363891e4",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580040531,
-      "stop" : 1729580136212,
-      "duration" : 95681
+      "start" : 1729581596242,
+      "stop" : 1729581604441,
+      "duration" : 8199
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1192,31 +1141,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "10 ASHVILLE TERRACE, MANCHESTER, M40 9WG", "today-15", "19/10/2026", "SDYY2-18E", "Hospital Hub", "COVID-19", "yes", "8/6/1961", "yes", "12", "RANDY FOGDEN", "9437540233", "ALBERT HOUSE", "yes", "today-7" ]
   }, {
-    "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-19/10/2026]",
-    "uid" : "d1ab7bcef040b2f6",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
-    "time" : {
-      "start" : 1729580059188,
-      "stop" : 1729580116430,
-      "duration" : 57242
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "19/10/2026", "SDYY2-14B", "Off-site Outreach Event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today" ]
-  }, {
     "name" : "Record a vaccine with nhs number [9-9474405174-BIRCH HOUSE-Home Of Housebound Patient-yes-today-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-19A-19/10/2026]",
-    "uid" : "7281c5eb8e05ff3b",
+    "uid" : "ff015a2a2e275ab8",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580100091,
-      "stop" : 1729580102039,
-      "duration" : 1948
+      "start" : 1729581612208,
+      "stop" : 1729581787805,
+      "duration" : 175597
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1226,14 +1158,82 @@
     "retriesStatusChange" : false,
     "parameters" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today", "19/10/2026", "SDYY2-19A", "Home Of Housebound Patient", "Flu", "yes", "4/9/1965", "yes", "9", "PHINEAS FAYLE", "9474405174", "BIRCH HOUSE", "yes", "today" ]
   }, {
-    "name" : "Record a vaccine with nhs number [1-9450141444-ALBERT HOUSE-Care Home-yes-today-4-yes-yes-today-2-BRANDIE DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-SDYY2-21A-19/10/2026]",
-    "uid" : "3666c1422d66b088",
+    "name" : "Record a vaccine with nhs number [8-9474376638-BECCLES HOUSE-Care Home-yes-today-32-yes-yes-today-30-PHYLLIDA ZYLKO-6/2/1968-BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG-Flu-SDYY2-18F-19/10/2026]",
+    "uid" : "c9a433b5c62d8c2a",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580107382,
-      "stop" : 1729580109862,
-      "duration" : 2480
+      "start" : 1729581633323,
+      "stop" : 1729581642255,
+      "duration" : 8932
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG", "today-32", "19/10/2026", "SDYY2-18F", "Care Home", "Flu", "yes", "6/2/1968", "yes", "8", "PHYLLIDA ZYLKO", "9474376638", "BECCLES HOUSE", "yes", "today-30" ]
+  }, {
+    "name" : "Display warning based on age when recording a vaccine [9450153485-3-covid]",
+    "uid" : "bccf557d1c1078e1",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581636512,
+      "stop" : 1729581959863,
+      "duration" : 323351
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "3", "9450153485", "covid" ]
+  }, {
+    "name" : "Record a vaccine with nhs number [11-9450134391-BECCLES HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-MARIAN PIESSE-17/7/1994-2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT-Flu-SDYY2-14C-19/10/2026]",
+    "uid" : "a81ebfe85cca394d",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581650129,
+      "stop" : 1729581658790,
+      "duration" : 8661
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT", "today-3", "19/10/2026", "SDYY2-14C", "Vaccination Centre", "Flu", "yes", "17/7/1994", "yes", "11", "MARIAN PIESSE", "9450134391", "BECCLES HOUSE", "yes", "today" ]
+  }, {
+    "name" : "Record a vaccine with nhs number [12-9450140960-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-SDYY2-20A-19/10/2026]",
+    "uid" : "dd80b01602c4eee0",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581666355,
+      "stop" : 1729581675021,
+      "duration" : 8666
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ", "today-1", "19/10/2026", "SDYY2-20A", "Hospital Hub", "Flu", "yes", "5/9/1993", "yes", "12", "DEANA GAMBLES", "9450140960", "BIRCH HOUSE", "yes", "today" ]
+  }, {
+    "name" : "Record a vaccine with nhs number [1-9450141444-ALBERT HOUSE-Care Home-yes-today-4-yes-yes-today-2-BRANDIE DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-SDYY2-21A-19/10/2026]",
+    "uid" : "fc6c7273fb8d8dfa",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581682785,
+      "stop" : 1729581691553,
+      "duration" : 8768
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1244,13 +1244,13 @@
     "parameters" : [ "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF", "today-4", "19/10/2026", "SDYY2-21A", "Care Home", "Flu", "yes", "25/8/1992", "yes", "1", "BRANDIE DYBLE", "9450141444", "ALBERT HOUSE", "yes", "today-2" ]
   }, {
     "name" : "Record a vaccine with nhs number [2-9450141711-BECCLES HOUSE-Home Of Housebound Patient-yes-today-2-yes-yes-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-SDYY2-22A-19/10/2026]",
-    "uid" : "908469c5270601ab",
+    "uid" : "9e88791fad2635cb",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580115169,
-      "stop" : 1729580204302,
-      "duration" : 89133
+      "start" : 1729581699303,
+      "stop" : 1729581708052,
+      "duration" : 8749
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1260,14 +1260,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY", "today-2", "19/10/2026", "SDYY2-22A", "Home Of Housebound Patient", "Flu", "yes", "24/6/1992", "yes", "2", "KRISTIA SIDAWAY", "9450141711", "BECCLES HOUSE", "yes", "today-1" ]
   }, {
-    "name" : "Record a vaccine with nhs number [12-9450140960-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-SDYY2-20A-19/10/2026]",
-    "uid" : "d62cad3dd6bfd05d",
+    "name" : "Record a vaccine with nhs number [3-9450144699-BIRCH HOUSE-Off-site Outreach Event-yes-today-1-yes-yes-today-1-HOPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-SDYY2-23A-19/10/2026]",
+    "uid" : "b82e75ee3941ad6d",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580122038,
-      "stop" : 1729580136997,
-      "duration" : 14959
+      "start" : 1729581715552,
+      "stop" : 1729581724819,
+      "duration" : 9267
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1275,33 +1275,16 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ", "today-1", "19/10/2026", "SDYY2-20A", "Hospital Hub", "Flu", "yes", "5/9/1993", "yes", "12", "DEANA GAMBLES", "9450140960", "BIRCH HOUSE", "yes", "today" ]
-  }, {
-    "name" : "Record a vaccine with nhs number [11-9450134391-BECCLES HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-MARIAN PIESSE-17/7/1994-2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT-Flu-SDYY2-14C-19/10/2026]",
-    "uid" : "aa6b88ac5eca911e",
-    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
-    "status" : "failed",
-    "time" : {
-      "start" : 1729580141466,
-      "stop" : 1729580143986,
-      "duration" : 2520
-    },
-    "flaky" : false,
-    "newFailed" : false,
-    "newPassed" : false,
-    "newBroken" : false,
-    "retriesCount" : 0,
-    "retriesStatusChange" : false,
-    "parameters" : [ "2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT", "today-3", "19/10/2026", "SDYY2-14C", "Vaccination Centre", "Flu", "yes", "17/7/1994", "yes", "11", "MARIAN PIESSE", "9450134391", "BECCLES HOUSE", "yes", "today" ]
+    "parameters" : [ "2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB", "today-1", "19/10/2026", "SDYY2-23A", "Off-site Outreach Event", "Flu", "yes", "10/1/1993", "yes", "3", "HOPE TULLY", "9450144699", "BIRCH HOUSE", "yes", "today-1" ]
   }, {
     "name" : "Record a vaccine with nhs number [4-9437541817-ALBERT HOUSE-Off-site Outreach Event-yes-today-yes-yes-today-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-Flu-SDYY2-24A-19/10/2026]",
-    "uid" : "8bd4448dde71a8e3",
+    "uid" : "1e84bbf874f09a08",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580142785,
-      "stop" : 1729580228421,
-      "duration" : 85636
+      "start" : 1729581732469,
+      "stop" : 1729581741120,
+      "duration" : 8651
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1312,13 +1295,13 @@
     "parameters" : [ "32 HOLLAND ROAD, MANCHESTER, M8 4NP", "today", "19/10/2026", "SDYY2-24A", "Off-site Outreach Event", "Flu", "yes", "27/3/1957", "yes", "4", "FLORINDA DUNNER", "9437541817", "ALBERT HOUSE", "yes", "today" ]
   }, {
     "name" : "Record a maternity vaccine with nhs number [4-9473629885-KINGSTON HOUSE-Off-site Outreach Event-yes-today+50-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-Respiratory syncytial virus (RSV)-Arexvy-AREX2-01A-19/10/2026]",
-    "uid" : "c5739721ad1c40fa",
+    "uid" : "691a8fd9ea3358aa",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580149540,
-      "stop" : 1729580245437,
-      "duration" : 95897
+      "start" : 1729581749451,
+      "stop" : 1729581788717,
+      "duration" : 39266
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1328,14 +1311,14 @@
     "retriesStatusChange" : false,
     "parameters" : [ "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB", "today-4", "19/10/2026", "AREX2-01A", "Off-site Outreach Event", "Respiratory syncytial virus (RSV)", "yes", "27/5/1924", "today+50", "yes", "4", "MARGIE PUCKEY", "9473629885", "KINGSTON HOUSE", "yes", "today-3", "Arexvy" ]
   }, {
-    "name" : "Record a vaccine with nhs number [3-9450144699-BIRCH HOUSE-Off-site Outreach Event-yes-today-1-yes-yes-today-1-HOPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-SDYY2-23A-19/10/2026]",
-    "uid" : "3b87d288b5deda19",
+    "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-19/10/2026]",
+    "uid" : "3e8931a587a2ff2f",
     "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
     "status" : "failed",
     "time" : {
-      "start" : 1729580209586,
-      "stop" : 1729580263821,
-      "duration" : 54235
+      "start" : 1729581796103,
+      "stop" : 1729581804317,
+      "duration" : 8214
     },
     "flaky" : false,
     "newFailed" : false,
@@ -1343,6 +1326,57 @@
     "newBroken" : false,
     "retriesCount" : 0,
     "retriesStatusChange" : false,
-    "parameters" : [ "2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB", "today-1", "19/10/2026", "SDYY2-23A", "Off-site Outreach Event", "Flu", "yes", "10/1/1993", "yes", "3", "HOPE TULLY", "9450144699", "BIRCH HOUSE", "yes", "today-1" ]
+    "parameters" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "19/10/2026", "SDYY2-14B", "Off-site Outreach Event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today" ]
+  }, {
+    "name" : "Display warning based on age when recording a vaccine [9470472918-3-covid]",
+    "uid" : "13ebcc466ef88e6f",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729581960025,
+      "stop" : 1729582291933,
+      "duration" : 331908
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "3", "9470472918", "covid" ]
+  }, {
+    "name" : "Display warning based on age when recording a vaccine [9473673388-2-covid]",
+    "uid" : "12ea27fffbe59fc0",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "failed",
+    "time" : {
+      "start" : 1729582292080,
+      "stop" : 1729582618367,
+      "duration" : 326287
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ "2", "9473673388", "covid" ]
+  }, {
+    "name" : "Find a patient page should launch",
+    "uid" : "e588441afa219816",
+    "parentUid" : "98d3104e051c652961429bf95fa0b5d6",
+    "status" : "passed",
+    "time" : {
+      "start" : 1729582627183,
+      "stop" : 1729582629622,
+      "duration" : 2439
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "newPassed" : false,
+    "newBroken" : false,
+    "retriesCount" : 0,
+    "retriesStatusChange" : false,
+    "parameters" : [ ]
   } ]
 }
