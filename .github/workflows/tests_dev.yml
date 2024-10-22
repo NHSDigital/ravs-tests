@@ -127,7 +127,7 @@ jobs:
       # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
         run: |
-          mv allure-report/* .
+          mv allure-report/** .
         # if [ -d "data/attachments" ]; then
           #   mkdir -p data/attachments  # Create the target directory if it doesn't exist
           #   mv data/attachments/* data/attachments/
