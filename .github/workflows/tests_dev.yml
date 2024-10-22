@@ -128,6 +128,7 @@ jobs:
       - name: Move Allure report files
         run: |
           mv allure-report/** .
+          mv allure-report/.[!.]* .
         # if [ -d "data/attachments" ]; then
           #   mkdir -p data/attachments  # Create the target directory if it doesn't exist
           #   mv data/attachments/* data/attachments/
