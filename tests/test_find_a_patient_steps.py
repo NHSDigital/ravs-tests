@@ -1,4 +1,3 @@
-import warnings
 from pytest_bdd import given, when, then, scenario, scenarios
 from pytest_bdd.parsers import parse
 from pages.vaccinator_location_page import *
@@ -11,20 +10,12 @@ from conftest import *
 from faker import Faker
 import random
 
-warnings.filterwarnings("ignore", category=UserWarning, module='faker')
-
-
+fake = Faker('en_GB')
 
 features_directory = get_working_directory() + "features"
 
-logging.basicConfig(level=logging.CRITICAL)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-logging.getLogger('faker').setLevel(logging.CRITICAL)
-logging.getLogger('faker.factory').setLevel(logging.CRITICAL)
-logging.getLogger('faker.providers').setLevel(logging.CRITICAL)
-
-fake = Faker('en_GB')
 
 @pytest.fixture(scope='function')
 def shared_data():

@@ -22,6 +22,10 @@ def shared_data():
 def test_add_vaccines_page_should_launch(navigate_and_login):
     pass
 
+@scenario(f'{features_directory}/add_vaccines.feature', 'Vaccine already added to site warning should appear')
+def test_Vaccine_already_added_to_site_warning_should_appear():
+    pass
+
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app():
     pass
