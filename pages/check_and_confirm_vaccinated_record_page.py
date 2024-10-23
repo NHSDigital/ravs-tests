@@ -46,7 +46,6 @@ def click_change_patient_vaccinate_page_details_button():
 
 def click_confirm_details_and_save_button():
     find_element_and_perform_action(CONFIRM_DETAILS_AND_SAVE_BUTTON, "click")
-    time.sleep(5)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
 def check_confirm_details_and_save_button_exists():
