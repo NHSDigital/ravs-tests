@@ -1,0 +1,155 @@
+{
+  "uid" : "3ea6948ae15c2d1b",
+  "name" : "Search by NHS number [9469997956-SOLOMON DAZLEY-20160130-10 BROOK STREET, LANCASTER, LA1 1SL]",
+  "fullName" : "/app/features/find_a_patient.feature:Search by NHS number",
+  "historyId" : "bf067cabd4515f88e1c3ee93869bc864",
+  "time" : {
+    "start" : 1729679867261,
+    "stop" : 1729679882071,
+    "duration" : 14810
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9469997956', True)",
+  "statusTrace" : "fixturefunc = <function patient_information_page_should_be_available at 0x7fc348222a20>\nrequest = <FixtureRequest for <Function test_search_by_nhs_number[9469997956-SOLOMON DAZLEY-20160130-10 BROOK STREET, LANCASTER, LA1 1SL]>>\nkwargs = {'address': '10 BROOK STREET, LANCASTER, LA1 1SL', 'dob': '20160130', 'name': 'SOLOMON DAZLEY', 'nhsNumber': '9469997956'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'SOLOMON DAZLEY', nhsNumber = '9469997956', dob = '20160130'\naddress = '10 BROOK STREET, LANCASTER, LA1 1SL'\n\n    @then(parse(\"I should be directed to the patient's information page and show {name}, {nhsNumber}, {dob} and {address} details\"))\n    def patient_information_page_should_be_available(name, nhsNumber, dob, address):\n        attach_screenshot(\"patient_information_page_should_be_visible\")\n        if name.lower() != \"Not found\".lower():\n>           assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True\nE           AssertionError: assert False == True\nE            +  where False = check_patient_nhs_number_search_result_exists('9469997956', True)\n\ntests/test_find_a_patient_steps.py:183: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9469997956', True)",
+    "statusTrace" : "fixturefunc = <function patient_information_page_should_be_available at 0x7fc348222a20>\nrequest = <FixtureRequest for <Function test_search_by_nhs_number[9469997956-SOLOMON DAZLEY-20160130-10 BROOK STREET, LANCASTER, LA1 1SL]>>\nkwargs = {'address': '10 BROOK STREET, LANCASTER, LA1 1SL', 'dob': '20160130', 'name': 'SOLOMON DAZLEY', 'nhsNumber': '9469997956'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'SOLOMON DAZLEY', nhsNumber = '9469997956', dob = '20160130'\naddress = '10 BROOK STREET, LANCASTER, LA1 1SL'\n\n    @then(parse(\"I should be directed to the patient's information page and show {name}, {nhsNumber}, {dob} and {address} details\"))\n    def patient_information_page_should_be_available(name, nhsNumber, dob, address):\n        attach_screenshot(\"patient_information_page_should_be_visible\")\n        if name.lower() != \"Not found\".lower():\n>           assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True\nE           AssertionError: assert False == True\nE            +  where False = check_patient_nhs_number_search_result_exists('9469997956', True)\n\ntests/test_find_a_patient_steps.py:183: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by nhs number page",
+      "time" : {
+        "start" : 1729679867261,
+        "stop" : 1729679871676,
+        "duration" : 4415
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I enter a valid 9469997956",
+      "time" : {
+        "start" : 1729679871676,
+        "stop" : 1729679871742,
+        "duration" : 66
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click the search button",
+      "time" : {
+        "start" : 1729679871743,
+        "stop" : 1729679871819,
+        "duration" : 76
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I should be directed to the patient's information page and show SOLOMON DAZLEY, 9469997956, 20160130 and 10 BROOK STREET, LANCASTER, LA1 1SL details",
+      "time" : {
+        "start" : 1729679871819,
+        "stop" : 1729679882071,
+        "duration" : 10252
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9469997956', True)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9469997956', True)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "abb3be2399ab25d7",
+        "name" : "dev_chrome_130.0.6723.69_patient_information_page_should_be_visible.png",
+        "source" : "abb3be2399ab25d7.png",
+        "type" : "image/png",
+        "size" : 48324
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "3fb012b6f57bbc25",
+      "name" : "log",
+      "source" : "3fb012b6f57bbc25.txt",
+      "type" : "text/plain",
+      "size" : 1751
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 2,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "93d21e8b6fbe"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 BROOK STREET, LANCASTER, LA1 1SL"
+  }, {
+    "name" : "dateofbirth",
+    "value" : "20160130"
+  }, {
+    "name" : "name",
+    "value" : "SOLOMON DAZLEY"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9469997956"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "3ea6948ae15c2d1b.json",
+  "parameterValues" : [ "10 BROOK STREET, LANCASTER, LA1 1SL", "20160130", "SOLOMON DAZLEY", "9469997956" ]
+}
