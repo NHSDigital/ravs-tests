@@ -44,7 +44,7 @@ def check_back_button_exists():
     return check_element_exists(BACK_ELEMENT, True)
 
 def check_age_based_warning_exists():
-    wait_for_element_to_appear(AGE_BASED_WARNING)
+    time.sleep(3)
     return check_element_exists(AGE_BASED_WARNING, True)
 
 def check_minimum_interval_based_warning_exists():

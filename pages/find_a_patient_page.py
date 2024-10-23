@@ -160,6 +160,7 @@ def check_patient_not_found_message_exists(wait):
 
 def check_patient_multiple_results_found_message_exists(wait):
     element = (f"//h3[contains(text(), 'More than one result found')]")
+    wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_create_new_patient_button_exists(wait):

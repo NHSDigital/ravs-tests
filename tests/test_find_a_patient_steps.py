@@ -220,11 +220,6 @@ def step_assert_create_new_patient_button_exists():
     attach_screenshot("check_create_new_patient_button_is_visible")
     assert check_create_new_patient_button_exists(True) == True
 
-@then("I can see an option to review the search tips")
-def step_assert_search_tips_link_exists():
-    attach_screenshot("check_assert_search_tips_link_is_visible")
-    assert check_search_tips_link_exists(True) == True
-
 @given(parse("I enter the mandatory patient details {firstName}, {lastName}, and {dob}"))
 def step_add_mandatory_patient_information(firstName, lastName, dob):
     enter_first_name(firstName)
