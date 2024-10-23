@@ -7,7 +7,7 @@ from pages.settings_page import *
 from pages.vaccines_page import *
 from pages.site_vaccine_batches_page import *
 from pages.site_vaccine_batches_confirm_page import *
-from pages.vaccines_add_batch_page import *
+from pages.site_vaccines_add_batch_page import *
 from pages.vaccines_choose_site_page import *
 import logging
 from init_helpers import *
@@ -30,6 +30,11 @@ def test_add_vaccine_batches_page_should_launch(navigate_and_login):
 def test_batch_already_added_to_site_warning_should_appear():
     pass
 
+@scenario(f"{features_directory}/add_batches.feature", "Error messages should appear when no values are entered")
+def test_batch_error_messages_should_appear_when_no_values_are_entered(navigate_and_login):
+    pass
+
+
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app():
     pass
@@ -49,38 +54,6 @@ def i_am_on_the_vaccines_page():
 def i_click_first_add_batch_link():
     click_first_available_add_batch_link()
 
-@when(parse("I select {site}, {vaccine}, {vaccinetype} and enter {batchprefix}, {batchsuffix}"))
-def i_select_site_vaccine_and_vaccinetype_for_batch(site, vaccine, vaccinetype, batchprefix, batchsuffix, shared_data):
-    click_site_radio_button(site)
-    if "covid" in vaccine.lower():
-        click_covid_vaccine_radiobutton()
-        click_covid_vaccine_type_radiobutton_on_add_batches_page(vaccinetype)
-    elif "flu" in vaccine.lower():
-        click_flu_vaccine_radiobutton()
-        click_flu_vaccine_type_radiobutton_on_add_batches_page(vaccinetype)
-    shared_data["site"] = site
-    shared_data["vaccine"] = vaccine
-    shared_data["vaccinetype"] = vaccinetype
-    if "covid" in shared_data["vaccine"].lower():
-        enter_covid_batch_number_prefix(batchprefix)
-        enter_covid_batch_number_suffix(batchsuffix)
-    elif "flu" in shared_data["vaccine"].lower():
-        enter_flu_batch_number(batchprefix)
-    attach_screenshot("entered_batch_number")
-
-@when(parse("I enter {batch_number}"))
-def i_enter_batchprefix_and_batchsuffix(batch_number):
-    click_add_batch_link()
-    enter_batch_number(batch_number)
-    attach_screenshot("entered_batch_number")
-
-# @when(parse("I enter {expirydate}"))
-# def i_enter_expiryDate(expirydate, shared_data):
-#     expirydate = format_date(str(get_date_value(expirydate)), config["browser"])
-#     enter_expiry_date(expirydate)
-#     shared_data["expiryDate"] = expirydate
-#     attach_screenshot("entered_expiry_date")
-
 @when("I click Add batch button")
 def i_click_add_batch_button():
     click_add_batch_button()
@@ -93,19 +66,40 @@ def i_click_confirm_choices_button():
 
 @when("I click confirm button")
 def i_click_confirm_button():
-    click_confirm_button()
+    click_continue_to_confirm_batch_details_button()
     attach_screenshot("clicked_confirm_choices_button")
 
-@then("the batch is already added to site warning should appear")
-def batch_already_added_warning_should_exist():
-    attach_screenshot("batch_already_added_warning_message_exists")
-    assert check_batch_already_exists_error_is_displayed() == True
+@when("I view product for the existing vaccine in an existing site")
+def view_product_for_site_and_vaccine_type(shared_data):
+    click_first_available_view_product_link()
+    shared_data["batch_number"] = get_first_active_batch_number_value()
+
+@when("I enter batch number  that already exists and expiry date")
+def i_enter_batchprefix_and_batchsuffix(shared_data):
+    click_add_batch_link()
+    enter_batch_number(shared_data["batch_number"])
+    expiry_date = format_date(str(get_date_value("today+365")), config["browser"])
+    enter_expiry_date(expiry_date)
+    attach_screenshot("entered_batch_number")
 
 @then("the add batch page should be launched")
 def add_batch_page_should_launch():
     attach_screenshot("add_batch_page_should_launch")
     assert check_add_batch_title_exists(True) == True
 
-@when(parse("I view product for the {vaccine_type} on {site}"))
-def view_product_for_site_and_vaccine_type(vaccine_type, site):
-    click_view_product(site, vaccine_type)
+@then("the batch is already added to site warning should appear")
+def batch_already_added_warning_should_exist():
+    attach_screenshot("batch_already_added_warning_message_exists")
+    assert check_batch_already_exists_error_message_is_displayed() == True
+    assert check_batch_already_exists_error_message_link_is_displayed() == True
+
+@when('I click continue to confirm batch details page')
+def step_when_i_click_continue():
+    click_continue_to_confirm_batch_details_button()
+
+@then('the error messages and error links should appear highlighting missing required fields')
+def step_then_the_error_messages_for_missing_fields_should_appear():
+    assert check_enter_batch_number_error_message_is_displayed()
+    assert check_enter_batch_number_error_message_link_is_displayed()
+    assert check_enter_batch_expiry_date_error_message_is_displayed()
+    assert check_enter_batch_expiry_date_error_message_link_is_displayed()

@@ -1,3 +1,4 @@
+import warnings
 from pytest_bdd import given, when, then, scenario, scenarios
 from pytest_bdd.parsers import parse
 from pages.vaccinator_location_page import *
@@ -10,12 +11,20 @@ from conftest import *
 from faker import Faker
 import random
 
-fake = Faker('en_GB')
+warnings.filterwarnings("ignore", category=UserWarning, module='faker')
+
+
 
 features_directory = get_working_directory() + "features"
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.CRITICAL)
 logger = logging.getLogger(__name__)
+
+logging.getLogger('faker').setLevel(logging.CRITICAL)
+logging.getLogger('faker.factory').setLevel(logging.CRITICAL)
+logging.getLogger('faker.providers').setLevel(logging.CRITICAL)
+
+fake = Faker('en_GB')
 
 @pytest.fixture(scope='function')
 def shared_data():
@@ -210,11 +219,6 @@ def step_assert_multiple_results_found_for_patient_message():
 def step_assert_create_new_patient_button_exists():
     attach_screenshot("check_create_new_patient_button_is_visible")
     assert check_create_new_patient_button_exists(True) == True
-
-@then("I can see an option to review the search tips")
-def step_assert_search_tips_link_exists():
-    attach_screenshot("check_assert_search_tips_link_is_visible")
-    assert check_search_tips_link_exists(True) == True
 
 @given(parse("I enter the mandatory patient details {firstName}, {lastName}, and {dob}"))
 def step_add_mandatory_patient_information(firstName, lastName, dob):

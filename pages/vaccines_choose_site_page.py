@@ -17,4 +17,5 @@ def click_continue_button():
     find_element_and_perform_action(CONTINUE_BUTTON, "click")
 
 def check_choose_site_title_exists(wait):
+    wait_for_element_to_appear(CHOOSE_SITE_TITLE)
     return check_element_exists(CHOOSE_SITE_TITLE, wait)

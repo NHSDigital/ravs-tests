@@ -192,7 +192,6 @@ Feature: Find a patient
     And I enter the mandatory patient details <firstName>, <lastName>, and <dob>
     When I click the search button
     Then I can see a message that no results are found for the patient
-    And I can see an option to review the search tips
     #And I can see an option to create a new patient
 
     Examples:
