@@ -39,7 +39,7 @@ jobs:
 
       - name: Print environment variable for debugging
         run: |
-          echo "Running tests in environment: ${{ inputs.environment }}"
+          echo "Running tests in environment: ${{ github.event.inputs.environment }}"
 
       - name: Run Docker container
         id: run-container
@@ -48,7 +48,7 @@ jobs:
             --memory 8g \
             -e RAVS_PASSWORD="${{ secrets.RAVS_PASSWORD }}" \
             -e HEADLESS_MODE="true" \
-            -e TEST_ENVIRONMENT="${{ inputs.environment }}" \
+            -e TEST_ENVIRONMENT="${{ github.event.inputs.environment }}" \
             -e BROWSER="chrome" \
             -e MARKER="" \
             -e AGENTS=3 \
@@ -71,9 +71,9 @@ jobs:
           if [[ -n "$allure_directory" ]]; then
             temp_dir="$(mktemp -d)"
             docker cp "$container_id":"$allure_directory"/. "$temp_dir"
-            (cd "$(dirname "$temp_dir")" && tar -czf allure-report-${{ inputs.environment }}.tar.gz -C "$(basename "$temp_dir")" .)
-            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report-${{ inputs.environment }}.tar.gz")"
-            echo "ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report-${{ inputs.environment }}.tar.gz")" >> $GITHUB_ENV
+            (cd "$(dirname "$temp_dir")" && tar -czf allure-report-${{ github.event.inputs.environment }}.tar.gz -C "$(basename "$temp_dir")" .)
+            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report-${{ github.event.inputs.environment }}.tar.gz")"
+            echo "ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report-${{ github.event.inputs.environment }}.tar.gz")" >> $GITHUB_ENV
           else
             echo "Allure directory not found or is empty."
           fi
@@ -81,22 +81,22 @@ jobs:
       - name: Upload Allure report archive
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report-${{ inputs.environment }}
+          name: allure-report-${{ github.event.inputs.environment }}
           path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
       - name: Retrieve and extract Allure report artifact
         uses: actions/download-artifact@v4
         with:
-          name: allure-report-${{ inputs.environment }}
-          path: allure-report-${{ inputs.environment }}
+          name: allure-report-${{ github.event.inputs.environment }}
+          path: allure-report-${{ github.event.inputs.environment }}
 
       - name: Unzip the tar file
         run: |
-          tar -xzvf allure-report-${{ inputs.environment }}/allure-report-${{ inputs.environment }}.tar.gz -C allure-report-${{ inputs.environment }}
+          tar -xzvf allure-report-${{ github.event.inputs.environment }}/allure-report-${{ github.event.inputs.environment }}.tar.gz -C allure-report-${{ github.event.inputs.environment }}
 
       - name: Move Allure report files
         run: |
-          mv allure-report-${{ inputs.environment }}/* .
+          mv allure-report-${{ github.event.inputs.environment }}/* .
 
       - name: Get branch name
         id: get_branch_name
@@ -111,7 +111,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          destination_branch: gh-pages-${{ inputs.environment }}
+          destination_branch: gh-pages-${{ github.event.inputs.environment }}
 
       - name: Output GitHub Pages URL
         run: |
@@ -121,4 +121,4 @@ jobs:
         if: success()
         run: |
           BRANCH_NAME=$(echo $GITHUB_REF | sed 's|refs/heads/||')
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Ravs tests finished running for the ${{ inputs.environment }} environment on branch $BRANCH_NAME! Check the Allure report: https://nhsdigital.github.io/ravs-tests/gh-pages-${{ inputs.environment }}/\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Ravs tests finished running for the ${{ github.event.inputs.environment }} environment on branch $BRANCH_NAME! Check the Allure report: https://nhsdigital.github.io/ravs-tests/gh-pages-${{ github.event.inputs.environment }}/\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
