@@ -52,18 +52,23 @@ def format_nhs_number(nhs_number):
     return formatted_nhs_number
 
 def enter_first_name(first_name):
+    wait_for_element_to_appear(FIRST_NAME_INPUT)
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
 
 def enter_last_name(last_name):
+    wait_for_element_to_appear(LAST_NAME_INPUT)
     find_element_and_perform_action(LAST_NAME_INPUT, "input_text", last_name)
 
 def enter_dob_day(dob_day):
+    wait_for_element_to_appear(DOB_DAY_INPUT)
     find_element_and_perform_action(DOB_DAY_INPUT, "input_text", str(dob_day))
 
 def enter_dob_month(dob_month):
+    wait_for_element_to_appear(DOB_MONTH_INPUT)
     find_element_and_perform_action(DOB_MONTH_INPUT, "input_text", str(dob_month))
 
 def enter_dob_year(dob_year):
+    wait_for_element_to_appear(DOB_YEAR_INPUT)
     find_element_and_perform_action(DOB_YEAR_INPUT, "input_text", str(dob_year))
 
 def enter_dob(dob):
@@ -76,43 +81,55 @@ def enter_dob(dob):
 
 def select_optional_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
+    wait_for_element_to_appear(GENDER_OPTIONAL_SELECT)
     find_element_and_perform_action(GENDER_OPTIONAL_SELECT, "select_option", str(gender_value))
 
 def enter_optional_postcode(postcode):
+    wait_for_element_to_appear(POSTCODE_OPTIONAL_INPUT)
     find_element_and_perform_action(POSTCODE_OPTIONAL_INPUT, "input_text", postcode)
 
 def select_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
+    wait_for_element_to_appear(GENDER_SELECT)
     find_element_and_perform_action(GENDER_SELECT, "select_option", str(gender_value))
 
 def enter_postcode(postcode):
+    wait_for_element_to_appear(POSTCODE_INPUT)
     find_element_and_perform_action(POSTCODE_INPUT, "input_text", postcode)
 
 def enter_nhs_number(nhsNumber):
+    wait_for_element_to_appear(NHS_NUMBER_INPUT)
     find_element_and_perform_action(NHS_NUMBER_INPUT, "input_text", nhsNumber)
 
 def click_search_by_nhs_number_link():
+    wait_for_element_to_appear(SEARCH_BY_NHS_NUMBER_LINK)
     find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_LINK, "click")
 
 def click_search_by_demographics_link():
+    wait_for_element_to_appear(SEARCH_BY_DEMOGRAPHICS_LINK)
     find_element_and_perform_action(SEARCH_BY_DEMOGRAPHICS_LINK, "click")
 
 def click_search_by_local_records_link():
+    wait_for_element_to_appear(SEARCH_BY_LOCAL_RECORDS_LINK)
     find_element_and_perform_action(SEARCH_BY_LOCAL_RECORDS_LINK, "click")
 
 def click_patient_name_link():
+    wait_for_element_to_appear(PATIENT_NAME_LINK)
     find_element_and_perform_action(PATIENT_NAME_LINK, "click")
 
 def click_view_record():
+    wait_for_element_to_appear(VIEW_RECORD_LINK)
     find_element_and_perform_action(VIEW_RECORD_LINK, "click")
 
 def check_search_for_patient_button_visible():
     return check_element_exists(SEARCH_BUTTON)
 
 def click_search_for_patient_button():
+    wait_for_element_to_appear(SEARCH_BUTTON)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
 
 def click_create_a_new_patient_button():
+    wait_for_element_to_appear(CREATE_NEW_PATIENT_BUTTON)
     find_element_and_perform_action(CREATE_NEW_PATIENT_BUTTON, "click")
 
 def check_error_appears_for_first_name(wait):
@@ -137,10 +154,12 @@ def check_postcode_invalid_error_message_text_exists():
 
 def check_patient_name_search_result_exists(name, wait):
     element = ("xpath", f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{name.lower()}')]")
+    wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_postcode_search_result_exists(postcode, wait):
     element = ("role", "cell", postcode)
+    wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
@@ -171,6 +190,7 @@ def check_search_tips_link_exists(wait):
 
 def click_on_patient_name_search_result(name):
     element = (f"//span[text()='{name}']")
+    wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
 
 def check_patient_dob_search_result_exists(dob, wait):
@@ -197,6 +217,7 @@ def check_patient_address_search_result_exists(address, wait):
 
 def get_patient_added_message(firstName):
     element = (f"//p[contains(text(),'{firstName}')]")
+    wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def check_required_field_error_appears_for_forename(wait):
