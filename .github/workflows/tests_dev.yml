@@ -3,18 +3,25 @@ name: RAVS TESTS - DEV
 on:
   push:
     branches:
-      - '**'   # Triggers on push to any branch
+      - '**'
   pull_request:
     branches:
-      - '**'   # Triggers on PR to any branch
+      - '**'
   schedule:
-      - cron: "30 7 * * *"
+    - cron: "30 7 * * *"
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment (e.g., dev, staging)'
+        required: true
+        type: choice
+        options:
+          - dev
+          - qa
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,7 +44,7 @@ jobs:
             --memory 8g \
             -e RAVS_PASSWORD="${{ secrets.RAVS_PASSWORD }}" \
             -e HEADLESS_MODE="true" \
-            -e TEST_ENVIRONMENT="dev" \
+            -e TEST_ENVIRONMENT="${{ inputs.environment }}" \
             -e BROWSER="chrome" \
             -e MARKER="" \
             -e AGENTS=3 \
@@ -53,49 +60,16 @@ jobs:
             fi
           done
 
-      - name: Start Docker container
-        run: |
-          docker start playwright-tests
-          sleep 5
-
       - name: Find and upload Allure report directory
         run: |
           container_id=$(docker ps -qf "name=playwright-tests")
-          echo "Container ID: $container_id"
           allure_directory=$(docker exec $container_id find / -path /proc -prune -o -type d -name "allure-report" -print -quit)
-          echo "Allure Directory: $allure_directory"
           if [[ -n "$allure_directory" ]]; then
-            echo "ALLURE_DIRECTORY=$allure_directory" >> $GITHUB_ENV
-
-            # Create a temporary directory to store the contents
             temp_dir="$(mktemp -d)"
-            echo "Temporary Directory: $temp_dir"
-
-            # Copy the contents of allure_directory to the temporary directory
             docker cp "$container_id":"$allure_directory"/. "$temp_dir"
-
-            # Archive the contents of the temporary directory
-            (cd "$(dirname "$temp_dir")" && tar -czf allure-report.tar.gz -C "$(basename "$temp_dir")" .)
-
-            # Set the path of Allure report archive as output
-            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")"
-
-            # Set the environment variable for the archive path
-            export ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report.tar.gz")
-            echo "ALLURE_REPORT_ARCHIVE=$ALLURE_REPORT_ARCHIVE" >> $GITHUB_ENV
-
-            # Check if tar was generated successfully
-            if [ $? -eq 0 ]; then
-              echo "Tar archive generated successfully."
-
-              # Echo the path of the tar file
-              echo "Path of the tar file: $ALLURE_REPORT_ARCHIVE"
-
-              # List the contents of the tar file
-              tar -tf "$ALLURE_REPORT_ARCHIVE"
-            else
-              echo "Failed to generate tar archive."
-            fi
+            (cd "$(dirname "$temp_dir")" && tar -czf allure-report-${{ inputs.environment }}.tar.gz -C "$(basename "$temp_dir")" .)
+            echo "::set-output name=allure_report_archive::$(realpath "$(dirname "$temp_dir")/allure-report-${{ inputs.environment }}.tar.gz")"
+            echo "ALLURE_REPORT_ARCHIVE=$(realpath "$(dirname "$temp_dir")/allure-report-${{ inputs.environment }}.tar.gz")" >> $GITHUB_ENV
           else
             echo "Allure directory not found or is empty."
           fi
@@ -103,39 +77,22 @@ jobs:
       - name: Upload Allure report archive
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
+          name: allure-report-${{ inputs.environment }}
           path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
       - name: Retrieve and extract Allure report artifact
         uses: actions/download-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
-
-      - name: List contents of the downloaded artifact
-        run: |
-          ls -l allure-report
+          name: allure-report-${{ inputs.environment }}
+          path: allure-report-${{ inputs.environment }}
 
       - name: Unzip the tar file
         run: |
-          tar -xzvf allure-report/allure-report.tar.gz -C allure-report
+          tar -xzvf allure-report-${{ inputs.environment }}/allure-report-${{ inputs.environment }}.tar.gz -C allure-report-${{ inputs.environment }}
 
-      - name: List contents after unzipping
-        run: |
-          ls -l allure-report
-
-      # Move the Allure report files to the root of the gh-pages directory
       - name: Move Allure report files
         run: |
-          mv allure-report/* .
-
-      - name: Upload Attachments
-        uses: actions/upload-artifact@v3
-        with:
-          name: screenshots
-          path: data/attachments/**
-          if-no-files-found: warn
-          include-hidden-files: false
+          mv allure-report-${{ inputs.environment }}/* .
 
       - name: Get branch name
         id: get_branch_name
@@ -150,31 +107,14 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          destination_branch: gh-pages-dev
-
-      - name: Check contents of gh-pages
-        run: ls -la
-
-      - name: Get GitHub Pages URL
-        id: pages-url
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const repo = context.repo.repo;
-            const owner = context.repo.owner;
-            const branchName = context.ref.split('/').pop();  // Use the branch name you want to reference
-            const pagesUrl = `https://${owner}.github.io/${repo}/gh-pages-${branchName}`; // Use backticks for template literals
-            core.setOutput('pages_url', pagesUrl);
+          destination_branch: gh-pages-${{ inputs.environment }}
 
       - name: Output GitHub Pages URL
         run: |
-          echo "GitHub Pages URL: ${{ steps.pages-url.outputs.pages_url }}"
-
-      - name: Clean up
-        run: docker stop $(docker ps -q) || true
+          echo "GitHub Pages URL: https://nhsdigital.github.io/ravs-tests/#"
 
       - name: Notify Slack on success
         if: success()
         run: |
           BRANCH_NAME=$(echo $GITHUB_REF | sed 's|refs/heads/||')
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Ravs tests finished running for the DEV environment on branch $BRANCH_NAME! Check the Allure report: https://nhsdigital.github.io/ravs-tests/#\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Ravs tests finished running for the ${{ inputs.environment }} environment on branch $BRANCH_NAME! Check the Allure report: https://nhsdigital.github.io/ravs-tests/gh-pages-${{ inputs.environment }}/\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
