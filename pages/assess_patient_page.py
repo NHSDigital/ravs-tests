@@ -2,11 +2,11 @@ import time
 from init_helpers import *
 from pages.record_consent_page import YES_CONSENT_RADIO_BUTTON
 
-ELIGIBLE_YES_RADIOBUTTON = ("#EligibleYes")
-ELIGIBLE_NO_RADIOBUTTON = ("#EligibleNo")
-ASSESSING_CLINICIAN_DROPDOWN_ELEMENT = ("#AssessmentClinicianId")
-ELIGIBILITY_TYPE_DROPDOWN_ELEMENT = ("#EligibilityTypeId")
-ASSESSMENT_DATE_INPUT_ELEMENT = ("#AssessmentDate")
+ELIGIBLE_YES_RADIOBUTTON = ("label", "Yes")
+ELIGIBLE_NO_RADIOBUTTON = ("label", "No")
+ASSESSING_CLINICIAN_DROPDOWN_ELEMENT = ("label", "Assessing clinician")
+ELIGIBILITY_TYPE_DROPDOWN_ELEMENT = ("label", "Eligibility type")
+ASSESSMENT_DATE_INPUT_ELEMENT = ("label", "Assessment date")
 COMMENTS_INPUT_ELEMENT = ("#AssessmentComments")
 SAVE_AND_RETURN_BUTTON=("//button[text()='Save and return']")
 BACK_TO_CHOOSE_VACCINE_BUTTON= ("//a[contains(@href, '/vaccination/add')]")

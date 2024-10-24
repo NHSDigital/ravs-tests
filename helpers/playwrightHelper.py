@@ -226,8 +226,12 @@ class BasePlaywrightHelper:
                     print("Checkbox is already checked.")
             elif action.lower() == "select_option":
                 if element.is_visible():
-                    element.select_option(inputValue)
-                    print(f"Selected option '{inputValue}' successfully.")
+                    if isinstance(inputValue, int):
+                            element.select_option(index=inputValue)
+                            print(f"Selected option by index '{inputValue}' successfully.")
+                    else:
+                            element.select_option(label=inputValue)
+                            print(f"Selected option by label '{inputValue}' successfully.")
             elif action.lower() == "clear":
                 element.fill('')
                 print(f"Cleared text from the element: {element}.")
