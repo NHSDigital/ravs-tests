@@ -8,12 +8,12 @@ ASSESSING_CLINICIAN_DROPDOWN_ELEMENT = ("label", "Assessing clinician")
 ELIGIBILITY_TYPE_DROPDOWN_ELEMENT = ("label", "Eligibility type")
 ASSESSMENT_DATE_INPUT_ELEMENT = ("label", "Assessment date")
 COMMENTS_INPUT_ELEMENT = ("label", "Comments (Optional)")
-SAVE_AND_RETURN_BUTTON=("button" "Save and return")
+SAVE_AND_RETURN_BUTTON=("role", "button" "Save and return")
 BACK_TO_CHOOSE_VACCINE_BUTTON= ("link", "Back")
 DATE_INPUT_ELEMENT = ("label", "Assessment date")
 GIVE_VACCINE_RADIOBUTTON = ("label", "Give vaccine")
 VACCINE_NOT_GIVEN_RADIOBUTTON = ("text", "Vaccine not given")
-CONTINUE_TO_RECORD_CONSENT_BUTTON = ("button", "Continue")
+CONTINUE_TO_RECORD_CONSENT_BUTTON = ("role", "button", "Continue")
 ASSESSMENT_NO_VACCINATION_REASON = ("label", "Reason vaccine not given")
 ASSESSMENT_DATE_INCORRECT_ERROR_MESSAGE = ("text", "Error: Date cannot be older")
 ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select an assessment date")
@@ -48,7 +48,7 @@ def check_assessment_date_missing_error_message_link_exists():
     wait_for_element_to_appear(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
     return check_element_exists(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
 
-def click_assessment_date_missing_error_message_link_exists():
+def click_assessment_date_missing_error_message_link():
     wait_for_element_to_appear(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
     find_element_and_perform_action(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK, "click")
 
@@ -60,7 +60,7 @@ def check_expected_due_date_missing_error_message_link_exists():
     wait_for_element_to_appear(EXPECTED_DUE_DATE_MISSING_ERROR_MESSAGE_LINK)
     return check_element_exists(EXPECTED_DUE_DATE_MISSING_ERROR_MESSAGE_LINK)
 
-def click_expected_due_date_missing_error_message_link_exists():
+def click_expected_due_date_missing_error_message_link():
     wait_for_element_to_appear(EXPECTED_DUE_DATE_MISSING_ERROR_MESSAGE_LINK)
     find_element_and_perform_action(EXPECTED_DUE_DATE_MISSING_ERROR_MESSAGE_LINK, "click")
 
@@ -72,7 +72,7 @@ def check_assessing_clinician_missing_error_message_link_exists():
     wait_for_element_to_appear(ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK)
     return check_element_exists(ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK)
 
-def click_assessing_clinician_missing_error_message_link_exists():
+def click_assessing_clinician_missing_error_message_link():
     wait_for_element_to_appear(ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK)
     find_element_and_perform_action(ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK, "click")
 
