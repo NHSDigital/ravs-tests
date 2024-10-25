@@ -4,7 +4,6 @@ from pytest import Parser
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse, cfparse
 from pages.vaccinator_location_page import *
-from pages.add_vaccines_page import *
 from pages.settings_page import *
 from pages.vaccines_page import *
 from pages.site_vaccine_batches_page import *
