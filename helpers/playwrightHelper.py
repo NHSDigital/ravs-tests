@@ -230,7 +230,7 @@ class BasePlaywrightHelper:
                             element.select_option(index=inputValue)
                             print(f"Selected option by index '{inputValue}' successfully.")
                     else:
-                            element.select_option(label=inputValue)
+                            element.select_option(value=inputValue)
                             print(f"Selected option by label '{inputValue}' successfully.")
             elif action.lower() == "clear":
                 element.fill('')

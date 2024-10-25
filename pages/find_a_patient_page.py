@@ -91,7 +91,7 @@ def enter_optional_postcode(postcode):
 def select_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
     wait_for_element_to_appear(GENDER_SELECT)
-    find_element_and_perform_action(GENDER_SELECT, "select_option", str(gender_value))
+    find_element_and_perform_action(GENDER_SELECT, "select_option", gender_value)
 
 def enter_postcode(postcode):
     wait_for_element_to_appear(POSTCODE_INPUT)
