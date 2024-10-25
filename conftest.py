@@ -259,30 +259,29 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     # vaccines_choose_site_page
     enter_site_name(site)
     select_site_from_list(site)
-    click_continue_button()
+    click_continue_to_add_vaccine_button()
 
     # choose_vaccine_page
-    click_vaccine_radiobutton(vaccine)
-    click_vaccine_type_radiobutton(vaccine_type)
-    click_continue_button()
+    click_vaccine_radiobutton_on_add_vaccine_screen(vaccine)
+    click_vaccine_type_radiobutton_on_add_vaccine_screen(vaccine_type)
+    click_continue_to_add_batch_button()
 
     # vaccines_add_batch_page
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
-    click_continue_button()
+    click_continue_to_confirm_batch_details_button()
 
     # vaccines_check_and_confirm_page
-    click_confirm_button()
+    click_confirm_add_vaccine_and_batch_button()
 
 def add_vaccine_type_batch(batch_number, expiry_date):
     click_add_batch_link()
-    # vaccines_add_batch_page
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
-    click_continue_button()
+    click_continue_to_confirm_batch_details_button()
 
     # vaccines_check_and_confirm_page
-    click_confirm_button()
+    click_confirm_add_vaccine_and_batch_button()
 
 def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, due_date, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
 
@@ -324,9 +323,11 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
     attach_screenshot("clicked_continue_to_record_consent_button")
 
 
-def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, no_consent_reason=None):
+def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
-    select_consent_clinician_with_name_and_council(consent_clinician)
+
+    if (legal_mechanism) != "Patient Group Directions (PGD)":
+        select_consent_clinician_with_name_and_council(consent_clinician)
 
     if consent_decision.lower() == 'yes':
         click_yes_to_consent()
