@@ -2,6 +2,7 @@ from pytest import Parser
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse, cfparse
 from pages.vaccinator_location_page import *
+from pages.add_vaccines_page import *
 from pages.settings_page import *
 from pages.vaccines_page import *
 import logging
@@ -53,6 +54,11 @@ def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_da
 
     shared_data['site'] = site
     shared_data['vaccineType'] = vaccine_type
+
+@then("the vaccine is already added to site warning should appear")
+def vaccine_already_added_warning_should_exist(shared_data):
+    attach_screenshot("vaccine_already_added_warning_message_exists")
+    assert check_vaccine_already_added_warning_message_exists(shared_data['site'], shared_data['vaccineType']) == True
 
 @then("the choose site page should be launched")
 def the_choose_site_page_is_launched():
