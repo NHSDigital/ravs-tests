@@ -83,7 +83,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
     shared_data['assessment_comments'] = "Assessment comments " + assess_date
-    assess_patient_with_details_and_click_continue_to_consent("yes", shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], None ,assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
+    assess_patient_with_details_and_click_continue_to_consent("yes", shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], None ,assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'], shared_data['eligibility_assessment_no_vaccine_given_reason'])
     shared_data['consent_decision'] = "yes"
     shared_data['consent_given_by'] = get_consent_given_by(shared_data["index"])
     name_of_person_consenting = "Automation tester"
