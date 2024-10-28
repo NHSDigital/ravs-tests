@@ -113,12 +113,7 @@ def enter_due_date(due_date):
     find_element_and_perform_action(DUE_DATE_YEAR, "input_text", year)
 
 def click_legal_mechanism(legal_mechanism):
-    xpath_map = {
-        "national protocol (np)": "//label[@for='LegalMechanismId-1']",
-        "patient group directions (pgd)": "//label[@for='LegalMechanismId-2']",
-        "patient specific directions (psd)": "//label[@for='LegalMechanismId-3']",
-    }
-    element = xpath_map.get(legal_mechanism.lower())
+    element = ("label", legal_mechanism)
     if element:
         find_element_and_perform_action(element, "click")
     else:

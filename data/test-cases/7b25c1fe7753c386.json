@@ -1,0 +1,200 @@
+{
+  "uid" : "7b25c1fe7753c386",
+  "name" : "Record a vaccine with nhs number [12-9450140960-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-SDYY2-20A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "02946c8fafa2ed02d379748078859176",
+  "time" : {
+    "start" : 1730116510211,
+    "stop" : 1730116628313,
+    "duration" : 118102
+  },
+  "status" : "failed",
+  "statusMessage" : "playwright._impl._errors.Error: Locator.is_visible: Error: strict mode violation: get_by_label(\"Quadrivalent Influenza Vaccine\") resolved to 4 elements:\n    1) <input value=\"7\" type=\"radio\" id=\"ConsentVaccineId-7\" name=\"ConsentVaccineId\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId7\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine\", exact=True)\n    2) <input value=\"12\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-12\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId12\"/> aka get_by_label(\"Cell-based Quadrivalent\")\n    3) <input value=\"13\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-13\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId13\"/> aka get_by_label(\"Adjuvanted Quadrivalent\")\n    4) <input value=\"25\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-25\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId25\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine – High Dose\")\n\nCall log:\n  checking visibility of get_by_label(\"Quadrivalent Influenza Vaccine\")",
+  "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f903086dc60>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9450140960-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-SDYY2-20A-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'chosen_vaccine': 'Flu', 'shared_data': {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'care_model': 'Community Pharmacy', 'chosen_vaccine': 'Flu', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:76: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\nconftest.py:206: in choose_vaccine_and_vaccine_type_for_patient\n    click_vaccine_type_radiobutton(vaccine_type)\npages/choose_vaccines_page.py:34: in click_vaccine_type_radiobutton\n    wait_for_element_to_appear(element)\ninit_helpers.py:210: in wait_for_element_to_appear\n    return playwright_helper_instance.wait_for_element_to_appear(element)\nhelpers/playwrightHelper.py:161: in wait_for_element_to_appear\n    if element and element.is_visible():\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:17017: in is_visible\n    self._sync(self._impl_obj.is_visible(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:500: in is_visible\n    return await self._frame.is_visible(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:354: in is_visible\n    return await self._channel.send(\"isVisible\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f9030992a50>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f9029b999e0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.Error: Locator.is_visible: Error: strict mode violation: get_by_label(\"Quadrivalent Influenza Vaccine\") resolved to 4 elements:\nE               1) <input value=\"7\" type=\"radio\" id=\"ConsentVaccineId-7\" name=\"ConsentVaccineId\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId7\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine\", exact=True)\nE               2) <input value=\"12\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-12\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId12\"/> aka get_by_label(\"Cell-based Quadrivalent\")\nE               3) <input value=\"13\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-13\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId13\"/> aka get_by_label(\"Adjuvanted Quadrivalent\")\nE               4) <input value=\"25\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-25\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId25\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine – High Dose\")\nE           \nE           Call log:\nE             checking visibility of get_by_label(\"Quadrivalent Influenza Vaccine\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:520: Error",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "playwright._impl._errors.Error: Locator.is_visible: Error: strict mode violation: get_by_label(\"Quadrivalent Influenza Vaccine\") resolved to 4 elements:\n    1) <input value=\"7\" type=\"radio\" id=\"ConsentVaccineId-7\" name=\"ConsentVaccineId\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId7\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine\", exact=True)\n    2) <input value=\"12\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-12\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId12\"/> aka get_by_label(\"Cell-based Quadrivalent\")\n    3) <input value=\"13\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-13\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId13\"/> aka get_by_label(\"Adjuvanted Quadrivalent\")\n    4) <input value=\"25\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-25\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId25\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine – High Dose\")\n\nCall log:\n  checking visibility of get_by_label(\"Quadrivalent Influenza Vaccine\")",
+    "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f903086dc60>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9450140960-BIRCH HOUSE-Hospital Hub-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-SDYY2-20A-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'chosen_vaccine': 'Flu', 'shared_data': {'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-20A', 'care_model': 'Community Pharmacy', 'chosen_vaccine': 'Flu', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:76: in step_choose_vaccine_and_vaccine_type\n    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])\nconftest.py:206: in choose_vaccine_and_vaccine_type_for_patient\n    click_vaccine_type_radiobutton(vaccine_type)\npages/choose_vaccines_page.py:34: in click_vaccine_type_radiobutton\n    wait_for_element_to_appear(element)\ninit_helpers.py:210: in wait_for_element_to_appear\n    return playwright_helper_instance.wait_for_element_to_appear(element)\nhelpers/playwrightHelper.py:161: in wait_for_element_to_appear\n    if element and element.is_visible():\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:17017: in is_visible\n    self._sync(self._impl_obj.is_visible(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:500: in is_visible\n    return await self._frame.is_visible(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:354: in is_visible\n    return await self._channel.send(\"isVisible\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f9030992a50>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f9029b999e0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.Error: Locator.is_visible: Error: strict mode violation: get_by_label(\"Quadrivalent Influenza Vaccine\") resolved to 4 elements:\nE               1) <input value=\"7\" type=\"radio\" id=\"ConsentVaccineId-7\" name=\"ConsentVaccineId\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId7\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine\", exact=True)\nE               2) <input value=\"12\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-12\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId12\"/> aka get_by_label(\"Cell-based Quadrivalent\")\nE               3) <input value=\"13\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-13\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId13\"/> aka get_by_label(\"Adjuvanted Quadrivalent\")\nE               4) <input value=\"25\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-25\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId25\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine – High Dose\")\nE           \nE           Call log:\nE             checking visibility of get_by_label(\"Quadrivalent Influenza Vaccine\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:520: Error",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Hospital Hub and get patient details for 9450140960 with option 12 and choose to vaccinate with vaccine details as Flu, SDYY2-20A with 19/10/2026",
+      "time" : {
+        "start" : 1730116510212,
+        "stop" : 1730116624246,
+        "duration" : 114034
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730116624247,
+        "stop" : 1730116624587,
+        "duration" : 340
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "86dbc4028d55b129",
+        "name" : "dev_chrome_130.0.6723.69_entered_nhs_number_as9450140960_and_clicked_search_for_patient_button.png",
+        "source" : "86dbc4028d55b129.png",
+        "type" : "image/png",
+        "size" : 49486
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient DEANA GAMBLES",
+      "time" : {
+        "start" : 1730116624587,
+        "stop" : 1730116625764,
+        "duration" : 1177
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e309c4d8a31ff3f6",
+        "name" : "dev_chrome_130.0.6723.69_before_clicking_patient_name.png",
+        "source" : "e309c4d8a31ff3f6.png",
+        "type" : "image/png",
+        "size" : 49520
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-20A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1730116625765,
+        "stop" : 1730116628313,
+        "duration" : 2548
+      },
+      "status" : "failed",
+      "statusMessage" : "Locator.is_visible: Error: strict mode violation: get_by_label(\"Quadrivalent Influenza Vaccine\") resolved to 4 elements:\n    1) <input value=\"7\" type=\"radio\" id=\"ConsentVaccineId-7\" name=\"ConsentVaccineId\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId7\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine\", exact=True)\n    2) <input value=\"12\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-12\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId12\"/> aka get_by_label(\"Cell-based Quadrivalent\")\n    3) <input value=\"13\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-13\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId13\"/> aka get_by_label(\"Adjuvanted Quadrivalent\")\n    4) <input value=\"25\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-25\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId25\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine – High Dose\")\n\nCall log:\n  checking visibility of get_by_label(\"Quadrivalent Influenza Vaccine\")\n",
+      "statusTrace" : "playwright._impl._errors.Error: Locator.is_visible: Error: strict mode violation: get_by_label(\"Quadrivalent Influenza Vaccine\") resolved to 4 elements:\n    1) <input value=\"7\" type=\"radio\" id=\"ConsentVaccineId-7\" name=\"ConsentVaccineId\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId7\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine\", exact=True)\n    2) <input value=\"12\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-12\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId12\"/> aka get_by_label(\"Cell-based Quadrivalent\")\n    3) <input value=\"13\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-13\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId13\"/> aka get_by_label(\"Adjuvanted Quadrivalent\")\n    4) <input value=\"25\" type=\"radio\" name=\"ConsentVaccineId\" id=\"ConsentVaccineId-25\" class=\"nhsuk-radios__input\" aria-describedby=\"ConsentVaccineId25\"/> aka get_by_label(\"Quadrivalent Influenza Vaccine – High Dose\")\n\nCall log:\n  checking visibility of get_by_label(\"Quadrivalent Influenza Vaccine\")\n\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "afac5564f89871bc",
+        "name" : "dev_chrome_130.0.6723.69_clicked_on_patient_DEANA GAMBLES_and_clicked_choose_vaccine_button.png",
+        "source" : "afac5564f89871bc.png",
+        "type" : "image/png",
+        "size" : 55160
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "75d86a63b032a11a",
+      "name" : "log",
+      "source" : "75d86a63b032a11a.txt",
+      "type" : "text/plain",
+      "size" : 3173
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "594589a9b446"
+  }, {
+    "name" : "thread",
+    "value" : "1100-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-20A"
+  }, {
+    "name" : "care_model",
+    "value" : "Hospital Hub"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "5/9/1993"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "12"
+  }, {
+    "name" : "name",
+    "value" : "DEANA GAMBLES"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450140960"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "7b25c1fe7753c386.json",
+  "parameterValues" : [ "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ", "today-1", "19/10/2026", "SDYY2-20A", "Hospital Hub", "Flu", "yes", "5/9/1993", "yes", "12", "DEANA GAMBLES", "9450140960", "BIRCH HOUSE", "yes", "today" ]
+}
