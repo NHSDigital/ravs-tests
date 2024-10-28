@@ -76,6 +76,30 @@ def click_assessing_clinician_missing_error_message_link():
     wait_for_element_to_appear(ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK)
     find_element_and_perform_action(ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK, "click")
 
+def check_legal_mechanism_missing_error_message_text_exists():
+    wait_for_element_to_appear(LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_TEXT)
+    return check_element_exists(LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_TEXT)
+
+def check_legal_mechanism_missing_error_message_link_exists():
+    wait_for_element_to_appear(LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_LINK)
+    return check_element_exists(LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_LINK)
+
+def click_legal_mechanism_missing_error_message_link():
+    wait_for_element_to_appear(LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_LINK, "click")
+
+def check_assessment_outcome_missing_error_message_text_exists():
+    wait_for_element_to_appear(ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_TEXT)
+    return check_element_exists(ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_TEXT)
+
+def check_assessment_outcome_missing_error_message_link_exists():
+    wait_for_element_to_appear(ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_LINK)
+    return check_element_exists(ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_LINK)
+
+def click_assessment_outcome_missing_error_message_link():
+    wait_for_element_to_appear(ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_LINK, "click")
+
 def select_eligibility_type(type):
     if check_eligibility_type_is_visible() == True:
         find_element_and_perform_action(ELIGIBILITY_TYPE_DROPDOWN_ELEMENT, "select_option", type)
