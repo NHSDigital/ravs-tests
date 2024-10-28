@@ -117,8 +117,11 @@ class BasePlaywrightHelper:
         self.page.wait_for_load_state()
 
     def wait_for_page_to_load(self, timeout=0.1):
-        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
-        self.page.wait_for_selector('*', timeout=timeout * 1000)
+        try:
+            self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
+            self.page.wait_for_selector('*', timeout=timeout * 1000)
+        except Exception as e:
+            print(f"Page did not fully load within {timeout} seconds. Proceeding anyway.")
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
@@ -226,8 +229,12 @@ class BasePlaywrightHelper:
                     print("Checkbox is already checked.")
             elif action.lower() == "select_option":
                 if element.is_visible():
-                    element.select_option(inputValue)
-                    print(f"Selected option '{inputValue}' successfully.")
+                    if isinstance(inputValue, int):
+                            element.select_option(index=inputValue)
+                            print(f"Selected option by index '{inputValue}' successfully.")
+                    else:
+                            element.select_option(value=inputValue)
+                            print(f"Selected option by label '{inputValue}' successfully.")
             elif action.lower() == "clear":
                 element.fill('')
                 print(f"Cleared text from the element: {element}.")
