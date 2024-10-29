@@ -1,0 +1,128 @@
+{
+  "uid" : "4e6a4a5d7d4a84a6",
+  "name" : "Find a patient page should launch",
+  "fullName" : "/app/features/find_a_patient.feature:Find a patient page should launch",
+  "historyId" : "ec71cb30f7c78f53c433358f76194162",
+  "time" : {
+    "start" : 1730188375131,
+    "stop" : 1730188395527,
+    "duration" : 20396
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False\n +  where False = check_search_for_patient_button_visible()",
+  "statusTrace" : "fixturefunc = <function the_pds_search_section_should_be_displayed at 0x7fc12e0882c0>\nrequest = <FixtureRequest for <Function test_find_a_patient_page_should_launch>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the find a patient page should be displayed')\n    def the_pds_search_section_should_be_displayed():\n        attach_screenshot(\"find_a_patient_page_should_be_displayed\")\n>       assert check_search_for_patient_button_visible()\nE       assert False\nE        +  where False = check_search_for_patient_button_visible()\n\ntests/test_find_a_patient_steps.py:99: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False\n +  where False = check_search_for_patient_button_visible()",
+    "statusTrace" : "fixturefunc = <function the_pds_search_section_should_be_displayed at 0x7fc12e0882c0>\nrequest = <FixtureRequest for <Function test_find_a_patient_page_should_launch>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the find a patient page should be displayed')\n    def the_pds_search_section_should_be_displayed():\n        attach_screenshot(\"find_a_patient_page_should_be_displayed\")\n>       assert check_search_for_patient_button_visible()\nE       assert False\nE        +  where False = check_search_for_patient_button_visible()\n\ntests/test_find_a_patient_steps.py:99: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1730188375132,
+        "stop" : 1730188375132,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the find a patient navigation link",
+      "time" : {
+        "start" : 1730188375132,
+        "stop" : 1730188395461,
+        "duration" : 20329
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the find a patient page should be displayed",
+      "time" : {
+        "start" : 1730188395461,
+        "stop" : 1730188395527,
+        "duration" : 66
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False\n +  where False = check_search_for_patient_button_visible()",
+      "statusTrace" : "AssertionError: assert False\n +  where False = check_search_for_patient_button_visible()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "667f6b946703871e",
+        "name" : "dev_chrome_130.0.6723.69_find_a_patient_page_should_be_displayed.png",
+        "source" : "667f6b946703871e.png",
+        "type" : "image/png",
+        "size" : 4331
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "11140805b8a1a828",
+      "name" : "log",
+      "source" : "11140805b8a1a828.txt",
+      "type" : "text/plain",
+      "size" : 1461
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 2,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7c0be77e3f3d"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "4e6a4a5d7d4a84a6.json",
+  "parameterValues" : [ ]
+}

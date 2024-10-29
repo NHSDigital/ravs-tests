@@ -1,0 +1,146 @@
+{
+  "uid" : "55dffc2e67cf0d6b",
+  "name" : "NHS Number: Searching for a patient without a record returns no results [9449306621]",
+  "fullName" : "/app/features/find_a_patient.feature:NHS Number: Searching for a patient without a record returns no results",
+  "historyId" : "2bdcbabc9de9c471d890c20f4ea0ff31",
+  "time" : {
+    "start" : 1730188611104,
+    "stop" : 1730188754562,
+    "duration" : 143458
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_not_found_for_nhs_number_message_exists('944 930 6621', True)\n +    where '944 930 6621' = format_nhs_number('9449306621')",
+  "statusTrace" : "fixturefunc = <function step_assert_no_results_found_for_nhs_number_message at 0x7f0f3a656c00>\nrequest = <FixtureRequest for <Function test_nhs_number_searching_for_a_patient_without_a_record_returns_no_results[9449306621]>>\nkwargs = {'nhsNumber': '9449306621'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nnhsNumber = '9449306621'\n\n    @then(parse(\"I can see a message that no results are found for the NHS number {nhsNumber}\"))\n    def step_assert_no_results_found_for_nhs_number_message(nhsNumber):\n        attach_screenshot(\"no_results_found_should_be_visible\")\n>       assert check_patient_not_found_for_nhs_number_message_exists(format_nhs_number(nhsNumber), True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_not_found_for_nhs_number_message_exists('944 930 6621', True)\nE        +    where '944 930 6621' = format_nhs_number('9449306621')\n\ntests/test_find_a_patient_steps.py:205: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_not_found_for_nhs_number_message_exists('944 930 6621', True)\n +    where '944 930 6621' = format_nhs_number('9449306621')",
+    "statusTrace" : "fixturefunc = <function step_assert_no_results_found_for_nhs_number_message at 0x7f0f3a656c00>\nrequest = <FixtureRequest for <Function test_nhs_number_searching_for_a_patient_without_a_record_returns_no_results[9449306621]>>\nkwargs = {'nhsNumber': '9449306621'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nnhsNumber = '9449306621'\n\n    @then(parse(\"I can see a message that no results are found for the NHS number {nhsNumber}\"))\n    def step_assert_no_results_found_for_nhs_number_message(nhsNumber):\n        attach_screenshot(\"no_results_found_should_be_visible\")\n>       assert check_patient_not_found_for_nhs_number_message_exists(format_nhs_number(nhsNumber), True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_not_found_for_nhs_number_message_exists('944 930 6621', True)\nE        +    where '944 930 6621' = format_nhs_number('9449306621')\n\ntests/test_find_a_patient_steps.py:205: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by nhs number page",
+      "time" : {
+        "start" : 1730188611104,
+        "stop" : 1730188703678,
+        "duration" : 92574
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter 9449306621 as the nhs number",
+      "time" : {
+        "start" : 1730188703678,
+        "stop" : 1730188724032,
+        "duration" : 20354
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730188724032,
+        "stop" : 1730188744349,
+        "duration" : 20317
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the NHS number 9449306621",
+      "time" : {
+        "start" : 1730188744349,
+        "stop" : 1730188754562,
+        "duration" : 10213
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_patient_not_found_for_nhs_number_message_exists('944 930 6621', True)\n +    where '944 930 6621' = format_nhs_number('9449306621')",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_patient_not_found_for_nhs_number_message_exists('944 930 6621', True)\n +    where '944 930 6621' = format_nhs_number('9449306621')\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e469de20e29e981f",
+        "name" : "dev_chrome_130.0.6723.69_no_results_found_should_be_visible.png",
+        "source" : "e469de20e29e981f.png",
+        "type" : "image/png",
+        "size" : 4331
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "1b9f5b01ad4e1bc9",
+      "name" : "log",
+      "source" : "1b9f5b01ad4e1bc9.txt",
+      "type" : "text/plain",
+      "size" : 1648
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 2,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7c0be77e3f3d"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "nhsNumber",
+    "value" : "9449306621"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "55dffc2e67cf0d6b.json",
+  "parameterValues" : [ "9449306621" ]
+}
