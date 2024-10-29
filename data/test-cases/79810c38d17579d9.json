@@ -1,0 +1,128 @@
+{
+  "uid" : "79810c38d17579d9",
+  "name" : "Search without entering patient details",
+  "fullName" : "/app/features/find_a_patient.feature:Search without entering patient details",
+  "historyId" : "6d3ecbed8a34389c2d17a31baab210b7",
+  "time" : {
+    "start" : 1730187450545,
+    "stop" : 1730187607698,
+    "duration" : 157153
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_required_field_error_appears_for_forename(False)",
+  "statusTrace" : "fixturefunc = <function the_alert_messages_should_appear_forename_surname_dob_gender_postcode at 0x7f0f3a655800>\nrequest = <FixtureRequest for <Function test_search_without_entering_patient_details>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode')\n    def the_alert_messages_should_appear_forename_surname_dob_gender_postcode():\n        attach_screenshot(\"alert_messages_should_appear_for_missing_fields\")\n>       assert check_required_field_error_appears_for_forename(False) == True\nE       assert False == True\nE        +  where False = check_required_field_error_appears_for_forename(False)\n\ntests/test_find_a_patient_steps.py:140: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_required_field_error_appears_for_forename(False)",
+    "statusTrace" : "fixturefunc = <function the_alert_messages_should_appear_forename_surname_dob_gender_postcode at 0x7f0f3a655800>\nrequest = <FixtureRequest for <Function test_search_without_entering_patient_details>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then('the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode')\n    def the_alert_messages_should_appear_forename_surname_dob_gender_postcode():\n        attach_screenshot(\"alert_messages_should_appear_for_missing_fields\")\n>       assert check_required_field_error_appears_for_forename(False) == True\nE       assert False == True\nE        +  where False = check_required_field_error_appears_for_forename(False)\n\ntests/test_find_a_patient_steps.py:140: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by pds details page",
+      "time" : {
+        "start" : 1730187450548,
+        "stop" : 1730187587278,
+        "duration" : 136730
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730187587280,
+        "stop" : 1730187607619,
+        "duration" : 20339
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then the alert messages should appear for Forename, Surname, Date Of Birth, Gender and Postcode",
+      "time" : {
+        "start" : 1730187607621,
+        "stop" : 1730187607698,
+        "duration" : 77
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_required_field_error_appears_for_forename(False)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_required_field_error_appears_for_forename(False)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fadad556cda4dc3b",
+        "name" : "dev_chrome_130.0.6723.69_alert_messages_should_appear_for_missing_fields.png",
+        "source" : "fadad556cda4dc3b.png",
+        "type" : "image/png",
+        "size" : 4331
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "26035f4f205137c7",
+      "name" : "log",
+      "source" : "26035f4f205137c7.txt",
+      "type" : "text/plain",
+      "size" : 1487
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 2,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7c0be77e3f3d"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "79810c38d17579d9.json",
+  "parameterValues" : [ ]
+}
