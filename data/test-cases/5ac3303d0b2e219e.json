@@ -1,0 +1,209 @@
+{
+  "uid" : "5ac3303d0b2e219e",
+  "name" : "Demographics: Search does not find existing patients if any of their details are wrong [gender-Bill-Garton-23/6/1946-DN18 5DW-Unknown]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Search does not find existing patients if any of their details are wrong",
+  "historyId" : "4e7d4313984f5ce5655615810d7d4778",
+  "time" : {
+    "start" : 1730272438332,
+    "stop" : 1730272453736,
+    "duration" : 15404
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_not_found_message_exists(True)",
+  "statusTrace" : "fixturefunc = <function step_assert_no_results_found_for_patient_message at 0x7ff34c577240>\nrequest = <FixtureRequest for <Function test_demographics_search_does_not_find_existing_patients_if_any_of_their_details_are_wrong[gender-Bill-Garton-23/6/1946-DN18 5DW-Unknown]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then(\"I can see a message that no results are found for the patient\")\n    def step_assert_no_results_found_for_patient_message():\n        attach_screenshot(\"no_results_found_should_be_visible\")\n>       assert check_patient_not_found_message_exists(True) == True\nE       assert False == True\nE        +  where False = check_patient_not_found_message_exists(True)\n\ntests/test_find_a_patient_steps.py:211: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_not_found_message_exists(True)",
+    "statusTrace" : "fixturefunc = <function step_assert_no_results_found_for_patient_message at 0x7ff34c577240>\nrequest = <FixtureRequest for <Function test_demographics_search_does_not_find_existing_patients_if_any_of_their_details_are_wrong[gender-Bill-Garton-23/6/1946-DN18 5DW-Unknown]>>\nkwargs = {}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    @then(\"I can see a message that no results are found for the patient\")\n    def step_assert_no_results_found_for_patient_message():\n        attach_screenshot(\"no_results_found_should_be_visible\")\n>       assert check_patient_not_found_message_exists(True) == True\nE       assert False == True\nE        +  where False = check_patient_not_found_message_exists(True)\n\ntests/test_find_a_patient_steps.py:211: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1730272438333,
+        "stop" : 1730272442634,
+        "duration" : 4301
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/6/1946",
+      "time" : {
+        "start" : 1730272442634,
+        "stop" : 1730272443075,
+        "duration" : 441
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "df6d86888aa3cf97",
+        "name" : "qa_chrome_130.0.6723.91_add_mandatory_patient_information.png",
+        "source" : "df6d86888aa3cf97.png",
+        "type" : "image/png",
+        "size" : 56612
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode DN18 5DW",
+      "time" : {
+        "start" : 1730272443076,
+        "stop" : 1730272443225,
+        "duration" : 149
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ee12e36ab38fa649",
+        "name" : "qa_chrome_130.0.6723.91_enter_invalid_postcode.png",
+        "source" : "ee12e36ab38fa649.png",
+        "type" : "image/png",
+        "size" : 47308
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Unknown",
+      "time" : {
+        "start" : 1730272443225,
+        "stop" : 1730272443376,
+        "duration" : 151
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "44042f16decd044",
+        "name" : "qa_chrome_130.0.6723.91_select_gender.png",
+        "source" : "44042f16decd044.png",
+        "type" : "image/png",
+        "size" : 50984
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730272443377,
+        "stop" : 1730272443475,
+        "duration" : 98
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the patient",
+      "time" : {
+        "start" : 1730272443475,
+        "stop" : 1730272453736,
+        "duration" : 10261
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_patient_not_found_message_exists(True)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_patient_not_found_message_exists(True)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5b669f0cd0c005bd",
+        "name" : "qa_chrome_130.0.6723.91_no_results_found_should_be_visible.png",
+        "source" : "5b669f0cd0c005bd.png",
+        "type" : "image/png",
+        "size" : 33790
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "6ae2c86707fb21fa",
+      "name" : "log",
+      "source" : "6ae2c86707fb21fa.txt",
+      "type" : "text/plain",
+      "size" : 3240
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "9634150af7bc"
+  }, {
+    "name" : "thread",
+    "value" : "1097-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "gender",
+    "value" : "Unknown"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "postcode",
+    "value" : "DN18 5DW"
+  }, {
+    "name" : "scenario",
+    "value" : "gender"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "5ac3303d0b2e219e.json",
+  "parameterValues" : [ "23/6/1946", "Bill", "Unknown", "Garton", "DN18 5DW", "gender" ]
+}
