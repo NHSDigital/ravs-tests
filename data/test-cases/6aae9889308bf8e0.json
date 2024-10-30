@@ -1,0 +1,212 @@
+{
+  "uid" : "6aae9889308bf8e0",
+  "name" : "Demographics: Existing patients can be found using their optional demographic details [9693632109-Bill-Garton-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-DN18 5DW-Male]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Existing patients can be found using their optional demographic details",
+  "historyId" : "5df882005ee3f92c211579b660aaa6e5",
+  "time" : {
+    "start" : 1730272375386,
+    "stop" : 1730272390984,
+    "duration" : 15598
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)",
+  "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7ff34c5767a0>\nrequest = <FixtureRequest for <Function test_demographics_existing_patients_can_be_found_using_their_optional_demographic_details[9693632109-Bill-Garton-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-DN18 5DW-Male]>>\nkwargs = {'address': '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW', 'dob': '23/6/1946', 'name': 'Bill Garton', 'nhsNumber': '9693632109'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'Bill Garton', nhsNumber = '9693632109', dob = '23/6/1946'\naddress = '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW'\n\n    @then(parse(\"I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dob} and address: {address}\"))\n    def step_patient_information_page_should_be_available(name, nhsNumber, dob, address):\n        attach_screenshot(\"patient_information_page_should_be_visible\")\n>       assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)\n\ntests/test_find_a_patient_steps.py:174: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)",
+    "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7ff34c5767a0>\nrequest = <FixtureRequest for <Function test_demographics_existing_patients_can_be_found_using_their_optional_demographic_details[9693632109-Bill-Garton-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-DN18 5DW-Male]>>\nkwargs = {'address': '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW', 'dob': '23/6/1946', 'name': 'Bill Garton', 'nhsNumber': '9693632109'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'Bill Garton', nhsNumber = '9693632109', dob = '23/6/1946'\naddress = '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW'\n\n    @then(parse(\"I can see the patient's information in the search results, showing their name: {name}, nhs number: {nhsNumber}, dob: {dob} and address: {address}\"))\n    def step_patient_information_page_should_be_available(name, nhsNumber, dob, address):\n        attach_screenshot(\"patient_information_page_should_be_visible\")\n>       assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True\nE       AssertionError: assert False == True\nE        +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)\n\ntests/test_find_a_patient_steps.py:174: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1730272375386,
+        "stop" : 1730272379738,
+        "duration" : 4352
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/6/1946",
+      "time" : {
+        "start" : 1730272379738,
+        "stop" : 1730272380245,
+        "duration" : 507
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7360ebd9c287fd4f",
+        "name" : "qa_chrome_130.0.6723.91_add_mandatory_patient_information.png",
+        "source" : "7360ebd9c287fd4f.png",
+        "type" : "image/png",
+        "size" : 56601
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode DN18 5DW",
+      "time" : {
+        "start" : 1730272380245,
+        "stop" : 1730272380434,
+        "duration" : 189
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d426142396bc012f",
+        "name" : "qa_chrome_130.0.6723.91_enter_invalid_postcode.png",
+        "source" : "d426142396bc012f.png",
+        "type" : "image/png",
+        "size" : 49493
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Male",
+      "time" : {
+        "start" : 1730272380435,
+        "stop" : 1730272380600,
+        "duration" : 165
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7d38cc673bc21852",
+        "name" : "qa_chrome_130.0.6723.91_select_gender.png",
+        "source" : "7d38cc673bc21852.png",
+        "type" : "image/png",
+        "size" : 50650
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730272380601,
+        "stop" : 1730272380714,
+        "duration" : 113
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient's information in the search results, showing their name: Bill Garton, nhs number: 9693632109, dob: 23/6/1946 and address: 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW",
+      "time" : {
+        "start" : 1730272380714,
+        "stop" : 1730272390984,
+        "duration" : 10270
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)",
+      "statusTrace" : "AssertionError: assert False == True\n +  where False = check_patient_nhs_number_search_result_exists('9693632109', True)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f634b2dc1d5ef87f",
+        "name" : "qa_chrome_130.0.6723.91_patient_information_page_should_be_visible.png",
+        "source" : "f634b2dc1d5ef87f.png",
+        "type" : "image/png",
+        "size" : 33511
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "dd51d72725ce2688",
+      "name" : "log",
+      "source" : "dd51d72725ce2688.txt",
+      "type" : "text/plain",
+      "size" : 3478
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "9634150af7bc"
+  }, {
+    "name" : "thread",
+    "value" : "1097-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "gender",
+    "value" : "Male"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9693632109"
+  }, {
+    "name" : "postcode",
+    "value" : "DN18 5DW"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "6aae9889308bf8e0.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill", "Male", "Garton", "9693632109", "DN18 5DW" ]
+}
