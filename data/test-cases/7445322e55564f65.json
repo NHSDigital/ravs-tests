@@ -1,0 +1,182 @@
+{
+  "uid" : "7445322e55564f65",
+  "name" : "Demographics: Search with an invalid postcode shows an error message [Bill-Garton-23/6/1946-INVALID]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Search with an invalid postcode shows an error message",
+  "historyId" : "1d569f2af68e5863c8cc60a0660126e6",
+  "time" : {
+    "start" : 1730277599479,
+    "stop" : 1730277884395,
+    "duration" : 284916
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False is True\n +  where False = check_postcode_invalid_error_message_text_exists()",
+  "statusTrace" : "fixturefunc = <function step_error_message_appears_for_postcode at 0x7f138cd42200>\nrequest = <FixtureRequest for <Function test_demographics_search_with_an_invalid_postcode_shows_an_error_message[Bill-Garton-23/6/1946-INVALID]>>\nkwargs = {'errorMessage': 'Enter the full postcode in the correct format'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nerrorMessage = 'Enter the full postcode in the correct format'\n\n    @then(parse('I can see a postcode error message {errorMessage}'))\n    def step_error_message_appears_for_postcode(errorMessage):\n        attach_screenshot(\"error_message_appears_for_postcode\")\n>       assert check_postcode_invalid_error_message_text_exists() is True\nE       assert False is True\nE        +  where False = check_postcode_invalid_error_message_text_exists()\n\ntests/test_find_a_patient_steps.py:169: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False is True\n +  where False = check_postcode_invalid_error_message_text_exists()",
+    "statusTrace" : "fixturefunc = <function step_error_message_appears_for_postcode at 0x7f138cd42200>\nrequest = <FixtureRequest for <Function test_demographics_search_with_an_invalid_postcode_shows_an_error_message[Bill-Garton-23/6/1946-INVALID]>>\nkwargs = {'errorMessage': 'Enter the full postcode in the correct format'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nerrorMessage = 'Enter the full postcode in the correct format'\n\n    @then(parse('I can see a postcode error message {errorMessage}'))\n    def step_error_message_appears_for_postcode(errorMessage):\n        attach_screenshot(\"error_message_appears_for_postcode\")\n>       assert check_postcode_invalid_error_message_text_exists() is True\nE       assert False is True\nE        +  where False = check_postcode_invalid_error_message_text_exists()\n\ntests/test_find_a_patient_steps.py:169: AssertionError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1730277599479,
+        "stop" : 1730277742142,
+        "duration" : 142663
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/6/1946",
+      "time" : {
+        "start" : 1730277742143,
+        "stop" : 1730277843688,
+        "duration" : 101545
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e4131c945c67da65",
+        "name" : "dev_chrome_130.0.6723.91_add_mandatory_patient_information.png",
+        "source" : "e4131c945c67da65.png",
+        "type" : "image/png",
+        "size" : 56101
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I enter the postcode INVALID",
+      "time" : {
+        "start" : 1730277843689,
+        "stop" : 1730277864040,
+        "duration" : 20351
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ceec4840c43cdeb4",
+        "name" : "dev_chrome_130.0.6723.91_enter_invalid_postcode.png",
+        "source" : "ceec4840c43cdeb4.png",
+        "type" : "image/png",
+        "size" : 56101
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730277864041,
+        "stop" : 1730277884332,
+        "duration" : 20291
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a postcode error message Enter the full postcode in the correct format",
+      "time" : {
+        "start" : 1730277884333,
+        "stop" : 1730277884395,
+        "duration" : 62
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False is True\n +  where False = check_postcode_invalid_error_message_text_exists()",
+      "statusTrace" : "AssertionError: assert False is True\n +  where False = check_postcode_invalid_error_message_text_exists()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "18637363cab360b5",
+        "name" : "dev_chrome_130.0.6723.91_error_message_appears_for_postcode.png",
+        "source" : "18637363cab360b5.png",
+        "type" : "image/png",
+        "size" : 56101
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "f14e00b5bd58737e",
+      "name" : "log",
+      "source" : "f14e00b5bd58737e.txt",
+      "type" : "text/plain",
+      "size" : 2663
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "ffdd1db22aac"
+  }, {
+    "name" : "thread",
+    "value" : "1103-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "postcode",
+    "value" : "INVALID"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "7445322e55564f65.json",
+  "parameterValues" : [ "23/6/1946", "Bill", "Garton", "INVALID" ]
+}
