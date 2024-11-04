@@ -326,7 +326,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
 def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
 
-    if (legal_mechanism) != "Patient Group Directions (PGD)":
+    if (legal_mechanism) != "Patient Group Direction (PGD)":
         select_consent_clinician_with_name_and_council(consent_clinician)
 
     if consent_decision.lower() == 'yes':
@@ -355,7 +355,7 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         click_vaccine_type(vaccine_type2)
         set_vaccination_date(vaccination_date)
         click_care_model_option(care_model)
-        if (legal_mechanism) != "Patient Group Directions (PGD)":
+        if (legal_mechanism) != "Patient Group Direction (PGD)":
             select_vaccinator_name_and_council(vaccinator)
         enter_vaccination_comments(vaccination_comments)
         select_vaccination_site(vaccination_site)

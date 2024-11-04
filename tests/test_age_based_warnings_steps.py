@@ -88,7 +88,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data['consent_given_by'] = get_consent_given_by(shared_data["index"])
     name_of_person_consenting = "Automation tester"
     relationship_to_patient = "RAVS tester"
-    if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+    if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
     else:
         shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
@@ -99,7 +99,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     chosen_vaccine = shared_data["chosen_vaccine"]
     shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
     shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine"]))
-    if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+    if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
     else:
         shared_data["vaccinator"] = get_vaccinator(shared_data["index"])

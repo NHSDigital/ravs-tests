@@ -112,7 +112,7 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         shared_data['consent_given_by'] = get_consent_given_by(shared_data["index"])
         name_of_person_consenting = "Automation tester"
         relationship_to_patient = "RAVS tester"
-        if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+        if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
             shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
         else:
             shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
@@ -128,7 +128,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
-            if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+            if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             else:
                 shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
@@ -189,4 +189,3 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
         shared_data.clear()
-
