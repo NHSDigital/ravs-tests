@@ -242,13 +242,13 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
     # If the batch does NOT currently exist, add a batch
     # This adds an active batch, so we don't need to do further checks
     click_view_product(site, vaccine_type)
-    if not check_batch_number_exists(batch_number, True):
+    if not check_batch_number_and_expiry_date_exists(batch_number, expiry_date, True):
         add_vaccine_type_batch(batch_number, expiry_date)
         return True
 
     # If we get this far, the batch does exists but is currently INACTIVE
     # This reactivates the batch
-    if not check_batch_number_is_active(batch_number, True):
+    if not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
         click_reactivate_batch_link(batch_number)
         click_reactivate_batch_confirmation_button()
 

@@ -164,6 +164,20 @@ class BasePlaywrightHelper:
 
             time.sleep(0.5)  # Check every 0.5 seconds
 
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=10):
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                print(f"Timeout: Element '{locator_or_element}' did not appear.")
+                return None
+
+            element = self.get_element(locator_or_element, wait=True)
+            if not element or not element.is_visible():
+                print(f"Element with locator '{locator_or_element}' appeared on the page.")
+                return True
+
+            time.sleep(0.5)  # Check every 0.5 seconds
+
     def check_element_exists(self, locator_or_element, wait=False, timeout=5):
         element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
         if element:

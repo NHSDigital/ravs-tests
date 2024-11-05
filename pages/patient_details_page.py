@@ -24,6 +24,7 @@ COVID_HISTORY_ELEMENT = ("text", "COVID-19")
 FLU_HISTORY_ELEMENT = ("text", "Flu")
 RSV_HISTORY_ELEMENT = ("text", "Respiratory syncytial virus (RSV)")
 PERTUSSIS_HISTORY_ELEMENT = ("text", "Pertussis")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def check_covid_history_element_exists():
     wait_for_element_to_appear(COVID_HISTORY_ELEMENT)
@@ -175,6 +176,7 @@ def click_check_in_and_return_button():
 def click_choose_vaccine_button():
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     find_element_and_perform_action(CHOOSE_VACCINE_BUTTON, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_patient_did_not_show_button():
     find_element_and_perform_action(PATIENT_DID_NOT_SHOW_BUTTON, "click")

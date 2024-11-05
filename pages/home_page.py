@@ -12,6 +12,7 @@ FEEDBACK_LINK = ("role", "link", "feedback (opens in a new tab)")
 REPORT_AN_ISSUE_LINK = ("role", "link", "Report an issue")
 CONTACT_US_LINK = ("role", "link", "Contact us")
 HELP_AND_GUIDANCE_LINK = ("role", "link", "Help and guidance")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def check_feedback_link_exists():
     wait_for_element_to_appear(FEEDBACK_LINK)
@@ -90,6 +91,7 @@ def click_reports_nav_link():
 def click_vaccines_nav_link():
     wait_for_element_to_appear(VACCINES_NAV_ELEMENT)
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_manage_users_nav_link():
     wait_for_element_to_appear(MANAGE_USERS_NAV_ELEMENT)
