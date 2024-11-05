@@ -32,7 +32,7 @@ Feature: Record vaccine
       | 12 | 9437540233 | ALBERT HOUSE  | Hospital Hub | yes | today-15 | yes | yes | today-7 | RANDY FOGDEN | 8/6/1961 | 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19 | SDYY2-18E | 19/10/2026 |
       | 8 | 9474376638 | BECCLES HOUSE | Care Home | yes | today-32 | yes | yes | today-30 | PHYLLIDA ZYLKO | 6/2/1968 | BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG      | Flu | SDYY2-18F | 19/10/2026 |
       | 9 | 9474405174 | BIRCH HOUSE   | Home Of Housebound Patient | yes | today | yes | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-19A | 19/10/2026 |
-      | 10 | 9474405174 | ALBERT HOUSE  | Off-site Outreach Event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-14B | 19/10/2026 |
+      | 10 | 9474405174 | ALBERT HOUSE  | Off-site Outreach Event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-14B | 5/5/2025 |
       | 11 | 9450134391 | BECCLES HOUSE | Vaccination Centre | yes | today-3 | yes | yes  | today | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | SDYY2-14C | 19/10/2026 |
       | 12 | 9450140960 | BIRCH HOUSE | Hospital Hub | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  SDYY2-20A | 19/10/2026 |
       | 1 | 9450141444 | ALBERT HOUSE  | Care Home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  SDYY2-21A |        5/5/2025 |
