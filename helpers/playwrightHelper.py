@@ -313,7 +313,7 @@ class BasePlaywrightHelper:
         self.page.mouse.down()
         self.page.mouse.up()
 
-    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None):
+    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None, exact=False):
         # If locator_type_or_selector is just a string, return it as a selector
         if isinstance(locator_type_or_selector, Locator):
             return locator_type_or_selector  # Directly return the Locator object
@@ -324,23 +324,23 @@ class BasePlaywrightHelper:
 
         # Handle known locator types
         if locator_type_or_selector == "role":
-            return self.page.get_by_role(locator_value, name=name)
+            return self.page.get_by_role(locator_value, name=name, exact=exact)
         elif locator_type_or_selector == "text":
-            return self.page.get_by_text(locator_value)
+            return self.page.get_by_text(locator_value, exact=exact)
         elif locator_type_or_selector == "label":
-            return self.page.get_by_label(locator_value)
+            return self.page.get_by_label(locator_value, exact=exact)
         elif locator_type_or_selector == "placeholder":
             return self.page.get_by_placeholder(locator_value)
         elif locator_type_or_selector == "xpath":
             return self.page.locator(locator_value)
         elif locator_type_or_selector == "link":
-            return self.page.get_by_role("link", name=locator_value)
+            return self.page.get_by_role("link", name=locator_value, exact=exact)
         elif locator_type_or_selector == "title":
-            return self.page.get_by_title(locator_value)
+            return self.page.get_by_title(locator_value, exact=exact)
         elif locator_type_or_selector == "row":
-            return self.page.get_by_role("row", name=locator_value)
+            return self.page.get_by_role("row", name=locator_value, exact=exact)
         elif locator_type_or_selector == "cell":
-            return self.page.get_by_role("cell", name=locator_value)
+            return self.page.get_by_role("cell", name=locator_value, exact=exact)
         else:
             # Log a warning for unsupported locator types
             print(f"Warning: Unsupported locator type '{locator_type_or_selector}'. Assuming it is a selector.")

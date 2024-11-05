@@ -44,6 +44,7 @@ def check_pertussis_history_element_exists():
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
     element = ("xpath", f"//h3[contains(text(), '{chosen_vaccine}')]/following-sibling::div/p[contains(text(), 'Displaying')]")
@@ -60,6 +61,7 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
         return 0
 
 def get_immunisation_history_details_of_vaccine(index):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     element_selector = f"(//dl[@class='nhsuk-summary-list mb-1'])[{index}]"
     element = ("xpath", element_selector)
@@ -68,6 +70,7 @@ def get_immunisation_history_details_of_vaccine(index):
     return vaccine_summary_list_rows_elements
 
 def get_vaccine_program_details(history_index):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     vaccine_summary_list_rows_elements = get_immunisation_history_details_of_vaccine(history_index)
     if vaccine_summary_list_rows_elements:
         vaccine_program = vaccine_summary_list_rows_elements[0].query_selector('.nhsuk-summary-list__row:nth-child(1) .nhsuk-summary-list__value').inner_text()

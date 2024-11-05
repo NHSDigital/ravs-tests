@@ -233,8 +233,8 @@ def click_cell_in_row(row_name, cell_index):
 def click_link_in_row(row_name, link_index):
     return playwright_helper_instance.click_link_in_row(row_name, link_index)
 
-def get_element_by_type(locator_type, locator_value=None, name=None):
-    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name)
+def get_element_by_type(locator_type, locator_value=None, name=None, exact=False):
+    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact)
 
 def release_mouse():
     return playwright_helper_instance.release_mouse()

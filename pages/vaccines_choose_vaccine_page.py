@@ -13,5 +13,5 @@ def click_vaccine_radiobutton_on_add_vaccine_screen(vaccine):
 
 def click_vaccine_type_radiobutton_on_add_vaccine_screen(vaccine_type):
     # element = (f"//label[contains(text(), '{vaccine_type}')]/preceding-sibling::input[@name='VaccineId']")
-    element = ("label", vaccine_type)
+    element = ("label", vaccine_type, None, True)
     find_element_and_perform_action(element, "click")
