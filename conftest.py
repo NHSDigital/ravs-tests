@@ -107,46 +107,6 @@ def navigate_to_ravs(request):
     navigate_to_ravs_login_page(url)
     return True
 
-# Fixture for clicking back button
-@pytest.fixture(scope='function')
-def click_back_button_recording_consent(request):
-    click_back_button()
-
-def set_vaccinator_location(site, care_model):
-    select_site(site)
-    select_care_model(care_model)
-    if care_model == "Care Home":
-        enter_carehome_name("WHITESTONES CARE HOME")
-    click_continue_to_record_a_vaccination_homepage()
-
-@pytest.fixture(scope='function')
-def login_and_navigate_to_homepage(request, navigate_and_login):
-    click_continue_to_record_a_vaccination_homepage()
-
-# Fixture for logging in and navigating to appointments open first patient
-@pytest.fixture(scope='function')
-def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_login):
-    attach_screenshot("user_has_logged_in")
-    site = "ST JOHN'S HOUSE"
-    care_model = "Vaccination Centre"
-    select_site(site)
-    attach_screenshot("user_has_selected_site")
-    select_care_model(care_model)
-    if care_model == "Care Home":
-        enter_carehome_name("WHITESTONES CARE HOME")
-    attach_screenshot("user_has_selected_site")
-    attach_screenshot("user_has_selected_care_model")
-    click_continue_to_record_a_vaccination_homepage()
-    attach_screenshot("user_has_clicked_continue_to_ravs_homepage")
-    current_date = datetime.now()
-    fromDate = datetime(2023, 12, 1)
-    set_from_date(fromDate)
-    click_active_from_date()
-    toDate = datetime.today()
-    set_to_date(toDate)
-    click_active_to_date_today()
-    click_first_patient()
-
 # Fixture for logging in and navigating to find a patient
 @pytest.fixture(scope='function')
 def login_and_navigate_to_find_a_patient(request):
