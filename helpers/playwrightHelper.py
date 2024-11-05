@@ -117,8 +117,11 @@ class BasePlaywrightHelper:
         self.page.wait_for_load_state()
 
     def wait_for_page_to_load(self, timeout=0.1):
-        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
-        self.page.wait_for_selector('*', timeout=timeout * 1000)
+        try:
+            self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
+            self.page.wait_for_selector('*', timeout=timeout * 1000)
+        except Exception as e:
+            print(f"Page did not fully load within {timeout} seconds. Proceeding anyway.")
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
@@ -158,6 +161,20 @@ class BasePlaywrightHelper:
             if element and element.is_visible():
                 print(f"Element with locator '{locator_or_element}' appeared on the page.")
                 return element
+
+            time.sleep(0.5)  # Check every 0.5 seconds
+
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=10):
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                print(f"Timeout: Element '{locator_or_element}' did not appear.")
+                return None
+
+            element = self.get_element(locator_or_element, wait=True)
+            if not element or not element.is_visible():
+                print(f"Element with locator '{locator_or_element}' appeared on the page.")
+                return True
 
             time.sleep(0.5)  # Check every 0.5 seconds
 
@@ -226,8 +243,12 @@ class BasePlaywrightHelper:
                     print("Checkbox is already checked.")
             elif action.lower() == "select_option":
                 if element.is_visible():
-                    element.select_option(inputValue)
-                    print(f"Selected option '{inputValue}' successfully.")
+                    if isinstance(inputValue, int):
+                            element.select_option(index=inputValue)
+                            print(f"Selected option by index '{inputValue}' successfully.")
+                    else:
+                            element.select_option(value=inputValue)
+                            print(f"Selected option by label '{inputValue}' successfully.")
             elif action.lower() == "clear":
                 element.fill('')
                 print(f"Cleared text from the element: {element}.")

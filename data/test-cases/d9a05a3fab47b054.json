@@ -1,0 +1,314 @@
+{
+  "uid" : "d9a05a3fab47b054",
+  "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Off-site Outreach Event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "de37279f8480022cc6f49b44d48769f3",
+  "time" : {
+    "start" : 1730799369684,
+    "stop" : 1730799483117,
+    "duration" : 113433
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fc6bd5de340>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474405174-ALBERT HOUSE-Off-site Outreach Event...-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-19/10/2026]>>\nkwargs = {'address': '2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX', 'dob': '4/9/1965', 'name': 'PHINEAS FAYLE', '...24PHINEAS FAYLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14B', 'care_model': 'Outreach event', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 03/11/2024PHINEAS FAYLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14B', 'care_model': 'Outreach event', ...}\nname = 'PHINEAS FAYLE', dob = '4/9/1965'\naddress = '2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.5'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:146: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fc6bd5de340>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474405174-ALBERT HOUSE-Off-site Outreach Event...-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-19/10/2026]>>\nkwargs = {'address': '2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX', 'dob': '4/9/1965', 'name': 'PHINEAS FAYLE', '...24PHINEAS FAYLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14B', 'care_model': 'Outreach event', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 03/11/2024PHINEAS FAYLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14B', 'care_model': 'Outreach event', ...}\nname = 'PHINEAS FAYLE', dob = '4/9/1965'\naddress = '2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.5'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:146: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Off-site Outreach Event and get patient details for 9474405174 with option 10 and choose to vaccinate with vaccine details as Flu, SDYY2-14B with 19/10/2026",
+      "time" : {
+        "start" : 1730799369685,
+        "stop" : 1730799391504,
+        "duration" : 21819
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730799391505,
+        "stop" : 1730799391899,
+        "duration" : 394
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ce984b0cc23bead1",
+        "name" : "dev_chrome_130.0.6723.91_entered_nhs_number_as9474405174_and_clicked_search_for_patient_button.png",
+        "source" : "ce984b0cc23bead1.png",
+        "type" : "image/png",
+        "size" : 48405
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient PHINEAS FAYLE",
+      "time" : {
+        "start" : 1730799391899,
+        "stop" : 1730799392605,
+        "duration" : 706
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "adc7876d02847653",
+        "name" : "dev_chrome_130.0.6723.91_before_clicking_patient_name.png",
+        "source" : "adc7876d02847653.png",
+        "type" : "image/png",
+        "size" : 48481
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-14B with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1730799392606,
+        "stop" : 1730799396959,
+        "duration" : 4353
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5ffb7c173c3dd7d4",
+        "name" : "dev_chrome_130.0.6723.91_clicked_on_patient_PHINEAS FAYLE_and_clicked_choose_vaccine_button.png",
+        "source" : "5ffb7c173c3dd7d4.png",
+        "type" : "image/png",
+        "size" : 50597
+      }, {
+        "uid" : "51fc187acf9b7ac5",
+        "name" : "dev_chrome_130.0.6723.91_selected_vaccine_Flu_and_Adjuvanted Quadrivalent Influenza Vaccine_and_clicked_continue_button.png",
+        "source" : "51fc187acf9b7ac5.png",
+        "type" : "image/png",
+        "size" : 74146
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-2 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730799396960,
+        "stop" : 1730799409073,
+        "duration" : 12113
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "af9d71533ab3ca06",
+        "name" : "dev_chrome_130.0.6723.91_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "af9d71533ab3ca06.png",
+        "type" : "image/png",
+        "size" : 73402
+      }, {
+        "uid" : "272c320469f7ba73",
+        "name" : "dev_chrome_130.0.6723.91_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "272c320469f7ba73.png",
+        "type" : "image/png",
+        "size" : 76707
+      }, {
+        "uid" : "1f87579c5e4b6317",
+        "name" : "dev_chrome_130.0.6723.91_clicked_continue_to_record_consent_button.png",
+        "source" : "1f87579c5e4b6317.png",
+        "type" : "image/png",
+        "size" : 45223
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730799409074,
+        "stop" : 1730799410544,
+        "duration" : 1470
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "85317f6f05b0d87a",
+        "name" : "dev_chrome_130.0.6723.91_before_selecting_consent_clinician.png",
+        "source" : "85317f6f05b0d87a.png",
+        "type" : "image/png",
+        "size" : 45223
+      }, {
+        "uid" : "206aa39bb19b0782",
+        "name" : "dev_chrome_130.0.6723.91_clicked_continue_to_vaccinate_button.png",
+        "source" : "206aa39bb19b0782.png",
+        "type" : "image/png",
+        "size" : 62170
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730799410545,
+        "stop" : 1730799442623,
+        "duration" : 32078
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dbe51e39f7a0d8c9",
+        "name" : "dev_chrome_130.0.6723.91_entered_vaccination_details.png",
+        "source" : "dbe51e39f7a0d8c9.png",
+        "type" : "image/png",
+        "size" : 50142
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient PHINEAS FAYLE, 4/9/1965, 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730799442623,
+        "stop" : 1730799483117,
+        "duration" : 40494
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+      "statusTrace" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1308cf574f595f3c",
+        "name" : "dev_chrome_130.0.6723.91_check_and_confirm_screen_before_assertion.png",
+        "source" : "1308cf574f595f3c.png",
+        "type" : "image/png",
+        "size" : 50275
+      }, {
+        "uid" : "7658acd68f022c3d",
+        "name" : "dev_chrome_130.0.6723.91_vaccination_dose_amount.png",
+        "source" : "7658acd68f022c3d.png",
+        "type" : "image/png",
+        "size" : 50275
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "a1f05747c28a9e3e",
+      "name" : "log",
+      "source" : "a1f05747c28a9e3e.txt",
+      "type" : "text/plain",
+      "size" : 8450
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 13,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7923645987f9"
+  }, {
+    "name" : "thread",
+    "value" : "1100-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-14B"
+  }, {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "4/9/1965"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "10"
+  }, {
+    "name" : "name",
+    "value" : "PHINEAS FAYLE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9474405174"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "d9a05a3fab47b054.json",
+  "parameterValues" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "19/10/2026", "SDYY2-14B", "Off-site Outreach Event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today" ]
+}
