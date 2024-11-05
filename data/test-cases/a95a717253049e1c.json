@@ -1,0 +1,347 @@
+{
+  "uid" : "a95a717253049e1c",
+  "name" : "Record a vaccine with nhs number [8-9437580812-BIRCH HOUSE-Care Home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-SDYY2-18A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "69641aa56c8bd19d233e433672f71876",
+  "time" : {
+    "start" : 1730809121175,
+    "stop" : 1730809134561,
+    "duration" : 13386
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False\n +  where False = check_record_saved_element_exists(False)",
+  "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_record_saved at 0x7f3df9f6a160>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[8-9437580812-BIRCH HOUSE-Care Home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-SDYY2-18A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 29/10/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18A', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 29/10/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18A', 'care_model': 'Vaccination centre open to the public', ...}\n\n    @then(\"when I click confirm and save button, I should see a record saved dialogue\")\n    def click_confirm_and_save_button_record_saved(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        click_confirm_details_and_save_button()\n        attach_screenshot(\"before_assert_record_saved\")\n>       assert check_record_saved_element_exists(False)\nE       assert False\nE        +  where False = check_record_saved_element_exists(False)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:163: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False\n +  where False = check_record_saved_element_exists(False)",
+    "statusTrace" : "fixturefunc = <function click_confirm_and_save_button_record_saved at 0x7f3df9f6a160>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[8-9437580812-BIRCH HOUSE-Care Home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-SDYY2-18A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 29/10/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18A', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 29/10/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-18A', 'care_model': 'Vaccination centre open to the public', ...}\n\n    @then(\"when I click confirm and save button, I should see a record saved dialogue\")\n    def click_confirm_and_save_button_record_saved(shared_data):\n        attach_screenshot(\"patient_details_screen_with_immunisation_history\")\n        click_confirm_details_and_save_button()\n        attach_screenshot(\"before_assert_record_saved\")\n>       assert check_record_saved_element_exists(False)\nE       assert False\nE        +  where False = check_record_saved_element_exists(False)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:163: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Care Home and get patient details for 9437580812 with option 8 and choose to vaccinate with vaccine details as COVID-19, SDYY2-18A with 19/10/2026",
+      "time" : {
+        "start" : 1730809121176,
+        "stop" : 1730809121962,
+        "duration" : 786
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730809121963,
+        "stop" : 1730809122348,
+        "duration" : 385
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "919e8d733792a0e6",
+        "name" : "dev_chrome_130.0.6723.91_entered_nhs_number_as9437580812_and_clicked_search_for_patient_button.png",
+        "source" : "919e8d733792a0e6.png",
+        "type" : "image/png",
+        "size" : 49350
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient INDIGO CATCHESIDE",
+      "time" : {
+        "start" : 1730809122348,
+        "stop" : 1730809123046,
+        "duration" : 698
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f3964b48bc1c8e18",
+        "name" : "dev_chrome_130.0.6723.91_before_clicking_patient_name.png",
+        "source" : "f3964b48bc1c8e18.png",
+        "type" : "image/png",
+        "size" : 49388
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, SDYY2-18A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1730809123046,
+        "stop" : 1730809125989,
+        "duration" : 2943
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8ed7a35940d012b9",
+        "name" : "dev_chrome_130.0.6723.91_clicked_on_patient_INDIGO CATCHESIDE_and_clicked_choose_vaccine_button.png",
+        "source" : "8ed7a35940d012b9.png",
+        "type" : "image/png",
+        "size" : 80738
+      }, {
+        "uid" : "9b353a9621eff9d0",
+        "name" : "dev_chrome_130.0.6723.91_selected_vaccine_COVID-19_and_Spikevax JN.1_and_clicked_continue_button.png",
+        "source" : "9b353a9621eff9d0.png",
+        "type" : "image/png",
+        "size" : 73642
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-7 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730809125990,
+        "stop" : 1730809128097,
+        "duration" : 2107
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fa7b2a335df1b14a",
+        "name" : "dev_chrome_130.0.6723.91_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "fa7b2a335df1b14a.png",
+        "type" : "image/png",
+        "size" : 72621
+      }, {
+        "uid" : "96bdb7d040a68132",
+        "name" : "dev_chrome_130.0.6723.91_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "96bdb7d040a68132.png",
+        "type" : "image/png",
+        "size" : 75561
+      }, {
+        "uid" : "5010b3f7b6e7cf6",
+        "name" : "dev_chrome_130.0.6723.91_clicked_continue_to_record_consent_button.png",
+        "source" : "5010b3f7b6e7cf6.png",
+        "type" : "image/png",
+        "size" : 42259
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730809128097,
+        "stop" : 1730809129713,
+        "duration" : 1616
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fed09b7f16a7b039",
+        "name" : "dev_chrome_130.0.6723.91_before_selecting_consent_clinician.png",
+        "source" : "fed09b7f16a7b039.png",
+        "type" : "image/png",
+        "size" : 42259
+      }, {
+        "uid" : "2cae44bfb27c7feb",
+        "name" : "dev_chrome_130.0.6723.91_clicked_continue_to_vaccinate_button.png",
+        "source" : "2cae44bfb27c7feb.png",
+        "type" : "image/png",
+        "size" : 60546
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-7 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730809129713,
+        "stop" : 1730809133398,
+        "duration" : 3685
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ecf561597696cf77",
+        "name" : "dev_chrome_130.0.6723.91_entered_vaccination_details.png",
+        "source" : "ecf561597696cf77.png",
+        "type" : "image/png",
+        "size" : 51712
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient INDIGO CATCHESIDE, 1/3/1959, 12 CANBERRA STREET, MANCHESTER, M11 4WL and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730809133399,
+        "stop" : 1730809134306,
+        "duration" : 907
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "55f5c103a408d2a3",
+        "name" : "dev_chrome_130.0.6723.91_check_and_confirm_screen_before_assertion.png",
+        "source" : "55f5c103a408d2a3.png",
+        "type" : "image/png",
+        "size" : 55995
+      }, {
+        "uid" : "102d2062aee4a6ef",
+        "name" : "dev_chrome_130.0.6723.91_vaccination_dose_amount.png",
+        "source" : "102d2062aee4a6ef.png",
+        "type" : "image/png",
+        "size" : 57066
+      }, {
+        "uid" : "8cc2235c7eac6f90",
+        "name" : "dev_chrome_130.0.6723.91_check_and_confirm_screen_after_assertion.png",
+        "source" : "8cc2235c7eac6f90.png",
+        "type" : "image/png",
+        "size" : 57066
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1730809134306,
+        "stop" : 1730809134561,
+        "duration" : 255
+      },
+      "status" : "failed",
+      "statusMessage" : "assert False\n +  where False = check_record_saved_element_exists(False)",
+      "statusTrace" : "AssertionError: assert False\n +  where False = check_record_saved_element_exists(False)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f23f0996ba7dfe88",
+        "name" : "dev_chrome_130.0.6723.91_patient_details_screen_with_immunisation_history.png",
+        "source" : "f23f0996ba7dfe88.png",
+        "type" : "image/png",
+        "size" : 57066
+      }, {
+        "uid" : "84912dbccf34ce3a",
+        "name" : "dev_chrome_130.0.6723.91_before_assert_record_saved.png",
+        "source" : "84912dbccf34ce3a.png",
+        "type" : "image/png",
+        "size" : 55476
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "f33058da16240d29",
+      "name" : "log",
+      "source" : "f33058da16240d29.txt",
+      "type" : "text/plain",
+      "size" : 9898
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 9,
+    "attachmentsCount" : 16,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "dcbd111f4c3c"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "12 CANBERRA STREET, MANCHESTER, M11 4WL"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-7"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-18A"
+  }, {
+    "name" : "care_model",
+    "value" : "Care Home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "1/3/1959"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "8"
+  }, {
+    "name" : "name",
+    "value" : "INDIGO CATCHESIDE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437580812"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-7"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "a95a717253049e1c.json",
+  "parameterValues" : [ "12 CANBERRA STREET, MANCHESTER, M11 4WL", "today-7", "19/10/2026", "SDYY2-18A", "Care Home", "COVID-19", "yes", "1/3/1959", "yes", "8", "INDIGO CATCHESIDE", "9437580812", "BIRCH HOUSE", "yes", "today-7" ]
+}
