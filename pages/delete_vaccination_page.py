@@ -1,8 +1,8 @@
 from init_helpers import *
 from pages.patient_details_page import CHOOSE_VACCINE_BUTTON
 
-DELETE_VACCINATION_BUTTON=("//button[text()='Delete']")
-CANCEL_VACCINATION_DELETE_BUTTON=("//button[text()='Cancel']")
+DELETE_VACCINATION_BUTTON=("role", "button", "delete")
+CANCEL_VACCINATION_DELETE_BUTTON=("role", "button", "Cancel")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def click_delete_vaccination_button():
