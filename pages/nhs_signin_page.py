@@ -45,30 +45,23 @@ def enter_password(password):
     find_element_and_perform_action(PASSWORD_INPUT_ELEMENT, "input_text", password)
 
 def click_keep_me_signedin():
-    wait_for_element_to_appear(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT)
     find_element_and_perform_action(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT, "click")
 
 def check_password_error_alert_exists():
     wait_for_page_to_load()
-    wait_for_element_to_appear(ALERT_TEXT_PASSWORD)
     return check_element_exists(ALERT_TEXT_PASSWORD, True)
 
 def check_emailAddress_error_alert_exists():
-    wait_for_element_to_appear(ALERT_TEXT_EMAILADDRESS)
     return check_element_exists(ALERT_TEXT_EMAILADDRESS, True)
 
 def check_found_some_errors_alert_exists():
-    wait_for_element_to_appear(FOUND_SOME_ERRORS)
     return check_element_exists(FOUND_SOME_ERRORS, True)
 
 def get_password_missing_error_text():
-    wait_for_element_to_appear(ALERT_TEXT_PASSWORD)
     return find_element_and_perform_action(ALERT_TEXT_PASSWORD, "get_text")
 
 def get_emailAddress_missing_error_text():
-    wait_for_element_to_appear(ALERT_TEXT_EMAILADDRESS)
     return find_element_and_perform_action(ALERT_TEXT_EMAILADDRESS, "get_text")
 
 def check_unable_to_sign_in_error_exists():
-    wait_for_element_to_appear(ERROR_UNABLE_TO_SIGN_IN)
     return check_element_exists(ERROR_UNABLE_TO_SIGN_IN, True)

@@ -26,8 +26,7 @@ def click_reactivate_batch_confirmation_button():
     find_element_and_perform_action(REACTIVATE_BATCH_CONFIRMATION_BUTTON, "click")
 
 def get_first_active_batch_number_value():
-    xpath = "(//tbody[@class='nhsuk-table__body']//tr[td[@role='cell'][3]//strong[text()='Active']][1]//td[@role='cell'])[1]"
-    wait_for_element_to_appear(("xpath", xpath))
+    xpath = "(//tbody[@class='nhsuk-table__body']//tr[td[@role='cell'][3]//strong[text()=' Active']][1]//td[@role='cell'])[1]"
     full_text = find_element_and_perform_action(("xpath", xpath), "get_text")
     batch_number = full_text.replace('Batch number', '').strip()
     return batch_number
