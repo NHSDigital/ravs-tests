@@ -46,7 +46,7 @@ Feature: Record vaccine
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
     When I click choose vaccine button and choose the <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date> and click continue
-    And I assess the pregnant patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
+    And I assess the pregnant patient's <eligibility> with the details of due date as <due_date> and assessment date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
     Then I need to be able to see the patient <name>, <dob>, <address> and vaccination details on the check and confirm screen
