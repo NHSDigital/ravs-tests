@@ -30,7 +30,7 @@ def click_delivery_team_radiobutton(deliveryTeam):
         print("Delivery team not available at organization")
 
 def click_vaccine_type_radiobutton(vaccine_type):
-    element = ("label", vaccine_type)
+    element = ("label", vaccine_type, None, True)
     wait_for_element_to_appear(element)
     if check_element_exists(element, True) == True:
         find_element_and_perform_action(element, "check")
