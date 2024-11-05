@@ -1,0 +1,404 @@
+{
+  "uid" : "ab7134ae4c2be325",
+  "name" : "Record a vaccine with nhs number [11-9450134391-BECCLES HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-MARIAN PIESSE-17/7/1994-2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT-Flu-SDYY2-14C-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "8c38b547f0a063f1c3e7ed09f57cb417",
+  "time" : {
+    "start" : 1730832094246,
+    "stop" : 1730832263212,
+    "duration" : 168966
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (5 + 1)\n +  where 0 = int(0)\n +  and   5 = int(5)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fd4a11ea020>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[11-9450134391-BECCLES HOUSE-Vaccination Centre-yes...ay-3-yes-yes-today-MARIAN PIESSE-17/7/1994-2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT-Flu-SDYY2-14C-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 02/11/2024MARIAN PIESSE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14C', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 02/11/2024MARIAN PIESSE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14C', 'care_model': 'Hospital hub for staff and patients', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (5 + 1)\nE        +  where 0 = int(0)\nE        +  and   5 = int(5)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:168: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (5 + 1)\n +  where 0 = int(0)\n +  and   5 = int(5)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fd4a11ea020>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[11-9450134391-BECCLES HOUSE-Vaccination Centre-yes...ay-3-yes-yes-today-MARIAN PIESSE-17/7/1994-2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT-Flu-SDYY2-14C-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 02/11/2024MARIAN PIESSE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14C', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 02/11/2024MARIAN PIESSE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-14C', 'care_model': 'Hospital hub for staff and patients', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (5 + 1)\nE        +  where 0 = int(0)\nE        +  and   5 = int(5)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:168: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BECCLES HOUSE and Vaccination Centre and get patient details for 9450134391 with option 11 and choose to vaccinate with vaccine details as Flu, SDYY2-14C with 19/10/2026",
+      "time" : {
+        "start" : 1730832094246,
+        "stop" : 1730832209902,
+        "duration" : 115656
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730832209902,
+        "stop" : 1730832210235,
+        "duration" : 333
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6593db8852a4912",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9450134391_and_clicked_search_for_patient_button.png",
+        "source" : "6593db8852a4912.png",
+        "type" : "image/png",
+        "size" : 49453
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARIAN PIESSE",
+      "time" : {
+        "start" : 1730832210235,
+        "stop" : 1730832210931,
+        "duration" : 696
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8644fcda518e60de",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "8644fcda518e60de.png",
+        "type" : "image/png",
+        "size" : 49517
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-14C with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1730832210931,
+        "stop" : 1730832215285,
+        "duration" : 4354
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e28a1e71717c869c",
+        "name" : "dev_chrome_130.0.6723.116_clicked_on_patient_MARIAN PIESSE_and_clicked_choose_vaccine_button.png",
+        "source" : "e28a1e71717c869c.png",
+        "type" : "image/png",
+        "size" : 80373
+      }, {
+        "uid" : "d5bb2cb32d2fe67b",
+        "name" : "dev_chrome_130.0.6723.116_selected_vaccine_Flu_and_Quadrivalent Influenza Vaccine – High Dose_and_clicked_continue_button.png",
+        "source" : "d5bb2cb32d2fe67b.png",
+        "type" : "image/png",
+        "size" : 73120
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-3 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730832215285,
+        "stop" : 1730832216427,
+        "duration" : 1142
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a7752480200fcd6a",
+        "name" : "dev_chrome_130.0.6723.116_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "a7752480200fcd6a.png",
+        "type" : "image/png",
+        "size" : 73332
+      }, {
+        "uid" : "82a7df1f3e698648",
+        "name" : "dev_chrome_130.0.6723.116_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "82a7df1f3e698648.png",
+        "type" : "image/png",
+        "size" : 71197
+      }, {
+        "uid" : "6bffa3933263156e",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_record_consent_button.png",
+        "source" : "6bffa3933263156e.png",
+        "type" : "image/png",
+        "size" : 41223
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730832216428,
+        "stop" : 1730832216951,
+        "duration" : 523
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cfecc3803e353d9c",
+        "name" : "dev_chrome_130.0.6723.116_before_selecting_consent_clinician.png",
+        "source" : "cfecc3803e353d9c.png",
+        "type" : "image/png",
+        "size" : 41223
+      }, {
+        "uid" : "d8f82984efc16d25",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_vaccinate_button.png",
+        "source" : "d8f82984efc16d25.png",
+        "type" : "image/png",
+        "size" : 70456
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730832216951,
+        "stop" : 1730832220619,
+        "duration" : 3668
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "71d50531949b97d2",
+        "name" : "dev_chrome_130.0.6723.116_entered_vaccination_details.png",
+        "source" : "71d50531949b97d2.png",
+        "type" : "image/png",
+        "size" : 49415
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient MARIAN PIESSE, 17/7/1994, 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730832220619,
+        "stop" : 1730832221367,
+        "duration" : 748
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d6d4a6925d8bef26",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_before_assertion.png",
+        "source" : "d6d4a6925d8bef26.png",
+        "type" : "image/png",
+        "size" : 49440
+      }, {
+        "uid" : "cbc46dea37f35a98",
+        "name" : "dev_chrome_130.0.6723.116_vaccination_dose_amount.png",
+        "source" : "cbc46dea37f35a98.png",
+        "type" : "image/png",
+        "size" : 49437
+      }, {
+        "uid" : "d53354a0958c81bf",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_after_assertion.png",
+        "source" : "d53354a0958c81bf.png",
+        "type" : "image/png",
+        "size" : 49437
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1730832221367,
+        "stop" : 1730832222124,
+        "duration" : 757
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ce6fe7e4e581ce4f",
+        "name" : "dev_chrome_130.0.6723.116_patient_details_screen_with_immunisation_history.png",
+        "source" : "ce6fe7e4e581ce4f.png",
+        "type" : "image/png",
+        "size" : 49437
+      }, {
+        "uid" : "3986703422b305c3",
+        "name" : "dev_chrome_130.0.6723.116_before_assert_record_saved.png",
+        "source" : "3986703422b305c3.png",
+        "type" : "image/png",
+        "size" : 34843
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730832222124,
+        "stop" : 1730832222436,
+        "duration" : 312
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "80c19d2da8edfa5b",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9450134391_and_clicked_search_for_patient_button.png",
+        "source" : "80c19d2da8edfa5b.png",
+        "type" : "image/png",
+        "size" : 37549
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARIAN PIESSE",
+      "time" : {
+        "start" : 1730832222437,
+        "stop" : 1730832242896,
+        "duration" : 20459
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f08e473bf50e6687",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "f08e473bf50e6687.png",
+        "type" : "image/png",
+        "size" : 37619
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1730832242897,
+        "stop" : 1730832263212,
+        "duration" : 20315
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (5 + 1)\n +  where 0 = int(0)\n +  and   5 = int(5)",
+      "statusTrace" : "AssertionError: assert 0 >= (5 + 1)\n +  where 0 = int(0)\n +  and   5 = int(5)\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "5fe92553b02d390",
+      "name" : "log",
+      "source" : "5fe92553b02d390.txt",
+      "type" : "text/plain",
+      "size" : 11916
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 18,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "285eba521044"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-3"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-14C"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "17/7/1994"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "11"
+  }, {
+    "name" : "name",
+    "value" : "MARIAN PIESSE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450134391"
+  }, {
+    "name" : "site",
+    "value" : "BECCLES HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "ab7134ae4c2be325.json",
+  "parameterValues" : [ "2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT", "today-3", "19/10/2026", "SDYY2-14C", "Vaccination Centre", "Flu", "yes", "17/7/1994", "yes", "11", "MARIAN PIESSE", "9450134391", "BECCLES HOUSE", "yes", "today" ]
+}

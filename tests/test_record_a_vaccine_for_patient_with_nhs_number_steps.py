@@ -89,14 +89,14 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['assessment_comments'] = "Assessment comments " + assess_date + shared_data["patient_name"]
     assess_patient_with_details_and_click_continue_to_consent(eligibility, shared_data['eligibility_type'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], None, assess_date, shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
 
-@when(parse("I assess the pregnant patient's {eligibility} with the details and date as {assess_date} and click continue to record consent screen button"))
-def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, assess_date):
+@when(parse("I assess the pregnant patient's {eligibility} with the details of due date as {due_date} and assessment date as {assess_date} and click continue to record consent screen button"))
+def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, due_date, assess_date):
     shared_data['eligible_decision'] = eligibility
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = "Pregnancy"
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    due_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    due_date = format_date(str(get_date_value(due_date)), config["browser"])
     shared_data['eligibility_due_date'] = due_date
     assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
