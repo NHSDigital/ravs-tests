@@ -12,6 +12,7 @@ RECORD_SAVED_DIALOGUE = ("text", "Record saved")
 CLOSE_RECORD_SAVED_DIALOGUE_BUTTON = ("text", "Close")
 SUCCESSFULLY_SAVED_MESSAGE = ("text", "You successfully saved")
 VIEW_RECORD_LINK = ("text", "View record")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 # Shared
 NHS_NUMBER_INPUT = ("label", "Enter a 10 digit NHS number")
@@ -127,6 +128,7 @@ def check_search_for_patient_button_visible():
 def click_search_for_patient_button():
     wait_for_element_to_appear(SEARCH_BUTTON)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_create_a_new_patient_button():
     wait_for_element_to_appear(CREATE_NEW_PATIENT_BUTTON)
