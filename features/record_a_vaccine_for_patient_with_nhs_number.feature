@@ -35,10 +35,10 @@ Feature: Record vaccine
       | 10 | 9474405174 | ALBERT HOUSE  | Off-site Outreach Event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-14B | 19/10/2026 |
       | 11 | 9450134391 | BECCLES HOUSE | Vaccination Centre | yes | today-3 | yes | yes  | today | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | SDYY2-14C | 19/10/2026 |
       | 12 | 9450140960 | BIRCH HOUSE | Hospital Hub | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  SDYY2-20A | 19/10/2026 |
-      | 1 | 9450141444 | ALBERT HOUSE  | Care Home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  SDYY2-21A |        19/10/2026 |
-      | 2 | 9450141711 | BECCLES HOUSE | Home Of Housebound Patient | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | SDYY2-22A | 19/10/2026 |
-      | 3 | 9450144699 | BIRCH HOUSE   | Off-site Outreach Event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  SDYY2-23A | 19/10/2026 |
-      | 4 | 9437541817 | ALBERT HOUSE  | Off-site Outreach Event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | SDYY2-24A | 19/10/2026 |
+      | 1 | 9450141444 | ALBERT HOUSE  | Care Home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  SDYY2-21A |        5/5/2025 |
+      | 2 | 9450141711 | BECCLES HOUSE | Home Of Housebound Patient | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | SDYY2-22A | 5/5/2025 |
+      | 3 | 9450144699 | BIRCH HOUSE   | Off-site Outreach Event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  SDYY2-23A | 5/5/2025 |
+      | 4 | 9437541817 | ALBERT HOUSE  | Off-site Outreach Event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | SDYY2-24A | 5/5/2025 |
 
   @recordvaccine
   Scenario Outline: Record a maternity vaccine with nhs number

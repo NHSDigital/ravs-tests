@@ -4,7 +4,6 @@ from pytest import Parser
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse, cfparse
 from pages.vaccinator_location_page import *
-from pages.add_vaccines_page import *
 from pages.settings_page import *
 from pages.vaccines_page import *
 from pages.site_vaccine_batches_page import *
@@ -113,12 +112,12 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         shared_data['consent_given_by'] = get_consent_given_by(shared_data["index"])
         name_of_person_consenting = "Automation tester"
         relationship_to_patient = "RAVS tester"
-        if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+        if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
             shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
         else:
             shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
-        record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
+        record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data["no_consent_reason"])
 
 @when(parse("I record {vaccination} details and date as {vaccination_date} and click Continue to Check and confirm screen"))
 def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shared_data, vaccination, vaccination_date):
@@ -129,13 +128,13 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
-            if shared_data['legal_mechanism'] == "Patient Group Directions (PGD)":
+            if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             else:
                 shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
 
 @then(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))
@@ -190,4 +189,3 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
         shared_data.clear()
-

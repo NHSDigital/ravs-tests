@@ -209,6 +209,13 @@ def wait_for_element_to_appear(element):
         element = get_element_by_type(element)
     return playwright_helper_instance.wait_for_element_to_appear(element)
 
+def wait_for_element_to_disappear(element):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    else:
+        element = get_element_by_type(element)
+    return playwright_helper_instance.wait_for_element_to_disappear(element)
+
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
 
@@ -246,6 +253,9 @@ def date_format_with_age(date):
 
 def date_format_with_name_of_month(date):
     return datetime_helper_instance.date_format_with_name_of_month(date)
+
+def date_format_with_name_of_month_shortened(date):
+    return datetime_helper_instance.date_format_with_name_of_month_shortened(date)
 
 def get_date_value(date):
     return datetime_helper_instance.get_date_value(date)
