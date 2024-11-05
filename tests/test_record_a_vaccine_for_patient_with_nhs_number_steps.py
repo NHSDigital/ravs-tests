@@ -175,7 +175,6 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
     attach_screenshot("patient_details_screen_with_immunisation_history")
     if shared_data["vaccinated_decision"].lower() == "yes" and shared_data["consent_decision"].lower() == "yes" and shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
         click_confirm_details_and_save_button()
-
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
         # assert get_vaccine_program_details(index) == shared_data["chosen_vaccine"]

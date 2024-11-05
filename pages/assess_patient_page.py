@@ -31,6 +31,7 @@ DUE_DATE_DAY = ("label", "Day")
 DUE_DATE_MONTH = ("label", "Month")
 DUE_DATE_YEAR = ("label", "Year")
 SCREENING_CONSIDERATIONS_ELEMENT = ("text", "Screening considerations")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def check_screening_considerations_exist():
     wait_for_element_to_appear(SCREENING_CONSIDERATIONS_ELEMENT)
@@ -203,7 +204,4 @@ def click_save_and_return_button_on_assessment_screen():
 def click_continue_to_record_consent_button():
     wait_for_element_to_appear(CONTINUE_TO_RECORD_CONSENT_BUTTON)
     find_element_and_perform_action(CONTINUE_TO_RECORD_CONSENT_BUTTON, "click")
-    if check_assessment_date_incorrect_error_message_exists() == False:
-        wait_for_element_to_appear(YES_CONSENT_RADIO_BUTTON)
-    else:
-        return True
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)

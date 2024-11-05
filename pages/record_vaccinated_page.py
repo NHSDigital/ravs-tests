@@ -35,6 +35,8 @@ BATCH_DOSE_AMOUNT_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Dose amount (ml)
 BATCH_DOSE_AMOUNT_MISSING_ERROR_MESSAGE_LINK = ("text", "Dose amount (ml) is required")
 YELLOW_CARD_MESSAGE_LINK = ("role", "link", "Yellow Card Report (opens a")
 POST_VACCINATION_MESSAGE_LINK = ("role", "link", "COVID-19 vaccinations on NHS.")
+CAREHOME_NAME_INPUT_ELEMENT = ("#CareHomeName")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def get_batch_expiry_date_value():
     return find_element_and_perform_action(BATCH_EXPIRY_DATE_READONLY_ELEMENT, "get_text")
@@ -83,11 +85,14 @@ def select_reason_for_no_vaccination(reason):
 
 def click_save_and_return_button_on_record_vaccinated_page():
     find_element_and_perform_action(SAVE_AND_RETURN_BUTTON, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_continue_to_check_and_confirm_screen_button():
     find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
     if check_vaccination_date_incorrect_error_message_exists() == True:
         return True
+    else:
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_continue_to_check_and_confirm_screen_button_exists():
     return check_element_exists(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
@@ -108,38 +113,15 @@ def click_care_model_option(care_model):
     else:
         print("Invalid care model")
 
-# def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-#     element = get_covid_vaccine_xpath(vaccinetype.lower())
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
-# def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-#     element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
-# def click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-#     element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
-# def click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-#     element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-#     if element:
-#         find_element_and_perform_action(element, "click")
-#     else:
-#         print("Invalid vaccine type")
-
 def click_vaccine_type(vaccine_type):
-    element = ("label", vaccine_type)
+    element = ("label", vaccine_type, None, True)
     if check_element_exists(element) == True:
         find_element_and_perform_action(element, "click")
     else:
         print("Invalid vaccine type")
+
+def enter_care_home_details(name):
+    find_element_and_perform_action(CAREHOME_NAME_INPUT_ELEMENT, "input_text", name)
+    element = ("text", name)
+    find_element_and_perform_action(element, "click")
 

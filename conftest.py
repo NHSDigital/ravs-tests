@@ -355,6 +355,8 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         click_vaccine_type(vaccine_type2)
         set_vaccination_date(vaccination_date)
         click_care_model_option(care_model)
+        if care_model == "Care home":
+            enter_care_home_details("WHITESTONES CARE HOME")
         if (legal_mechanism) != "Patient Group Direction (PGD)":
             select_vaccinator_name_and_council(vaccinator)
         enter_vaccination_comments(vaccination_comments)

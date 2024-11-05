@@ -1,0 +1,157 @@
+{
+  "uid" : "bce34fd314b2205c",
+  "name" : "Demographics: Can search for a patient by their old name, after a name change [Joan-Robertson-19/09/1972-Poppy Roberts-9449310076-1 Canada Road, COBHAM, Surrey, LS15 4LJ]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Can search for a patient by their old name, after a name change",
+  "historyId" : "2d9e28b3527a9276ae3ad6c7f15e18b6",
+  "time" : {
+    "start" : 1730807636536,
+    "stop" : 1730807642817,
+    "duration" : 6281
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1730807636536,
+        "stop" : 1730807641397,
+        "duration" : 4861
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Joan, Robertson, and 19/09/1972",
+      "time" : {
+        "start" : 1730807641398,
+        "stop" : 1730807642024,
+        "duration" : 626
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a4582d7986ec5ee3",
+        "name" : "dev_chrome_130.0.6723.91_add_mandatory_patient_information.png",
+        "source" : "a4582d7986ec5ee3.png",
+        "type" : "image/png",
+        "size" : 45586
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730807642025,
+        "stop" : 1730807642170,
+        "duration" : 145
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient's information in the search results, showing their name: Poppy Roberts, nhs number: 9449310076, dob: 19/09/1972 and address: 1 Canada Road, COBHAM, Surrey, LS15 4LJ",
+      "time" : {
+        "start" : 1730807642171,
+        "stop" : 1730807642817,
+        "duration" : 646
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3feea04674ec08de",
+        "name" : "dev_chrome_130.0.6723.91_patient_information_page_should_be_visible.png",
+        "source" : "3feea04674ec08de.png",
+        "type" : "image/png",
+        "size" : 32036
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "f0f52c931b7f5868",
+      "name" : "log",
+      "source" : "f0f52c931b7f5868.txt",
+      "type" : "text/plain",
+      "size" : 2276
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "905edeb1254c"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 Canada Road, COBHAM, Surrey, LS15 4LJ"
+  }, {
+    "name" : "dob",
+    "value" : "19/09/1972"
+  }, {
+    "name" : "firstName",
+    "value" : "Joan"
+  }, {
+    "name" : "lastName",
+    "value" : "Robertson"
+  }, {
+    "name" : "newName",
+    "value" : "Poppy Roberts"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9449310076"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bce34fd314b2205c.json",
+  "parameterValues" : [ "1 Canada Road, COBHAM, Surrey, LS15 4LJ", "19/09/1972", "Joan", "Robertson", "Poppy Roberts", "9449310076" ]
+}
