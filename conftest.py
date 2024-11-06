@@ -151,17 +151,22 @@ def click_on_patient_name(name):
 
 def click_find_a_patient_top_nav_bar():
     click_find_a_patient_nav_link()
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_manage_users_top_nav_bar():
     click_manage_users_nav_link()
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
     click_choose_vaccine_button()
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     attach_screenshot("clicked_on_patient_" + name + "_and_clicked_choose_vaccine_button")
     return immunisation_history_records
 
 def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     click_delivery_team_radiobutton(site)
     click_vaccine_radiobutton(vaccine)
     click_vaccine_type_radiobutton(vaccine_type)
@@ -169,6 +174,7 @@ def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
 def choose_vaccine_and_vaccine_type_only(site, vaccine, vaccine_type):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     click_delivery_team_radiobutton(site)
     click_vaccine_radiobutton(vaccine)
     click_vaccine_type_radiobutton(vaccine_type)
