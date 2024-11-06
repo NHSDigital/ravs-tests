@@ -1,0 +1,314 @@
+{
+  "uid" : "38ae75269677dc4a",
+  "name" : "Record a vaccine with nhs number [3-9450144699-BIRCH HOUSE-Off-site Outreach Event-yes-today-1-yes-yes-today-1-HOPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-SDYY2-23A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "a6980f9538e77242aa9178bacf4627f1",
+  "time" : {
+    "start" : 1730879799300,
+    "stop" : 1730879932168,
+    "duration" : 132868
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'Unknown vaccine type'\n +  where None = get_patient_vaccination_dose_amount_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f3111f92020>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[3-9450144699-BIRCH HOUSE-Off-site Outreach Event-yes-today-1-yes-yes-today-1-HOPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-SDYY2-23A-19/10/2026]>>\nkwargs = {'address': '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB', 'dob': '10/1/1993', 'name': 'HOPE TULLY', 'shared_data': {'ass...05/11/2024HOPE TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Care home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 05/11/2024HOPE TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Care home', ...}\nname = 'HOPE TULLY', dob = '10/1/1993'\naddress = '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == 'Unknown vaccine type'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:147: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'Unknown vaccine type'\n +  where None = get_patient_vaccination_dose_amount_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7f3111f92020>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[3-9450144699-BIRCH HOUSE-Off-site Outreach Event-yes-today-1-yes-yes-today-1-HOPE TULLY-10/1/1993-2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB-Flu-SDYY2-23A-19/10/2026]>>\nkwargs = {'address': '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB', 'dob': '10/1/1993', 'name': 'HOPE TULLY', 'shared_data': {'ass...05/11/2024HOPE TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Care home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 05/11/2024HOPE TULLY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'SDYY2-23A', 'care_model': 'Care home', ...}\nname = 'HOPE TULLY', dob = '10/1/1993'\naddress = '2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == 'Unknown vaccine type'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:147: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Off-site Outreach Event and get patient details for 9450144699 with option 3 and choose to vaccinate with vaccine details as Flu, SDYY2-23A with 19/10/2026",
+      "time" : {
+        "start" : 1730879799301,
+        "stop" : 1730879883414,
+        "duration" : 84113
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730879883415,
+        "stop" : 1730879883739,
+        "duration" : 324
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d4942099e76a3de9",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9450144699_and_clicked_search_for_patient_button.png",
+        "source" : "d4942099e76a3de9.png",
+        "type" : "image/png",
+        "size" : 49490
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient HOPE TULLY",
+      "time" : {
+        "start" : 1730879883739,
+        "stop" : 1730879884432,
+        "duration" : 693
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f806e1d86afe3da1",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "f806e1d86afe3da1.png",
+        "type" : "image/png",
+        "size" : 49555
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-23A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1730879884433,
+        "stop" : 1730879886798,
+        "duration" : 2365
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d0b482998909a355",
+        "name" : "dev_chrome_130.0.6723.116_clicked_on_patient_HOPE TULLY_and_clicked_choose_vaccine_button.png",
+        "source" : "d0b482998909a355.png",
+        "type" : "image/png",
+        "size" : 53715
+      }, {
+        "uid" : "b5a56e3cf8a14932",
+        "name" : "dev_chrome_130.0.6723.116_selected_vaccine_Flu_and_Quadrivalent Influenza Vaccine – High Dose_and_clicked_continue_button.png",
+        "source" : "b5a56e3cf8a14932.png",
+        "type" : "image/png",
+        "size" : 73168
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730879886799,
+        "stop" : 1730879888657,
+        "duration" : 1858
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "990dd91baa153142",
+        "name" : "dev_chrome_130.0.6723.116_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "990dd91baa153142.png",
+        "type" : "image/png",
+        "size" : 73311
+      }, {
+        "uid" : "393f0f608b3338bb",
+        "name" : "dev_chrome_130.0.6723.116_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "393f0f608b3338bb.png",
+        "type" : "image/png",
+        "size" : 72255
+      }, {
+        "uid" : "657a1ec28bef9a1c",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_record_consent_button.png",
+        "source" : "657a1ec28bef9a1c.png",
+        "type" : "image/png",
+        "size" : 46053
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730879888658,
+        "stop" : 1730879889236,
+        "duration" : 578
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1c81be952c753500",
+        "name" : "dev_chrome_130.0.6723.116_before_selecting_consent_clinician.png",
+        "source" : "1c81be952c753500.png",
+        "type" : "image/png",
+        "size" : 46053
+      }, {
+        "uid" : "b4de930c897d5d13",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_vaccinate_button.png",
+        "source" : "b4de930c897d5d13.png",
+        "type" : "image/png",
+        "size" : 75077
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730879889236,
+        "stop" : 1730879891736,
+        "duration" : 2500
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8c70768d06144a6a",
+        "name" : "dev_chrome_130.0.6723.116_entered_vaccination_details.png",
+        "source" : "8c70768d06144a6a.png",
+        "type" : "image/png",
+        "size" : 52459
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient HOPE TULLY, 10/1/1993, 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730879891737,
+        "stop" : 1730879932168,
+        "duration" : 40431
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == 'Unknown vaccine type'\n +  where None = get_patient_vaccination_dose_amount_value()",
+      "statusTrace" : "AssertionError: assert None == 'Unknown vaccine type'\n +  where None = get_patient_vaccination_dose_amount_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a9c0bd6be34532f4",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_before_assertion.png",
+        "source" : "a9c0bd6be34532f4.png",
+        "type" : "image/png",
+        "size" : 48343
+      }, {
+        "uid" : "9227a5abc4ab89a0",
+        "name" : "dev_chrome_130.0.6723.116_vaccination_dose_amount.png",
+        "source" : "9227a5abc4ab89a0.png",
+        "type" : "image/png",
+        "size" : 42736
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "3b15ae1c51132dbb",
+      "name" : "log",
+      "source" : "3b15ae1c51132dbb.txt",
+      "type" : "text/plain",
+      "size" : 8453
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 13,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "71cea03c12f3"
+  }, {
+    "name" : "thread",
+    "value" : "1097-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-23A"
+  }, {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "10/1/1993"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "3"
+  }, {
+    "name" : "name",
+    "value" : "HOPE TULLY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450144699"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "38ae75269677dc4a.json",
+  "parameterValues" : [ "2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB", "today-1", "19/10/2026", "SDYY2-23A", "Off-site Outreach Event", "Flu", "yes", "10/1/1993", "yes", "3", "HOPE TULLY", "9450144699", "BIRCH HOUSE", "yes", "today-1" ]
+}
