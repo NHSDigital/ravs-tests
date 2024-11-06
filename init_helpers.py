@@ -209,13 +209,6 @@ def wait_for_element_to_appear(element):
         element = get_element_by_type(element)
     return playwright_helper_instance.wait_for_element_to_appear(element)
 
-def wait_for_element_to_disappear(element):
-    if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)
-    else:
-        element = get_element_by_type(element)
-    return playwright_helper_instance.wait_for_element_to_disappear(element)
-
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
 
@@ -233,8 +226,8 @@ def click_cell_in_row(row_name, cell_index):
 def click_link_in_row(row_name, link_index):
     return playwright_helper_instance.click_link_in_row(row_name, link_index)
 
-def get_element_by_type(locator_type, locator_value=None, name=None, exact=False):
-    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact)
+def get_element_by_type(locator_type, locator_value=None, name=None):
+    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name)
 
 def release_mouse():
     return playwright_helper_instance.release_mouse()
@@ -253,9 +246,6 @@ def date_format_with_age(date):
 
 def date_format_with_name_of_month(date):
     return datetime_helper_instance.date_format_with_name_of_month(date)
-
-def date_format_with_name_of_month_shortened(date):
-    return datetime_helper_instance.date_format_with_name_of_month_shortened(date)
 
 def get_date_value(date):
     return datetime_helper_instance.get_date_value(date)
