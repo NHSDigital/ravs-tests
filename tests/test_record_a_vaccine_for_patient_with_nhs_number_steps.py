@@ -66,6 +66,7 @@ def step_search_for_patient(shared_data):
 def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
     click_on_patient_name(name)
+    attach_screenshot("before_clicking_patient_name")
     shared_data["patient_name"] = name
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
@@ -164,10 +165,13 @@ def click_confirm_and_save_button_record_saved(shared_data):
 
 @then("the immunisation history of the patient should be updated in the patient details page")
 def immunisation_history_should_be_updated(shared_data):
+    attach_screenshot("immunisation_history_records_count_after_vaccination")
     immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
     assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
     click_delete_history_link(shared_data["chosen_vaccine"])
+    attach_screenshot("click_delete_history_link")
     click_delete_vaccination_button()
+    attach_screenshot("click_delete_vaccination_button")
     shared_data.clear()
 
 @then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
@@ -188,3 +192,5 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
         shared_data.clear()
+    attach_screenshot("patient_details_screen_with_immunisation_history")
+
