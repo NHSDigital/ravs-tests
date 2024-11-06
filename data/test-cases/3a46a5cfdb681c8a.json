@@ -1,0 +1,202 @@
+{
+  "uid" : "3a46a5cfdb681c8a",
+  "name" : "Demographics: Existing patients can be found using their optional demographic details [9693632109-Bill-Garton-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-DN18 5DW-Male]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Existing patients can be found using their optional demographic details",
+  "historyId" : "5df882005ee3f92c211579b660aaa6e5",
+  "time" : {
+    "start" : 1730911207889,
+    "stop" : 1730911216738,
+    "duration" : 8849
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1730911207889,
+        "stop" : 1730911213405,
+        "duration" : 5516
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Bill, Garton, and 23/6/1946",
+      "time" : {
+        "start" : 1730911213405,
+        "stop" : 1730911214124,
+        "duration" : 719
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7e03569acaaf7fc1",
+        "name" : "dev_edge_130.0.2849.68_add_mandatory_patient_information.png",
+        "source" : "7e03569acaaf7fc1.png",
+        "type" : "image/png",
+        "size" : 47638
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I enter the postcode DN18 5DW",
+      "time" : {
+        "start" : 1730911214124,
+        "stop" : 1730911214347,
+        "duration" : 223
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e4604649c9a150d0",
+        "name" : "dev_edge_130.0.2849.68_enter_invalid_postcode.png",
+        "source" : "e4604649c9a150d0.png",
+        "type" : "image/png",
+        "size" : 51192
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I select the gender Male",
+      "time" : {
+        "start" : 1730911214348,
+        "stop" : 1730911214503,
+        "duration" : 155
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "439376503629d4c6",
+        "name" : "dev_edge_130.0.2849.68_select_gender.png",
+        "source" : "439376503629d4c6.png",
+        "type" : "image/png",
+        "size" : 50650
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1730911214503,
+        "stop" : 1730911214599,
+        "duration" : 96
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see the patient's information in the search results, showing their name: Bill Garton, nhs number: 9693632109, dob: 23/6/1946 and address: 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW",
+      "time" : {
+        "start" : 1730911214599,
+        "stop" : 1730911216738,
+        "duration" : 2139
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4cd24fb4b7cde79f",
+        "name" : "dev_edge_130.0.2849.68_patient_information_page_should_be_visible.png",
+        "source" : "4cd24fb4b7cde79f.png",
+        "type" : "image/png",
+        "size" : 33511
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "aba87bbb33472b83",
+      "name" : "log",
+      "source" : "aba87bbb33472b83.txt",
+      "type" : "text/plain",
+      "size" : 3468
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "6ba1223c32a4"
+  }, {
+    "name" : "thread",
+    "value" : "1097-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "firstName",
+    "value" : "Bill"
+  }, {
+    "name" : "gender",
+    "value" : "Male"
+  }, {
+    "name" : "lastName",
+    "value" : "Garton"
+  }, {
+    "name" : "nhsNumber",
+    "value" : "9693632109"
+  }, {
+    "name" : "postcode",
+    "value" : "DN18 5DW"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "3a46a5cfdb681c8a.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "23/6/1946", "Bill", "Male", "Garton", "9693632109", "DN18 5DW" ]
+}
