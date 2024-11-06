@@ -1,5 +1,6 @@
 legal_mechanism = [
     "National Protocol (NP)",
-    "Patient Group Directions (PGD)",
-    "Patient Specific Directions (PSD)"
+    "Patient Group Direction (PGD)",
+    "Patient Specific Direction (PSD)",
+    "Written Instruction (WI)"
 ]

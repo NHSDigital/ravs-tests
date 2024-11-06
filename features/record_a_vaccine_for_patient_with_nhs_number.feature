@@ -32,13 +32,13 @@ Feature: Record vaccine
       | 12 | 9437540233 | ALBERT HOUSE  | Hospital Hub | yes | today-15 | yes | yes | today-7 | RANDY FOGDEN | 8/6/1961 | 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19 | SDYY2-18E | 19/10/2026 |
       | 8 | 9474376638 | BECCLES HOUSE | Care Home | yes | today-32 | yes | yes | today-30 | PHYLLIDA ZYLKO | 6/2/1968 | BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG      | Flu | SDYY2-18F | 19/10/2026 |
       | 9 | 9474405174 | BIRCH HOUSE   | Home Of Housebound Patient | yes | today | yes | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-19A | 19/10/2026 |
-      | 10 | 9474405174 | ALBERT HOUSE  | Off-site Outreach Event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-14B | 19/10/2026 |
+      | 10 | 9474405174 | ALBERT HOUSE  | Off-site Outreach Event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | SDYY2-14B | 5/5/2025 |
       | 11 | 9450134391 | BECCLES HOUSE | Vaccination Centre | yes | today-3 | yes | yes  | today | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | SDYY2-14C | 19/10/2026 |
       | 12 | 9450140960 | BIRCH HOUSE | Hospital Hub | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  SDYY2-20A | 19/10/2026 |
-      | 1 | 9450141444 | ALBERT HOUSE  | Care Home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  SDYY2-21A |        19/10/2026 |
-      | 2 | 9450141711 | BECCLES HOUSE | Home Of Housebound Patient | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | SDYY2-22A | 19/10/2026 |
+      | 1 | 9450141444 | ALBERT HOUSE  | Care Home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  SDYY2-21A |        5/5/2025 |
+      | 2 | 9450141711 | BECCLES HOUSE | Home Of Housebound Patient | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | SDYY2-22A | 5/5/2025 |
       | 3 | 9450144699 | BIRCH HOUSE   | Off-site Outreach Event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  SDYY2-23A | 19/10/2026 |
-      | 4 | 9437541817 | ALBERT HOUSE  | Off-site Outreach Event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | SDYY2-24A | 19/10/2026 |
+      | 4 | 9437541817 | ALBERT HOUSE  | Off-site Outreach Event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | SDYY2-24A | 5/5/2025 |
 
   @recordvaccine
   Scenario Outline: Record a maternity vaccine with nhs number
@@ -46,7 +46,7 @@ Feature: Record vaccine
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
     When I click choose vaccine button and choose the <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date> and click continue
-    And I assess the pregnant patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
+    And I assess the pregnant patient's <eligibility> with the details of due date as <due_date> and assessment date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
     Then I need to be able to see the patient <name>, <dob>, <address> and vaccination details on the check and confirm screen
@@ -57,7 +57,7 @@ Feature: Record vaccine
 
     Examples:
       | index | nhs_number | site   | care_model      | eligibility | due_date | assess_date | consent | vaccination | vaccination_date | name  | dob       | address                                             | chosen_vaccine            | vaccine_type | batch_number | batch_expiry_date |
-      |     4 | 9473629885 | KINGSTON HOUSE | Off-site Outreach Event | yes | today+50 | today-4     | yes     | yes | today-3  | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | Arexvy       | AREX2-01A    |        19/10/2026 |
+      |  4 | 9473629885 | KINGSTON HOUSE | Off-site Outreach Event | yes | today+50 | today-4 | yes   | yes | today-3  | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | Arexvy  | RSVTEST2    |  31/12/2025 |
       # |     0 | 9693632109 | ALBERT HOUSE  | Vaccination Centre | yes | today     | today       | yes     | yes | today    | Bill GARTON   |  23/6/1946 |           1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis                 | Adacel vaccine suspension  | ADAC1-27     |        19/10/2027 |
       # |     1 | 9693632109 | BECCLES HOUSE | Vaccination Centre | yes | today+100 | today-1     | yes     | yes | today-1  | Bill GARTON   |  23/6/1946 |           1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis                 | Boostrix-IPV suspension    | BST01-28B    |        19/10/2028 |
       # |     2 | 9470040228 | BIRCH HOUSE   | Hospital Hub       | yes | today+290 | today-1     | yes     | yes | today    | HERBERT HAAG  | 14/12/1922 |                       10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis                 | Repevax vaccine suspension | REPE11-29A   |         19/2/2029 |

@@ -117,8 +117,11 @@ class BasePlaywrightHelper:
         self.page.wait_for_load_state()
 
     def wait_for_page_to_load(self, timeout=0.1):
-        self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
-        self.page.wait_for_selector('*', timeout=timeout * 1000)
+        try:
+            self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
+            self.page.wait_for_selector('*', timeout=timeout * 1000)
+        except Exception as e:
+            print(f"Page did not fully load within {timeout} seconds. Proceeding anyway.")
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
@@ -158,6 +161,20 @@ class BasePlaywrightHelper:
             if element and element.is_visible():
                 print(f"Element with locator '{locator_or_element}' appeared on the page.")
                 return element
+
+            time.sleep(0.5)  # Check every 0.5 seconds
+
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=10):
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                print(f"Timeout: Element '{locator_or_element}' did not appear.")
+                return None
+
+            element = self.get_element(locator_or_element, wait=True)
+            if not element or not element.is_visible():
+                print(f"Element with locator '{locator_or_element}' appeared on the page.")
+                return True
 
             time.sleep(0.5)  # Check every 0.5 seconds
 
@@ -226,8 +243,12 @@ class BasePlaywrightHelper:
                     print("Checkbox is already checked.")
             elif action.lower() == "select_option":
                 if element.is_visible():
-                    element.select_option(inputValue)
-                    print(f"Selected option '{inputValue}' successfully.")
+                    if isinstance(inputValue, int):
+                            element.select_option(index=inputValue)
+                            print(f"Selected option by index '{inputValue}' successfully.")
+                    else:
+                            element.select_option(value=inputValue)
+                            print(f"Selected option by label '{inputValue}' successfully.")
             elif action.lower() == "clear":
                 element.fill('')
                 print(f"Cleared text from the element: {element}.")
@@ -292,7 +313,7 @@ class BasePlaywrightHelper:
         self.page.mouse.down()
         self.page.mouse.up()
 
-    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None):
+    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None, exact=False):
         # If locator_type_or_selector is just a string, return it as a selector
         if isinstance(locator_type_or_selector, Locator):
             return locator_type_or_selector  # Directly return the Locator object
@@ -303,23 +324,23 @@ class BasePlaywrightHelper:
 
         # Handle known locator types
         if locator_type_or_selector == "role":
-            return self.page.get_by_role(locator_value, name=name)
+            return self.page.get_by_role(locator_value, name=name, exact=exact)
         elif locator_type_or_selector == "text":
-            return self.page.get_by_text(locator_value)
+            return self.page.get_by_text(locator_value, exact=exact)
         elif locator_type_or_selector == "label":
-            return self.page.get_by_label(locator_value)
+            return self.page.get_by_label(locator_value, exact=exact)
         elif locator_type_or_selector == "placeholder":
             return self.page.get_by_placeholder(locator_value)
         elif locator_type_or_selector == "xpath":
             return self.page.locator(locator_value)
         elif locator_type_or_selector == "link":
-            return self.page.get_by_role("link", name=locator_value)
+            return self.page.get_by_role("link", name=locator_value, exact=exact)
         elif locator_type_or_selector == "title":
-            return self.page.get_by_title(locator_value)
+            return self.page.get_by_title(locator_value, exact=exact)
         elif locator_type_or_selector == "row":
-            return self.page.get_by_role("row", name=locator_value)
+            return self.page.get_by_role("row", name=locator_value, exact=exact)
         elif locator_type_or_selector == "cell":
-            return self.page.get_by_role("cell", name=locator_value)
+            return self.page.get_by_role("cell", name=locator_value, exact=exact)
         else:
             # Log a warning for unsupported locator types
             print(f"Warning: Unsupported locator type '{locator_type_or_selector}'. Assuming it is a selector.")
