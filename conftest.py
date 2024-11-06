@@ -1,5 +1,4 @@
 import pytest
-# from pages.add_vaccines_page import *
 from pages.settings_page import *
 from pages.site_vaccine_batches_page import *
 from pages.vaccines_page import *
