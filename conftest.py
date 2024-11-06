@@ -147,6 +147,7 @@ def click_find_a_patient_and_search_with_nhs_number(nhs_number):
 
 def click_on_patient_name(name):
     click_on_patient_name_search_result(name)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_find_a_patient_top_nav_bar():
     click_find_a_patient_nav_link()
