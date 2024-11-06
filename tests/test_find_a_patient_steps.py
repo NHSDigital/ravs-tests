@@ -38,6 +38,7 @@ scenarios(f'{features_directory}/find_a_patient.feature')
 
 @given('I am on the find a patient by pds details page')
 def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
+    click_continue_to_record_a_vaccination_homepage()
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
@@ -45,6 +46,7 @@ def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
     click_search_by_demographics_link()
 
 def step_select_site_and_care_model(site, care_model):
+    click_continue_to_record_a_vaccination_homepage()
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()

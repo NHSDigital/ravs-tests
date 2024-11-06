@@ -15,7 +15,7 @@ MIN_INTERVAL_BASED_WARNING = ("text", "You may have not reached the minimal inte
 def click_site_radiobutton(site):
     element = ("label", site)
     wait_for_element_to_appear(element)
-    find_element_and_perform_action(element, "check")
+    find_element_and_perform_action(element, "click")
 
 def click_back_button_choosing_vaccine_for_patient():
     wait_for_element_to_appear(BACK_ELEMENT)
@@ -30,7 +30,7 @@ def click_delivery_team_radiobutton(deliveryTeam):
         print("Delivery team not available at organization")
 
 def click_vaccine_type_radiobutton(vaccine_type):
-    element = ("label", vaccine_type, None, True)
+    element = ("label", vaccine_type)
     wait_for_element_to_appear(element)
     if check_element_exists(element, True) == True:
         find_element_and_perform_action(element, "check")

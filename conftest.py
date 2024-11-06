@@ -1,5 +1,5 @@
 import pytest
-# from pages.add_vaccines_page import *
+from pages.add_vaccines_page import *
 from pages.settings_page import *
 from pages.site_vaccine_batches_page import *
 from pages.vaccines_page import *
@@ -107,6 +107,46 @@ def navigate_to_ravs(request):
     navigate_to_ravs_login_page(url)
     return True
 
+# Fixture for clicking back button
+@pytest.fixture(scope='function')
+def click_back_button_recording_consent(request):
+    click_back_button()
+
+def set_vaccinator_location(site, care_model):
+    select_site(site)
+    select_care_model(care_model)
+    if care_model == "Care Home":
+        enter_carehome_name("WHITESTONES CARE HOME")
+    click_continue_to_record_a_vaccination_homepage()
+
+@pytest.fixture(scope='function')
+def login_and_navigate_to_homepage(request, navigate_and_login):
+    click_continue_to_record_a_vaccination_homepage()
+
+# Fixture for logging in and navigating to appointments open first patient
+@pytest.fixture(scope='function')
+def login_and_navigate_to_appointments_open_first_patient(request, navigate_and_login):
+    attach_screenshot("user_has_logged_in")
+    site = "ST JOHN'S HOUSE"
+    care_model = "Vaccination Centre"
+    select_site(site)
+    attach_screenshot("user_has_selected_site")
+    select_care_model(care_model)
+    if care_model == "Care Home":
+        enter_carehome_name("WHITESTONES CARE HOME")
+    attach_screenshot("user_has_selected_site")
+    attach_screenshot("user_has_selected_care_model")
+    click_continue_to_record_a_vaccination_homepage()
+    attach_screenshot("user_has_clicked_continue_to_ravs_homepage")
+    current_date = datetime.now()
+    fromDate = datetime(2023, 12, 1)
+    set_from_date(fromDate)
+    click_active_from_date()
+    toDate = datetime.today()
+    set_to_date(toDate)
+    click_active_to_date_today()
+    click_first_patient()
+
 # Fixture for logging in and navigating to find a patient
 @pytest.fixture(scope='function')
 def login_and_navigate_to_find_a_patient(request):
@@ -202,13 +242,13 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
     # If the batch does NOT currently exist, add a batch
     # This adds an active batch, so we don't need to do further checks
     click_view_product(site, vaccine_type)
-    if not check_batch_number_and_expiry_date_exists(batch_number, expiry_date, True):
+    if not check_batch_number_exists(batch_number, True):
         add_vaccine_type_batch(batch_number, expiry_date)
         return True
 
     # If we get this far, the batch does exists but is currently INACTIVE
     # This reactivates the batch
-    if not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
+    if not check_batch_number_is_active(batch_number, True):
         click_reactivate_batch_link(batch_number)
         click_reactivate_batch_confirmation_button()
 
@@ -219,29 +259,30 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     # vaccines_choose_site_page
     enter_site_name(site)
     select_site_from_list(site)
-    click_continue_to_add_vaccine_button()
+    click_continue_button()
 
     # choose_vaccine_page
-    click_vaccine_radiobutton_on_add_vaccine_screen(vaccine)
-    click_vaccine_type_radiobutton_on_add_vaccine_screen(vaccine_type)
-    click_continue_to_add_batch_button()
+    click_vaccine_radiobutton(vaccine)
+    click_vaccine_type_radiobutton(vaccine_type)
+    click_continue_button()
 
     # vaccines_add_batch_page
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
-    click_continue_to_confirm_batch_details_button()
+    click_continue_button()
 
     # vaccines_check_and_confirm_page
-    click_confirm_add_vaccine_and_batch_button()
+    click_confirm_button()
 
 def add_vaccine_type_batch(batch_number, expiry_date):
     click_add_batch_link()
+    # vaccines_add_batch_page
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
-    click_continue_to_confirm_batch_details_button()
+    click_continue_button()
 
     # vaccines_check_and_confirm_page
-    click_confirm_add_vaccine_and_batch_button()
+    click_confirm_button()
 
 def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, due_date, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
 
@@ -283,11 +324,9 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
     attach_screenshot("clicked_continue_to_record_consent_button")
 
 
-def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):
+def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
-
-    if (legal_mechanism) != "Patient Group Direction (PGD)":
-        select_consent_clinician_with_name_and_council(consent_clinician)
+    select_consent_clinician_with_name_and_council(consent_clinician)
 
     if consent_decision.lower() == 'yes':
         click_yes_to_consent()
@@ -308,17 +347,22 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, no_vaccination_reason=None):
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
 
-        click_vaccine_type(vaccine_type2)
+        if "covid" in (vaccine).lower():
+            click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+        elif "flu" in (vaccine).lower():
+            click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+        elif "rsv" in (vaccine).lower():
+            click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+        elif "pertussis" in (vaccine).lower():
+            click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccine_type2)
+
         set_vaccination_date(vaccination_date)
         click_care_model_option(care_model)
-        if care_model == "Care home":
-            enter_care_home_details("WHITESTONES CARE HOME")
-        if (legal_mechanism) != "Patient Group Direction (PGD)":
-            select_vaccinator_name_and_council(vaccinator)
+        select_vaccinator_name_and_council(vaccinator)
         enter_vaccination_comments(vaccination_comments)
         select_vaccination_site(vaccination_site)
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date

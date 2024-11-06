@@ -1,4 +1,3 @@
-from datetime import datetime
 from init_helpers import *
 import re
 
@@ -7,17 +6,12 @@ ADD_BATCH_LINK = ("(//a[text()='Add batch'])[1]")
 def click_add_batch_link():
     find_element_and_perform_action(ADD_BATCH_LINK, "click")
 
-def check_batch_number_and_expiry_date_exists(batch_number, expiry_date, wait):
-    formatted_expiry_date = date_format_with_name_of_month_shortened(expiry_date)
-    element = (f"//tr[td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']"
-               f" and td[normalize-space(text()) = '{formatted_expiry_date}']]")
+def check_batch_number_exists(batch_number, wait):
+    element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']")
     return check_element_exists(element, wait)
 
-def check_batch_number_is_active_with_date(batch_number, expiry_date, wait):
-    formatted_expiry_date = date_format_with_name_of_month_shortened(expiry_date)
-    element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']"
-               f"/following-sibling::td['{formatted_expiry_date}']"
-               f"/following-sibling::td/strong[not(contains(., 'Inactive'))]")
+def check_batch_number_is_active(batch_number, wait):
+    element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']/following-sibling::td/strong[not(contains(.,'Inactive'))]")
     return check_element_exists(element, wait)
 
 def click_reactivate_batch_link(batch_number):
