@@ -1,25 +1,43 @@
+import time
 from init_helpers import *
 from test_data.get_values_from_models import get_covid_vaccine_xpath, get_flu_vaccine_xpath
 
-YES_VACCINATED_RADIO_BUTTON=("#VaccinatedYes")
-NO_VACCINATED_RADIO_BUTTON=("#VaccinatedNo")
-CONSENT_TYPE_DROPDOWN_ELEMENT = ("//select[@name='ConsentTypeId']")
-VACCINATOR_DROPDOWN_ELEMENT = ("#VaccinatingClinicianId")
-SAVE_AND_RETURN_BUTTON=("//button[text()='Save and return']")
-CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON=("//button[text()='Continue']")
-REQUIRED_ALERT_BUTTON = ("//span[text()='Required']")
-NAME_OF_PERSON_CONSENTING_INPUT_ELEMENT = ("#NameOfPersonConsenting")
-RELATION_TO_PATIENT_INPUT_ELEMENT = ("#RelationshipToPatient")
-RESPONSIBLE_CLINICIAN_INPUT_ELEMENT = ("#ConsentResponsibleClinicianId")
-NO_VACCINATION_REASON_DROPDOWN_ELEMENT = ("#NoVaccinationReasonId")
-CONSENT_GIVEN_BY_DROPDOWN_ELEMENT = ("#ConsentTypeId")
-VACCINATION_DATE_INPUT_ELEMENT = ("#VaccinationDate")
-VACCINATION_COMMENTS_ELEMENT = ("#VaccinationComments")
-VACCINATION_SITE_DROPDOWN_ELEMENT = ("#VaccinationSiteId")
-BATCH_NUMBER_DROPDOWN_ELEMENT = ("#BatchNumber")
-BATCH_EXPIRY_DATE_READONLY_ELEMENT = ("#BatchExpiryDate")
-DOSE_AMOUNT_READONLY_ELEMENT = ("#DoseAmount")
-VACCINATION_DATE_INCORRECT_ERROR = ("#VaccinationDateError")
+YES_VACCINATED_RADIO_BUTTON=("label", "Yes")
+NO_VACCINATED_RADIO_BUTTON=("label", "No")
+VACCINATOR_DROPDOWN_ELEMENT = ("label","Vaccinator")
+SAVE_AND_RETURN_BUTTON=("role", "button", "Save and return")
+CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON=("role", "button", "Continue")
+NO_VACCINATION_REASON_DROPDOWN_ELEMENT = ("label", "No vaccination reason")
+VACCINATION_DATE_INPUT_ELEMENT = ("label", "Vaccination Date")
+VACCINATION_COMMENTS_ELEMENT = ("label", "Comments (Optional)")
+VACCINATION_SITE_DROPDOWN_ELEMENT = ("label", "Vaccination site")
+BATCH_NUMBER_DROPDOWN_ELEMENT = ("label", "Batch number")
+BATCH_EXPIRY_DATE_READONLY_ELEMENT = ("label", "Batch expiry date")
+DOSE_AMOUNT_READONLY_ELEMENT = ("label", "Dose amount (ml)")
+VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_TEXT = ("text", "Error: Date cannot be older than a year")
+VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_LINK = ("text", "Date cannot be older than a year")
+VACCINATED_YES_OR_NO_SELECTION_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select 'Yes' if you have vaccinated the patient, or 'No' if you haven't")
+VACCINATED_YES_OR_NO_SELECTION_MISSING_ERROR_MESSAGE_LINK = ("text", "Select 'Yes' if you have vaccinated the patient, or 'No' if you haven't")
+VACCINATION_DATE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select a vaccination date")
+VACCINATION_DATE_MISSING_ERROR_MESSAGE_LINK = ("text", "Select a vaccination date")
+VACCINATOR_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select the vaccinator")
+VACCINATOR_MISSING_ERROR_MESSAGE_LINK = ("text", "Select the vaccinator")
+VACCINATION_LOCATION_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select where the vaccination is taking place")
+VACCINATION_LOCATION_MISSING_ERROR_MESSAGE_LINK = ("text", "Select where the vaccination is taking place")
+VACCINE_IS_REQUIRED_ERROR_MESSAGE_TEXT = ("text", "Error: Vaccine is required")
+VACCINE_IS_REQUIRED_ERROR_MESSAGE_LINK = ("text", "Vaccine is required")
+VACCINATION_SITE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select a vaccination site")
+VACCINATION_SITE_MISSING_ERROR_MESSAGE_LINK = ("text", "Select a vaccination site")
+BATCH_NUMBER_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select a batch number")
+BATCH_NUMBER_MISSING_ERROR_MESSAGE_LINK = ("text", "Select a batch number")
+BATCH_NUMBER_EXPIRY_DATE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Enter a batch expiry date")
+BATCH_NUMBER_EXPIRY_DATE_MISSING_ERROR_MESSAGE_LINK = ("text", "Enter a batch expiry date")
+BATCH_DOSE_AMOUNT_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Dose amount (ml) is required")
+BATCH_DOSE_AMOUNT_MISSING_ERROR_MESSAGE_LINK = ("text", "Dose amount (ml) is required")
+YELLOW_CARD_MESSAGE_LINK = ("role", "link", "Yellow Card Report (opens a")
+POST_VACCINATION_MESSAGE_LINK = ("role", "link", "COVID-19 vaccinations on NHS.")
+CAREHOME_NAME_INPUT_ELEMENT = ("#CareHomeName")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def get_batch_expiry_date_value():
     return find_element_and_perform_action(BATCH_EXPIRY_DATE_READONLY_ELEMENT, "get_text")
@@ -53,88 +71,60 @@ def select_vaccinator_name_and_council(nameandcouncil):
     if check_element_enabled(VACCINATOR_DROPDOWN_ELEMENT):
         find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "select_option", nameandcouncil)
 
+def select_vaccination_location(location):
+    element = ("label", location)
+    find_element_and_perform_action(element, "check")
+
 def select_vaccination_site(site):
     find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
 
 def select_batch_number(batchNumber):
-    #find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "click")
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
-
-def select_consent_given_by_from_dropdown(givenBy):
-    find_element_and_perform_action(CONSENT_GIVEN_BY_DROPDOWN_ELEMENT, "select_option", givenBy)
-
-def select_consentType(consentType):
-    find_element_and_perform_action(CONSENT_TYPE_DROPDOWN_ELEMENT, "select_option", consentType)
 
 def select_reason_for_no_vaccination(reason):
     find_element_and_perform_action(NO_VACCINATION_REASON_DROPDOWN_ELEMENT, "select_option", reason)
 
 def click_save_and_return_button_on_record_vaccinated_page():
     find_element_and_perform_action(SAVE_AND_RETURN_BUTTON, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_continue_to_check_and_confirm_screen_button():
+    wait_for_element_to_appear(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
+    time.sleep(2)
     find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
-    if check_vaccination_date_incorrect_error_exists() == True:
+    if check_vaccination_date_incorrect_error_message_exists() == True:
         return True
+    else:
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_continue_to_check_and_confirm_screen_button_exists():
     return check_element_exists(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
 
-def check_required_alert_exists(wait):
-    return check_element_exists(REQUIRED_ALERT_BUTTON, wait)
+def check_vaccination_date_incorrect_error_message_exists():
+    return check_element_exists(VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_TEXT, False)
 
-def check_name_of_person_consenting_input_element_exists(wait):
-    return check_element_exists(NAME_OF_PERSON_CONSENTING_INPUT_ELEMENT, wait)
+def check_vaccination_date_incorrect_error_message_link_exists():
+    return check_element_exists(VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_LINK, False)
 
-def check_vaccination_date_incorrect_error_exists():
-    return check_element_exists(VACCINATION_DATE_INCORRECT_ERROR, False)
-
-def check_relation_to_parent_input_element_exists(wait):
-    return check_element_exists(RELATION_TO_PATIENT_INPUT_ELEMENT, wait)
-
-def check_clinician_details_input_element_exists(wait):
-    return check_element_exists(RESPONSIBLE_CLINICIAN_INPUT_ELEMENT, wait)
-
-def enter_person_consenting_details(person):
-    find_element_and_perform_action(NAME_OF_PERSON_CONSENTING_INPUT_ELEMENT, "input_text", person)
-
-def enter_relationship_to_patient(relationship):
-    find_element_and_perform_action(RELATION_TO_PATIENT_INPUT_ELEMENT, "input_text", relationship)
-
-def enter_clinician_details(clinician):
-    find_element_and_perform_action(RESPONSIBLE_CLINICIAN_INPUT_ELEMENT, "input_text", clinician)
+def click_vaccination_date_incorrect_error_message_link():
+    return find_element_and_perform_action(VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_LINK, "click")
 
 def click_care_model_option(care_model):
-    element = (f'//input[@name="CareModelId"]/following-sibling::label[text()="{care_model}"]')
+    element = ("label", care_model)
     if check_element_exists(element, False):
         find_element_and_perform_action(element, "click")
     else:
-        print("Invalid vaccine type")
+        print("Invalid care model")
 
-def click_covid_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = get_covid_vaccine_xpath(vaccinetype.lower())
-    if element:
+def click_vaccine_type(vaccine_type):
+    element = ("label", vaccine_type, None, True)
+    if check_element_exists(element) == True:
         find_element_and_perform_action(element, "click")
     else:
         print("Invalid vaccine type")
 
-def click_flu_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
+def enter_care_home_details(name):
+    find_element_and_perform_action(CAREHOME_NAME_INPUT_ELEMENT, "input_text", name)
+    element = ("text", name)
+    find_element_and_perform_action(element, "click")
 
-def click_rsv_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
-
-def click_pertussis_vaccine_type_radiobutton_choose_vaccine_for_patient_on_vaccinated_page(vaccinetype):
-    element = f"//input[@name='VaccineId']/following-sibling::label[text()='{vaccinetype}']"
-    if element:
-        find_element_and_perform_action(element, "click")
-    else:
-        print("Invalid vaccine type")
