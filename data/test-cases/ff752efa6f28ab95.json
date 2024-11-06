@@ -1,0 +1,394 @@
+{
+  "uid" : "ff752efa6f28ab95",
+  "name" : "Record a vaccine with nhs number [11-9450134391-BECCLES HOUSE-Vaccination Centre-yes-today-3-yes-yes-today-MARIAN PIESSE-17/7/1994-2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT-Flu-SDYY2-14C-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "8c38b547f0a063f1c3e7ed09f57cb417",
+  "time" : {
+    "start" : 1730886979164,
+    "stop" : 1730887009780,
+    "duration" : 30616
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BECCLES HOUSE and Vaccination Centre and get patient details for 9450134391 with option 11 and choose to vaccinate with vaccine details as Flu, SDYY2-14C with 19/10/2026",
+      "time" : {
+        "start" : 1730886979164,
+        "stop" : 1730886979886,
+        "duration" : 722
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730886979887,
+        "stop" : 1730886980342,
+        "duration" : 455
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d3ed085682ecc9e2",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9450134391_and_clicked_search_for_patient_button.png",
+        "source" : "d3ed085682ecc9e2.png",
+        "type" : "image/png",
+        "size" : 48599
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARIAN PIESSE",
+      "time" : {
+        "start" : 1730886980342,
+        "stop" : 1730886980563,
+        "duration" : 221
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "76b235d40475bc8d",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "76b235d40475bc8d.png",
+        "type" : "image/png",
+        "size" : 48492
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-14C with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1730886980563,
+        "stop" : 1730886985397,
+        "duration" : 4834
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "51bda89125118aa8",
+        "name" : "dev_chrome_130.0.6723.116_clicked_on_patient_MARIAN PIESSE_and_clicked_choose_vaccine_button.png",
+        "source" : "51bda89125118aa8.png",
+        "type" : "image/png",
+        "size" : 80373
+      }, {
+        "uid" : "311c03e02e9efe7a",
+        "name" : "dev_chrome_130.0.6723.116_selected_vaccine_Flu_and_Quadrivalent Influenza Vaccine_and_clicked_continue_button.png",
+        "source" : "311c03e02e9efe7a.png",
+        "type" : "image/png",
+        "size" : 73120
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-3 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730886985397,
+        "stop" : 1730886987246,
+        "duration" : 1849
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "eced51c1e60558e9",
+        "name" : "dev_chrome_130.0.6723.116_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "eced51c1e60558e9.png",
+        "type" : "image/png",
+        "size" : 72215
+      }, {
+        "uid" : "1c90317d5861fd89",
+        "name" : "dev_chrome_130.0.6723.116_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "1c90317d5861fd89.png",
+        "type" : "image/png",
+        "size" : 72439
+      }, {
+        "uid" : "17329fa053c039dc",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_record_consent_button.png",
+        "source" : "17329fa053c039dc.png",
+        "type" : "image/png",
+        "size" : 42963
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730886987247,
+        "stop" : 1730886988739,
+        "duration" : 1492
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3b1e5713398c40c1",
+        "name" : "dev_chrome_130.0.6723.116_before_selecting_consent_clinician.png",
+        "source" : "3b1e5713398c40c1.png",
+        "type" : "image/png",
+        "size" : 42963
+      }, {
+        "uid" : "157e4cea0b365fb2",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_vaccinate_button.png",
+        "source" : "157e4cea0b365fb2.png",
+        "type" : "image/png",
+        "size" : 60527
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730886988740,
+        "stop" : 1730886992748,
+        "duration" : 4008
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "391f1fa2470036a7",
+        "name" : "dev_chrome_130.0.6723.116_entered_vaccination_details.png",
+        "source" : "391f1fa2470036a7.png",
+        "type" : "image/png",
+        "size" : 50847
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient MARIAN PIESSE, 17/7/1994, 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730886992748,
+        "stop" : 1730886993480,
+        "duration" : 732
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d001c12bcc388a4b",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_before_assertion.png",
+        "source" : "d001c12bcc388a4b.png",
+        "type" : "image/png",
+        "size" : 51246
+      }, {
+        "uid" : "2d3c065c1e30c706",
+        "name" : "dev_chrome_130.0.6723.116_vaccination_dose_amount.png",
+        "source" : "2d3c065c1e30c706.png",
+        "type" : "image/png",
+        "size" : 51246
+      }, {
+        "uid" : "5210769dc94206ca",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_after_assertion.png",
+        "source" : "5210769dc94206ca.png",
+        "type" : "image/png",
+        "size" : 51246
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1730886993480,
+        "stop" : 1730886994236,
+        "duration" : 756
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7213e8a652b6e17d",
+        "name" : "dev_chrome_130.0.6723.116_patient_details_screen_with_immunisation_history.png",
+        "source" : "7213e8a652b6e17d.png",
+        "type" : "image/png",
+        "size" : 51246
+      }, {
+        "uid" : "7dccf5d4daeeeb43",
+        "name" : "dev_chrome_130.0.6723.116_before_assert_record_saved.png",
+        "source" : "7dccf5d4daeeeb43.png",
+        "type" : "image/png",
+        "size" : 34843
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730886994237,
+        "stop" : 1730886994596,
+        "duration" : 359
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4c3a1b5c11dbe6d5",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9450134391_and_clicked_search_for_patient_button.png",
+        "source" : "4c3a1b5c11dbe6d5.png",
+        "type" : "image/png",
+        "size" : 37549
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARIAN PIESSE",
+      "time" : {
+        "start" : 1730886994596,
+        "stop" : 1730886995294,
+        "duration" : 698
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "50d0b359bf0022a1",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "50d0b359bf0022a1.png",
+        "type" : "image/png",
+        "size" : 37589
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1730886995294,
+        "stop" : 1730887009780,
+        "duration" : 14486
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "3739c0cf98018bd8",
+      "name" : "log",
+      "source" : "3739c0cf98018bd8.txt",
+      "type" : "text/plain",
+      "size" : 11888
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 18,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "00d992ad6ccd"
+  }, {
+    "name" : "thread",
+    "value" : "1100-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-3"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-14C"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "17/7/1994"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "11"
+  }, {
+    "name" : "name",
+    "value" : "MARIAN PIESSE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450134391"
+  }, {
+    "name" : "site",
+    "value" : "BECCLES HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ff752efa6f28ab95.json",
+  "parameterValues" : [ "2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT", "today-3", "19/10/2026", "SDYY2-14C", "Vaccination Centre", "Flu", "yes", "17/7/1994", "yes", "11", "MARIAN PIESSE", "9450134391", "BECCLES HOUSE", "yes", "today" ]
+}

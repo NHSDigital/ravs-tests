@@ -154,6 +154,23 @@ class BaseDatetimeHelper:
         year = parsed_date.year
         return f"{day} {month} {year}"
 
+    @staticmethod
+    def date_format_with_name_of_month_shortened(date_str):
+        try:
+            # Try parsing the date as '%d/%m/%Y'
+            parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
+        except ValueError:
+            try:
+                # If parsing fails, try parsing as '%m/%d/%Y'
+                parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
+            except ValueError:
+                # If parsing as both formats fails, return the original string
+                return date_str.strftime("%d %b %Y")
+
+        day = parsed_date.day
+        month = parsed_date.strftime('%b')
+        year = parsed_date.year
+        return f"{day} {month} {year}"
 
 class DatetimeHelper(BaseDatetimeHelper):
     def __init__(self):

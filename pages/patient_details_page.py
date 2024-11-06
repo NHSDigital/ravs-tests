@@ -12,39 +12,44 @@ COLLAPSED_RSV_BUTTON = ("(//button[@class='accordion-button collapsed'])[3]")
 EXPANDED_PERTUSSIS_BUTTON = ("(//button[@class='accordion-button'])[4]")
 COLLAPSED_PERTUSSIS_BUTTON = ("(//button[@class='accordion-button collapsed'])[4]")
 CHECK_IN_AND_RETURN_BUTTON=("//button[text()='Check in and return']")
-CHOOSE_VACCINE_BUTTON=("//button[text()='Choose Vaccine']")
+CHOOSE_VACCINE_BUTTON=("role", "button", "Choose Vaccine")
 PATIENT_DID_NOT_SHOW_BUTTON=("//button[text()='Patient did not show']")
-BACK_BUTTON = ("//a[@href='/appointment']")
-VACCINATION_HISTORY_LABEL = ("//h3[text()='Vaccination History']")
+BACK_BUTTON_ON_PATIENT_DETAILS_PAGE = ("link", "Back")
 SHOW_ALL_BUTTON_COVID_RECORDS = ("(//button[contains(text(), 'Show all')])[1]")
 SHOW_ALL_BUTTON_FLU_RECORDS = ("(//button[contains(text(), 'Show all')])[2]")
-EDIT_HISTORY_BUTTON = ("//span[text()='Edit']")
-DELETE_HISTORY_BUTTON = ("//span[text()='Delete']")
-VACCINE_SUMMARY_LIST_ROWS_ELEMENTS = ("//dl[@class='nhsuk-summary-list mb-1']")
-COVID_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='COVID-19'])"
-FLU_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Flu'])"
-RSV_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Respiratory syncytial virus (RSV)'])"
-PERTUSSIS_HISTORY_ELEMENT = "(//dt[text()='Vaccine programme']/following-sibling::dd/div[text()='Pertussis'])"
+EDIT_HISTORY_BUTTON = ("xpath", "//span[text()='Edit']")
+DELETE_HISTORY_BUTTON = ("xpath", "//span[text()='Delete']")
+VACCINE_SUMMARY_LIST_ROWS_ELEMENTS = ("xpath", "//dl[@class='nhsuk-summary-list mb-1']")
+COVID_HISTORY_ELEMENT = ("text", "COVID-19")
+FLU_HISTORY_ELEMENT = ("text", "Flu")
+RSV_HISTORY_ELEMENT = ("text", "Respiratory syncytial virus (RSV)")
+PERTUSSIS_HISTORY_ELEMENT = ("text", "Pertussis")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def check_covid_history_element_exists():
+    wait_for_element_to_appear(COVID_HISTORY_ELEMENT)
     return check_element_exists(COVID_HISTORY_ELEMENT)
 
 def check_flu_history_element_exists():
+    wait_for_element_to_appear(FLU_HISTORY_ELEMENT)
     return check_element_exists(FLU_HISTORY_ELEMENT)
 
 def check_rsv_history_element_exists():
+    wait_for_element_to_appear(RSV_HISTORY_ELEMENT)
     return check_element_exists(RSV_HISTORY_ELEMENT)
 
 def check_pertussis_history_element_exists():
+    wait_for_element_to_appear(PERTUSSIS_HISTORY_ELEMENT)
     return check_element_exists(PERTUSSIS_HISTORY_ELEMENT)
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
-
     count = 0
-
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(2)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
-    element = (f"//h3[contains(text(), '{chosen_vaccine}')]/following-sibling::div/p[contains(text(), 'Displaying')]")
+    element = ("xpath", f"//h3[contains(text(), '{chosen_vaccine}')]/following-sibling::div/p[contains(text(), 'Displaying')]")
+    wait_for_element_to_appear(element)
     if check_element_exists(element, True):
         display_text = find_element_and_perform_action(element, "get_text")
 
@@ -57,12 +62,16 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
         return 0
 
 def get_immunisation_history_details_of_vaccine(index):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     element_selector = f"(//dl[@class='nhsuk-summary-list mb-1'])[{index}]"
+    element = ("xpath", element_selector)
+    wait_for_element_to_appear(element)
     vaccine_summary_list_rows_elements = find_elements(element_selector)
     return vaccine_summary_list_rows_elements
 
 def get_vaccine_program_details(history_index):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     vaccine_summary_list_rows_elements = get_immunisation_history_details_of_vaccine(history_index)
     if vaccine_summary_list_rows_elements:
         vaccine_program = vaccine_summary_list_rows_elements[0].query_selector('.nhsuk-summary-list__row:nth-child(1) .nhsuk-summary-list__value').inner_text()
@@ -105,8 +114,6 @@ def get_vaccine_data_source_details(history_index):
         return data_source
     else:
         return None
-def check_vaccination_history_label_exists():
-    return check_element_exists(VACCINATION_HISTORY_LABEL, True)
 
 def click_show_all_covid_history_button():
     find_element_and_perform_action(SHOW_ALL_BUTTON_COVID_RECORDS, "click")
@@ -171,13 +178,17 @@ def click_check_in_and_return_button():
     find_element_and_perform_action(CHECK_IN_AND_RETURN_BUTTON, "click")
 
 def click_choose_vaccine_button():
+    wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     find_element_and_perform_action(CHOOSE_VACCINE_BUTTON, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_patient_did_not_show_button():
     find_element_and_perform_action(PATIENT_DID_NOT_SHOW_BUTTON, "click")
 
-def click_back_button():
-    find_element_and_perform_action(BACK_BUTTON, "click")
+def click_back_button_on_patient_details_page():
+    wait_for_element_to_appear(BACK_BUTTON_ON_PATIENT_DETAILS_PAGE)
+    find_element_and_perform_action(BACK_BUTTON_ON_PATIENT_DETAILS_PAGE, "click")
 
 def check_choose_vaccine_button_exists():
+    wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(CHOOSE_VACCINE_BUTTON, True)

@@ -1,0 +1,394 @@
+{
+  "uid" : "e12565a775f119c7",
+  "name" : "Record a vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-SDYY2-01-19/10/2025]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "5e6d4bc262db1980cad4a6ed13de65db",
+  "time" : {
+    "start" : 1730886458532,
+    "stop" : 1730886601830,
+    "duration" : 143298
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Vaccination Centre and get patient details for 9693632109 with option 0 and choose to vaccinate with vaccine details as COVID-19, SDYY2-01 with 19/10/2025",
+      "time" : {
+        "start" : 1730886458532,
+        "stop" : 1730886574178,
+        "duration" : 115646
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730886574178,
+        "stop" : 1730886574513,
+        "duration" : 335
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9d2415d1863667b9",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "9d2415d1863667b9.png",
+        "type" : "image/png",
+        "size" : 49611
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1730886574514,
+        "stop" : 1730886575194,
+        "duration" : 680
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8bb80f62888ea792",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "8bb80f62888ea792.png",
+        "type" : "image/png",
+        "size" : 49643
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, SDYY2-01 with 19/10/2025 and click continue",
+      "time" : {
+        "start" : 1730886575195,
+        "stop" : 1730886580535,
+        "duration" : 5340
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ce9baeedfcc02bab",
+        "name" : "dev_chrome_130.0.6723.116_clicked_on_patient_Bill GARTON_and_clicked_choose_vaccine_button.png",
+        "source" : "ce9baeedfcc02bab.png",
+        "type" : "image/png",
+        "size" : 81145
+      }, {
+        "uid" : "9b8baffe79950bf1",
+        "name" : "dev_chrome_130.0.6723.116_selected_vaccine_COVID-19_and_Spikevax JN.1_and_clicked_continue_button.png",
+        "source" : "9b8baffe79950bf1.png",
+        "type" : "image/png",
+        "size" : 73867
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730886580535,
+        "stop" : 1730886581529,
+        "duration" : 994
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6f7944ad409e30f8",
+        "name" : "dev_chrome_130.0.6723.116_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "6f7944ad409e30f8.png",
+        "type" : "image/png",
+        "size" : 71068
+      }, {
+        "uid" : "a1e0641e059f92a0",
+        "name" : "dev_chrome_130.0.6723.116_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "a1e0641e059f92a0.png",
+        "type" : "image/png",
+        "size" : 48632
+      }, {
+        "uid" : "2e3fa6be406de7b3",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_record_consent_button.png",
+        "source" : "2e3fa6be406de7b3.png",
+        "type" : "image/png",
+        "size" : 44152
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730886581530,
+        "stop" : 1730886582015,
+        "duration" : 485
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "776277a257bce9cf",
+        "name" : "dev_chrome_130.0.6723.116_before_selecting_consent_clinician.png",
+        "source" : "776277a257bce9cf.png",
+        "type" : "image/png",
+        "size" : 44152
+      }, {
+        "uid" : "bd546793ee1d1e79",
+        "name" : "dev_chrome_130.0.6723.116_clicked_continue_to_vaccinate_button.png",
+        "source" : "bd546793ee1d1e79.png",
+        "type" : "image/png",
+        "size" : 73346
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730886582015,
+        "stop" : 1730886585497,
+        "duration" : 3482
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9e4727a9b8ceee74",
+        "name" : "dev_chrome_130.0.6723.116_entered_vaccination_details.png",
+        "source" : "9e4727a9b8ceee74.png",
+        "type" : "image/png",
+        "size" : 49857
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient Bill GARTON, 23/6/1946, 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730886585497,
+        "stop" : 1730886586195,
+        "duration" : 698
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4205e54048fd24bd",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_before_assertion.png",
+        "source" : "4205e54048fd24bd.png",
+        "type" : "image/png",
+        "size" : 49814
+      }, {
+        "uid" : "2c952c7f4a06eb92",
+        "name" : "dev_chrome_130.0.6723.116_vaccination_dose_amount.png",
+        "source" : "2c952c7f4a06eb92.png",
+        "type" : "image/png",
+        "size" : 49887
+      }, {
+        "uid" : "948ea18b3024a023",
+        "name" : "dev_chrome_130.0.6723.116_check_and_confirm_screen_after_assertion.png",
+        "source" : "948ea18b3024a023.png",
+        "type" : "image/png",
+        "size" : 49887
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1730886586195,
+        "stop" : 1730886586953,
+        "duration" : 758
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "577aa5df001831c4",
+        "name" : "dev_chrome_130.0.6723.116_patient_details_screen_with_immunisation_history.png",
+        "source" : "577aa5df001831c4.png",
+        "type" : "image/png",
+        "size" : 49887
+      }, {
+        "uid" : "146516e13c29bedc",
+        "name" : "dev_chrome_130.0.6723.116_before_assert_record_saved.png",
+        "source" : "146516e13c29bedc.png",
+        "type" : "image/png",
+        "size" : 34843
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730886586953,
+        "stop" : 1730886587261,
+        "duration" : 308
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f91945f820d92379",
+        "name" : "dev_chrome_130.0.6723.116_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "f91945f820d92379.png",
+        "type" : "image/png",
+        "size" : 37713
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1730886587261,
+        "stop" : 1730886587926,
+        "duration" : 665
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8b1a95ef41d72f26",
+        "name" : "dev_chrome_130.0.6723.116_before_clicking_patient_name.png",
+        "source" : "8b1a95ef41d72f26.png",
+        "type" : "image/png",
+        "size" : 37758
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1730886587926,
+        "stop" : 1730886601830,
+        "duration" : 13904
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "211520f36678b09",
+      "name" : "log",
+      "source" : "211520f36678b09.txt",
+      "type" : "text/plain",
+      "size" : 11868
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 18,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "00d992ad6ccd"
+  }, {
+    "name" : "thread",
+    "value" : "1100-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "assess_date",
+    "value" : "today"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2025"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-01"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "0"
+  }, {
+    "name" : "name",
+    "value" : "Bill GARTON"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9693632109"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e12565a775f119c7.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2025", "SDYY2-01", "Vaccination Centre", "COVID-19", "yes", "23/6/1946", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
+}

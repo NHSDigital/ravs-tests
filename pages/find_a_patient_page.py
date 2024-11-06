@@ -12,6 +12,7 @@ RECORD_SAVED_DIALOGUE = ("text", "Record saved")
 CLOSE_RECORD_SAVED_DIALOGUE_BUTTON = ("text", "Close")
 SUCCESSFULLY_SAVED_MESSAGE = ("text", "You successfully saved")
 VIEW_RECORD_LINK = ("text", "View record")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 # Shared
 NHS_NUMBER_INPUT = ("label", "Enter a 10 digit NHS number")
@@ -82,7 +83,7 @@ def enter_dob(dob):
 def select_optional_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
     wait_for_element_to_appear(GENDER_OPTIONAL_SELECT)
-    find_element_and_perform_action(GENDER_OPTIONAL_SELECT, "select_option", str(gender_value))
+    find_element_and_perform_action(GENDER_OPTIONAL_SELECT, "select_option", gender_value)
 
 def enter_optional_postcode(postcode):
     wait_for_element_to_appear(POSTCODE_OPTIONAL_INPUT)
@@ -91,7 +92,7 @@ def enter_optional_postcode(postcode):
 def select_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
     wait_for_element_to_appear(GENDER_SELECT)
-    find_element_and_perform_action(GENDER_SELECT, "select_option", str(gender_value))
+    find_element_and_perform_action(GENDER_SELECT, "select_option", gender_value)
 
 def enter_postcode(postcode):
     wait_for_element_to_appear(POSTCODE_INPUT)
@@ -127,6 +128,7 @@ def check_search_for_patient_button_visible():
 def click_search_for_patient_button():
     wait_for_element_to_appear(SEARCH_BUTTON)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_create_a_new_patient_button():
     wait_for_element_to_appear(CREATE_NEW_PATIENT_BUTTON)
@@ -164,11 +166,13 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     element = ("role", "cell", nhsNumber)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = ("role", "heading", f"No result found for {nhsNumber}")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
