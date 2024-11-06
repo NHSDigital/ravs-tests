@@ -1,0 +1,422 @@
+{
+  "uid" : "8043540a5a03a2b",
+  "name" : "Record a vaccine with nhs number [4-9437541817-ALBERT HOUSE-Off-site Outreach Event-yes-today-yes-yes-today-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-Flu-SDYY2-24A-5/5/2025]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "899a36331c22a3615edfcb888a55bcb6",
+  "time" : {
+    "start" : 1730898088973,
+    "stop" : 1730898147387,
+    "duration" : 58414
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (33 + 1)\n +  where 0 = int(0)\n +  and   33 = int(33)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f1dd918e0c0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[4-9437541817-ALBERT HOUSE-Off-site Outreach Event-yes-today-yes-yes-today-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-Flu-SDYY2-24A-5/5/2025]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 06/11/2024FLORINDA DUNNER', 'batch_expiry_date': '5/5/2025', 'batch_number': 'SDYY2-24A', 'care_model': \"Housebound patient's home\", ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 06/11/2024FLORINDA DUNNER', 'batch_expiry_date': '5/5/2025', 'batch_number': 'SDYY2-24A', 'care_model': \"Housebound patient's home\", ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (33 + 1)\nE        +  where 0 = int(0)\nE        +  and   33 = int(33)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:170: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (33 + 1)\n +  where 0 = int(0)\n +  and   33 = int(33)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f1dd918e0c0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[4-9437541817-ALBERT HOUSE-Off-site Outreach Event-yes-today-yes-yes-today-FLORINDA DUNNER-27/3/1957-32 HOLLAND ROAD, MANCHESTER, M8 4NP-Flu-SDYY2-24A-5/5/2025]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 06/11/2024FLORINDA DUNNER', 'batch_expiry_date': '5/5/2025', 'batch_number': 'SDYY2-24A', 'care_model': \"Housebound patient's home\", ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 06/11/2024FLORINDA DUNNER', 'batch_expiry_date': '5/5/2025', 'batch_number': 'SDYY2-24A', 'care_model': \"Housebound patient's home\", ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (33 + 1)\nE        +  where 0 = int(0)\nE        +  and   33 = int(33)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:170: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Off-site Outreach Event and get patient details for 9437541817 with option 4 and choose to vaccinate with vaccine details as Flu, SDYY2-24A with 5/5/2025",
+      "time" : {
+        "start" : 1730898088973,
+        "stop" : 1730898089728,
+        "duration" : 755
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730898089729,
+        "stop" : 1730898090083,
+        "duration" : 354
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "678a8591523dacc3",
+        "name" : "dev_edge_130.0.2849.68_entered_nhs_number_as9437541817_and_clicked_search_for_patient_button.png",
+        "source" : "678a8591523dacc3.png",
+        "type" : "image/png",
+        "size" : 48780
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient FLORINDA DUNNER",
+      "time" : {
+        "start" : 1730898090083,
+        "stop" : 1730898092349,
+        "duration" : 2266
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "99ad22f4b9d24900",
+        "name" : "dev_edge_130.0.2849.68_before_clicking_patient_name.png",
+        "source" : "99ad22f4b9d24900.png",
+        "type" : "image/png",
+        "size" : 48816
+      }, {
+        "uid" : "97cf3b4d29ec9e7d",
+        "name" : "dev_edge_130.0.2849.68_before_clicking_patient_name.png",
+        "source" : "97cf3b4d29ec9e7d.png",
+        "type" : "image/png",
+        "size" : 54719
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-24A with 5/5/2025 and click continue",
+      "time" : {
+        "start" : 1730898092349,
+        "stop" : 1730898095666,
+        "duration" : 3317
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7ec388c82066c1b6",
+        "name" : "dev_edge_130.0.2849.68_clicked_on_patient_FLORINDA DUNNER_and_clicked_choose_vaccine_button.png",
+        "source" : "7ec388c82066c1b6.png",
+        "type" : "image/png",
+        "size" : 80309
+      }, {
+        "uid" : "b696675e69f475bd",
+        "name" : "dev_edge_130.0.2849.68_selected_vaccine_Flu_and_Adjuvanted Quadrivalent Influenza Vaccine_and_clicked_continue_button.png",
+        "source" : "b696675e69f475bd.png",
+        "type" : "image/png",
+        "size" : 73570
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today and click continue to record consent screen button",
+      "time" : {
+        "start" : 1730898095667,
+        "stop" : 1730898096665,
+        "duration" : 998
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a163cf47e9baf5d8",
+        "name" : "dev_edge_130.0.2849.68_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "a163cf47e9baf5d8.png",
+        "type" : "image/png",
+        "size" : 73303
+      }, {
+        "uid" : "3d98d3be707f1cd0",
+        "name" : "dev_edge_130.0.2849.68_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "3d98d3be707f1cd0.png",
+        "type" : "image/png",
+        "size" : 50432
+      }, {
+        "uid" : "913698491a3cedc",
+        "name" : "dev_edge_130.0.2849.68_clicked_continue_to_record_consent_button.png",
+        "source" : "913698491a3cedc.png",
+        "type" : "image/png",
+        "size" : 42102
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1730898096666,
+        "stop" : 1730898098233,
+        "duration" : 1567
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e8a64806cba9eb1f",
+        "name" : "dev_edge_130.0.2849.68_before_selecting_consent_clinician.png",
+        "source" : "e8a64806cba9eb1f.png",
+        "type" : "image/png",
+        "size" : 42102
+      }, {
+        "uid" : "f8ef23a69aea25f4",
+        "name" : "dev_edge_130.0.2849.68_clicked_continue_to_vaccinate_button.png",
+        "source" : "f8ef23a69aea25f4.png",
+        "type" : "image/png",
+        "size" : 60370
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1730898098234,
+        "stop" : 1730898102583,
+        "duration" : 4349
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "932dd05f13fab019",
+        "name" : "dev_edge_130.0.2849.68_entered_vaccination_details.png",
+        "source" : "932dd05f13fab019.png",
+        "type" : "image/png",
+        "size" : 51403
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient FLORINDA DUNNER, 27/3/1957, 32 HOLLAND ROAD, MANCHESTER, M8 4NP and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1730898102583,
+        "stop" : 1730898103314,
+        "duration" : 731
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e62a76fbc19778c",
+        "name" : "dev_edge_130.0.2849.68_check_and_confirm_screen_before_assertion.png",
+        "source" : "e62a76fbc19778c.png",
+        "type" : "image/png",
+        "size" : 51391
+      }, {
+        "uid" : "beae0fc683da1119",
+        "name" : "dev_edge_130.0.2849.68_vaccination_dose_amount.png",
+        "source" : "beae0fc683da1119.png",
+        "type" : "image/png",
+        "size" : 51391
+      }, {
+        "uid" : "7a49e7d1125d39c3",
+        "name" : "dev_edge_130.0.2849.68_check_and_confirm_screen_after_assertion.png",
+        "source" : "7a49e7d1125d39c3.png",
+        "type" : "image/png",
+        "size" : 51391
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1730898103314,
+        "stop" : 1730898104072,
+        "duration" : 758
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cb5cd35281ea9044",
+        "name" : "dev_edge_130.0.2849.68_patient_details_screen_with_immunisation_history.png",
+        "source" : "cb5cd35281ea9044.png",
+        "type" : "image/png",
+        "size" : 51391
+      }, {
+        "uid" : "b95f395f31b73dfa",
+        "name" : "dev_edge_130.0.2849.68_before_assert_record_saved.png",
+        "source" : "b95f395f31b73dfa.png",
+        "type" : "image/png",
+        "size" : 34843
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1730898104073,
+        "stop" : 1730898104473,
+        "duration" : 400
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "215a6032eec8369e",
+        "name" : "dev_edge_130.0.2849.68_entered_nhs_number_as9437541817_and_clicked_search_for_patient_button.png",
+        "source" : "215a6032eec8369e.png",
+        "type" : "image/png",
+        "size" : 37780
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient FLORINDA DUNNER",
+      "time" : {
+        "start" : 1730898104474,
+        "stop" : 1730898124980,
+        "duration" : 20506
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "31d65b2e89b73d4",
+        "name" : "dev_edge_130.0.2849.68_before_clicking_patient_name.png",
+        "source" : "31d65b2e89b73d4.png",
+        "type" : "image/png",
+        "size" : 37853
+      }, {
+        "uid" : "f69214486cd78a7e",
+        "name" : "dev_edge_130.0.2849.68_before_clicking_patient_name.png",
+        "source" : "f69214486cd78a7e.png",
+        "type" : "image/png",
+        "size" : 43605
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1730898124980,
+        "stop" : 1730898147387,
+        "duration" : 22407
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (33 + 1)\n +  where 0 = int(0)\n +  and   33 = int(33)",
+      "statusTrace" : "AssertionError: assert 0 >= (33 + 1)\n +  where 0 = int(0)\n +  and   33 = int(33)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "baaf7608d15fc251",
+        "name" : "dev_edge_130.0.2849.68_immunisation_history_records_count_after_vaccination.png",
+        "source" : "baaf7608d15fc251.png",
+        "type" : "image/png",
+        "size" : 43605
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "97cdb158c1833b3",
+      "name" : "log",
+      "source" : "97cdb158c1833b3.txt",
+      "type" : "text/plain",
+      "size" : 12885
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 21,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a305d9e8c84e"
+  }, {
+    "name" : "thread",
+    "value" : "1101-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "32 HOLLAND ROAD, MANCHESTER, M8 4NP"
+  }, {
+    "name" : "assess_date",
+    "value" : "today"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "5/5/2025"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-24A"
+  }, {
+    "name" : "care_model",
+    "value" : "Off-site Outreach Event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "27/3/1957"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "4"
+  }, {
+    "name" : "name",
+    "value" : "FLORINDA DUNNER"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437541817"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "8043540a5a03a2b.json",
+  "parameterValues" : [ "32 HOLLAND ROAD, MANCHESTER, M8 4NP", "today", "5/5/2025", "SDYY2-24A", "Off-site Outreach Event", "Flu", "yes", "27/3/1957", "yes", "4", "FLORINDA DUNNER", "9437541817", "ALBERT HOUSE", "yes", "today" ]
+}
