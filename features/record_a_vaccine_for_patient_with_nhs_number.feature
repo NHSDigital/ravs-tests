@@ -45,7 +45,7 @@ Feature: Record vaccine
     Given I login to RAVS and set vaccinator details with <site> and <care_model> and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date>
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
-    When I click choose vaccine button and choose the <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date> and click continue
+    When I click choose vaccine button and choose the <chosen_vaccine>, <batch_number> with <batch_expiry_date> and click continue
     And I assess the pregnant patient's <eligibility> with the details of due date as <due_date> and assessment date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
@@ -56,8 +56,8 @@ Feature: Record vaccine
     And the immunisation history of the patient should be updated in the patient details page
 
     Examples:
-      | index | nhs_number | site   | care_model      | eligibility | due_date | assess_date | consent | vaccination | vaccination_date | name  | dob       | address                                             | chosen_vaccine            | vaccine_type | batch_number | batch_expiry_date |
-      |  4 | 9473629885 | KINGSTON HOUSE | Outreach event | yes | today+50 | today-4 | yes   | yes | today-3  | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | Arexvy | RSVTEST2 |  31/12/2025 |
+      | index | nhs_number | site   | care_model      | eligibility | due_date | assess_date | consent | vaccination | vaccination_date | name  | dob    | address     | chosen_vaccine  | batch_number | batch_expiry_date |
+      |  4 | 9473629885 | KINGSTON HOUSE | Outreach event | yes | today+50 | today-4 | yes   | yes | today-3  | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | RSVTEST2 |  31/12/2025 |
       # |     0 | 9693632109 | ALBERT HOUSE  | Vaccination Centre | yes | today     | today       | yes     | yes | today    | Bill GARTON   |  23/6/1946 |           1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis                 | Adacel vaccine suspension  | ADAC1-27     |        19/10/2027 |
       # |     1 | 9693632109 | BECCLES HOUSE | Vaccination Centre | yes | today+100 | today-1     | yes     | yes | today-1  | Bill GARTON   |  23/6/1946 |           1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis                 | Boostrix-IPV suspension    | BST01-28B    |        19/10/2028 |
       # |     2 | 9470040228 | BIRCH HOUSE   | Hospital hub for staff and patients       | yes | today+290 | today-1     | yes     | yes | today    | HERBERT HAAG  | 14/12/1922 |                       10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis                 | Repevax vaccine suspension | REPE11-29A   |         19/2/2029 |
