@@ -13,10 +13,7 @@ import random
 
 warnings.filterwarnings("ignore", category=UserWarning, module='faker')
 
-
-
 features_directory = get_working_directory() + "features"
-
 logging.basicConfig(level=logging.CRITICAL)
 logger = logging.getLogger(__name__)
 
@@ -114,7 +111,7 @@ def step_click_check_and_confirm_button():
 def step_click_confirm_and_save_button():
     click_confirm_and_save_button()
 
-@when('I click the find a patient navigation link')
+@when('I click the search button')
 def step_i_click_the_search_button():
     click_search_for_patient_button()
 
