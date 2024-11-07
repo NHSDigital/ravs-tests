@@ -1,0 +1,178 @@
+{
+  "uid" : "a3b9ec3c04945cdb",
+  "name" : "Display warning based on age when recording a vaccine [9692237893-3-covid]",
+  "fullName" : "features/age_based_warnings.feature:Display warning based on age when recording a vaccine",
+  "historyId" : "eb7473c685934417e0e1bded91e819c3",
+  "time" : {
+    "start" : 1731004986749,
+    "stop" : 1731005024419,
+    "duration" : 37670
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1731004986749,
+        "stop" : 1731004991425,
+        "duration" : 4676
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I search for the patient with NHS number 9692237893",
+      "time" : {
+        "start" : 1731004991425,
+        "stop" : 1731004991610,
+        "duration" : 185
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I proceed to record a vaccine for covid for all products",
+      "time" : {
+        "start" : 1731004991610,
+        "stop" : 1731004993951,
+        "duration" : 2341
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "96f6ae5f02d43ecc",
+        "name" : "dev_edge_130.0.2849.68_clicked_patient_name.png",
+        "source" : "96f6ae5f02d43ecc.png",
+        "type" : "image/png",
+        "size" : 31499
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then the system should display the warnings 3",
+      "time" : {
+        "start" : 1731004993951,
+        "stop" : 1731005024419,
+        "duration" : 30468
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ade62f42822ec348",
+        "name" : "dev_edge_130.0.2849.68_clicked_choose_vaccine_button.png",
+        "source" : "ade62f42822ec348.png",
+        "type" : "image/png",
+        "size" : 80770
+      }, {
+        "uid" : "b937cf9b09b0614f",
+        "name" : "dev_edge_130.0.2849.68_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "b937cf9b09b0614f.png",
+        "type" : "image/png",
+        "size" : 72155
+      }, {
+        "uid" : "3825b5f5bdc3c20a",
+        "name" : "dev_edge_130.0.2849.68_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "3825b5f5bdc3c20a.png",
+        "type" : "image/png",
+        "size" : 72964
+      }, {
+        "uid" : "15fda41d179ad0a5",
+        "name" : "dev_edge_130.0.2849.68_clicked_continue_to_record_consent_button.png",
+        "source" : "15fda41d179ad0a5.png",
+        "type" : "image/png",
+        "size" : 42751
+      }, {
+        "uid" : "1f040c18b9c930c2",
+        "name" : "dev_edge_130.0.2849.68_before_selecting_consent_clinician.png",
+        "source" : "1f040c18b9c930c2.png",
+        "type" : "image/png",
+        "size" : 42751
+      }, {
+        "uid" : "4a709d2b2df1590c",
+        "name" : "dev_edge_130.0.2849.68_clicked_continue_to_vaccinate_button.png",
+        "source" : "4a709d2b2df1590c.png",
+        "type" : "image/png",
+        "size" : 59951
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "73c076590164fd34",
+      "name" : "log",
+      "source" : "73c076590164fd34.txt",
+      "type" : "text/plain",
+      "size" : 3858
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 8,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "da70e0298b1d"
+  }, {
+    "name" : "thread",
+    "value" : "1099-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Age based warnings"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "expected_warning_count",
+    "value" : "3"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9692237893"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "covid"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a3b9ec3c04945cdb.json",
+  "parameterValues" : [ "3", "9692237893", "covid" ]
+}
