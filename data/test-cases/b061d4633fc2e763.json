@@ -1,0 +1,169 @@
+{
+  "uid" : "b061d4633fc2e763",
+  "name" : "Demographics: Searching for a patient without a record returns no results [Cecile-Elston-18/01/1965]",
+  "fullName" : "/app/features/find_a_patient.feature:Demographics: Searching for a patient without a record returns no results",
+  "historyId" : "1b51f6a7f6d588f463a9a362437309b2",
+  "time" : {
+    "start" : 1731086043423,
+    "stop" : 1731086051557,
+    "duration" : 8134
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1731086043425,
+        "stop" : 1731086047822,
+        "duration" : 4397
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the mandatory patient details Cecile, Elston, and 18/01/1965",
+      "time" : {
+        "start" : 1731086047823,
+        "stop" : 1731086048345,
+        "duration" : 522
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d348a10f28ad663e",
+        "name" : "dev_edge_130.0.2849.80_add_mandatory_patient_information.png",
+        "source" : "d348a10f28ad663e.png",
+        "type" : "image/png",
+        "size" : 55214
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1731086048346,
+        "stop" : 1731086051343,
+        "duration" : 2997
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the patient",
+      "time" : {
+        "start" : 1731086051344,
+        "stop" : 1731086051445,
+        "duration" : 101
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fedcb23b90e847ec",
+        "name" : "dev_edge_130.0.2849.80_no_results_found_should_be_visible.png",
+        "source" : "fedcb23b90e847ec.png",
+        "type" : "image/png",
+        "size" : 42437
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I can see an option to create a new patient",
+      "time" : {
+        "start" : 1731086051446,
+        "stop" : 1731086051557,
+        "duration" : 111
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d23d07459ede062c",
+        "name" : "dev_edge_130.0.2849.80_check_create_new_patient_button_is_visible.png",
+        "source" : "d23d07459ede062c.png",
+        "type" : "image/png",
+        "size" : 42437
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "c1d9b3051773f40b",
+      "name" : "log",
+      "source" : "c1d9b3051773f40b.txt",
+      "type" : "text/plain",
+      "size" : 2848
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "77a7ac40621e"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "dob",
+    "value" : "18/01/1965"
+  }, {
+    "name" : "firstName",
+    "value" : "Cecile"
+  }, {
+    "name" : "lastName",
+    "value" : "Elston"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b061d4633fc2e763.json",
+  "parameterValues" : [ "18/01/1965", "Cecile", "Elston" ]
+}
