@@ -42,7 +42,7 @@ Feature: Record vaccine
 
   @recordvaccine
   Scenario Outline: Record a maternity vaccine with nhs number
-    Given I login to RAVS and set vaccinator details with <site> and <care_model> and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <vaccine_type>, <batch_number> with <batch_expiry_date>
+    Given I login to RAVS and set vaccinator details with <site> and <care_model> and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
     When I click choose vaccine button and choose the <chosen_vaccine>, <batch_number> with <batch_expiry_date> and click continue
