@@ -1,0 +1,285 @@
+{
+  "uid" : "7d39428212284898",
+  "name" : "Record a vaccine with nhs number [5-9473629885-BIRCH HOUSE-Outreach event-yes-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-COVID-19-SDYY2-15A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "9cb2b44696f051b8c96db0242c1c3f1c",
+  "time" : {
+    "start" : 1731310080848,
+    "stop" : 1731310323568,
+    "duration" : 242720
+  },
+  "status" : "failed",
+  "statusMessage" : "Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"Vaccinator\")",
+  "statusTrace" : "element = <Locator frame=<Frame name= url='https://www.ravs-qa.england.nhs.uk/vaccination/add/97'> selector='internal:label=\"Vaccinator\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n>           return playwright_helper_instance.check_element_enabled(element, wait)\n\ninit_helpers.py:188: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nhelpers/playwrightHelper.py:192: in check_element_enabled\n    return element.is_enabled()\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:16961: in is_enabled\n    self._sync(self._impl_obj.is_enabled(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:484: in is_enabled\n    return await self._frame.is_editable(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:339: in is_editable\n    return await self._channel.send(\"isEditable\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7efdc4c07210>\ncb = <function Channel.send.<locals>.<lambda> at 0x7efdbd5cb6a0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Vaccinator\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:520: TimeoutError\n\nDuring handling of the above exception, another exception occurred:\n\nfixturefunc = <function step_enter_vaccination_details_and_continue_to_check_and_confirm_screen at 0x7efdc4b45bc0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[5-9473629885-BIRCH HOUSE-Outreach event-yes-today-...-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-COVID-19-SDYY2-15A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 07/11/2024MARGIE PUCKEY', 'batch_expiry_date': '19/10/202...'batch_number': 'SDYY2-15A', 'care_model': 'Outreach event', ...}, 'vaccination': 'yes', 'vaccination_date': 'today-3'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:138: in step_enter_vaccination_details_and_continue_to_check_and_confirm_screen\n    enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data[\"vaccinated_decision\"], shared_data[\"care_model\"], shared_data[\"vaccination_date\"], chosen_vaccine, shared_data[\"chosen_vaccine_type\"], shared_data[\"vaccination_site\"], shared_data[\"batch_number\"], shared_data[\"batch_expiry_date\"], shared_data[\"dose_amount\"], shared_data[\"vaccinator\"], shared_data[\"vaccination_comments\"], shared_data[\"legal_mechanism\"], shared_data[\"no_vaccination_reason\"])\nconftest.py:328: in enter_vaccine_details_and_click_continue_to_check_and_confirm\n    select_vaccinator_name_and_council(vaccinator)\npages/record_vaccinated_page.py:71: in select_vaccinator_name_and_council\n    if check_element_enabled(VACCINATOR_DROPDOWN_ELEMENT):\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nelement = <Locator frame=<Frame name= url='https://www.ravs-qa.england.nhs.uk/vaccination/add/97'> selector='internal:label=\"Vaccinator\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n            return playwright_helper_instance.check_element_enabled(element, wait)\n        except Exception as e:\n>           pytest.fail(f\"An error occurred: {e}\")\nE           Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Vaccinator\")\n\ninit_helpers.py:190: Failed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"Vaccinator\")",
+    "statusTrace" : "element = <Locator frame=<Frame name= url='https://www.ravs-qa.england.nhs.uk/vaccination/add/97'> selector='internal:label=\"Vaccinator\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n>           return playwright_helper_instance.check_element_enabled(element, wait)\n\ninit_helpers.py:188: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nhelpers/playwrightHelper.py:192: in check_element_enabled\n    return element.is_enabled()\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:16961: in is_enabled\n    self._sync(self._impl_obj.is_enabled(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:484: in is_enabled\n    return await self._frame.is_editable(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:339: in is_editable\n    return await self._channel.send(\"isEditable\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7efdc4c07210>\ncb = <function Channel.send.<locals>.<lambda> at 0x7efdbd5cb6a0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Vaccinator\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:520: TimeoutError\n\nDuring handling of the above exception, another exception occurred:\n\nfixturefunc = <function step_enter_vaccination_details_and_continue_to_check_and_confirm_screen at 0x7efdc4b45bc0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[5-9473629885-BIRCH HOUSE-Outreach event-yes-today-...-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-COVID-19-SDYY2-15A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 07/11/2024MARGIE PUCKEY', 'batch_expiry_date': '19/10/202...'batch_number': 'SDYY2-15A', 'care_model': 'Outreach event', ...}, 'vaccination': 'yes', 'vaccination_date': 'today-3'}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:138: in step_enter_vaccination_details_and_continue_to_check_and_confirm_screen\n    enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data[\"vaccinated_decision\"], shared_data[\"care_model\"], shared_data[\"vaccination_date\"], chosen_vaccine, shared_data[\"chosen_vaccine_type\"], shared_data[\"vaccination_site\"], shared_data[\"batch_number\"], shared_data[\"batch_expiry_date\"], shared_data[\"dose_amount\"], shared_data[\"vaccinator\"], shared_data[\"vaccination_comments\"], shared_data[\"legal_mechanism\"], shared_data[\"no_vaccination_reason\"])\nconftest.py:328: in enter_vaccine_details_and_click_continue_to_check_and_confirm\n    select_vaccinator_name_and_council(vaccinator)\npages/record_vaccinated_page.py:71: in select_vaccinator_name_and_council\n    if check_element_enabled(VACCINATOR_DROPDOWN_ELEMENT):\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nelement = <Locator frame=<Frame name= url='https://www.ravs-qa.england.nhs.uk/vaccination/add/97'> selector='internal:label=\"Vaccinator\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n            return playwright_helper_instance.check_element_enabled(element, wait)\n        except Exception as e:\n>           pytest.fail(f\"An error occurred: {e}\")\nE           Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Vaccinator\")\n\ninit_helpers.py:190: Failed",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Outreach event and get patient details for 9473629885 with option 5 and choose to vaccinate with vaccine details as COVID-19, SDYY2-15A with 19/10/2026",
+      "time" : {
+        "start" : 1731310080849,
+        "stop" : 1731310199582,
+        "duration" : 118733
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731310199583,
+        "stop" : 1731310199925,
+        "duration" : 342
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e23189ff9d6cec3d",
+        "name" : "qa_edge_130.0.2849.80_entered_nhs_number_as9473629885_and_clicked_search_for_patient_button.png",
+        "source" : "e23189ff9d6cec3d.png",
+        "type" : "image/png",
+        "size" : 50426
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARGIE PUCKEY",
+      "time" : {
+        "start" : 1731310199925,
+        "stop" : 1731310203205,
+        "duration" : 3280
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "17ea50fba3fc9349",
+        "name" : "qa_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "17ea50fba3fc9349.png",
+        "type" : "image/png",
+        "size" : 50462
+      }, {
+        "uid" : "7b51c76adb7a68",
+        "name" : "qa_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "7b51c76adb7a68.png",
+        "type" : "image/png",
+        "size" : 48842
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, SDYY2-15A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731310203206,
+        "stop" : 1731310209505,
+        "duration" : 6299
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "273b4f092bf29fdf",
+        "name" : "qa_edge_130.0.2849.80_clicked_on_patient_MARGIE PUCKEY_and_clicked_choose_vaccine_button.png",
+        "source" : "273b4f092bf29fdf.png",
+        "type" : "image/png",
+        "size" : 82221
+      }, {
+        "uid" : "b13e99bf09f9958a",
+        "name" : "qa_edge_130.0.2849.80_selected_vaccine_COVID-19_and_Comirnaty 3 JN.1_and_clicked_continue_button.png",
+        "source" : "b13e99bf09f9958a.png",
+        "type" : "image/png",
+        "size" : 32553
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-4 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731310209505,
+        "stop" : 1731310211359,
+        "duration" : 1854
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "202795b6217b5585",
+        "name" : "qa_edge_130.0.2849.80_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "202795b6217b5585.png",
+        "type" : "image/png",
+        "size" : 73516
+      }, {
+        "uid" : "a8dd4f02c4839b7a",
+        "name" : "qa_edge_130.0.2849.80_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "a8dd4f02c4839b7a.png",
+        "type" : "image/png",
+        "size" : 76719
+      }, {
+        "uid" : "32e704aed103b838",
+        "name" : "qa_edge_130.0.2849.80_clicked_continue_to_record_consent_button.png",
+        "source" : "32e704aed103b838.png",
+        "type" : "image/png",
+        "size" : 45366
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731310211359,
+        "stop" : 1731310242858,
+        "duration" : 31499
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d04d643bda03715",
+        "name" : "qa_edge_130.0.2849.80_before_selecting_consent_clinician.png",
+        "source" : "d04d643bda03715.png",
+        "type" : "image/png",
+        "size" : 45366
+      }, {
+        "uid" : "4124b488211f9afc",
+        "name" : "qa_edge_130.0.2849.80_clicked_continue_to_vaccinate_button.png",
+        "source" : "4124b488211f9afc.png",
+        "type" : "image/png",
+        "size" : 45919
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-3 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1731310242859,
+        "stop" : 1731310323741,
+        "duration" : 80882
+      },
+      "status" : "skipped",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "9dde0a3caa464b42",
+      "name" : "log",
+      "source" : "9dde0a3caa464b42.txt",
+      "type" : "text/plain",
+      "size" : 7101
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 11,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7f3ead91d494"
+  }, {
+    "name" : "thread",
+    "value" : "1103-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-4"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-15A"
+  }, {
+    "name" : "care_model",
+    "value" : "Outreach event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "27/5/1924"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "5"
+  }, {
+    "name" : "name",
+    "value" : "MARGIE PUCKEY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9473629885"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-3"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "7d39428212284898.json",
+  "parameterValues" : [ "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB", "today-4", "19/10/2026", "SDYY2-15A", "Outreach event", "COVID-19", "yes", "27/5/1924", "yes", "5", "MARGIE PUCKEY", "9473629885", "BIRCH HOUSE", "yes", "today-3" ]
+}
