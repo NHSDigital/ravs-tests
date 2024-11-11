@@ -1,0 +1,264 @@
+{
+  "uid" : "f3d03cca32298d27",
+  "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Outreach event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-5/5/2025]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "02286755ee3c4415bf361e3fbeaad0be",
+  "time" : {
+    "start" : 1731344792362,
+    "stop" : 1731344876248,
+    "duration" : 83886
+  },
+  "status" : "failed",
+  "statusMessage" : "Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"Consenting clinician\")",
+  "statusTrace" : "element = <Locator frame=<Frame name= url='https://www.ravs-dev.england.nhs.uk/vaccination/add/33'> selector='internal:label=\"Consenting clinician\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n>           return playwright_helper_instance.check_element_enabled(element, wait)\n\ninit_helpers.py:188: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nhelpers/playwrightHelper.py:195: in check_element_enabled\n    return element.is_enabled()\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:16961: in is_enabled\n    self._sync(self._impl_obj.is_enabled(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:484: in is_enabled\n    return await self._frame.is_editable(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:339: in is_editable\n    return await self._channel.send(\"isEditable\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f82687b7210>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f8261559da0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Consenting clinician\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:520: TimeoutError\n\nDuring handling of the above exception, another exception occurred:\n\nfixturefunc = <function step_record_consent_and_click_continue_to_vaccinate_screen at 0x7f82686a1da0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474405174-ALBERT HOUSE-Outreach event-yes-toda...es-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-5/5/2025]>>\nkwargs = {'consent': 'yes', 'shared_data': {'assessment_comments': 'Assessment comments 09/11/2024PHINEAS FAYLE', 'batch_expiry_date': '5/5/2025', 'batch_number': 'SDYY2-14B', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:121: in step_record_consent_and_click_continue_to_vaccinate_screen\n    record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data[\"no_consent_reason\"])\nconftest.py:303: in record_consent_details_and_click_continue_to_vaccinate\n    select_consent_clinician_with_name_and_council(consent_clinician)\npages/record_consent_page.py:75: in select_consent_clinician_with_name_and_council\n    if check_element_enabled(CONSENT_CLINICIAN_DROPDOWN_ELEMENT):\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nelement = <Locator frame=<Frame name= url='https://www.ravs-dev.england.nhs.uk/vaccination/add/33'> selector='internal:label=\"Consenting clinician\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n            return playwright_helper_instance.check_element_enabled(element, wait)\n        except Exception as e:\n>           pytest.fail(f\"An error occurred: {e}\")\nE           Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Consenting clinician\")\n\ninit_helpers.py:190: Failed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nCall log:\nwaiting for get_by_label(\"Consenting clinician\")",
+    "statusTrace" : "element = <Locator frame=<Frame name= url='https://www.ravs-dev.england.nhs.uk/vaccination/add/33'> selector='internal:label=\"Consenting clinician\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n>           return playwright_helper_instance.check_element_enabled(element, wait)\n\ninit_helpers.py:188: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nhelpers/playwrightHelper.py:195: in check_element_enabled\n    return element.is_enabled()\n.tox/py311/lib/python3.11/site-packages/playwright/sync_api/_generated.py:16961: in is_enabled\n    self._sync(self._impl_obj.is_enabled(timeout=timeout))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_locator.py:484: in is_enabled\n    return await self._frame.is_editable(\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_frame.py:339: in is_editable\n    return await self._channel.send(\"isEditable\", locals_to_params(locals()))\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:59: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f82687b7210>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f8261559da0>\nis_internal = False\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(task, \"__pw_stack__\", inspect.stack())\n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Consenting clinician\")\n\n.tox/py311/lib/python3.11/site-packages/playwright/_impl/_connection.py:520: TimeoutError\n\nDuring handling of the above exception, another exception occurred:\n\nfixturefunc = <function step_record_consent_and_click_continue_to_vaccinate_screen at 0x7f82686a1da0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474405174-ALBERT HOUSE-Outreach event-yes-toda...es-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-SDYY2-14B-5/5/2025]>>\nkwargs = {'consent': 'yes', 'shared_data': {'assessment_comments': 'Assessment comments 09/11/2024PHINEAS FAYLE', 'batch_expiry_date': '5/5/2025', 'batch_number': 'SDYY2-14B', 'care_model': 'Vaccination centre open to the public', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:121: in step_record_consent_and_click_continue_to_vaccinate_screen\n    record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data[\"no_consent_reason\"])\nconftest.py:303: in record_consent_details_and_click_continue_to_vaccinate\n    select_consent_clinician_with_name_and_council(consent_clinician)\npages/record_consent_page.py:75: in select_consent_clinician_with_name_and_council\n    if check_element_enabled(CONSENT_CLINICIAN_DROPDOWN_ELEMENT):\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nelement = <Locator frame=<Frame name= url='https://www.ravs-dev.england.nhs.uk/vaccination/add/33'> selector='internal:label=\"Consenting clinician\"i'>\nwait = False\n\n    def check_element_enabled(element, wait=False):\n        if isinstance(element, (tuple, list)):\n            element = get_element_by_type(*element)\n        elif isinstance(element, str):\n            element = get_element_by_type(element)\n        try:\n            return playwright_helper_instance.check_element_enabled(element, wait)\n        except Exception as e:\n>           pytest.fail(f\"An error occurred: {e}\")\nE           Failed: An error occurred: Locator.is_enabled: Timeout 30000ms exceeded.\nE           Call log:\nE           waiting for get_by_label(\"Consenting clinician\")\n\ninit_helpers.py:190: Failed",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Outreach event and get patient details for 9474405174 with option 10 and choose to vaccinate with vaccine details as Flu, SDYY2-14B with 5/5/2025",
+      "time" : {
+        "start" : 1731344792362,
+        "stop" : 1731344793120,
+        "duration" : 758
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731344793121,
+        "stop" : 1731344795508,
+        "duration" : 2387
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fec6b1ed40a187c5",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9474405174_and_clicked_search_for_patient_button.png",
+        "source" : "fec6b1ed40a187c5.png",
+        "type" : "image/png",
+        "size" : 48605
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient PHINEAS FAYLE",
+      "time" : {
+        "start" : 1731344795509,
+        "stop" : 1731344796775,
+        "duration" : 1266
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fbe47cb8e75b55c1",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "fbe47cb8e75b55c1.png",
+        "type" : "image/png",
+        "size" : 48605
+      }, {
+        "uid" : "510e5cf15f5cd671",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "510e5cf15f5cd671.png",
+        "type" : "image/png",
+        "size" : 47792
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, SDYY2-14B with 5/5/2025 and click continue",
+      "time" : {
+        "start" : 1731344796775,
+        "stop" : 1731344804109,
+        "duration" : 7334
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "18ddf73e0c9d4f82",
+        "name" : "dev_edge_130.0.2849.80_clicked_on_patient_PHINEAS FAYLE_and_clicked_choose_vaccine_button.png",
+        "source" : "18ddf73e0c9d4f82.png",
+        "type" : "image/png",
+        "size" : 50597
+      }, {
+        "uid" : "a252a0c11e863671",
+        "name" : "dev_edge_130.0.2849.80_selected_vaccine_Flu_and_Adjuvanted Quadrivalent Influenza Vaccine_and_clicked_continue_button.png",
+        "source" : "a252a0c11e863671.png",
+        "type" : "image/png",
+        "size" : 74469
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-2 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731344804110,
+        "stop" : 1731344835991,
+        "duration" : 31881
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "45d2d2282ed1e1fd",
+        "name" : "dev_edge_130.0.2849.80_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "45d2d2282ed1e1fd.png",
+        "type" : "image/png",
+        "size" : 73768
+      }, {
+        "uid" : "5c5d96fc6222d54f",
+        "name" : "dev_edge_130.0.2849.80_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "5c5d96fc6222d54f.png",
+        "type" : "image/png",
+        "size" : 76139
+      }, {
+        "uid" : "c9e8a4a0bfda90bd",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_record_consent_button.png",
+        "source" : "c9e8a4a0bfda90bd.png",
+        "type" : "image/png",
+        "size" : 36435
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731344835992,
+        "stop" : 1731344876460,
+        "duration" : 40468
+      },
+      "status" : "skipped",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "35fcaa1858af165d",
+        "name" : "dev_edge_130.0.2849.80_before_selecting_consent_clinician.png",
+        "source" : "35fcaa1858af165d.png",
+        "type" : "image/png",
+        "size" : 37781
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "32f8e5b12ae125cb",
+      "name" : "log",
+      "source" : "32f8e5b12ae125cb.txt",
+      "type" : "text/plain",
+      "size" : 7355
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 10,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "414abe5f6a07"
+  }, {
+    "name" : "thread",
+    "value" : "1101-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "5/5/2025"
+  }, {
+    "name" : "batch_number",
+    "value" : "SDYY2-14B"
+  }, {
+    "name" : "care_model",
+    "value" : "Outreach event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "4/9/1965"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "10"
+  }, {
+    "name" : "name",
+    "value" : "PHINEAS FAYLE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9474405174"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "f3d03cca32298d27.json",
+  "parameterValues" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "5/5/2025", "SDYY2-14B", "Outreach event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today" ]
+}
