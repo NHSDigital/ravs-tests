@@ -3,6 +3,7 @@ from playwright.sync_api import sync_playwright, TimeoutError, Locator
 from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
+import logging
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -85,6 +86,8 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, full_path):
         try:
+            logging.debug("Scrolling to the top of the page.")
+            self.page.evaluate("window.scrollTo(0, 0);")
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):

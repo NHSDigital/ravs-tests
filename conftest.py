@@ -271,8 +271,10 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         attach_screenshot("clicked_patient_not_eligible_radiobutton")
 
     set_assessment_date(assessment_date)
-
     click_legal_mechanism(legal_mechanism)
+
+    logging.debug("Assess clinician to select is: " + assessing_clinician)
+    logging.debug("Assess legal mechanism is: " + legal_mechanism)
 
     select_assessing_clinician_with_name_and_council(assessing_clinician)
 
@@ -293,6 +295,9 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
 
 def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
+
+    logging.debug("Consent clinician to select is: " + consent_clinician)
+    logging.debug("Consent legal mechanism is: " + legal_mechanism)
 
     if (legal_mechanism) != "Patient Group Direction (PGD)":
         select_consent_clinician_with_name_and_council(consent_clinician)
@@ -325,6 +330,8 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         click_care_model_option(care_model)
         if care_model == "Care home":
             enter_care_home_details("WHITESTONES CARE HOME")
+        logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
+        logging.debug("Vaccinator to select is: " + vaccinator)
         if (legal_mechanism) != "Patient Group Direction (PGD)":
             select_vaccinator_name_and_council(vaccinator)
         enter_vaccination_comments(vaccination_comments)
