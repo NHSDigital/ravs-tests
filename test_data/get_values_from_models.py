@@ -48,6 +48,15 @@ def get_wrapped_index(index, length):
         return get_random_index(length)
     return index
 
+# def get_wrapped_index(index, length):
+#     if length == 0:
+#         return 0
+#     try:
+#         index = int(index)
+#     except ValueError:
+#         return 0
+#     return index % length
+
 def get_random_index(length):
     if length <= 0:
         return 0
