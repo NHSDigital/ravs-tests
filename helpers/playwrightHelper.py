@@ -206,7 +206,7 @@ class BasePlaywrightHelper:
     def handle_unresponsive_page(self):
         if not self.is_page_responsive():
             print("Page is unresponsive. Attempting to reload or take action.")
-            self.page.reload()  # You might want to handle this more gracefully
+            self.page.reload(wait_until="networkidle")  
             self.wait_for_page_to_load()
 
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):

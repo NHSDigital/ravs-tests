@@ -84,26 +84,31 @@ def check_logout_button_exists_without_waiting():
 
 def click_profile_nav_link(email):
     element = ("role", "link", email)
+    handle_unresponsive_page()
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_reports_nav_link():
+    handle_unresponsive_page()
     wait_for_element_to_appear(REPORTS_NAV_ELEMENT)
     find_element_and_perform_action(REPORTS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_vaccines_nav_link():
+    handle_unresponsive_page()
     wait_for_element_to_appear(VACCINES_NAV_ELEMENT)
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_manage_users_nav_link():
+    handle_unresponsive_page()
     wait_for_element_to_appear(MANAGE_USERS_NAV_ELEMENT)
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_find_a_patient_nav_link():
+    handle_unresponsive_page()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     find_element_and_perform_action(FIND_A_PATIENT_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
