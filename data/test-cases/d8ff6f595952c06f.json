@@ -1,0 +1,422 @@
+{
+  "uid" : "d8ff6f595952c06f",
+  "name" : "Record a vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre open to the public-yes-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-AUTOMATION-SJ1-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "eecb763363430fd31fe4e5364d74e54d",
+  "time" : {
+    "start" : 1731504375266,
+    "stop" : 1731504564674,
+    "duration" : 189408
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (120 + 1)\n +  where 0 = int(0)\n +  and   120 = int(120)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fe48d8322a0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[0-9693632109-ALBERT HOUSE-Vaccination Centre open ...-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-AUTOMATION-SJ1-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 13/11/2024Bill GARTON', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 13/11/2024Bill GARTON', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (120 + 1)\nE        +  where 0 = int(0)\nE        +  and   120 = int(120)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (120 + 1)\n +  where 0 = int(0)\n +  and   120 = int(120)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fe48d8322a0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[0-9693632109-ALBERT HOUSE-Vaccination Centre open ...-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-AUTOMATION-SJ1-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 13/11/2024Bill GARTON', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 13/11/2024Bill GARTON', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (120 + 1)\nE        +  where 0 = int(0)\nE        +  and   120 = int(120)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Vaccination Centre open to the public and get patient details for 9693632109 with option 0 and choose to vaccinate with vaccine details as COVID-19, AUTOMATION-SJ1 with 19/10/2026",
+      "time" : {
+        "start" : 1731504375266,
+        "stop" : 1731504492482,
+        "duration" : 117216
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731504492482,
+        "stop" : 1731504497776,
+        "duration" : 5294
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "fdd698c2ca709888",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "fdd698c2ca709888.png",
+        "type" : "image/png",
+        "size" : 48654
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1731504497777,
+        "stop" : 1731504504161,
+        "duration" : 6384
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3470779e6f19ad0",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "3470779e6f19ad0.png",
+        "type" : "image/png",
+        "size" : 48742
+      }, {
+        "uid" : "c3ee7cf36fdc5c57",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "c3ee7cf36fdc5c57.png",
+        "type" : "image/png",
+        "size" : 47880
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, AUTOMATION-SJ1 with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731504504161,
+        "stop" : 1731504511190,
+        "duration" : 7029
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "819dda8e7804b077",
+        "name" : "dev_edge_130.0.2849.80_clicked_on_patient_Bill GARTON_and_clicked_choose_vaccine_button.png",
+        "source" : "819dda8e7804b077.png",
+        "type" : "image/png",
+        "size" : 81145
+      }, {
+        "uid" : "519288e24e6bbbe7",
+        "name" : "dev_edge_130.0.2849.80_selected_vaccine_COVID-19_and_Spikevax JN.1_and_clicked_continue_button.png",
+        "source" : "519288e24e6bbbe7.png",
+        "type" : "image/png",
+        "size" : 74200
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731504511191,
+        "stop" : 1731504512309,
+        "duration" : 1118
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6c0d303c7fe97cad",
+        "name" : "dev_edge_130.0.2849.80_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "6c0d303c7fe97cad.png",
+        "type" : "image/png",
+        "size" : 71425
+      }, {
+        "uid" : "9378afe21c1f1bb6",
+        "name" : "dev_edge_130.0.2849.80_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "9378afe21c1f1bb6.png",
+        "type" : "image/png",
+        "size" : 49657
+      }, {
+        "uid" : "b27a32b3f883045a",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_record_consent_button.png",
+        "source" : "b27a32b3f883045a.png",
+        "type" : "image/png",
+        "size" : 45453
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731504512309,
+        "stop" : 1731504512927,
+        "duration" : 618
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "14217d268c13296b",
+        "name" : "dev_edge_130.0.2849.80_before_selecting_consent_clinician.png",
+        "source" : "14217d268c13296b.png",
+        "type" : "image/png",
+        "size" : 45451
+      }, {
+        "uid" : "5868bb8e8f4b18d2",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_vaccinate_button.png",
+        "source" : "5868bb8e8f4b18d2.png",
+        "type" : "image/png",
+        "size" : 73645
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1731504512928,
+        "stop" : 1731504515759,
+        "duration" : 2831
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3f2db0b91de644a",
+        "name" : "dev_edge_130.0.2849.80_entered_vaccination_details.png",
+        "source" : "3f2db0b91de644a.png",
+        "type" : "image/png",
+        "size" : 49550
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient Bill GARTON, 23/6/1946, 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1731504515759,
+        "stop" : 1731504516631,
+        "duration" : 872
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "436228313f2d4825",
+        "name" : "dev_edge_130.0.2849.80_check_and_confirm_screen_before_assertion.png",
+        "source" : "436228313f2d4825.png",
+        "type" : "image/png",
+        "size" : 49316
+      }, {
+        "uid" : "71c756da20f38442",
+        "name" : "dev_edge_130.0.2849.80_vaccination_dose_amount.png",
+        "source" : "71c756da20f38442.png",
+        "type" : "image/png",
+        "size" : 49562
+      }, {
+        "uid" : "16a024b4ce6780d9",
+        "name" : "dev_edge_130.0.2849.80_check_and_confirm_screen_after_assertion.png",
+        "source" : "16a024b4ce6780d9.png",
+        "type" : "image/png",
+        "size" : 49562
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1731504516632,
+        "stop" : 1731504517436,
+        "duration" : 804
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "acd3543562ebb99",
+        "name" : "dev_edge_130.0.2849.80_patient_details_screen_with_immunisation_history.png",
+        "source" : "acd3543562ebb99.png",
+        "type" : "image/png",
+        "size" : 49562
+      }, {
+        "uid" : "573daf6c7d527c9c",
+        "name" : "dev_edge_130.0.2849.80_before_assert_record_saved.png",
+        "source" : "573daf6c7d527c9c.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731504517436,
+        "stop" : 1731504521724,
+        "duration" : 4288
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5cbbd8a702922e58",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "5cbbd8a702922e58.png",
+        "type" : "image/png",
+        "size" : 43521
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1731504521724,
+        "stop" : 1731504542256,
+        "duration" : 20532
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "290b513f381f3898",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "290b513f381f3898.png",
+        "type" : "image/png",
+        "size" : 43521
+      }, {
+        "uid" : "c3c9fef0df36f915",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "c3c9fef0df36f915.png",
+        "type" : "image/png",
+        "size" : 43518
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1731504542257,
+        "stop" : 1731504564674,
+        "duration" : 22417
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (120 + 1)\n +  where 0 = int(0)\n +  and   120 = int(120)",
+      "statusTrace" : "AssertionError: assert 0 >= (120 + 1)\n +  where 0 = int(0)\n +  and   120 = int(120)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4c81942ee4db848a",
+        "name" : "dev_edge_130.0.2849.80_immunisation_history_records_count_after_vaccination.png",
+        "source" : "4c81942ee4db848a.png",
+        "type" : "image/png",
+        "size" : 43518
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "471624ba0e248eaa",
+      "name" : "log",
+      "source" : "471624ba0e248eaa.txt",
+      "type" : "text/plain",
+      "size" : 16533
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 21,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "5135f797976a"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "assess_date",
+    "value" : "today"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-SJ1"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre open to the public"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "0"
+  }, {
+    "name" : "name",
+    "value" : "Bill GARTON"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9693632109"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "d8ff6f595952c06f.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2026", "AUTOMATION-SJ1", "Vaccination Centre open to the public", "COVID-19", "yes", "23/6/1946", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
+}

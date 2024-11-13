@@ -10,6 +10,7 @@ ALERT_TEXT_PASSWORD = ("//p[contains(@id, 'input-container-error')]")
 ERROR_UNABLE_TO_SIGN_IN = ("text", "Unable to sign in")
 FOUND_SOME_ERRORS = ("text", "We found some errors. Please review the form and make corrections.")
 LOGOUT_NAV_ELEMENT = ("role", "link", "Log Out")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def navigate_to_nhs_signin_page(url):
     navigate_to_url(url)
@@ -26,6 +27,7 @@ def click_nhs_signin_button():
     wait_for_element_to_appear(SIGN_IN_BUTTON_ELEMENT)
     find_element_and_perform_action(SIGN_IN_BUTTON_ELEMENT, "click")
     wait_for_page_to_load(timeout=10)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
 
 def enter_email_address(emailAddress):
