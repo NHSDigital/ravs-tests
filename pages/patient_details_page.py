@@ -45,7 +45,7 @@ def check_pertussis_history_element_exists():
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(2)
+    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
     element = ("xpath", f"//h3[contains(text(), '{chosen_vaccine}')]/following-sibling::div/p[contains(text(), 'Displaying')]")
