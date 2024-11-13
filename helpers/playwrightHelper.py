@@ -3,7 +3,6 @@ from playwright.sync_api import sync_playwright, TimeoutError, Locator
 from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
-import logging
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -86,8 +85,6 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, full_path):
         try:
-            logging.debug("Scrolling to the top of the page.")
-            self.page.evaluate("window.scrollTo(0, 0);")
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):
@@ -206,7 +203,7 @@ class BasePlaywrightHelper:
     def handle_unresponsive_page(self):
         if not self.is_page_responsive():
             print("Page is unresponsive. Attempting to reload or take action.")
-            self.page.reload(wait_until="networkidle")  
+            self.page.reload()  # You might want to handle this more gracefully
             self.wait_for_page_to_load()
 
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):

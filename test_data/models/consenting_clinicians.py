@@ -1,5 +1,8 @@
 consenting_clinicians = [
-    "Automated Lead Admin - neelima.guntupalli1+leadadmin_automated@nhs.net",
-    "Automated Recorder - neelima.guntupalli1+recorder_automated@nhs.net",
-    "Automated Administrator - neelima.guntupalli1+administrator_automated@nhs.net"
+    "Mark Chapman - mark.chapman1@nhs.net",
+    "Test Clinicians - test@nhs.net",
+    "Test Clinicians - test@nhs.net",
+    "Test Clinicians - test@nhs.net",
+    "Paul Parker - paul.parker13@nhs.net",
+    "Richard Williams - rich.williams1@nhs.net"
 ]
