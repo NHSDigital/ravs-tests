@@ -14,6 +14,7 @@ import random
 warnings.filterwarnings("ignore", category=UserWarning, module='faker')
 
 features_directory = get_working_directory() + "features"
+
 logging.basicConfig(level=logging.CRITICAL)
 logger = logging.getLogger(__name__)
 

@@ -37,16 +37,25 @@ from test_data.models.flu_vaccine_radio_button_xpath_map import flu_vaccine_radi
 from test_data.models.covid_vaccine_radio_button_xpath_map import covid_vaccine_radio_button_xpath_map
 import random
 
+# def get_wrapped_index(index, length):
+#     if length == 0:
+#         return 0
+#     try:
+#         index = int(index)
+#     except ValueError:
+#         return get_random_index(length)
+#     if index < 0 or index >= length:
+#         return get_random_index(length)
+#     return index
+
 def get_wrapped_index(index, length):
     if length == 0:
         return 0
     try:
         index = int(index)
     except ValueError:
-        return get_random_index(length)
-    if index < 0 or index >= length:
-        return get_random_index(length)
-    return index
+        return 0
+    return index % length
 
 def get_random_index(length):
     if length <= 0:
