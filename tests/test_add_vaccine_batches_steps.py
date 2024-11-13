@@ -73,7 +73,7 @@ def view_product_for_site_and_vaccine_type(shared_data):
     click_first_available_view_product_link()
     shared_data["batch_number"] = get_first_active_batch_number_value()
 
-@when("I enter batch number that already exists and expiry date")
+@when("I enter batch number  that already exists and expiry date")
 def i_enter_batchprefix_and_batchsuffix(shared_data):
     click_add_batch_link()
     enter_batch_number(shared_data["batch_number"])
@@ -90,7 +90,6 @@ def add_batch_page_should_launch():
 def batch_already_added_warning_should_exist():
     attach_screenshot("batch_already_added_warning_message_exists")
     assert check_batch_already_exists_error_message_is_displayed() == True
-    click_continue_to_add_batch_button()
     assert check_batch_already_exists_error_message_link_is_displayed() == True
 
 @when('I click continue to confirm batch details page')
