@@ -73,11 +73,11 @@ def view_product_for_site_and_vaccine_type(shared_data):
     click_first_available_view_product_link()
     shared_data["batch_number"] = get_first_active_batch_number_value()
 
-@when("I enter batch number that already exists and expiry date")
-def i_enter_batchprefix_and_batchsuffix(shared_data):
+@when(parse("I enter {batch_number} that already exists and {expiry_date}"))
+def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date):
     click_add_batch_link()
-    enter_batch_number(shared_data["batch_number"])
-    expiry_date = format_date(str(get_date_value("today+365")), config["browser"])
+    enter_batch_number(batch_number)
+    # expiry_date = format_date(str(get_date_value("today+365")), config["browser"])
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_batch_number")
 

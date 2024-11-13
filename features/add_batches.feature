@@ -20,9 +20,9 @@ Feature: Add Batches to vaccine
     Given I am on the RAVS home page
     When I am on the vaccines page
     And I view product for the existing vaccine in an existing site
-    And I enter batch number that already exists and expiry date
+    And I enter <batch_number> that already exists and <expiry_date>
     Then the batch is already added to site warning should appear
 
     Examples:
-      | site         | vaccine  | vaccine_type  | batch_number       |
-      | ALBERT HOUSE | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     |
+      | site         | vaccine  | vaccine_type  | batch_number       | expiry_date |
+      | ALBERT HOUSE | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
