@@ -219,6 +219,9 @@ def wait_for_element_to_disappear(element):
 def capture_screenshot(filename):
     return playwright_helper_instance.capture_screenshot(filename)
 
+def handle_unresponsive_page():
+    return playwright_helper_instance.handle_unresponsive_page()
+
 def find_element_and_perform_action(element, action, inputValue=None):
     if isinstance(element, (tuple, list)):
         element = get_element_by_type(*element)  # Unpack the tuple/list

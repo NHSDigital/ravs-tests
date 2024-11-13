@@ -1,5 +1,4 @@
 Feature: Find a patient
-Feature: Find a patient
 
   @findpatient
   Scenario: Find a patient page should launch
@@ -104,7 +103,7 @@ Feature: Find a patient
     Examples:
       | nhsNumber  | firstName | lastName | dob        | address                                                    | postcode | gender |
       | 9693632109 | Bill      | Garton   |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | DN18 5DW | Male   |
-      | 9470006739 | JANNETTE  | ARD      | 09/12/2015 |           1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ | LA21 8HZ | Other  |
+      | 9470006739 | JANNETTE  | ARD      | 09/12/2015 | 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ | LA21 8HZ | Other  |
 
   @findpatient
   Scenario Outline: Demographics: Search does not find existing patients if any of their details are wrong
