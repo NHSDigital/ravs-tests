@@ -4,16 +4,16 @@
   "children" : [ {
     "name" : "Product defects",
     "children" : [ {
-      "name" : "AttributeError: 'NoneType' object has no attribute 'replace'",
+      "name" : "AssertionError: assert False == True\n +  where False = check_batch_already_exists_error_message_is_displayed()",
       "children" : [ {
         "name" : "Add batch to vaccine [ALBERT HOUSE-COVID-19-Spikevax JN.1-AUTOMATION-SJ1-19/10/2026]",
-        "uid" : "ea4aa86c48993df",
-        "parentUid" : "25a21910444aa008768d7f030679064d",
+        "uid" : "bf23cb7802915e3b",
+        "parentUid" : "3d73f087a4e57f391b7e00fcfec13be1",
         "status" : "failed",
         "time" : {
-          "start" : 1731598493311,
-          "stop" : 1731598551701,
-          "duration" : 58390
+          "start" : 1731604269441,
+          "stop" : 1731604298535,
+          "duration" : 29094
         },
         "flaky" : false,
         "newFailed" : false,
@@ -23,18 +23,18 @@
         "retriesStatusChange" : false,
         "parameters" : [ "AUTOMATION-SJ1", "19/10/2026", "ALBERT HOUSE", "COVID-19", "Spikevax JN.1" ]
       } ],
-      "uid" : "25a21910444aa008768d7f030679064d"
+      "uid" : "3d73f087a4e57f391b7e00fcfec13be1"
     }, {
-      "name" : "AssertionError: assert False == True\n +  where False = check_patient_multiple_results_found_message_exists(True)",
+      "name" : "AssertionError: assert False\n +  where False = check_enter_batch_number_error_message_is_displayed()",
       "children" : [ {
-        "name" : "Demographics: Multiple demographic matches shows an error that more than one result is found [Aidan-Smith-23/02/2020]",
-        "uid" : "51b661ab60d20ef2",
-        "parentUid" : "f17dee65973499f126a9164b19ce01ed",
+        "name" : "Error messages should appear when no values are entered",
+        "uid" : "19aaadf1987ca1b7",
+        "parentUid" : "da0b9baaf1163f54173c6ceb43a6c2eb",
         "status" : "failed",
         "time" : {
-          "start" : 1731598672283,
-          "stop" : 1731598689641,
-          "duration" : 17358
+          "start" : 1731604302605,
+          "stop" : 1731604317059,
+          "duration" : 14454
         },
         "flaky" : false,
         "newFailed" : false,
@@ -42,9 +42,30 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "23/02/2020", "Aidan", "Smith" ]
+        "parameters" : [ ]
       } ],
-      "uid" : "f17dee65973499f126a9164b19ce01ed"
+      "uid" : "da0b9baaf1163f54173c6ceb43a6c2eb"
+    }, {
+      "name" : "AssertionError: assert 34 >= (34 + 1)\n +  where 34 = int(34)\n +  and   34 = int(34)",
+      "children" : [ {
+        "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Outreach event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATION-CBQI-19/10/2026]",
+        "uid" : "1faf990ee211dda0",
+        "parentUid" : "c0a6b864f2dd636f70efcc20c12e3e6c",
+        "status" : "failed",
+        "time" : {
+          "start" : 1731604829551,
+          "stop" : 1731604870179,
+          "duration" : 40628
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "19/10/2026", "AUTOMATION-CBQI", "Outreach event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today" ]
+      } ],
+      "uid" : "c0a6b864f2dd636f70efcc20c12e3e6c"
     } ],
     "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
   } ]

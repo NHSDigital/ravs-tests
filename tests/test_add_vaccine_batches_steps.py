@@ -70,14 +70,12 @@ def i_click_confirm_button():
 
 @when("I view product for the existing vaccine in an existing site")
 def view_product_for_site_and_vaccine_type(shared_data):
-    click_first_available_view_product_link()
-    shared_data["batch_number"] = get_first_active_batch_number_value()
+    click_view_product_link("Comirnaty 10 JN.1")
 
 @when(parse("I enter {batch_number} that already exists and {expiry_date}"))
 def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date):
-    click_add_batch_link()
+    click_add_batch_button()
     enter_batch_number(batch_number)
-    # expiry_date = format_date(str(get_date_value("today+365")), config["browser"])
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_batch_number")
 

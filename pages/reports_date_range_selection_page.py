@@ -1,6 +1,7 @@
 from init_helpers import *
 
 CREATE_REPORT_BUTTON = ("role", "button", "Create report")
+NO_VACCINATION_DATE_TO_REPORT = ("text", "No vaccination data to report")
 TODAY_RADIO_BUTTON = ("label", "Today", None, True)
 YESTERDAY_RADIO_BUTTON = ("label", "Yesterday")
 LAST_7_DAYS_RADIO_BUTTON = ("label", "Last 7 days (includes today)")
@@ -29,6 +30,16 @@ def check_create_report_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)
     return check_element_exists(CREATE_REPORT_BUTTON)
+
+def check_no_vaccination_data_to_report_message_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(NO_VACCINATION_DATE_TO_REPORT)
+    return check_element_exists(NO_VACCINATION_DATE_TO_REPORT)
+
+def check_create_report_button_enabled():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CREATE_REPORT_BUTTON)
+    return check_element_enabled(CREATE_REPORT_BUTTON)
 
 def click_create_report_button():
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)

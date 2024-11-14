@@ -8,6 +8,9 @@ view_product_button = "//a[text()='View Product']"
 add_batch_link = "//a[text()='Add batch']"
 filter_by_site_dropdown = ("label", "Select site")
 
+def click_view_product_link(vaccine):
+   click_link_in_row(vaccine, 0)
+
 def click_first_available_view_product_link():
     xpath = "(//tr[@role='row']//a[contains(text(),'View product')])[1]"
     find_element_and_perform_action(("xpath", xpath), "click")
