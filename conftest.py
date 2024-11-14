@@ -353,3 +353,18 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("patient_decided_to_not_vaccinate")
         click_save_and_return_button_on_record_vaccinated_page()
         attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
+
+def navigate_and_login_with_username(username):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+                click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    url = get_app_url(config["test_environment"])
+    navigate_to_ravs_login_page(url)
+    click_login_button()
+    emailAddress = username
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()

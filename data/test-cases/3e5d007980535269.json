@@ -1,0 +1,424 @@
+{
+  "uid" : "3e5d007980535269",
+  "name" : "Record a vaccine with nhs number [3-9470057589-ALBERT HOUSE-Care home-yes-today-2-yes-yes-today-1-ROGER SEABORNE-13/12/1922-10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG-COVID-19-AUTOMATION-C3-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "d461eee0f5f5c4b1ad524a61ba5ca89b",
+  "time" : {
+    "start" : 1731604649340,
+    "stop" : 1731604783121,
+    "duration" : 133781
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Care home and get patient details for 9470057589 with option 3 and choose to vaccinate with vaccine details as COVID-19, AUTOMATION-C3 with 19/10/2026",
+      "time" : {
+        "start" : 1731604649340,
+        "stop" : 1731604746500,
+        "duration" : 97160
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731604746501,
+        "stop" : 1731604752670,
+        "duration" : 6169
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5f511f8b5175ae47",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9470057589_and_clicked_search_for_patient_button.png",
+        "source" : "5f511f8b5175ae47.png",
+        "type" : "image/png",
+        "size" : 48889
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient ROGER SEABORNE",
+      "time" : {
+        "start" : 1731604752671,
+        "stop" : 1731604753953,
+        "duration" : 1282
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "92a0d20887478849",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "92a0d20887478849.png",
+        "type" : "image/png",
+        "size" : 48889
+      }, {
+        "uid" : "74d9c96ae511faa1",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "74d9c96ae511faa1.png",
+        "type" : "image/png",
+        "size" : 48216
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, AUTOMATION-C3 with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731604753954,
+        "stop" : 1731604761603,
+        "duration" : 7649
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7a25df769915ee2d",
+        "name" : "dev_edge_130.0.2849.80_clicked_on_patient_ROGER SEABORNE_and_clicked_choose_vaccine_button.png",
+        "source" : "7a25df769915ee2d.png",
+        "type" : "image/png",
+        "size" : 81532
+      }, {
+        "uid" : "da3be57161b2523a",
+        "name" : "dev_edge_130.0.2849.80_selected_vaccine_COVID-19_and_Comirnaty 3 JN.1_and_clicked_continue_button.png",
+        "source" : "da3be57161b2523a.png",
+        "type" : "image/png",
+        "size" : 74659
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-2 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731604761604,
+        "stop" : 1731604763823,
+        "duration" : 2219
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8b8af25e63133160",
+        "name" : "dev_edge_130.0.2849.80_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "8b8af25e63133160.png",
+        "type" : "image/png",
+        "size" : 72973
+      }, {
+        "uid" : "5ddc093ba204e3da",
+        "name" : "dev_edge_130.0.2849.80_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "5ddc093ba204e3da.png",
+        "type" : "image/png",
+        "size" : 74932
+      }, {
+        "uid" : "23ceecf4d095c403",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_record_consent_button.png",
+        "source" : "23ceecf4d095c403.png",
+        "type" : "image/png",
+        "size" : 42978
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731604763824,
+        "stop" : 1731604765432,
+        "duration" : 1608
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a446c6cfddcc505b",
+        "name" : "dev_edge_130.0.2849.80_before_selecting_consent_clinician.png",
+        "source" : "a446c6cfddcc505b.png",
+        "type" : "image/png",
+        "size" : 42978
+      }, {
+        "uid" : "5d2633b11ed073b1",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_vaccinate_button.png",
+        "source" : "5d2633b11ed073b1.png",
+        "type" : "image/png",
+        "size" : 59867
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1731604765432,
+        "stop" : 1731604770555,
+        "duration" : 5123
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "bc7d6f840732c2ff",
+        "name" : "dev_edge_130.0.2849.80_entered_vaccination_details.png",
+        "source" : "bc7d6f840732c2ff.png",
+        "type" : "image/png",
+        "size" : 50832
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient ROGER SEABORNE, 13/12/1922, 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1731604770556,
+        "stop" : 1731604771354,
+        "duration" : 798
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5c5b8a62b4d7259",
+        "name" : "dev_edge_130.0.2849.80_check_and_confirm_screen_before_assertion.png",
+        "source" : "5c5b8a62b4d7259.png",
+        "type" : "image/png",
+        "size" : 50848
+      }, {
+        "uid" : "d03d68a5a1193e63",
+        "name" : "dev_edge_130.0.2849.80_vaccination_dose_amount.png",
+        "source" : "d03d68a5a1193e63.png",
+        "type" : "image/png",
+        "size" : 50848
+      }, {
+        "uid" : "187bbe8af096c99d",
+        "name" : "dev_edge_130.0.2849.80_check_and_confirm_screen_after_assertion.png",
+        "source" : "187bbe8af096c99d.png",
+        "type" : "image/png",
+        "size" : 50848
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1731604771355,
+        "stop" : 1731604772110,
+        "duration" : 755
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e47c6dde76df70ed",
+        "name" : "dev_edge_130.0.2849.80_patient_details_screen_with_immunisation_history.png",
+        "source" : "e47c6dde76df70ed.png",
+        "type" : "image/png",
+        "size" : 50848
+      }, {
+        "uid" : "15e21d3a79198384",
+        "name" : "dev_edge_130.0.2849.80_before_assert_record_saved.png",
+        "source" : "15e21d3a79198384.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731604772111,
+        "stop" : 1731604777303,
+        "duration" : 5192
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "168f5b58ff28d970",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9470057589_and_clicked_search_for_patient_button.png",
+        "source" : "168f5b58ff28d970.png",
+        "type" : "image/png",
+        "size" : 49179
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient ROGER SEABORNE",
+      "time" : {
+        "start" : 1731604777303,
+        "stop" : 1731604778569,
+        "duration" : 1266
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b188e6bd1f863052",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "b188e6bd1f863052.png",
+        "type" : "image/png",
+        "size" : 49179
+      }, {
+        "uid" : "acf628edcd739452",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "acf628edcd739452.png",
+        "type" : "image/png",
+        "size" : 48216
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1731604778569,
+        "stop" : 1731604783121,
+        "duration" : 4552
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5891f8f7848f1b63",
+        "name" : "dev_edge_130.0.2849.80_immunisation_history_records_count_after_vaccination.png",
+        "source" : "5891f8f7848f1b63.png",
+        "type" : "image/png",
+        "size" : 48216
+      }, {
+        "uid" : "274d02037d03b7c0",
+        "name" : "dev_edge_130.0.2849.80_click_delete_history_link.png",
+        "source" : "274d02037d03b7c0.png",
+        "type" : "image/png",
+        "size" : 44617
+      }, {
+        "uid" : "4fc38d76f3524c3b",
+        "name" : "dev_edge_130.0.2849.80_click_delete_vaccination_button.png",
+        "source" : "4fc38d76f3524c3b.png",
+        "type" : "image/png",
+        "size" : 48216
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "aee3e8cd07db18b6",
+      "name" : "log",
+      "source" : "aee3e8cd07db18b6.txt",
+      "type" : "text/plain",
+      "size" : 17345
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 23,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "43adabc67d84"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-C3"
+  }, {
+    "name" : "care_model",
+    "value" : "Care home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "13/12/1922"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "3"
+  }, {
+    "name" : "name",
+    "value" : "ROGER SEABORNE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9470057589"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "3e5d007980535269.json",
+  "parameterValues" : [ "10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG", "today-2", "19/10/2026", "AUTOMATION-C3", "Care home", "COVID-19", "yes", "13/12/1922", "yes", "3", "ROGER SEABORNE", "9470057589", "ALBERT HOUSE", "yes", "today-1" ]
+}
