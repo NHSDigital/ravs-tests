@@ -1,0 +1,424 @@
+{
+  "uid" : "65fe57250ef052fb",
+  "name" : "Record a vaccine with nhs number [1-9450141444-ALBERT HOUSE-Care home-yes-today-4-yes-yes-today-2-BRANDIE DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-AUTOMATION-QI-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "c33b39ac6ef580ed9d66b4070fc26488",
+  "time" : {
+    "start" : 1731610139928,
+    "stop" : 1731610189176,
+    "duration" : 49248
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Care home and get patient details for 9450141444 with option 1 and choose to vaccinate with vaccine details as Flu, AUTOMATION-QI with 19/10/2026",
+      "time" : {
+        "start" : 1731610139928,
+        "stop" : 1731610143571,
+        "duration" : 3643
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731610143572,
+        "stop" : 1731610148815,
+        "duration" : 5243
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "60721f437ad42d62",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9450141444_and_clicked_search_for_patient_button.png",
+        "source" : "60721f437ad42d62.png",
+        "type" : "image/png",
+        "size" : 48408
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient BRANDIE DYBLE",
+      "time" : {
+        "start" : 1731610148815,
+        "stop" : 1731610149596,
+        "duration" : 781
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3d07a364396eadf9",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "3d07a364396eadf9.png",
+        "type" : "image/png",
+        "size" : 48408
+      }, {
+        "uid" : "1745cc7d86d8c17b",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "1745cc7d86d8c17b.png",
+        "type" : "image/png",
+        "size" : 50764
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, AUTOMATION-QI with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731610149597,
+        "stop" : 1731610158547,
+        "duration" : 8950
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7a87c193148f9bea",
+        "name" : "dev_edge_130.0.2849.80_clicked_on_patient_BRANDIE DYBLE_and_clicked_choose_vaccine_button.png",
+        "source" : "7a87c193148f9bea.png",
+        "type" : "image/png",
+        "size" : 83245
+      }, {
+        "uid" : "d68bba40f34916d2",
+        "name" : "dev_edge_130.0.2849.80_selected_vaccine_Flu_and_Quadrivalent Influenza Vaccine_and_clicked_continue_button.png",
+        "source" : "d68bba40f34916d2.png",
+        "type" : "image/png",
+        "size" : 73985
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-4 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731610158548,
+        "stop" : 1731610160479,
+        "duration" : 1931
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5154534fe1e50e2e",
+        "name" : "dev_edge_130.0.2849.80_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "5154534fe1e50e2e.png",
+        "type" : "image/png",
+        "size" : 73914
+      }, {
+        "uid" : "b7dc2813f6122303",
+        "name" : "dev_edge_130.0.2849.80_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "b7dc2813f6122303.png",
+        "type" : "image/png",
+        "size" : 76848
+      }, {
+        "uid" : "849b3998caa5a225",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_record_consent_button.png",
+        "source" : "849b3998caa5a225.png",
+        "type" : "image/png",
+        "size" : 44502
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731610160480,
+        "stop" : 1731610161998,
+        "duration" : 1518
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "721ae625d3181c1d",
+        "name" : "dev_edge_130.0.2849.80_before_selecting_consent_clinician.png",
+        "source" : "721ae625d3181c1d.png",
+        "type" : "image/png",
+        "size" : 44502
+      }, {
+        "uid" : "eed0cc03cd5981aa",
+        "name" : "dev_edge_130.0.2849.80_clicked_continue_to_vaccinate_button.png",
+        "source" : "eed0cc03cd5981aa.png",
+        "type" : "image/png",
+        "size" : 63061
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-2 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1731610161998,
+        "stop" : 1731610167324,
+        "duration" : 5326
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "65addc6afbccd1ac",
+        "name" : "dev_edge_130.0.2849.80_entered_vaccination_details.png",
+        "source" : "65addc6afbccd1ac.png",
+        "type" : "image/png",
+        "size" : 64320
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient BRANDIE DYBLE, 25/8/1992, 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1731610167325,
+        "stop" : 1731610168230,
+        "duration" : 905
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "71428dd6032fbdcd",
+        "name" : "dev_edge_130.0.2849.80_check_and_confirm_screen_before_assertion.png",
+        "source" : "71428dd6032fbdcd.png",
+        "type" : "image/png",
+        "size" : 62748
+      }, {
+        "uid" : "a654bca0a136c126",
+        "name" : "dev_edge_130.0.2849.80_vaccination_dose_amount.png",
+        "source" : "a654bca0a136c126.png",
+        "type" : "image/png",
+        "size" : 62748
+      }, {
+        "uid" : "43edd68aaa9ca22b",
+        "name" : "dev_edge_130.0.2849.80_check_and_confirm_screen_after_assertion.png",
+        "source" : "43edd68aaa9ca22b.png",
+        "type" : "image/png",
+        "size" : 62748
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1731610168230,
+        "stop" : 1731610169035,
+        "duration" : 805
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8c8ca663b94eeed4",
+        "name" : "dev_edge_130.0.2849.80_patient_details_screen_with_immunisation_history.png",
+        "source" : "8c8ca663b94eeed4.png",
+        "type" : "image/png",
+        "size" : 62748
+      }, {
+        "uid" : "bdeb7a0decc20e78",
+        "name" : "dev_edge_130.0.2849.80_before_assert_record_saved.png",
+        "source" : "bdeb7a0decc20e78.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731610169035,
+        "stop" : 1731610174261,
+        "duration" : 5226
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "2141ccb311abc0d0",
+        "name" : "dev_edge_130.0.2849.80_entered_nhs_number_as9450141444_and_clicked_search_for_patient_button.png",
+        "source" : "2141ccb311abc0d0.png",
+        "type" : "image/png",
+        "size" : 48443
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient BRANDIE DYBLE",
+      "time" : {
+        "start" : 1731610174261,
+        "stop" : 1731610175527,
+        "duration" : 1266
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c675e0cc77f1a87b",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "c675e0cc77f1a87b.png",
+        "type" : "image/png",
+        "size" : 48443
+      }, {
+        "uid" : "5ef145f66a55f80a",
+        "name" : "dev_edge_130.0.2849.80_before_clicking_patient_name.png",
+        "source" : "5ef145f66a55f80a.png",
+        "type" : "image/png",
+        "size" : 50764
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1731610175527,
+        "stop" : 1731610189176,
+        "duration" : 13649
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "2d010334f7c1d0ba",
+        "name" : "dev_edge_130.0.2849.80_immunisation_history_records_count_after_vaccination.png",
+        "source" : "2d010334f7c1d0ba.png",
+        "type" : "image/png",
+        "size" : 50764
+      }, {
+        "uid" : "a65538942f3976ae",
+        "name" : "dev_edge_130.0.2849.80_click_delete_history_link.png",
+        "source" : "a65538942f3976ae.png",
+        "type" : "image/png",
+        "size" : 44617
+      }, {
+        "uid" : "a27344e5d4d66ec9",
+        "name" : "dev_edge_130.0.2849.80_click_delete_vaccination_button.png",
+        "source" : "a27344e5d4d66ec9.png",
+        "type" : "image/png",
+        "size" : 37375
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "6ef2d0bf38cf1ace",
+      "name" : "log",
+      "source" : "6ef2d0bf38cf1ace.txt",
+      "type" : "text/plain",
+      "size" : 17341
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 23,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "bab6da2d293e"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-4"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-QI"
+  }, {
+    "name" : "care_model",
+    "value" : "Care home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "25/8/1992"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "1"
+  }, {
+    "name" : "name",
+    "value" : "BRANDIE DYBLE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450141444"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-2"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "65fe57250ef052fb.json",
+  "parameterValues" : [ "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF", "today-4", "19/10/2026", "AUTOMATION-QI", "Care home", "Flu", "yes", "25/8/1992", "yes", "1", "BRANDIE DYBLE", "9450141444", "ALBERT HOUSE", "yes", "today-2" ]
+}
