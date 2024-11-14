@@ -99,6 +99,7 @@ def step_when_i_click_continue():
 
 @then('the error messages and error links should appear highlighting missing required fields')
 def step_then_the_error_messages_for_missing_fields_should_appear():
+    attach_screenshot(check_enter_batch_number_error_message_is_displayed)
     assert check_enter_batch_number_error_message_is_displayed()
     assert check_enter_batch_number_error_message_link_is_displayed()
     assert check_enter_batch_expiry_date_error_message_is_displayed()
