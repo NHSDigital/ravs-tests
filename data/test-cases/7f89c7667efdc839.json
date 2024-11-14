@@ -1,0 +1,215 @@
+{
+  "uid" : "7f89c7667efdc839",
+  "name" : "Local: Created patient can be found using local search",
+  "fullName" : "/app/features/find_a_patient.feature:Local: Created patient can be found using local search",
+  "historyId" : "318f11c97be2b8bb6bebbd84c9bce5b1",
+  "time" : {
+    "start" : 1731573763203,
+    "stop" : 1731574282766,
+    "duration" : 519563
+  },
+  "status" : "failed",
+  "statusMessage" : "TypeError: argument of type 'NoneType' is not iterable",
+  "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7f35c9247ec0>\nrequest = <FixtureRequest for <Function test_local_created_patient_can_be_found_using_local_search>>\nkwargs = {'shared_data': {'dob': '15/7/1956', 'first_name': 'Naomi', 'gender': 'Other', 'last_name': 'Smith', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'dob': '15/7/1956', 'first_name': 'Naomi', 'gender': 'Other', 'last_name': 'Smith', ...}\n\n    @then(\"I can check and confirm the patient information is correct\")\n    def step_patient_information_page_should_be_available(shared_data):\n        attach_screenshot(\"patient_information_is_correct\")\n>       assert shared_data[\"first_name\"] in get_first_name_field_text()\nE       TypeError: argument of type 'NoneType' is not iterable\n\ntests/test_find_a_patient_steps.py:278: TypeError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "TypeError: argument of type 'NoneType' is not iterable",
+    "statusTrace" : "fixturefunc = <function step_patient_information_page_should_be_available at 0x7f35c9247ec0>\nrequest = <FixtureRequest for <Function test_local_created_patient_can_be_found_using_local_search>>\nkwargs = {'shared_data': {'dob': '15/7/1956', 'first_name': 'Naomi', 'gender': 'Other', 'last_name': 'Smith', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'dob': '15/7/1956', 'first_name': 'Naomi', 'gender': 'Other', 'last_name': 'Smith', ...}\n\n    @then(\"I can check and confirm the patient information is correct\")\n    def step_patient_information_page_should_be_available(shared_data):\n        attach_screenshot(\"patient_information_is_correct\")\n>       assert shared_data[\"first_name\"] in get_first_name_field_text()\nE       TypeError: argument of type 'NoneType' is not iterable\n\ntests/test_find_a_patient_steps.py:278: TypeError",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by demographics page",
+      "time" : {
+        "start" : 1731573763204,
+        "stop" : 1731573905749,
+        "duration" : 142545
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I generate random data for a new patient",
+      "time" : {
+        "start" : 1731573905749,
+        "stop" : 1731573905750,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the new patient details on find by demographics page",
+      "time" : {
+        "start" : 1731573905750,
+        "stop" : 1731574047785,
+        "duration" : 142035
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dda32c144dedb4d2",
+        "name" : "dev_edge_130.0.2849.80_add_mandatory_new_patient_information.png",
+        "source" : "dda32c144dedb4d2.png",
+        "type" : "image/png",
+        "size" : 4331
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I click the search button",
+      "time" : {
+        "start" : 1731574047785,
+        "stop" : 1731574070072,
+        "duration" : 22287
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I click the create a new patient button",
+      "time" : {
+        "start" : 1731574070073,
+        "stop" : 1731574090353,
+        "duration" : 20280
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter the new patient details on create a new patient page",
+      "time" : {
+        "start" : 1731574090353,
+        "stop" : 1731574232395,
+        "duration" : 142042
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a3244c5b9973d902",
+        "name" : "dev_edge_130.0.2849.80_add_mandatory_new_patient_information.png",
+        "source" : "a3244c5b9973d902.png",
+        "type" : "image/png",
+        "size" : 4331
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click the check and confirm button",
+      "time" : {
+        "start" : 1731574232395,
+        "stop" : 1731574242551,
+        "duration" : 10156
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can check and confirm the patient information is correct",
+      "time" : {
+        "start" : 1731574242552,
+        "stop" : 1731574282766,
+        "duration" : 40214
+      },
+      "status" : "failed",
+      "statusMessage" : "argument of type 'NoneType' is not iterable",
+      "statusTrace" : "TypeError: argument of type 'NoneType' is not iterable\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "858bc4bfd203e139",
+        "name" : "dev_edge_130.0.2849.80_patient_information_is_correct.png",
+        "source" : "858bc4bfd203e139.png",
+        "type" : "image/png",
+        "size" : 4331
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "9a3129625b783125",
+      "name" : "log",
+      "source" : "9a3129625b783125.txt",
+      "type" : "text/plain",
+      "size" : 3797
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "65c7fd734071"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "7f89c7667efdc839.json",
+  "parameterValues" : [ ]
+}
