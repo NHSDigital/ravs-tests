@@ -1,0 +1,356 @@
+{
+  "uid" : "644bf5f0e8ff91f9",
+  "name" : "Record a vaccine with nhs number [9-9474405174-BIRCH HOUSE-Housebound patient's home-yes-today-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATED-AQI-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "3e4db09534cb30126d01834ceddbeb80",
+  "time" : {
+    "start" : 1731678492558,
+    "stop" : 1731678526541,
+    "duration" : 33983
+  },
+  "status" : "failed",
+  "statusMessage" : "TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'",
+  "statusTrace" : "fixturefunc = <function step_record_consent_and_click_continue_to_vaccinate_screen at 0x7f32804e7ce0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[9-9474405174-BIRCH HOUSE-Housebound patient's home...-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATED-AQI-19/10/2026]>>\nkwargs = {'consent': 'yes', 'shared_data': {'assessment_comments': 'Assessment comments 15/11/2024PHINEAS FAYLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATED-AQI', 'care_model': 'Care home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:121: in step_record_consent_and_click_continue_to_vaccinate_screen\n    record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data[\"no_consent_reason\"])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconsent_decision = 'yes'\nconsent_given_by = 'Independent mental capacity advocate'\nperson_consenting_name = 'Automation tester'\nrelationship_to_patient = 'RAVS tester'\nconsent_clinician = 'Automated Administrator - neelima.guntupalli1+administrator_automated@nhs.net'\nlegal_mechanism = 'Patient Group Direction (PGD)', no_consent_reason = 'Other'\n\n    def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):\n        attach_screenshot(\"before_selecting_consent_clinician\")\n    \n        logging.debug(\"Consent clinician to select is: \" + consent_clinician)\n        logging.debug(\"Consent legal mechanism is: \" + legal_mechanism)\n    \n        if (legal_mechanism) != \"Patient Group Direction (PGD)\":\n            select_consent_clinician_with_name_and_council(consent_clinician)\n            attach_screenshot(\"selected_consent_clinician_with_name_and_council\")\n    \n        if consent_decision.lower() == 'yes':\n            click_yes_to_consent()\n            attach_screenshot(\"clicked_yes_to_consent\")\n            select_consent_given_by_from_dropdown(consent_given_by)\n            attach_screenshot(\"selected_consent_given_by_from_dropdown\")\n    \n            if consent_given_by != \"Patient (informed consent)\":\n                enter_person_consenting_details(person_consenting_name)\n                attach_screenshot(\"entered_person_consenting_details\")\n                enter_relationship_to_patient(relationship_to_patient)\n>               add_vaccine_type_batch(\"entered_relationship_to_patient\")\nE               TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'\n\nconftest.py:347: TypeError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'",
+    "statusTrace" : "fixturefunc = <function step_record_consent_and_click_continue_to_vaccinate_screen at 0x7f32804e7ce0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[9-9474405174-BIRCH HOUSE-Housebound patient's home...-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATED-AQI-19/10/2026]>>\nkwargs = {'consent': 'yes', 'shared_data': {'assessment_comments': 'Assessment comments 15/11/2024PHINEAS FAYLE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATED-AQI', 'care_model': 'Care home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:121: in step_record_consent_and_click_continue_to_vaccinate_screen\n    record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data[\"no_consent_reason\"])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconsent_decision = 'yes'\nconsent_given_by = 'Independent mental capacity advocate'\nperson_consenting_name = 'Automation tester'\nrelationship_to_patient = 'RAVS tester'\nconsent_clinician = 'Automated Administrator - neelima.guntupalli1+administrator_automated@nhs.net'\nlegal_mechanism = 'Patient Group Direction (PGD)', no_consent_reason = 'Other'\n\n    def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):\n        attach_screenshot(\"before_selecting_consent_clinician\")\n    \n        logging.debug(\"Consent clinician to select is: \" + consent_clinician)\n        logging.debug(\"Consent legal mechanism is: \" + legal_mechanism)\n    \n        if (legal_mechanism) != \"Patient Group Direction (PGD)\":\n            select_consent_clinician_with_name_and_council(consent_clinician)\n            attach_screenshot(\"selected_consent_clinician_with_name_and_council\")\n    \n        if consent_decision.lower() == 'yes':\n            click_yes_to_consent()\n            attach_screenshot(\"clicked_yes_to_consent\")\n            select_consent_given_by_from_dropdown(consent_given_by)\n            attach_screenshot(\"selected_consent_given_by_from_dropdown\")\n    \n            if consent_given_by != \"Patient (informed consent)\":\n                enter_person_consenting_details(person_consenting_name)\n                attach_screenshot(\"entered_person_consenting_details\")\n                enter_relationship_to_patient(relationship_to_patient)\n>               add_vaccine_type_batch(\"entered_relationship_to_patient\")\nE               TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'\n\nconftest.py:347: TypeError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Housebound patient's home and get patient details for 9474405174 with option 9 and choose to vaccinate with vaccine details as Flu, AUTOMATED-AQI with 19/10/2026",
+      "time" : {
+        "start" : 1731678492559,
+        "stop" : 1731678496869,
+        "duration" : 4310
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "44d28f762955d039",
+        "name" : "qa_edge_131.0.2903.48_clicked_vaccines_nav_link.png",
+        "source" : "44d28f762955d039.png",
+        "type" : "image/png",
+        "size" : 46598
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731678496870,
+        "stop" : 1731678502896,
+        "duration" : 6026
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "887b8a9da63531cd",
+        "name" : "qa_edge_131.0.2903.48_entered_nhs_number_as9474405174_and_clicked_search_for_patient_button.png",
+        "source" : "887b8a9da63531cd.png",
+        "type" : "image/png",
+        "size" : 48605
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient PHINEAS FAYLE",
+      "time" : {
+        "start" : 1731678502897,
+        "stop" : 1731678505197,
+        "duration" : 2300
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ed916836b0a3559",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "ed916836b0a3559.png",
+        "type" : "image/png",
+        "size" : 48605
+      }, {
+        "uid" : "636763eb4a8b7f82",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "636763eb4a8b7f82.png",
+        "type" : "image/png",
+        "size" : 47792
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, AUTOMATED-AQI with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731678505197,
+        "stop" : 1731678517600,
+        "duration" : 12403
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d3e03daa4b231493",
+        "name" : "qa_edge_131.0.2903.48_immunisation_history_records_count_is_20.png",
+        "source" : "d3e03daa4b231493.png",
+        "type" : "image/png",
+        "size" : 47792
+      }, {
+        "uid" : "d1f6fc4e8740bafd",
+        "name" : "qa_edge_131.0.2903.48_clicked_choose_vaccine_button.png",
+        "source" : "d1f6fc4e8740bafd.png",
+        "type" : "image/png",
+        "size" : 50824
+      }, {
+        "uid" : "8b99f66e30af7362",
+        "name" : "qa_edge_131.0.2903.48_clicked_on_patient_PHINEAS FAYLE_and_clicked_choose_vaccine_button.png",
+        "source" : "8b99f66e30af7362.png",
+        "type" : "image/png",
+        "size" : 50824
+      }, {
+        "uid" : "f27653efcda885c1",
+        "name" : "qa_edge_131.0.2903.48_clicked_delivery_team.png",
+        "source" : "f27653efcda885c1.png",
+        "type" : "image/png",
+        "size" : 92999
+      }, {
+        "uid" : "bdb13b865f85d455",
+        "name" : "qa_edge_131.0.2903.48_clicked_vaccine.png",
+        "source" : "bdb13b865f85d455.png",
+        "type" : "image/png",
+        "size" : 57503
+      }, {
+        "uid" : "a9833933836922cf",
+        "name" : "qa_edge_131.0.2903.48_clicked_vaccine_type.png",
+        "source" : "a9833933836922cf.png",
+        "type" : "image/png",
+        "size" : 57803
+      }, {
+        "uid" : "397eb115edbb6f7d",
+        "name" : "qa_edge_131.0.2903.48_selected_vaccine_Flu_and_Adjuvanted Quadrivalent Influenza Vaccine_and_clicked_continue_button.png",
+        "source" : "397eb115edbb6f7d.png",
+        "type" : "image/png",
+        "size" : 77019
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731678517601,
+        "stop" : 1731678523831,
+        "duration" : 6230
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "913110df57620dbc",
+        "name" : "qa_edge_131.0.2903.48_clicked_eligible_yes_radiobutton.png",
+        "source" : "913110df57620dbc.png",
+        "type" : "image/png",
+        "size" : 73036
+      }, {
+        "uid" : "ec6fceffe3e2f020",
+        "name" : "qa_edge_131.0.2903.48_selected_eligibility_type.png",
+        "source" : "ec6fceffe3e2f020.png",
+        "type" : "image/png",
+        "size" : 72543
+      }, {
+        "uid" : "7e4b4f53660084e",
+        "name" : "qa_edge_131.0.2903.48_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "7e4b4f53660084e.png",
+        "type" : "image/png",
+        "size" : 72543
+      }, {
+        "uid" : "271c3ee3c3451151",
+        "name" : "qa_edge_131.0.2903.48_set_assessment_date.png",
+        "source" : "271c3ee3c3451151.png",
+        "type" : "image/png",
+        "size" : 72221
+      }, {
+        "uid" : "bf63aff3e969dc33",
+        "name" : "qa_edge_131.0.2903.48_clicked_legal_mechanism.png",
+        "source" : "bf63aff3e969dc33.png",
+        "type" : "image/png",
+        "size" : 71196
+      }, {
+        "uid" : "fb021380db25eef7",
+        "name" : "qa_edge_131.0.2903.48_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "fb021380db25eef7.png",
+        "type" : "image/png",
+        "size" : 73535
+      }, {
+        "uid" : "221e76518fdfee37",
+        "name" : "qa_edge_131.0.2903.48_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "221e76518fdfee37.png",
+        "type" : "image/png",
+        "size" : 73847
+      }, {
+        "uid" : "6341c7752a5c7588",
+        "name" : "qa_edge_131.0.2903.48_entered_comments_for_assessing_patient.png",
+        "source" : "6341c7752a5c7588.png",
+        "type" : "image/png",
+        "size" : 76382
+      }, {
+        "uid" : "862add3b6123ce8e",
+        "name" : "qa_edge_131.0.2903.48_clicked_continue_to_record_consent_button.png",
+        "source" : "862add3b6123ce8e.png",
+        "type" : "image/png",
+        "size" : 45857
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 9,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731678523831,
+        "stop" : 1731678526541,
+        "duration" : 2710
+      },
+      "status" : "failed",
+      "statusMessage" : "add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'",
+      "statusTrace" : "TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8eb7bd6ff25a3e77",
+        "name" : "qa_edge_131.0.2903.48_before_selecting_consent_clinician.png",
+        "source" : "8eb7bd6ff25a3e77.png",
+        "type" : "image/png",
+        "size" : 45857
+      }, {
+        "uid" : "5929fd545d33cdbd",
+        "name" : "qa_edge_131.0.2903.48_clicked_yes_to_consent.png",
+        "source" : "5929fd545d33cdbd.png",
+        "type" : "image/png",
+        "size" : 75901
+      }, {
+        "uid" : "9cadfd8ca634d089",
+        "name" : "qa_edge_131.0.2903.48_selected_consent_given_by_from_dropdown.png",
+        "source" : "9cadfd8ca634d089.png",
+        "type" : "image/png",
+        "size" : 77015
+      }, {
+        "uid" : "e61b9e4652fb1ec6",
+        "name" : "qa_edge_131.0.2903.48_entered_person_consenting_details.png",
+        "source" : "e61b9e4652fb1ec6.png",
+        "type" : "image/png",
+        "size" : 78220
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 4,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "a25e95f6a3504a12",
+      "name" : "log",
+      "source" : "a25e95f6a3504a12.txt",
+      "type" : "text/plain",
+      "size" : 14030
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "attachmentsCount" : 25,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "d663d667dee7"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX"
+  }, {
+    "name" : "assess_date",
+    "value" : "today"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATED-AQI"
+  }, {
+    "name" : "care_model",
+    "value" : "Housebound patient's home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "4/9/1965"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "9"
+  }, {
+    "name" : "name",
+    "value" : "PHINEAS FAYLE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9474405174"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "644bf5f0e8ff91f9.json",
+  "parameterValues" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today", "19/10/2026", "AUTOMATED-AQI", "Housebound patient's home", "Flu", "yes", "4/9/1965", "yes", "9", "PHINEAS FAYLE", "9474405174", "BIRCH HOUSE", "yes", "today" ]
+}

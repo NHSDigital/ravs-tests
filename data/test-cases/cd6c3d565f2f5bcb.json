@@ -1,0 +1,242 @@
+{
+  "uid" : "cd6c3d565f2f5bcb",
+  "name" : "Display warning based on age when recording a vaccine [9692237893-3-covid]",
+  "fullName" : "features/age_based_warnings.feature:Display warning based on age when recording a vaccine",
+  "historyId" : "eb7473c685934417e0e1bded91e819c3",
+  "time" : {
+    "start" : 1731678120219,
+    "stop" : 1731678152087,
+    "duration" : 31868
+  },
+  "status" : "failed",
+  "statusMessage" : "TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'",
+  "statusTrace" : "fixturefunc = <function step_warning_messages_should_be_displayed at 0x7f3280567920>\nrequest = <FixtureRequest for <Function test_display_warning_based_on_age_when_recording_a_vaccine[9692237893-3-covid]>>\nkwargs = {'expected_warning_count': '3', 'shared_data': {'assessment_comments': 'Assessment comments 15/11/2024', 'chosen_vacci...an_details': 'Automated Lead Admin - neelima.guntupalli1+leadadmin_automated@nhs.net', 'consent_decision': 'yes', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_age_based_warnings_steps.py:96: in step_warning_messages_should_be_displayed\n    record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data[\"no_consent_reason\"])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconsent_decision = 'yes'\nconsent_given_by = 'Independent mental capacity advocate'\nperson_consenting_name = 'Automation tester'\nrelationship_to_patient = 'RAVS tester'\nconsent_clinician = 'Automated Lead Admin - neelima.guntupalli1+leadadmin_automated@nhs.net'\nlegal_mechanism = 'Porcine(Pork)', no_consent_reason = None\n\n    def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):\n        attach_screenshot(\"before_selecting_consent_clinician\")\n    \n        logging.debug(\"Consent clinician to select is: \" + consent_clinician)\n        logging.debug(\"Consent legal mechanism is: \" + legal_mechanism)\n    \n        if (legal_mechanism) != \"Patient Group Direction (PGD)\":\n            select_consent_clinician_with_name_and_council(consent_clinician)\n            attach_screenshot(\"selected_consent_clinician_with_name_and_council\")\n    \n        if consent_decision.lower() == 'yes':\n            click_yes_to_consent()\n            attach_screenshot(\"clicked_yes_to_consent\")\n            select_consent_given_by_from_dropdown(consent_given_by)\n            attach_screenshot(\"selected_consent_given_by_from_dropdown\")\n    \n            if consent_given_by != \"Patient (informed consent)\":\n                enter_person_consenting_details(person_consenting_name)\n                attach_screenshot(\"entered_person_consenting_details\")\n                enter_relationship_to_patient(relationship_to_patient)\n>               add_vaccine_type_batch(\"entered_relationship_to_patient\")\nE               TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'\n\nconftest.py:347: TypeError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'",
+    "statusTrace" : "fixturefunc = <function step_warning_messages_should_be_displayed at 0x7f3280567920>\nrequest = <FixtureRequest for <Function test_display_warning_based_on_age_when_recording_a_vaccine[9692237893-3-covid]>>\nkwargs = {'expected_warning_count': '3', 'shared_data': {'assessment_comments': 'Assessment comments 15/11/2024', 'chosen_vacci...an_details': 'Automated Lead Admin - neelima.guntupalli1+leadadmin_automated@nhs.net', 'consent_decision': 'yes', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_age_based_warnings_steps.py:96: in step_warning_messages_should_be_displayed\n    record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data[\"no_consent_reason\"])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconsent_decision = 'yes'\nconsent_given_by = 'Independent mental capacity advocate'\nperson_consenting_name = 'Automation tester'\nrelationship_to_patient = 'RAVS tester'\nconsent_clinician = 'Automated Lead Admin - neelima.guntupalli1+leadadmin_automated@nhs.net'\nlegal_mechanism = 'Porcine(Pork)', no_consent_reason = None\n\n    def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):\n        attach_screenshot(\"before_selecting_consent_clinician\")\n    \n        logging.debug(\"Consent clinician to select is: \" + consent_clinician)\n        logging.debug(\"Consent legal mechanism is: \" + legal_mechanism)\n    \n        if (legal_mechanism) != \"Patient Group Direction (PGD)\":\n            select_consent_clinician_with_name_and_council(consent_clinician)\n            attach_screenshot(\"selected_consent_clinician_with_name_and_council\")\n    \n        if consent_decision.lower() == 'yes':\n            click_yes_to_consent()\n            attach_screenshot(\"clicked_yes_to_consent\")\n            select_consent_given_by_from_dropdown(consent_given_by)\n            attach_screenshot(\"selected_consent_given_by_from_dropdown\")\n    \n            if consent_given_by != \"Patient (informed consent)\":\n                enter_person_consenting_details(person_consenting_name)\n                attach_screenshot(\"entered_person_consenting_details\")\n                enter_relationship_to_patient(relationship_to_patient)\n>               add_vaccine_type_batch(\"entered_relationship_to_patient\")\nE               TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'\n\nconftest.py:347: TypeError",
+    "steps" : [ {
+      "name" : "Given I am logged into the RAVS app",
+      "time" : {
+        "start" : 1731678120219,
+        "stop" : 1731678126594,
+        "duration" : 6375
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I search for the patient with NHS number 9692237893",
+      "time" : {
+        "start" : 1731678126595,
+        "stop" : 1731678128758,
+        "duration" : 2163
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I proceed to record a vaccine for covid for all products",
+      "time" : {
+        "start" : 1731678128759,
+        "stop" : 1731678132244,
+        "duration" : 3485
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "86abc02157ace4e1",
+        "name" : "qa_edge_131.0.2903.48_clicked_patient_name.png",
+        "source" : "86abc02157ace4e1.png",
+        "type" : "image/png",
+        "size" : 31478
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then the system should display the warnings 3",
+      "time" : {
+        "start" : 1731678132245,
+        "stop" : 1731678152087,
+        "duration" : 19842
+      },
+      "status" : "failed",
+      "statusMessage" : "add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'",
+      "statusTrace" : "TypeError: add_vaccine_type_batch() missing 1 required positional argument: 'expiry_date'\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "61f6398bd5267b8a",
+        "name" : "qa_edge_131.0.2903.48_clicked_choose_vaccine_button.png",
+        "source" : "61f6398bd5267b8a.png",
+        "type" : "image/png",
+        "size" : 81222
+      }, {
+        "uid" : "5b6796f7a2ef6aaa",
+        "name" : "qa_edge_131.0.2903.48_clicked_eligible_yes_radiobutton.png",
+        "source" : "5b6796f7a2ef6aaa.png",
+        "type" : "image/png",
+        "size" : 70999
+      }, {
+        "uid" : "93c11229f065aa7",
+        "name" : "qa_edge_131.0.2903.48_selected_eligibility_type.png",
+        "source" : "93c11229f065aa7.png",
+        "type" : "image/png",
+        "size" : 71840
+      }, {
+        "uid" : "1708a33aaa27c6b2",
+        "name" : "qa_edge_131.0.2903.48_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "1708a33aaa27c6b2.png",
+        "type" : "image/png",
+        "size" : 71840
+      }, {
+        "uid" : "a5d0f81180d8b8ec",
+        "name" : "qa_edge_131.0.2903.48_set_assessment_date.png",
+        "source" : "a5d0f81180d8b8ec.png",
+        "type" : "image/png",
+        "size" : 71495
+      }, {
+        "uid" : "b02b453e603cfa25",
+        "name" : "qa_edge_131.0.2903.48_clicked_legal_mechanism.png",
+        "source" : "b02b453e603cfa25.png",
+        "type" : "image/png",
+        "size" : 71503
+      }, {
+        "uid" : "590eb99556974c9e",
+        "name" : "qa_edge_131.0.2903.48_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "590eb99556974c9e.png",
+        "type" : "image/png",
+        "size" : 73605
+      }, {
+        "uid" : "feacd6daafcdb503",
+        "name" : "qa_edge_131.0.2903.48_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "feacd6daafcdb503.png",
+        "type" : "image/png",
+        "size" : 74058
+      }, {
+        "uid" : "9653a4745da06ae8",
+        "name" : "qa_edge_131.0.2903.48_entered_comments_for_assessing_patient.png",
+        "source" : "9653a4745da06ae8.png",
+        "type" : "image/png",
+        "size" : 71436
+      }, {
+        "uid" : "1f47e24649190c24",
+        "name" : "qa_edge_131.0.2903.48_clicked_continue_to_record_consent_button.png",
+        "source" : "1f47e24649190c24.png",
+        "type" : "image/png",
+        "size" : 42746
+      }, {
+        "uid" : "d91f26696bb5e37",
+        "name" : "qa_edge_131.0.2903.48_before_selecting_consent_clinician.png",
+        "source" : "d91f26696bb5e37.png",
+        "type" : "image/png",
+        "size" : 42746
+      }, {
+        "uid" : "775dd6ccdabb3b1",
+        "name" : "qa_edge_131.0.2903.48_selected_consent_clinician_with_name_and_council.png",
+        "source" : "775dd6ccdabb3b1.png",
+        "type" : "image/png",
+        "size" : 44790
+      }, {
+        "uid" : "4caf6da960702169",
+        "name" : "qa_edge_131.0.2903.48_clicked_yes_to_consent.png",
+        "source" : "4caf6da960702169.png",
+        "type" : "image/png",
+        "size" : 73712
+      }, {
+        "uid" : "434dde66741cf0c4",
+        "name" : "qa_edge_131.0.2903.48_selected_consent_given_by_from_dropdown.png",
+        "source" : "434dde66741cf0c4.png",
+        "type" : "image/png",
+        "size" : 74918
+      }, {
+        "uid" : "3d8390f7a26c3850",
+        "name" : "qa_edge_131.0.2903.48_entered_person_consenting_details.png",
+        "source" : "3d8390f7a26c3850.png",
+        "type" : "image/png",
+        "size" : 76058
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 15,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "b55fa943fae38320",
+      "name" : "log",
+      "source" : "b55fa943fae38320.txt",
+      "type" : "text/plain",
+      "size" : 8802
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 17,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "d663d667dee7"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Age based warnings"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "expected_warning_count",
+    "value" : "3"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9692237893"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "covid"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "cd6c3d565f2f5bcb.json",
+  "parameterValues" : [ "3", "9692237893", "covid" ]
+}
