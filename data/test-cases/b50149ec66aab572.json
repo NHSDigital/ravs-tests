@@ -1,0 +1,323 @@
+{
+  "uid" : "b50149ec66aab572",
+  "name" : "Record a maternity vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre-yes-today-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-Pertussis-AUTOMATION-AVS-19/10/2027]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a maternity vaccine with nhs number",
+  "historyId" : "74677cf04f6dd06fec7a647451e52d68",
+  "time" : {
+    "start" : 1731665692474,
+    "stop" : 1731665852158,
+    "duration" : 159684
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+  "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fd159073740>\nrequest = <FixtureRequest for <Function test_record_a_maternity_vaccine_with_nhs_number[0-9693632109-ALBERT HOUSE-Vaccination Ce...Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-Pertussis-AUTOMATION-AVS-19/10/2027]>>\nkwargs = {'address': '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW', 'dob': '23/6/1946', 'name': 'Bill GARTON', '...xpiry_date': '19/10/2027', 'batch_number': 'AUTOMATION-AVS', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 15/11/2024Bill GARTON', 'batch_expiry_date': '19/10/2027', 'batch_number': 'AUTOMATION-AVS', 'care_model': 'Hospital hub for staff and patients', ...}\nname = 'Bill GARTON', dob = '23/6/1946'\naddress = '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.5'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:148: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+    "statusTrace" : "fixturefunc = <function step_see_patient_details_on_check_and_confirm_screen at 0x7fd159073740>\nrequest = <FixtureRequest for <Function test_record_a_maternity_vaccine_with_nhs_number[0-9693632109-ALBERT HOUSE-Vaccination Ce...Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-Pertussis-AUTOMATION-AVS-19/10/2027]>>\nkwargs = {'address': '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW', 'dob': '23/6/1946', 'name': 'Bill GARTON', '...xpiry_date': '19/10/2027', 'batch_number': 'AUTOMATION-AVS', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 15/11/2024Bill GARTON', 'batch_expiry_date': '19/10/2027', 'batch_number': 'AUTOMATION-AVS', 'care_model': 'Hospital hub for staff and patients', ...}\nname = 'Bill GARTON', dob = '23/6/1946'\naddress = '1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW'\n\n    @then(parse(\"I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen\"))\n    def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):\n        if shared_data[\"vaccinated_decision\"].lower() == \"Yes\".lower() and shared_data[\"consent_decision\"].lower() == \"Yes\".lower() and shared_data[\"eligibility_assessment_outcome\"].lower() == \"Give vaccine\".lower():\n            attach_screenshot(\"check_and_confirm_screen_before_assertion\")\n            assert get_patient_name_value() == shared_data[\"patient_name\"]\n            assert get_patient_address_value() == address\n>           assert get_patient_vaccination_dose_amount_value() == shared_data[\"dose_amount\"]\nE           AssertionError: assert None == '0.5'\nE            +  where None = get_patient_vaccination_dose_amount_value()\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:148: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Vaccination Centre and get patient details for 9693632109 with option 0 and choose to vaccinate with vaccine details as Pertussis, AUTOMATION-AVS with 19/10/2027",
+      "time" : {
+        "start" : 1731665692474,
+        "stop" : 1731665789328,
+        "duration" : 96854
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731665789328,
+        "stop" : 1731665795274,
+        "duration" : 5946
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "86e9263b476ea232",
+        "name" : "qa_edge_131.0.2903.48_entered_nhs_number_as9693632109_and_clicked_search_for_patient_button.png",
+        "source" : "86e9263b476ea232.png",
+        "type" : "image/png",
+        "size" : 48827
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient Bill GARTON",
+      "time" : {
+        "start" : 1731665795275,
+        "stop" : 1731665797058,
+        "duration" : 1783
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "61078ac716ffb225",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "61078ac716ffb225.png",
+        "type" : "image/png",
+        "size" : 48827
+      }, {
+        "uid" : "48461a5cbeab5112",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "48461a5cbeab5112.png",
+        "type" : "image/png",
+        "size" : 55726
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Pertussis, AUTOMATION-AVS with 19/10/2027 and click continue",
+      "time" : {
+        "start" : 1731665797058,
+        "stop" : 1731665804926,
+        "duration" : 7868
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4cd3737d8f3ea73f",
+        "name" : "qa_edge_131.0.2903.48_clicked_on_patient_Bill GARTON_and_clicked_choose_vaccine_button.png",
+        "source" : "4cd3737d8f3ea73f.png",
+        "type" : "image/png",
+        "size" : 81570
+      }, {
+        "uid" : "62e775f0145c2f6d",
+        "name" : "qa_edge_131.0.2903.48_selected_vaccine_Pertussis_and_Adacel vaccine suspension_and_clicked_continue_button.png",
+        "source" : "62e775f0145c2f6d.png",
+        "type" : "image/png",
+        "size" : 74199
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the pregnant patient's yes with the details of due date as today and assessment date as today and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731665804926,
+        "stop" : 1731665807344,
+        "duration" : 2418
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "702382b5bf0aed2b",
+        "name" : "qa_edge_131.0.2903.48_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "702382b5bf0aed2b.png",
+        "type" : "image/png",
+        "size" : 72188
+      }, {
+        "uid" : "208faf739dcd124c",
+        "name" : "qa_edge_131.0.2903.48_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "208faf739dcd124c.png",
+        "type" : "image/png",
+        "size" : 43102
+      }, {
+        "uid" : "90dddd0cdbfd5c8e",
+        "name" : "qa_edge_131.0.2903.48_clicked_continue_to_record_consent_button.png",
+        "source" : "90dddd0cdbfd5c8e.png",
+        "type" : "image/png",
+        "size" : 44152
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731665807345,
+        "stop" : 1731665807828,
+        "duration" : 483
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5523fb5fa89fd83d",
+        "name" : "qa_edge_131.0.2903.48_before_selecting_consent_clinician.png",
+        "source" : "5523fb5fa89fd83d.png",
+        "type" : "image/png",
+        "size" : 44152
+      }, {
+        "uid" : "4db428600e071850",
+        "name" : "qa_edge_131.0.2903.48_clicked_continue_to_vaccinate_button.png",
+        "source" : "4db428600e071850.png",
+        "type" : "image/png",
+        "size" : 51010
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1731665807829,
+        "stop" : 1731665811725,
+        "duration" : 3896
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "350afb160abffa94",
+        "name" : "qa_edge_131.0.2903.48_entered_vaccination_details.png",
+        "source" : "350afb160abffa94.png",
+        "type" : "image/png",
+        "size" : 53108
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient Bill GARTON, 23/6/1946, 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1731665811725,
+        "stop" : 1731665852158,
+        "duration" : 40433
+      },
+      "status" : "failed",
+      "statusMessage" : "assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
+      "statusTrace" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5e595e05767be741",
+        "name" : "qa_edge_131.0.2903.48_check_and_confirm_screen_before_assertion.png",
+        "source" : "5e595e05767be741.png",
+        "type" : "image/png",
+        "size" : 53188
+      }, {
+        "uid" : "ebea0641ddf9f2a9",
+        "name" : "qa_edge_131.0.2903.48_vaccination_dose_amount.png",
+        "source" : "ebea0641ddf9f2a9.png",
+        "type" : "image/png",
+        "size" : 53188
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "9c31a5a2ffca83f9",
+      "name" : "log",
+      "source" : "9c31a5a2ffca83f9.txt",
+      "type" : "text/plain",
+      "size" : 12012
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 8,
+    "attachmentsCount" : 14,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "40638186b9fe"
+  }, {
+    "name" : "thread",
+    "value" : "1103-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW"
+  }, {
+    "name" : "assess_date",
+    "value" : "today"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2027"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-AVS"
+  }, {
+    "name" : "care_model",
+    "value" : "Vaccination Centre"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Pertussis"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "23/6/1946"
+  }, {
+    "name" : "due_date",
+    "value" : "today"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "0"
+  }, {
+    "name" : "name",
+    "value" : "Bill GARTON"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9693632109"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "b50149ec66aab572.json",
+  "parameterValues" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2027", "AUTOMATION-AVS", "Vaccination Centre", "Pertussis", "yes", "23/6/1946", "today", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
+}
