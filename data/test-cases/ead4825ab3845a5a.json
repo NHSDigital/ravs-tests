@@ -1,0 +1,206 @@
+{
+  "uid" : "ead4825ab3845a5a",
+  "name" : "Record a vaccine with nhs number [10-9474405174-ALBERT HOUSE-Outreach event-yes-today-2-yes-yes-today-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATION-CBQI-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "a3a4c660d017bf2fa3f72ef7fb2ce224",
+  "time" : {
+    "start" : 1731674497982,
+    "stop" : 1731674516412,
+    "duration" : 18430
+  },
+  "status" : "failed",
+  "statusMessage" : "TypeError: can only concatenate str (not \"int\") to str",
+  "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f176ab7ee80>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474405174-ALBERT HOUSE-Outreach event-yes-toda...oday-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATION-CBQI-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-CBQI', 'chosen_vaccine': 'Flu', 'shared_data': {'batch.../10/2026', 'batch_number': 'AUTOMATION-CBQI', 'care_model': \"Housebound patient's home\", 'chosen_vaccine': 'Flu', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:75: in step_choose_vaccine_and_vaccine_type\n    immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'PHINEAS FAYLE', vaccine = 'Flu'\n\n    def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):\n        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)\n        immunisation_history_records = get_count_of_immunisation_history_records(vaccine)\n>       attach_screenshot(\"immunisation_history_records_count_is_\" + immunisation_history_records)\nE       TypeError: can only concatenate str (not \"int\") to str\n\nconftest.py:164: TypeError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "TypeError: can only concatenate str (not \"int\") to str",
+    "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f176ab7ee80>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[10-9474405174-ALBERT HOUSE-Outreach event-yes-toda...oday-PHINEAS FAYLE-4/9/1965-2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX-Flu-AUTOMATION-CBQI-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-CBQI', 'chosen_vaccine': 'Flu', 'shared_data': {'batch.../10/2026', 'batch_number': 'AUTOMATION-CBQI', 'care_model': \"Housebound patient's home\", 'chosen_vaccine': 'Flu', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:75: in step_choose_vaccine_and_vaccine_type\n    immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'PHINEAS FAYLE', vaccine = 'Flu'\n\n    def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):\n        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)\n        immunisation_history_records = get_count_of_immunisation_history_records(vaccine)\n>       attach_screenshot(\"immunisation_history_records_count_is_\" + immunisation_history_records)\nE       TypeError: can only concatenate str (not \"int\") to str\n\nconftest.py:164: TypeError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Outreach event and get patient details for 9474405174 with option 10 and choose to vaccinate with vaccine details as Flu, AUTOMATION-CBQI with 19/10/2026",
+      "time" : {
+        "start" : 1731674497983,
+        "stop" : 1731674502247,
+        "duration" : 4264
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "174abde7a4dbd6d1",
+        "name" : "qa_edge_131.0.2903.48_clicked_vaccines_nav_link.png",
+        "source" : "174abde7a4dbd6d1.png",
+        "type" : "image/png",
+        "size" : 46598
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731674502247,
+        "stop" : 1731674508043,
+        "duration" : 5796
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "371f9b2c1d6ba669",
+        "name" : "qa_edge_131.0.2903.48_entered_nhs_number_as9474405174_and_clicked_search_for_patient_button.png",
+        "source" : "371f9b2c1d6ba669.png",
+        "type" : "image/png",
+        "size" : 48605
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient PHINEAS FAYLE",
+      "time" : {
+        "start" : 1731674508044,
+        "stop" : 1731674510335,
+        "duration" : 2291
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "97616016ece1ad88",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "97616016ece1ad88.png",
+        "type" : "image/png",
+        "size" : 48605
+      }, {
+        "uid" : "e48da3caac17e764",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "e48da3caac17e764.png",
+        "type" : "image/png",
+        "size" : 47792
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, AUTOMATION-CBQI with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731674510336,
+        "stop" : 1731674516412,
+        "duration" : 6076
+      },
+      "status" : "failed",
+      "statusMessage" : "can only concatenate str (not \"int\") to str",
+      "statusTrace" : "TypeError: can only concatenate str (not \"int\") to str\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "9d31e1430ce9996b",
+      "name" : "log",
+      "source" : "9d31e1430ce9996b.txt",
+      "type" : "text/plain",
+      "size" : 3766
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7f90a3882da0"
+  }, {
+    "name" : "thread",
+    "value" : "1104-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-CBQI"
+  }, {
+    "name" : "care_model",
+    "value" : "Outreach event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "4/9/1965"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "10"
+  }, {
+    "name" : "name",
+    "value" : "PHINEAS FAYLE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9474405174"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "ead4825ab3845a5a.json",
+  "parameterValues" : [ "2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX", "today-2", "19/10/2026", "AUTOMATION-CBQI", "Outreach event", "Flu", "yes", "4/9/1965", "yes", "10", "PHINEAS FAYLE", "9474405174", "ALBERT HOUSE", "yes", "today" ]
+}

@@ -1,0 +1,206 @@
+{
+  "uid" : "5d152c537bcbfe5e",
+  "name" : "Record a vaccine with nhs number [2-9450141711-BECCLES HOUSE-Housebound patient's home-yes-today-2-yes-yes-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-AUTOMATION-IT-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "ed032380a34a51bd66833e089d0cf08d",
+  "time" : {
+    "start" : 1731674528636,
+    "stop" : 1731674547182,
+    "duration" : 18546
+  },
+  "status" : "failed",
+  "statusMessage" : "TypeError: can only concatenate str (not \"int\") to str",
+  "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f769e6677e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9450141711-BECCLES HOUSE-Housebound patient's ho...s-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-AUTOMATION-IT-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'chosen_vaccine': 'Flu', 'shared_data': {'batch_e...ate': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'care_model': 'Community Pharmacy', 'chosen_vaccine': 'Flu', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:75: in step_choose_vaccine_and_vaccine_type\n    immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'KRISTIA SIDAWAY', vaccine = 'Flu'\n\n    def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):\n        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)\n        immunisation_history_records = get_count_of_immunisation_history_records(vaccine)\n>       attach_screenshot(\"immunisation_history_records_count_is_\" + immunisation_history_records)\nE       TypeError: can only concatenate str (not \"int\") to str\n\nconftest.py:164: TypeError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "TypeError: can only concatenate str (not \"int\") to str",
+    "statusTrace" : "fixturefunc = <function step_choose_vaccine_and_vaccine_type at 0x7f769e6677e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9450141711-BECCLES HOUSE-Housebound patient's ho...s-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-AUTOMATION-IT-19/10/2026]>>\nkwargs = {'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'chosen_vaccine': 'Flu', 'shared_data': {'batch_e...ate': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'care_model': 'Community Pharmacy', 'chosen_vaccine': 'Flu', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:75: in step_choose_vaccine_and_vaccine_type\n    immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'KRISTIA SIDAWAY', vaccine = 'Flu'\n\n    def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):\n        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)\n        immunisation_history_records = get_count_of_immunisation_history_records(vaccine)\n>       attach_screenshot(\"immunisation_history_records_count_is_\" + immunisation_history_records)\nE       TypeError: can only concatenate str (not \"int\") to str\n\nconftest.py:164: TypeError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BECCLES HOUSE and Housebound patient's home and get patient details for 9450141711 with option 2 and choose to vaccinate with vaccine details as Flu, AUTOMATION-IT with 19/10/2026",
+      "time" : {
+        "start" : 1731674528636,
+        "stop" : 1731674532925,
+        "duration" : 4289
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b05357b0e097e803",
+        "name" : "qa_edge_131.0.2903.48_clicked_vaccines_nav_link.png",
+        "source" : "b05357b0e097e803.png",
+        "type" : "image/png",
+        "size" : 46598
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731674532925,
+        "stop" : 1731674538717,
+        "duration" : 5792
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d544aac8b00f97aa",
+        "name" : "qa_edge_131.0.2903.48_entered_nhs_number_as9450141711_and_clicked_search_for_patient_button.png",
+        "source" : "d544aac8b00f97aa.png",
+        "type" : "image/png",
+        "size" : 48584
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient KRISTIA SIDAWAY",
+      "time" : {
+        "start" : 1731674538717,
+        "stop" : 1731674541093,
+        "duration" : 2376
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "bfd09273b00e191f",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "bfd09273b00e191f.png",
+        "type" : "image/png",
+        "size" : 48584
+      }, {
+        "uid" : "1c9b5d1735f9f1f4",
+        "name" : "qa_edge_131.0.2903.48_before_clicking_patient_name.png",
+        "source" : "1c9b5d1735f9f1f4.png",
+        "type" : "image/png",
+        "size" : 52468
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, AUTOMATION-IT with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731674541093,
+        "stop" : 1731674547182,
+        "duration" : 6089
+      },
+      "status" : "failed",
+      "statusMessage" : "can only concatenate str (not \"int\") to str",
+      "statusTrace" : "TypeError: can only concatenate str (not \"int\") to str\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "7955d81c0162a6e0",
+      "name" : "log",
+      "source" : "7955d81c0162a6e0.txt",
+      "type" : "text/plain",
+      "size" : 3775
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "7f90a3882da0"
+  }, {
+    "name" : "thread",
+    "value" : "1098-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-IT"
+  }, {
+    "name" : "care_model",
+    "value" : "Housebound patient's home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "24/6/1992"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "2"
+  }, {
+    "name" : "name",
+    "value" : "KRISTIA SIDAWAY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450141711"
+  }, {
+    "name" : "site",
+    "value" : "BECCLES HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "5d152c537bcbfe5e.json",
+  "parameterValues" : [ "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY", "today-2", "19/10/2026", "AUTOMATION-IT", "Housebound patient's home", "Flu", "yes", "24/6/1992", "yes", "2", "KRISTIA SIDAWAY", "9450141711", "BECCLES HOUSE", "yes", "today-1" ]
+}
