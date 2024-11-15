@@ -84,10 +84,34 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Error launching mobile browser for {device_name}: {e}")
 
+    # def capture_screenshot(self, full_path):
+    #     try:
+    #         logging.debug("Scrolling to the top of the page.")
+    #         self.page.evaluate("window.scrollTo(0, 0);")
+    #         self.page.screenshot(path=full_path)
+    #     except Exception as error:
+    #         if "Timeout" in str(error):
+    #             print('Screenshot taking timed out, ignoring...')
+    #             return None
+    #         else:
+    #             raise error
+    #     return full_path
+
     def capture_screenshot(self, full_path):
         try:
-            logging.debug("Scrolling to the top of the page.")
-            self.page.evaluate("window.scrollTo(0, 0);")
+            # Get the current mouse position
+            mouse_position = self.page.evaluate(
+                "() => ({ x: window.pageXOffset, y: window.pageYOffset })"
+            )
+
+            # Scroll to the current mouse position
+            logging.debug(f"Scrolling to mouse position: {mouse_position}")
+            self.page.evaluate(f"window.scrollTo({mouse_position['x']}, {mouse_position['y']});")
+
+            # Wait briefly to ensure the scroll action is complete
+            self.page.wait_for_timeout(500)  # Wait for 500ms
+
+            # Take the screenshot
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):
@@ -206,7 +230,7 @@ class BasePlaywrightHelper:
     def handle_unresponsive_page(self):
         if not self.is_page_responsive():
             print("Page is unresponsive. Attempting to reload or take action.")
-            self.page.reload(wait_until="networkidle")  
+            self.page.reload(wait_until="networkidle")
             self.wait_for_page_to_load()
 
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):
