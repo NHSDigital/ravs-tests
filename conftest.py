@@ -344,7 +344,7 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
             enter_person_consenting_details(person_consenting_name)
             attach_screenshot("entered_person_consenting_details")
             enter_relationship_to_patient(relationship_to_patient)
-            add_vaccine_type_batch("entered_relationship_to_patient")
+            attach_screenshot("entered_relationship_to_patient")
         click_continue_to_vaccinate_button()
         attach_screenshot("clicked_continue_to_vaccinate_button")
     else:
