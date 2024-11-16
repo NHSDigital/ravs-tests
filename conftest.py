@@ -161,9 +161,7 @@ def click_manage_users_top_nav_bar():
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
-    attach_screenshot("immunisation_history_records_count_is_" + str(immunisation_history_records))
     click_choose_vaccine_button()
-    attach_screenshot("clicked_choose_vaccine_button")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     attach_screenshot("clicked_on_patient_" + name + "_and_clicked_choose_vaccine_button")
     return immunisation_history_records
@@ -171,20 +169,15 @@ def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
 def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     click_delivery_team_radiobutton(site)
-    attach_screenshot("clicked_delivery_team")
     click_vaccine_radiobutton(vaccine)
-    attach_screenshot("clicked_vaccine")
     click_vaccine_type_radiobutton(vaccine_type)
-    attach_screenshot("clicked_vaccine_type")
     click_continue_to_assess_patient_button()
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
 def choose_vaccine_and_vaccine_type_only(site, vaccine, vaccine_type):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     click_delivery_team_radiobutton(site)
-    attach_screenshot("clicked_delivery_team")
     click_vaccine_radiobutton(vaccine)
-    attach_screenshot("clicked_vaccine")
     click_vaccine_type_radiobutton(vaccine_type)
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type)
 
@@ -197,7 +190,6 @@ def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccine_type, batch_nu
             click_nav_link_bar_toggler()
 
     click_vaccines_nav_link()
-    attach_screenshot("clicked_vaccines_nav_link")
     check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_number, expiry_date)
 
 def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_number, expiry_date):
@@ -231,66 +223,47 @@ def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_
 def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     # vaccines_page
     click_add_vaccine_button()
-    attach_screenshot("clicked_add_vaccine_button")
 
     # vaccines_choose_site_page
     enter_site_name(site)
-    attach_screenshot("entered_site_name")
     select_site_from_list(site)
-    attach_screenshot("selected_site_from_list")
     click_continue_to_add_vaccine_button()
-    attach_screenshot("clicked_continue_to_add_vaccine_button")
 
     # choose_vaccine_page
     click_vaccine_radiobutton_on_add_vaccine_screen(vaccine)
-    attach_screenshot("clicked_vaccine_radiobutton_on_add_vaccine_screen")
     click_vaccine_type_radiobutton_on_add_vaccine_screen(vaccine_type)
-    attach_screenshot("clicked_vaccine_type_radiobutton_on_add_vaccine_screen")
     click_continue_to_add_batch_button()
-    attach_screenshot("clicked_continue_to_add_batch_button")
 
     # vaccines_add_batch_page
     enter_batch_number(batch_number)
-    attach_screenshot("entered_batch_number")
     enter_expiry_date(expiry_date)
-    attach_screenshot("entered_expiry_date")
     click_continue_to_confirm_batch_details_button()
-    attach_screenshot("clicked_continue_to_confirm_batch_details_button")
 
     # vaccines_check_and_confirm_page
     click_confirm_add_vaccine_and_batch_button()
-    attach_screenshot("clicked_confirm_add_vaccine_and_batch_button")
 
 def add_vaccine_type_batch(batch_number, expiry_date):
     click_add_batch_link()
-    attach_screenshot("clicked_add_batch_link")
     enter_batch_number(batch_number)
-    attach_screenshot("entered_batch_number")
     enter_expiry_date(expiry_date)
-    attach_screenshot("entered_expiry_date")
     click_continue_to_confirm_batch_details_button()
-    attach_screenshot("clicked_continue_to_confirm_batch_details_button")
 
     # vaccines_check_and_confirm_page
     click_confirm_add_vaccine_and_batch_button()
-    attach_screenshot("clicked_confirm_add_vaccine_and_batch_button")
 
 def assess_patient_with_details_and_click_continue_to_consent(eligible_decision, eligibility_type, staff_role, assessing_clinician, due_date, assessment_date, legal_mechanism, assessment_outcome, assessment_comments, eligibility_assessment_no_vaccine_given_reason=None):
+
     if eligible_decision.lower() == 'yes':
         click_eligible_yes_radiobutton()
-        attach_screenshot("clicked_eligible_yes_radiobutton")
 
         if check_eligibility_type_is_enabled():
             select_eligibility_type(eligibility_type)
-            attach_screenshot("selected_eligibility_type")
 
         if eligibility_type == "Healthcare workers":
             select_staff_role(staff_role)
-            attach_screenshot("selected_staff_role")
 
         if eligibility_type == "Pregnancy" and due_date:
             enter_due_date(due_date)
-            attach_screenshot("entered_due_date")
 
         attach_screenshot("clicked_eligibility_yes_and_selected_eligibility_type")
     else:
@@ -298,31 +271,27 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         attach_screenshot("clicked_patient_not_eligible_radiobutton")
 
     set_assessment_date(assessment_date)
-    attach_screenshot("set_assessment_date")
     click_legal_mechanism(legal_mechanism)
-    attach_screenshot("clicked_legal_mechanism")
 
     logging.debug("Assess clinician to select is: " + assessing_clinician)
     logging.debug("Assess legal mechanism is: " + legal_mechanism)
 
     select_assessing_clinician_with_name_and_council(assessing_clinician)
-    attach_screenshot("selected_assessing_clinician_with_name_and_council")
 
     if assessment_outcome.lower() == "give vaccine":
         click_give_vaccine_radiobutton()
         attach_screenshot("clicked_patient_give_vaccine_radio_button")
     else:
         click_vaccine_not_given_radiobutton()
-        attach_screenshot("clicked_vaccine_not_given_radiobutton")
         select_assessment_no_vaccination_reason(eligibility_assessment_no_vaccine_given_reason)
-        attach_screenshot("selected_patient_not_given_reason_vaccine_after_assessing")
+        attach_screenshot("select_patient_not_given_vaccine_after_assessing")
         click_save_and_return_button_on_assessment_screen()
         attach_screenshot("clicked_save_and_return_on_assessment_screen")
 
     enter_comments_for_assessing_patient(assessment_comments)
-    attach_screenshot("entered_comments_for_assessing_patient")
     click_continue_to_record_consent_button()
     attach_screenshot("clicked_continue_to_record_consent_button")
+
 
 def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  consent_given_by, person_consenting_name, relationship_to_patient,  consent_clinician, legal_mechanism, no_consent_reason=None):
     attach_screenshot("before_selecting_consent_clinician")
@@ -332,28 +301,21 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
 
     if (legal_mechanism) != "Patient Group Direction (PGD)":
         select_consent_clinician_with_name_and_council(consent_clinician)
-        attach_screenshot("selected_consent_clinician_with_name_and_council")
 
     if consent_decision.lower() == 'yes':
         click_yes_to_consent()
-        attach_screenshot("clicked_yes_to_consent")
         select_consent_given_by_from_dropdown(consent_given_by)
-        attach_screenshot("selected_consent_given_by_from_dropdown")
 
         if consent_given_by != "Patient (informed consent)":
             enter_person_consenting_details(person_consenting_name)
-            attach_screenshot("entered_person_consenting_details")
             enter_relationship_to_patient(relationship_to_patient)
-            attach_screenshot("entered_relationship_to_patient")
         click_continue_to_vaccinate_button()
         attach_screenshot("clicked_continue_to_vaccinate_button")
     else:
         click_no_to_consent()
-        attach_screenshot("clicked_no_to_consent")
 
         if no_consent_reason is not None:
             select_reason_for_no_consent(no_consent_reason)
-            attach_screenshot("selected_reason_for_no_consent")
 
         attach_screenshot("patient_decided_to_not_consent")
         click_save_and_return_button_on_record_consent_page()
@@ -362,51 +324,33 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
 def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, no_vaccination_reason=None):
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
-        attach_screenshot("clicked_yes_vaccinated_radiobutton")
 
         click_vaccine_type(vaccine_type2)
-        attach_screenshot("clicked_vaccine_type")
         set_vaccination_date(vaccination_date)
-        attach_screenshot("vaccination_date_is_set")
         click_care_model_option(care_model)
-        attach_screenshot("clicked_care_model_option")
         if care_model == "Care home":
             enter_care_home_details("WHITESTONES CARE HOME")
-            attach_screenshot("entered_care_home_details")
         logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
         logging.debug("Vaccinator to select is: " + vaccinator)
         if (legal_mechanism) != "Patient Group Direction (PGD)":
             select_vaccinator_name_and_council(vaccinator)
-            attach_screenshot("selected_vaccinator_name_and_council")
         enter_vaccination_comments(vaccination_comments)
-        attach_screenshot("entered_vaccination_comments")
         select_vaccination_site(vaccination_site)
-        attach_screenshot("selected_vaccination_site")
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
-        logging.debug("Batch number to select is: " + batch_number_to_select)
         select_batch_number(batch_number_to_select)
-        attach_screenshot("selected_batch_number")
         enter_dose_amount_value(dose_amount)
-        attach_screenshot("entered_dose_amount_value")
 
         if click_continue_to_check_and_confirm_screen_button() == True:
             vaccination_date = format_date(vaccination_date, "safari")
             set_vaccination_date(vaccination_date)
-            attach_screenshot("vaccination_date_is_set")
             select_batch_number(batch_number_to_select)
-            attach_screenshot("selected_batch_number")
-
             click_continue_to_check_and_confirm_screen_button()
-            attach_screenshot("clicked_continue_to_check_and_confirm_screen_button")
-
     else:
         click_not_vaccinated_radiobutton()
-        attach_screenshot("clicked_not_vaccinated_radiobutton")
         if no_vaccination_reason is not None:
             select_reason_for_no_vaccination(no_vaccination_reason)
-            attach_screenshot("selected_reason_for_no_vaccination")
             click_save_and_return_button_on_record_vaccinated_page
-            attach_screenshot("clicked_save_and_return_button_on_record_vaccinated_page")
+        attach_screenshot("patient_decided_to_not_vaccinate")
         click_save_and_return_button_on_record_vaccinated_page()
         attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
 
@@ -416,17 +360,11 @@ def navigate_and_login_with_username(username):
                 click_navbar_toggler()
     if check_logout_button_exists_without_waiting():
         click_logout_button()
-        attach_screenshot("clicked_logout_button")
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
-    attach_screenshot("navigated_to_ravs_login_page")
     click_login_button()
-    attach_screenshot("clicked_login_button")
     emailAddress = username
     enter_email_address(emailAddress)
-    attach_screenshot("entered_email_address")
     password = config["credentials"]["ravs_password"]
     enter_password(password)
-    attach_screenshot("entered_password")
     click_nhs_signin_button()
-    attach_screenshot("clicked_nhs_signin_button")
