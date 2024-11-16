@@ -1,0 +1,157 @@
+{
+  "uid" : "85594c0ddf8a16b8",
+  "name" : "NHS Number: Searching for a patient without a record returns no results [9449306621]",
+  "fullName" : "/app/features/find_a_patient.feature:NHS Number: Searching for a patient without a record returns no results",
+  "historyId" : "2bdcbabc9de9c471d890c20f4ea0ff31",
+  "time" : {
+    "start" : 1731742756912,
+    "stop" : 1731742766445,
+    "duration" : 9533
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the find a patient by nhs number page",
+      "time" : {
+        "start" : 1731742756913,
+        "stop" : 1731742762052,
+        "duration" : 5139
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter 9449306621 as the nhs number",
+      "time" : {
+        "start" : 1731742762053,
+        "stop" : 1731742762126,
+        "duration" : 73
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I click the search button",
+      "time" : {
+        "start" : 1731742762127,
+        "stop" : 1731742764230,
+        "duration" : 2103
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Then I can see a message that no results are found for the NHS number 9449306621",
+      "time" : {
+        "start" : 1731742764231,
+        "stop" : 1731742766359,
+        "duration" : 2128
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "40f84b58720fd47a",
+        "name" : "dev_edge_131.0.2903.51_no_results_found_should_be_visible.png",
+        "source" : "40f84b58720fd47a.png",
+        "type" : "image/png",
+        "size" : 49064
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I can see an option to create a new patient",
+      "time" : {
+        "start" : 1731742766360,
+        "stop" : 1731742766445,
+        "duration" : 85
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8527eae44eb9e58f",
+        "name" : "dev_edge_131.0.2903.51_check_create_new_patient_button_is_visible.png",
+        "source" : "8527eae44eb9e58f.png",
+        "type" : "image/png",
+        "size" : 49064
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "64cc549868e370f4",
+      "name" : "log",
+      "source" : "64cc549868e370f4.txt",
+      "type" : "text/plain",
+      "size" : 2592
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "042720d57187"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Find a patient"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "nhsNumber",
+    "value" : "9449306621"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "85594c0ddf8a16b8.json",
+  "parameterValues" : [ "9449306621" ]
+}
