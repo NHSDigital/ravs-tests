@@ -4,16 +4,16 @@
   "children" : [ {
     "name" : "Product defects",
     "children" : [ {
-      "name" : "AssertionError: assert False == True\n +  where False = check_batch_already_exists_error_message_is_displayed()",
+      "name" : "AssertionError: assert False == True\n +  where False = check_patient_multiple_results_found_message_exists(True)",
       "children" : [ {
-        "name" : "Add batch to vaccine [ALBERT HOUSE-COVID-19-Spikevax JN.1-AUTOMATION-SJ1-19/10/2026]",
-        "uid" : "cc4093328390c7ce",
-        "parentUid" : "3d73f087a4e57f391b7e00fcfec13be1",
+        "name" : "Demographics: Multiple demographic matches shows an error that more than one result is found [Aidan-Smith-23/02/2020]",
+        "uid" : "7c15dae45c655dfb",
+        "parentUid" : "f17dee65973499f126a9164b19ce01ed",
         "status" : "failed",
         "time" : {
-          "start" : 1731829045393,
-          "stop" : 1731829066138,
-          "duration" : 20745
+          "start" : 1731914007435,
+          "stop" : 1731914025742,
+          "duration" : 18307
         },
         "flaky" : false,
         "newFailed" : false,
@@ -21,41 +21,20 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "AUTOMATION-SJ1", "19/10/2026", "ALBERT HOUSE", "COVID-19", "Spikevax JN.1" ]
+        "parameters" : [ "23/02/2020", "Aidan", "Smith" ]
       } ],
-      "uid" : "3d73f087a4e57f391b7e00fcfec13be1"
-    }, {
-      "name" : "AssertionError: assert False\n +  where False = check_enter_batch_number_error_message_is_displayed()",
-      "children" : [ {
-        "name" : "Error messages should appear when no values are entered",
-        "uid" : "89c07eb98beb7935",
-        "parentUid" : "da0b9baaf1163f54173c6ceb43a6c2eb",
-        "status" : "failed",
-        "time" : {
-          "start" : 1731829072280,
-          "stop" : 1731829087284,
-          "duration" : 15004
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ ]
-      } ],
-      "uid" : "da0b9baaf1163f54173c6ceb43a6c2eb"
+      "uid" : "f17dee65973499f126a9164b19ce01ed"
     }, {
       "name" : "AssertionError: assert None == '0.5'\n +  where None = get_patient_vaccination_dose_amount_value()",
       "children" : [ {
-        "name" : "Record a vaccine with nhs number [0-9693632109-ALBERT HOUSE-Vaccination Centre open to the public-yes-today-yes-yes-today-Bill GARTON-23/6/1946-1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW-COVID-19-AUTOMATION-SJ1-19/10/2026]",
-        "uid" : "caccd8ac30984233",
+        "name" : "Record a vaccine with nhs number [1-9450141444-ALBERT HOUSE-Care home-yes-today-4-yes-yes-today-2-BRANDIE DYBLE-25/8/1992-49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF-Flu-AUTOMATION-QI-19/10/2026]",
+        "uid" : "c164979b8b9e0697",
         "parentUid" : "bcf6079ad556b3d78b7a6cbf3fb7956a",
         "status" : "failed",
         "time" : {
-          "start" : 1731829269614,
-          "stop" : 1731829429478,
-          "duration" : 159864
+          "start" : 1731914668441,
+          "stop" : 1731914831860,
+          "duration" : 163419
         },
         "flaky" : false,
         "newFailed" : false,
@@ -63,41 +42,7 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW", "today", "19/10/2026", "AUTOMATION-SJ1", "Vaccination Centre open to the public", "COVID-19", "yes", "23/6/1946", "yes", "0", "Bill GARTON", "9693632109", "ALBERT HOUSE", "yes", "today" ]
-      }, {
-        "name" : "Record a maternity vaccine with nhs number [2-9470040228-BIRCH HOUSE-Hospital hub for staff and patients-yes-today+290-today-1-yes-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-Pertussis-AUTOMATION-RVS-19/2/2029]",
-        "uid" : "e7cc6f9c2adc7801",
-        "parentUid" : "bcf6079ad556b3d78b7a6cbf3fb7956a",
-        "status" : "failed",
-        "time" : {
-          "start" : 1731830021549,
-          "stop" : 1731830088702,
-          "duration" : 67153
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN", "today-1", "19/2/2029", "AUTOMATION-RVS", "Hospital hub for staff and patients", "Pertussis", "yes", "14/12/1922", "today+290", "yes", "2", "HERBERT HAAG", "9470040228", "BIRCH HOUSE", "yes", "today" ]
-      }, {
-        "name" : "Record a maternity vaccine with nhs number [4-9473629885-BECCLES HOUSE-Outreach event-yes-today+50-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-Respiratory syncytial virus (RSV)-AREX2-15A-19/10/2026]",
-        "uid" : "2110c2d1545255dd",
-        "parentUid" : "bcf6079ad556b3d78b7a6cbf3fb7956a",
-        "status" : "failed",
-        "time" : {
-          "start" : 1731830047645,
-          "stop" : 1731830210305,
-          "duration" : 162660
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB", "today-4", "19/10/2026", "AREX2-15A", "Outreach event", "Respiratory syncytial virus (RSV)", "yes", "27/5/1924", "today+50", "yes", "4", "MARGIE PUCKEY", "9473629885", "BECCLES HOUSE", "yes", "today-3" ]
+        "parameters" : [ "49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF", "today-4", "19/10/2026", "AUTOMATION-QI", "Care home", "Flu", "yes", "25/8/1992", "yes", "1", "BRANDIE DYBLE", "9450141444", "ALBERT HOUSE", "yes", "today-2" ]
       } ],
       "uid" : "bcf6079ad556b3d78b7a6cbf3fb7956a"
     } ],
