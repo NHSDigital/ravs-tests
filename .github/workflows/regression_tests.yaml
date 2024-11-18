@@ -1,28 +1,85 @@
-name: RAVS TESTS - DEV
-
+name: Regression Tests
 on:
-  # push:
-  #   branches:
-  #     - '**'   # Triggers on push to any branch
-  # pull_request:
-  #   branches:
-  #     - '**'   # Triggers on PR to any branch
-  schedule:
-      - cron: "30 6 * * *"
   workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test scenario tags'
+        required: true
+        type: string
+        default: "@regression"
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+        default: "DEV"
+      product:
+        description: 'The product we are testing'
+        type: choice
+        options:
+          - RAVS
+        required: false
+        default: RAVS
+      id:
+        description: 'Unique run identifier (Do not change this)'
+        required: false
+        default: "Manually Triggered Run"
+      pull_request_id:
+        description: 'The ID of the pull request. This should be in the format pr-xxxx where xxxx is the pull request id'
+        required: false
+        default: ""
+      github_tag:
+        description: 'The github tag to run the test pack from'
+        required: false
+        default: "main"
 
 jobs:
-  build-and-test:
+  regression_tests:
     runs-on: ubuntu-latest
-
+    environment: ${{ inputs.environment }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # This causes all history to be fetched, which is required for calculate-version to function
+          ref: ${{ inputs.github_tag }}
 
-      - name: Stop and remove all containers
+      - name: ${{github.event.inputs.id}}
+        env:
+          ID: ${{github.event.inputs.id}}
+          ENV: ${{ inputs.environment }}
+          PRODUCT: ${{ inputs.product }}
+          # PULL_REQUEST_ID: ${{ inputs.pull_request_id }}
         run: |
-          docker stop $(docker ps -q) || true
-          docker rm $(docker ps -aq) || true
+          # echo run identifier "$ID"-"$PRODUCT"-"$ENV"-"$PULL_REQUEST_ID"
+          # echo run identifier "$ID"-"$PRODUCT"-"$ENV"-"$PULL_REQUEST_ID"  >> "$GITHUB_STEP_SUMMARY"
+          # echo run identifier "$ID"-"$PRODUCT"-"$ENV"
+          # echo run identifier "$ID"-"$PRODUCT"-"$ENV"  >> "$GITHUB_STEP_SUMMARY"
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Install dependencies and tox
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      # Cache tox environments
+      - name: Cache tox environments
+        uses: actions/cache@v4
+        with:
+          path: .tox
+          key: ${{ runner.os }}-tox-${{ hashFiles('tox.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-tox-
+
+      # - name: Stop and remove all containers
+      #   run: |
+      #     docker stop $(docker ps -q) || true
+      #     docker rm $(docker ps -aq) || true
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -30,16 +87,16 @@ jobs:
       - name: Build the Docker image
         run: docker build -t playwright-tests -f Docker/tests.dockerfile .
 
-      - name: Run Docker container
-        id: run-container
+      - name: Run regression tests in Docker container
+        id: tests
         run: |
           docker run -d --name playwright-tests \
             --memory 8g \
-            -e RAVS_PASSWORD="${{ secrets.RAVS_PASSWORD }}" \
+            -e RAVS_PASSWORD=""${{ inputs.environment }}"" \
             -e HEADLESS_MODE="true" \
             -e TEST_ENVIRONMENT="dev" \
             -e BROWSER="edge" \
-            -e MARKER="" \
+            -e MARKER="login" \
             -e AGENTS=3 \
             -p 5050:5050 \
             playwright-tests
@@ -106,6 +163,15 @@ jobs:
           name: allure-report
           path: ${{ env.ALLURE_REPORT_ARCHIVE }}
 
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.REGRESSION_TESTS_APP_ID }}
+          private-key: ${{ secrets.REGRESSION_TESTS_PEM }}
+          owner: "NHSDigital"
+          repositories: "ravs-tests,RAVS-test-reports"
+
       - name: Retrieve and extract Allure report artifact
         uses: actions/download-artifact@v4
         with:
@@ -143,14 +209,14 @@ jobs:
 
       - name: Set destination branch for GitHub Pages
         id: set-destination-branch
-        run: echo "DESTINATION_BRANCH=gh-pages-${{ env.BRANCH_NAME }}" >> $GITHUB_ENV
+        run: echo "DESTINATION_BRANCH=gh-pages-${{ inputs.environment }}" >> $GITHUB_ENV
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          destination_branch: gh-pages-dev
+          destination_branch: "${{ inputs.environment }}"
 
       - name: Check contents of gh-pages
         run: ls -la
@@ -172,6 +238,14 @@ jobs:
 
       - name: Clean up
         run: docker stop $(docker ps -q) || true
+
+      - name: Report failure on test failure
+        if: steps.tests.outcome != 'success'
+        run: |
+          poetry run python scripts/send_test_results.py --token=${{ steps.generate-token.outputs.token }} --run_id ${{GITHUB.RUN_ID}}
+          echo The regression tests step failed, this likely means there are test failures.
+          echo A test report will be generated shortly and can be viewed at: https://nhsdigital.github.io/ravs-test-reports
+          exit 1
 
       - name: Notify Slack on success
         if: success()
