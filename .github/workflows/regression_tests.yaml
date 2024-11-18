@@ -81,6 +81,11 @@ jobs:
           docker stop $(docker ps -q) || true
           docker rm $(docker ps -aq) || true
 
+      - name: Cleanup unused Docker resources
+        run: |
+          docker system prune -af
+          docker volume prune -f
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -92,9 +97,9 @@ jobs:
         run: |
           docker run -d --name playwright-tests \
             --memory 8g \
-            -e RAVS_PASSWORD=""${{ inputs.environment }}"" \
+            -e RAVS_PASSWORD=""${{ secrets.RAVS_PASSWORD }}"" \
             -e HEADLESS_MODE="true" \
-            -e TEST_ENVIRONMENT="dev" \
+            -e TEST_ENVIRONMENT="${{ inputs.environment }}" \
             -e BROWSER="edge" \
             -e MARKER="login" \
             -e AGENTS=3 \
