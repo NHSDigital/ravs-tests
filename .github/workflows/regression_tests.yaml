@@ -55,26 +55,26 @@ jobs:
           # echo run identifier "$ID"-"$PRODUCT"-"$ENV"
           # echo run identifier "$ID"-"$PRODUCT"-"$ENV"  >> "$GITHUB_STEP_SUMMARY"
 
-      # Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+      # # Set up Python
+      # - name: Set up Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.x'
 
-      # Install dependencies and tox
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install tox
+      # # Install dependencies and tox
+      # - name: Install Python dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install tox
 
-      # Cache tox environments
-      - name: Cache tox environments
-        uses: actions/cache@v4
-        with:
-          path: .tox
-          key: ${{ runner.os }}-tox-${{ hashFiles('tox.ini') }}
-          restore-keys: |
-            ${{ runner.os }}-tox-
+      # # Cache tox environments
+      # - name: Cache tox environments
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: .tox
+      #     key: ${{ runner.os }}-tox-${{ hashFiles('tox.ini') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-tox-
 
       # - name: Stop and remove all containers
       #   run: |
