@@ -1,4 +1,5 @@
 name: Regression Tests
+
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +29,7 @@ on:
         required: false
         default: ""
       github_tag:
-        description: 'The github tag to run the test pack from'
+        description: 'The GitHub tag to run the test pack from'
         required: false
         default: "main"
 
@@ -38,6 +39,7 @@ jobs:
     environment: ${{ inputs.environment }}
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -45,19 +47,20 @@ jobs:
         env:
           ACTION_STEP_DEBUG: true
 
+      # Step 2: Clean previous tox and pip caches
+      - name: Clean tox and pip cache
+        run: |
+          rm -rf .tox
+          rm -rf ~/.tox_cache
+          rm -rf ~/.cache/pip
+
+      # Step 3: Set up Python 3.11
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      # - name: Cache pip dependencies
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.cache/pip
-      #     key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('tox.ini') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pip-
-
+      # Step 4: Cache pip dependencies
       - name: Cache pip dependencies
         uses: actions/cache@v4
         with:
@@ -66,16 +69,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      # Step 5: Install Python dependencies from requirements.txt
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Step 6: Clean .tox directory again after installation
       - name: Clean .tox directory
         run: |
           rm -rf .tox
           rm -rf ~/.tox_cache
 
+      # Step 7: Cache Playwright binaries
       - name: Cache Playwright binaries
         uses: actions/cache@v4
         with:
@@ -84,22 +90,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
 
+      # Step 8: Debug cache keys and tox.ini existence
       - name: Debug cache key and files
         run: |
           echo "Cache Key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('tox.ini') }}"
           ls -alh tox.ini
 
+      # Step 9: Install Playwright dependencies
       - name: Install Playwright dependencies
         run: |
           playwright install
           playwright install-deps
 
+      # Step 10: Cache Allure Installation (Only if not cached previously)
       - name: Cache Allure Installation
         uses: actions/cache@v4
         with:
           path: /opt/allure-2.17.3
           key: allure-installation-v1
 
+      # Step 11: Install Allure if not cached
       - name: Install Allure if not cached
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -108,12 +118,15 @@ jobs:
           sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
           rm -rf allure-commandline-2.17.3.tgz
 
+      # Step 12: Verify Allure installation
       - name: Verify Allure Installation
         run: allure --version
 
+      # Step 13: Debug tox.ini content for visibility
       - name: Debug tox.ini
         run: cat tox.ini
 
+      # Step 14: Run Tests using tox
       - name: Run Tests
         env:
           TEST_ENVIRONMENT: ${{ inputs.environment }}
@@ -125,6 +138,7 @@ jobs:
         run: |
           tox
 
+      # Step 15: Upload Allure Results as an artifact
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
         with:
@@ -132,6 +146,7 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
+      # Step 16: Trigger a test report generation in another workflow
       - name: Trigger test report generation
         run: |
           curl -X POST \
