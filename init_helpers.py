@@ -207,11 +207,16 @@ def after_all():
     write_properties_file(file_path, properties_dict)
 
 def write_properties_file(file_path, properties_dict):
-    if os.path.exists(file_path):
-        os.remove(file_path)
-    with open(file_path, "w") as file:
-        for key, value in properties_dict.items():
-            file.write(f"{key}={value}\n")
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        with open(file_path, "w") as file:
+            for key, value in properties_dict.items():
+                file.write(f"{key}={value}\n")
+    except Exception as e:
+        logging.debug(f"Failed to create environment properties file {file_path}: {e}")
+        print(f"Error writing to {file_path}: {e}")
 
 def quit_browser():
     playwright_helper_instance.quit_browser()

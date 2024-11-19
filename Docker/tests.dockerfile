@@ -47,7 +47,6 @@ ENV LANG=en_GB.UTF-8 \
     LANGUAGE=en_GB:en \
     LC_ALL=en_GB.UTF-8
 
-
 # Expose port for Allure server
 EXPOSE 5050
 
