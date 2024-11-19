@@ -66,6 +66,10 @@ jobs:
         run: |
           rm -rf .tox
 
+      - name: Rebuild Tox environments
+        run: |
+          tox -r  # Forces tox to recreate environments
+
       - name: Cache Playwright binaries
         uses: actions/cache@v4
         with:
