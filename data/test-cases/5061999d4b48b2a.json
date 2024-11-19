@@ -1,0 +1,578 @@
+{
+  "uid" : "5061999d4b48b2a",
+  "name" : "Record a vaccine with nhs number [8-9437580812-BIRCH HOUSE-Care home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-AUTOMATION-SJ1-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "c47584f2431c072f146f60f28a2e75f4",
+  "time" : {
+    "start" : 1731998954014,
+    "stop" : 1731999037015,
+    "duration" : 83001
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f8228057c40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[8-9437580812-BIRCH HOUSE-Care home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-AUTOMATION-SJ1-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 12/11/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 12/11/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Community Pharmacy', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f8228057c40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[8-9437580812-BIRCH HOUSE-Care home-yes-today-7-yes-yes-today-7-INDIGO CATCHESIDE-1/3/1959-12 CANBERRA STREET, MANCHESTER, M11 4WL-COVID-19-AUTOMATION-SJ1-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 12/11/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 12/11/2024INDIGO CATCHESIDE', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Community Pharmacy', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Care home and get patient details for 9437580812 with option 8 and choose to vaccinate with vaccine details as COVID-19, AUTOMATION-SJ1 with 19/10/2026",
+      "time" : {
+        "start" : 1731998954015,
+        "stop" : 1731998958298,
+        "duration" : 4283
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9131c98a3392dbc6",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccines_nav_link.png",
+        "source" : "9131c98a3392dbc6.png",
+        "type" : "image/png",
+        "size" : 46618
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731998958299,
+        "stop" : 1731998964185,
+        "duration" : 5886
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4119ca63a3998ee5",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9437580812_and_clicked_search_for_patient_button.png",
+        "source" : "4119ca63a3998ee5.png",
+        "type" : "image/png",
+        "size" : 49542
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient INDIGO CATCHESIDE",
+      "time" : {
+        "start" : 1731998964186,
+        "stop" : 1731998966469,
+        "duration" : 2283
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c3f27da9f91888cc",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "c3f27da9f91888cc.png",
+        "type" : "image/png",
+        "size" : 49542
+      }, {
+        "uid" : "2b7b2b567b775476",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "2b7b2b567b775476.png",
+        "type" : "image/png",
+        "size" : 54122
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, AUTOMATION-SJ1 with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1731998966469,
+        "stop" : 1731998987952,
+        "duration" : 21483
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "848fa9f71e50e26b",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_is_0.png",
+        "source" : "848fa9f71e50e26b.png",
+        "type" : "image/png",
+        "size" : 54122
+      }, {
+        "uid" : "28c4c62be723b203",
+        "name" : "dev_edge_131.0.2903.51_clicked_choose_vaccine_button.png",
+        "source" : "28c4c62be723b203.png",
+        "type" : "image/png",
+        "size" : 80397
+      }, {
+        "uid" : "c3d4ae5b97036294",
+        "name" : "dev_edge_131.0.2903.51_clicked_on_patient_INDIGO CATCHESIDE_and_clicked_choose_vaccine_button.png",
+        "source" : "c3d4ae5b97036294.png",
+        "type" : "image/png",
+        "size" : 80397
+      }, {
+        "uid" : "a9617ccffb23ee91",
+        "name" : "dev_edge_131.0.2903.51_clicked_delivery_team.png",
+        "source" : "a9617ccffb23ee91.png",
+        "type" : "image/png",
+        "size" : 81729
+      }, {
+        "uid" : "352ac28a2b65df81",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine.png",
+        "source" : "352ac28a2b65df81.png",
+        "type" : "image/png",
+        "size" : 82080
+      }, {
+        "uid" : "23e404b03a3c2ce9",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "23e404b03a3c2ce9.png",
+        "type" : "image/png",
+        "size" : 58898
+      }, {
+        "uid" : "500c68c7a6ab5020",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccine_COVID-19_and_Spikevax JN.1_and_clicked_continue_button.png",
+        "source" : "500c68c7a6ab5020.png",
+        "type" : "image/png",
+        "size" : 75064
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-7 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1731998987952,
+        "stop" : 1731998994115,
+        "duration" : 6163
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8bbdc313e658e997",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligible_yes_radiobutton.png",
+        "source" : "8bbdc313e658e997.png",
+        "type" : "image/png",
+        "size" : 69915
+      }, {
+        "uid" : "fed0132244f4a349",
+        "name" : "dev_edge_131.0.2903.51_selected_eligibility_type.png",
+        "source" : "fed0132244f4a349.png",
+        "type" : "image/png",
+        "size" : 74307
+      }, {
+        "uid" : "7974d1be3403e20d",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "7974d1be3403e20d.png",
+        "type" : "image/png",
+        "size" : 74307
+      }, {
+        "uid" : "9828309d6c235900",
+        "name" : "dev_edge_131.0.2903.51_set_assessment_date.png",
+        "source" : "9828309d6c235900.png",
+        "type" : "image/png",
+        "size" : 73928
+      }, {
+        "uid" : "e595af8599d2c774",
+        "name" : "dev_edge_131.0.2903.51_clicked_legal_mechanism.png",
+        "source" : "e595af8599d2c774.png",
+        "type" : "image/png",
+        "size" : 77332
+      }, {
+        "uid" : "a54f6ab90d51e278",
+        "name" : "dev_edge_131.0.2903.51_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "a54f6ab90d51e278.png",
+        "type" : "image/png",
+        "size" : 81591
+      }, {
+        "uid" : "c39026b3ab7cb5d8",
+        "name" : "dev_edge_131.0.2903.51_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "c39026b3ab7cb5d8.png",
+        "type" : "image/png",
+        "size" : 49409
+      }, {
+        "uid" : "b97905b33be9922e",
+        "name" : "dev_edge_131.0.2903.51_entered_comments_for_assessing_patient.png",
+        "source" : "b97905b33be9922e.png",
+        "type" : "image/png",
+        "size" : 53620
+      }, {
+        "uid" : "b9ef7dad4d370972",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_record_consent_button.png",
+        "source" : "b9ef7dad4d370972.png",
+        "type" : "image/png",
+        "size" : 39983
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 9,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1731998994115,
+        "stop" : 1731998998819,
+        "duration" : 4704
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "bec0173ff7c35d3d",
+        "name" : "dev_edge_131.0.2903.51_before_selecting_consent_clinician.png",
+        "source" : "bec0173ff7c35d3d.png",
+        "type" : "image/png",
+        "size" : 39983
+      }, {
+        "uid" : "b893d8f0e96ded11",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_clinician_with_name_and_council.png",
+        "source" : "b893d8f0e96ded11.png",
+        "type" : "image/png",
+        "size" : 43738
+      }, {
+        "uid" : "214705363105ef84",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_to_consent.png",
+        "source" : "214705363105ef84.png",
+        "type" : "image/png",
+        "size" : 76089
+      }, {
+        "uid" : "3e9e50d2f7d70a94",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_given_by_from_dropdown.png",
+        "source" : "3e9e50d2f7d70a94.png",
+        "type" : "image/png",
+        "size" : 76169
+      }, {
+        "uid" : "ff86fcd031eb0a11",
+        "name" : "dev_edge_131.0.2903.51_entered_person_consenting_details.png",
+        "source" : "ff86fcd031eb0a11.png",
+        "type" : "image/png",
+        "size" : 77384
+      }, {
+        "uid" : "441def59b66f69e7",
+        "name" : "dev_edge_131.0.2903.51_entered_relationship_to_patient.png",
+        "source" : "441def59b66f69e7.png",
+        "type" : "image/png",
+        "size" : 79295
+      }, {
+        "uid" : "8e4a34eaa7861940",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_vaccinate_button.png",
+        "source" : "8e4a34eaa7861940.png",
+        "type" : "image/png",
+        "size" : 68634
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-7 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1731998998819,
+        "stop" : 1731999007983,
+        "duration" : 9164
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c3cae4ada82cd327",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_vaccinated_radiobutton.png",
+        "source" : "c3cae4ada82cd327.png",
+        "type" : "image/png",
+        "size" : 80993
+      }, {
+        "uid" : "2c108d9e4e7710f0",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "2c108d9e4e7710f0.png",
+        "type" : "image/png",
+        "size" : 76720
+      }, {
+        "uid" : "89b12f886f7500aa",
+        "name" : "dev_edge_131.0.2903.51_vaccination_date_is_set.png",
+        "source" : "89b12f886f7500aa.png",
+        "type" : "image/png",
+        "size" : 84612
+      }, {
+        "uid" : "c6bd1ed1d6bc2be9",
+        "name" : "dev_edge_131.0.2903.51_clicked_care_model_option.png",
+        "source" : "c6bd1ed1d6bc2be9.png",
+        "type" : "image/png",
+        "size" : 85599
+      }, {
+        "uid" : "95c6292124660a7b",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccinator_name_and_council.png",
+        "source" : "95c6292124660a7b.png",
+        "type" : "image/png",
+        "size" : 85599
+      }, {
+        "uid" : "80497961ed225efb",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_comments.png",
+        "source" : "80497961ed225efb.png",
+        "type" : "image/png",
+        "size" : 38251
+      }, {
+        "uid" : "bb56299c0516d289",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccination_site.png",
+        "source" : "bb56299c0516d289.png",
+        "type" : "image/png",
+        "size" : 39815
+      }, {
+        "uid" : "fd3431b5040bcb2e",
+        "name" : "dev_edge_131.0.2903.51_selected_batch_number.png",
+        "source" : "fd3431b5040bcb2e.png",
+        "type" : "image/png",
+        "size" : 44998
+      }, {
+        "uid" : "9a706eda5531dbee",
+        "name" : "dev_edge_131.0.2903.51_entered_dose_amount_value.png",
+        "source" : "9a706eda5531dbee.png",
+        "type" : "image/png",
+        "size" : 44998
+      }, {
+        "uid" : "788e52790a256216",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_details.png",
+        "source" : "788e52790a256216.png",
+        "type" : "image/png",
+        "size" : 53594
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient INDIGO CATCHESIDE, 1/3/1959, 12 CANBERRA STREET, MANCHESTER, M11 4WL and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1731999007983,
+        "stop" : 1731999010333,
+        "duration" : 2350
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "87a9c53f39216210",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_before_assertion.png",
+        "source" : "87a9c53f39216210.png",
+        "type" : "image/png",
+        "size" : 53594
+      }, {
+        "uid" : "8075f73ed833fb42",
+        "name" : "dev_edge_131.0.2903.51_vaccination_dose_amount.png",
+        "source" : "8075f73ed833fb42.png",
+        "type" : "image/png",
+        "size" : 53594
+      }, {
+        "uid" : "c1ffe6f9cc7d77c6",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_after_assertion.png",
+        "source" : "c1ffe6f9cc7d77c6.png",
+        "type" : "image/png",
+        "size" : 53594
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1731999010334,
+        "stop" : 1731999012123,
+        "duration" : 1789
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dc9f32c095b55c9a",
+        "name" : "dev_edge_131.0.2903.51_patient_details_screen_with_immunisation_history.png",
+        "source" : "dc9f32c095b55c9a.png",
+        "type" : "image/png",
+        "size" : 53594
+      }, {
+        "uid" : "4196a8d7e42fb5ff",
+        "name" : "dev_edge_131.0.2903.51_before_assert_record_saved.png",
+        "source" : "4196a8d7e42fb5ff.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1731999012124,
+        "stop" : 1731999017916,
+        "duration" : 5792
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1e283f2167328e61",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9437580812_and_clicked_search_for_patient_button.png",
+        "source" : "1e283f2167328e61.png",
+        "type" : "image/png",
+        "size" : 47422
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient INDIGO CATCHESIDE",
+      "time" : {
+        "start" : 1731999017917,
+        "stop" : 1731999023251,
+        "duration" : 5334
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a394fd8b36f8a388",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "a394fd8b36f8a388.png",
+        "type" : "image/png",
+        "size" : 47422
+      }, {
+        "uid" : "14a7428b691916ce",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "14a7428b691916ce.png",
+        "type" : "image/png",
+        "size" : 54122
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1731999023251,
+        "stop" : 1731999037015,
+        "duration" : 13764
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+      "statusTrace" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "bf43fcaeca004d48",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_after_vaccination.png",
+        "source" : "bf43fcaeca004d48.png",
+        "type" : "image/png",
+        "size" : 54122
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "7914424a5c95ad5a",
+      "name" : "log",
+      "source" : "7914424a5c95ad5a.txt",
+      "type" : "text/plain",
+      "size" : 28163
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 47,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "f0095e0db0f3"
+  }, {
+    "name" : "thread",
+    "value" : "1100-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "12 CANBERRA STREET, MANCHESTER, M11 4WL"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-7"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-SJ1"
+  }, {
+    "name" : "care_model",
+    "value" : "Care home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "1/3/1959"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "8"
+  }, {
+    "name" : "name",
+    "value" : "INDIGO CATCHESIDE"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9437580812"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-7"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "5061999d4b48b2a.json",
+  "parameterValues" : [ "12 CANBERRA STREET, MANCHESTER, M11 4WL", "today-7", "19/10/2026", "AUTOMATION-SJ1", "Care home", "COVID-19", "yes", "1/3/1959", "yes", "8", "INDIGO CATCHESIDE", "9437580812", "BIRCH HOUSE", "yes", "today-7" ]
+}
