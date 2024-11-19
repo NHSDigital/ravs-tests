@@ -44,8 +44,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.github_tag }}
-        env:
-          ACTION_STEP_DEBUG: true
+
+      - name: Fetch latest history (unshallow) and check status
+        run: |
+          git fetch --prune --unshallow
+          git status
 
       # Step 2: Clean previous tox and pip caches (if any)
       - name: Clean tox and pip cache
