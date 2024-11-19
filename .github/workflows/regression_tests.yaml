@@ -254,7 +254,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
-          -d '{"ref": "main", "inputs": {"run_id": "'${{ github.run_id }}'"}}' \
+          -d '{"ref": "main", "inputs": {"run_id": "'${{ GITHUB.RUN_ID }}'"}}' \
           "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
 
       - name: Notify Slack on success
