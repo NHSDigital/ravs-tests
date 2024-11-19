@@ -41,7 +41,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
           ref: ${{ inputs.github_tag }}
         env:
           ACTION_STEP_DEBUG: true
@@ -63,10 +62,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Clean .tox directory
-        run: |
-          rm -rf .tox
 
       - name: Cache Playwright binaries
         uses: actions/cache@v4
