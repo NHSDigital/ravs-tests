@@ -45,11 +45,6 @@ jobs:
         with:
           ref: ${{ inputs.github_tag }}
 
-      - name: Fetch latest history (unshallow) and check status
-        run: |
-          git fetch --prune --unshallow
-          git status
-
       # Step 2: Clean previous tox and pip caches (if any)
       - name: Clean tox and pip cache
         run: |
