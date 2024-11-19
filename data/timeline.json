@@ -2,18 +2,56 @@
   "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
   "name" : "timeline",
   "children" : [ {
-    "name" : "77cd5568f4be",
+    "name" : "76911e86d8ae",
     "children" : [ {
-      "name" : "1097-MainThread",
+      "name" : "1100-MainThread",
       "children" : [ {
-        "name" : "Sign in should fail based on credentials provided [long_email_address@nhs.net-password-fail]",
-        "uid" : "c6332124093af591",
-        "parentUid" : "a6c913603c6c86cdf15ae6fb67702043",
+        "name" : "Sign in should fail based on credentials provided [None-password-fail]",
+        "uid" : "dbfc737c4479eb83",
+        "parentUid" : "8a59037a1f9964da733bdd983b98f18d",
         "status" : "passed",
         "time" : {
-          "start" : 1732020332059,
-          "stop" : 1732020344870,
-          "duration" : 12811
+          "start" : 1732020625545,
+          "stop" : 1732020650540,
+          "duration" : 24995
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ "None", "password", "fail" ]
+      }, {
+        "name" : "Sign in should fail based on credentials provided [neelima.guntupalli1@nhs.net-valid-pass-pass]",
+        "uid" : "24662b81f5bfe5ee",
+        "parentUid" : "8a59037a1f9964da733bdd983b98f18d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1732020499843,
+          "stop" : 1732020625543,
+          "duration" : 125700
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ "neelima.guntupalli1@nhs.net-valid", "pass", "pass" ]
+      } ],
+      "uid" : "8a59037a1f9964da733bdd983b98f18d"
+    }, {
+      "name" : "1103-MainThread",
+      "children" : [ {
+        "name" : "Sign in should fail based on credentials provided [long_email_address@nhs.net-password-fail]",
+        "uid" : "6222d975864d61d9",
+        "parentUid" : "3457347cb7a3dbbd0acd9b9ed0145fd9",
+        "status" : "passed",
+        "time" : {
+          "start" : 1732020514736,
+          "stop" : 1732020527513,
+          "duration" : 12777
         },
         "flaky" : false,
         "newFailed" : false,
@@ -24,13 +62,13 @@
         "parameters" : [ "long_email_address@nhs.net", "password", "fail" ]
       }, {
         "name" : "Sign in should fail based on credentials provided [invalid_email_address-password-fail]",
-        "uid" : "acb1fdf2ada9112b",
-        "parentUid" : "a6c913603c6c86cdf15ae6fb67702043",
+        "uid" : "db69c4bca5608277",
+        "parentUid" : "3457347cb7a3dbbd0acd9b9ed0145fd9",
         "status" : "passed",
         "time" : {
-          "start" : 1732020316693,
-          "stop" : 1732020332056,
-          "duration" : 15363
+          "start" : 1732020499809,
+          "stop" : 1732020514733,
+          "duration" : 14924
         },
         "flaky" : false,
         "newFailed" : false,
@@ -40,73 +78,35 @@
         "retriesStatusChange" : false,
         "parameters" : [ "invalid_email_address", "password", "fail" ]
       } ],
-      "uid" : "a6c913603c6c86cdf15ae6fb67702043"
+      "uid" : "3457347cb7a3dbbd0acd9b9ed0145fd9"
     }, {
-      "name" : "1103-MainThread",
+      "name" : "1097-MainThread",
       "children" : [ {
-        "name" : "Sign in should fail based on credentials provided [neelima.guntupalli1@nhs.net-valid-pass-pass]",
-        "uid" : "831be079975155b8",
-        "parentUid" : "d3b00f94581b42d6bac312f992df10d4",
-        "status" : "passed",
-        "time" : {
-          "start" : 1732020316749,
-          "stop" : 1732020324374,
-          "duration" : 7625
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "neelima.guntupalli1@nhs.net-valid", "pass", "pass" ]
-      }, {
-        "name" : "Sign in should fail based on credentials provided [None-password-fail]",
-        "uid" : "dddb224b0d39798c",
-        "parentUid" : "d3b00f94581b42d6bac312f992df10d4",
-        "status" : "passed",
-        "time" : {
-          "start" : 1732020324376,
-          "stop" : 1732020348054,
-          "duration" : 23678
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ "None", "password", "fail" ]
-      } ],
-      "uid" : "d3b00f94581b42d6bac312f992df10d4"
-    }, {
-      "name" : "1100-MainThread",
-      "children" : [ {
-        "name" : "NHS sign in page should be visible",
-        "uid" : "5256ba40c9f99271",
-        "parentUid" : "fcb81ef329b64660be5eb2bf8ddd3ad4",
-        "status" : "passed",
-        "time" : {
-          "start" : 1732020320346,
-          "stop" : 1732020322218,
-          "duration" : 1872
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 0,
-        "retriesStatusChange" : false,
-        "parameters" : [ ]
-      }, {
         "name" : "Login button is visible",
-        "uid" : "a02dd3e80e7a30f1",
-        "parentUid" : "fcb81ef329b64660be5eb2bf8ddd3ad4",
+        "uid" : "2d777d8df36be460",
+        "parentUid" : "c44617ab88c9476371585ce61ea49fdb",
         "status" : "passed",
         "time" : {
-          "start" : 1732020316700,
-          "stop" : 1732020320341,
-          "duration" : 3641
+          "start" : 1732020499773,
+          "stop" : 1732020502773,
+          "duration" : 3000
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "NHS sign in page should be visible",
+        "uid" : "4583030f7835d9fa",
+        "parentUid" : "c44617ab88c9476371585ce61ea49fdb",
+        "status" : "passed",
+        "time" : {
+          "start" : 1732020502775,
+          "stop" : 1732020504480,
+          "duration" : 1705
         },
         "flaky" : false,
         "newFailed" : false,
@@ -116,8 +116,8 @@
         "retriesStatusChange" : false,
         "parameters" : [ ]
       } ],
-      "uid" : "fcb81ef329b64660be5eb2bf8ddd3ad4"
+      "uid" : "c44617ab88c9476371585ce61ea49fdb"
     } ],
-    "uid" : "8d38f91fbc5b9576db46d360956baeee"
+    "uid" : "ac5aa3bee0e5b93b06ed3041d0d103fe"
   } ]
 }
