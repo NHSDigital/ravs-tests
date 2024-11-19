@@ -47,7 +47,7 @@ jobs:
         env:
           ACTION_STEP_DEBUG: true
 
-      # Step 2: Clean previous tox and pip caches
+      # Step 2: Clean previous tox and pip caches (if any)
       - name: Clean tox and pip cache
         run: |
           rm -rf .tox
@@ -60,73 +60,42 @@ jobs:
         with:
           python-version: '3.11'
 
-      # Step 4: Cache pip dependencies
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('tox.ini') }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      # Step 5: Install Python dependencies from requirements.txt
+      # Step 4: Install Python dependencies from requirements.txt
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 6: Clean .tox directory again after installation
+      # Step 5: Clean .tox directory again after installation
       - name: Clean .tox directory
         run: |
           rm -rf .tox
           rm -rf ~/.tox_cache
 
-      # Step 7: Cache Playwright binaries
-      - name: Cache Playwright binaries
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
-      # Step 8: Debug cache keys and tox.ini existence
-      - name: Debug cache key and files
-        run: |
-          echo "Cache Key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('tox.ini') }}"
-          ls -alh tox.ini
-
-      # Step 9: Install Playwright dependencies
+      # Step 6: Install Playwright dependencies (Playwright-related setup)
       - name: Install Playwright dependencies
         run: |
+          python -m pip install playwright
           playwright install
           playwright install-deps
 
-      # Step 10: Cache Allure Installation (Only if not cached previously)
-      - name: Cache Allure Installation
-        uses: actions/cache@v4
-        with:
-          path: /opt/allure-2.17.3
-          key: allure-installation-v1
-
-      # Step 11: Install Allure if not cached
-      - name: Install Allure if not cached
-        if: steps.cache.outputs.cache-hit != 'true'
+      # Step 7: Install Allure Commandline
+      - name: Install Allure Commandline
         run: |
           curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
           tar -zxvf allure-commandline-2.17.3.tgz -C /opt/ && \
           sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
           rm -rf allure-commandline-2.17.3.tgz
 
-      # Step 12: Verify Allure installation
+      # Step 8: Verify Allure Installation
       - name: Verify Allure Installation
         run: allure --version
 
-      # Step 13: Debug tox.ini content for visibility
+      # Step 9: Debug tox.ini content for visibility
       - name: Debug tox.ini
         run: cat tox.ini
 
-      # Step 14: Run Tests using tox
+      # Step 10: Run Tests using tox (This will pick up your tox.ini configuration)
       - name: Run Tests
         env:
           TEST_ENVIRONMENT: ${{ inputs.environment }}
@@ -138,7 +107,7 @@ jobs:
         run: |
           tox
 
-      # Step 15: Upload Allure Results as an artifact
+      # Step 11: Upload Allure Results as an artifact
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
         with:
@@ -146,7 +115,7 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
-      # Step 16: Trigger a test report generation in another workflow
+      # Step 12: Trigger a test report generation in another workflow
       - name: Trigger test report generation
         run: |
           curl -X POST \
