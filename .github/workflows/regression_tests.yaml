@@ -41,8 +41,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           ref: ${{ inputs.github_tag }}
+        env:
+          ACTION_STEP_DEBUG: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
