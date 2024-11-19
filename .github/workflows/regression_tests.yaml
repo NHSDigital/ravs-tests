@@ -42,8 +42,6 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.github_tag }}
 
       # Step 2: Clean previous tox and pip caches (if any)
       - name: Clean tox and pip cache
