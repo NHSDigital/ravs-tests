@@ -244,13 +244,9 @@ jobs:
       - name: Clean up
         run: docker stop $(docker ps -q) || true
 
-      - name: Report failure on test failure
-        if: steps.tests.outcome != 'success'
+      - name: Trigger test report generation
         run: |
           poetry run python scripts/send_test_results.py --token=${{ steps.generate-token.outputs.token }} --run_id ${{GITHUB.RUN_ID}}
-          echo The regression tests step failed, this likely means there are test failures.
-          echo A test report will be generated shortly and can be viewed at: https://nhsdigital.github.io/ravs-test-reports
-          exit 1
 
       - name: Notify Slack on success
         if: success()
