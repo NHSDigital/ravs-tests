@@ -172,8 +172,8 @@ jobs:
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.REGRESSION_TESTS_APP_ID }}
-          private-key: ${{ secrets.REGRESSION_TESTS_PEM }}
+          app-id: ${{ secrets.EPS_REGRESSION_TESTING_APP_ID }}
+          private-key: ${{ secrets.EPS_REGRESSION_TESTING_PEM }}
           owner: "NHSDigital"
           repositories: "ravs-tests,RAVS-test-reports"
 
