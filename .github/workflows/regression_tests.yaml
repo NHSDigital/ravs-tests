@@ -75,34 +75,11 @@ jobs:
           playwright install
           playwright install-deps
 
-
-          The issue arises because you are using an incorrect condition in the if statement in this part of your workflow:
-
-            yaml
-            Copy code
-            - name: Install Allure if not cached
-              if: !steps.cache.outputs.cache-hit
-              run: |
-                curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
-                tar -zxvf allure-commandline-2.17.3.tgz -C /opt/ && \
-                ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
-                rm -rf allure-commandline-2.17.3.tgz
-            The Fix:
-            GitHub Actions expressions should use the correct syntax for conditional checks. The correct way to check for a cache hit is to use the following expression:
-
-            yaml
-            Copy code
-            if: steps.cache.outputs.cache-hit != 'true'
-            This change will ensure that the step to install Allure is only triggered if the cache was not found.
-
-            Corrected Workflow Section:
-            yaml
-            Copy code
-            - name: Cache Allure Installation
-              uses: actions/cache@v4
-              with:
-                path: /opt/allure-2.17.3
-                key: allure-installation-v1
+      - name: Cache Allure Installation
+        uses: actions/cache@v4
+        with:
+          path: /opt/allure-2.17.3
+          key: allure-installation-v1
 
       - name: Install Allure if not cached
         if: steps.cache.outputs.cache-hit != 'true'
