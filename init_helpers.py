@@ -185,7 +185,7 @@ def get_total_scenarios_to_run(config, tags=None):
 def after_all():
     # Add anything you want to happen after all the tests have completed here
     env = os.environ.get("TEST_ENVIRONMENT", "qa")
-    product = "Record a vaccination"
+    product = "RAVS"
     properties_dict = {"PRODUCT": product, "ENV": env}
         # if PULL_REQUEST_ID:
         #     pull_request_id = PULL_REQUEST_ID.lower()

@@ -76,6 +76,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
 
+      - name: Debug cache key and files
+        run: |
+          echo "Cache Key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('tox.ini') }}"
+          ls -alh tox.ini
+
       - name: Install Playwright dependencies
         run: |
           playwright install
@@ -97,6 +102,9 @@ jobs:
 
       - name: Verify Allure Installation
         run: allure --version
+
+      - name: Debug tox.ini
+        run: cat tox.ini
 
       - name: Run Tests
         env:
