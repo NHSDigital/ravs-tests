@@ -53,7 +53,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('tox.ini') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -65,10 +65,6 @@ jobs:
       - name: Clean .tox directory
         run: |
           rm -rf .tox
-
-      - name: Rebuild Tox environments
-        run: |
-          tox -r  # Forces tox to recreate environments
 
       - name: Cache Playwright binaries
         uses: actions/cache@v4
