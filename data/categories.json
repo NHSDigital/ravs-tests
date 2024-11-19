@@ -4,16 +4,16 @@
   "children" : [ {
     "name" : "Product defects",
     "children" : [ {
-      "name" : "AssertionError: assert False == True\n +  where False = check_patient_multiple_results_found_message_exists(True)",
+      "name" : "AssertionError: assert False == True\n +  where False = check_batch_already_exists_error_message_is_displayed()",
       "children" : [ {
-        "name" : "Demographics: Multiple demographic matches shows an error that more than one result is found [Aidan-Smith-23/02/2020]",
-        "uid" : "e50408fec1e18100",
-        "parentUid" : "f17dee65973499f126a9164b19ce01ed",
+        "name" : "Add batch to vaccine [ALBERT HOUSE-COVID-19-Spikevax JN.1-AUTOMATION-SJ1-19/10/2026]",
+        "uid" : "f3e5a040deeda66c",
+        "parentUid" : "3d73f087a4e57f391b7e00fcfec13be1",
         "status" : "failed",
         "time" : {
-          "start" : 1731915812792,
-          "stop" : 1731915831909,
-          "duration" : 19117
+          "start" : 1731996638459,
+          "stop" : 1731996660547,
+          "duration" : 22088
         },
         "flaky" : false,
         "newFailed" : false,
@@ -21,9 +21,30 @@
         "newBroken" : false,
         "retriesCount" : 0,
         "retriesStatusChange" : false,
-        "parameters" : [ "23/02/2020", "Aidan", "Smith" ]
+        "parameters" : [ "AUTOMATION-SJ1", "19/10/2026", "ALBERT HOUSE", "COVID-19", "Spikevax JN.1" ]
       } ],
-      "uid" : "f17dee65973499f126a9164b19ce01ed"
+      "uid" : "3d73f087a4e57f391b7e00fcfec13be1"
+    }, {
+      "name" : "AssertionError: assert False\n +  where False = check_enter_batch_number_error_message_is_displayed()",
+      "children" : [ {
+        "name" : "Error messages should appear when no values are entered",
+        "uid" : "4a9a9f95f09eefb6",
+        "parentUid" : "da0b9baaf1163f54173c6ceb43a6c2eb",
+        "status" : "failed",
+        "time" : {
+          "start" : 1731996667097,
+          "stop" : 1731996682931,
+          "duration" : 15834
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "da0b9baaf1163f54173c6ceb43a6c2eb"
     } ],
     "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
   } ]
