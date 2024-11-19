@@ -202,7 +202,8 @@ def after_all():
         #             "PULL-REQUEST": pull_request_link,
         #         }
 
-    file_path = "./allure-results/environment.properties"
+    working_dir = get_working_directory()
+    file_path = os.path.join(working_dir, 'allure-results', 'environment.properties')
     write_properties_file(file_path, properties_dict)
 
 def write_properties_file(file_path, properties_dict):
