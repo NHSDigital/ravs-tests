@@ -37,14 +37,14 @@ on:
       - '**'   # Triggers on push to any branch
   schedule:
     # QA environment at 6:00 AM UTC
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * *'  # This will run the tests for the QA environment
     # DEV environment at 6:30 AM UTC
-    - cron: '30 6 * * *'
+    - cron: '30 6 * * *'  # This will run the tests for the DEV environment
 
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'push' && 'qa' || inputs.environment }} # Sets to dev if push event, else uses the input value
+    environment: ${{ github.event_name == 'push' && 'qa' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || 'dev') }} # Dynamically set environment based on event type
 
     steps:
       # Step 1: Checkout the repository
@@ -110,7 +110,7 @@ jobs:
       # Step 10: Run Tests using tox
       - name: Run Tests
         env:
-          TEST_ENVIRONMENT: ${{ github.event_name == 'push' && 'qa' || inputs.environment }}  # Ensure environment is passed here
+          TEST_ENVIRONMENT: ${{ github.event_name == 'push' && 'qa' || (inputs.environment == 'dev' || 'qa') }}
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
           BROWSER: "edge"
@@ -128,6 +128,7 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
+      # Step 12: Generate a token and trigger report generation
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -137,7 +138,6 @@ jobs:
           owner: "NHSDigital"
           repositories: "ravs-tests,ravs-test-reports"
 
-      # Step 12: Trigger a test report generation in another workflow
       - name: Trigger test report generation
         run: |
           curl -X POST \
