@@ -44,7 +44,7 @@ on:
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'push' && 'dev' || inputs.environment }} # Sets to dev if push event, else uses the input value
+    environment: ${{ github.event_name == 'push' && 'qa' || inputs.environment }} # Sets to dev if push event, else uses the input value
 
     steps:
       # Step 1: Checkout the repository
