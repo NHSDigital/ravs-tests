@@ -3,11 +3,11 @@ name: Regression Tests
 on:
   workflow_dispatch:
     inputs:
-      tags:
+      marker:
         description: 'Test scenario tags'
         required: true
         type: string
-        default: "@regression"
+        default: ''
       environment:
         description: 'Environment to run tests against'
         type: environment
@@ -114,7 +114,7 @@ jobs:
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
           BROWSER: "edge"
-          MARKER: ""
+          MARKER: ${{ inputs.marker || '' }}
           AGENTS: 3
         run: |
           tox -v
