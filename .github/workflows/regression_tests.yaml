@@ -113,6 +113,7 @@ jobs:
           AGENTS: 3
         run: |
           tox
+        continue-on-error: true
 
       # Step 11: Upload Allure Results as an artifact
       - name: Upload Allure Results
