@@ -33,22 +33,30 @@ on:
         required: false
         default: "main"
 
+  schedule:
+    # QA environment at 6:00 AM UTC
+    - cron: '0 6 * * *'
+    # DEV environment at 6:30 AM UTC
+    - cron: '30 6 * * *'
+
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.environment || 'DEV' }}
 
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Clean previous tox and pip caches (if any)
-      - name: Clean tox and pip cache
-        run: |
-          rm -rf .tox
-          rm -rf ~/.tox_cache
-          rm -rf ~/.cache/pip
+      # Step 2: Cache Python dependencies
+      - name: Cache Python dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       # Step 3: Set up Python 3.11
       - name: Set up Python
@@ -62,13 +70,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 5: Clean .tox directory again after installation
-      - name: Clean .tox directory
-        run: |
-          rm -rf .tox
-          rm -rf ~/.tox_cache
+      # Step 5: Cache Playwright binaries
+      - name: Cache Playwright binaries
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ inputs.environment }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-      # Step 6: Install Playwright dependencies (Playwright-related setup)
+      # Step 6: Install Playwright dependencies
       - name: Install Playwright dependencies
         run: |
           python -m pip install playwright
@@ -91,7 +102,7 @@ jobs:
       - name: Debug tox.ini
         run: cat tox.ini
 
-      # Step 10: Run Tests using tox (This will pick up your tox.ini configuration)
+      # Step 10: Run Tests using tox
       - name: Run Tests
         env:
           TEST_ENVIRONMENT: ${{ inputs.environment }}
@@ -120,5 +131,3 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -d '{"ref": "main", "inputs": {"run_id": "'${{ GITHUB.RUN_ID }}'"}}' \
           "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
-
-
