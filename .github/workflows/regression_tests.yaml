@@ -9,13 +9,10 @@ on:
         type: string
         default: "@regression"
       environment:
-        description: 'Environment to run tests against (dev or qa)'
-        type: choice
+        description: 'Environment to run tests against'
+        type: environment
         required: true
-        options:
-          - dev
-          - qa
-        default: "dev"  # Default to dev if not chosen
+        default: "dev"
       product:
         description: 'The product we are testing'
         type: choice
@@ -47,7 +44,7 @@ on:
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'dev' }}  # Use the input from manual trigger, default to 'dev' if not provided
+    environment: ${{ github.event_name == 'push' && 'dev' || inputs.environment }} # Sets to dev if push event, else uses the input value
 
     steps:
       # Step 1: Checkout the repository
@@ -80,7 +77,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ github.event.inputs.environment }}
+          key: ${{ runner.os }}-playwright-${{ inputs.environment }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
@@ -113,7 +110,7 @@ jobs:
       # Step 10: Run Tests using tox
       - name: Run Tests
         env:
-          TEST_ENVIRONMENT: ${{ github.event.inputs.environment }}  # Use the selected environment
+          TEST_ENVIRONMENT: ${{ inputs.environment }}
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
           BROWSER: "edge"
@@ -131,7 +128,6 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
-      # Step 12: Generate a token
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -141,7 +137,7 @@ jobs:
           owner: "NHSDigital"
           repositories: "ravs-tests,ravs-test-reports"
 
-      # Step 13: Trigger a test report generation in another workflow
+      # Step 12: Trigger a test report generation in another workflow
       - name: Trigger test report generation
         run: |
           curl -X POST \
