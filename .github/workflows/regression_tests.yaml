@@ -9,10 +9,13 @@ on:
         type: string
         default: "@regression"
       environment:
-        description: 'Environment to run tests against'
-        type: environment
+        description: 'Environment to run tests against (dev or qa)'
+        type: choice
         required: true
-        default: "dev"
+        options:
+          - dev
+          - qa
+        default: "dev"  # Default to dev if not chosen
       product:
         description: 'The product we are testing'
         type: choice
@@ -44,7 +47,7 @@ on:
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment || 'dev' }}
+    environment: ${{ github.event.inputs.environment || 'dev' }}  # Use the input from manual trigger, default to 'dev' if not provided
 
     steps:
       # Step 1: Checkout the repository
@@ -77,7 +80,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ inputs.environment }}
+          key: ${{ runner.os }}-playwright-${{ github.event.inputs.environment }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
@@ -110,7 +113,7 @@ jobs:
       # Step 10: Run Tests using tox
       - name: Run Tests
         env:
-          TEST_ENVIRONMENT: ${{ inputs.environment }}
+          TEST_ENVIRONMENT: ${{ github.event.inputs.environment }}  # Use the selected environment
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
           BROWSER: "edge"
@@ -128,6 +131,7 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
+      # Step 12: Generate a token
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -137,7 +141,7 @@ jobs:
           owner: "NHSDigital"
           repositories: "ravs-tests,ravs-test-reports"
 
-      # Step 12: Trigger a test report generation in another workflow
+      # Step 13: Trigger a test report generation in another workflow
       - name: Trigger test report generation
         run: |
           curl -X POST \
