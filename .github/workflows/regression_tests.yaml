@@ -130,5 +130,5 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -d '{"ref": "main", "inputs": {"run_id": "'${{ GITHUB.RUN_ID }}'"}}' \
+          -d '{"ref": "main", "inputs": {"run_id": "'${{ GITHUB.run_id }}'"}}' \
           "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
