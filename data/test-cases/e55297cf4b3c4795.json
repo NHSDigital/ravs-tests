@@ -1,0 +1,566 @@
+{
+  "uid" : "e55297cf4b3c4795",
+  "name" : "Record a vaccine with nhs number [12-9450140960-BIRCH HOUSE-Hospital hub for staff and patients-yes-today-1-yes-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-AUTOMATION-SJ1-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "37c8518f5e6f8c40c7e8a780611169f8",
+  "time" : {
+    "start" : 1732170202235,
+    "stop" : 1732170285636,
+    "duration" : 83401
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f13603dbc40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9450140960-BIRCH HOUSE-Hospital hub for staff a...es-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-AUTOMATION-SJ1-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 20/11/2024DEANA GAMBLES', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 20/11/2024DEANA GAMBLES', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f13603dbc40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[12-9450140960-BIRCH HOUSE-Hospital hub for staff a...es-yes-today-DEANA GAMBLES-5/9/1993-10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ-Flu-AUTOMATION-SJ1-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 20/11/2024DEANA GAMBLES', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 20/11/2024DEANA GAMBLES', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-SJ1', 'care_model': 'Hospital hub for staff and patients', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Hospital hub for staff and patients and get patient details for 9450140960 with option 12 and choose to vaccinate with vaccine details as Flu, AUTOMATION-SJ1 with 19/10/2026",
+      "time" : {
+        "start" : 1732170202236,
+        "stop" : 1732170206517,
+        "duration" : 4281
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "89ae557915b26216",
+        "name" : "qa_edge_131.0.2903.51_clicked_vaccines_nav_link.png",
+        "source" : "89ae557915b26216.png",
+        "type" : "image/png",
+        "size" : 46617
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732170206518,
+        "stop" : 1732170212436,
+        "duration" : 5918
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c31bc409bf8512c0",
+        "name" : "qa_edge_131.0.2903.51_entered_nhs_number_as9450140960_and_clicked_search_for_patient_button.png",
+        "source" : "c31bc409bf8512c0.png",
+        "type" : "image/png",
+        "size" : 48784
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient DEANA GAMBLES",
+      "time" : {
+        "start" : 1732170212436,
+        "stop" : 1732170215311,
+        "duration" : 2875
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8de693d235cb6b75",
+        "name" : "qa_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "8de693d235cb6b75.png",
+        "type" : "image/png",
+        "size" : 48784
+      }, {
+        "uid" : "a8809cda8894a1d4",
+        "name" : "qa_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "a8809cda8894a1d4.png",
+        "type" : "image/png",
+        "size" : 54508
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, AUTOMATION-SJ1 with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1732170215312,
+        "stop" : 1732170236971,
+        "duration" : 21659
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3186fcbf2eebbf60",
+        "name" : "qa_edge_131.0.2903.51_immunisation_history_records_count_is_0.png",
+        "source" : "3186fcbf2eebbf60.png",
+        "type" : "image/png",
+        "size" : 54508
+      }, {
+        "uid" : "ba510142cac1b148",
+        "name" : "qa_edge_131.0.2903.51_clicked_choose_vaccine_button.png",
+        "source" : "ba510142cac1b148.png",
+        "type" : "image/png",
+        "size" : 86355
+      }, {
+        "uid" : "584ae0b3056accba",
+        "name" : "qa_edge_131.0.2903.51_clicked_on_patient_DEANA GAMBLES_and_clicked_choose_vaccine_button.png",
+        "source" : "584ae0b3056accba.png",
+        "type" : "image/png",
+        "size" : 86355
+      }, {
+        "uid" : "29410004ecf2ea41",
+        "name" : "qa_edge_131.0.2903.51_clicked_delivery_team.png",
+        "source" : "29410004ecf2ea41.png",
+        "type" : "image/png",
+        "size" : 87710
+      }, {
+        "uid" : "701952a10274badf",
+        "name" : "qa_edge_131.0.2903.51_clicked_vaccine.png",
+        "source" : "701952a10274badf.png",
+        "type" : "image/png",
+        "size" : 59152
+      }, {
+        "uid" : "c9d32bfda2ae7f0c",
+        "name" : "qa_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "c9d32bfda2ae7f0c.png",
+        "type" : "image/png",
+        "size" : 61422
+      }, {
+        "uid" : "666f1af2a74c6403",
+        "name" : "qa_edge_131.0.2903.51_selected_vaccine_Flu_and_Influenza Tetra MYL_and_clicked_continue_button.png",
+        "source" : "666f1af2a74c6403.png",
+        "type" : "image/png",
+        "size" : 76586
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1732170236971,
+        "stop" : 1732170243302,
+        "duration" : 6331
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ae3d6a77e37028c9",
+        "name" : "qa_edge_131.0.2903.51_clicked_eligible_yes_radiobutton.png",
+        "source" : "ae3d6a77e37028c9.png",
+        "type" : "image/png",
+        "size" : 71526
+      }, {
+        "uid" : "6c4d38473dc6f461",
+        "name" : "qa_edge_131.0.2903.51_selected_eligibility_type.png",
+        "source" : "6c4d38473dc6f461.png",
+        "type" : "image/png",
+        "size" : 74833
+      }, {
+        "uid" : "6d89b4f1709a0a52",
+        "name" : "qa_edge_131.0.2903.51_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "6d89b4f1709a0a52.png",
+        "type" : "image/png",
+        "size" : 74833
+      }, {
+        "uid" : "f0c737d6c01160e9",
+        "name" : "qa_edge_131.0.2903.51_set_assessment_date.png",
+        "source" : "f0c737d6c01160e9.png",
+        "type" : "image/png",
+        "size" : 74771
+      }, {
+        "uid" : "f4004d59f3cf8fb",
+        "name" : "qa_edge_131.0.2903.51_clicked_legal_mechanism.png",
+        "source" : "f4004d59f3cf8fb.png",
+        "type" : "image/png",
+        "size" : 76543
+      }, {
+        "uid" : "ff1b1b8fbf7e1c8e",
+        "name" : "qa_edge_131.0.2903.51_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "ff1b1b8fbf7e1c8e.png",
+        "type" : "image/png",
+        "size" : 80148
+      }, {
+        "uid" : "c8a87ac930a6e913",
+        "name" : "qa_edge_131.0.2903.51_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "c8a87ac930a6e913.png",
+        "type" : "image/png",
+        "size" : 79355
+      }, {
+        "uid" : "35e858a9e5c9d54a",
+        "name" : "qa_edge_131.0.2903.51_entered_comments_for_assessing_patient.png",
+        "source" : "35e858a9e5c9d54a.png",
+        "type" : "image/png",
+        "size" : 79658
+      }, {
+        "uid" : "63119037916a2d3f",
+        "name" : "qa_edge_131.0.2903.51_clicked_continue_to_record_consent_button.png",
+        "source" : "63119037916a2d3f.png",
+        "type" : "image/png",
+        "size" : 40532
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 9,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1732170243303,
+        "stop" : 1732170246639,
+        "duration" : 3336
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "e4498fea4b9ab9f",
+        "name" : "qa_edge_131.0.2903.51_before_selecting_consent_clinician.png",
+        "source" : "e4498fea4b9ab9f.png",
+        "type" : "image/png",
+        "size" : 40532
+      }, {
+        "uid" : "fb25a38ee6ea9522",
+        "name" : "qa_edge_131.0.2903.51_selected_consent_clinician_with_name_and_council.png",
+        "source" : "fb25a38ee6ea9522.png",
+        "type" : "image/png",
+        "size" : 44010
+      }, {
+        "uid" : "e0a512f8005a81ad",
+        "name" : "qa_edge_131.0.2903.51_clicked_yes_to_consent.png",
+        "source" : "e0a512f8005a81ad.png",
+        "type" : "image/png",
+        "size" : 75948
+      }, {
+        "uid" : "7119c9dda40c1676",
+        "name" : "qa_edge_131.0.2903.51_selected_consent_given_by_from_dropdown.png",
+        "source" : "7119c9dda40c1676.png",
+        "type" : "image/png",
+        "size" : 78870
+      }, {
+        "uid" : "13329a8ef4660fc",
+        "name" : "qa_edge_131.0.2903.51_clicked_continue_to_vaccinate_button.png",
+        "source" : "13329a8ef4660fc.png",
+        "type" : "image/png",
+        "size" : 82835
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 5,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1732170246639,
+        "stop" : 1732170256005,
+        "duration" : 9366
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dfdec41313ddfe6e",
+        "name" : "qa_edge_131.0.2903.51_clicked_yes_vaccinated_radiobutton.png",
+        "source" : "dfdec41313ddfe6e.png",
+        "type" : "image/png",
+        "size" : 84100
+      }, {
+        "uid" : "68a8b5fd8400e13d",
+        "name" : "qa_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "68a8b5fd8400e13d.png",
+        "type" : "image/png",
+        "size" : 62318
+      }, {
+        "uid" : "d9d4d0e6e619a14f",
+        "name" : "qa_edge_131.0.2903.51_vaccination_date_is_set.png",
+        "source" : "d9d4d0e6e619a14f.png",
+        "type" : "image/png",
+        "size" : 86252
+      }, {
+        "uid" : "60819cd5a8670b55",
+        "name" : "qa_edge_131.0.2903.51_clicked_care_model_option.png",
+        "source" : "60819cd5a8670b55.png",
+        "type" : "image/png",
+        "size" : 87302
+      }, {
+        "uid" : "b7c0413e5fe8a7ed",
+        "name" : "qa_edge_131.0.2903.51_selected_vaccinator_name_and_council.png",
+        "source" : "b7c0413e5fe8a7ed.png",
+        "type" : "image/png",
+        "size" : 87302
+      }, {
+        "uid" : "ce935e7848bca1c0",
+        "name" : "qa_edge_131.0.2903.51_entered_vaccination_comments.png",
+        "source" : "ce935e7848bca1c0.png",
+        "type" : "image/png",
+        "size" : 44045
+      }, {
+        "uid" : "1b095e138444c415",
+        "name" : "qa_edge_131.0.2903.51_selected_vaccination_site.png",
+        "source" : "1b095e138444c415.png",
+        "type" : "image/png",
+        "size" : 45289
+      }, {
+        "uid" : "922915e26ffd6380",
+        "name" : "qa_edge_131.0.2903.51_selected_batch_number.png",
+        "source" : "922915e26ffd6380.png",
+        "type" : "image/png",
+        "size" : 50480
+      }, {
+        "uid" : "eb353b2e4d41019",
+        "name" : "qa_edge_131.0.2903.51_entered_dose_amount_value.png",
+        "source" : "eb353b2e4d41019.png",
+        "type" : "image/png",
+        "size" : 50480
+      }, {
+        "uid" : "865ec88318945d51",
+        "name" : "qa_edge_131.0.2903.51_entered_vaccination_details.png",
+        "source" : "865ec88318945d51.png",
+        "type" : "image/png",
+        "size" : 61317
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient DEANA GAMBLES, 5/9/1993, 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1732170256006,
+        "stop" : 1732170258319,
+        "duration" : 2313
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "48944f204b1dae19",
+        "name" : "qa_edge_131.0.2903.51_check_and_confirm_screen_before_assertion.png",
+        "source" : "48944f204b1dae19.png",
+        "type" : "image/png",
+        "size" : 61317
+      }, {
+        "uid" : "e9845997ce2fce13",
+        "name" : "qa_edge_131.0.2903.51_vaccination_dose_amount.png",
+        "source" : "e9845997ce2fce13.png",
+        "type" : "image/png",
+        "size" : 61317
+      }, {
+        "uid" : "c1e5aa2d3227e41f",
+        "name" : "qa_edge_131.0.2903.51_check_and_confirm_screen_after_assertion.png",
+        "source" : "c1e5aa2d3227e41f.png",
+        "type" : "image/png",
+        "size" : 61317
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1732170258319,
+        "stop" : 1732170260640,
+        "duration" : 2321
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cc125e243d693ca9",
+        "name" : "qa_edge_131.0.2903.51_patient_details_screen_with_immunisation_history.png",
+        "source" : "cc125e243d693ca9.png",
+        "type" : "image/png",
+        "size" : 61317
+      }, {
+        "uid" : "f0b0645782d83ab",
+        "name" : "qa_edge_131.0.2903.51_before_assert_record_saved.png",
+        "source" : "f0b0645782d83ab.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732170260641,
+        "stop" : 1732170266518,
+        "duration" : 5877
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1020fa68cdadb4eb",
+        "name" : "qa_edge_131.0.2903.51_entered_nhs_number_as9450140960_and_clicked_search_for_patient_button.png",
+        "source" : "1020fa68cdadb4eb.png",
+        "type" : "image/png",
+        "size" : 48613
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient DEANA GAMBLES",
+      "time" : {
+        "start" : 1732170266519,
+        "stop" : 1732170271872,
+        "duration" : 5353
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "72fcc444caecac39",
+        "name" : "qa_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "72fcc444caecac39.png",
+        "type" : "image/png",
+        "size" : 48613
+      }, {
+        "uid" : "9c6927b25d03699c",
+        "name" : "qa_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "9c6927b25d03699c.png",
+        "type" : "image/png",
+        "size" : 54508
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1732170271872,
+        "stop" : 1732170285636,
+        "duration" : 13764
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+      "statusTrace" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4453c56185bb008b",
+        "name" : "qa_edge_131.0.2903.51_immunisation_history_records_count_after_vaccination.png",
+        "source" : "4453c56185bb008b.png",
+        "type" : "image/png",
+        "size" : 54508
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "38231d7c564e8fbd",
+      "name" : "log",
+      "source" : "38231d7c564e8fbd.txt",
+      "type" : "text/plain",
+      "size" : 27261
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 45,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "e8b53a082911"
+  }, {
+    "name" : "thread",
+    "value" : "1100-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-SJ1"
+  }, {
+    "name" : "care_model",
+    "value" : "Hospital hub for staff and patients"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "5/9/1993"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "12"
+  }, {
+    "name" : "name",
+    "value" : "DEANA GAMBLES"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450140960"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "e55297cf4b3c4795.json",
+  "parameterValues" : [ "10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ", "today-1", "19/10/2026", "AUTOMATION-SJ1", "Hospital hub for staff and patients", "Flu", "yes", "5/9/1993", "yes", "12", "DEANA GAMBLES", "9450140960", "BIRCH HOUSE", "yes", "today" ]
+}
