@@ -60,6 +60,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      - name: Set up en_GB.UTF-8 locale
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen "en_GB.UTF-8"
+          sudo update-locale LANG=en_GB.UTF-8 LANGUAGE=en_GB:en LC_ALL=en_GB.UTF-8
+        env:
+          DEBIAN_FRONTEND: noninteractive
+
       # Step 3: Set up Python 3.11
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -107,10 +116,19 @@ jobs:
       - name: Debug regression_tests.yaml
         run: cat .github/workflows/regression_tests.yaml
 
+
+      - name: Debug locale settings
+        run: |
+          echo "Current Locale:"
+          locale
+
       # Step 10: Run Tests using tox
       - name: Run Tests
         env:
-          TZ: "Europe/London" 
+          TZ: "Europe/London"
+          LANG: "en_GB.UTF-8"
+          LANGUAGE: "en_GB:en"
+          LC_ALL: "en_GB.UTF-8"
           TEST_ENVIRONMENT: ${{ github.event_name == 'push' && 'dev' || (inputs.environment == 'dev' || 'qa') }}
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
