@@ -44,7 +44,7 @@ on:
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'push' && 'qa' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || 'dev') }} # Dynamically set environment based on event type
+    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || 'dev') }} # Dynamically set environment based on event type
 
     steps:
       # Step 1: Checkout the repository
@@ -110,7 +110,7 @@ jobs:
       # Step 10: Run Tests using tox
       - name: Run Tests
         env:
-          TEST_ENVIRONMENT: ${{ github.event_name == 'push' && 'qa' || (inputs.environment == 'dev' || 'qa') }}
+          TEST_ENVIRONMENT: ${{ github.event_name == 'push' && 'dev' || (inputs.environment == 'dev' || 'qa') }}
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
           BROWSER: "edge"
