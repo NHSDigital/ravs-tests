@@ -1,0 +1,587 @@
+{
+  "uid" : "fcfbecd42598b2f2",
+  "name" : "Record a maternity vaccine with nhs number [4-9473629885-BECCLES HOUSE-Outreach event-yes-today+50-today-4-yes-yes-today-3-MARGIE PUCKEY-27/5/1924-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-Respiratory syncytial virus (RSV)-AREX2-15A-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a maternity vaccine with nhs number",
+  "historyId" : "6b904498058c6dc06a20bd0e949ae45a",
+  "time" : {
+    "start" : 1732172409062,
+    "stop" : 1732172491341,
+    "duration" : 82279
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fbf093d85e0>\nrequest = <FixtureRequest for <Function test_record_a_maternity_vaccine_with_nhs_number[4-9473629885-BECCLES HOUSE-Outreach even...4-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-Respiratory syncytial virus (RSV)-AREX2-15A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 17/11/2024MARGIE PUCKEY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AREX2-15A', 'care_model': \"Housebound patient's home\", ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 17/11/2024MARGIE PUCKEY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AREX2-15A', 'care_model': \"Housebound patient's home\", ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fbf093d85e0>\nrequest = <FixtureRequest for <Function test_record_a_maternity_vaccine_with_nhs_number[4-9473629885-BECCLES HOUSE-Outreach even...4-MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB-Respiratory syncytial virus (RSV)-AREX2-15A-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 17/11/2024MARGIE PUCKEY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AREX2-15A', 'care_model': \"Housebound patient's home\", ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 17/11/2024MARGIE PUCKEY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AREX2-15A', 'care_model': \"Housebound patient's home\", ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BECCLES HOUSE and Outreach event and get patient details for 9473629885 with option 4 and choose to vaccinate with vaccine details as Respiratory syncytial virus (RSV), AREX2-15A with 19/10/2026",
+      "time" : {
+        "start" : 1732172409063,
+        "stop" : 1732172413341,
+        "duration" : 4278
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "95df3d86777cbeab",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccines_nav_link.png",
+        "source" : "95df3d86777cbeab.png",
+        "type" : "image/png",
+        "size" : 46618
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732172413341,
+        "stop" : 1732172419156,
+        "duration" : 5815
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "700f8ef0233ba2e7",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9473629885_and_clicked_search_for_patient_button.png",
+        "source" : "700f8ef0233ba2e7.png",
+        "type" : "image/png",
+        "size" : 49480
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARGIE PUCKEY",
+      "time" : {
+        "start" : 1732172419157,
+        "stop" : 1732172422991,
+        "duration" : 3834
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "dcaa5e3ede4dddaf",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "dcaa5e3ede4dddaf.png",
+        "type" : "image/png",
+        "size" : 49480
+      }, {
+        "uid" : "ac0499819a038082",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "ac0499819a038082.png",
+        "type" : "image/png",
+        "size" : 58093
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Respiratory syncytial virus (RSV), AREX2-15A with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1732172422992,
+        "stop" : 1732172444437,
+        "duration" : 21445
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "16f97e9b62d42970",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_is_0.png",
+        "source" : "16f97e9b62d42970.png",
+        "type" : "image/png",
+        "size" : 58093
+      }, {
+        "uid" : "56f40e89db8924e8",
+        "name" : "dev_edge_131.0.2903.51_clicked_choose_vaccine_button.png",
+        "source" : "56f40e89db8924e8.png",
+        "type" : "image/png",
+        "size" : 81294
+      }, {
+        "uid" : "8af0c00829a250d4",
+        "name" : "dev_edge_131.0.2903.51_clicked_on_patient_MARGIE PUCKEY_and_clicked_choose_vaccine_button.png",
+        "source" : "8af0c00829a250d4.png",
+        "type" : "image/png",
+        "size" : 81294
+      }, {
+        "uid" : "dd0ba3e40abb293f",
+        "name" : "dev_edge_131.0.2903.51_clicked_delivery_team.png",
+        "source" : "dd0ba3e40abb293f.png",
+        "type" : "image/png",
+        "size" : 86388
+      }, {
+        "uid" : "54ecd12e00d3972e",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine.png",
+        "source" : "54ecd12e00d3972e.png",
+        "type" : "image/png",
+        "size" : 60046
+      }, {
+        "uid" : "c79a0db07e15c1f4",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "c79a0db07e15c1f4.png",
+        "type" : "image/png",
+        "size" : 62682
+      }, {
+        "uid" : "feb43b64cae40fd",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccine_Respiratory syncytial virus (RSV)_and_Abrysvo_and_clicked_continue_button.png",
+        "source" : "feb43b64cae40fd.png",
+        "type" : "image/png",
+        "size" : 45599
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the pregnant patient's yes with the details of due date as today+50 and assessment date as today-4 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1732172444438,
+        "stop" : 1732172451355,
+        "duration" : 6917
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b9a454ef9fe021ca",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligible_yes_radiobutton.png",
+        "source" : "b9a454ef9fe021ca.png",
+        "type" : "image/png",
+        "size" : 72311
+      }, {
+        "uid" : "152c849edcae4cb2",
+        "name" : "dev_edge_131.0.2903.51_selected_eligibility_type.png",
+        "source" : "152c849edcae4cb2.png",
+        "type" : "image/png",
+        "size" : 72983
+      }, {
+        "uid" : "8b798f2418f45238",
+        "name" : "dev_edge_131.0.2903.51_entered_due_date.png",
+        "source" : "8b798f2418f45238.png",
+        "type" : "image/png",
+        "size" : 73312
+      }, {
+        "uid" : "276af988f97ac686",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "276af988f97ac686.png",
+        "type" : "image/png",
+        "size" : 73312
+      }, {
+        "uid" : "c490a48e96763261",
+        "name" : "dev_edge_131.0.2903.51_set_assessment_date.png",
+        "source" : "c490a48e96763261.png",
+        "type" : "image/png",
+        "size" : 75190
+      }, {
+        "uid" : "d87a00cbf2cad5f6",
+        "name" : "dev_edge_131.0.2903.51_clicked_legal_mechanism.png",
+        "source" : "d87a00cbf2cad5f6.png",
+        "type" : "image/png",
+        "size" : 76312
+      }, {
+        "uid" : "bfbef3a4ba31bc26",
+        "name" : "dev_edge_131.0.2903.51_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "bfbef3a4ba31bc26.png",
+        "type" : "image/png",
+        "size" : 76460
+      }, {
+        "uid" : "744f906284c921c9",
+        "name" : "dev_edge_131.0.2903.51_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "744f906284c921c9.png",
+        "type" : "image/png",
+        "size" : 45697
+      }, {
+        "uid" : "f0b393b819496f9d",
+        "name" : "dev_edge_131.0.2903.51_entered_comments_for_assessing_patient.png",
+        "source" : "f0b393b819496f9d.png",
+        "type" : "image/png",
+        "size" : 50293
+      }, {
+        "uid" : "6560a20a588c819a",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_record_consent_button.png",
+        "source" : "6560a20a588c819a.png",
+        "type" : "image/png",
+        "size" : 43077
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1732172451355,
+        "stop" : 1732172456071,
+        "duration" : 4716
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8bf4fecd5c250c6a",
+        "name" : "dev_edge_131.0.2903.51_before_selecting_consent_clinician.png",
+        "source" : "8bf4fecd5c250c6a.png",
+        "type" : "image/png",
+        "size" : 43077
+      }, {
+        "uid" : "9bd634e0b273d3d0",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_clinician_with_name_and_council.png",
+        "source" : "9bd634e0b273d3d0.png",
+        "type" : "image/png",
+        "size" : 47557
+      }, {
+        "uid" : "cb18ade77efc1d37",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_to_consent.png",
+        "source" : "cb18ade77efc1d37.png",
+        "type" : "image/png",
+        "size" : 76433
+      }, {
+        "uid" : "60a3fc1bdea72699",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_given_by_from_dropdown.png",
+        "source" : "60a3fc1bdea72699.png",
+        "type" : "image/png",
+        "size" : 78153
+      }, {
+        "uid" : "15800bd2456f7479",
+        "name" : "dev_edge_131.0.2903.51_entered_person_consenting_details.png",
+        "source" : "15800bd2456f7479.png",
+        "type" : "image/png",
+        "size" : 79522
+      }, {
+        "uid" : "252627597d218d1e",
+        "name" : "dev_edge_131.0.2903.51_entered_relationship_to_patient.png",
+        "source" : "252627597d218d1e.png",
+        "type" : "image/png",
+        "size" : 81308
+      }, {
+        "uid" : "893f765f41440938",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_vaccinate_button.png",
+        "source" : "893f765f41440938.png",
+        "type" : "image/png",
+        "size" : 48945
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-3 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1732172456071,
+        "stop" : 1732172465020,
+        "duration" : 8949
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "564a26066720e5e8",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_vaccinated_radiobutton.png",
+        "source" : "564a26066720e5e8.png",
+        "type" : "image/png",
+        "size" : 74432
+      }, {
+        "uid" : "be33e6f804e1b465",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "be33e6f804e1b465.png",
+        "type" : "image/png",
+        "size" : 74824
+      }, {
+        "uid" : "7274faf1194c5e49",
+        "name" : "dev_edge_131.0.2903.51_vaccination_date_is_set.png",
+        "source" : "7274faf1194c5e49.png",
+        "type" : "image/png",
+        "size" : 74597
+      }, {
+        "uid" : "85e087a61c076a58",
+        "name" : "dev_edge_131.0.2903.51_clicked_care_model_option.png",
+        "source" : "85e087a61c076a58.png",
+        "type" : "image/png",
+        "size" : 74597
+      }, {
+        "uid" : "740157ae00c95117",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccinator_name_and_council.png",
+        "source" : "740157ae00c95117.png",
+        "type" : "image/png",
+        "size" : 74597
+      }, {
+        "uid" : "75dd7f5739826ba2",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_comments.png",
+        "source" : "75dd7f5739826ba2.png",
+        "type" : "image/png",
+        "size" : 65508
+      }, {
+        "uid" : "b1a52cee2adc5b01",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccination_site.png",
+        "source" : "b1a52cee2adc5b01.png",
+        "type" : "image/png",
+        "size" : 66691
+      }, {
+        "uid" : "13ed0723fa88c3db",
+        "name" : "dev_edge_131.0.2903.51_selected_batch_number.png",
+        "source" : "13ed0723fa88c3db.png",
+        "type" : "image/png",
+        "size" : 71429
+      }, {
+        "uid" : "1b4ac39e4fe8e10a",
+        "name" : "dev_edge_131.0.2903.51_entered_dose_amount_value.png",
+        "source" : "1b4ac39e4fe8e10a.png",
+        "type" : "image/png",
+        "size" : 71429
+      }, {
+        "uid" : "742a90f7a613c93a",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_details.png",
+        "source" : "742a90f7a613c93a.png",
+        "type" : "image/png",
+        "size" : 63212
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient MARGIE PUCKEY, 27/5/1924, MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1732172465021,
+        "stop" : 1732172467270,
+        "duration" : 2249
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5bbf2611e87ff322",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_before_assertion.png",
+        "source" : "5bbf2611e87ff322.png",
+        "type" : "image/png",
+        "size" : 63212
+      }, {
+        "uid" : "546f01b0f30f58fd",
+        "name" : "dev_edge_131.0.2903.51_vaccination_dose_amount.png",
+        "source" : "546f01b0f30f58fd.png",
+        "type" : "image/png",
+        "size" : 63212
+      }, {
+        "uid" : "be0a4f9055793aa4",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_after_assertion.png",
+        "source" : "be0a4f9055793aa4.png",
+        "type" : "image/png",
+        "size" : 63212
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1732172467270,
+        "stop" : 1732172469060,
+        "duration" : 1790
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6f53699a2d45385b",
+        "name" : "dev_edge_131.0.2903.51_patient_details_screen_with_immunisation_history.png",
+        "source" : "6f53699a2d45385b.png",
+        "type" : "image/png",
+        "size" : 63212
+      }, {
+        "uid" : "645b3cbb1c358dba",
+        "name" : "dev_edge_131.0.2903.51_before_assert_record_saved.png",
+        "source" : "645b3cbb1c358dba.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732172469060,
+        "stop" : 1732172474786,
+        "duration" : 5726
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9c4ab0f2878a4b25",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9473629885_and_clicked_search_for_patient_button.png",
+        "source" : "9c4ab0f2878a4b25.png",
+        "type" : "image/png",
+        "size" : 51491
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient MARGIE PUCKEY",
+      "time" : {
+        "start" : 1732172474787,
+        "stop" : 1732172477586,
+        "duration" : 2799
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5582cbd0082c5849",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "5582cbd0082c5849.png",
+        "type" : "image/png",
+        "size" : 51491
+      }, {
+        "uid" : "2b0629c494f960d8",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "2b0629c494f960d8.png",
+        "type" : "image/png",
+        "size" : 58093
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1732172477586,
+        "stop" : 1732172491341,
+        "duration" : 13755
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+      "statusTrace" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d250fe302272ce99",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_after_vaccination.png",
+        "source" : "d250fe302272ce99.png",
+        "type" : "image/png",
+        "size" : 58093
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "ff3c9ec94ac249f9",
+      "name" : "log",
+      "source" : "ff3c9ec94ac249f9.txt",
+      "type" : "text/plain",
+      "size" : 28698
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 48,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a0493315bdb0"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-4"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AREX2-15A"
+  }, {
+    "name" : "care_model",
+    "value" : "Outreach event"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Respiratory syncytial virus (RSV)"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "27/5/1924"
+  }, {
+    "name" : "due_date",
+    "value" : "today+50"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "4"
+  }, {
+    "name" : "name",
+    "value" : "MARGIE PUCKEY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9473629885"
+  }, {
+    "name" : "site",
+    "value" : "BECCLES HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-3"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "fcfbecd42598b2f2.json",
+  "parameterValues" : [ "MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB", "today-4", "19/10/2026", "AREX2-15A", "Outreach event", "Respiratory syncytial virus (RSV)", "yes", "27/5/1924", "today+50", "yes", "4", "MARGIE PUCKEY", "9473629885", "BECCLES HOUSE", "yes", "today-3" ]
+}
