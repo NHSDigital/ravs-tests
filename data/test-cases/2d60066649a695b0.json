@@ -1,0 +1,169 @@
+{
+  "uid" : "2d60066649a695b0",
+  "name" : "Add batch to vaccine [ALBERT HOUSE-COVID-19-Spikevax JN.1-AUTOMATION-SJ1-19/10/2026]",
+  "fullName" : "/app/features/add_batches.feature:Add batch to vaccine",
+  "historyId" : "06c8cc60cc6e8043d1eeffe4362e4aff",
+  "time" : {
+    "start" : 1732171341698,
+    "stop" : 1732171352544,
+    "duration" : 10846
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I am on the RAVS home page",
+      "time" : {
+        "start" : 1732171341699,
+        "stop" : 1732171346993,
+        "duration" : 5294
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "When I am on the vaccines page",
+      "time" : {
+        "start" : 1732171346994,
+        "stop" : 1732171350475,
+        "duration" : 3481
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I view product for the existing vaccine in an existing site",
+      "time" : {
+        "start" : 1732171350476,
+        "stop" : 1732171350766,
+        "duration" : 290
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "And I enter AUTOMATION-SJ1 that already exists and 19/10/2026",
+      "time" : {
+        "start" : 1732171350766,
+        "stop" : 1732171351780,
+        "duration" : 1014
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "409213236ed197c9",
+        "name" : "dev_edge_131.0.2903.51_entered_batch_number.png",
+        "source" : "409213236ed197c9.png",
+        "type" : "image/png",
+        "size" : 36357
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then the batch is already added to site warning should appear",
+      "time" : {
+        "start" : 1732171351780,
+        "stop" : 1732171352544,
+        "duration" : 764
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "bf6c0dd2af5c1bd1",
+        "name" : "dev_edge_131.0.2903.51_batch_already_added_warning_message_exists.png",
+        "source" : "bf6c0dd2af5c1bd1.png",
+        "type" : "image/png",
+        "size" : 36357
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "75739004091d1850",
+      "name" : "log",
+      "source" : "75739004091d1850.txt",
+      "type" : "text/plain",
+      "size" : 2480
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 5,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a0493315bdb0"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Add Batches to vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-SJ1"
+  }, {
+    "name" : "expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "vaccine_type",
+    "value" : "Spikevax JN.1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "2d60066649a695b0.json",
+  "parameterValues" : [ "AUTOMATION-SJ1", "19/10/2026", "ALBERT HOUSE", "COVID-19", "Spikevax JN.1" ]
+}

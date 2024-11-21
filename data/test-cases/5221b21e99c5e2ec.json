@@ -1,0 +1,659 @@
+{
+  "uid" : "5221b21e99c5e2ec",
+  "name" : "Record a maternity vaccine with nhs number [3-9472710255-ALBERT HOUSE-Housebound patient's home-yes-today+5-today-3-yes-yes-today-2-DELICE PINKER-10/11/1926-HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH-Respiratory syncytial virus (RSV)-AUTOMATION-ARX-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a maternity vaccine with nhs number",
+  "historyId" : "8183bcf9e5391591ab5787e19476e607",
+  "time" : {
+    "start" : 1732172321750,
+    "stop" : 1732172452250,
+    "duration" : 130500
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f7e5c853c40>\nrequest = <FixtureRequest for <Function test_record_a_maternity_vaccine_with_nhs_number[3-9472710255-ALBERT HOUSE-Housebound pat...USE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH-Respiratory syncytial virus (RSV)-AUTOMATION-ARX-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 18/11/2024DELICE PINKER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-ARX', 'care_model': 'Care home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 18/11/2024DELICE PINKER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-ARX', 'care_model': 'Care home', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f7e5c853c40>\nrequest = <FixtureRequest for <Function test_record_a_maternity_vaccine_with_nhs_number[3-9472710255-ALBERT HOUSE-Housebound pat...USE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH-Respiratory syncytial virus (RSV)-AUTOMATION-ARX-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 18/11/2024DELICE PINKER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-ARX', 'care_model': 'Care home', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 18/11/2024DELICE PINKER', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-ARX', 'care_model': 'Care home', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with ALBERT HOUSE and Housebound patient's home and get patient details for 9472710255 with option 3 and choose to vaccinate with vaccine details as Respiratory syncytial virus (RSV), AUTOMATION-ARX with 19/10/2026",
+      "time" : {
+        "start" : 1732172321750,
+        "stop" : 1732172353824,
+        "duration" : 32074
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "411e61e1a8152223",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccines_nav_link.png",
+        "source" : "411e61e1a8152223.png",
+        "type" : "image/png",
+        "size" : 41865
+      }, {
+        "uid" : "ef432ebffe2aea9a",
+        "name" : "dev_edge_131.0.2903.51_clicked_add_vaccine_button.png",
+        "source" : "ef432ebffe2aea9a.png",
+        "type" : "image/png",
+        "size" : 45873
+      }, {
+        "uid" : "30f1afcfec9201d5",
+        "name" : "dev_edge_131.0.2903.51_entered_site_name.png",
+        "source" : "30f1afcfec9201d5.png",
+        "type" : "image/png",
+        "size" : 48042
+      }, {
+        "uid" : "2b8d1958eaee3b2",
+        "name" : "dev_edge_131.0.2903.51_selected_site_from_list.png",
+        "source" : "2b8d1958eaee3b2.png",
+        "type" : "image/png",
+        "size" : 46701
+      }, {
+        "uid" : "648aba83e3dd432b",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_add_vaccine_button.png",
+        "source" : "648aba83e3dd432b.png",
+        "type" : "image/png",
+        "size" : 47394
+      }, {
+        "uid" : "f135a925186acc07",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_radiobutton_on_add_vaccine_screen.png",
+        "source" : "f135a925186acc07.png",
+        "type" : "image/png",
+        "size" : 55588
+      }, {
+        "uid" : "eff48de393bb5ea7",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type_radiobutton_on_add_vaccine_screen.png",
+        "source" : "eff48de393bb5ea7.png",
+        "type" : "image/png",
+        "size" : 56049
+      }, {
+        "uid" : "c29371cd06402602",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_add_batch_button.png",
+        "source" : "c29371cd06402602.png",
+        "type" : "image/png",
+        "size" : 37249
+      }, {
+        "uid" : "e71601d7c823f29c",
+        "name" : "dev_edge_131.0.2903.51_entered_batch_number.png",
+        "source" : "e71601d7c823f29c.png",
+        "type" : "image/png",
+        "size" : 39494
+      }, {
+        "uid" : "936a746fdc561055",
+        "name" : "dev_edge_131.0.2903.51_entered_expiry_date.png",
+        "source" : "936a746fdc561055.png",
+        "type" : "image/png",
+        "size" : 44827
+      }, {
+        "uid" : "ecf1d44b6de84e2f",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_confirm_batch_details_button.png",
+        "source" : "ecf1d44b6de84e2f.png",
+        "type" : "image/png",
+        "size" : 45663
+      }, {
+        "uid" : "258f541992eee4f7",
+        "name" : "dev_edge_131.0.2903.51_clicked_confirm_add_vaccine_and_batch_button.png",
+        "source" : "258f541992eee4f7.png",
+        "type" : "image/png",
+        "size" : 45663
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 12,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732172353824,
+        "stop" : 1732172359642,
+        "duration" : 5818
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "31dc40271fb3cf36",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9472710255_and_clicked_search_for_patient_button.png",
+        "source" : "31dc40271fb3cf36.png",
+        "type" : "image/png",
+        "size" : 49345
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient DELICE PINKER",
+      "time" : {
+        "start" : 1732172359642,
+        "stop" : 1732172362978,
+        "duration" : 3336
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "da90728a495b5b7c",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "da90728a495b5b7c.png",
+        "type" : "image/png",
+        "size" : 49345
+      }, {
+        "uid" : "283d5692245fbd41",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "283d5692245fbd41.png",
+        "type" : "image/png",
+        "size" : 55911
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Respiratory syncytial virus (RSV), AUTOMATION-ARX with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1732172362978,
+        "stop" : 1732172384525,
+        "duration" : 21547
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a055e5074fbbd4f8",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_is_0.png",
+        "source" : "a055e5074fbbd4f8.png",
+        "type" : "image/png",
+        "size" : 55911
+      }, {
+        "uid" : "411a5510b7fef8e7",
+        "name" : "dev_edge_131.0.2903.51_clicked_choose_vaccine_button.png",
+        "source" : "411a5510b7fef8e7.png",
+        "type" : "image/png",
+        "size" : 82249
+      }, {
+        "uid" : "dfcc0d221f8f9ec5",
+        "name" : "dev_edge_131.0.2903.51_clicked_on_patient_DELICE PINKER_and_clicked_choose_vaccine_button.png",
+        "source" : "dfcc0d221f8f9ec5.png",
+        "type" : "image/png",
+        "size" : 82249
+      }, {
+        "uid" : "97e02e29773bf9e3",
+        "name" : "dev_edge_131.0.2903.51_clicked_delivery_team.png",
+        "source" : "97e02e29773bf9e3.png",
+        "type" : "image/png",
+        "size" : 83261
+      }, {
+        "uid" : "61a8c5e24fc834ca",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine.png",
+        "source" : "61a8c5e24fc834ca.png",
+        "type" : "image/png",
+        "size" : 61331
+      }, {
+        "uid" : "2dc58b120aeec4dd",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "2dc58b120aeec4dd.png",
+        "type" : "image/png",
+        "size" : 63932
+      }, {
+        "uid" : "62a6f6ac0c0dd581",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccine_Respiratory syncytial virus (RSV)_and_Arexvy_and_clicked_continue_button.png",
+        "source" : "62a6f6ac0c0dd581.png",
+        "type" : "image/png",
+        "size" : 46861
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the pregnant patient's yes with the details of due date as today+5 and assessment date as today-3 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1732172384525,
+        "stop" : 1732172391592,
+        "duration" : 7067
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "973bbf9e4d637ea0",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligible_yes_radiobutton.png",
+        "source" : "973bbf9e4d637ea0.png",
+        "type" : "image/png",
+        "size" : 71719
+      }, {
+        "uid" : "7505fbcb3622a1b8",
+        "name" : "dev_edge_131.0.2903.51_selected_eligibility_type.png",
+        "source" : "7505fbcb3622a1b8.png",
+        "type" : "image/png",
+        "size" : 72436
+      }, {
+        "uid" : "c48c486e5732dba9",
+        "name" : "dev_edge_131.0.2903.51_entered_due_date.png",
+        "source" : "c48c486e5732dba9.png",
+        "type" : "image/png",
+        "size" : 72974
+      }, {
+        "uid" : "1ab488a992d3fbfe",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "1ab488a992d3fbfe.png",
+        "type" : "image/png",
+        "size" : 72974
+      }, {
+        "uid" : "f6f3aa56eaa60500",
+        "name" : "dev_edge_131.0.2903.51_set_assessment_date.png",
+        "source" : "f6f3aa56eaa60500.png",
+        "type" : "image/png",
+        "size" : 76609
+      }, {
+        "uid" : "f04c6a832131e468",
+        "name" : "dev_edge_131.0.2903.51_clicked_legal_mechanism.png",
+        "source" : "f04c6a832131e468.png",
+        "type" : "image/png",
+        "size" : 77754
+      }, {
+        "uid" : "b64a1e4d0d263e70",
+        "name" : "dev_edge_131.0.2903.51_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "b64a1e4d0d263e70.png",
+        "type" : "image/png",
+        "size" : 77847
+      }, {
+        "uid" : "47ff3e0b08ea437a",
+        "name" : "dev_edge_131.0.2903.51_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "47ff3e0b08ea437a.png",
+        "type" : "image/png",
+        "size" : 48012
+      }, {
+        "uid" : "b7dc58621bd5e674",
+        "name" : "dev_edge_131.0.2903.51_entered_comments_for_assessing_patient.png",
+        "source" : "b7dc58621bd5e674.png",
+        "type" : "image/png",
+        "size" : 52162
+      }, {
+        "uid" : "6deffe4cd3062f5f",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_record_consent_button.png",
+        "source" : "6deffe4cd3062f5f.png",
+        "type" : "image/png",
+        "size" : 40352
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1732172391592,
+        "stop" : 1732172396257,
+        "duration" : 4665
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "4207b40ffcc13373",
+        "name" : "dev_edge_131.0.2903.51_before_selecting_consent_clinician.png",
+        "source" : "4207b40ffcc13373.png",
+        "type" : "image/png",
+        "size" : 40352
+      }, {
+        "uid" : "ba90831c2fb6b6f5",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_clinician_with_name_and_council.png",
+        "source" : "ba90831c2fb6b6f5.png",
+        "type" : "image/png",
+        "size" : 43909
+      }, {
+        "uid" : "5c409f065310fa33",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_to_consent.png",
+        "source" : "5c409f065310fa33.png",
+        "type" : "image/png",
+        "size" : 75042
+      }, {
+        "uid" : "f6d6ffe54985d25",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_given_by_from_dropdown.png",
+        "source" : "f6d6ffe54985d25.png",
+        "type" : "image/png",
+        "size" : 75581
+      }, {
+        "uid" : "724ff7ea00113861",
+        "name" : "dev_edge_131.0.2903.51_entered_person_consenting_details.png",
+        "source" : "724ff7ea00113861.png",
+        "type" : "image/png",
+        "size" : 76838
+      }, {
+        "uid" : "231c4e727576ea50",
+        "name" : "dev_edge_131.0.2903.51_entered_relationship_to_patient.png",
+        "source" : "231c4e727576ea50.png",
+        "type" : "image/png",
+        "size" : 78673
+      }, {
+        "uid" : "db46f2a4fd1b7d90",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_vaccinate_button.png",
+        "source" : "db46f2a4fd1b7d90.png",
+        "type" : "image/png",
+        "size" : 45561
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-2 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1732172396257,
+        "stop" : 1732172426356,
+        "duration" : 30099
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "d04564100698c15a",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_vaccinated_radiobutton.png",
+        "source" : "d04564100698c15a.png",
+        "type" : "image/png",
+        "size" : 73809
+      }, {
+        "uid" : "c3abd904e784ee38",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "c3abd904e784ee38.png",
+        "type" : "image/png",
+        "size" : 74288
+      }, {
+        "uid" : "4c2d7e9d98b811a7",
+        "name" : "dev_edge_131.0.2903.51_vaccination_date_is_set.png",
+        "source" : "4c2d7e9d98b811a7.png",
+        "type" : "image/png",
+        "size" : 74006
+      }, {
+        "uid" : "31df8d72ade0a9b9",
+        "name" : "dev_edge_131.0.2903.51_clicked_care_model_option.png",
+        "source" : "31df8d72ade0a9b9.png",
+        "type" : "image/png",
+        "size" : 74006
+      }, {
+        "uid" : "f5880e15c3c34376",
+        "name" : "dev_edge_131.0.2903.51_entered_care_home_details.png",
+        "source" : "f5880e15c3c34376.png",
+        "type" : "image/png",
+        "size" : 74006
+      }, {
+        "uid" : "40744c5610a930e6",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccinator_name_and_council.png",
+        "source" : "40744c5610a930e6.png",
+        "type" : "image/png",
+        "size" : 74006
+      }, {
+        "uid" : "cf942364de2bb953",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_comments.png",
+        "source" : "cf942364de2bb953.png",
+        "type" : "image/png",
+        "size" : 65883
+      }, {
+        "uid" : "d290d412de30a4ca",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccination_site.png",
+        "source" : "d290d412de30a4ca.png",
+        "type" : "image/png",
+        "size" : 67825
+      }, {
+        "uid" : "7803de2650796dd5",
+        "name" : "dev_edge_131.0.2903.51_selected_batch_number.png",
+        "source" : "7803de2650796dd5.png",
+        "type" : "image/png",
+        "size" : 73230
+      }, {
+        "uid" : "776504d6f04db739",
+        "name" : "dev_edge_131.0.2903.51_entered_dose_amount_value.png",
+        "source" : "776504d6f04db739.png",
+        "type" : "image/png",
+        "size" : 73230
+      }, {
+        "uid" : "1a4d87c98816b2df",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_details.png",
+        "source" : "1a4d87c98816b2df.png",
+        "type" : "image/png",
+        "size" : 62116
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 11,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient DELICE PINKER, 10/11/1926, HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1732172426357,
+        "stop" : 1732172428622,
+        "duration" : 2265
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "46f9536ca62fd3eb",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_before_assertion.png",
+        "source" : "46f9536ca62fd3eb.png",
+        "type" : "image/png",
+        "size" : 62116
+      }, {
+        "uid" : "5512d9484f74d3b9",
+        "name" : "dev_edge_131.0.2903.51_vaccination_dose_amount.png",
+        "source" : "5512d9484f74d3b9.png",
+        "type" : "image/png",
+        "size" : 62116
+      }, {
+        "uid" : "82ae2338bae1e485",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_after_assertion.png",
+        "source" : "82ae2338bae1e485.png",
+        "type" : "image/png",
+        "size" : 62116
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1732172428623,
+        "stop" : 1732172430429,
+        "duration" : 1806
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a1247a4c925d71fb",
+        "name" : "dev_edge_131.0.2903.51_patient_details_screen_with_immunisation_history.png",
+        "source" : "a1247a4c925d71fb.png",
+        "type" : "image/png",
+        "size" : 62116
+      }, {
+        "uid" : "9cd562ebedac57e8",
+        "name" : "dev_edge_131.0.2903.51_before_assert_record_saved.png",
+        "source" : "9cd562ebedac57e8.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732172430429,
+        "stop" : 1732172436205,
+        "duration" : 5776
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "50ffba25c424e774",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9472710255_and_clicked_search_for_patient_button.png",
+        "source" : "50ffba25c424e774.png",
+        "type" : "image/png",
+        "size" : 49665
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient DELICE PINKER",
+      "time" : {
+        "start" : 1732172436206,
+        "stop" : 1732172438490,
+        "duration" : 2284
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7e8c3883eb79fbdf",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "7e8c3883eb79fbdf.png",
+        "type" : "image/png",
+        "size" : 49665
+      }, {
+        "uid" : "e0cc3c3df542c623",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "e0cc3c3df542c623.png",
+        "type" : "image/png",
+        "size" : 55911
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1732172438490,
+        "stop" : 1732172452250,
+        "duration" : 13760
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+      "statusTrace" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "71cf86710351326",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_after_vaccination.png",
+        "source" : "71cf86710351326.png",
+        "type" : "image/png",
+        "size" : 55911
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "2c9083815a03844",
+      "name" : "log",
+      "source" : "2c9083815a03844.txt",
+      "type" : "text/plain",
+      "size" : 34085
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 60,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a0493315bdb0"
+  }, {
+    "name" : "thread",
+    "value" : "1099-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-3"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-ARX"
+  }, {
+    "name" : "care_model",
+    "value" : "Housebound patient's home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Respiratory syncytial virus (RSV)"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "10/11/1926"
+  }, {
+    "name" : "due_date",
+    "value" : "today+5"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "3"
+  }, {
+    "name" : "name",
+    "value" : "DELICE PINKER"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9472710255"
+  }, {
+    "name" : "site",
+    "value" : "ALBERT HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-2"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "5221b21e99c5e2ec.json",
+  "parameterValues" : [ "HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH", "today-3", "19/10/2026", "AUTOMATION-ARX", "Housebound patient's home", "Respiratory syncytial virus (RSV)", "yes", "10/11/1926", "today+5", "yes", "3", "DELICE PINKER", "9472710255", "ALBERT HOUSE", "yes", "today-2" ]
+}

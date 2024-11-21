@@ -1,0 +1,584 @@
+{
+  "uid" : "bf9c4009af4fae9d",
+  "name" : "Record a vaccine with nhs number [2-9470040228-BIRCH HOUSE-Hospital hub for staff and patients-yes-today-1-yes-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-AUTOMATION-C10-19/2/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "6210f73bbcde7fc900a2557932f395eb",
+  "time" : {
+    "start" : 1732171792514,
+    "stop" : 1732171875174,
+    "duration" : 82660
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fbf093d85e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9470040228-BIRCH HOUSE-Hospital hub for staff an...s-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-AUTOMATION-C10-19/2/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 20/11/2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'AUTOMATION-C10', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 20/11/2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'AUTOMATION-C10', 'care_model': 'Community Pharmacy', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7fbf093d85e0>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9470040228-BIRCH HOUSE-Hospital hub for staff an...s-yes-today-HERBERT HAAG-14/12/1922-10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN-COVID-19-AUTOMATION-C10-19/2/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 20/11/2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'AUTOMATION-C10', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 20/11/2024HERBERT HAAG', 'batch_expiry_date': '19/2/2026', 'batch_number': 'AUTOMATION-C10', 'care_model': 'Community Pharmacy', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BIRCH HOUSE and Hospital hub for staff and patients and get patient details for 9470040228 with option 2 and choose to vaccinate with vaccine details as COVID-19, AUTOMATION-C10 with 19/2/2026",
+      "time" : {
+        "start" : 1732171792514,
+        "stop" : 1732171796725,
+        "duration" : 4211
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "5d3c2e250e9979e5",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccines_nav_link.png",
+        "source" : "5d3c2e250e9979e5.png",
+        "type" : "image/png",
+        "size" : 46618
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732171796726,
+        "stop" : 1732171802497,
+        "duration" : 5771
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7ea0a356f5e1263a",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9470040228_and_clicked_search_for_patient_button.png",
+        "source" : "7ea0a356f5e1263a.png",
+        "type" : "image/png",
+        "size" : 48983
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient HERBERT HAAG",
+      "time" : {
+        "start" : 1732171802497,
+        "stop" : 1732171805815,
+        "duration" : 3318
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "90447ee08db78b37",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "90447ee08db78b37.png",
+        "type" : "image/png",
+        "size" : 48983
+      }, {
+        "uid" : "2abd981ac2298617",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "2abd981ac2298617.png",
+        "type" : "image/png",
+        "size" : 51712
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the COVID-19, AUTOMATION-C10 with 19/2/2026 and click continue",
+      "time" : {
+        "start" : 1732171805816,
+        "stop" : 1732171827279,
+        "duration" : 21463
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "1c466de142ab6b29",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_is_0.png",
+        "source" : "1c466de142ab6b29.png",
+        "type" : "image/png",
+        "size" : 51712
+      }, {
+        "uid" : "be5478f6cca35bae",
+        "name" : "dev_edge_131.0.2903.51_clicked_choose_vaccine_button.png",
+        "source" : "be5478f6cca35bae.png",
+        "type" : "image/png",
+        "size" : 80188
+      }, {
+        "uid" : "9664e323b7269298",
+        "name" : "dev_edge_131.0.2903.51_clicked_on_patient_HERBERT HAAG_and_clicked_choose_vaccine_button.png",
+        "source" : "9664e323b7269298.png",
+        "type" : "image/png",
+        "size" : 80188
+      }, {
+        "uid" : "767857c2c252088e",
+        "name" : "dev_edge_131.0.2903.51_clicked_delivery_team.png",
+        "source" : "767857c2c252088e.png",
+        "type" : "image/png",
+        "size" : 81515
+      }, {
+        "uid" : "774c3a6eeb0a3617",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine.png",
+        "source" : "774c3a6eeb0a3617.png",
+        "type" : "image/png",
+        "size" : 81863
+      }, {
+        "uid" : "d4e2edda6e84ddcf",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "d4e2edda6e84ddcf.png",
+        "type" : "image/png",
+        "size" : 53512
+      }, {
+        "uid" : "31461bf166275e60",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccine_COVID-19_and_Comirnaty 10 JN.1_and_clicked_continue_button.png",
+        "source" : "31461bf166275e60.png",
+        "type" : "image/png",
+        "size" : 76294
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-1 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1732171827280,
+        "stop" : 1732171834111,
+        "duration" : 6831
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a45473a872ac7104",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligible_yes_radiobutton.png",
+        "source" : "a45473a872ac7104.png",
+        "type" : "image/png",
+        "size" : 71225
+      }, {
+        "uid" : "3e23b219e7418e85",
+        "name" : "dev_edge_131.0.2903.51_selected_eligibility_type.png",
+        "source" : "3e23b219e7418e85.png",
+        "type" : "image/png",
+        "size" : 71730
+      }, {
+        "uid" : "17662b94801f94cf",
+        "name" : "dev_edge_131.0.2903.51_selected_staff_role.png",
+        "source" : "17662b94801f94cf.png",
+        "type" : "image/png",
+        "size" : 75416
+      }, {
+        "uid" : "8021d467fe1505da",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "8021d467fe1505da.png",
+        "type" : "image/png",
+        "size" : 75416
+      }, {
+        "uid" : "a6a2b33e87a1c4ae",
+        "name" : "dev_edge_131.0.2903.51_set_assessment_date.png",
+        "source" : "a6a2b33e87a1c4ae.png",
+        "type" : "image/png",
+        "size" : 77210
+      }, {
+        "uid" : "50d3f171e55d1309",
+        "name" : "dev_edge_131.0.2903.51_clicked_legal_mechanism.png",
+        "source" : "50d3f171e55d1309.png",
+        "type" : "image/png",
+        "size" : 68922
+      }, {
+        "uid" : "a91ce584a623fbc7",
+        "name" : "dev_edge_131.0.2903.51_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "a91ce584a623fbc7.png",
+        "type" : "image/png",
+        "size" : 72684
+      }, {
+        "uid" : "ef6af7b8866aa0ea",
+        "name" : "dev_edge_131.0.2903.51_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "ef6af7b8866aa0ea.png",
+        "type" : "image/png",
+        "size" : 73080
+      }, {
+        "uid" : "d6aa855ed47955c8",
+        "name" : "dev_edge_131.0.2903.51_entered_comments_for_assessing_patient.png",
+        "source" : "d6aa855ed47955c8.png",
+        "type" : "image/png",
+        "size" : 69672
+      }, {
+        "uid" : "ddc24c6e893da83b",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_record_consent_button.png",
+        "source" : "ddc24c6e893da83b.png",
+        "type" : "image/png",
+        "size" : 38941
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1732171834112,
+        "stop" : 1732171838868,
+        "duration" : 4756
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "cabcba4d76727a94",
+        "name" : "dev_edge_131.0.2903.51_before_selecting_consent_clinician.png",
+        "source" : "cabcba4d76727a94.png",
+        "type" : "image/png",
+        "size" : 38941
+      }, {
+        "uid" : "f962ebccd211221f",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_clinician_with_name_and_council.png",
+        "source" : "f962ebccd211221f.png",
+        "type" : "image/png",
+        "size" : 42649
+      }, {
+        "uid" : "7ba18724a86295c5",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_to_consent.png",
+        "source" : "7ba18724a86295c5.png",
+        "type" : "image/png",
+        "size" : 76257
+      }, {
+        "uid" : "7a140b7c17ad31fe",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_given_by_from_dropdown.png",
+        "source" : "7a140b7c17ad31fe.png",
+        "type" : "image/png",
+        "size" : 76268
+      }, {
+        "uid" : "72ef6183623dbf6e",
+        "name" : "dev_edge_131.0.2903.51_entered_person_consenting_details.png",
+        "source" : "72ef6183623dbf6e.png",
+        "type" : "image/png",
+        "size" : 77620
+      }, {
+        "uid" : "c2b6226397a2c21f",
+        "name" : "dev_edge_131.0.2903.51_entered_relationship_to_patient.png",
+        "source" : "c2b6226397a2c21f.png",
+        "type" : "image/png",
+        "size" : 79427
+      }, {
+        "uid" : "6ef09db40cd90457",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_vaccinate_button.png",
+        "source" : "6ef09db40cd90457.png",
+        "type" : "image/png",
+        "size" : 68762
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1732171838868,
+        "stop" : 1732171848069,
+        "duration" : 9201
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "980f5caa114baaf2",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_vaccinated_radiobutton.png",
+        "source" : "980f5caa114baaf2.png",
+        "type" : "image/png",
+        "size" : 80518
+      }, {
+        "uid" : "202079ea3449f8b0",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "202079ea3449f8b0.png",
+        "type" : "image/png",
+        "size" : 62135
+      }, {
+        "uid" : "8a6e68104e89fcf1",
+        "name" : "dev_edge_131.0.2903.51_vaccination_date_is_set.png",
+        "source" : "8a6e68104e89fcf1.png",
+        "type" : "image/png",
+        "size" : 85613
+      }, {
+        "uid" : "d779ae162fc71d58",
+        "name" : "dev_edge_131.0.2903.51_clicked_care_model_option.png",
+        "source" : "d779ae162fc71d58.png",
+        "type" : "image/png",
+        "size" : 86638
+      }, {
+        "uid" : "ef668e9b94e3bd02",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccinator_name_and_council.png",
+        "source" : "ef668e9b94e3bd02.png",
+        "type" : "image/png",
+        "size" : 86638
+      }, {
+        "uid" : "b30a687b7576a91e",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_comments.png",
+        "source" : "b30a687b7576a91e.png",
+        "type" : "image/png",
+        "size" : 37374
+      }, {
+        "uid" : "e197ef2c2bb1ec18",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccination_site.png",
+        "source" : "e197ef2c2bb1ec18.png",
+        "type" : "image/png",
+        "size" : 39012
+      }, {
+        "uid" : "217012baa722b6cc",
+        "name" : "dev_edge_131.0.2903.51_selected_batch_number.png",
+        "source" : "217012baa722b6cc.png",
+        "type" : "image/png",
+        "size" : 44109
+      }, {
+        "uid" : "383d8689a4af9e02",
+        "name" : "dev_edge_131.0.2903.51_entered_dose_amount_value.png",
+        "source" : "383d8689a4af9e02.png",
+        "type" : "image/png",
+        "size" : 44109
+      }, {
+        "uid" : "16385f964ace5824",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_details.png",
+        "source" : "16385f964ace5824.png",
+        "type" : "image/png",
+        "size" : 52206
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient HERBERT HAAG, 14/12/1922, 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1732171848069,
+        "stop" : 1732171850478,
+        "duration" : 2409
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "a34d6c1e9effb199",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_before_assertion.png",
+        "source" : "a34d6c1e9effb199.png",
+        "type" : "image/png",
+        "size" : 52206
+      }, {
+        "uid" : "78e869c7e94ffec",
+        "name" : "dev_edge_131.0.2903.51_vaccination_dose_amount.png",
+        "source" : "78e869c7e94ffec.png",
+        "type" : "image/png",
+        "size" : 52206
+      }, {
+        "uid" : "939f3185bdfb69e6",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_after_assertion.png",
+        "source" : "939f3185bdfb69e6.png",
+        "type" : "image/png",
+        "size" : 52206
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1732171850478,
+        "stop" : 1732171852305,
+        "duration" : 1827
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "68a194c06402e2b9",
+        "name" : "dev_edge_131.0.2903.51_patient_details_screen_with_immunisation_history.png",
+        "source" : "68a194c06402e2b9.png",
+        "type" : "image/png",
+        "size" : 52206
+      }, {
+        "uid" : "52a911dde39d86fc",
+        "name" : "dev_edge_131.0.2903.51_before_assert_record_saved.png",
+        "source" : "52a911dde39d86fc.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732171852305,
+        "stop" : 1732171858051,
+        "duration" : 5746
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b26f2177157261b",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9470040228_and_clicked_search_for_patient_button.png",
+        "source" : "b26f2177157261b.png",
+        "type" : "image/png",
+        "size" : 45601
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient HERBERT HAAG",
+      "time" : {
+        "start" : 1732171858051,
+        "stop" : 1732171861411,
+        "duration" : 3360
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "71f3c12a4a2ba1d6",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "71f3c12a4a2ba1d6.png",
+        "type" : "image/png",
+        "size" : 45601
+      }, {
+        "uid" : "c9390e60214366f0",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "c9390e60214366f0.png",
+        "type" : "image/png",
+        "size" : 51712
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1732171861412,
+        "stop" : 1732171875174,
+        "duration" : 13762
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+      "statusTrace" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ffcd11c24e9b9293",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_after_vaccination.png",
+        "source" : "ffcd11c24e9b9293.png",
+        "type" : "image/png",
+        "size" : 51712
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "da8dc701b7dbfb38",
+      "name" : "log",
+      "source" : "da8dc701b7dbfb38.txt",
+      "type" : "text/plain",
+      "size" : 28586
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 48,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a0493315bdb0"
+  }, {
+    "name" : "thread",
+    "value" : "1096-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-1"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/2/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-C10"
+  }, {
+    "name" : "care_model",
+    "value" : "Hospital hub for staff and patients"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "COVID-19"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "14/12/1922"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "2"
+  }, {
+    "name" : "name",
+    "value" : "HERBERT HAAG"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9470040228"
+  }, {
+    "name" : "site",
+    "value" : "BIRCH HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "bf9c4009af4fae9d.json",
+  "parameterValues" : [ "10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN", "today-1", "19/2/2026", "AUTOMATION-C10", "Hospital hub for staff and patients", "COVID-19", "yes", "14/12/1922", "yes", "2", "HERBERT HAAG", "9470040228", "BIRCH HOUSE", "yes", "today" ]
+}

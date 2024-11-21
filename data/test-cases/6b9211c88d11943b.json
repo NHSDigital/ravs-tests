@@ -1,0 +1,584 @@
+{
+  "uid" : "6b9211c88d11943b",
+  "name" : "Record a vaccine with nhs number [2-9450141711-BECCLES HOUSE-Housebound patient's home-yes-today-2-yes-yes-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-AUTOMATION-IT-19/10/2026]",
+  "fullName" : "/app/features/record_a_vaccine_for_patient_with_nhs_number.feature:Record a vaccine with nhs number",
+  "historyId" : "ed032380a34a51bd66833e089d0cf08d",
+  "time" : {
+    "start" : 1732172147150,
+    "stop" : 1732172229301,
+    "duration" : 82151
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+  "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f07c87dfc40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9450141711-BECCLES HOUSE-Housebound patient's ho...s-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-AUTOMATION-IT-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 19/11/2024KRISTIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 19/11/2024KRISTIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'care_model': 'Community Pharmacy', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+    "statusTrace" : "fixturefunc = <function immunisation_history_should_be_updated at 0x7f07c87dfc40>\nrequest = <FixtureRequest for <Function test_record_a_vaccine_with_nhs_number[2-9450141711-BECCLES HOUSE-Housebound patient's ho...s-today-1-KRISTIA SIDAWAY-24/6/1992-41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY-Flu-AUTOMATION-IT-19/10/2026]>>\nkwargs = {'shared_data': {'assessment_comments': 'Assessment comments 19/11/2024KRISTIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'care_model': 'Community Pharmacy', ...}}\n\n    def call_fixture_func(\n        fixturefunc: _FixtureFunc[FixtureValue], request: FixtureRequest, kwargs\n    ) -> FixtureValue:\n        if is_generator(fixturefunc):\n            fixturefunc = cast(\n                Callable[..., Generator[FixtureValue, None, None]], fixturefunc\n            )\n            generator = fixturefunc(**kwargs)\n            try:\n                fixture_result = next(generator)\n            except StopIteration:\n                raise ValueError(f\"{request.fixturename} did not yield a value\") from None\n            finalizer = functools.partial(_teardown_yield_fixture, fixturefunc, generator)\n            request.addfinalizer(finalizer)\n        else:\n            fixturefunc = cast(Callable[..., FixtureValue], fixturefunc)\n>           fixture_result = fixturefunc(**kwargs)\n\n.tox/py311/lib/python3.11/site-packages/_pytest/fixtures.py:898: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nshared_data = {'assessment_comments': 'Assessment comments 19/11/2024KRISTIA SIDAWAY', 'batch_expiry_date': '19/10/2026', 'batch_number': 'AUTOMATION-IT', 'care_model': 'Community Pharmacy', ...}\n\n    @then(\"the immunisation history of the patient should be updated in the patient details page\")\n    def immunisation_history_should_be_updated(shared_data):\n        attach_screenshot(\"immunisation_history_records_count_after_vaccination\")\n        immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data[\"chosen_vaccine\"])\n>       assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data[\"immunisation_history_records_count_before_vaccination\"]) + 1\nE       assert 0 >= (0 + 1)\nE        +  where 0 = int(0)\nE        +  and   0 = int(0)\n\ntests/test_record_a_vaccine_for_patient_with_nhs_number_steps.py:171: AssertionError",
+    "steps" : [ {
+      "name" : "Given I login to RAVS and set vaccinator details with BECCLES HOUSE and Housebound patient's home and get patient details for 9450141711 with option 2 and choose to vaccinate with vaccine details as Flu, AUTOMATION-IT with 19/10/2026",
+      "time" : {
+        "start" : 1732172147151,
+        "stop" : 1732172151930,
+        "duration" : 4779
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "ab3c02727ff1d42f",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccines_nav_link.png",
+        "source" : "ab3c02727ff1d42f.png",
+        "type" : "image/png",
+        "size" : 46618
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732172151930,
+        "stop" : 1732172157683,
+        "duration" : 5753
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "c4c13ff816895dce",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9450141711_and_clicked_search_for_patient_button.png",
+        "source" : "c4c13ff816895dce.png",
+        "type" : "image/png",
+        "size" : 48584
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient KRISTIA SIDAWAY",
+      "time" : {
+        "start" : 1732172157683,
+        "stop" : 1732172160483,
+        "duration" : 2800
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "596fbc6683f9140f",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "596fbc6683f9140f.png",
+        "type" : "image/png",
+        "size" : 48584
+      }, {
+        "uid" : "d61e73a2ca67a4a8",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "d61e73a2ca67a4a8.png",
+        "type" : "image/png",
+        "size" : 53455
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "When I click choose vaccine button and choose the Flu, AUTOMATION-IT with 19/10/2026 and click continue",
+      "time" : {
+        "start" : 1732172160483,
+        "stop" : 1732172182135,
+        "duration" : 21652
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "f4312542cdac2874",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_is_0.png",
+        "source" : "f4312542cdac2874.png",
+        "type" : "image/png",
+        "size" : 53455
+      }, {
+        "uid" : "98d5ceb65c1e4eff",
+        "name" : "dev_edge_131.0.2903.51_clicked_choose_vaccine_button.png",
+        "source" : "98d5ceb65c1e4eff.png",
+        "type" : "image/png",
+        "size" : 79676
+      }, {
+        "uid" : "41636c062d9743e9",
+        "name" : "dev_edge_131.0.2903.51_clicked_on_patient_KRISTIA SIDAWAY_and_clicked_choose_vaccine_button.png",
+        "source" : "41636c062d9743e9.png",
+        "type" : "image/png",
+        "size" : 79676
+      }, {
+        "uid" : "dcc39d1aed0ecb87",
+        "name" : "dev_edge_131.0.2903.51_clicked_delivery_team.png",
+        "source" : "dcc39d1aed0ecb87.png",
+        "type" : "image/png",
+        "size" : 84258
+      }, {
+        "uid" : "71284638edbc7dfa",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine.png",
+        "source" : "71284638edbc7dfa.png",
+        "type" : "image/png",
+        "size" : 68547
+      }, {
+        "uid" : "94e8f131bd2dcdfa",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "94e8f131bd2dcdfa.png",
+        "type" : "image/png",
+        "size" : 70820
+      }, {
+        "uid" : "92239ee8351a7cfe",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccine_Flu_and_Influenza Tetra MYL_and_clicked_continue_button.png",
+        "source" : "92239ee8351a7cfe.png",
+        "type" : "image/png",
+        "size" : 75666
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I assess the patient's yes with the details and date as today-2 and click continue to record consent screen button",
+      "time" : {
+        "start" : 1732172182135,
+        "stop" : 1732172189118,
+        "duration" : 6983
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "b8bd578e2c58ca98",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligible_yes_radiobutton.png",
+        "source" : "b8bd578e2c58ca98.png",
+        "type" : "image/png",
+        "size" : 70608
+      }, {
+        "uid" : "34c4832a81920c2e",
+        "name" : "dev_edge_131.0.2903.51_selected_eligibility_type.png",
+        "source" : "34c4832a81920c2e.png",
+        "type" : "image/png",
+        "size" : 71144
+      }, {
+        "uid" : "9c07842b2eb3efd8",
+        "name" : "dev_edge_131.0.2903.51_selected_staff_role.png",
+        "source" : "9c07842b2eb3efd8.png",
+        "type" : "image/png",
+        "size" : 74803
+      }, {
+        "uid" : "15222aae9ef3448b",
+        "name" : "dev_edge_131.0.2903.51_clicked_eligibility_yes_and_selected_eligibility_type.png",
+        "source" : "15222aae9ef3448b.png",
+        "type" : "image/png",
+        "size" : 74803
+      }, {
+        "uid" : "465c7ece7364430a",
+        "name" : "dev_edge_131.0.2903.51_set_assessment_date.png",
+        "source" : "465c7ece7364430a.png",
+        "type" : "image/png",
+        "size" : 76080
+      }, {
+        "uid" : "5b7461f3d12bd148",
+        "name" : "dev_edge_131.0.2903.51_clicked_legal_mechanism.png",
+        "source" : "5b7461f3d12bd148.png",
+        "type" : "image/png",
+        "size" : 68551
+      }, {
+        "uid" : "3d3516a484298832",
+        "name" : "dev_edge_131.0.2903.51_selected_assessing_clinician_with_name_and_council.png",
+        "source" : "3d3516a484298832.png",
+        "type" : "image/png",
+        "size" : 72313
+      }, {
+        "uid" : "50e6aa46ba82e4d",
+        "name" : "dev_edge_131.0.2903.51_clicked_patient_give_vaccine_radio_button.png",
+        "source" : "50e6aa46ba82e4d.png",
+        "type" : "image/png",
+        "size" : 72707
+      }, {
+        "uid" : "3202a3a3dbb874e9",
+        "name" : "dev_edge_131.0.2903.51_entered_comments_for_assessing_patient.png",
+        "source" : "3202a3a3dbb874e9.png",
+        "type" : "image/png",
+        "size" : 73814
+      }, {
+        "uid" : "83a7c392836e957a",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_record_consent_button.png",
+        "source" : "83a7c392836e957a.png",
+        "type" : "image/png",
+        "size" : 39557
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes with the details and click continue to vaccinate button",
+      "time" : {
+        "start" : 1732172189118,
+        "stop" : 1732172194001,
+        "duration" : 4883
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9c02428f6798f092",
+        "name" : "dev_edge_131.0.2903.51_before_selecting_consent_clinician.png",
+        "source" : "9c02428f6798f092.png",
+        "type" : "image/png",
+        "size" : 39557
+      }, {
+        "uid" : "4d6bef887495451",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_clinician_with_name_and_council.png",
+        "source" : "4d6bef887495451.png",
+        "type" : "image/png",
+        "size" : 43288
+      }, {
+        "uid" : "b000a71fedb5fb98",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_to_consent.png",
+        "source" : "b000a71fedb5fb98.png",
+        "type" : "image/png",
+        "size" : 75282
+      }, {
+        "uid" : "87e7c9aa668f6d05",
+        "name" : "dev_edge_131.0.2903.51_selected_consent_given_by_from_dropdown.png",
+        "source" : "87e7c9aa668f6d05.png",
+        "type" : "image/png",
+        "size" : 75259
+      }, {
+        "uid" : "f9f1b63721964afd",
+        "name" : "dev_edge_131.0.2903.51_entered_person_consenting_details.png",
+        "source" : "f9f1b63721964afd.png",
+        "type" : "image/png",
+        "size" : 76549
+      }, {
+        "uid" : "5045fa5e0b0cc826",
+        "name" : "dev_edge_131.0.2903.51_entered_relationship_to_patient.png",
+        "source" : "5045fa5e0b0cc826.png",
+        "type" : "image/png",
+        "size" : 78396
+      }, {
+        "uid" : "99955e605b59ae57",
+        "name" : "dev_edge_131.0.2903.51_clicked_continue_to_vaccinate_button.png",
+        "source" : "99955e605b59ae57.png",
+        "type" : "image/png",
+        "size" : 68412
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 7,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I record yes details and date as today-1 and click Continue to Check and confirm screen",
+      "time" : {
+        "start" : 1732172194001,
+        "stop" : 1732172203388,
+        "duration" : 9387
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "aa16388fa9e0b897",
+        "name" : "dev_edge_131.0.2903.51_clicked_yes_vaccinated_radiobutton.png",
+        "source" : "aa16388fa9e0b897.png",
+        "type" : "image/png",
+        "size" : 79579
+      }, {
+        "uid" : "7027d345f947e56e",
+        "name" : "dev_edge_131.0.2903.51_clicked_vaccine_type.png",
+        "source" : "7027d345f947e56e.png",
+        "type" : "image/png",
+        "size" : 61655
+      }, {
+        "uid" : "f9b300213e4fc675",
+        "name" : "dev_edge_131.0.2903.51_vaccination_date_is_set.png",
+        "source" : "f9b300213e4fc675.png",
+        "type" : "image/png",
+        "size" : 85829
+      }, {
+        "uid" : "bf1363a6ebfd8535",
+        "name" : "dev_edge_131.0.2903.51_clicked_care_model_option.png",
+        "source" : "bf1363a6ebfd8535.png",
+        "type" : "image/png",
+        "size" : 86446
+      }, {
+        "uid" : "40c185848ed94b56",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccinator_name_and_council.png",
+        "source" : "40c185848ed94b56.png",
+        "type" : "image/png",
+        "size" : 86446
+      }, {
+        "uid" : "94c790c749932d32",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_comments.png",
+        "source" : "94c790c749932d32.png",
+        "type" : "image/png",
+        "size" : 44378
+      }, {
+        "uid" : "336fd065232a60fd",
+        "name" : "dev_edge_131.0.2903.51_selected_vaccination_site.png",
+        "source" : "336fd065232a60fd.png",
+        "type" : "image/png",
+        "size" : 46120
+      }, {
+        "uid" : "d5755d8c5c40f9c6",
+        "name" : "dev_edge_131.0.2903.51_selected_batch_number.png",
+        "source" : "d5755d8c5c40f9c6.png",
+        "type" : "image/png",
+        "size" : 50935
+      }, {
+        "uid" : "328e6656746ccc7f",
+        "name" : "dev_edge_131.0.2903.51_entered_dose_amount_value.png",
+        "source" : "328e6656746ccc7f.png",
+        "type" : "image/png",
+        "size" : 50935
+      }, {
+        "uid" : "fd326cbab2075cbc",
+        "name" : "dev_edge_131.0.2903.51_entered_vaccination_details.png",
+        "source" : "fd326cbab2075cbc.png",
+        "type" : "image/png",
+        "size" : 60667
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 10,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Then I need to be able to see the patient KRISTIA SIDAWAY, 24/6/1992, 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY and vaccination details on the check and confirm screen",
+      "time" : {
+        "start" : 1732172203389,
+        "stop" : 1732172205653,
+        "duration" : 2264
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "2cf80f030adab1a8",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_before_assertion.png",
+        "source" : "2cf80f030adab1a8.png",
+        "type" : "image/png",
+        "size" : 60667
+      }, {
+        "uid" : "b95eedb9d6d7b4b0",
+        "name" : "dev_edge_131.0.2903.51_vaccination_dose_amount.png",
+        "source" : "b95eedb9d6d7b4b0.png",
+        "type" : "image/png",
+        "size" : 60667
+      }, {
+        "uid" : "d57e034ec7b22559",
+        "name" : "dev_edge_131.0.2903.51_check_and_confirm_screen_after_assertion.png",
+        "source" : "d57e034ec7b22559.png",
+        "type" : "image/png",
+        "size" : 60667
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And when I click confirm and save button, I should see a record saved dialogue",
+      "time" : {
+        "start" : 1732172205653,
+        "stop" : 1732172207453,
+        "duration" : 1800
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "9c149a132c60b669",
+        "name" : "dev_edge_131.0.2903.51_patient_details_screen_with_immunisation_history.png",
+        "source" : "9c149a132c60b669.png",
+        "type" : "image/png",
+        "size" : 60667
+      }, {
+        "uid" : "b80af29efe9a683c",
+        "name" : "dev_edge_131.0.2903.51_before_assert_record_saved.png",
+        "source" : "b80af29efe9a683c.png",
+        "type" : "image/png",
+        "size" : 34849
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I search for a patient with the NHS number in the find a patient screen",
+      "time" : {
+        "start" : 1732172207453,
+        "stop" : 1732172213267,
+        "duration" : 5814
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "6c3373183c02529e",
+        "name" : "dev_edge_131.0.2903.51_entered_nhs_number_as9450141711_and_clicked_search_for_patient_button.png",
+        "source" : "6c3373183c02529e.png",
+        "type" : "image/png",
+        "size" : 48488
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And I open the patient record by clicking on patient KRISTIA SIDAWAY",
+      "time" : {
+        "start" : 1732172213267,
+        "stop" : 1732172215547,
+        "duration" : 2280
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "69ccff4f530308",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "69ccff4f530308.png",
+        "type" : "image/png",
+        "size" : 48488
+      }, {
+        "uid" : "a1514c65534d30ec",
+        "name" : "dev_edge_131.0.2903.51_before_clicking_patient_name.png",
+        "source" : "a1514c65534d30ec.png",
+        "type" : "image/png",
+        "size" : 53455
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 2,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "And the immunisation history of the patient should be updated in the patient details page",
+      "time" : {
+        "start" : 1732172215547,
+        "stop" : 1732172229301,
+        "duration" : 13754
+      },
+      "status" : "failed",
+      "statusMessage" : "assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)",
+      "statusTrace" : "AssertionError: assert 0 >= (0 + 1)\n +  where 0 = int(0)\n +  and   0 = int(0)\n",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "7daa0ab4fc59b7d1",
+        "name" : "dev_edge_131.0.2903.51_immunisation_history_records_count_after_vaccination.png",
+        "source" : "7daa0ab4fc59b7d1.png",
+        "type" : "image/png",
+        "size" : 53455
+      } ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "ed18e3c5b8a5f950",
+      "name" : "log",
+      "source" : "ed18e3c5b8a5f950.txt",
+      "type" : "text/plain",
+      "size" : 28592
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 48,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "a0493315bdb0"
+  }, {
+    "name" : "thread",
+    "value" : "1102-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest-bdd"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "feature",
+    "value" : "Record vaccine"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "address",
+    "value" : "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY"
+  }, {
+    "name" : "assess_date",
+    "value" : "today-2"
+  }, {
+    "name" : "batch_expiry_date",
+    "value" : "19/10/2026"
+  }, {
+    "name" : "batch_number",
+    "value" : "AUTOMATION-IT"
+  }, {
+    "name" : "care_model",
+    "value" : "Housebound patient's home"
+  }, {
+    "name" : "chosen_vaccine",
+    "value" : "Flu"
+  }, {
+    "name" : "consent",
+    "value" : "yes"
+  }, {
+    "name" : "dob",
+    "value" : "24/6/1992"
+  }, {
+    "name" : "eligibility",
+    "value" : "yes"
+  }, {
+    "name" : "index",
+    "value" : "2"
+  }, {
+    "name" : "name",
+    "value" : "KRISTIA SIDAWAY"
+  }, {
+    "name" : "nhs_number",
+    "value" : "9450141711"
+  }, {
+    "name" : "site",
+    "value" : "BECCLES HOUSE"
+  }, {
+    "name" : "vaccination",
+    "value" : "yes"
+  }, {
+    "name" : "vaccination_date",
+    "value" : "today-1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "6b9211c88d11943b.json",
+  "parameterValues" : [ "41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY", "today-2", "19/10/2026", "AUTOMATION-IT", "Housebound patient's home", "Flu", "yes", "24/6/1992", "yes", "2", "KRISTIA SIDAWAY", "9450141711", "BECCLES HOUSE", "yes", "today-1" ]
+}
