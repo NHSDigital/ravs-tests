@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 from helpers.apiHelper import ApiHelper
 from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
@@ -7,6 +8,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 import allure
 import logging
+from _pytest.main import Session
 
 playwright_helper_instance = None
 api_helper_instance = None
@@ -126,6 +128,7 @@ mobile_devices = get_mobile_devices()
 def initialize_session():
     initialize_helpers()
     yield
+    after_all()
     quit_browser()
 
 @pytest.fixture(scope="session")
@@ -150,6 +153,70 @@ def get_app_url(test_environment):
 
 def navigate_to_url(url):
     playwright_helper_instance.navigate_to_url(url)
+
+def get_total_scenarios_to_run(config, tags=None):
+    """
+    Calculate the total number of scenarios to run based on tags.
+    Args:
+        config: pytest Config object.
+        tags: List of tags to filter scenarios.
+    Returns:
+        int: Total number of scenarios to be run.
+    """
+    session = Session.from_config(config)
+    session.perform_collect()  # Collect all test items
+
+    # Filter scenarios
+    scenarios = [
+        item for item in session.items
+        if "pytest_bdd_scenario" in item.keywords  # Filter pytest-bdd scenarios
+    ]
+
+    if tags:
+        scenarios = [
+            scenario for scenario in scenarios
+            if any(tag in scenario.keywords for tag in tags)  # Check if tags match
+        ]
+
+    total_scenarios = len(scenarios)
+    print(f"Total scenarios to be run: {total_scenarios}")
+    return total_scenarios
+
+def after_all():
+    # Add anything you want to happen after all the tests have completed here
+    env = os.environ.get("TEST_ENVIRONMENT", "qa")
+    product = "RAVS"
+    properties_dict = {"PRODUCT": product, "ENV": env}
+        # if PULL_REQUEST_ID:
+        #     pull_request_id = PULL_REQUEST_ID.lower()
+        #     if "pr-" in pull_request_id:
+        #         env = os.path.join("PULL-REQUEST", PULL_REQUEST_ID)
+        #         pull_request_link = os.path.join(
+        #             select_repository_base_url(product),
+        #             "pull",
+        #             PULL_REQUEST_ID.upper().replace("PR-", ""),
+        #         )
+        #         properties_dict = {
+        #             "PRODUCT": product,
+        #             "ENV": env,
+        #             "PULL-REQUEST": pull_request_link,
+        #         }
+
+    working_dir = get_working_directory()
+    file_path = os.path.join(working_dir, 'allure-results', 'environment.properties')
+    write_properties_file(file_path, properties_dict)
+
+def write_properties_file(file_path, properties_dict):
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        with open(file_path, "w") as file:
+            for key, value in properties_dict.items():
+                file.write(f"{key}={value}\n")
+    except Exception as e:
+        logging.debug(f"Failed to create environment properties file {file_path}: {e}")
+        print(f"Error writing to {file_path}: {e}")
 
 def quit_browser():
     playwright_helper_instance.quit_browser()
