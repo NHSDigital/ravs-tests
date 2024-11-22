@@ -21,7 +21,17 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture(scope='function')
 def shared_data():
-    return {}
+    data = {}
+    yield data
+    data.clear()
+
+# @scenario(f'{features_directory}/reports.feature', 'Reports page is displayed')
+# def test_record_a_vaccine_with_nhs_number():
+#     pass
+
+# @scenario(f'{features_directory}/reports.feature', 'Reports page is displayed')
+# def test_record_a_vaccine_with_nhs_number():
+    # pass
 
 @pytest.mark.reports
 @given("I am logged into the RAVS app")
@@ -102,9 +112,9 @@ def I_select_no_date_range_and_click_continue(shared_data):
     logging.info("clicked_continue_to_reports_select_vaccine_button")
 
 @when(parse('I select a invalid date range of {from_date} and {to_date} and click Continue'))
-def I_click_date_range_button_to_generate_reports(from_date, to_date, shared_data):
+def I_click_date_range_button_to_generate_reports(shared_data, from_date, to_date):
     click_day_range_radio_button("Select a custom date range up to 31 days")
-    if (from_date and to_date != 'none'):
+    if (from_date != "null" and to_date != "null"):
         from_date = format_date(str(get_date_value(from_date)), config["browser"])
         to_date = format_date(str(get_date_value(to_date)), config["browser"])
         enter_from_date(from_date)
@@ -117,13 +127,13 @@ def I_click_date_range_button_to_generate_reports(from_date, to_date, shared_dat
     shared_data["from_date"] = from_date
     shared_data["to_date"] = to_date
 
-@then(parse("the {error_message} should be displayed"))
-def the_error_message_for_reports_date_should_be_displayed(shared_data, error_message):
-    if shared_data['from_date'] == 'none' and shared_data['to_date'] == 'none':
+@then(parse('the error message {error_message} should be displayed'))
+def the_error_message_for_reports_date_should_be_displayed(error_message, shared_data):
+    if shared_data['from_date'] == None and shared_data['to_date'] == None:
         assert check_from_date_missing_error_message_link_exists() == True
-        assert check_from_date_missing_error_message_link_exists() == True
+        assert check_from_date_missing_error_message_text_exists() == True
         assert check_to_date_missing_error_message_link_exists() == True
-        assert check_to_date_missing_error_message_link_exists() == True
+        assert check_to_date_missing_error_message_text_exists() == True
     if 'today+' in shared_data['from_date'] and 'today' in shared_data['to_date']:
         assert check_from_date_must_be_in_the_past_error_message_text_exists() == True
         assert check_from_date_must_be_in_the_past_error_message_link_exists() == True
