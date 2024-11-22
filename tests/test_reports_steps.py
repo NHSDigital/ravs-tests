@@ -10,6 +10,7 @@ from pages.reports_date_range_selection_page import *
 import logging
 from init_helpers import *
 from conftest import *
+from pages.reports_vaccine_selection_page import check_covid_check_box_exists
 
 features_directory = get_working_directory() + "features"
 
@@ -43,14 +44,13 @@ def the_reports_page_should_be_displayed():
 def I_click_create_report_button():
     click_create_report_button()
     attach_screenshot("create_report_button_is_clicked")
-    logging.info("logged_in_and_reports_navigation_link_clicked")
+    logging.info("logged_in_and_create_report_button_clicked")
 
 @then("the choose dates page should be displayed")
 def the_choose_dates_page_should_be_displayed():
     assert check_today_radio_button_exists() == True
     attach_screenshot("choose_dates_range_page_should_be_displayed")
     logging.info("choose_dates_range_page_should_be_displayed")
-
 
 @given(parse('I am logged into the RAVS app with the {username}'))
 def logged_into_ravs_app_with_username(username):
@@ -67,3 +67,23 @@ def the_choose_dates_page_should_be_displayed():
     assert check_create_report_button_enabled() == False
     attach_screenshot("Create report button should be disabled")
     logging.info("Create report button should be disabled")
+
+@when(parse('I click the {day} radio button and click Continue'))
+def I_click_date_range_button_to_generate_reports(day):
+    click_day_range_radio_button(day)
+    if day == "Select a custom date range up to 31 days":
+        from_date = format_date(str(get_date_value("today-31")), config["browser"])
+        enter_from_date(from_date)
+        to_date = format_date(str(get_date_value("today")), config["browser"])
+        enter_to_date(to_date)
+    attach_screenshot("day_range_radio_button_is_clicked_and_date_range_Selected")
+    logging.info("day_range_radio_button_is_clicked_and_date_range_Selected")
+    click_continue_to_reports_select_vaccine_button()
+    attach_screenshot("clicked_continue_to_reports_select_vaccine_button")
+    logging.info("clicked_continue_to_reports_select_vaccine_button")
+
+@then("the choose vaccines page should be displayed")
+def the_choose_dates_page_should_be_displayed():
+    assert check_covid_check_box_exists() == True
+    attach_screenshot("Choose vaccines page should be visible")
+    logging.info("Choose vaccines page should be visible")

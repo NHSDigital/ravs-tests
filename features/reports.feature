@@ -21,3 +21,24 @@ Feature: Reports
   Examples:
   | username                                      |
   | neelima.guntupalli1+no_location_sites@nhs.net |
+
+  Scenario Outline: "Choose vaccines" page is displayed
+    Given I am logged into the RAVS app
+    When I click the reports navigation link
+    And I click the create report button
+    And I click the <day> radio button and click Continue
+    Then the choose vaccines page should be displayed
+
+  Examples:
+  | day        |
+  | Yesterday  |
+  | Today      |
+  | Last 7 days (includes today)   |
+  | Last 14 days (includes today)  |
+  | Last 31 days (includes today)  |
+  | Select a custom date range up to 31 days  |
+
+
+
+
+
