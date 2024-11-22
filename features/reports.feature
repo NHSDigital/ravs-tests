@@ -38,7 +38,26 @@ Feature: Reports
   | Last 31 days (includes today)  |
   | Select a custom date range up to 31 days  |
 
+  Scenario: User should not be able to proceed if no date range is selected
+    Given I am logged into the RAVS app
+    When I click the reports navigation link
+    And I click the create report button
+    And I select no date range and click Continue
+    Then the user should not be able to proceed to choose a vaccine
 
+  Scenario Outline: User should not be able to proceed if incorrect date range is selected
+    Given I am logged into the RAVS app
+    When I click the reports navigation link
+    And I click the create report button
+    And I select a invalid date range of <from_date> and <to_date> and click Continue
+    Then the <error_message> should be displayed
 
+  Examples:
+    |from_date    | to_date   | error_message                                               |
+    | today       | today+31  | To date must be in the past                                 |
+    | today       | today+1   | To date must be in the past                                 |
+    | today+1     | today+1   | To date must be in the past, From date must be in the past  |
+    | today+1     | today     | From date must be in the past                               |
+    | none        | none        | Enter From date, Enter To date                              |
 
 
