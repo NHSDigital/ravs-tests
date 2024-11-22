@@ -19,12 +19,12 @@ TO_DATE_MUST_BE_VALID_ERROR_MESSAGE_TEXT = ("text", "Error: To date must be vali
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_LINK = ("role", "button", "The date range must be within 31 days")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_TEXT = ("text", "Error: The date range must be within 31 days")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
-FROM_DATE_DAY_INPUT_ELEMENT = ("#fromDate-day")
-FROM_DATE_MONTH_INPUT_ELEMENT = ("#fromDate-month")
-FROM_DATE_YEAR_INPUT_ELEMENT = ("#fromDate-year")
-TO_DATE_DAY_INPUT_ELEMENT = ("#toDate-day")
-TO_DATE_MONTH_INPUT_ELEMENT = ("#toDate-month")
-TO_DATE_YEAR_INPUT_ELEMENT = ("#toDate-year")
+FROM_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.day']")
+FROM_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.month']")
+FROM_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.year']")
+TO_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.day']")
+TO_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.month']")
+TO_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.year']")
 
 def check_create_report_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
@@ -54,6 +54,12 @@ def click_today_radio_button():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(TODAY_RADIO_BUTTON)
     find_element_and_perform_action(TODAY_RADIO_BUTTON, "check")
+
+def click_day_range_radio_button(day):
+    element = ("label", day, None, True)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(element)
+    find_element_and_perform_action(element, "click")
 
 def check_yesterday_radio_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)

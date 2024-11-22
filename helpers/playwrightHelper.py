@@ -368,6 +368,8 @@ class BasePlaywrightHelper:
             return self.page.get_by_role("row", name=locator_value, exact=exact)
         elif locator_type_or_selector == "cell":
             return self.page.get_by_role("cell", name=locator_value, exact=exact)
+        elif locator_type_or_selector == "id":
+            return self.page.locator(f"#{locator_value}")
         else:
             # Log a warning for unsupported locator types
             print(f"Warning: Unsupported locator type '{locator_type_or_selector}'. Assuming it is a selector.")
