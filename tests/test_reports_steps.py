@@ -158,7 +158,7 @@ def I_click_today_date_range_and_click_continue(shared_data):
     attach_screenshot("clicked_continue_to_reports_select_vaccine_button")
     logging.info("clicked_continue_to_reports_select_vaccine_button")
 
-@when(parse('I select {vaccineType} and click continue'))
+@when(parse('I select the vaccine type {vaccineType} and click continue'))
 def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
     click_vaccine_check_box_on_reports_page(vaccineType)
     attach_screenshot("click_" + vaccineType.lower() + "_check_box_on_reports_page")

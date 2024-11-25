@@ -65,7 +65,7 @@ Scenario Outline: Choose sites page is displayed
   When I click the reports navigation link
   And I click the create report button
   And I click the today date range button and click continue
-  And I select <vaccineType> and click continue
+  And I select the vaccine type <vaccineType> and click continue
   Then the choose sites page should be displayed
 
   Examples:
