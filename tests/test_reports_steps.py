@@ -6,6 +6,7 @@ from pytest_bdd.parsers import parse
 from pages.login_page import *
 from pages.home_page import *
 from pages.nhs_signin_page import *
+from pages.reports_data_selection_page import *
 from pages.reports_date_range_selection_page import *
 import logging
 from init_helpers import *
@@ -25,14 +26,6 @@ def shared_data():
     data = {}
     yield data
     data.clear()
-
-# @scenario(f'{features_directory}/reports.feature', 'Reports page is displayed')
-# def test_record_a_vaccine_with_nhs_number():
-#     pass
-
-# @scenario(f'{features_directory}/reports.feature', 'Reports page is displayed')
-# def test_record_a_vaccine_with_nhs_number():
-    # pass
 
 @pytest.mark.reports
 @given("I am logged into the RAVS app")
@@ -170,5 +163,20 @@ def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
 @then("the choose sites page should be displayed")
 def the_choose_sites_page_should_be_displayed():
     assert check_site_check_box_exists("ALBERT HOUSE") == True
-    attach_screenshot("check_sites_page_is_displayed")
-    logging.info("check_sites_page_is_displayed")
+    attach_screenshot("check_choose_sites_page_is_displayed")
+    logging.info("check_choose_sites_page_is_displayed")
+
+@when(parse('I select the site {site} and click continue'))
+def I_select_vaccinetype_and_click_continue(shared_data, site):
+    check_site_check_box(site)
+    attach_screenshot("click_" + site.lower() + "_check_box_on_reports_page")
+    logging.info("click_" + site.lower() + "_check_box_on_reports_page")
+    click_continue_to_reports_select_data_button()
+    attach_screenshot("click_continue_to_reports_select_data_button")
+    logging.info("click_continue_to_reports_select_data_button")
+
+@then("the choose data page should be displayed")
+def the_choose_data_page_should_be_displayed():
+    assert check_data_check_box_exists("Patients") == True
+    attach_screenshot("check_choose_data_pages_reports_exists")
+    logging.info("check_choose_data_pages_reports_exists")
