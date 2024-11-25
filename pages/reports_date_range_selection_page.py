@@ -16,15 +16,25 @@ FROM_DATE_MUST_BE_VALID_ERROR_MESSAGE_LINK = ("role", "button", "From date must 
 FROM_DATE_MUST_BE_VALID_ERROR_MESSAGE_TEXT = ("text", "Error: From date must be valid")
 TO_DATE_MUST_BE_VALID_ERROR_MESSAGE_LINK = ("role", "button", "To date must be valid")
 TO_DATE_MUST_BE_VALID_ERROR_MESSAGE_TEXT = ("text", "Error: To date must be valid")
+FROM_DATE_MISSING_ERROR_MESSAGE_LINK = ("role", "button", "Enter From date")
+FROM_DATE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Enter From date")
+TO_DATE_MISSING_ERROR_MESSAGE_LINK = ("role", "button", "Enter To date")
+TO_DATE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Enter To date")
+NO_DATE_SELECTED_ERROR_MESSAGE_LINK = ("role", "link", "Please select a date range option")
+NO_DATE_SELECTED_ERROR_MESSAGE_TEXT = ("text", "Error: Please select a date range option")
+TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK = ("role", "link", "To date must be in the past")
+TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT = ("text", "Error: To date must be in the past")
+FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK = ("role", "link", "From date must be in the past")
+FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT = ("text", "Error: From date must be in the past")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_LINK = ("role", "button", "The date range must be within 31 days")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_TEXT = ("text", "Error: The date range must be within 31 days")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
-FROM_DATE_DAY_INPUT_ELEMENT = ("#fromDate-day")
-FROM_DATE_MONTH_INPUT_ELEMENT = ("#fromDate-month")
-FROM_DATE_YEAR_INPUT_ELEMENT = ("#fromDate-year")
-TO_DATE_DAY_INPUT_ELEMENT = ("#toDate-day")
-TO_DATE_MONTH_INPUT_ELEMENT = ("#toDate-month")
-TO_DATE_YEAR_INPUT_ELEMENT = ("#toDate-year")
+FROM_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.day']")
+FROM_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.month']")
+FROM_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.year']")
+TO_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.day']")
+TO_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.month']")
+TO_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.year']")
 
 def check_create_report_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
@@ -54,6 +64,12 @@ def click_today_radio_button():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(TODAY_RADIO_BUTTON)
     find_element_and_perform_action(TODAY_RADIO_BUTTON, "check")
+
+def click_day_range_radio_button(day):
+    element = ("label", day, None, True)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(element)
+    find_element_and_perform_action(element, "click")
 
 def check_yesterday_radio_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
@@ -186,3 +202,63 @@ def click_back_to_reports_homepage_button():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(BACK_TO_REPORTS_HOMEPAGE_BUTTON)
     find_element_and_perform_action(BACK_TO_REPORTS_HOMEPAGE_BUTTON, "click")
+
+def check_to_date_must_be_in_the_past_error_message_text_exists():
+    wait_for_element_to_appear(TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT)
+    return check_element_exists(TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT)
+
+def check_to_date_must_be_in_the_past_error_message_link_exists():
+    wait_for_element_to_appear(TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK)
+    return check_element_exists(TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK)
+
+def click_to_date_must_be_in_the_past_error_message_link():
+    wait_for_element_to_appear(TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(TO_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK, "click")
+
+def check_from_date_must_be_in_the_past_error_message_text_exists():
+    wait_for_element_to_appear(FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT)
+    return check_element_exists(FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT)
+
+def check_from_date_must_be_in_the_past_error_message_link_exists():
+    wait_for_element_to_appear(FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK)
+    return check_element_exists(FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK)
+
+def click_from_date_must_be_in_the_past_error_message_link():
+    wait_for_element_to_appear(FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK, "click")
+
+def check_from_date_missing_error_message_text_exists():
+    wait_for_element_to_appear(FROM_DATE_MISSING_ERROR_MESSAGE_TEXT)
+    return check_element_exists(FROM_DATE_MISSING_ERROR_MESSAGE_TEXT)
+
+def check_from_date_missing_error_message_link_exists():
+    wait_for_element_to_appear(FROM_DATE_MISSING_ERROR_MESSAGE_LINK)
+    return check_element_exists(FROM_DATE_MISSING_ERROR_MESSAGE_LINK)
+
+def click_from_date_missing_error_message_link():
+    wait_for_element_to_appear(FROM_DATE_MISSING_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(FROM_DATE_MISSING_ERROR_MESSAGE_LINK, "click")
+
+def check_to_date_missing_error_message_text_exists():
+    wait_for_element_to_appear(TO_DATE_MISSING_ERROR_MESSAGE_TEXT)
+    return check_element_exists(TO_DATE_MISSING_ERROR_MESSAGE_TEXT)
+
+def check_to_date_missing_error_message_link_exists():
+    wait_for_element_to_appear(TO_DATE_MISSING_ERROR_MESSAGE_LINK)
+    return check_element_exists(TO_DATE_MISSING_ERROR_MESSAGE_LINK)
+
+def click_to_date_missing_error_message_link():
+    wait_for_element_to_appear(TO_DATE_MISSING_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(TO_DATE_MISSING_ERROR_MESSAGE_LINK, "click")
+
+def check_no_date_selected_error_message_text_exists():
+    wait_for_element_to_appear(NO_DATE_SELECTED_ERROR_MESSAGE_TEXT)
+    return check_element_exists(NO_DATE_SELECTED_ERROR_MESSAGE_TEXT)
+
+def check_no_date_selected_error_message_link_exists():
+    wait_for_element_to_appear(NO_DATE_SELECTED_ERROR_MESSAGE_LINK)
+    return check_element_exists(NO_DATE_SELECTED_ERROR_MESSAGE_LINK)
+
+def click_no_date_selected_error_message_link():
+    wait_for_element_to_appear(NO_DATE_SELECTED_ERROR_MESSAGE_LINK)
+    find_element_and_perform_action(NO_DATE_SELECTED_ERROR_MESSAGE_LINK, "click")
