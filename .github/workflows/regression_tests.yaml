@@ -53,7 +53,7 @@ jobs:
 
       # Step 2: Cache Python dependencies
       - name: Cache Python dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -71,7 +71,7 @@ jobs:
 
       # Step 3: Set up Python 3.11
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -83,7 +83,7 @@ jobs:
 
       # Step 5: Cache Playwright binaries
       - name: Cache Playwright binaries
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ inputs.environment }}
