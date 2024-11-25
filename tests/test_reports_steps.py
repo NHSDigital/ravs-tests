@@ -10,7 +10,8 @@ from pages.reports_date_range_selection_page import *
 import logging
 from init_helpers import *
 from conftest import *
-from pages.reports_vaccine_selection_page import check_covid_check_box_exists
+from pages.reports_site_selection_page import *
+from pages.reports_vaccine_selection_page import *
 
 features_directory = get_working_directory() + "features"
 
@@ -147,3 +148,27 @@ def the_error_message_for_reports_date_should_be_displayed(error_message, shared
         assert check_to_date_must_be_in_the_past_error_message_link_exists() == True
     attach_screenshot("Choose vaccines page should be visible")
     logging.info("Choose vaccines page should be visible")
+
+@when('I click the today date range button and click continue')
+def I_click_today_date_range_and_click_continue(shared_data):
+    click_today_radio_button()
+    attach_screenshot("clicked_today_radio_button")
+    logging.info("clicked_today_radio_button")
+    click_continue_to_reports_select_vaccine_button()
+    attach_screenshot("clicked_continue_to_reports_select_vaccine_button")
+    logging.info("clicked_continue_to_reports_select_vaccine_button")
+
+@when(parse('I select {vaccineType} and click continue'))
+def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
+    click_vaccine_check_box_on_reports_page(vaccineType)
+    attach_screenshot("click_" + vaccineType.lower() + "_check_box_on_reports_page")
+    logging.info("click_" + vaccineType.lower() + "_check_box_on_reports_page")
+    click_continue_to_reports_select_site_button()
+    attach_screenshot("click_continue_to_reports_select_site_button")
+    logging.info("click_continue_to_reports_select_site_button")
+
+@then("the choose sites page should be displayed")
+def the_choose_sites_page_should_be_displayed():
+    assert check_site_check_box_exists("ALBERT HOUSE") == True
+    attach_screenshot("check_sites_page_is_displayed")
+    logging.info("check_sites_page_is_displayed")
