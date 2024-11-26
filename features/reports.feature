@@ -109,3 +109,21 @@ Scenario Outline: Check and confirm page is displayed
   | Pertussis                         | Albert House  |
   | Respiratory syncytial virus (RSV) | Albert House  |
   | COVID-19                          | Albert House  |
+
+Scenario Outline: Check and confirm page is displayed
+  Given I am logged into the RAVS app
+  When I click the reports navigation link
+  And I click the create report button
+  And I click the today date range button and click continue
+  And I select the vaccine type <vaccineType> and click continue
+  And I select the site <site> and click continue
+  And I click continue on the data page
+  Then the check and confirm page should be displayed
+
+  Examples:
+  |vaccineType                        | site          |
+  | COVID-19                          | Albert House  |
+  | Flu                               | Albert House  |
+  | Pertussis                         | Albert House  |
+  | Respiratory syncytial virus (RSV) | Albert House  |
+  | COVID-19                          | Albert House  |
