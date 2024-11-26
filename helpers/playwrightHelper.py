@@ -219,6 +219,12 @@ class BasePlaywrightHelper:
             return element.is_enabled()
         return False
 
+    def check_element_checked(self, selector, wait=False):
+        element = self.get_element(selector, wait=wait)
+        if element:
+            return element.is_checked()
+        return False
+
     def is_page_responsive(self):
         try:
             # Check for a specific element that indicates responsiveness

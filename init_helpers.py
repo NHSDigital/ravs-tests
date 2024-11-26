@@ -256,6 +256,16 @@ def check_element_enabled(element, wait=False):
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
+def check_element_checked(element, wait=False):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    elif isinstance(element, str):
+        element = get_element_by_type(element)
+    try:
+        return playwright_helper_instance.check_element_checked(element, wait)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
 def check_element_by_locator_enabled(element, wait=False):
     if isinstance(element, (tuple, list)):
         element = get_element_by_type(*element)
