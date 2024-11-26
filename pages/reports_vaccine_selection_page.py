@@ -52,7 +52,8 @@ def check_vaccine_check_box_exists(vaccine):
     wait_for_element_to_appear(element)
     return check_element_exists(element)
 
-def click_vaccine_check_box(vaccine):
+def click_vaccine_check_box_on_reports_page(vaccine):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("label", vaccine)
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "check")
