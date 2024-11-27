@@ -4,6 +4,7 @@ from axe_core_python.sync_playwright import Axe
 from init_helpers import *
 import pytest
 import logging
+import platform
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -83,19 +84,6 @@ class BasePlaywrightHelper:
             self.page = self.context.new_page()
         except Exception as e:
             print(f"Error launching mobile browser for {device_name}: {e}")
-
-    # def capture_screenshot(self, full_path):
-    #     try:
-    #         logging.debug("Scrolling to the top of the page.")
-    #         self.page.evaluate("window.scrollTo(0, 0);")
-    #         self.page.screenshot(path=full_path)
-    #     except Exception as error:
-    #         if "Timeout" in str(error):
-    #             print('Screenshot taking timed out, ignoring...')
-    #             return None
-    #         else:
-    #             raise error
-    #     return full_path
 
     def capture_screenshot(self, full_path):
         try:
@@ -238,6 +226,38 @@ class BasePlaywrightHelper:
             print("Page is unresponsive. Attempting to reload or take action.")
             self.page.reload(wait_until="networkidle")
             self.wait_for_page_to_load()
+
+    def click_and_get_download_path(self, locator_or_element, action="click", timeout=30, download_dir="downloads"):
+        """
+        Clicks an element and waits for a file to be downloaded, then returns the download path.
+        The file is saved in a custom directory to prevent deletion after the test.
+        This works cross-platform (Windows and Linux).
+        """
+        try:
+            # Ensure the custom download directory exists
+            if not os.path.isabs(download_dir):  # Make sure the download_dir is an absolute path
+                download_dir = os.path.join(os.getcwd(), download_dir)  # Use current working directory as base
+
+            os.makedirs(download_dir, exist_ok=True)
+
+            # Set the download behavior in Playwright to download files to the specified directory
+            self.page.on("download", lambda download: download.save_as(os.path.join(download_dir, download.suggested_filename)))
+
+            # Use Playwright's download expectation
+            with self.page.expect_download(timeout=timeout * 1000) as download_info:
+                self.find_element_and_perform_action(locator_or_element, action)
+
+            # Get the download object
+            download = download_info.value
+            downloaded_file_path = download.path()
+
+            print(f"Download completed: {downloaded_file_path}")
+            return downloaded_file_path
+
+        except Exception as e:
+            print(f"Error during download: {e}")
+            raise
+
 
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):
         # Generate screenshot filename if not provided
