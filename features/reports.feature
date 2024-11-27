@@ -91,7 +91,7 @@ Scenario Outline: Choose data page is displayed
   | Pertussis                         | Albert House  |
   | Respiratory syncytial virus (RSV) | Albert House  |
 
-Scenario Outline: Check and confirm page is displayed
+Scenario Outline: Check and confirm page should be displayed
   Given I am logged into the RAVS app
   When I click the reports navigation link
   And I click the create report button
@@ -108,3 +108,42 @@ Scenario Outline: Check and confirm page is displayed
   | Pertussis                         | Albert House  |
   | Respiratory syncytial virus (RSV) | Albert House  |
   | COVID-19                          | Albert House  |
+
+Scenario Outline: Report is ready page should be displayed
+  Given I am logged into the RAVS app
+  When I click the reports navigation link
+  And I click the create report button
+  And I click the today date range button and click continue
+  And I select the vaccine type <vaccineType> and click continue
+  And I select the site <site> and click continue
+  And I click continue on the data page
+  And I click Confirm and create report button in the check and confirm page
+  Then Creating your page element should be displayed and Download Report button should be visible
+
+  Examples:
+  |vaccineType                        | site          |
+  | COVID-19                          | Albert House  |
+  | Flu                               | Albert House  |
+  | Pertussis                         | Albert House  |
+  | Respiratory syncytial virus (RSV) | Albert House  |
+  | COVID-19                          | Albert House  |
+
+Scenario Outline: User can download the report
+  Given I am logged into the RAVS app
+  When I click the reports navigation link
+  And I click the create report button
+  And I click the <day> radio button and click Continue
+  And I select the vaccine type <vaccineType> and click continue
+  And I select the site <site> and click continue
+  And I click continue on the data page
+  And I click Confirm and create report button in the check and confirm page
+  And I click download report button
+  Then the report is downloaded successfully
+
+  Examples:
+  |vaccineType                        | site          | day                             |
+  | COVID-19                          | Albert House  | Last 31 days (includes today)   |
+  | Flu                               | Albert House  | Last 31 days (includes today)   |
+  | Pertussis                         | Albert House  | Last 7 days (includes today)    |
+  | Respiratory syncytial virus (RSV) | Albert House  | Last 14 days (includes today)   |
+  | COVID-19                          | Albert House  | Last 31 days (includes today)   |

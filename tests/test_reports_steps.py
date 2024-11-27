@@ -1,4 +1,5 @@
 from asyncio import sleep
+from logging.handlers import RotatingFileHandler
 import secrets
 import string
 from pytest_bdd import given, when, then, scenarios, scenario
@@ -7,6 +8,7 @@ from pages.login_page import *
 from pages.home_page import *
 from pages.nhs_signin_page import *
 from pages.reports_check_and_confirm_page import *
+from pages.reports_creating_report_page import *
 from pages.reports_data_selection_page import *
 from pages.reports_date_range_selection_page import *
 import logging
@@ -19,8 +21,22 @@ features_directory = get_working_directory() + "features"
 
 scenarios(f'{features_directory}/reports.feature')
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)  # Or any other level like INFO, WARNING, etc.
+
+# Create a rotating file handler to log to tox.log
+log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  # Log rotation (optional)
+log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+# Add the handler to the logger
+logger.addHandler(log_handler)
+
+@pytest.fixture(scope="session", autouse=True)
+def setup_logging():
+    # You can add logging setup here if needed
+    logger.info("Logging setup complete")
+    yield
+    logger.info("Test session complete")
 
 @pytest.fixture(scope='function')
 def shared_data():
@@ -155,11 +171,11 @@ def I_click_today_date_range_and_click_continue(shared_data):
 @when(parse('I select the vaccine type {vaccineType} and click continue'))
 def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
     click_vaccine_check_box_on_reports_page(vaccineType)
-    attach_screenshot("click_" + vaccineType.lower() + "_check_box_on_reports_page")
-    logging.info("click_" + vaccineType.lower() + "_check_box_on_reports_page")
+    attach_screenshot("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
+    logging.info("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
     click_continue_to_reports_select_site_button()
-    attach_screenshot("click_continue_to_reports_select_site_button")
-    logging.info("click_continue_to_reports_select_site_button")
+    attach_screenshot("clicked_continue_to_reports_select_site_button")
+    logging.info("clicked_continue_to_reports_select_site_button")
 
 @then("the choose sites page should be displayed")
 def the_choose_sites_page_should_be_displayed():
@@ -170,11 +186,11 @@ def the_choose_sites_page_should_be_displayed():
 @when(parse('I select the site {site} and click continue'))
 def I_select_vaccinetype_and_click_continue(shared_data, site):
     check_site_check_box(site)
-    attach_screenshot("click_" + site.lower() + "_check_box_on_reports_page")
-    logging.info("click_" + site.lower() + "_check_box_on_reports_page")
+    attach_screenshot("clicked_" + site.lower() + "_check_box_on_reports_page")
+    logging.info("clicked_" + site.lower() + "_check_box_on_reports_page")
     click_continue_to_reports_select_data_button()
-    attach_screenshot("click_continue_to_reports_select_data_button")
-    logging.info("click_continue_to_reports_select_data_button")
+    attach_screenshot("clicked_continue_to_reports_select_data_button")
+    logging.info("clicked_continue_to_reports_select_data_button")
 
 @then("the choose data page should be displayed and all data options should be checked by default")
 def the_choose_data_page_should_be_displayed():
@@ -190,11 +206,36 @@ def the_choose_data_page_should_be_displayed():
 @when(parse('I click continue on the data page'))
 def I_select_data_and_click_continue(shared_data):
     click_continue_to_reports_select_data_button()
-    attach_screenshot("click_continue_to_reports_select_data_button")
-    logging.info("click_continue_to_reports_select_data_button")
+    attach_screenshot("clicked_continue_to_reports_select_data_button")
+    logging.info("clicked_continue_to_reports_select_data_button")
 
 @then("the check and confirm page should be displayed")
 def the_check_and_confirm_page_should_be_displayed():
     assert check_reports_change_data_button_exists() == True
     attach_screenshot("check_reports_change_data_pages_reports_exists")
     logging.info("check_reports_change_data_pages_reports_exists")
+
+@when('I click Confirm and create report button in the check and confirm page')
+def I_click_confirm_to_generate_report(shared_data):
+    click_continue_to_confirm_and_create_report_button()
+    attach_screenshot("clicked_continue_to_confirm_and_create_report_button")
+    logging.info("clicked_continue_to_confirm_and_create_report_button")
+
+@then("Creating your page element should be displayed and Download Report button should be visible")
+def the_check_and_confirm_page_should_be_displayed():
+    assert check_reports_download_report_button_exists() == True
+    attach_screenshot("check_reports_change_data_pages_reports_exists")
+    logging.info("check_reports_change_data_pages_reports_exists")
+
+@when('I click download report button')
+def I_click_confirm_to_generate_report(shared_data):
+    shared_data['report_download_path'] = click_reports_download_report_button()
+    attach_screenshot("clicked_reports_download_report_button")
+    logging.info("clicked_reports_download_report_button")
+
+
+@then("the report is downloaded successfully")
+def the_report_is_downloaded_successfully(shared_data):
+    assert os.path.exists(shared_data['report_download_path']), f"Downloaded file not found: {shared_data['report_download_path']}"
+    attach_screenshot("check_report_downloaded")
+    logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
