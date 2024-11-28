@@ -257,30 +257,29 @@ def the_report_is_downloaded_successfully(shared_data):
 
             # Check headers
             if headers == expected_headers:
-                    print("Headers are valid!")
+                    logger.info("Headers are valid!")
                     return True
             else:
-                print("Headers are invalid!")
-                print("Expected Headers:")
-                print(expected_headers)
-                print("Found Headers:")
-                print(headers)
+                logger.info("Headers are invalid!")
+                logger.info("Expected Headers:")
+                logger.info(expected_headers)
+                logger.info("Found Headers:")
+                logger.info(headers)
 
                 # Find missing or extra headers
                 missing_headers = [h for h in expected_headers if h not in headers]
                 extra_headers = [h for h in headers if h not in expected_headers]
 
                 if missing_headers:
-                    print("Missing Headers:")
-                    print(missing_headers)
+                    logger.info("Missing Headers:")
+                    logger.info(missing_headers)
                 if extra_headers:
-                    print("Extra Headers:")
-                    print(extra_headers)
-
+                    logger.info("Extra Headers:")
+                    logger.info(extra_headers)
                 return False
 
     except Exception as e:
-        print(f"An error occurred while validating headers: {e}")
+        logger.info(f"An error occurred while validating headers: {e}")
         return False
 
 
