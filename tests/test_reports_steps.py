@@ -1,4 +1,5 @@
 from asyncio import sleep
+import csv
 from logging.handlers import RotatingFileHandler
 import secrets
 import string
@@ -239,3 +240,47 @@ def the_report_is_downloaded_successfully(shared_data):
     assert os.path.exists(shared_data['report_download_path']), f"Downloaded file not found: {shared_data['report_download_path']}"
     attach_screenshot("check_report_downloaded")
     logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
+    expected_headers = [
+    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+    "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+    "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+    "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+    "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+    "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
+    "VaccinatingClinician", "ConsentingClinician"
+]
+    try:
+        with open(shared_data['report_download_path'], mode="r", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            headers = next(reader)
+
+            # Check headers
+            if headers == expected_headers:
+                    print("Headers are valid!")
+                    return True
+            else:
+                print("Headers are invalid!")
+                print("Expected Headers:")
+                print(expected_headers)
+                print("Found Headers:")
+                print(headers)
+
+                # Find missing or extra headers
+                missing_headers = [h for h in expected_headers if h not in headers]
+                extra_headers = [h for h in headers if h not in expected_headers]
+
+                if missing_headers:
+                    print("Missing Headers:")
+                    print(missing_headers)
+                if extra_headers:
+                    print("Extra Headers:")
+                    print(extra_headers)
+
+                return False
+
+    except Exception as e:
+        print(f"An error occurred while validating headers: {e}")
+        return False
+
+
