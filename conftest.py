@@ -574,12 +574,6 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         click_confirm_details_and_save_button()
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
-        # assert get_vaccine_program_details(index) == shared_data["chosen_vaccine"]
-        # click_delete_history_button(shared_data["chosen_vaccine"], index)
-        # attach_screenshot("delete_history_button_clicked")
-        # click_delete_vaccination_button()
-        # attach_screenshot("delete_vaccination_button_clicked")
-        # time.sleep(10)
         shared_data.clear()
     else:
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
