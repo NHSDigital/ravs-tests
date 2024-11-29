@@ -1,4 +1,6 @@
 from asyncio import sleep
+import csv
+from logging.handlers import RotatingFileHandler
 import secrets
 import string
 from pytest_bdd import given, when, then, scenarios, scenario
@@ -6,6 +8,8 @@ from pytest_bdd.parsers import parse
 from pages.login_page import *
 from pages.home_page import *
 from pages.nhs_signin_page import *
+from pages.reports_check_and_confirm_page import *
+from pages.reports_creating_report_page import *
 from pages.reports_data_selection_page import *
 from pages.reports_date_range_selection_page import *
 import logging
@@ -18,8 +22,79 @@ features_directory = get_working_directory() + "features"
 
 scenarios(f'{features_directory}/reports.feature')
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)  # Or any other level like INFO, WARNING, etc.
+
+# Create a rotating file handler to log to tox.log
+log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  # Log rotation (optional)
+log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+# Add the handler to the logger
+logger.addHandler(log_handler)
+
+def validate_report_headers(file_path, expected_headers):
+    try:
+        with open(file_path, mode="r", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            headers = next(reader)
+
+            # Check headers
+            if headers == expected_headers:
+                logger.info("Headers are valid!")
+                logger.info(headers)
+                return True, headers
+            else:
+                logger.info("Headers are invalid!")
+                logger.info("Expected Headers:")
+                logger.info(expected_headers)
+                logger.info("Found Headers:")
+                logger.info(headers)
+
+                # Find missing or extra headers
+                missing_headers = [h for h in expected_headers if h not in headers]
+                extra_headers = [h for h in headers if h not in expected_headers]
+
+                if missing_headers:
+                    logger.info("Missing Headers:")
+                    logger.info(missing_headers)
+                if extra_headers:
+                    logger.info("Extra Headers:")
+                    logger.info(extra_headers)
+
+                return False, headers
+
+    except Exception as e:
+        logger.error(f"An error occurred while validating headers: {e}")
+        return False, None
+
+def validate_value_in_header(file_path, header, value):
+    try:
+        with open(file_path, mode="r", newline="", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+
+            # Ensure the specified header exists
+            if header not in reader.fieldnames:
+                logger.error(f"Header '{header}' not found in the report.")
+                return False
+
+            # Search for the value under the specified header
+            for row in reader:
+                if row.get(header) == value:
+                    logger.info(f"Value '{value}' found under header '{header}' in the report.")
+                    return True
+
+            logger.error(f"Value '{value}' not found under header '{header}' in the report.")
+            return False
+    except Exception as e:
+        logger.error(f"An error occurred while searching for value '{value}' under header '{header}': {e}")
+        return False
+
+@pytest.fixture(scope="session", autouse=True)
+def setup_logging():
+    # You can add logging setup here if needed
+    logger.info("Logging setup complete")
+    yield
+    logger.info("Test session complete")
 
 @pytest.fixture(scope='function')
 def shared_data():
@@ -154,11 +229,11 @@ def I_click_today_date_range_and_click_continue(shared_data):
 @when(parse('I select the vaccine type {vaccineType} and click continue'))
 def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
     click_vaccine_check_box_on_reports_page(vaccineType)
-    attach_screenshot("click_" + vaccineType.lower() + "_check_box_on_reports_page")
-    logging.info("click_" + vaccineType.lower() + "_check_box_on_reports_page")
+    attach_screenshot("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
+    logging.info("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
     click_continue_to_reports_select_site_button()
-    attach_screenshot("click_continue_to_reports_select_site_button")
-    logging.info("click_continue_to_reports_select_site_button")
+    attach_screenshot("clicked_continue_to_reports_select_site_button")
+    logging.info("clicked_continue_to_reports_select_site_button")
 
 @then("the choose sites page should be displayed")
 def the_choose_sites_page_should_be_displayed():
@@ -169,6 +244,160 @@ def the_choose_sites_page_should_be_displayed():
 @when(parse('I select the site {site} and click continue'))
 def I_select_vaccinetype_and_click_continue(shared_data, site):
     check_site_check_box(site)
+    attach_screenshot("clicked_" + site.lower() + "_check_box_on_reports_page")
+    logging.info("clicked_" + site.lower() + "_check_box_on_reports_page")
+    click_continue_to_reports_select_data_button()
+    attach_screenshot("clicked_continue_to_reports_select_data_button")
+    logging.info("clicked_continue_to_reports_select_data_button")
+
+@then("the choose data page should be displayed and all data options should be checked by default")
+def the_choose_data_page_should_be_displayed():
+    assert check_reports_data_check_box_exists("Patients") == True
+    assert check_reports_data_check_box_checked("Patients") == True
+    assert check_reports_data_check_box_checked("Staff") == True
+    assert check_reports_data_check_box_checked("Site or delivery team") == True
+    assert check_reports_data_check_box_checked("Assessment and consent") == True
+    assert check_reports_data_check_box_checked("Vaccination") == True
+    attach_screenshot("check_choose_data_pages_reports_exists")
+    logging.info("check_choose_data_pages_reports_exists")
+
+@when(parse('I click continue on the data page'))
+def I_select_data_and_click_continue(shared_data):
+    click_continue_to_reports_select_data_button()
+    attach_screenshot("clicked_continue_to_reports_select_data_button")
+    logging.info("clicked_continue_to_reports_select_data_button")
+
+@then("the check and confirm page should be displayed")
+def the_check_and_confirm_page_should_be_displayed():
+    assert check_reports_change_data_button_exists() == True
+    attach_screenshot("check_reports_change_data_pages_reports_exists")
+    logging.info("check_reports_change_data_pages_reports_exists")
+
+@when('I click Confirm and create report button in the check and confirm page')
+def I_click_confirm_to_generate_report(shared_data):
+    click_continue_to_confirm_and_create_report_button()
+    attach_screenshot("clicked_continue_to_confirm_and_create_report_button")
+    logging.info("clicked_continue_to_confirm_and_create_report_button")
+
+@then("Creating your page element should be displayed and Download Report button should be visible")
+def the_check_and_confirm_page_should_be_displayed():
+    assert check_reports_download_report_button_exists() == True
+    attach_screenshot("check_reports_change_data_pages_reports_exists")
+    logging.info("check_reports_change_data_pages_reports_exists")
+
+@when('I click download report button')
+def I_click_confirm_to_generate_report(shared_data):
+    shared_data['report_download_path'] = click_reports_download_report_button()
+    attach_screenshot("clicked_reports_download_report_button")
+    logging.info("clicked_reports_download_report_button")
+
+@then("the report is downloaded successfully")
+def the_report_is_downloaded_successfully(shared_data):
+    assert os.path.exists(shared_data['report_download_path']), f"Downloaded file not found: {shared_data['report_download_path']}"
+    attach_screenshot("check_report_downloaded")
+    logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
+    expected_headers = [
+    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+    "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+    "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+    "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+    "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+    "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
+    "VaccinatingClinician", "ConsentingClinician"
+]
+    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    assert is_valid, "Report headers are invalid. See logs for details."
+
+@then(parse("the report is downloaded successfully and contains the vaccine record for {nhs_number}"))
+def the_report_is_downloaded_successfully(shared_data, nhs_number):
+    assert os.path.exists(shared_data['report_download_path']), f"Downloaded file not found: {shared_data['report_download_path']}"
+    attach_screenshot("check_report_downloaded")
+    logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
+    expected_headers = [
+    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+    "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+    "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+    "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+    "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+    "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
+    "VaccinatingClinician", "ConsentingClinician"
+]
+    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    assert is_valid, "Report headers are invalid. See logs for details."
+
+    vaccination_date = shared_data.get("vaccination_date")
+    vaccinated_decision = shared_data["vaccinated_decision"]
+    consent_given_by =  shared_data['consent_given_by']
+    eligibility_type = shared_data['eligibility_type']
+
+    if vaccination_date:
+        # Convert the vaccination date from shared_data to a datetime object
+        vaccination_date_obj = datetime.strptime(vaccination_date, "%d/%m/%Y")  # Adjust format as needed
+        current_date = datetime.now()
+        date_diff = (current_date - vaccination_date_obj).days
+
+        if 0 <= date_diff <= 31:
+            # If vaccination date is within the last 31 days, ensure all columns have values
+            logger.info(f"Vaccination date '{vaccination_date}' is within the last 31 days. Verifying all columns have values...")
+
+            with open(shared_data['report_download_path'], mode="r", newline="", encoding="utf-8") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    # For each row, ensure that all columns have non-empty values
+                    for header in expected_headers:
+                        if header == "NoVaccinationReason":
+                            # If vaccinated_decision is "yes", NoVaccinationReason should be empty
+                            if vaccinated_decision.lower() == "yes":
+                                assert not row[header], f"Column 'NoVaccinationReason' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'yes'."
+                            else:
+                                assert row[header], f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+                        elif header == "ConsentingPersonName" or header == "ConsentingPersonRelationship":
+                            if consent_given_by == "Patient (informed consent)":
+                                assert not row[header], f"Column 'ConsentingPersonName' and 'ConsentingPersonRelationship' should be empty for NHS number {shared_data['nhs_number']} as consent given by patient (informed consent)"
+                            else:
+                                assert row[header], f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+                        elif header == "StaffType":
+                            if eligibility_type == "Healthcare workers":
+                                assert row[header], f"Column 'StaffType' should not be empty for NHS number {shared_data['nhs_number']} as eligibility_type is 'Healthcare workers'."
+                            else:
+                                assert not row[header], f"Column 'StaffType' should be empty for NHS number {shared_data['nhs_number']} as eligibility_type is not 'Healthcare workers'."
+                        else:
+                            # For other columns, ensure they are not empty
+                            assert row[header], f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+
+            # Validate the presence of the vaccination date in the report
+            is_vaccination_date_present = validate_value_in_header(
+                shared_data['report_download_path'],
+                "VaccinationDate",
+                vaccination_date
+            )
+            assert is_vaccination_date_present, (
+                f"Value '{vaccination_date}' not found under header 'VaccinationDate' in the report."
+            )
+
+            # Validate the presence of the NHS number only if the vaccination date is within the last 31 days
+            is_nhsNumber_present = validate_value_in_header(shared_data['report_download_path'], "NhsNumber", shared_data["nhs_number"])
+            assert is_nhsNumber_present, f"Value '{shared_data['nhs_number']}' not found under header 'NhsNumber' in the report."
+
+        else:
+            # If vaccination date is more than 31 days old, ensure no rows for that date
+            logger.info(f"Vaccination date '{vaccination_date}' is more than 31 days old. Ensuring no rows exist with this date in the report.")
+
+            with open(shared_data['report_download_path'], mode="r", newline="", encoding="utf-8") as file:
+                reader = csv.DictReader(file)
+                found_invalid_row = False
+                for row in reader:
+                    if row["VaccinationDate"] == vaccination_date:
+                        found_invalid_row = True
+                        break
+
+            assert not found_invalid_row, (
+                f"Row with vaccination date '{vaccination_date}' found in the report, but it should not be present since it's older than 31 days."
+            )
+
+            logger.info(f"Vaccination date '{vaccination_date}' is correctly not present in the report.")
     attach_screenshot("click_" + site.lower() + "_check_box_on_reports_page")
     logging.info("click_" + site.lower() + "_check_box_on_reports_page")
     click_continue_to_reports_select_data_button()
@@ -180,3 +409,4 @@ def the_choose_data_page_should_be_displayed():
     assert check_data_check_box_exists("Patients") == True
     attach_screenshot("check_choose_data_pages_reports_exists")
     logging.info("check_choose_data_pages_reports_exists")
+
