@@ -35,7 +35,7 @@ def check_continue_to_reports_check_and_confirm_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CONTINUE_TO_REPORTS_CHECK_AND_CONFIRM_BUTTON)
     return check_element_exists(CONTINUE_TO_REPORTS_CHECK_AND_CONFIRM_BUTTON)
-  
+    
 def click_continue_to_reports_select_data_button():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CONTINUE_TO_REPORTS_CHECK_AND_CONFIRM_BUTTON)
