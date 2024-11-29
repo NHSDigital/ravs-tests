@@ -84,6 +84,7 @@ Scenario Outline: Choose data page is displayed
   And I select the site <site> and click continue
   Then the choose data page should be displayed and all data options should be checked by default
 
+
   Examples:
   |vaccineType                        | site          |
   | COVID-19                          | Albert House  |
@@ -177,4 +178,3 @@ Scenario Outline: User can download the report
     | index | nhs_number | site | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob        | address                                       | chosen_vaccine | batch_number     | batch_expiry_date |
     | 0  | 9693632109 | Albert House | Vaccination Centre open to the public | yes        | today      | yes     | yes         | today | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-SJ1   | 19/10/2026   |
     | 0  | 9693632109 | Albert House | Vaccination Centre open to the public | yes        | today      | yes     | yes         | today-32 | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-SJ1   | 19/10/2026   |
-

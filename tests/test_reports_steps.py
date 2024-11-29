@@ -291,7 +291,6 @@ def I_click_confirm_to_generate_report(shared_data):
     attach_screenshot("clicked_reports_download_report_button")
     logging.info("clicked_reports_download_report_button")
 
-
 @then("the report is downloaded successfully")
 def the_report_is_downloaded_successfully(shared_data):
     assert os.path.exists(shared_data['report_download_path']), f"Downloaded file not found: {shared_data['report_download_path']}"
@@ -309,7 +308,6 @@ def the_report_is_downloaded_successfully(shared_data):
 ]
     is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
     assert is_valid, "Report headers are invalid. See logs for details."
-
 
 @then(parse("the report is downloaded successfully and contains the vaccine record for {nhs_number}"))
 def the_report_is_downloaded_successfully(shared_data, nhs_number):
@@ -400,3 +398,15 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
             )
 
             logger.info(f"Vaccination date '{vaccination_date}' is correctly not present in the report.")
+    attach_screenshot("click_" + site.lower() + "_check_box_on_reports_page")
+    logging.info("click_" + site.lower() + "_check_box_on_reports_page")
+    click_continue_to_reports_select_data_button()
+    attach_screenshot("click_continue_to_reports_select_data_button")
+    logging.info("click_continue_to_reports_select_data_button")
+
+@then("the choose data page should be displayed")
+def the_choose_data_page_should_be_displayed():
+    assert check_data_check_box_exists("Patients") == True
+    attach_screenshot("check_choose_data_pages_reports_exists")
+    logging.info("check_choose_data_pages_reports_exists")
+
