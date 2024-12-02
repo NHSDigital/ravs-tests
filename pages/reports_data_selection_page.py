@@ -12,6 +12,12 @@ def check_reports_data_check_box_checked(data):
     wait_for_element_to_appear(element)
     return check_element_checked(element)
 
+def check_reports_data_check_box_exists(data):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    element = ("label", data)
+    wait_for_element_to_appear(element)
+    return check_element_exists(element)
+
 def click_reports_data_check_box(data):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("label", data)
