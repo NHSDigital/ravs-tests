@@ -323,7 +323,7 @@ class BasePlaywrightHelper:
                 if element.is_visible():
                     if element.text_content() != '':
                         element.clear()  # Clear existing text
-                    element.type(inputValue)
+                    element.type(inputValue, delay=50)
                     print(f"Typed text '{inputValue}' successfully.")
             else:
                 print(f"Unsupported action: {action}")
@@ -381,7 +381,7 @@ class BasePlaywrightHelper:
         elif locator_type_or_selector == "text":
             return self.page.get_by_text(locator_value, exact=exact)
         elif locator_type_or_selector == "label":
-            return self.page.get_by_label(locator_value, exact=exact)
+            return self.page.get_by_label(locator_value, exact=exact).nth(0)
         elif locator_type_or_selector == "placeholder":
             return self.page.get_by_placeholder(locator_value)
         elif locator_type_or_selector == "xpath":

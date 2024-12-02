@@ -351,26 +351,25 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
 def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, no_vaccination_reason=None):
+    set_vaccination_date(vaccination_date)
+    attach_screenshot("vaccination_date_is_set")
+    logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
+    logging.debug("Vaccinator to select is: " + vaccinator)
+    if (legal_mechanism) != "Patient Group Direction (PGD)":
+        select_vaccinator_name_and_council(vaccinator)
+        attach_screenshot("selected_vaccinator_name_and_council")
+    enter_vaccination_comments(vaccination_comments)
+    attach_screenshot("entered_vaccination_comments")
+    click_care_model_option(care_model)
+    attach_screenshot("clicked_care_model_option")
+    if care_model == "Care home":
+        enter_care_home_details("WHITESTONES CARE HOME")
+        attach_screenshot("entered_care_home_details")
     if vaccinate_decision.lower() == 'yes':
         click_yes_vaccinated_radiobutton()
         attach_screenshot("clicked_yes_vaccinated_radiobutton")
-
         click_vaccine_type(vaccine_type2)
         attach_screenshot("clicked_vaccine_type")
-        set_vaccination_date(vaccination_date)
-        attach_screenshot("vaccination_date_is_set")
-        click_care_model_option(care_model)
-        attach_screenshot("clicked_care_model_option")
-        if care_model == "Care home":
-            enter_care_home_details("WHITESTONES CARE HOME")
-            attach_screenshot("entered_care_home_details")
-        logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
-        logging.debug("Vaccinator to select is: " + vaccinator)
-        if (legal_mechanism) != "Patient Group Direction (PGD)":
-            select_vaccinator_name_and_council(vaccinator)
-            attach_screenshot("selected_vaccinator_name_and_council")
-        enter_vaccination_comments(vaccination_comments)
-        attach_screenshot("entered_vaccination_comments")
         select_vaccination_site(vaccination_site)
         attach_screenshot("selected_vaccination_site")
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
@@ -381,22 +380,62 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("entered_dose_amount_value")
 
         if click_continue_to_check_and_confirm_screen_button() == True:
-            vaccination_date = format_date(vaccination_date, "safari")
-            set_vaccination_date(vaccination_date)
             attach_screenshot("vaccination_date_is_set")
             select_batch_number(batch_number_to_select)
             attach_screenshot("selected_batch_number")
-
             click_continue_to_check_and_confirm_screen_button()
             attach_screenshot("clicked_continue_to_check_and_confirm_screen_button")
-
     else:
         click_not_vaccinated_radiobutton()
         attach_screenshot("clicked_not_vaccinated_radiobutton")
         if no_vaccination_reason is not None:
             select_reason_for_no_vaccination(no_vaccination_reason)
             attach_screenshot("selected_reason_for_no_vaccination")
-            click_save_and_return_button_on_record_vaccinated_page
+            click_save_and_return_button_on_record_vaccinated_page()
+            attach_screenshot("clicked_save_and_return_button_on_record_vaccinated_page")
+        attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
+
+def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, no_vaccination_reason=None):
+    set_vaccination_date(vaccination_date)
+    attach_screenshot("vaccination_date_is_set")
+    logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
+    logging.debug("Vaccinator to select is: " + vaccinator)
+    if (legal_mechanism) != "Patient Group Direction (PGD)":
+        select_vaccinator_name_and_council(vaccinator)
+        attach_screenshot("selected_vaccinator_name_and_council")
+    enter_vaccination_comments(vaccination_comments)
+    attach_screenshot("entered_vaccination_comments")
+    click_care_model_option(care_model)
+    attach_screenshot("clicked_care_model_option")
+    if care_model == "Care home":
+        enter_care_home_details("WHITESTONES CARE HOME")
+        attach_screenshot("entered_care_home_details")
+    if vaccinate_decision.lower() == 'yes':
+        click_yes_vaccinated_radiobutton()
+        attach_screenshot("clicked_yes_vaccinated_radiobutton")
+        click_vaccine_type(vaccine_type2)
+        attach_screenshot("clicked_vaccine_type")
+        select_vaccination_site(vaccination_site)
+        attach_screenshot("selected_vaccination_site")
+        batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
+        logging.debug("Batch number to select is: " + batch_number_to_select)
+        select_batch_number(batch_number_to_select)
+        attach_screenshot("selected_batch_number")
+        enter_dose_amount_value(dose_amount)
+        attach_screenshot("entered_dose_amount_value")
+        if click_continue_to_check_and_confirm_screen_button() == True:
+            attach_screenshot("vaccination_date_is_set")
+            select_batch_number(batch_number_to_select)
+            attach_screenshot("selected_batch_number")
+            click_continue_to_check_and_confirm_screen_button()
+            attach_screenshot("clicked_continue_to_check_and_confirm_screen_button")
+    else:
+        click_not_vaccinated_radiobutton()
+        attach_screenshot("clicked_not_vaccinated_radiobutton")
+        if no_vaccination_reason is not None:
+            select_reason_for_no_vaccination(no_vaccination_reason)
+            attach_screenshot("selected_reason_for_no_vaccination")
+            click_save_and_return_button_on_record_vaccinated_page()
             attach_screenshot("clicked_save_and_return_button_on_record_vaccinated_page")
         click_save_and_return_button_on_record_vaccinated_page()
         attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
@@ -525,6 +564,25 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
+@when(parse("I record {vaccination} details and date as {vaccination_date} and click Save and return button"))
+def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shared_data, vaccination, vaccination_date):
+    shared_data["vaccinated_decision"] = vaccination
+    if shared_data["consent_decision"].lower() == "yes":
+        if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
+            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            chosen_vaccine = shared_data["chosen_vaccine"]
+            shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
+            shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
+            if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
+                shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
+            else:
+                shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+            shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
+            shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
+            enter_vaccine_details_and_click_save_and_return(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
+            attach_screenshot("entered_vaccination_details")
+    logging.info(shared_data)
+
 @then(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))
 def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
@@ -537,6 +595,7 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
         assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
         assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
         assert get_patient_dob_value() == date_format_with_age(dob)
+        shared_data['dob'] = date_format_with_age(dob)
         assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
         assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
         assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
@@ -565,7 +624,10 @@ def immunisation_history_should_be_updated(shared_data):
 def immunisation_history_should_be_updated(shared_data):
     attach_screenshot("immunisation_history_records_count_after_vaccination")
     immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
-    assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
+    if shared_data['vaccinated_decision'].lower() == "yes":
+        assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
+    else:
+        assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
 
 @then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
 def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):
