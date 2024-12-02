@@ -341,8 +341,13 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                     logger.info(f"Vaccination date '{vaccination_date}' is within the last 31 days. Verifying all columns in the last row...")
 
                     for header in expected_headers:
+                        if vaccinated_decision.lower() == "no":
+                            for field in ["Vaccine", "VaccineProduct", "DoseAmount", "VaccineRoute"]:
+                                assert not last_row[field], (
+                                    f"Column '{field}' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'No'."
+                                )
 
-                        if header == "NoVaccinationReason":
+                        elif header == "NoVaccinationReason":
                             if vaccinated_decision.lower() == "yes":
                                 assert not last_row[header], (
                                     f"Column 'NoVaccinationReason' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'yes'."
