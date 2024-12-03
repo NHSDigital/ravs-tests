@@ -390,9 +390,49 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                         f"Value '{shared_data['nhs_number']}' not found in the 'NhsNumber' column of the last row."
                     )
 
-                    assert last_row["PatientName"] == shared_data["patient_name"], (
+                    assert last_row["PatientName"].lower() == shared_data["patient_name"].lower(), (
                         f"Mismatch in 'PatientName': expected '{shared_data['patient_name']}' but found '{last_row['PatientName']}'."
                     )
+
+                    assert last_row["AssessmentDate"] == shared_data["eligibility_assessment_date"], (
+                        f"Mismatch in 'AssessmentDate': expected '{shared_data['eligibility_assessment_date']}' but found '{last_row['AssessmentDate']}'."
+                    )
+
+                    assert last_row["AssessingClinician"].lower() == shared_data["eligibility_assessing_clinician"].lower(), (
+                        f"Mismatch in 'AssessingClinician': expected '{shared_data['eligibility_assessing_clinician']}' but found '{last_row['AssessingClinician']}'."
+                    )
+
+                    assert last_row["SiteName"].lower() == shared_data["site"].lower(), (
+                        f"Mismatch in 'SiteName': expected '{shared_data['site']}' but found '{last_row['SiteName']}'."
+                    )
+
+                    assert last_row["CareModel"].lower() == shared_data["care_model"].lower(), (
+                        f"Mismatch in 'CareModel': expected '{shared_data['care_model']}' but found '{last_row['CareModel']}'."
+                    )
+
+                    assert last_row["Consented"].lower() == shared_data["consent_decision"].lower(), (
+                        f"Mismatch in 'Consented': expected '{shared_data['consent_decision']}' but found '{last_row['Consented']}'."
+                    )
+
+                    assert last_row["ConsentType"].lower() == shared_data["consent_given_by"].lower(), (
+                        f"Mismatch in 'ConsentType': expected '{shared_data['consent_given_by']}' but found '{last_row['ConsentType']}'."
+                    )
+
+                    assert last_row["EligibilityType"].lower() == shared_data["eligibility_type"].lower(), (
+                        f"Mismatch in 'EligibilityType': expected '{shared_data['eligibility_type']}' but found '{last_row['EligibilityType']}'."
+                    )
+
+                    assert last_row["AssessmentComments"].lower() == shared_data["assessment_comments"].lower(), (
+                        f"Mismatch in 'AssessmentComments': expected '{shared_data['assessment_comments']}' but found '{last_row['AssessmentComments']}'."
+                    )
+
+                    if shared_data["consent_given_by"] != "Patient (informed consent)":
+                        assert last_row["ConsentingPersonName"].lower() == "Automation tester".lower(), (
+                            f"Mismatch in 'ConsentingPersonName': expected 'Automation tester' but found '{last_row['ConsentingPersonName']}'."
+                        )
+                        assert last_row["ConsentingPersonRelationship"].lower() == "RAVS tester".lower(), (
+                            f"Mismatch in 'ConsentingPersonRelationship': expected 'RAVS tester' but found '{last_row['ConsentingPersonRelationship']}'."
+                        )
 
                 else:
                     # If vaccination date is more than 31 days old, ensure the last row does not have this date
