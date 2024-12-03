@@ -15,7 +15,7 @@ VIEW_RECORD_LINK = ("text", "View record")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 # Shared
-NHS_NUMBER_INPUT = ("label", "Enter a 10 digit NHS number")
+NHS_NUMBER_INPUT = ("id", "NhsNumber")
 
 FIRST_NAME_INPUT = ("label", "First name")
 LAST_NAME_INPUT = ("label", "Last name")
