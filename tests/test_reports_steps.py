@@ -226,15 +226,6 @@ def I_click_today_date_range_and_click_continue(shared_data):
     attach_screenshot("clicked_continue_to_reports_select_vaccine_button")
     logging.info("clicked_continue_to_reports_select_vaccine_button")
 
-@when(parse('I select the vaccine type {vaccineType} and click continue'))
-def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
-    click_vaccine_check_box_on_reports_page(vaccineType)
-    attach_screenshot("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
-    logging.info("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
-    click_continue_to_reports_select_site_button()
-    attach_screenshot("clicked_continue_to_reports_select_site_button")
-    logging.info("clicked_continue_to_reports_select_site_button")
-
 @then("the choose sites page should be displayed")
 def the_choose_sites_page_should_be_displayed():
     assert check_site_check_box_exists("ALBERT HOUSE") == True
@@ -260,12 +251,6 @@ def the_choose_data_page_should_be_displayed():
     assert check_reports_data_check_box_checked("Vaccination") == True
     attach_screenshot("check_choose_data_pages_reports_exists")
     logging.info("check_choose_data_pages_reports_exists")
-
-@when(parse('I click continue on the data page'))
-def I_select_data_and_click_continue(shared_data):
-    click_continue_to_reports_select_data_button()
-    attach_screenshot("clicked_continue_to_reports_select_data_button")
-    logging.info("clicked_continue_to_reports_select_data_button")
 
 @then("the check and confirm page should be displayed")
 def the_check_and_confirm_page_should_be_displayed():
@@ -331,6 +316,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
     vaccinated_decision = shared_data["vaccinated_decision"]
     consent_given_by =  shared_data['consent_given_by']
     eligibility_type = shared_data['eligibility_type']
+    patient_name = shared_data['patient_name']
 
     if vaccination_date:
         # Convert the vaccination date from shared_data to a datetime object
@@ -344,69 +330,163 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
 
             with open(shared_data['report_download_path'], mode="r", newline="", encoding="utf-8") as file:
                 reader = csv.DictReader(file)
-                for row in reader:
-                    # For each row, ensure that all columns have non-empty values
+                rows = list(reader)
+                last_row = rows[-1] if rows else None
+
+                if last_row:
+                    logger.info(f"Validating the latest row for vaccination date: {vaccination_date}...")
+
+                if 0 <= date_diff <= 31:
+                    # If vaccination date is within the last 31 days, ensure all columns have values
+                    logger.info(f"Vaccination date '{vaccination_date}' is within the last 31 days. Verifying all columns in the last row...")
+
                     for header in expected_headers:
-                        if header == "NoVaccinationReason":
-                            # If vaccinated_decision is "yes", NoVaccinationReason should be empty
+                        if vaccinated_decision.lower() == "no":
+                            for field in ["Vaccine", "VaccineProduct", "DoseAmount", "VaccineRoute"]:
+                                assert not last_row[field], (
+                                    f"Column '{field}' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'No'."
+                                )
+
+                        elif header == "NoVaccinationReason":
                             if vaccinated_decision.lower() == "yes":
-                                assert not row[header], f"Column 'NoVaccinationReason' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'yes'."
+                                assert not last_row[header], (
+                                    f"Column 'NoVaccinationReason' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'yes'."
+                                )
                             else:
-                                assert row[header], f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
-                        elif header == "ConsentingPersonName" or header == "ConsentingPersonRelationship":
+                                assert last_row[header], (
+                                    f"Missing value in column 'NoVaccinationReason' for NHS number {shared_data['nhs_number']}."
+                                )
+                        elif header in ["ConsentingPersonName", "ConsentingPersonRelationship"]:
                             if consent_given_by == "Patient (informed consent)":
-                                assert not row[header], f"Column 'ConsentingPersonName' and 'ConsentingPersonRelationship' should be empty for NHS number {shared_data['nhs_number']} as consent given by patient (informed consent)"
+                                assert not last_row[header], (
+                                    f"Column '{header}' should be empty for NHS number {shared_data['nhs_number']} as consent given by patient (informed consent)."
+                                )
                             else:
-                                assert row[header], f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+                                assert last_row[header], (
+                                    f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+                                )
                         elif header == "StaffType":
                             if eligibility_type == "Healthcare workers":
-                                assert row[header], f"Column 'StaffType' should not be empty for NHS number {shared_data['nhs_number']} as eligibility_type is 'Healthcare workers'."
+                                assert last_row[header], (
+                                    f"Column 'StaffType' should not be empty for NHS number {shared_data['nhs_number']} as eligibility_type is 'Healthcare workers'."
+                                )
                             else:
-                                assert not row[header], f"Column 'StaffType' should be empty for NHS number {shared_data['nhs_number']} as eligibility_type is not 'Healthcare workers'."
+                                assert not last_row[header], (
+                                    f"Column 'StaffType' should be empty for NHS number {shared_data['nhs_number']} as eligibility_type is not 'Healthcare workers'."
+                                )
                         else:
                             # For other columns, ensure they are not empty
-                            assert row[header], f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+                            assert last_row[header], (
+                                f"Missing value in column '{header}' for NHS number {shared_data['nhs_number']}."
+                            )
 
-            # Validate the presence of the vaccination date in the report
-            is_vaccination_date_present = validate_value_in_header(
-                shared_data['report_download_path'],
-                "VaccinationDate",
-                vaccination_date
-            )
-            assert is_vaccination_date_present, (
-                f"Value '{vaccination_date}' not found under header 'VaccinationDate' in the report."
-            )
+                    # Validate the presence of the vaccination date in the last row
+                    assert last_row["VaccinationDate"] == vaccination_date, (
+                        f"Value '{vaccination_date}' not found in the 'VaccinationDate' column of the last row."
+                    )
 
-            # Validate the presence of the NHS number only if the vaccination date is within the last 31 days
-            is_nhsNumber_present = validate_value_in_header(shared_data['report_download_path'], "NhsNumber", shared_data["nhs_number"])
-            assert is_nhsNumber_present, f"Value '{shared_data['nhs_number']}' not found under header 'NhsNumber' in the report."
+                    # Validate the presence of the NHS number in the last row
+                    assert last_row["NhsNumber"] == shared_data["nhs_number"], (
+                        f"Value '{shared_data['nhs_number']}' not found in the 'NhsNumber' column of the last row."
+                    )
 
+                    assert last_row["PatientName"].lower() == shared_data["patient_name"].lower(), (
+                        f"Mismatch in 'PatientName': expected '{shared_data['patient_name']}' but found '{last_row['PatientName']}'."
+                    )
+
+                    assert last_row["AssessmentDate"] == shared_data["eligibility_assessment_date"], (
+                        f"Mismatch in 'AssessmentDate': expected '{shared_data['eligibility_assessment_date']}' but found '{last_row['AssessmentDate']}'."
+                    )
+
+                    assert last_row["AssessingClinician"].lower() == shared_data["eligibility_assessing_clinician"].lower(), (
+                        f"Mismatch in 'AssessingClinician': expected '{shared_data['eligibility_assessing_clinician']}' but found '{last_row['AssessingClinician']}'."
+                    )
+
+                    assert last_row["SiteName"].lower() == shared_data["site"].lower(), (
+                        f"Mismatch in 'SiteName': expected '{shared_data['site']}' but found '{last_row['SiteName']}'."
+                    )
+
+                    assert last_row["CareModel"].lower() == shared_data["care_model"].lower(), (
+                        f"Mismatch in 'CareModel': expected '{shared_data['care_model']}' but found '{last_row['CareModel']}'."
+                    )
+
+                    assert last_row["Consented"].lower() == shared_data["consent_decision"].lower(), (
+                        f"Mismatch in 'Consented': expected '{shared_data['consent_decision']}' but found '{last_row['Consented']}'."
+                    )
+
+                    assert last_row["ConsentType"].lower() == shared_data["consent_given_by"].lower(), (
+                        f"Mismatch in 'ConsentType': expected '{shared_data['consent_given_by']}' but found '{last_row['ConsentType']}'."
+                    )
+
+                    assert last_row["EligibilityType"].lower() == shared_data["eligibility_type"].lower(), (
+                        f"Mismatch in 'EligibilityType': expected '{shared_data['eligibility_type']}' but found '{last_row['EligibilityType']}'."
+                    )
+
+                    assert last_row["AssessmentComments"].lower() == shared_data["assessment_comments"].lower(), (
+                        f"Mismatch in 'AssessmentComments': expected '{shared_data['assessment_comments']}' but found '{last_row['AssessmentComments']}'."
+                    )
+
+                    if shared_data["consent_given_by"] != "Patient (informed consent)":
+                        assert last_row["ConsentingPersonName"].lower() == "Automation tester".lower(), (
+                            f"Mismatch in 'ConsentingPersonName': expected 'Automation tester' but found '{last_row['ConsentingPersonName']}'."
+                        )
+                        assert last_row["ConsentingPersonRelationship"].lower() == "RAVS tester".lower(), (
+                            f"Mismatch in 'ConsentingPersonRelationship': expected 'RAVS tester' but found '{last_row['ConsentingPersonRelationship']}'."
+                        )
+
+                else:
+                    # If vaccination date is more than 31 days old, ensure the last row does not have this date
+                    assert last_row["VaccinationDate"] != vaccination_date, (
+                        f"Row with vaccination date '{vaccination_date}' found in the last row, but it should not be present since it's older than 31 days."
+                    )
+
+                    logger.info(f"Vaccination date '{vaccination_date}' is correctly not present in the last row of the report.")
         else:
-            # If vaccination date is more than 31 days old, ensure no rows for that date
-            logger.info(f"Vaccination date '{vaccination_date}' is more than 31 days old. Ensuring no rows exist with this date in the report.")
+            logger.warning("The report file is empty. No rows to validate.")
 
-            with open(shared_data['report_download_path'], mode="r", newline="", encoding="utf-8") as file:
-                reader = csv.DictReader(file)
-                found_invalid_row = False
-                for row in reader:
-                    if row["VaccinationDate"] == vaccination_date:
-                        found_invalid_row = True
-                        break
 
-            assert not found_invalid_row, (
-                f"Row with vaccination date '{vaccination_date}' found in the report, but it should not be present since it's older than 31 days."
-            )
+@when(parse('I select the vaccine type {vaccineType} and click continue'))
+def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
+    click_vaccine_check_box_on_reports_page(vaccineType)
+    attach_screenshot("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
+    logging.info("clicked_" + vaccineType.lower() + "_check_box_on_reports_page")
+    click_continue_to_reports_select_site_button()
+    attach_screenshot("clicked_continue_to_reports_select_site_button")
+    logging.info("clicked_continue_to_reports_select_site_button")
 
-            logger.info(f"Vaccination date '{vaccination_date}' is correctly not present in the report.")
-    attach_screenshot("click_" + site.lower() + "_check_box_on_reports_page")
-    logging.info("click_" + site.lower() + "_check_box_on_reports_page")
+@then("the choose sites page should be displayed")
+def the_choose_sites_page_should_be_displayed():
+    assert check_site_check_box_exists("ALBERT HOUSE") == True
+    attach_screenshot("check_choose_sites_page_is_displayed")
+    logging.info("check_choose_sites_page_is_displayed")
+
+@when(parse('I click continue on the data page'))
+def I_select_data_and_click_continue(shared_data):
     click_continue_to_reports_select_data_button()
-    attach_screenshot("click_continue_to_reports_select_data_button")
-    logging.info("click_continue_to_reports_select_data_button")
+    attach_screenshot("clicked_continue_to_reports_select_data_button")
+    logging.info("clicked_continue_to_reports_select_data_button")
+
+@then("the report is downloaded successfully")
+def the_report_is_downloaded_successfully(shared_data):
+    assert os.path.exists(shared_data['report_download_path']), f"Downloaded file not found: {shared_data['report_download_path']}"
+    attach_screenshot("check_report_downloaded")
+    logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
+    expected_headers = [
+    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+    "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+    "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+    "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+    "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+    "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
+    "VaccinatingClinician", "ConsentingClinician"
+]
+    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    assert is_valid, "Report headers are invalid. See logs for details."
 
 @then("the choose data page should be displayed")
 def the_choose_data_page_should_be_displayed():
-    assert check_data_check_box_exists("Patients") == True
+    assert check_reports_data_check_box_exists("Patients") == True
     attach_screenshot("check_choose_data_pages_reports_exists")
     logging.info("check_choose_data_pages_reports_exists")
 

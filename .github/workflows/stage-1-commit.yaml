@@ -47,7 +47,7 @@ jobs:
   check-file-format:
     name: "Check file format"
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
   check-markdown-format:
     name: "Check Markdown format"
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
@@ -69,7 +69,7 @@ jobs:
   check-english-usage:
     name: "Check English usage"
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
@@ -92,7 +92,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
@@ -111,7 +111,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
