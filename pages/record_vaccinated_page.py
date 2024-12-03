@@ -3,7 +3,7 @@ from init_helpers import *
 from test_data.get_values_from_models import get_covid_vaccine_xpath, get_flu_vaccine_xpath
 
 YES_VACCINATED_RADIO_BUTTON=("label", "Yes")
-NO_VACCINATED_RADIO_BUTTON=("label", "No")
+NO_VACCINATED_RADIO_BUTTON=("label", "No", True)
 VACCINATOR_DROPDOWN_ELEMENT = ("label","Vaccinator")
 SAVE_AND_RETURN_BUTTON=("role", "button", "Save and return")
 CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON=("role", "button", "Continue")
@@ -62,10 +62,12 @@ def check_no_to_vaccinated_radiobutton_exists():
     return check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
 
 def click_yes_vaccinated_radiobutton():
+    wait_for_element_to_appear(YES_VACCINATED_RADIO_BUTTON)
     find_element_and_perform_action(YES_VACCINATED_RADIO_BUTTON, "click")
 
 def click_not_vaccinated_radiobutton():
-    find_element_and_perform_action(NO_VACCINATED_RADIO_BUTTON, "click")
+    wait_for_element_to_appear(NO_VACCINATED_RADIO_BUTTON)
+    find_element_and_perform_action(NO_VACCINATED_RADIO_BUTTON, "check")
 
 def select_vaccinator_name_and_council(nameandcouncil):
     if check_element_enabled(VACCINATOR_DROPDOWN_ELEMENT):
