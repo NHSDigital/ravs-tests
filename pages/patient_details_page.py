@@ -25,6 +25,12 @@ FLU_HISTORY_ELEMENT = ("text", "Flu")
 RSV_HISTORY_ELEMENT = ("text", "Respiratory syncytial virus (RSV)")
 PERTUSSIS_HISTORY_ELEMENT = ("text", "Pertussis")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+VACCINATION_HISTORY_NOT_AVAILABLE = ("role", "heading", "No vaccination history available")
+
+def check_vaccine_history_not_available_label_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
+    return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
 
 def check_covid_history_element_exists():
     wait_for_element_to_appear(COVID_HISTORY_ELEMENT)
