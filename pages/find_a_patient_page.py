@@ -156,7 +156,7 @@ def check_postcode_invalid_error_message_text_exists():
     return check_element_exists(POSTCODE_INVALID_INPUT_ERROR_LABEL)
 
 def check_patient_name_search_result_exists(name, wait):
-    element = ("xpath", f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{name.lower()}')]")
+    element = ("xpath", f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), \"{name.lower()}\")]")
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
