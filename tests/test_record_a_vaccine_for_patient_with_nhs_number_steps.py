@@ -34,7 +34,4 @@ def test_record_a_vaccine_with_nhs_number(navigate_and_login):
 
 @scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a maternity vaccine with nhs number')
 def test_record_a_maternity_vaccine_with_nhs_number(navigate_and_login):
-    pass
-
-
-
+    pass # All test steps are in conftest.py

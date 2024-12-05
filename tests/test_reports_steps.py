@@ -143,7 +143,8 @@ def the_no_vaccination_data_to_report_on_message_should_be_displayed():
 
 @then("the Create report button should be disabled")
 def the_create_report_button_should_be_disabled():
-    assert check_create_report_button_enabled() == False
+    assert check_create_report_button_exists() == False
+    assert check_no_vaccination_data_to_report_message_exists() == True
     attach_screenshot("Create report button should be disabled")
     logging.info("Create report button should be disabled")
 
@@ -352,6 +353,18 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                                 assert not last_row[header], (
                                     f"Column 'NoVaccinationReason' should be empty for NHS number {shared_data['nhs_number']} as vaccinated_decision is 'yes'."
                                 )
+                                assert last_row["Vaccine"].lower() == shared_data["chosen_vaccine"].lower(), (
+                                    f"Mismatch in 'Vaccine': expected '{shared_data['chosen_vaccine']}' but found '{last_row['Vaccine']}'."
+                                )
+                                assert last_row["VaccineProduct"].lower() == shared_data["chosen_vaccine_type"].lower(), (
+                                    f"Mismatch in 'VaccineProduct': expected '{shared_data['chosen_vaccine_type']}' but found '{last_row['VaccineProduct']}'."
+                                )
+                                assert last_row["BatchNumber"].lower() == shared_data["batch_number"].lower(), (
+                                    f"Mismatch in 'BatchNumber': expected '{shared_data['batch_number']}' but found '{last_row['BatchNumber']}'."
+                                )
+                                assert last_row["BatchExpiryDate"].lower() == shared_data["batch_expiry_date"].lower(), (
+                                    f"Mismatch in 'BatchExpiryDate': expected '{shared_data['batch_expiry_date']}' but found '{last_row['BatchExpiryDate']}'."
+                                )
                             else:
                                 assert last_row[header], (
                                     f"Missing value in column 'NoVaccinationReason' for NHS number {shared_data['nhs_number']}."
@@ -424,6 +437,30 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
 
                     assert last_row["AssessmentComments"].lower() == shared_data["assessment_comments"].lower(), (
                         f"Mismatch in 'AssessmentComments': expected '{shared_data['assessment_comments']}' but found '{last_row['AssessmentComments']}'."
+                    )
+
+                    assert last_row["AuditType"] == "Created", (
+                        f"Mismatch in 'AuditType': expected 'Created' but found '{last_row['AuditType']}'."
+                    )
+
+                    assert last_row["UserEnteringData"] == "Neelima Guntupalli", (
+                        f"Mismatch in 'UserEnteringData': expected 'Neelima Guntupalli' but found '{last_row['UserEnteringData']}'."
+                    )
+
+                    assert last_row["PrescribingMethod"] == shared_data["legal_mechanism"], (
+                        f"Mismatch in 'PrescribingMethod': expected '{shared_data['legal_mechanism']}' but found '{last_row['PrescribingMethod']}'."
+                    )
+
+                    assert last_row["VaccinationComments"] == shared_data["vaccination_comments"], (
+                        f"Mismatch in 'VaccinationComments': expected '{shared_data['vaccination_comments']}' but found '{last_row['VaccinationComments']}'."
+                    )
+
+                    assert last_row["VaccinatingClinician"] == shared_data["vaccinator"], (
+                        f"Mismatch in 'VaccinatingClinician': expected '{shared_data['vaccinator']}' but found '{last_row['VaccinatingClinician']}'."
+                    )
+
+                    assert last_row["ConsentingClinician"] == shared_data["consent_clinician_details"], (
+                        f"Mismatch in 'ConsentingClinician': expected '{shared_data['consent_clinician_details']}' but found '{last_row['ConsentingClinician']}'."
                     )
 
                     if shared_data["consent_given_by"] != "Patient (informed consent)":
