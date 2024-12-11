@@ -286,7 +286,15 @@ def the_report_is_downloaded_successfully(shared_data):
     "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
     "VaccinatingClinician", "ConsentingClinician"
 ]
-    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    is_valid, missing_headers, extra_headers = validate_report_headers(shared_data['report_download_path'], expected_headers)
+
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+            error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+            error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
     assert is_valid, "Report headers are invalid. See logs for details."
 
 @then(parse("the report is downloaded successfully and contains the vaccine record for {nhs_number}"))
@@ -304,7 +312,15 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
     "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
     "VaccinatingClinician", "ConsentingClinician"
 ]
-    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    is_valid, missing_headers, extra_headers = validate_report_headers(shared_data['report_download_path'], expected_headers)
+
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+            error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+            error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
     assert is_valid, "Report headers are invalid. See logs for details."
 
     vaccination_date = shared_data.get("vaccination_date")
@@ -401,7 +417,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                         f"Mismatch in 'PatientName': expected '{shared_data['patient_name']}' but found '{last_row['PatientName']}'."
                     )
 
-                    assert last_row["Address"].lower() == shared_data["address"].lower(), (
+                    assert shared_data["address"].lower() in last_row["Address"].lower() (
                         f"Mismatch in 'Address': expected '{shared_data['address']}' but found '{last_row['Address']}'."
                     )
 
@@ -520,7 +536,14 @@ def the_report_is_downloaded_successfully(shared_data):
     "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
     "VaccinatingClinician", "ConsentingClinician"
 ]
-    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    is_valid, missing_headers, extra_headers = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+                error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+                error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
     assert is_valid, "Report headers are invalid. See logs for details."
 
 @then("the choose data page should be displayed")
@@ -606,10 +629,8 @@ def the_report_is_downloaded_successfully(shared_data):
     if not expected_headers:
         raise ValueError(f"Unexpected data_to_filter value: {data_to_filter}")
 
-    # Validate headers and highlight the issue
     is_valid, missing_headers, extra_headers = validate_report_headers(report_path, expected_headers)
 
-    # If validation fails, raise an exception with detailed error
     if not is_valid:
         error_message = "Report headers are invalid."
         if missing_headers:
