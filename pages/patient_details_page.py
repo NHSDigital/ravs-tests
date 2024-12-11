@@ -29,6 +29,7 @@ VACCINATION_HISTORY_NOT_AVAILABLE = ("role", "heading", "No vaccination history 
 
 def check_vaccine_history_not_available_label_element_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
 
@@ -51,7 +52,6 @@ def check_pertussis_history_element_exists():
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
     element = ("xpath", f"//h2[contains(text(), '{chosen_vaccine}')]/following-sibling::div/p[contains(text(), 'Displaying')]")
