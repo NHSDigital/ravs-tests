@@ -63,6 +63,9 @@ def click_cancel_confirm_details_button():
 def get_patient_name_value():
     return find_element_and_perform_action(PATIENT_NAME_LABEL_ELEMENT, "get_text")
 
+def get_patient_gender_value():
+    return find_element_and_perform_action(PATIENT_GENDER_LABEL_ELEMENT, "get_text")
+
 def get_patient_dob_value():
     return find_element_and_perform_action(PATIENT_DOB_LABEL_ELEMENT, "get_text")
 

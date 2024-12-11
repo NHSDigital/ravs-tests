@@ -203,3 +203,25 @@ Scenario Outline: User can download the report
   Examples:
     | index | nhs_number | site | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob        | address                                       | chosen_vaccine | batch_number     | batch_expiry_date |
     | 4 | 9437541817 | KINGSTON HOUSE  | Outreach event | yes | today | yes | no | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+
+
+  Scenario Outline: User should be able to filter vaccine event data before creating a report
+  Given I am logged into the RAVS app
+  When I click the reports navigation link
+  And I click the create report button
+  And I click the <day> radio button and click Continue
+  And I select the vaccine type <vaccineType> and click continue
+  And I select the site <site> and click continue
+  And I select the data <data> to filter and click continue
+  And I click Confirm and create report button in the check and confirm page
+  And I click download report button
+  Then the report is downloaded successfully and it should not contain the data that was selected for filtering
+
+  Examples:
+  |vaccineType                        | site          | day                            |   data   |
+  | COVID-19                          | Albert House  | Last 31 days (includes today)  | Patients |
+  | Flu                               | Albert House  | Last 31 days (includes today)  | Staff    |
+  | Pertussis                         | Albert House  | Last 7 days (includes today)   | Site or delivery team |
+  | Respiratory syncytial virus (RSV) | Albert House  | Last 14 days (includes today)  | Assessment and consent |
+  | COVID-19                          | Albert House  | Last 31 days (includes today)  | Vaccination |
+

@@ -294,6 +294,12 @@ class BasePlaywrightHelper:
                     print("Checkbox checked successfully.")
                 elif element.is_checked():
                     print("Checkbox is already checked.")
+            elif action.lower() == "uncheck":
+                if element.is_visible() and element.is_checked():
+                    element.uncheck()
+                    print("Checkbox un-checked successfully.")
+                elif not element.is_checked():
+                    print("Checkbox is already un-checked.")
             elif action.lower() == "select_option":
                 if element.is_visible():
                     if isinstance(inputValue, int):
