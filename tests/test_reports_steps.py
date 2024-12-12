@@ -417,7 +417,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                         f"Mismatch in 'PatientName': expected '{shared_data['patient_name']}' but found '{last_row['PatientName']}'."
                     )
 
-                    assert shared_data["address"].lower() in last_row["Address"].lower() (
+                    assert last_row["Address"].lower() in shared_data["address"].lower(), (
                         f"Mismatch in 'Address': expected '{shared_data['address']}' but found '{last_row['Address']}'."
                     )
 

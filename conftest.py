@@ -486,6 +486,11 @@ def step_search_for_patient(shared_data):
     nhs_number = shared_data["nhs_number"]
     click_find_a_patient_and_search_with_nhs_number(nhs_number)
 
+@given(parse("I see the patient's address {address} and gender {gender}"))
+def step_save_address_and_gender_to_shared_data(shared_data, address, gender):
+    shared_data["address"] = address
+    shared_data["gender"] = gender
+
 @given(parse("I open the patient record by clicking on patient {name}"))
 @then(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):
@@ -594,8 +599,8 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
         attach_screenshot("check_and_confirm_screen_before_assertion")
         assert get_patient_name_value() == shared_data["patient_name"]
         assert get_patient_address_value() == address
-        shared_data['gender'] = get_patient_gender_value()
-        shared_data['address'] = address
+        shared_data["gender"] = get_patient_gender_value()
+        shared_data["address"] = address
         assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
         assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine"]
         assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["chosen_vaccine_type"]

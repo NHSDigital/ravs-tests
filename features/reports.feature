@@ -183,6 +183,7 @@ Scenario Outline: User can download the report
     And I login to RAVS and set vaccinator details with <site> and <care_model> and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
+    And I see the patient's address <address> and gender <gender>
     When I click choose vaccine button and choose the <chosen_vaccine>, <batch_number> with <batch_expiry_date> and click continue
     And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
@@ -201,8 +202,8 @@ Scenario Outline: User can download the report
     Then the report is downloaded successfully and contains the vaccine record for <nhs_number>
 
   Examples:
-    | index | nhs_number | site | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob        | address                                       | chosen_vaccine | batch_number     | batch_expiry_date |
-    | 4 | 9437541817 | KINGSTON HOUSE  | Outreach event | yes | today | yes | no | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+    | index | nhs_number | site | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob        | address    | chosen_vaccine | batch_number     | batch_expiry_date |  gender |
+    | 4 | 9437541817 | KINGSTON HOUSE  | Outreach event | yes | today | yes | no | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 | female |
 
 
   Scenario Outline: User should be able to filter vaccine event data before creating a report
