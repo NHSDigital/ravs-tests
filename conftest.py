@@ -42,6 +42,7 @@ pytest.mark.recordvaccine = pytest.mark.mark(recordvaccine=True)
 pytest.mark.addvaccine = pytest.mark.mark(addvaccine=True)
 pytest.mark.addbatches = pytest.mark.mark(addbatches=True)
 pytest.mark.reports = pytest.mark.mark(reports=True)
+pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
