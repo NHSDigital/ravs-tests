@@ -226,3 +226,4 @@ Scenario Outline: User can download the report
   | Respiratory syncytial virus (RSV) | Albert House  | Last 14 days (includes today)  | Assessment and consent |
   | COVID-19                          | Albert House  | Last 31 days (includes today)  | Vaccination |
 
+

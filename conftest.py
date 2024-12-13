@@ -487,7 +487,7 @@ def step_search_for_patient(shared_data):
     nhs_number = shared_data["nhs_number"]
     click_find_a_patient_and_search_with_nhs_number(nhs_number)
 
-@given(parse("I see the patient's address {address} and gender {gender}"))
+    @given(parse("I see the patient's address {address} and gender {gender}"))
 def step_save_address_and_gender_to_shared_data(shared_data, address, gender):
     shared_data["address"] = address
     shared_data["gender"] = gender

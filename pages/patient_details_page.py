@@ -31,6 +31,7 @@ def check_vaccine_history_not_available_label_element_exists():
     time.sleep(2)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     time.sleep(3)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
 
