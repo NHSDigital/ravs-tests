@@ -27,6 +27,7 @@ def click_logout():
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists():
             click_navbar_toggler()
+    attach_screenshot("before_clicking_logged_out")
     click_logout_button()
 
 @then('the user should be logged out successfully')

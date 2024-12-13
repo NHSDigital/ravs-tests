@@ -28,6 +28,9 @@ PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 VACCINATION_HISTORY_NOT_AVAILABLE = ("role", "heading", "No vaccination history available")
 
 def check_vaccine_history_not_available_label_element_exists():
+    time.sleep(2)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(3)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
@@ -50,6 +53,7 @@ def check_pertussis_history_element_exists():
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
+    time.sleep(3)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
@@ -139,7 +143,7 @@ def click_delete_history_button(vaccine, index):
     find_element_and_perform_action(element, "click")
 
 def click_delete_history_link(vaccine):
-    element = (f"//h3[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
+    element = (f"//h2[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
     find_element_and_perform_action(element, "click")
 
 def click_edit_history_button(vaccine, index):
