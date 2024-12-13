@@ -23,49 +23,41 @@ features_directory = get_working_directory() + "features"
 scenarios(f'{features_directory}/reports.feature')
 
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)  # Or any other level like INFO, WARNING, etc.
+logger.setLevel(logging.DEBUG)
 
-# Create a rotating file handler to log to tox.log
 log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  # Log rotation (optional)
 log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 
-# Add the handler to the logger
 logger.addHandler(log_handler)
 
 def validate_report_headers(file_path, expected_headers):
     try:
         with open(file_path, mode="r", newline="", encoding="utf-8") as file:
             reader = csv.reader(file)
-            headers = next(reader)
+            actual_headers = next(reader)
 
-            # Check headers
-            if headers == expected_headers:
+            missing_headers = [h for h in expected_headers if h not in actual_headers]
+            extra_headers = [h for h in actual_headers if h not in expected_headers]
+
+            is_valid = not missing_headers and not extra_headers
+
+            if is_valid:
                 logger.info("Headers are valid!")
-                logger.info(headers)
-                return True, headers
+                logger.debug(f"Headers: {actual_headers}")
             else:
-                logger.info("Headers are invalid!")
-                logger.info("Expected Headers:")
-                logger.info(expected_headers)
-                logger.info("Found Headers:")
-                logger.info(headers)
-
-                # Find missing or extra headers
-                missing_headers = [h for h in expected_headers if h not in headers]
-                extra_headers = [h for h in headers if h not in expected_headers]
-
+                logger.error("Headers are invalid!")
+                logger.debug(f"Expected Headers: {expected_headers}")
+                logger.debug(f"Found Headers: {actual_headers}")
                 if missing_headers:
-                    logger.info("Missing Headers:")
-                    logger.info(missing_headers)
+                    logger.error(f"Missing Headers: {missing_headers}")
                 if extra_headers:
-                    logger.info("Extra Headers:")
-                    logger.info(extra_headers)
+                    logger.error(f"Extra Headers: {extra_headers}")
 
-                return False, headers
+            return is_valid, missing_headers, extra_headers
 
     except Exception as e:
-        logger.error(f"An error occurred while validating headers: {e}")
-        return False, None
+        logger.exception(f"An error occurred while validating headers: {e}")
+        return False, [], []
 
 def validate_value_in_header(file_path, header, value):
     try:
@@ -292,7 +284,16 @@ def the_report_is_downloaded_successfully(shared_data):
     "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
     "VaccinatingClinician", "ConsentingClinician"
 ]
-    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    is_valid, missing_headers, extra_headers = validate_report_headers(shared_data['report_download_path'], expected_headers)
+
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+            error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+            error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
+
     assert is_valid, "Report headers are invalid. See logs for details."
 
 @then(parse("the report is downloaded successfully and contains the vaccine record for {nhs_number}"))
@@ -310,7 +311,15 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
     "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
     "VaccinatingClinician", "ConsentingClinician"
 ]
-    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    is_valid, missing_headers, extra_headers = validate_report_headers(shared_data['report_download_path'], expected_headers)
+
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+            error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+            error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
     assert is_valid, "Report headers are invalid. See logs for details."
 
     vaccination_date = shared_data.get("vaccination_date")
@@ -405,6 +414,14 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
 
                     assert last_row["PatientName"].lower() == shared_data["patient_name"].lower(), (
                         f"Mismatch in 'PatientName': expected '{shared_data['patient_name']}' but found '{last_row['PatientName']}'."
+                    )
+
+                    assert last_row["Address"].lower() in shared_data["address"].lower(), (
+                        f"Mismatch in 'Address': expected '{shared_data['address']}' but found '{last_row['Address']}'."
+                    )
+
+                    assert last_row["Gender"].lower() == shared_data["gender"].lower(), (
+                        f"Mismatch in 'Gender': expected '{shared_data['gender']}' but found '{last_row['Gender']}'."
                     )
 
                     assert last_row["AssessmentDate"] == shared_data["eligibility_assessment_date"], (
@@ -518,7 +535,14 @@ def the_report_is_downloaded_successfully(shared_data):
     "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
     "VaccinatingClinician", "ConsentingClinician"
 ]
-    is_valid, _ = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    is_valid, missing_headers, extra_headers = validate_report_headers(shared_data['report_download_path'], expected_headers)
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+                error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+                error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
     assert is_valid, "Report headers are invalid. See logs for details."
 
 @then("the choose data page should be displayed")
@@ -527,3 +551,89 @@ def the_choose_data_page_should_be_displayed():
     attach_screenshot("check_choose_data_pages_reports_exists")
     logging.info("check_choose_data_pages_reports_exists")
 
+@when("I uncheck all filters on the data page")
+def i_uncheck_all_data_filters():
+    uncheck_all_data_filters()
+    attach_screenshot("unchecked_all_data_filters")
+    logging.info("unchecked_all_data_filters")
+
+@when(parse("I select the data {data} to filter and click continue"))
+def select_data_to_filter_and_click_continue(shared_data, data):
+    uncheck_reports_data_check_box(data)
+    attach_screenshot("clicked_reports_data_check_box" + data)
+    logging.info("clicked_reports_data_check_box" + data)
+    shared_data['data_to_filter'] = data
+    click_continue_to_reports_check_and_confirm_button()
+
+@then(parse("the report is downloaded successfully and it should not contain the data that was selected for filtering"))
+def the_report_is_downloaded_successfully(shared_data):
+    report_path = shared_data['report_download_path']
+    data_to_filter = shared_data['data_to_filter']
+
+    # Assert that the report exists
+    assert os.path.exists(report_path), f"Downloaded file not found: {report_path}"
+    attach_screenshot("check_report_downloaded")
+    logger.info(f"check_report_downloaded_to_{report_path}")
+
+    # Define expected headers based on the data to filter
+    headers_map = {
+        "Assessment and consent": [
+            "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+            "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+            # "Vaccinated", "NoVaccinationReason",
+            "VaccinationDate", "Vaccine", "VaccineProduct",
+            "DoseAmount", "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate",
+            "AuditType", "DateEntered", "UserEnteringData", "VaccinationComments",
+            "AssessingClinician", "VaccinatingClinician", "ConsentingClinician"
+        ],
+        "Patients": [
+            "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+            "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+            "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+            "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+            "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+            "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
+            "VaccinatingClinician", "ConsentingClinician"
+        ],
+        "Site or delivery team": [
+            "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+            "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+            "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+            "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+            "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+            "DateEntered", "UserEnteringData", "VaccinationComments", "AssessingClinician",
+            "VaccinatingClinician", "ConsentingClinician"
+        ],
+        "Staff": [
+            "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+            "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+            "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+            "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+            "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
+            "VaccineRoute", "PrescribingMethod", "BatchNumber", "BatchExpiryDate", "AuditType",
+            "DateEntered", "UserEnteringData", "VaccinationComments"
+        ],
+        "Vaccination": [
+        "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+        "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
+        "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
+        "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
+        "AssessmentComments",
+        #"AuditType", "DateEntered", "UserEnteringData", "VaccinationComments",
+        "AssessingClinician", "VaccinatingClinician", "ConsentingClinician"
+        ]
+    }
+
+    expected_headers = headers_map.get(data_to_filter)
+    if not expected_headers:
+        raise ValueError(f"Unexpected data_to_filter value: {data_to_filter}")
+
+    is_valid, missing_headers, extra_headers = validate_report_headers(report_path, expected_headers)
+
+    if not is_valid:
+        error_message = "Report headers are invalid."
+        if missing_headers:
+            error_message += f" Missing headers: {missing_headers}."
+        if extra_headers:
+            error_message += f" Extra headers: {extra_headers}."
+        raise ValueError(error_message)
