@@ -23,7 +23,7 @@ features_directory = get_working_directory() + "features"
 scenarios(f'{features_directory}/reports.feature')
 
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG) 
+logger.setLevel(logging.DEBUG)
 
 log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  # Log rotation (optional)
 log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
@@ -423,7 +423,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                     assert last_row["Gender"].lower() == shared_data["gender"].lower(), (
                         f"Mismatch in 'Gender': expected '{shared_data['gender']}' but found '{last_row['Gender']}'."
                     )
-                    
+
                     assert last_row["AssessmentDate"] == shared_data["eligibility_assessment_date"], (
                         f"Mismatch in 'AssessmentDate': expected '{shared_data['eligibility_assessment_date']}' but found '{last_row['AssessmentDate']}'."
                     )
@@ -543,7 +543,6 @@ def the_report_is_downloaded_successfully(shared_data):
         if extra_headers:
                 error_message += f" Extra headers: {extra_headers}."
         raise ValueError(error_message)
-        
     assert is_valid, "Report headers are invalid. See logs for details."
 
 @then("the choose data page should be displayed")
