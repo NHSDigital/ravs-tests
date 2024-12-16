@@ -508,8 +508,6 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
     else:
         assert check_vaccine_history_not_available_label_element_exists() == True
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
-    assert check_vaccine_history_not_available_label_element_exists() == False
-    attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
     shared_data["immunisation_history_records_count_before_vaccination"] = immunisation_history_records_count_before_vaccination
     choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])
