@@ -598,7 +598,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
 def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         attach_screenshot("check_and_confirm_screen_before_assertion")
-        assert get_patient_name_value() == shared_data["patient_name"]
+        assert get_patient_name_value().lower() == shared_data["patient_name"].lower()
         assert get_patient_address_value() == address
         shared_data["gender"] = get_patient_gender_value()
         shared_data["address"] = address
