@@ -37,10 +37,32 @@ Feature: Record vaccine
       | 12 | 9450140960 | BIRCH HOUSE | Hospital hub for staff and patients | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  AUTOMATION-SJ1 | 19/10/2026 |
       | 1 | 9450141444 | ALBERT HOUSE  | Care home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  AUTOMATION-QI |  19/10/2026 |
       | 2 | 9450141711 | BECCLES HOUSE | Housebound patient's home | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | AUTOMATION-IT | 19/10/2026  |
-      | 3 | 9450144699 | BIRCH HOUSE   | Outreach event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  AUTOMATION-C3 | 19/10/2026 |
-      | 4 | 9437541817 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 |
-      | 4 | 9223638941 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | MICHELLE DONNELLY |  05/5/1900 | 	6 WHESSOE ROAD, HARDWICK, STOCKTON-ON-TEES, CLEVELAND, TS19 8LB | Flu | AUTOMATION-SJ1 | 19/10/2026 |
-      | 4 | 9727840361 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | BOBBY TICKLE |  04/5/1983 | 	1 Canning Way, LOUGHBOROUGH, Leics, LE11 5YA | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+      | 3 | 9450144699 | BIRCH HOUSE   | Outreach event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  AUTOMATION-LAIV | 19/10/2026 |
+      | 4 | 9437541817 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-LAIV | 19/10/2026 |
+      | 5 | 9223638941 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | MICHELLE DONNELLY |  05/5/1900 | 	6 WHESSOE ROAD, HARDWICK, STOCKTON-ON-TEES, CLEVELAND, TS19 8LB | Flu | AUTOMATION-LAIV | 19/10/2026 |
+      | 6 | 9449306125 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 |	35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+      | 6 | 9449306125 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 |	35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+      | 4 | 9727840361 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | BOBBY TICKLE |  04/5/1983 |  1 Canning Way, LOUGHBOROUGH, Leics, LE11 5YA | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+      | 5 | 9449303975 | CARDINAL SQUARE  | Outreach event | yes | today | yes | yes | today | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+
+  @recordvaccine
+  Scenario Outline: Record a vaccine with nhs number and auto-select batch number as only one vaccine product
+    Given I login to RAVS and set vaccinator details with <site> and <care_model> and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
+    And I search for a patient with the NHS number in the find a patient screen
+    And I open the patient record by clicking on patient <name>
+    When I click choose vaccine button and choose the <chosen_vaccine>, <batch_number> with <batch_expiry_date> and click continue
+    And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
+    And I record <consent> with the details and click continue to vaccinate button
+    And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen without selecting batch number as the vaccine product has only one batch so it should be auto-selected
+    Then I need to be able to see the patient <name>, <dob>, <address> and vaccination details on the check and confirm screen
+    And when I click confirm and save button, I should see a record saved dialogue
+    And I search for a patient with the NHS number in the find a patient screen
+    And I open the patient record by clicking on patient <name>
+    And the immunisation history of the patient should be updated in the patient details page
+
+    Examples:
+      | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date |
+      | 5 | 9449303975 | CARDINAL SQUARE  | Outreach event | yes | today | yes | yes | today | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
 
   @recordvaccine
   Scenario Outline: Record a maternity vaccine with nhs number

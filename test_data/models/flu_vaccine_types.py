@@ -7,9 +7,10 @@ flu_vaccine_types = [
     # "Fluad Tetra - aQIV",
     # "Cell-based Quadrivalent - QIVc",
     # "Adjuvanted Quadrivalent - aQIV"
-    "Cell-based Quadrivalent Influenza Vaccine",
     "Quadrivalent Influenza Vaccine",
+    "Cell-based Quadrivalent Influenza Vaccine",
+    "Adjuvanted Quadrivalent Influenza Vaccine",
+    "Fluenz (LAIV)",
     "Influenza Tetra MYL",
     "Quadrivalent Influenza Vaccine – High Dose",
-    "Adjuvanted Quadrivalent Influenza Vaccine"
 ]
