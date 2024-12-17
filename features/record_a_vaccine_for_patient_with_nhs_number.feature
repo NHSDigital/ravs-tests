@@ -37,9 +37,10 @@ Feature: Record vaccine
       | 12 | 9450140960 | BIRCH HOUSE | Hospital hub for staff and patients | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  AUTOMATION-SJ1 | 19/10/2026 |
       | 1 | 9450141444 | ALBERT HOUSE  | Care home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  AUTOMATION-QI |  19/10/2026 |
       | 2 | 9450141711 | BECCLES HOUSE | Housebound patient's home | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | AUTOMATION-IT | 19/10/2026  |
-      | 3 | 9450144699 | BIRCH HOUSE   | Outreach event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  AUTOMATION-C3 | 19/10/2026 |
-      | 4 | 9437541817 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 |
-      | 4 | 9223638941 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | MICHELLE DONNELLY |  05/5/1900 | 	6 WHESSOE ROAD, HARDWICK, STOCKTON-ON-TEES, CLEVELAND, TS19 8LB | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+      | 3 | 9450144699 | BIRCH HOUSE   | Outreach event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  AUTOMATION-LAIV | 19/10/2026 |
+      | 4 | 9437541817 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-LAIV | 19/10/2026 |
+      | 5 | 9223638941 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | MICHELLE DONNELLY |  05/5/1900 | 	6 WHESSOE ROAD, HARDWICK, STOCKTON-ON-TEES, CLEVELAND, TS19 8LB | Flu | AUTOMATION-LAIV | 19/10/2026 |
+      | 6 | 9449306125 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 | 		35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
       | 4 | 9727840361 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | BOBBY TICKLE |  04/5/1983 | 	1 Canning Way, LOUGHBOROUGH, Leics, LE11 5YA | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
 
   @recordvaccine

@@ -196,7 +196,10 @@ def check_search_tips_link_exists(wait):
     return check_element_exists(SEARCH_TIPS_LINK, wait)
 
 def click_on_patient_name_search_result(name):
-    element = (f"//span[text()='{name}']")
+    element = (
+        f"//span[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')="
+        f"translate('{name}', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')]"
+    )
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
 
