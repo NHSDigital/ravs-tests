@@ -351,7 +351,7 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, select_batch, no_vaccination_reason=None):
     set_vaccination_date(vaccination_date)
     attach_screenshot("vaccination_date_is_set")
     logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
@@ -375,7 +375,8 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("selected_vaccination_site")
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         logging.debug("Batch number to select is: " + batch_number_to_select)
-        select_batch_number(batch_number_to_select)
+        if select_batch:
+            select_batch_number(batch_number_to_select)
         attach_screenshot("selected_batch_number")
         enter_dose_amount_value(dose_amount)
         attach_screenshot("entered_dose_amount_value")
@@ -571,7 +572,26 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
                 shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"])
+            attach_screenshot("entered_vaccination_details")
+    logging.info(shared_data)
+
+@when(parse("I record {vaccination} details and date as {vaccination_date} and click Continue to Check and confirm screen without selecting batch number as the vaccine product has only one batch so it should be auto-selected"))
+def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shared_data, vaccination, vaccination_date):
+    shared_data["vaccinated_decision"] = vaccination
+    if shared_data["consent_decision"].lower() == "yes":
+        if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
+            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            chosen_vaccine = shared_data["chosen_vaccine"]
+            shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
+            shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
+            if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
+                shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
+            else:
+                shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+            shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
+            shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
