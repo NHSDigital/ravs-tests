@@ -280,9 +280,6 @@ class BasePlaywrightHelper:
         self.disable_smooth_scrolling()
         self.wait_for_element_to_appear(element)
 
-        PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
-        self.wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-
         try:
             # Perform the action based on the passed `action`
             if action.lower() == "click":
