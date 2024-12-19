@@ -50,6 +50,7 @@ def check_back_button_exists():
 
 def check_age_based_warning_exists():
     time.sleep(2)
+    attach_screenshot("age_based_warning")
     return check_element_exists(AGE_BASED_WARNING, True)
 
 def check_minimum_interval_based_warning_exists():
