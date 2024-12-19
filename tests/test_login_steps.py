@@ -42,6 +42,7 @@ def then_the_login_button_should_be_visible():
 @when('I click on the log in button')
 def step_click_login_button():
     click_login_button()
+    attach_screenshot("clicked_login_button")
 
 @then('the NHS sign in page should be visible')
 def step_nhs_sign_in_page_visible():

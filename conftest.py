@@ -94,10 +94,13 @@ def navigate_to_ravs(request):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
+            attach_screenshot("clicked_navbar_toggler")
     if check_logout_button_exists_without_waiting():
         click_logout_button()
+        attach_screenshot("clicked_logout_button")
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
+    attach_screenshot("navigated_to_ravs_login_page")
     return True
 
 # Fixture for logging in and navigating to find a patient
