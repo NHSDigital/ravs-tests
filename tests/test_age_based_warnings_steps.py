@@ -117,12 +117,12 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
         click_vaccine_type_radiobutton(vaccine)
         attach_screenshot("clicked_vaccine_type_radiobutton")
         if shared_data["nhs_number"] in warning_nhs_numbers:
-            assert check_age_based_warning_exists() is True
             attach_screenshot("check_age_based_warning_exists")
+            assert check_age_based_warning_exists() is True
             warning_count += 1
         else:
-            assert check_age_based_warning_exists() is False
             attach_screenshot("check_age_based_warning_does_not_exist")
+            assert check_age_based_warning_exists() is False
 
     assert str(warning_count) == expected_warning_count
 
