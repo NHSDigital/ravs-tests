@@ -60,17 +60,21 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
 
     for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):
         click_vaccine_type_radiobutton(vaccine)
+        attach_screenshot("clicked_vaccine_type_radiobutton")
         if shared_data["nhs_number"] in warning_nhs_numbers:
             assert check_age_based_warning_exists() is True
+            attach_screenshot("check_age_based_warning_exists")
             warning_count += 1
         else:
             assert check_age_based_warning_exists() is False
+            attach_screenshot("check_age_based_warning_does_not_exist")
 
     assert str(warning_count) == expected_warning_count
 
     warning_count = 0
 
     click_continue_to_assess_patient_button()
+    attach_screenshot("clicked_continue_to_assess_patient_button")
     shared_data["index"] = index
     shared_data['chosen_vaccine'] = shared_data['vaccine_type']
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
@@ -106,13 +110,18 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data["vaccination_comments"] = shared_data["chosen_vaccine"] + "vaccination given on " + shared_data["vaccination_date"]
     shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
     click_yes_vaccinated_radiobutton()
+    attach_screenshot("clicked_yes_vaccinated_radiobutton")
     set_vaccination_date(shared_data["vaccination_date"])
+    attach_screenshot("vaccination_date_is_Set")
     for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):
         click_vaccine_type_radiobutton(vaccine)
+        attach_screenshot("clicked_vaccine_type_radiobutton")
         if shared_data["nhs_number"] in warning_nhs_numbers:
+            attach_screenshot("check_age_based_warning_exists")
             assert check_age_based_warning_exists() is True
             warning_count += 1
         else:
+            attach_screenshot("check_age_based_warning_does_not_exist")
             assert check_age_based_warning_exists() is False
 
     assert str(warning_count) == expected_warning_count

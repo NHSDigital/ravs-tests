@@ -42,15 +42,11 @@ def i_click_add_vaccine():
 
 @when(parse("I select {site}, {vaccine}, {vaccine_type}"))
 def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):
-    # vaccines_choose_site_page
     enter_site_name(site)
     select_site_from_list(site)
     click_continue_to_add_vaccine_button()
-
-    # choose_vaccine_pageclick_continue_to_add_vaccine_button
     click_vaccine_radiobutton(vaccine)
     click_vaccine_type_radiobutton(vaccine_type)
-
     shared_data['site'] = site
     shared_data['vaccineType'] = vaccine_type
 
