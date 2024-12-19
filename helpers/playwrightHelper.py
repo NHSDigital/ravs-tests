@@ -87,19 +87,13 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, full_path):
         try:
-            # Get the current mouse position
             mouse_position = self.page.evaluate(
                 "() => ({ x: window.pageXOffset, y: window.pageYOffset })"
             )
-
-            # Scroll to the current mouse position
             logging.debug(f"Scrolling to mouse position: {mouse_position}")
             self.page.evaluate(f"window.scrollTo({mouse_position['x']}, {mouse_position['y']});")
-
-            # Wait briefly to ensure the scroll action is complete
-            self.page.wait_for_timeout(500)  # Wait for 500ms
-
-            # Take the screenshot
+            self.page.wait_for_timeout(500)
+            self.page.locator(".header")
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):

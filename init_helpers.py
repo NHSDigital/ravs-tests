@@ -313,7 +313,12 @@ def find_element_and_perform_action(element, action, inputValue=None):
     else:
         # If it's a string, treat it as a selector directly
         element = get_element_by_type(element)
+    wait_until_page_loading_message_disappears()
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
+
+def wait_until_page_loading_message_disappears():
+    PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+    return wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def click_cell_in_row(row_name, cell_index):
     return playwright_helper_instance.click_cell_in_row(row_name, cell_index)
