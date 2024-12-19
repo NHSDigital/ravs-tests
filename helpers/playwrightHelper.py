@@ -87,13 +87,7 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, full_path):
         try:
-            mouse_position = self.page.evaluate(
-                "() => ({ x: window.pageXOffset, y: window.pageYOffset })"
-            )
-            logging.debug(f"Scrolling to mouse position: {mouse_position}")
-            self.page.evaluate(f"window.scrollTo({mouse_position['x']}, {mouse_position['y']});")
             self.page.wait_for_timeout(500)
-            self.page.locator(".header")
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):
@@ -275,52 +269,51 @@ class BasePlaywrightHelper:
         self.wait_for_element_to_appear(element)
 
         try:
-            # Perform the action based on the passed `action`
-            if action.lower() == "click":
-                if element.is_visible() and element.is_enabled():
-                    element.click()
-                    print(f"Clicked the element successfully.")
-                else:
-                    print(f"Element is either not visible or not enabled.")
-            elif action.lower() == "check":
-                if element.is_visible() and not element.is_checked():
-                    element.check()
-                    print("Checkbox checked successfully.")
-                elif element.is_checked():
-                    print("Checkbox is already checked.")
-            elif action.lower() == "uncheck":
-                if element.is_visible() and element.is_checked():
-                    element.uncheck()
-                    print("Checkbox un-checked successfully.")
-                elif not element.is_checked():
-                    print("Checkbox is already un-checked.")
-            elif action.lower() == "select_option":
-                if element.is_visible():
-                    if isinstance(inputValue, int):
-                            element.select_option(index=inputValue)
-                            print(f"Selected option by index '{inputValue}' successfully.")
+            if element.is_visible():
+                element.scroll_into_view_if_needed()
+                if action.lower() == "click":
+                    if element.is_enabled():
+                        element.click()
+                        print(f"Clicked the element successfully.")
                     else:
-                            element.select_option(value=inputValue)
-                            print(f"Selected option by label '{inputValue}' successfully.")
-            elif action.lower() == "clear":
-                element.fill('')
-                print(f"Cleared text from the element: {element}.")
-            elif action.lower() == "input_text":
-                if inputValue is None:
-                    raise ValueError("`inputValue` cannot be None for 'input_text' action.")
-                if element.is_visible():
-                    if element.text_content() != '':
-                        element.clear()  # Clear existing text if necessary
-                    element.fill(inputValue)
-                    print(f"Entered text '{inputValue}' successfully.")
-            elif action.lower() == "get_text":
-                text = element.text_content()
-                print(f"Text from the element: {text}")
-                return text
-            elif action.lower() == "type_text":
-                if inputValue is None:
-                    raise ValueError("`inputValue` cannot be None for 'type_text' action.")
-                if element.is_visible():
+                        print(f"Element is either not visible or not enabled.")
+                elif action.lower() == "check":
+                    if not element.is_checked():
+                        element.check()
+                        print("Checkbox checked successfully.")
+                    elif element.is_checked():
+                        print("Checkbox is already checked.")
+                elif action.lower() == "uncheck":
+                    if element.is_checked():
+                        element.uncheck()
+                        print("Checkbox un-checked successfully.")
+                    elif not element.is_checked():
+                        print("Checkbox is already un-checked.")
+                elif action.lower() == "select_option":
+                    if isinstance(inputValue, int):
+                        element.select_option(index=inputValue)
+                        print(f"Selected option by index '{inputValue}' successfully.")
+                    else:
+                        element.select_option(value=inputValue)
+                        print(f"Selected option by label '{inputValue}' successfully.")
+                elif action.lower() == "clear":
+                    element.fill('')
+                    print(f"Cleared text from the element: {element}.")
+                elif action.lower() == "input_text":
+                    if inputValue is None:
+                        raise ValueError("`inputValue` cannot be None for 'input_text' action.")
+                    if element.is_visible():
+                        if element.text_content() != '':
+                            element.clear()  # Clear existing text if necessary
+                        element.fill(inputValue)
+                        print(f"Entered text '{inputValue}' successfully.")
+                elif action.lower() == "get_text":
+                    text = element.text_content()
+                    print(f"Text from the element: {text}")
+                    return text
+                elif action.lower() == "type_text":
+                    if inputValue is None:
+                        raise ValueError("`inputValue` cannot be None for 'type_text' action.")
                     if element.text_content() != '':
                         element.clear()  # Clear existing text
                     element.type(inputValue, delay=50)
