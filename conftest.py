@@ -1,7 +1,6 @@
 import pytest
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse
-# from pages.add_vaccines_page import *
 from pages.check_and_confirm_vaccinated_record_page import *
 from pages.delete_vaccination_page import *
 from pages.settings_page import *
@@ -94,10 +93,13 @@ def navigate_to_ravs(request):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
+            attach_screenshot("clicked_navbar_toggler")
     if check_logout_button_exists_without_waiting():
         click_logout_button()
+        attach_screenshot("clicked_logout_button")
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
+    attach_screenshot("navigated_to_ravs_login_page")
     return True
 
 # Fixture for logging in and navigating to find a patient
@@ -250,8 +252,9 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date):
     attach_screenshot("clicked_continue_to_confirm_batch_details_button")
 
     # vaccines_check_and_confirm_page
-    click_confirm_add_vaccine_and_batch_button()
-    attach_screenshot("clicked_confirm_add_vaccine_and_batch_button")
+    if not check_batch_already_exists_error_message_is_displayed():
+        click_confirm_add_vaccine_and_batch_button()
+        attach_screenshot("clicked_confirm_add_vaccine_and_batch_button")
 
 def add_vaccine_type_batch(batch_number, expiry_date):
     click_add_batch_link()
