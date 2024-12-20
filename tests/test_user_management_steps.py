@@ -7,6 +7,7 @@ from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse
 from pages.login_page import *
 from pages.home_page import *
+from pages.manage_users_add_user_page import *
 from pages.nhs_signin_page import *
 from pages.manage_users_home_page import *
 import logging
@@ -55,3 +56,36 @@ def the_manage_users_page_should_be_displayed():
     assert check_add_user_button_exists() == True
     attach_screenshot("manage_users_page_loads_and_add_user_button_is_visible")
     logging.info("reports_page_loads_and_create_report_button_is_visible")
+
+@when("I click the add user button")
+def I_click_add_user_button():
+    click_add_user_button()
+    attach_screenshot("add_user_button_clicked")
+    logging.info("add_user_button_clicked")
+
+@then("the add user page should be displayed")
+def the_add_user_page_should_be_displayed():
+    assert check_continue_to_add_user_button_exists() == True
+    attach_screenshot("continue_to_add_user_button_is_visible")
+    logging.info("continue_to_add_user_button_is_visible")
+
+@when("I click the continue to add user details button")
+def I_click_continue_to_add_user_button():
+    click_continue_to_add_user_button()
+    attach_screenshot("continue_to_add_user_button_clicked")
+    logging.info("continue_to_add_user_button_clicked")
+
+@then("the error messages and links should be displayed for the missing fields")
+def the_error_messages_and_links_should_be_displayed():
+    assert check_enter_first_name_error_message_text_exists() == True
+    assert check_enter_first_name_error_message_link_exists() == True
+    assert check_enter_last_name_error_message_text_exists() == True
+    assert check_enter_last_name_error_message_link_exists() == True
+    assert check_enter_email_address_error_message_text_exists() == True
+    assert check_enter_email_address_error_message_link_exists() == True
+    assert check_select_clinician_error_message_text_exists() == True
+    assert check_select_clinician_error_message_link_exists() == True
+    assert check_select_permission_level_error_message_text_exists() == True
+    assert check_select_permission_level_error_message_link_exists() == True
+    attach_screenshot("check_add_user_error_messages_are_visible")
+    logging.info("check_add_user_error_messages_are_visible")
