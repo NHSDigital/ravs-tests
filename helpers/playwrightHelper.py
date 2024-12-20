@@ -167,7 +167,7 @@ class BasePlaywrightHelper:
 
             time.sleep(0.5)  # Check every 0.5 seconds
 
-    def wait_for_element_to_disappear(self, locator_or_element, timeout=10):
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=20):
         start_time = time.time()
         while True:
             if time.time() - start_time > timeout:
@@ -186,6 +186,8 @@ class BasePlaywrightHelper:
         if element:
             is_visible = element.is_visible()
             print(f"Element visibility check result: {is_visible}")
+            if element.is_visible():
+                element.scroll_into_view_if_needed()
             return is_visible
         return False
 
