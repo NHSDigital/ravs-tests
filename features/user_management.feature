@@ -21,3 +21,9 @@ Scenario: Add user error messages should be displayed
   And I click the continue to add user details button
   Then the error messages and links should be displayed for the missing fields
 
+@usermanagement
+Scenario: Deactivated users page should be displayed
+  Given I am logged into the RAVS app
+  When I click the manage users navigation link
+  When I click the deactivated users link
+  Then the deactivated users page should be displayed

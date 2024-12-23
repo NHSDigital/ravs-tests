@@ -2,6 +2,7 @@ from init_helpers import *
 
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 ADD_USER_BUTTON = ("role", "button", "Add user")
+DEACTIVATED_USERS_LINK = ("xpath", "//a[@href='/manage-users/deactivated-users']")
 
 def check_add_user_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
@@ -25,14 +26,12 @@ def check_change_user_details_link_exists(user):
     element = ("label", f"Change details for {user}")
     return check_element_exists(element)
 
-def click_view_deactivated_users_link(count):
+def click_view_deactivated_users_link():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(ADD_USER_BUTTON)
-    element = ("role", "link", f"View {count} deactivated users")
-    find_element_and_perform_action(element, "click")
+    find_element_and_perform_action(DEACTIVATED_USERS_LINK, "click")
 
 def check_view_deactivated_users_link_exists(count):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(ADD_USER_BUTTON)
-    element = ("role", "link", f"View {count} deactivated users")
-    check_element_exists(element)
+    return check_element_exists(DEACTIVATED_USERS_LINK)

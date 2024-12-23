@@ -8,6 +8,7 @@ from pytest_bdd.parsers import parse
 from pages.login_page import *
 from pages.home_page import *
 from pages.manage_users_add_user_page import *
+from pages.manage_users_deactivate_users_page import *
 from pages.nhs_signin_page import *
 from pages.manage_users_home_page import *
 import logging
@@ -89,3 +90,17 @@ def the_error_messages_and_links_should_be_displayed():
     assert check_select_permission_level_error_message_link_exists() == True
     attach_screenshot("check_add_user_error_messages_are_visible")
     logging.info("check_add_user_error_messages_are_visible")
+
+@when("I click the deactivated users link")
+def I_click_deactivated_users_link():
+    click_view_deactivated_users_link()
+    attach_screenshot("clicked_view_deactivated_users_link")
+    logging.info("clicked_view_deactivated_users_link")
+
+@then("the deactivated users page should be displayed")
+def the_deactivated_users_page_should_be_displayed():
+    assert check_deactivated_users_page_heading_exists() == True
+    assert check_deactivated_users_list_table_exists() == True
+    attach_screenshot("checked_deactivated_users_list_table_exists")
+    logging.info("checked_deactivated_users_list_table_exists")
+
