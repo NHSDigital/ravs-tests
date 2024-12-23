@@ -8,6 +8,7 @@ from pytest_bdd.parsers import parse
 from pages.login_page import *
 from pages.home_page import *
 from pages.manage_users_add_user_page import *
+from pages.manage_users_change_user_details_page import *
 from pages.manage_users_deactivate_users_page import *
 from pages.manage_users_reactivate_users_page import *
 from pages.nhs_signin_page import *
@@ -119,3 +120,26 @@ def the_reactivate_user_page_should_be_displayed(shared_data):
     assert check_reactivate_message_text_exists(shared_data["first_deactivated_users_name"], shared_data["first_deactivated_users_email_address"]) == True
     attach_screenshot("checked_reactivate_button_exists")
     logging.info("check_reactivate_button_exists")
+
+@when("I click the change user details link")
+def I_click_change_user_details_link(shared_data):
+    full_name = get_first_users_name()
+    if full_name:
+        shared_data["first_users_name"] = full_name.split(' (')[0]
+        if '(' in full_name and ')' in full_name:
+                shared_data["first_users_clinician_status"] = full_name.split('(')[1].strip(')')
+        else:
+                shared_data["first_users_clinician_status"] = None
+        click_first_users_change_details_link()
+    else:
+        shared_data["first_users_name"] = None
+        shared_data["first_users_clinician_status"] = None
+    attach_screenshot("clicked_first_users_change_details_link")
+    logging.info("clicked_first_users_change_details_link")
+
+@then("the change user details page should be displayed")
+def the_change_user_details_page_should_be_displayed(shared_data):
+    assert check_users_name_is_displayed(shared_data["first_users_name"]) == True
+    assert check_continue_to_change_user_details_button_exists() == True
+    attach_screenshot("checked_change_user_details_page_is_displayed")
+    logging.info("checked_change_user_details_page_is_displayed")
