@@ -32,3 +32,28 @@ def check_deactivated_users_page_heading_exists():
     wait_for_element_to_appear(BACK_TO_MANAGE_USERS_LINK)
     wait_for_element_to_appear(DEACTIVATED_USERS_HEADING)
     return check_element_exists(DEACTIVATED_USERS_HEADING)
+
+def get_first_deactivated_users_name():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    element = ("xpath", '(//a[text()="Reactivate"]/ancestor::tr/td[1])[1]')
+    if check_element_exists(element):
+        return find_element_and_perform_action(element, "get_text")
+    else:
+        return None
+
+def get_first_deactivated_users_email_address():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    element = ("xpath", '(//a[text()="Reactivate"]/ancestor::tr/td[2])[1]')
+    if check_element_exists(element):
+        return find_element_and_perform_action(element, "get_text")
+    else:
+        return None
+
+def click_first_deactivated_users_reactivate_link():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    element = ("xpath", '(//a[text()="Reactivate"])[1]')
+    if check_element_exists(element):
+        find_element_and_perform_action(element, "click")
+    else:
+        logging.info("No users to reactivate")
+        attach_screenshot("No_users_available_to_reactivate")

@@ -9,6 +9,7 @@ from pages.login_page import *
 from pages.home_page import *
 from pages.manage_users_add_user_page import *
 from pages.manage_users_deactivate_users_page import *
+from pages.manage_users_reactivate_users_page import *
 from pages.nhs_signin_page import *
 from pages.manage_users_home_page import *
 import logging
@@ -104,3 +105,17 @@ def the_deactivated_users_page_should_be_displayed():
     attach_screenshot("checked_deactivated_users_list_table_exists")
     logging.info("checked_deactivated_users_list_table_exists")
 
+@when("I click the reactivate user link")
+def I_click_reactivate_user_link(shared_data):
+    shared_data["first_deactivated_users_name"] = get_first_deactivated_users_name()
+    shared_data["first_deactivated_users_email_address"] = get_first_deactivated_users_email_address()
+    click_first_deactivated_users_reactivate_link()
+    attach_screenshot("clicked_first_deactivated_users_reactivate_link")
+    logging.info("clicked_first_deactivated_users_reactivate_link")
+
+@then("the reactivate user page should be displayed")
+def the_reactivate_user_page_should_be_displayed(shared_data):
+    assert check_reactivate_button_exists() == True
+    assert check_reactivate_message_text_exists(shared_data["first_deactivated_users_name"], shared_data["first_deactivated_users_email_address"]) == True
+    attach_screenshot("checked_reactivate_button_exists")
+    logging.info("check_reactivate_button_exists")
