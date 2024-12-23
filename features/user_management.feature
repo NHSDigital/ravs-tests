@@ -27,3 +27,11 @@ Scenario: Deactivated users page should be displayed
   When I click the manage users navigation link
   When I click the deactivated users link
   Then the deactivated users page should be displayed
+
+@usermanagement
+Scenario: Reactivate user page should be displayed
+  Given I am logged into the RAVS app
+  When I click the manage users navigation link
+  When I click the deactivated users link
+  When I click the reactivate user link
+  Then the reactivate user page should be displayed
