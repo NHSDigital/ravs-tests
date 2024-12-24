@@ -211,11 +211,45 @@ class BasePlaywrightHelper:
         except Exception:
             return False
 
+    def check_page_status(self):
+        try:
+            # Check for common selectors or conditions indicating a responsive page
+            if self.page.query_selector("body"):
+                self.page.wait_for_selector("body", timeout=5000)  # Wait for the body if present
+                return "responsive"
+            else:
+                # If body is not found, check for other signs of life
+                if self.page.query_selector("html"):  # Check if HTML is present
+                    return "partially_loaded"
+                else:
+                    return "no_content"  # No recognizable HTML structure
+        except TimeoutError:
+            return "unresponsive"
+        except Exception as e:
+            print(f"Error checking page status: {e}")
+            return "error"
+
     def handle_unresponsive_page(self):
-        if not self.is_page_responsive():
-            print("Page is unresponsive. Attempting to reload or take action.")
-            self.page.reload(wait_until="networkidle")
-            self.wait_for_page_to_load()
+        page_status = self.check_page_status()
+        if page_status == "unresponsive":
+            print("Page is unresponsive, attempting to reload or take action...")
+            attach_screenshot("Page_is_unresponsive_attempting_to_reload")
+            retry_limit = 3
+            for attempt in range(retry_limit):
+                print(f"Retrying page action: Attempt {attempt + 1}")
+                attach_screenshot("Retrying_page_reloading")
+                try:
+                    self.page.reload(wait_until="networkidle")
+                    self.wait_for_page_to_load(timeout=15)
+                    print("Page reloaded successfully.")
+                    attach_screenshot("Page_reloaded_successfully")
+                    return True
+                except Exception as e:
+                    print(f"Error during reload: {e}")
+                    if attempt == retry_limit - 1:
+                        print("Retry limit reached. Moving to alternative action.")
+                        attach_screenshot("Page_reload_retry_failed")
+            return False
 
     def click_and_get_download_path(self, locator_or_element, action="click", timeout=30, download_dir="downloads"):
         """
@@ -249,90 +283,118 @@ class BasePlaywrightHelper:
             raise
 
 
-    def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None):
-        # Generate screenshot filename if not provided
+    def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None, max_retries=3, retry_delay=2):
         if not screenshot_name:
             if isinstance(locator_or_element, str):
-                # Generate a safe filename based on the locator
                 screenshot_name = "".join(c if c.isalnum() else "_" for c in locator_or_element)
             else:
                 screenshot_name = "element_action"
 
         self.wait_for_page_to_load()
 
-        # Try to get the element using a helper function
-        element = self.get_element(locator_or_element, wait=True)
+        retries = 0
+        while retries < max_retries:
+            try:
+                element = self.get_element(locator_or_element, wait=True)
 
-        if not element:
-            print(f"Element not found for action: {action}")
-            return
+                if not element:
+                    print(f"Element not found for action: {action}")
+                    return
 
-        self.disable_smooth_scrolling()
-        self.wait_for_element_to_appear(element)
+                self.disable_smooth_scrolling()
+                self.wait_for_element_to_appear(element)
 
-        try:
-            if element.is_visible():
-                element.scroll_into_view_if_needed()
-                if action.lower() == "click":
-                    if element.is_enabled():
-                        element.click()
-                        print(f"Clicked the element successfully.")
-                    else:
-                        print(f"Element is either not visible or not enabled.")
-                elif action.lower() == "check":
-                    if not element.is_checked():
-                        element.check()
-                        print("Checkbox checked successfully.")
-                    elif element.is_checked():
-                        print("Checkbox is already checked.")
-                elif action.lower() == "uncheck":
-                    if element.is_checked():
-                        element.uncheck()
-                        print("Checkbox un-checked successfully.")
-                    elif not element.is_checked():
-                        print("Checkbox is already un-checked.")
-                elif action.lower() == "select_option":
-                    if isinstance(inputValue, int):
-                        element.select_option(index=inputValue)
-                        print(f"Selected option by index '{inputValue}' successfully.")
-                    else:
-                        element.select_option(value=inputValue)
-                        print(f"Selected option by label '{inputValue}' successfully.")
-                elif action.lower() == "clear":
-                    element.fill('')
-                    print(f"Cleared text from the element: {element}.")
-                elif action.lower() == "input_text":
-                    if inputValue is None:
-                        raise ValueError("`inputValue` cannot be None for 'input_text' action.")
-                    if element.is_visible():
+                if element.is_visible():
+                    element.scroll_into_view_if_needed()
+
+                    # Perform action based on the specified type
+                    if action.lower() == "click":
+                        if element.is_enabled():
+                            element.click()
+                            print(f"Clicked the element successfully.")
+                        else:
+                            print(f"Element is either not visible or not enabled.")
+                    elif action.lower() == "check":
+                        if not element.is_checked():
+                            element.check()
+                            print("Checkbox checked successfully.")
+                        elif element.is_checked():
+                            print("Checkbox is already checked.")
+                    elif action.lower() == "uncheck":
+                        if element.is_checked():
+                            element.uncheck()
+                            print("Checkbox un-checked successfully.")
+                        elif not element.is_checked():
+                            print("Checkbox is already un-checked.")
+                    elif action.lower() == "select_option":
+                        if isinstance(inputValue, int):
+                            element.select_option(index=inputValue)
+                            print(f"Selected option by index '{inputValue}' successfully.")
+                        else:
+                            element.select_option(value=inputValue)
+                            print(f"Selected option by label '{inputValue}' successfully.")
+                    elif action.lower() == "clear":
+                        element.fill('')
+                        print(f"Cleared text from the element: {element}.")
+                    elif action.lower() == "input_text":
+                        if inputValue is None:
+                            raise ValueError("`inputValue` cannot be None for 'input_text' action.")
+                        if element.is_visible():
+                            if element.text_content() != '':
+                                element.clear()  # Clear existing text if necessary
+                            element.fill(inputValue)
+                            print(f"Entered text '{inputValue}' successfully.")
+                    elif action.lower() == "get_text":
+                        text = element.text_content()
+                        print(f"Text from the element: {text}")
+                        return text
+                    elif action.lower() == "type_text":
+                        if inputValue is None:
+                            raise ValueError("`inputValue` cannot be None for 'type_text' action.")
                         if element.text_content() != '':
-                            element.clear()  # Clear existing text if necessary
-                        element.fill(inputValue)
-                        print(f"Entered text '{inputValue}' successfully.")
-                elif action.lower() == "get_text":
-                    text = element.text_content()
-                    print(f"Text from the element: {text}")
-                    return text
-                elif action.lower() == "type_text":
-                    if inputValue is None:
-                        raise ValueError("`inputValue` cannot be None for 'type_text' action.")
-                    if element.text_content() != '':
-                        element.clear()  # Clear existing text
-                    element.type(inputValue, delay=50)
-                    print(f"Typed text '{inputValue}' successfully.")
-            else:
-                print(f"Unsupported action: {action}")
-        except TimeoutError:
-            print(f"Timeout waiting for element to perform {action}")
-        except Exception as e:
-            print(f"Exception: {e} during {action} on element.")
+                            element.clear()  # Clear existing text
+                        element.type(inputValue, delay=50)
+                        print(f"Typed text '{inputValue}' successfully.")
+                    else:
+                        print(f"Unsupported action: {action}")
 
-    def wait_for_selector_to_disappear(self, selector, timeout=5):
-        try:
-            self.page.wait_for_selector(selector, state='hidden', timeout=timeout)
-            print(f"Element {selector} disappeared from the page.")
-        except Exception as e:
-            print(f"Error waiting for element {selector} to disappear: {e}")
+                    return  # If the action was successful, exit the method.
+
+                else:
+                    print(f"Element is not visible.")
+                    retries += 1
+                    if retries < max_retries:
+                        print(f"Retrying... ({retries}/{max_retries})")
+                        time.sleep(retry_delay)
+                    else:
+                        print("Element was not visible after retries.")
+                        return
+
+            except TimeoutError:
+                print(f"Timeout waiting for element to perform {action}. Retrying...")
+                retries += 1
+                if retries < max_retries:
+                    time.sleep(retry_delay)
+                else:
+                    print(f"Timeout occurred after {max_retries} retries. Aborting action.")
+                    return
+            except Exception as e:
+                print(f"Exception: {e} during {action} on element. Retrying...")
+                retries += 1
+                if retries < max_retries:
+                    time.sleep(retry_delay)
+                else:
+                    print(f"Failed to perform action {action} after {max_retries} retries.")
+                    return
+
+        # If we reached here, it means the action couldn't be performed after max retries
+        print(f"Action '{action}' failed after {max_retries} retries.")
+        def wait_for_selector_to_disappear(self, selector, timeout=5):
+            try:
+                self.page.wait_for_selector(selector, state='hidden', timeout=timeout)
+                print(f"Element {selector} disappeared from the page.")
+            except Exception as e:
+                print(f"Error waiting for element {selector} to disappear: {e}")
 
     def check_element_by_locator_enabled(self, element, wait=False):
         try:
