@@ -108,7 +108,7 @@ def the_deactivated_users_page_should_be_displayed():
 
 @when("I click the reactivate user link")
 def I_click_reactivate_user_link(shared_data):
-    shared_data["first_deactivated_users_name"] = get_first_deactivated_users_name()
+    shared_data["first_deactivated_users_name"] = get_first_deactivated_users_name().split(' (')[0]
     shared_data["first_deactivated_users_email_address"] = get_first_deactivated_users_email_address()
     click_first_deactivated_users_reactivate_link()
     attach_screenshot("clicked_first_deactivated_users_reactivate_link")
