@@ -87,8 +87,11 @@ jobs:
       - name: Notify Slack - Test Run Started
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
+          BRANCH_NAME=${{ github.ref_name || 'manual trigger (branch not specified)' }}
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"text": "🚀 Tests have been kicked off manually by *${{ github.actor }}*.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}"}' \
+          --data '{
+            "text": "🚀 Tests have been kicked off manually by *${{ github.actor }}*.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* '$BRANCH_NAME'"
+          }' \
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Notify Slack - Test Run Started
