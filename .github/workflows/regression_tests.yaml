@@ -60,6 +60,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      - name: Notify Slack - Test Run Started
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text": "🚀 Tests have been kicked off manually by *${{ github.actor }}*.\n*Environment:* ${{ inputs.environment }}\n*Product:* ${{ inputs.product }}\n*Run ID:* ${{ inputs.id }}"}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack - Test Run Started
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text": "🚀 Tests have been triggered by a push to branch *${{ github.ref_name }}*.\n*Environment:* ${{ inputs.environment }}\n*Product:* ${{ inputs.product }}\n*Run ID:* ${{ inputs.id }}"}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Set up en_GB.UTF-8 locale
         run: |
           sudo apt-get update
