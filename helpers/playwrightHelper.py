@@ -211,25 +211,44 @@ class BasePlaywrightHelper:
         except Exception:
             return False
 
-    def handle_unresponsive_page(self, page_status):
+    def check_page_status(self):
+        try:
+            # Check for common selectors or conditions indicating a responsive page
+            if self.page.query_selector("body"):
+                self.page.wait_for_selector("body", timeout=5000)  # Wait for the body if present
+                return "responsive"
+            else:
+                # If body is not found, check for other signs of life
+                if self.page.query_selector("html"):  # Check if HTML is present
+                    return "partially_loaded"
+                else:
+                    return "no_content"  # No recognizable HTML structure
+        except TimeoutError:
+            return "unresponsive"
+        except Exception as e:
+            print(f"Error checking page status: {e}")
+            return "error"
+
+    def handle_unresponsive_page(self):
+        page_status = self.check_page_status()
         if page_status == "unresponsive":
             print("Page is unresponsive, attempting to reload or take action...")
-            attach_screenshot("Page is unresponsive, attempting to reload or take action...")
+            attach_screenshot("Page_is_unresponsive_attempting_to_reload")
             retry_limit = 3
             for attempt in range(retry_limit):
                 print(f"Retrying page action: Attempt {attempt + 1}")
+                attach_screenshot("Retrying_page_reloading")
                 try:
                     self.page.reload(wait_until="networkidle")
                     self.wait_for_page_to_load(timeout=15)
                     print("Page reloaded successfully.")
-                    attach_screenshot("Page reloaded successfully")
+                    attach_screenshot("Page_reloaded_successfully")
                     return True
                 except Exception as e:
                     print(f"Error during reload: {e}")
                     if attempt == retry_limit - 1:
-                        # If retries fail, fallback action
                         print("Retry limit reached. Moving to alternative action.")
-                        attach_screenshot("Page re-load retry failed")
+                        attach_screenshot("Page_reload_retry_failed")
             return False
 
     def click_and_get_download_path(self, locator_or_element, action="click", timeout=30, download_dir="downloads"):
