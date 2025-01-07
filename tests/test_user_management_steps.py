@@ -125,11 +125,18 @@ def the_reactivate_user_page_should_be_displayed(shared_data):
 def I_click_change_user_details_link(shared_data):
     full_name = get_first_users_name()
     if full_name:
+        shared_data["user_clinician_status_before_change"] = get_first_users_clinician_status()
+        shared_data["user_name_before_change"] = get_first_users_name().split(' (')[0]
+        shared_data["user_email_address_before_change"] = get_first_users_email_address()
+        shared_data["user_permission_level_before_change"] = get_first_users_permission_level()
+        shared_data["user_active_status_before_change"] = get_first_users_active_status()
         shared_data["first_users_name"] = full_name.split(' (')[0]
         if '(' in full_name and ')' in full_name:
                 shared_data["first_users_clinician_status"] = full_name.split('(')[1].strip(')')
         else:
                 shared_data["first_users_clinician_status"] = None
+        attach_screenshot("before_clicking_first_users_change_details_link")
+        logging.info("before_clicking_first_users_change_details_link")
         click_first_users_change_details_link()
     else:
         shared_data["first_users_name"] = None
@@ -143,3 +150,51 @@ def the_change_user_details_page_should_be_displayed(shared_data):
     assert check_continue_to_change_user_details_button_exists() == True
     attach_screenshot("checked_change_user_details_page_is_displayed")
     logging.info("checked_change_user_details_page_is_displayed")
+
+@when(parse("I change the user's {detail}"))
+def change_users_detail(shared_data, detail):
+    shared_data["detail"] = detail
+    if detail == "clinician":
+        if shared_data["user_clinician_status_before_change"] is not None:
+            click_change_to_no_registered_clinician_radio_button()
+            shared_data["user_clinician_status_after_change"] = ""
+        else:
+            click_change_to_yes_registered_clinician_radio_button()
+            shared_data["user_clinician_status_after_change"] = "clinician"
+    else:
+        if shared_data["user_permission_level_before_change"].lower() != detail:
+            click_change_to_permission_level_radio_button(detail)
+            shared_data["user_permission_level_after_change"] = detail
+        else:
+            click_change_to_permission_level_radio_button("Recorder")
+            shared_data["user_permission_level_after_change"] = "Recorder"
+        attach_screenshot("users_details_are_changed")
+
+@when("I click continue to save the changed detail")
+def click_continue_to_save_changed_detail():
+    click_continue_to_change_user_details_user_button()
+    attach_screenshot("clicked_continue_to_change_user_details_user_button")
+    logging.info("clicked_continue_to_change_user_details_user_button")
+
+@then("the user's new details should be visible in the user management table")
+def assert_users_new_details_are_updated(shared_data):
+    if shared_data["detail"] == "clinician":
+        attach_screenshot("before_asserting_clinician_status")
+        if shared_data["user_clinician_status_before_change"] is not None:
+            assert get_first_users_clinician_status() is None
+            click_first_users_change_details_link()
+            click_change_to_yes_registered_clinician_radio_button()
+            click_continue_to_change_user_details_user_button()
+        else:
+            assert get_first_users_clinician_status().lower() == shared_data["user_clinician_status_after_change"]
+            click_first_users_change_details_link()
+            click_change_to_no_registered_clinician_radio_button()
+            click_continue_to_change_user_details_user_button()
+    else:
+        attach_screenshot("before_asserting_permission_level")
+        assert get_first_users_permission_level().lower() == shared_data["user_permission_level_after_change"].lower()
+        click_first_users_change_details_link()
+        click_change_to_permission_level_radio_button(shared_data["user_permission_level_before_change"])
+        click_continue_to_change_user_details_user_button()
+    attach_screenshot("reset_user_details_to_before_test_after_asserting")
+
