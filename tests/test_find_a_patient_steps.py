@@ -67,16 +67,16 @@ def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
     pass
 
 @given('I am on the find a patient by nhs number page')
-def step_i_am_on_the_find_a_patient_by_nhs_number_page(navigate_and_login):
+def step_i_am_on_the_find_a_patient_by_nhs_number_page(login_and_navigate_to_find_a_patient):
     pass
 
 @given('I am on the find a patient by demographics page')
-def step_given_i_am_on_the_find_a_patient_by_demographics_page(navigate_and_login):
+def step_given_i_am_on_the_find_a_patient_by_demographics_page(login_and_navigate_to_find_a_patient):
     click_search_by_demographics_link()
 
 @then('I am on the find a patient by local records page')
 @given('I am on the find a patient by local records page')
-def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
+def step_given_i_am_on_the_find_a_patient_by_local_records_page(login_and_navigate_to_find_a_patient):
     click_search_by_local_records_link()
 
 @given('I click the find a patient by local records link')
@@ -85,7 +85,7 @@ def step_click_the_find_a_patient_by_local_records_link():
     click_search_by_local_records_link()
 
 @given('I am on the create a new patient page')
-def step_given_i_am_on_the_find_a_patient_by_local_records_page(navigate_and_login):
+def step_given_i_am_on_the_find_a_patient_by_local_records_page(login_and_navigate_to_find_a_patient):
     click_search_by_local_records_link()
 
 @then('the find a patient page should be displayed')
