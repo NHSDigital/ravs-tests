@@ -20,7 +20,7 @@ def shared_data():
     return {}
 
 @given("I am logged into the RAVS app")
-def given_I_login_to_the_ravs_web_app(navigate_and_login):
+def given_I_login_to_the_ravs_web_app(login_and_navigate_to_find_a_patient):
     pass
 
 @when(parse('I search for the patient with NHS number {nhs_number}'))

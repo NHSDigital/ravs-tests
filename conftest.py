@@ -104,10 +104,18 @@ def navigate_to_ravs(request):
 
 # Fixture for logging in and navigating to find a patient
 @pytest.fixture(scope='function')
-def login_and_navigate_to_find_a_patient(request):
+def login_and_navigate_to_find_a_patient(request, navigate_to_ravs):
     if config["browser"] == "mobile":
-        if check_nav_link_bar_toggle_exists():
-            click_nav_link_bar_toggler()
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
     click_find_a_patient_nav_link()
 
 # Fixture for logging in and finding a patient by NHS number
