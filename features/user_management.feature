@@ -17,7 +17,7 @@ Scenario: Add User page should be displayed
 Scenario: Add user error messages should be displayed
   Given I am logged into the RAVS app
   When I click the manage users navigation link
-  When I click the add user button
+  And I click the add user button
   And I click the continue to add user details button
   Then the error messages and links should be displayed for the missing fields
 
@@ -25,31 +25,31 @@ Scenario: Add user error messages should be displayed
 Scenario: Deactivated users page should be displayed
   Given I am logged into the RAVS app
   When I click the manage users navigation link
-  When I click the deactivated users link
+  And I click the deactivated users link
   Then the deactivated users page should be displayed
 
 @usermanagement
 Scenario: Reactivate user page should be displayed
   Given I am logged into the RAVS app
   When I click the manage users navigation link
-  When I click the deactivated users link
-  When I click the reactivate user link
+  And I click the deactivated users link
+  And I click the reactivate user link
   Then the reactivate user page should be displayed
 
 @usermanagement
 Scenario: Change user details page should launch
   Given I am logged into the RAVS app
   When I click the manage users navigation link
-  When I click the change user details link
+  And I click the change user details link
   Then the change user details page should be displayed
 
 @usermanagement
 Scenario: Change user details
   Given I am logged into the RAVS app
   When I click the manage users navigation link
-  When I click the change user details link
-  When I change the user's <detail>
-  When I click continue to save the changed detail
+  And I click the change user details link
+  And I change the user's <detail>
+  And I click continue to save the changed detail
   Then the user's new details should be visible in the user management table
 
 Examples:
@@ -58,5 +58,23 @@ Examples:
 | recorder            |
 | administrator       |
 | lead administrator  |
+
+@usermanagement
+Scenario: Add user details - Check and confirm page should be visible
+  Given I am logged into the RAVS app
+  When I click the manage users navigation link
+  And I click the add user button
+  And I enter the <first_name>, <last_name>, <nhs_email_address>
+  And I select <clinician_status>
+  And I select <permission_level>
+  And I click the continue to add user details button
+  Then the check and confirm user screen should be visible
+
+Examples:
+| first_name | last_name      | nhs_email_address                                       | clinician_status  | permission_level |
+| Automated  | administrator  | neelima.guntupalli1+administrator_automated@nhs.net     | yes               | administrator    |
+| Automated  | tester         | automated.tester@nhs.net                                | yes               | recorder         |
+
+
 
 

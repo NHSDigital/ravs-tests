@@ -11,6 +11,7 @@ from pages.manage_users_add_user_page import *
 from pages.manage_users_change_user_details_page import *
 from pages.manage_users_deactivate_users_page import *
 from pages.manage_users_reactivate_users_page import *
+from pages.manage_users_check_and_add_user import *
 from pages.nhs_signin_page import *
 from pages.manage_users_home_page import *
 import logging
@@ -198,3 +199,48 @@ def assert_users_new_details_are_updated(shared_data):
         click_continue_to_change_user_details_user_button()
     attach_screenshot("reset_user_details_to_before_test_after_asserting")
 
+@when(parse("I enter the {first_name}, {last_name}, {nhs_email_address}"))
+def enter_user_details_for_adding(shared_data, first_name, last_name, nhs_email_address):
+    enter_first_name_to_add_user(first_name)
+    attach_screenshot("entered_first_name")
+    enter_last_name_to_add_user(last_name)
+    attach_screenshot("entered_last_name")
+    if nhs_email_address == "automated.tester@nhs.net":
+        random_number = random.randint(1000, 9999)
+        nhs_email_address = f"automated.tester+{random_number}@nhs.net"
+    enter_email_address_to_add_user(nhs_email_address)
+    attach_screenshot("entered_email_address")
+    shared_data["first_name"] = first_name
+    shared_data["last_name"] = last_name
+    shared_data["nhs_email_address"] = nhs_email_address
+    logger.info(f"entered new user's details : {first_name}, {last_name}, {nhs_email_address}")
+
+@when(parse("I select {clinician_status}"))
+def enter_user_details_for_adding(shared_data, clinician_status):
+    if clinician_status == "yes":
+        select_yes_registered_clinician_radio_button()
+        attach_screenshot("clicked_yes_registered_clinician_radio_button")
+    else:
+        select_no_registered_clinician_radio_button()
+        attach_screenshot("clicked_no_registered_clinician_radio_button")
+    shared_data["clinician_status"] = clinician_status
+    logger.info(f"clicked clinician status:  {clinician_status}")
+
+@when(parse("I select {permission_level}"))
+def enter_user_details_for_adding(shared_data, permission_level):
+    select_permission_level_radio_button(permission_level)
+    shared_data["permission_level"] = permission_level
+    attach_screenshot("clicked_permission_level")
+    logger.info(f"clicked permission level:  {permission_level}")
+
+@then("the check and confirm user screen should be visible")
+def check_and_confirm_screen_should_be_visible(shared_data):
+    attach_screenshot("check_and_confirm_user_page_visible")
+    if shared_data["nhs_email_address"] == "neelima.guntupalli1+administrator_automated@nhs.net":
+        assert check_email_already_exists_in_organisation_error_message_text_exists() == True
+        attach_screenshot("email_already_exists_in_organisation_error_message_text_exists")
+        assert check_email_already_exists_in_organisation_error_message_link_exists() == True
+        attach_screenshot("email_already_exists_in_organisation_error_message_link_exists")
+    else:
+        assert check_change_name_link_exists() == True
+        attach_screenshot("change_name_link_exists")
