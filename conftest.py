@@ -148,10 +148,6 @@ def click_find_a_patient_and_search_with_nhs_number(nhs_number):
     click_search_for_patient_button()
     attach_screenshot("entered_nhs_number_as" + nhs_number + "_and_clicked_search_for_patient_button")
 
-def click_on_patient_name(name):
-    click_on_patient_name_search_result(name)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-
 def click_find_a_patient_top_nav_bar():
     click_find_a_patient_nav_link()
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
@@ -508,7 +504,7 @@ def step_save_address_and_gender_to_shared_data(shared_data, address, gender):
 @then(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
-    click_on_patient_name(name)
+    click_on_patient_name_search_result(name)
     attach_screenshot("before_clicking_patient_name")
     shared_data["patient_name"] = name
 
