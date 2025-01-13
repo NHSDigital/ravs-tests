@@ -7,6 +7,7 @@ continue_to_add_batch_page_button = ("role", "Continue")
 view_product_button = "//a[text()='View Product']"
 add_batch_link = "//a[text()='Add batch']"
 filter_by_site_dropdown = ("label", "Select site")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def click_view_product_link(vaccine):
    click_link_in_row(vaccine, 0)
@@ -14,6 +15,11 @@ def click_view_product_link(vaccine):
 def click_first_available_view_product_link():
     xpath = "(//tr[@role='row']//a[contains(text(),'View product')])[1]"
     find_element_and_perform_action(("xpath", xpath), "click")
+
+def check_add_vaccine_button_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(add_vaccine_button)
+    return check_element_exists(add_vaccine_button)
 
 def click_add_vaccine_button():
     find_element_and_perform_action(add_vaccine_button, "click")
