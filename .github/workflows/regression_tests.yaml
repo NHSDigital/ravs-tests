@@ -100,9 +100,9 @@ jobs:
           BRANCH_NAME=${{ github.ref_name || 'manual trigger (branch not specified)' }}
           TRIGGER_SOURCE=$([[ "${{ github.actor }}" == "azure-pipelines[bot]" ]] && echo "by Azure DevOps" || echo "manually by *${{ github.actor }}*")
           curl -X POST -H 'Content-type: application/json' \
-          --data '{
-            "text": "🚀 Tests have been kicked off $TRIGGER_SOURCE.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* '$BRANCH_NAME'"
-          }' \
+          --data "{
+            \"text\": \"🚀 Tests have been kicked off ${TRIGGER_SOURCE}.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* ${BRANCH_NAME}\"
+          }" \
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Notify Slack - Test Run Started
