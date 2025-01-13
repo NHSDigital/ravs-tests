@@ -87,6 +87,11 @@ Scenario: User management should not be visible if logged in as administrator
   Given I am logged into the RAVS app as an administrator
   Then user management navigation link should not be visible
 
+@usermanagement
+Scenario: User management should not be visible if logged in as administrator
+  Given I am logged into the RAVS app as an administrator
+  Then user management navigation link should not be visible
+
 
 
 
