@@ -637,3 +637,22 @@ def the_report_is_downloaded_successfully(shared_data):
         if extra_headers:
             error_message += f" Extra headers: {extra_headers}."
         raise ValueError(error_message)
+
+@given("I am logged into the RAVS app as a recorder")
+def logged_into_ravs_as_recorder(navigate_and_login_as_recorder):
+    pass
+
+@then("reports navigation link should not be visible")
+def reports_nav_link_should_not_be_visible_for_recorder():
+    assert check_reports_nav_link_exists() == False
+    attach_screenshot("reports_nav_link_should_not_exist")
+
+@given("I am logged into the RAVS app as an administrator")
+def logged_into_ravs_as_recorder(navigate_and_login_as_administrator):
+    pass
+
+@then("reports navigation link should be visible")
+def reports_nav_link_should_not_be_visible_for_administrator():
+    assert check_reports_nav_link_exists() == True
+    attach_screenshot("reports_nav_link_should_exist")
+

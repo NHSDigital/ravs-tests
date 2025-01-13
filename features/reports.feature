@@ -227,3 +227,18 @@ Scenario Outline: User can download the report
   | COVID-19                          | Albert House  | Last 31 days (includes today)  | Vaccination |
 
 
+  @reports
+  Scenario: Reports navigation link should not be visible when logged in as recorder
+    Given I am logged into the RAVS app as a recorder
+    Then reports navigation link should not be visible
+
+  @reports
+  Scenario: Reports navigation link should be visible when logged in as an administrator
+    Given I am logged into the RAVS app as an administrator
+    Then reports navigation link should be visible
+
+  @reports
+  Scenario: Create reports page should be visible when logged in as an administrator
+    Given I am logged into the RAVS app as an administrator
+    When I click the reports navigation link
+    Then the reports page should be displayed
