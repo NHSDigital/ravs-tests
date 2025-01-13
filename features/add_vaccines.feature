@@ -8,7 +8,7 @@ Feature: Add vaccine to site
     Then the choose site page should be launched
 
   @addvaccine
-  Scenario: Add vaccines navigation link should not be visible when logged in as recorder
+  Scenario: Vaccines navigation link should not be visible when logged in as recorder
     Given I am logged into the RAVS app as a recorder
     Then vaccines navigation link should not be visible
 
