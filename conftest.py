@@ -87,6 +87,51 @@ def navigate_and_login(request, navigate_to_ravs):
     enter_password(password)
     click_nhs_signin_button()
 
+# Fixture for navigating and logging in
+@pytest.fixture(scope='function')
+def navigate_and_login_as_recorder(request, navigate_to_ravs):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1+recorder_automated@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
+# Fixture for navigating and logging in as recorder
+@pytest.fixture(scope='function')
+def navigate_and_login_as_recorder(request, navigate_to_ravs):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1+recorder_automated@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
+# Fixture for navigating and logging in as administrator
+@pytest.fixture(scope='function')
+def navigate_and_login_as_administrator(request, navigate_to_ravs):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1+administrator_automated@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
 # Fixture for navigating to RAVS
 @pytest.fixture(scope='function')
 def navigate_to_ravs(request):
