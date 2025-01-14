@@ -10,7 +10,7 @@ filter_by_site_dropdown = ("label", "Select site")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def click_view_product_link(vaccine):
-   click_link_in_row(vaccine, 0)
+    click_link_in_row(vaccine, 0)
 
 def click_first_available_view_product_link():
     xpath = "(//tr[@role='row']//a[contains(text(),'View product')])[1]"
