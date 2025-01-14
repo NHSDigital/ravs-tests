@@ -233,7 +233,7 @@ def get_current_url():
 def find_elements(selector):
     return playwright_helper_instance.find_elements(selector)
 
-def wait_for_page_to_load(timeout=1):
+def wait_for_page_to_load(timeout=10):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
 def check_element_exists(element, wait=False):

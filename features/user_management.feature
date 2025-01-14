@@ -71,9 +71,26 @@ Scenario: Add user details - Check and confirm page should be visible
   Then the check and confirm user screen should be visible
 
 Examples:
-| first_name | last_name      | nhs_email_address                                       | clinician_status  | permission_level |
-| Automated  | administrator  | neelima.guntupalli1+administrator_automated@nhs.net     | yes               | administrator    |
-| Automated  | tester         | automated.tester@nhs.net                                | yes               | recorder         |
+| first_name | last_name           | nhs_email_address                                    | clinician_status | permission_level |
+| Automated  | administrator       | neelima.guntupalli1+administrator_automated@nhs.net  | yes              | administrator    |
+| Automated  | tester              | automated.tester@nhs.net                             | yes              | recorder         |
+| Automated  | lead administrator  | automated.tester@nhs.net                             | no               | lead administrator         |
+
+
+@usermanagement
+Scenario: User management should not be visible if logged in as recorder
+  Given I am logged into the RAVS app as a recorder
+  Then user management navigation link should not be visible
+
+@usermanagement
+Scenario: User management should not be visible if logged in as administrator
+  Given I am logged into the RAVS app as an administrator
+  Then user management navigation link should not be visible
+
+@usermanagement
+Scenario: User management should not be visible if logged in as administrator
+  Given I am logged into the RAVS app as an administrator
+  Then user management navigation link should not be visible
 
 
 
