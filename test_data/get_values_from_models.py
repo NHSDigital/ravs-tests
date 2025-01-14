@@ -35,6 +35,7 @@ from test_data.models.rsv_consent_vaccine_radio_button_xpath_map import rsv_cons
 from test_data.models.pertussis_consent_vaccine_radio_button_xpath_map import pertussis_consent_vaccine_radio_button_xpath_map
 from test_data.models.flu_vaccine_radio_button_xpath_map import flu_vaccine_radio_button_xpath_map
 from test_data.models.covid_vaccine_radio_button_xpath_map import covid_vaccine_radio_button_xpath_map
+from test_data.models.user_permission_levels import permission_levels
 import random
 
 # def get_wrapped_index(index, length):
@@ -153,3 +154,6 @@ def get_flu_vaccine_xpath(vaccine_type):
 
 def get_covid_vaccine_xpath(vaccine_type):
     return covid_vaccine_radio_button_xpath_map.get(vaccine_type, "Unknown vaccine type")
+
+def get_user_permission_level(index):
+    return permission_levels[get_wrapped_index(index, len(permission_levels))]
