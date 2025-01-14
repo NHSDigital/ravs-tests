@@ -258,3 +258,49 @@ def user_management_nav_link_should_not_be_visible():
     assert check_manage_users_nav_link_exists() == False
     attach_screenshot("manage_users_nav_link_should_not_exist")
 
+@when(parse("I click the change {detail} link"))
+def change_detail_link(shared_data, detail):
+    shared_data["detail"] = detail
+    click_change_detail_link(detail)
+    attach_screenshot(f'click_change_{detail.replace(" ", "_")}_link')
+
+@when(parse("I change the detail to the {new_detail}"))
+def change_detail_to_new_detail(shared_data, new_detail):
+    shared_data["new_detail"] = new_detail
+    if shared_data["detail"] == "name":
+        enter_first_name_to_add_user(new_detail.split(" ")[0])
+        enter_last_name_to_add_user(new_detail.split(" ")[1])
+        attach_screenshot("entered_new_name")
+    elif shared_data["detail"] == "email_address":
+        enter_email_address(new_detail)
+        attach_screenshot("entered_new_email_address")
+    elif shared_data["detail"] == "clinician_status":
+        if new_detail == "yes":
+            select_yes_registered_clinician_radio_button()
+        else:
+            select_no_registered_clinician_radio_button()
+        attach_screenshot("selected_new_clinician_status")
+    elif shared_data["detail"] == "permission_level":
+        select_permission_level_radio_button(new_detail)
+        attach_screenshot("selected_new_permission_level")
+
+@when("continue to check and confirm screen")
+def continue_to_check_and_confirm_screen():
+    click_continue_to_add_user_button()
+    attach_screenshot("clicked_continue_to_add_user_button")
+
+@then("the new detail should be visible on the check and confirm screen")
+def new_detail_should_be_visible_on_check_and_confirm_screen(shared_data):
+    if shared_data["detail"] == "name":
+        changed_name = get_users_name()
+        assert changed_name == shared_data["new_detail"]
+        attach_screenshot("name_is_changed")
+    elif shared_data["detail"] == "clinician_status":
+        assert get_users_clinician_status() == shared_data["new_detail"]
+        attach_screenshot("clinician_status_is_changed")
+    elif shared_data["detail"] == "email_address":
+        assert get_users_email_address() == shared_data["new_detail"]
+        attach_screenshot("email_address_is_changed")
+    elif shared_data["detail"] == "permission_level":
+        assert get_users_permission_level() == shared_data["new_detail"]
+        attach_screenshot("permission_level_is_changed")
