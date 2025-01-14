@@ -39,6 +39,7 @@ DOB_INPUT_ERROR_LABEL = ("text", "Error: Enter the date of birth")
 CREATE_NEW_PATIENT_BUTTON = ("role", "button", "Create new patient")
 SEARCH_TIPS_LINK = ("link", "search tips")
 PATIENT_NAME_LINK = ("//span[@class='nhsuk-action-link__text']")
+CHOOSE_VACCINE_BUTTON=("role", "button", "Choose Vaccine")
 
 GENDER_MAPPING = {
     "Male": "1",
@@ -202,6 +203,8 @@ def click_on_patient_name_search_result(name):
     )
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
 def check_patient_dob_search_result_exists(dob, wait):
     try:

@@ -12,6 +12,10 @@ FEEDBACK_LINK = ("role", "link", "feedback (opens in a new tab)")
 REPORT_AN_ISSUE_LINK = ("role", "link", "Report an issue")
 CONTACT_US_LINK = ("role", "link", "Contact us")
 HELP_AND_GUIDANCE_LINK = ("role", "link", "Help and guidance")
+ADD_USER_BUTTON = ("role", "button", "Add user")
+SEARCH_BUTTON = ("role", "button", "Search")
+ADD_VACCINE_BUTTON = ("role", "button", "Add vaccine")
+CREATE_REPORT_BUTTON = ("role", "button", "Create report")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def check_feedback_link_exists():
@@ -89,26 +93,45 @@ def click_profile_nav_link(email):
     find_element_and_perform_action(element, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
+def check_reports_nav_link_exists():
+    handle_unresponsive_page()
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_exists(REPORTS_NAV_ELEMENT)
+
 def click_reports_nav_link():
     handle_unresponsive_page()
     wait_for_element_to_appear(REPORTS_NAV_ELEMENT)
     find_element_and_perform_action(REPORTS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CREATE_REPORT_BUTTON)
+
+def check_vaccines_nav_link_exists():
+    handle_unresponsive_page()
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_exists(VACCINES_NAV_ELEMENT)
 
 def click_vaccines_nav_link():
     handle_unresponsive_page()
     wait_for_element_to_appear(VACCINES_NAV_ELEMENT)
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(ADD_VACCINE_BUTTON)
+
+def check_manage_users_nav_link_exists():
+    handle_unresponsive_page()
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_exists(MANAGE_USERS_NAV_ELEMENT)
 
 def click_manage_users_nav_link():
     handle_unresponsive_page()
     wait_for_element_to_appear(MANAGE_USERS_NAV_ELEMENT)
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(ADD_USER_BUTTON)
 
 def click_find_a_patient_nav_link():
     handle_unresponsive_page()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     find_element_and_perform_action(FIND_A_PATIENT_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(SEARCH_BUTTON)
