@@ -241,6 +241,11 @@ def check_and_confirm_screen_should_be_visible(shared_data):
         attach_screenshot("email_already_exists_in_organisation_error_message_text_exists")
         assert check_email_already_exists_in_organisation_error_message_link_exists() == True
         attach_screenshot("email_already_exists_in_organisation_error_message_link_exists")
+    elif shared_data["nhs_email_address"] == "neelima.guntupalli1+administrator_automated@nhs.test":
+        assert check_enter_email_address_error_message_text_exists() == True
+        attach_screenshot("enter_email_address_error_message_text_exists")
+        assert check_enter_email_address_error_message_link_exists() == True
+        attach_screenshot("enter_email_address_error_message_link_exists")
     else:
         assert check_change_name_link_exists() == True
         attach_screenshot("change_name_link_exists")
