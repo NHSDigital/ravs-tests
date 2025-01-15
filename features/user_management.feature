@@ -73,8 +73,14 @@ Scenario: Add user details - Check and confirm page should be visible
 Examples:
 | first_name | last_name           | nhs_email_address                                    | clinician_status | permission_level |
 | Automated  | administrator       | neelima.guntupalli1+administrator_automated@nhs.net  | yes              | administrator    |
+| Automated  | administrator       | neelima.guntupalli1+administrator_automated@nhs.test  | yes              | administrator    |
 | Automated  | tester              | automated.tester@nhs.net                             | yes              | recorder         |
 | Automated  | lead administrator  | automated.tester@nhs.net                             | no               | lead administrator         |
+| Bethany  | lead administrator  | bethany.north4+lead_administrator_automated@rmh.nhs.uk  | no               | lead administrator         |
+| Bethany  | administrator  | bethany.north4+administrator_automated@stockport.nhs.uk  | no               | administrator         |
+| Bethany  | recorder  | bethany.north4+recorder_automated@swast.nhs.uk  | no               | recorder         |
+| Bethany  | recorder  | bethany.north4+recorder_automated@nhs.scot  | no               | recorder         |
+| Bethany  | recorder  | bethany.north4+recorder_automated@nhs.uk  | no               | recorder         |
 
 @usermanagement
 Scenario: User management should not be visible if logged in as recorder
