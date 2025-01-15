@@ -71,16 +71,16 @@ Scenario: Add user details - Check and confirm page should be visible
   Then the check and confirm user screen should be visible
 
 Examples:
-| first_name | last_name           | nhs_email_address                                    | clinician_status | permission_level |
-| Automated  | administrator       | neelima.guntupalli1+administrator_automated@nhs.net  | yes              | administrator    |
-| Automated  | administrator       | neelima.guntupalli1+administrator_automated@nhs.test  | yes              | administrator    |
-| Automated  | tester              | automated.tester@nhs.net                             | yes              | recorder         |
-| Automated  | lead administrator  | automated.tester@nhs.net                             | no               | lead administrator         |
-| Bethany  | lead administrator  | bethany.north4+lead_administrator_automated@rmh.nhs.uk  | no               | lead administrator         |
-| Bethany  | administrator  | bethany.north4+administrator_automated@stockport.nhs.uk  | no               | administrator         |
-| Bethany  | recorder  | bethany.north4+recorder_automated@swast.nhs.uk  | no               | recorder         |
-| Bethany  | recorder  | bethany.north4+recorder_automated@nhs.scot  | no               | recorder         |
-| Bethany  | recorder  | bethany.north4+recorder_automated@nhs.uk  | no               | recorder         |
+| first_name | last_name             | nhs_email_address                                        | clinician_status | permission_level       |
+| Automated  | administrator         | neelima.guntupalli1+administrator_automated@nhs.net      | yes              | administrator          |
+| Automated  | administrator         | neelima.guntupalli1+administrator_automated@nhs.test     | yes              | administrator          |
+| Automated  | tester                | automated.tester@nhs.net                                 | yes              | recorder               |
+| Automated  | lead administrator    | automated.tester@nhs.net                                 | no               | lead administrator     |
+| Bethany    | lead administrator    | bethany.north4+lead_administrator_automated@rmh.nhs.uk   | no               | lead administrator     |
+| Bethany    | administrator         | bethany.north4+administrator_automated@stockport.nhs.uk  | no               | administrator          |
+| Bethany    | recorder              | bethany.north4+recorder_automated@swast.nhs.uk           | no               | recorder               |
+| Bethany    | recorder              | bethany.north4+recorder_automated@nhs.scot               | no               | recorder               |
+| Bethany    | recorder              | bethany.north4+recorder_automated@nhs.uk                 | no               | recorder               |
 
 @usermanagement
 Scenario: User management should not be visible if logged in as recorder
@@ -106,7 +106,7 @@ Scenario: Change details in the check and confirm user screen when adding a new 
   And I select <clinician_status>
   And I select <permission_level>
   And I click the continue to add user details button
-  And I click the change <detail> link
+  And I click the change user's <detail> detail link
   And I change the detail to the <new_detail>
   And continue to check and confirm screen
   Then the new detail should be visible on the check and confirm screen

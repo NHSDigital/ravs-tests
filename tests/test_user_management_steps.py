@@ -242,10 +242,10 @@ def check_and_confirm_screen_should_be_visible(shared_data):
         assert check_email_already_exists_in_organisation_error_message_link_exists() == True
         attach_screenshot("email_already_exists_in_organisation_error_message_link_exists")
     elif shared_data["nhs_email_address"] == "neelima.guntupalli1+administrator_automated@nhs.test":
-        assert check_enter_email_address_error_message_text_exists() == True
-        attach_screenshot("enter_email_address_error_message_text_exists")
-        assert check_enter_email_address_error_message_link_exists() == True
-        attach_screenshot("enter_email_address_error_message_link_exists")
+        assert check_enter_an_nhs_email_address_error_message_text_exists() == True
+        attach_screenshot("enter_an_nhs_email_address_error_message_text_exists")
+        assert check_enter_an_nhs_email_address_error_message_link_exists() == True
+        attach_screenshot("enter_an_nhs_email_address_error_message_link_exists")
     else:
         assert check_change_name_link_exists() == True
         attach_screenshot("change_name_link_exists")
@@ -263,7 +263,7 @@ def user_management_nav_link_should_not_be_visible():
     assert check_manage_users_nav_link_exists() == False
     attach_screenshot("manage_users_nav_link_should_not_exist")
 
-@when(parse("I click the change {detail} link"))
+@when(parse("I click the change user's {detail} detail link"))
 def change_detail_link(shared_data, detail):
     shared_data["detail"] = detail
     click_change_detail_link(detail)
