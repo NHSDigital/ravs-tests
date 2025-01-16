@@ -83,10 +83,12 @@ def step_given_i_am_on_the_find_a_patient_by_local_records_page(login_and_naviga
 @then('I click the find a patient by local records link')
 def step_click_the_find_a_patient_by_local_records_link():
     click_search_by_local_records_link()
+    attach_screenshot("clicked_search_by_local_records_link")
 
 @given('I am on the create a new patient page')
 def step_given_i_am_on_the_find_a_patient_by_local_records_page(login_and_navigate_to_find_a_patient):
     click_search_by_local_records_link()
+    attach_screenshot("clicked_search_by_local_records_link")
 
 @then('the find a patient page should be displayed')
 def the_pds_search_section_should_be_displayed():
@@ -97,19 +99,23 @@ def the_pds_search_section_should_be_displayed():
 @when('I click the search button')
 def step_click_search_button():
     click_search_for_patient_button()
+    attach_screenshot("clicked_search_for_patient_button")
 
 @given('I click the create a new patient button')
 @when('I click the create a new patient button')
 def step_click_create_a_new_patient_button():
     click_create_a_new_patient_button()
+    attach_screenshot("clicked_create_a_new_patient_button")
 
 @when('I click the check and confirm button')
 def step_click_check_and_confirm_button():
     click_check_and_confirm_button()
+    attach_screenshot("clicked_check_and_confirm_button")
 
 @when('I click the confirm and save button')
 def step_click_confirm_and_save_button():
     click_confirm_and_save_button()
+    attach_screenshot("clicked_confirm_and_save_button")
 
 @when('I click the search button')
 def step_i_click_the_search_button():
@@ -284,4 +290,5 @@ def step_patient_information_page_should_be_available(shared_data):
 @then("I can see the patient added confirmation message")
 def step_patient_added_message_should_be_available(shared_data):
     patient_added_message = get_patient_added_message(shared_data["first_name"])
+    attach_screenshot("patient_added_confirmation_message")
     assert f'{shared_data["first_name"]} {shared_data["last_name"]} with date of birth {shared_data["dob"]} has been added to RAVS' in patient_added_message
