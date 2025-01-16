@@ -53,10 +53,12 @@ def format_nhs_number(nhs_number):
     return formatted_nhs_number
 
 def enter_first_name(first_name):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(FIRST_NAME_INPUT)
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
 
 def enter_last_name(last_name):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(LAST_NAME_INPUT)
     find_element_and_perform_action(LAST_NAME_INPUT, "input_text", last_name)
 

@@ -16,6 +16,8 @@ ENTER_LAST_NAME_ERROR_MESSAGE_LINK = ("role", "button", "Enter last name")
 ENTER_LAST_NAME_ERROR_MESSAGE_TEXT = ("text", "Error: Enter last name")
 ENTER_EMAIL_ADDRESS_ERROR_MESSAGE_LINK = ("role", "button", "Enter email address")
 ENTER_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT = ("text", "Error: Enter email address")
+ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_LINK = ("role", "button", "Enter an NHS email address")
+ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT = ("text", "Error: Enter an NHS email address")
 SELECT_CLINICIAN_ERROR_MESSAGE_LINK = ("role", "button", "Select if they are a clinician")
 SELECT_CLINICIAN_ERROR_MESSAGE_TEXT = ("text", "Error: Select if they are a clinician")
 SELECT_PERMISSION_LEVEL_ERROR_MESSAGE_LINK = ("role", "button", "Select permission level")
@@ -123,6 +125,21 @@ def check_enter_email_address_error_message_text_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
     return check_element_exists(ENTER_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT)
+
+def check_enter_an_nhs_email_address_error_message_link_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
+    return check_element_exists(ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_LINK)
+
+def click_enter_an_nhs_email_address_error_message_link():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
+    find_element_and_perform_action(ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_LINK, "click")
+
+def check_enter_an_nhs_email_address_error_message_text_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
+    return check_element_exists(ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT)
 
 def check_select_clinician_error_message_link_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
