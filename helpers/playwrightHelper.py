@@ -233,22 +233,18 @@ class BasePlaywrightHelper:
         page_status = self.check_page_status()
         if page_status == "unresponsive":
             print("Page is unresponsive, attempting to reload or take action...")
-            attach_screenshot("Page_is_unresponsive_attempting_to_reload")
             retry_limit = 3
             for attempt in range(retry_limit):
                 print(f"Retrying page action: Attempt {attempt + 1}")
-                attach_screenshot("Retrying_page_reloading")
                 try:
                     self.page.reload(wait_until="networkidle")
                     self.wait_for_page_to_load(timeout=15)
                     print("Page reloaded successfully.")
-                    attach_screenshot("Page_reloaded_successfully")
                     return True
                 except Exception as e:
                     print(f"Error during reload: {e}")
                     if attempt == retry_limit - 1:
                         print("Retry limit reached. Moving to alternative action.")
-                        attach_screenshot("Page_reload_retry_failed")
             return False
 
     def click_and_get_download_path(self, locator_or_element, action="click", timeout=30, download_dir="downloads"):

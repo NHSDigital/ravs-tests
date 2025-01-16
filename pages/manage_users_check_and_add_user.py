@@ -71,3 +71,31 @@ def check_login_to_ravs_message_text_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(LOGIN_TO_RAVS_TEXT)
+
+def click_change_detail_link(detail):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
+    if detail == "name":
+        click_change_name_link()
+    elif detail == "email_address":
+        click_change_email_address_link()
+    elif detail == "permission_level":
+        click_change_permission_level_link()
+    elif detail == "clinician_status":
+        click_change_clinical_status_link()
+
+def get_users_name():
+    element = ("xpath", "//dt[text()='Name']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    return find_element_and_perform_action(element, "get_text")
+
+def get_users_email_address():
+    element = ("xpath", "//dt[text()='Email address']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    return find_element_and_perform_action(element, "get_text")
+
+def get_users_clinician_status():
+    element = ("xpath", "//dt[text()='Clinical']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    return find_element_and_perform_action(element, "get_text")
+
+def get_users_permission_level():
+    element = ("xpath", "//dt[text()='Permission level']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    return find_element_and_perform_action(element, "get_text")
