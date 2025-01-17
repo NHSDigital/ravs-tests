@@ -13,15 +13,7 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@pytest.fixture(scope='function')
-def shared_data():
-    return {}
-
 scenarios(f'{features_directory}/add_vaccines.feature')
-
-# @scenario(f'{features_directory}/add_vaccines.feature', 'Add vaccines page should launch')
-# def test_add_vaccines_page_should_launch(navigate_and_login):
-#     pass
 
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(navigate_and_login):

@@ -278,6 +278,34 @@ class BasePlaywrightHelper:
             print(f"Error during download: {e}")
             raise
 
+    def get_checked_radio_button_text(self, name):
+        try:
+            legend_selector = f'//legend[text()="{name}"]'
+            self.page.wait_for_selector(legend_selector, timeout=5000)
+
+            radio_group = self.page.query_selector(f'{legend_selector}/ancestor::fieldset//div[contains(@class, "nhsuk-radios")]')
+
+            selected_radio = radio_group.query_selector('input[type="radio"]:checked')
+
+            if not selected_radio:
+                print("No radio button is selected.")
+                return ""
+
+            radio_id = selected_radio.get_attribute("id")
+
+            label_selector = f'//label[@for="{radio_id}"]'
+            label = self.page.query_selector(label_selector)
+
+            if label:
+                selected_text = label.text_content().strip()
+                print(f"Selected radio button text: {selected_text}")
+                return selected_text
+            else:
+                print(f"Label not found for radio button ID: {radio_id}")
+                return ""
+        except Exception as e:
+            print(f"Error checking if radio button is selected: {e}")
+            return False
 
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None, max_retries=3, retry_delay=2):
         if not screenshot_name:
