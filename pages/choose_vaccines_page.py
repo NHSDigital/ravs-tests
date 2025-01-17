@@ -68,11 +68,24 @@ def click_continue_to_assess_patient_button():
     wait_for_element_to_appear(CONTINUE_BUTTON)
     find_element_and_perform_action(CONTINUE_BUTTON, "click")
 
-def get_selected_delivery_team_radio_button_value():
-    return get_checked_radio_button_text("Delivery team")
+def get_selected_delivery_team_radio_button_value_on_choose_vaccine_page():
+    selected_value = get_checked_radio_button_text("Delivery team")
+    if selected_value != "":
+        return selected_value    
+    else:
+        print("No delivery team selection was made.")
+        return "Delivery team selection did not persist"
 
-def get_selected_vaccine_radio_button_value():
-    return get_checked_radio_button_text("Vaccine")    
+def get_selected_vaccine_radio_button_value_on_choose_vaccine_page():
+    selected_value = get_checked_radio_button_text("Vaccine")
+    if selected_value != "":
+        return selected_value    
+    else:
+        return "Vaccine selection did not persist"
 
-def get_selected_vaccine_product_radio_button_value():
-    return get_checked_radio_button_text("Vaccine product")        
+def get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page():
+    selected_value = get_checked_radio_button_text("Vaccine product")
+    if selected_value != "":
+        return selected_value    
+    else:
+        return "Vaccine product selection did not persist" 
