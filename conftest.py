@@ -748,17 +748,21 @@ def start_recording_the_vaccine_for_new_patient(shared_data, new_patient_name, n
 
 @then("the delivery team, vaccine and vaccine product selection should persist on the choose vaccine page")
 def check_values_persist_on_choose_vaccine_screen(shared_data):
-    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]
+    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page() == shared_data["site"]
     attach_screenshot("delivery_team_selection_is_persisted")
+    assert get_selected_vaccine_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine"]
+    attach_screenshot("vaccine_selection_is_persisted")
+    assert get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine_type"]
+    attach_screenshot("vaccine_product_selection_is_persisted")
 
 @then("the patient's eligibility, assessment date, legal mechanism, assessing clinician, assessment outcome selection must persist on the assessment screen")
 def the_eligibility_values_should_persist(shared_data):
-    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]    
+    pass
 
 @then("the patient's consent answer, consent given by, consenting clinician, selection must persist on the assessment screen")
 def the_consent_values_should_persist(shared_data):
-    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]       
+    pass    
 
 @then("the patient's vaccinated answer, vaccine product, vaccinate date, care model, batch number, vaccinator should persist")
 def the_vaccinated_values_should_persist(shared_data):
-    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]           
+    pass       

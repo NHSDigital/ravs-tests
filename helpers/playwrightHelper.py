@@ -283,9 +283,10 @@ class BasePlaywrightHelper:
             legend_selector = f'//legend[text()="{name}"]'
             self.page.wait_for_selector(legend_selector, timeout=5000)
 
-            radio_group = self.page.query_selector(f'{legend_selector}/ancestor::fieldset//div[contains(@class, "nhsuk-radios")]')
-
-            selected_radio = radio_group.query_selector('input[type="radio"]:checked')
+            fieldset = self.page.query_selector(legend_selector).evaluate_handle(
+                'element => element.closest("fieldset")'
+            )
+            selected_radio = fieldset.query_selector('input[type="radio"]:checked')
 
             if not selected_radio:
                 print("No radio button is selected.")
