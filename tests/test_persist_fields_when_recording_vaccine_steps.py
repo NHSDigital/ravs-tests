@@ -22,14 +22,8 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a vaccine with nhs number')
-def test_record_a_vaccine_with_nhs_number(navigate_and_login):
-    pass
+features_directory = get_working_directory() + "features"
 
-@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a vaccine with nhs number and auto-select batch number as only one vaccine product')
-def test_record_a_vaccine_with_nhs_number_auto_select_batch_number(navigate_and_login):
+@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Persist fields when recording a vaccination')
+def test_persisting_fields_when_recording_a_vaccine(navigate_and_login):
     pass
-
-@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a maternity vaccine with nhs number')
-def test_record_a_maternity_vaccine_with_nhs_number(navigate_and_login):
-    pass # All test steps are in conftest.py

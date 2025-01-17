@@ -124,11 +124,20 @@ config = load_config_from_env()
 
 mobile_devices = get_mobile_devices()
 
+@pytest.fixture(scope="session")
+def shared_data():
+    """
+    Provide a session-scoped shared_data dictionary to share data across tests.
+    """
+    return {}
+
+
 @pytest.fixture(scope="session", autouse=True)
-def initialize_session():
+def initialize_session(shared_data):
     initialize_helpers()
     yield
     after_all()
+    shared_data.clear()
     quit_browser()
 
 @pytest.fixture(scope="session")
@@ -245,6 +254,12 @@ def check_element_exists(element, wait=False):
         return playwright_helper_instance.check_element_exists(element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
+
+def get_checked_radio_button_text(name):
+    try:
+        return playwright_helper_instance.get_checked_radio_button_text(name)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")        
 
 def check_element_enabled(element, wait=False):
     if isinstance(element, (tuple, list)):

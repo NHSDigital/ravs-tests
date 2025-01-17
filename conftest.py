@@ -42,6 +42,7 @@ pytest.mark.addvaccine = pytest.mark.mark(addvaccine=True)
 pytest.mark.addbatches = pytest.mark.mark(addbatches=True)
 pytest.mark.reports = pytest.mark.mark(reports=True)
 pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
+pytest.mark.persist_values = pytest.mark.mark(persist_values=True)
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
@@ -535,7 +536,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
-@then("I search for a patient with the NHS number in the find a patient screen")
+@when("I search for a patient with the NHS number in the find a patient screen")
 def step_search_for_patient(shared_data):
     nhs_number = shared_data["nhs_number"]
     click_find_a_patient_and_search_with_nhs_number(nhs_number)
@@ -546,7 +547,7 @@ def step_save_address_and_gender_to_shared_data(shared_data, address, gender):
     shared_data["gender"] = gender
 
 @given(parse("I open the patient record by clicking on patient {name}"))
-@then(parse("I open the patient record by clicking on patient {name}"))
+@when(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
     click_on_patient_name_search_result(name)
@@ -563,6 +564,7 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
     shared_data["immunisation_history_records_count_before_vaccination"] = immunisation_history_records_count_before_vaccination
+    shared_data["chosen_vaccine_vaccinate_page"] = chosen_vaccine
     choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])
 
 @when(parse("I assess the patient's {eligibility} with the details and date as {assess_date} and click continue to record consent screen button"))
@@ -666,6 +668,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
+@when(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))
 @then(parse("I need to be able to see the patient {name}, {dob}, {address} and vaccination details on the check and confirm screen"))
 def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob, address):
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
@@ -688,6 +691,7 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
             assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
             attach_screenshot("check_and_confirm_screen_after_assertion")
 
+@when("when I click confirm and save button, I should see a record saved dialogue")
 @then("when I click confirm and save button, I should see a record saved dialogue")
 def click_confirm_and_save_button_record_saved(shared_data):
     attach_screenshot("patient_details_screen_with_immunisation_history")
@@ -695,6 +699,7 @@ def click_confirm_and_save_button_record_saved(shared_data):
     attach_screenshot("before_assert_record_saved")
     assert check_record_saved_element_exists(False)
 
+@when("the immunisation history of the patient should be updated in the patient details page")
 @then("the immunisation history of the patient should be updated in the patient details page")
 def immunisation_history_should_be_updated(shared_data):
     attach_screenshot("immunisation_history_records_count_after_vaccination")
@@ -704,7 +709,7 @@ def immunisation_history_should_be_updated(shared_data):
     attach_screenshot("click_delete_history_link")
     click_delete_vaccination_button()
     attach_screenshot("click_delete_vaccination_button")
-    shared_data.clear()
+    # shared_data.clear()
 
 @then("the immunisation history of the patient should be updated in the patient details page and not be deleted")
 def immunisation_history_should_be_updated(shared_data):
@@ -722,9 +727,38 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         click_confirm_details_and_save_button()
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
-        shared_data.clear()
+        # shared_data.clear()
     else:
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
-        shared_data.clear()
+        # shared_data.clear()
     attach_screenshot("patient_details_screen_with_immunisation_history")
+
+@when(parse("I start to record the vaccination for a new patient {new_patient_name} with nhs number {new_nhs_number}"))
+def start_recording_the_vaccine_for_new_patient(shared_data, new_patient_name, new_nhs_number):
+    click_find_a_patient_nav_link()
+    attach_screenshot("clicked_find_a_patient_nav_link")
+    enter_nhs_number(new_nhs_number)
+    attach_screenshot("entered_new_nhs_number: " + new_nhs_number)
+    click_search_for_patient_button()
+    attach_screenshot("clicked_search_for_patient_button")
+    click_on_patient_name_search_result(new_patient_name)
+    attach_screenshot("clicked_on_patient_name_search_result")
+    click_choose_vaccine_button()
+
+@then("the delivery team, vaccine and vaccine product selection should persist on the choose vaccine page")
+def check_values_persist_on_choose_vaccine_screen(shared_data):
+    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]
+    attach_screenshot("delivery_team_selection_is_persisted")
+
+@then("the patient's eligibility, assessment date, legal mechanism, assessing clinician, assessment outcome selection must persist on the assessment screen")
+def the_eligibility_values_should_persist(shared_data):
+    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]    
+
+@then("the patient's consent answer, consent given by, consenting clinician, selection must persist on the assessment screen")
+def the_consent_values_should_persist(shared_data):
+    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]       
+
+@then("the patient's vaccinated answer, vaccine product, vaccinate date, care model, batch number, vaccinator should persist")
+def the_vaccinated_values_should_persist(shared_data):
+    assert get_selected_delivery_team_radio_button_value() == shared_data["site"]           

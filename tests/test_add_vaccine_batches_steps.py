@@ -17,10 +17,6 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@pytest.fixture(scope="function")
-def shared_data():
-    return {}
-
 @scenario(f"{features_directory}/add_batches.feature", "Add vaccine batches page should launch")
 def test_add_vaccine_batches_page_should_launch(navigate_and_login):
     pass
