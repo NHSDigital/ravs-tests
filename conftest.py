@@ -537,6 +537,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
 
 @given("I search for a patient with the NHS number in the find a patient screen")
 @when("I search for a patient with the NHS number in the find a patient screen")
+@then("I search for a patient with the NHS number in the find a patient screen")
 def step_search_for_patient(shared_data):
     nhs_number = shared_data["nhs_number"]
     click_find_a_patient_and_search_with_nhs_number(nhs_number)
@@ -548,6 +549,7 @@ def step_save_address_and_gender_to_shared_data(shared_data, address, gender):
 
 @given(parse("I open the patient record by clicking on patient {name}"))
 @when(parse("I open the patient record by clicking on patient {name}"))
+@then(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
     click_on_patient_name_search_result(name)
@@ -761,8 +763,8 @@ def the_eligibility_values_should_persist(shared_data):
 
 @then("the patient's consent answer, consent given by, consenting clinician, selection must persist on the assessment screen")
 def the_consent_values_should_persist(shared_data):
-    pass    
+    pass
 
 @then("the patient's vaccinated answer, vaccine product, vaccinate date, care model, batch number, vaccinator should persist")
 def the_vaccinated_values_should_persist(shared_data):
-    pass       
+    pass
