@@ -52,6 +52,9 @@ def set_vaccination_date(date):
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "clear")
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "type_text", date)
 
+def get_vaccination_date():
+    return find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "get_text")
+
 def enter_vaccination_comments(comments):
     find_element_and_perform_action(VACCINATION_COMMENTS_ELEMENT, "type_text", comments)
 
@@ -130,3 +133,29 @@ def enter_care_home_details(name):
     element = ("text", name)
     find_element_and_perform_action(element, "click")
 
+def get_is_patient_vaccinated_value_on_vaccinated_page():
+    selected_value = get_checked_radio_button_text("Have you vaccinated the patient?")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Patient vaccinated value did not persist"
+
+def get_vaccination_care_model_value_on_vaccinated_page():
+    selected_value = get_checked_radio_button_text("Where is the vaccination taking place?")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Care model value did not persist"
+
+def get_vaccine_product_value_on_vaccinated_page():
+    selected_value = get_checked_radio_button_text("Vaccine product")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Vaccine product value did not persist"
+
+def get_vaccinator_value_on_vaccinated_page():
+    find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "get_selected_option")
+
+def get_batch_number():
+    return find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "get_selected_option")

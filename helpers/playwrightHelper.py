@@ -371,8 +371,24 @@ class BasePlaywrightHelper:
                             print(f"Entered text '{inputValue}' successfully.")
                     elif action.lower() == "get_text":
                         text = element.text_content()
+                        if text == "":
+                            text = element.get_attribute("value")
                         print(f"Text from the element: {text}")
                         return text
+                    elif action.lower() == "get_value":
+                        text = element.get_attribute("value")
+                        print(f"Text from the element: {text}")
+                        return text
+                    elif action.lower() == "get_selected_option":
+                        selected_option = element.locator("option:checked")
+                        if selected_option.count() > 0:
+                            text = selected_option.text_content()
+                            value = selected_option.get_attribute("value")
+                            print(f"Selected option text: '{text}', value: '{value}'")
+                            return text
+                        else:
+                            print("No option is currently selected.")
+                            return None
                     elif action.lower() == "type_text":
                         if inputValue is None:
                             raise ValueError("`inputValue` cannot be None for 'type_text' action.")
