@@ -433,7 +433,6 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("selected_batch_number")
         enter_dose_amount_value(dose_amount)
         attach_screenshot("entered_dose_amount_value")
-
         if click_continue_to_check_and_confirm_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
             select_batch_number(batch_number_to_select)
@@ -627,6 +626,8 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             else:
                 shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
+            batch_number_to_select = shared_data["batch_number"].upper() + " - " + shared_data["batch_expiry_date"]
+            shared_data["batch_number_selected"] = batch_number_to_select
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
@@ -711,7 +712,6 @@ def immunisation_history_should_be_updated(shared_data):
     attach_screenshot("click_delete_history_link")
     click_delete_vaccination_button()
     attach_screenshot("click_delete_vaccination_button")
-    # shared_data.clear()
 
 @then("the immunisation history of the patient should be updated in the patient details page and not be deleted")
 def immunisation_history_should_be_updated(shared_data):
@@ -729,11 +729,9 @@ def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_
         click_confirm_details_and_save_button()
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
-        # shared_data.clear()
     else:
         immunisation_history_records_count_after_vaccination = get_count_of_immunisation_history_records(shared_data["chosen_vaccine"])
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
-        # shared_data.clear()
     attach_screenshot("patient_details_screen_with_immunisation_history")
 
 @when(parse("I start to record the vaccination for a new patient {new_patient_name} with nhs number {new_nhs_number}"))
@@ -754,17 +752,61 @@ def check_values_persist_on_choose_vaccine_screen(shared_data):
     attach_screenshot("delivery_team_selection_is_persisted")
     assert get_selected_vaccine_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine"]
     attach_screenshot("vaccine_selection_is_persisted")
-    assert get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine_type"]
+    assert str(get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page()).replace("Active batches available", "").strip() == shared_data["chosen_vaccine_type"]
     attach_screenshot("vaccine_product_selection_is_persisted")
+    click_continue_to_assess_patient_button()
 
 @then("the patient's eligibility, assessment date, legal mechanism, assessing clinician, assessment outcome selection must persist on the assessment screen")
 def the_eligibility_values_should_persist(shared_data):
-    pass
+    assert get_is_patient_eligible_value_on_assessing_the_patient_page().lower() == str(shared_data["eligible_decision"]).lower()
+    attach_screenshot("assessment_patient_eligible_value_should_persist")
+    assert format_date(get_assessment_date_value(), config["browser"]) == shared_data["eligibility_assessment_date"]
+    attach_screenshot("assessment_date_value_should_persist")
+    assert get_legal_mechanism_value_on_assessing_the_patient_page() == shared_data["legal_mechanism"]
+    attach_screenshot("legal_mechanism_value_should_persist")
+    assert get_assessing_clinician_value_on_assessing_the_patient_page() == shared_data["eligibility_assessing_clinician"]
+    attach_screenshot("assessing_clinician_value_should_persist")
+    assert get_assessment_outcome_value_on_assessing_the_patient_page().lower() == str(shared_data["eligibility_assessment_outcome"]).lower()
+    attach_screenshot("assessment_outcome_value_should_persist")
+    if check_eligibility_type_is_enabled():
+        select_eligibility_type(shared_data["eligibility_type"])
+        attach_screenshot("selected_eligibility_type")
+    click_continue_to_record_consent_button()
 
 @then("the patient's consent answer, consent given by, consenting clinician, selection must persist on the assessment screen")
 def the_consent_values_should_persist(shared_data):
-    pass
+    assert get_patient_consent_value_on_consent_page().lower() == str(shared_data["eligible_decision"]).lower()
+    attach_screenshot("consent_value_should_persist")
+    # assert get_consenting_clinician_details() == shared_data["consent_clinician_details"]
+    attach_screenshot("consent_clinician_value_should_persist")
+    name_of_person_consenting = "Automation tester"
+    relationship_to_patient = "RAVS tester"
+    if shared_data['consent_given_by'] != "Patient (informed consent)":
+        enter_person_consenting_details(name_of_person_consenting)
+        attach_screenshot("entered_person_consenting_details")
+        enter_relationship_to_patient(relationship_to_patient)
+        attach_screenshot("entered_relationship_to_patient")
+    if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
+        shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
+    else:
+        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+    if (legal_mechanism) != "Patient Group Direction (PGD)":
+        select_consent_clinician_with_name_and_council(shared_data['consent_clinician_details'] )
+        attach_screenshot("selected_consent_clinician_with_name_and_council")
+    click_continue_to_vaccinate_button()
+    attach_screenshot("clicked_continue_to_vaccinate_button")
 
 @then("the patient's vaccinated answer, vaccine product, vaccinate date, care model, batch number, vaccinator should persist")
 def the_vaccinated_values_should_persist(shared_data):
-    pass
+    assert get_is_patient_vaccinated_value_on_vaccinated_page().lower() == shared_data["vaccinated_decision"].lower()
+    attach_screenshot("patient_vaccinated_value_must_persist")
+    assert format_date(get_vaccination_date(), config["browser"]) == shared_data["vaccination_date"]
+    attach_screenshot("vaccination_date_should_persist")
+    assert get_vaccination_care_model_value_on_vaccinated_page() == shared_data["care_model"]
+    attach_screenshot("care_model_value_should_persist")
+    assert get_vaccine_product_value_on_vaccinated_page() == shared_data["chosen_vaccine_type"]
+    attach_screenshot("vaccine_product_value_should_persist")
+    assert get_batch_number() == shared_data["batch_number_selected"]
+    attach_screenshot("vaccine_product_batch_number_value_should_persist")
+    assert get_vaccinator_value_on_vaccinated_page() == shared_data['vaccinator']
+    attach_screenshot("vaccinator_value_should_persist")

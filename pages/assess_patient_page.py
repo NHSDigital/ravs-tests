@@ -205,3 +205,28 @@ def click_continue_to_record_consent_button():
     wait_for_element_to_appear(CONTINUE_TO_RECORD_CONSENT_BUTTON)
     find_element_and_perform_action(CONTINUE_TO_RECORD_CONSENT_BUTTON, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+
+def get_is_patient_eligible_value_on_assessing_the_patient_page():
+    selected_value = get_checked_radio_button_text("Is the patient eligible for the vaccine? ")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Is patient eligible selection did not persist"
+
+def get_legal_mechanism_value_on_assessing_the_patient_page():
+    selected_value = get_checked_radio_button_text("Legal mechanism")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Legal mechanism selection did not persist"
+
+def get_assessing_clinician_value_on_assessing_the_patient_page():
+    wait_for_element_to_appear(ASSESSING_CLINICIAN_DROPDOWN_ELEMENT)
+    return find_element_and_perform_action(ASSESSING_CLINICIAN_DROPDOWN_ELEMENT, "get_selected_option")
+
+def get_assessment_outcome_value_on_assessing_the_patient_page():
+    selected_value = get_checked_radio_button_text("Assessment outcome")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Assessment outcome selection did not persist"
