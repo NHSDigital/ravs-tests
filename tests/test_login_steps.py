@@ -22,10 +22,6 @@ def generate_random_string(length=10):
     random_string = ''.join(secrets.choice(characters) for _ in range(length))
     return random_string
 
-@pytest.fixture(scope='function')
-def shared_data():
-    return {}
-
 @pytest.mark.login
 @given("I access the ravs web app")
 def given_I_access_the_ravs_web_app(navigate_to_ravs):

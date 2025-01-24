@@ -38,12 +38,6 @@ def setup_logging():
     yield
     logger.info("Test session complete")
 
-@pytest.fixture(scope='function')
-def shared_data():
-    data = {}
-    yield data
-    data.clear()
-
 @pytest.mark.usermanagement
 @given("I am logged into the RAVS app")
 def logged_into_ravs_app(navigate_and_login):

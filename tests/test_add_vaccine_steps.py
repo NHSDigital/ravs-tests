@@ -13,10 +13,6 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@pytest.fixture(scope='function')
-def shared_data():
-    return {}
-
 scenarios(f'{features_directory}/add_vaccines.feature')
 
 # @scenario(f'{features_directory}/add_vaccines.feature', 'Add vaccines page should launch')

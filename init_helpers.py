@@ -132,6 +132,10 @@ def initialize_session():
     quit_browser()
 
 @pytest.fixture(scope="session")
+def shared_data():
+    return {}
+
+@pytest.fixture(scope="session")
 def playwright_helper():
     return playwright_helper_instance
 

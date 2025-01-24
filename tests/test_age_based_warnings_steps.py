@@ -15,10 +15,6 @@ scenarios(f'{features_directory}/age_based_warnings.feature')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@pytest.fixture(scope='function')
-def shared_data():
-    return {}
-
 @given("I am logged into the RAVS app")
 def given_I_login_to_the_ravs_web_app(login_and_navigate_to_find_a_patient):
     pass
