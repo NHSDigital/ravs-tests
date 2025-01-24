@@ -292,3 +292,10 @@ def step_patient_added_message_should_be_available(shared_data):
     patient_added_message = get_patient_added_message(shared_data["first_name"])
     attach_screenshot("patient_added_confirmation_message")
     assert f'{shared_data["first_name"]} {shared_data["last_name"]} with date of birth {shared_data["dob"]} has been added to RAVS' in patient_added_message
+
+@then("the patient's phone-number, address and site information should not be visible")
+def step_sensitive_patients_details_should_be_hidden(shared_data):
+    assert get_patient_name_value() == shared_data["patient_name"]
+    assert get_patient_phone_number_value() == ""
+    assert get_patient_address_value() == ""
+

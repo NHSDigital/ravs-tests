@@ -26,6 +26,31 @@ RSV_HISTORY_ELEMENT = ("text", "Respiratory syncytial virus (RSV)")
 PERTUSSIS_HISTORY_ELEMENT = ("text", "Pertussis")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 VACCINATION_HISTORY_NOT_AVAILABLE = ("role", "heading", "No vaccination history available")
+PATIENT_NAME_ELEMENT = ("xpath", "//dt[text()='Name']/following-sibling::dd")
+PATIENT_NHS_NUMBER_ELEMENT = ("xpath", "//dt[text()='NHS number']/following-sibling::dd")
+PATIENT_DATE_OF_BIRTH_ELEMENT = ("xpath", "//dt[text()='Date of birth']/following-sibling::dd")
+PATIENT_GENDER_ELEMENT = ("xpath", "//dt[text()='Gender']/following-sibling::dd")
+PATIENT_PHONE_NUMBER_ELEMENT = ("xpath", "//dt[text()='Phone number']/following-sibling::dd")
+PATIENT_ADDRESS_ELEMENT = ("xpath", "//dt[text()='Address']/following-sibling::dd")
+
+def get_patient_name_value():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    find_element_and_perform_action(PATIENT_NAME_ELEMENT, "get_text")
+
+def get_patient_nhs_number_value():
+    find_element_and_perform_action(PATIENT_NHS_NUMBER_ELEMENT, "get_text")
+
+def get_patient_date_of_birth_value():
+    find_element_and_perform_action(PATIENT_DATE_OF_BIRTH_ELEMENT, "get_text")
+
+def get_patient_gender_value():
+    find_element_and_perform_action(PATIENT_GENDER_ELEMENT, "get_text")
+
+def get_patient_phone_number_value():
+    find_element_and_perform_action(PATIENT_PHONE_NUMBER_ELEMENT, "get_text")
+
+def get_patient_address_value():
+    find_element_and_perform_action(PATIENT_ADDRESS_ELEMENT, "get_text")
 
 def check_vaccine_history_not_available_label_element_exists():
     time.sleep(2)
