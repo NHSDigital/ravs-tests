@@ -23,10 +23,6 @@ logging.getLogger('faker.providers').setLevel(logging.CRITICAL)
 
 fake = Faker('en_GB')
 
-# @scenario(f'{features_directory}/find_a_patient.feature', 'Find a patient page should launch')
-# def test_find_a_patient_page_should_launch(navigate_and_login):
-#     pass
-
 scenarios(f'{features_directory}/find_a_patient.feature')
 
 @pytest.mark.sflag
