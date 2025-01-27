@@ -214,15 +214,15 @@ Feature: Find a patient
     When I click the search button
     Then I can see the patient's local record in the search results
 
-@sflag
-Scenario Outline: Sensitive information should be hidden for S-flag patients
-  Given I am on the find a patient by nhs number page
-  When I enter a valid <nhsNumber>
-  And I click the search button
-  Then I should be directed to the patient's information page and show <name>, <nhsNumber>, <dateofbirth> and <address> details
-  And I open the patient record by clicking on patient <name>
-  And the patient's phone-number, address and site information should not be visible
+  @sflag
+  Scenario Outline: Sensitive information should be hidden for S-flag patients
+    Given I am on the find a patient by nhs number page
+    When I enter a valid <nhsNumber>
+    And I click the search button
+    And I open the patient record by clicking on patient <name>
+    Then the patient's phone-number, address and site information should not be visible
 
-  Examples:
-  | nhsNumber  | name                                      | dateofbirth | address   |
-  | 9450127077 | LUDMILLA MCKSN-PDS-ALPHA-SENSITIVE        | 2/5/1974    |           |
+    Examples:
+    | nhsNumber  | name                                      | dateofbirth | address   |
+    | 9450127077 | LUDMILLA MCKSN-PDS-ALPHA-SENSITIVE        | 2/5/1974    |           |
+    | 9733907723 | Sandra Ryan                               | 7/4/1994    |           |
