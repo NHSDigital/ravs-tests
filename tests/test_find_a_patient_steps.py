@@ -23,11 +23,12 @@ logging.getLogger('faker.providers').setLevel(logging.CRITICAL)
 
 fake = Faker('en_GB')
 
-@scenario(f'{features_directory}/find_a_patient.feature', 'Find a patient page should launch')
-def test_find_a_patient_page_should_launch(navigate_and_login):
-    pass
-
 scenarios(f'{features_directory}/find_a_patient.feature')
+
+@pytest.mark.sflag
+@given("I am logged into the RAVS app")
+def logged_into_ravs_app(navigate_and_login):
+    pass
 
 @given('I am on the find a patient by pds details page')
 def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
@@ -288,3 +289,30 @@ def step_patient_added_message_should_be_available(shared_data):
     patient_added_message = get_patient_added_message(shared_data["first_name"])
     attach_screenshot("patient_added_confirmation_message")
     assert f'{shared_data["first_name"]} {shared_data["last_name"]} with date of birth {shared_data["dob"]} has been added to RAVS' in patient_added_message
+
+@then("the patient's phone-number, address and site information should not be visible")
+def step_sensitive_patients_details_should_be_hidden(shared_data):
+    assert get_patient_name_value().lower() == shared_data["patient_name"].lower()
+    assert get_patient_phone_number_value() == ""
+    assert get_patient_address_value().strip() == ""
+
+    vaccine_types = [
+        {"name": "COVID-19", "check_exists": check_covid_history_element_exists, "show_all": click_show_all_covid_history_button},
+        {"name": "Flu", "check_exists": check_flu_history_element_exists, "show_all": click_show_all_flu_history_button},
+        {"name": "Respiratory syncytial virus (RSV)", "check_exists": check_rsv_history_element_exists, "show_all": click_show_all_rsv_history_button},
+        {"name": "Pertussis", "check_exists": check_pertussis_history_element_exists, "show_all": click_show_all_pertussis_history_button}
+    ]
+
+    for vaccine in vaccine_types:
+        if vaccine["check_exists"]():
+            vaccination_history_count = get_count_of_immunisation_history_records(vaccine["name"])
+            attach_screenshot(f"{vaccine['name'].lower().replace(' ', '_')}_vaccination_history_count")
+
+            if vaccination_history_count > 1:
+                vaccine["show_all"]()
+                attach_screenshot(f"clicked_{vaccine['name'].lower().replace(' ', '_')}_show_all_button")
+
+            for i in range(1, vaccination_history_count + 1):
+                assert get_vaccine_location_details(i).strip() == ""
+                attach_screenshot(f"{vaccine['name'].lower().replace(' ', '_')}_vaccine_location_details_should_be_empty")
+
