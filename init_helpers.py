@@ -132,10 +132,14 @@ def shared_data():
     return {}
 
 
+@pytest.fixture(scope="session")
+def shared_data():
+    return {}
+
 @pytest.fixture(scope="session", autouse=True)
 def initialize_session(shared_data):
     initialize_helpers()
-    yield
+    yield shared_data
     after_all()
     shared_data.clear()
     quit_browser()
@@ -259,7 +263,13 @@ def get_checked_radio_button_text(name):
     try:
         return playwright_helper_instance.get_checked_radio_button_text(name)
     except Exception as e:
-        pytest.fail(f"An error occurred: {e}")        
+        pytest.fail(f"An error occurred: {e}")
+
+def get_checked_radio_button_text(name):
+    try:
+        return playwright_helper_instance.get_checked_radio_button_text(name)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
 
 def check_element_enabled(element, wait=False):
     if isinstance(element, (tuple, list)):

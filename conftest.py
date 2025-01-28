@@ -43,6 +43,7 @@ pytest.mark.addbatches = pytest.mark.mark(addbatches=True)
 pytest.mark.reports = pytest.mark.mark(reports=True)
 pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
 pytest.mark.persist_values = pytest.mark.mark(persist_values=True)
+pytest.mark.sflag = pytest.mark.mark(sflag=True)
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
@@ -127,7 +128,7 @@ def navigate_and_login_as_administrator(request, navigate_to_ravs):
     if check_logout_button_exists_without_waiting():
         click_logout_button()
     click_login_button()
-    emailAddress = "neelima.guntupalli1+administrator_automated@nhs.net"
+    emailAddress = "neelima.guntupalli1+admin_automated@nhs.net"
     enter_email_address(emailAddress)
     password = config["credentials"]["ravs_password"]
     enter_password(password)
