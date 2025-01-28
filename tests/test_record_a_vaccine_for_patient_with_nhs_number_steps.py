@@ -22,12 +22,6 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@pytest.fixture(scope='function')
-def shared_data():
-    data = {}
-    yield data
-    data.clear()
-
 @scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a vaccine with nhs number')
 def test_record_a_vaccine_with_nhs_number(navigate_and_login):
     pass

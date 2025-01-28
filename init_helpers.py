@@ -124,11 +124,16 @@ config = load_config_from_env()
 
 mobile_devices = get_mobile_devices()
 
+@pytest.fixture(scope="session")
+def shared_data():
+    return {}
+
 @pytest.fixture(scope="session", autouse=True)
-def initialize_session():
+def initialize_session(shared_data):
     initialize_helpers()
     yield
     after_all()
+    shared_data.clear()
     quit_browser()
 
 @pytest.fixture(scope="session")

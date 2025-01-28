@@ -42,6 +42,7 @@ pytest.mark.addvaccine = pytest.mark.mark(addvaccine=True)
 pytest.mark.addbatches = pytest.mark.mark(addbatches=True)
 pytest.mark.reports = pytest.mark.mark(reports=True)
 pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
+pytest.mark.sflag = pytest.mark.mark(sflag=True)
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
@@ -546,6 +547,7 @@ def step_save_address_and_gender_to_shared_data(shared_data, address, gender):
     shared_data["gender"] = gender
 
 @given(parse("I open the patient record by clicking on patient {name}"))
+@when(parse("I open the patient record by clicking on patient {name}"))
 @then(parse("I open the patient record by clicking on patient {name}"))
 def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
