@@ -76,7 +76,7 @@ Examples:
 | Automated  | administrator         | neelima.guntupalli1+admin_automated@nhs.test     | yes              | administrator          |
 | Automated  | tester                | automated.tester@nhs.net                                 | yes              | recorder               |
 | Automated  | lead administrator    | automated.tester@nhs.net                                 | no               | lead administrator     |
-| Bethany    | lead administrator    | bethany.north4+lead_admininstrator_automated@rmh.nhs.uk   | no               | lead administrator     |
+| Bethany    | lead administrator    | bethany.north4+lead_administrator_automated@rmh.nhs.uk   | no               | lead administrator     |
 | Bethany    | administrator         | bethany.north4+administrator_automated@stockport.nhs.uk  | no               | administrator          |
 | Bethany    | recorder              | bethany.north4+recorder_automated@swast.nhs.uk           | no               | recorder               |
 | Bethany    | recorder              | bethany.north4+recorder_automated@nhs.scot               | no               | recorder               |
