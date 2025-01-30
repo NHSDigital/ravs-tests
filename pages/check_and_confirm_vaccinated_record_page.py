@@ -60,19 +60,19 @@ def click_back_button_on_check_and_confirm_vaccination_screen():
 def click_cancel_confirm_details_button():
     find_element_and_perform_action(CANCEL_CONFIRM_DETAILS_BUTTON, "click")
 
-def get_patient_name_value():
+def get_patient_name_value_in_check_and_confirm_screen():
     return find_element_and_perform_action(PATIENT_NAME_LABEL_ELEMENT, "get_text")
 
-def get_patient_gender_value():
+def get_patient_gender_value_in_check_and_confirm_screen():
     return find_element_and_perform_action(PATIENT_GENDER_LABEL_ELEMENT, "get_text")
 
-def get_patient_dob_value():
+def get_patient_dob_value_in_check_and_confirm_screen():
     return find_element_and_perform_action(PATIENT_DOB_LABEL_ELEMENT, "get_text")
 
-def get_patient_address_value():
+def get_patient_address_value_in_check_and_confirm_screen():
     return find_element_and_perform_action(PATIENT_ADDRESS_LABEL_ELEMENT, "get_text")
 
-def get_patient_nhs_number_value():
+def get_patient_nhs_number_value_in_check_and_confirm_screen():
     return find_element_and_perform_action(PATIENT_NHS_NUMBER_LABEL_ELEMENT, "get_text")
 
 def get_patient_eligibility_for_vaccine_value():
