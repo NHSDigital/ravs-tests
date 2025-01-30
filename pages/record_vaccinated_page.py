@@ -155,7 +155,7 @@ def get_vaccine_product_value_on_vaccinated_page():
         return "Vaccine product value did not persist"
 
 def get_vaccinator_value_on_vaccinated_page():
-    find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "get_selected_option")
+    return find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "get_selected_option")
 
 def get_batch_number():
     return find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "get_selected_option")
