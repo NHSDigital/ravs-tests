@@ -139,7 +139,7 @@ def shared_data():
 @pytest.fixture(scope="session", autouse=True)
 def initialize_session(shared_data):
     initialize_helpers()
-    yield shared_data
+    yield
     after_all()
     shared_data.clear()
     quit_browser()
