@@ -295,7 +295,7 @@ def step_patient_added_message_should_be_available(shared_data):
 @then("the patient's phone-number, address and site information should not be visible")
 def step_sensitive_patients_details_should_be_hidden(shared_data):
     assert get_patient_name_value_in_patient_details_screen().lower() == shared_data["patient_name"].lower()
-    assert get_patient_nhs_number_value_in_patient_details_screen() == ""
+    assert get_patient_phone_number_value_in_patient_details_screen() == None
     assert get_patient_address_value_in_patient_details_screen().strip() == ""
 
     vaccine_types = [
