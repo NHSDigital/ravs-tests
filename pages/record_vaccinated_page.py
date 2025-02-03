@@ -167,8 +167,8 @@ def get_vaccine_product_value_on_vaccinated_page():
 def get_vaccinator_value_on_vaccinated_page():
     return find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "get_selected_option")
 
-def get_batch_number():
+def get_batch_number_on_vaccinated_screen():
     return find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "get_selected_option")
 
-def get_vaccination_site():
+def get_vaccination_site_on_vaccinated_screen():
     return find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "get_selected_option")
