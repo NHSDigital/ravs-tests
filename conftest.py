@@ -434,11 +434,11 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("selected_batch_number")
         enter_dose_amount_value(dose_amount)
         attach_screenshot("entered_dose_amount_value")
-        if click_continue_to_check_and_confirm_screen_button() == True:
+        if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
             select_batch_number(batch_number_to_select)
             attach_screenshot("selected_batch_number")
-            click_continue_to_check_and_confirm_screen_button()
+            click_continue_to_check_and_confirm_vaccination_screen_button()
             attach_screenshot("clicked_continue_to_check_and_confirm_screen_button")
     else:
         click_not_vaccinated_radiobutton()
@@ -478,11 +478,11 @@ def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_mod
         attach_screenshot("selected_batch_number")
         enter_dose_amount_value(dose_amount)
         attach_screenshot("entered_dose_amount_value")
-        if click_continue_to_check_and_confirm_screen_button() == True:
+        if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
             select_batch_number(batch_number_to_select)
             attach_screenshot("selected_batch_number")
-            click_continue_to_check_and_confirm_screen_button()
+            click_continue_to_check_and_confirm_vaccination_screen_button()
             attach_screenshot("clicked_continue_to_check_and_confirm_screen_button")
     else:
         click_not_vaccinated_radiobutton()
@@ -759,6 +759,9 @@ def check_values_persist_on_choose_vaccine_screen(shared_data):
 
 @then("the patient's eligibility, assessment date, legal mechanism, assessing clinician, assessment outcome selection must persist on the assessment screen")
 def the_eligibility_values_should_persist(shared_data):
+    click_continue_to_record_consent_button()
+    assert check_eligibility_type_missing_error_message_link_exists() == True
+    attach_screenshot("eligibility_link_missing_error_message_text_should_exist")
     assert get_is_patient_eligible_value_on_assessing_the_patient_page().lower() == str(shared_data["eligible_decision"]).lower()
     attach_screenshot("assessment_patient_eligible_value_should_persist")
     assert format_date(get_assessment_date_value(), config["browser"]) == shared_data["eligibility_assessment_date"]
@@ -778,7 +781,7 @@ def the_eligibility_values_should_persist(shared_data):
 def the_consent_values_should_persist(shared_data):
     assert get_patient_consent_value_on_consent_page().lower() == str(shared_data["eligible_decision"]).lower()
     attach_screenshot("consent_value_should_persist")
-    # assert get_consenting_clinician_details() == shared_data["consent_clinician_details"]
+    assert get_consenting_clinician_details() == shared_data["consent_clinician_details"]
     attach_screenshot("consent_clinician_value_should_persist")
     name_of_person_consenting = "Automation tester"
     relationship_to_patient = "RAVS tester"
@@ -805,9 +808,18 @@ def the_vaccinated_values_should_persist(shared_data):
     attach_screenshot("vaccination_date_should_persist")
     assert get_vaccination_care_model_value_on_vaccinated_page() == shared_data["care_model"]
     attach_screenshot("care_model_value_should_persist")
-    assert get_vaccine_product_value_on_vaccinated_page() == shared_data["chosen_vaccine_type"]
-    attach_screenshot("vaccine_product_value_should_persist")
-    assert get_batch_number() == shared_data["batch_number_selected"]
-    attach_screenshot("vaccine_product_batch_number_value_should_persist")
     assert get_vaccinator_value_on_vaccinated_page() == shared_data['vaccinator']
     attach_screenshot("vaccinator_value_should_persist")
+    if get_is_patient_vaccinated_value_on_vaccinated_page().lower() == "yes":
+        assert get_vaccine_product_value_on_vaccinated_page() == shared_data["chosen_vaccine_type"]
+        attach_screenshot("vaccine_product_value_should_persist")
+        assert get_batch_number() == shared_data["batch_number_selected"]
+        attach_screenshot("vaccine_product_batch_number_value_should_persist")
+        assert get_dose_amount_value() == shared_data["dose_amount"]
+        attach_screenshot("vaccine_product_does_amount_value_should_persist")
+        assert get_vaccination_site() == ""
+        attach_screenshot("vaccination_site_value_should_not_persist")
+    click_continue_to_check_and_confirm_vaccination_screen_button()
+    assert check_vaccination_site_missing_error_message_exists() == True
+    assert check_vaccination_site_missing_error_message_link_exists() == True
+
