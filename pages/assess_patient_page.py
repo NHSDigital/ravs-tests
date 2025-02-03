@@ -24,6 +24,8 @@ ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select the ass
 ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK = ("text", "Select the assessing clinician")
 LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select a legal mechanism")
 LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_LINK = ("text", "Select a legal mechanism")
+ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select eligibility type")
+ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_LINK = ("text", "Select eligibility type")
 ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select an assessment outcome")
 ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_LINK = ("text", "Select an assessment outcome")
 STAFF_ROLE_DROPDOWN_ELEMENT = ("label", "Staff role")
@@ -48,6 +50,14 @@ def check_assessment_date_missing_error_message_text_exists():
 def check_assessment_date_missing_error_message_link_exists():
     wait_for_element_to_appear(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
     return check_element_exists(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
+
+def check_eligibility_type_missing_error_message_text_exists():
+    wait_for_element_to_appear(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_TEXT)
+    return check_element_exists(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_TEXT)
+
+def check_eligibility_type_missing_error_message_link_exists():
+    wait_for_element_to_appear(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_LINK)
+    return check_element_exists(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_LINK)
 
 def click_assessment_date_missing_error_message_link():
     wait_for_element_to_appear(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)

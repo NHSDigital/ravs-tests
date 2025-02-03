@@ -1,10 +1,14 @@
+from asyncio.log import logger
+import json
 import time
 from playwright.sync_api import sync_playwright, TimeoutError, Locator
 from axe_core_python.sync_playwright import Axe
+from requests import request
 from init_helpers import *
 import pytest
 import logging
 import platform
+from helpers.mockdatabaseHelper import MockDatabaseHelper
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -308,6 +312,106 @@ class BasePlaywrightHelper:
             print(f"Error checking if radio button is selected: {e}")
             return False
 
+    def get_mock_database_helper(self, working_directory):
+        """Returns an instance of MockDatabaseHelper, initializing with mock data."""
+        mock_data_file = os.path.join(working_directory, "mock_data", "mock_patients.json")
+        if not os.path.exists(mock_data_file):
+            raise FileNotFoundError(f"Mock data file not found: {mock_data_file}")
+        return MockDatabaseHelper(mock_data_file)
+
+    def mock_api_response(self, working_directory):
+        endpoint_pattern = "**/api/patient/nhsNumberSearch*"
+        endpoint_pattern = "https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**"
+        logger.info(f"Setting up mock for API: {endpoint_pattern}")
+
+        def handler(route):
+            """Intercept API requests and return mock data."""
+            request_url = route.request.url
+            logger.info(f"API Request Detected: {request_url}")
+
+            if "nhsNumber=" in request_url:
+                nhs_number = request_url.split("nhsNumber=")[-1]
+            else:
+                nhs_number = None
+
+            logger.info(f"Extracted NHS number: {nhs_number}")
+
+            if not nhs_number:
+                logger.warning(f"No NHS number found in request: {request_url}")
+                route.continue_()
+                return
+
+            mock_db = self.get_mock_database_helper(working_directory)
+            patient = mock_db.fetch_one("SELECT * FROM patients WHERE nhs_number = ?", (nhs_number,))
+
+            if patient:
+                patient_id = int(patient[0])
+                nhs_number = patient[2]
+                full_name = patient[1].split()
+                first_name = full_name[0]
+                last_name = full_name[1] if len(full_name) > 1 else ""
+                dob = patient[3]
+                address = patient[4]
+                postcode = "DN18 5DW"
+
+                response_body = json.dumps({
+                    "PdsPatient": {
+                        "PatientId": patient_id,
+                        "NhsNumber": nhs_number,
+                        "FirstName": first_name,
+                        "LastName": last_name,
+                        "DateOfBirth": dob,
+                        "GenderId": 1,
+                        "Gender": None,
+                        "Telephone": None,
+                        "Address": address,
+                        "Postcode": postcode,
+                        "GpCode": None,
+                        "TooManyReturnedResults": False,
+                        "PatientExists": True,
+                        "IsDeceased": False,
+                        "PdsPatientDto": None,
+                        "Vaccinations": None,
+                        "SecurityCode": 0,
+                        "AuditTypeId": None,
+                        "AuditDateTime": None,
+                        "AuditUserId": None,
+                        "AuditIpAddress": None
+                    },
+                    "RavsPatient": {
+                        "PatientId": patient_id,
+                        "NhsNumber": nhs_number,
+                        "FirstName": first_name,
+                        "LastName": last_name,
+                        "DateOfBirth": dob,
+                        "GenderId": 1,
+                        "Gender": None,
+                        "Telephone": None,
+                        "Address": None,
+                        "Postcode": None,
+                        "GpCode": None,
+                        "TooManyReturnedResults": False,
+                        "PatientExists": False,
+                        "IsDeceased": False,
+                        "PdsPatientDto": None,
+                        "Vaccinations": None,
+                        "SecurityCode": 0,
+                        "AuditTypeId": None,
+                        "AuditDateTime": None,
+                        "AuditUserId": None,
+                        "AuditIpAddress": None
+                    }
+                })
+                logger.info(f"Mocking API response for NHS Number {nhs_number}: {response_body}")
+
+                route.fulfill(status=200, content_type="application/json", body=response_body)
+            else:
+                logger.warning(f"No mock data found for NHS Number: {nhs_number}")
+                route.fulfill(status=404, content_type="application/json", body='{"error": "Patient not found"}')
+
+        self.page.route(endpoint_pattern, handler)
+        self.page.route("https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**", lambda route: route.abort())
+
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None, max_retries=3, retry_delay=2):
         if not screenshot_name:
             if isinstance(locator_or_element, str):
@@ -379,6 +483,9 @@ class BasePlaywrightHelper:
                         text = element.get_attribute("value")
                         print(f"Text from the element: {text}")
                         return text
+                    elif action.lower() == "scroll_to":
+                        element.scroll_into_view_if_needed()
+                        print(f"Scrolled to {element}")
                     elif action.lower() == "get_selected_option":
                         selected_option = element.locator("option:checked")
                         if selected_option.count() > 0:

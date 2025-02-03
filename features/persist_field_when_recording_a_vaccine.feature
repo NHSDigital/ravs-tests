@@ -23,3 +23,4 @@ Feature: Persist fields when recording vaccination
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | new_nhs_number | new_patient_name |
       | 0 | 9693632109 | ALBERT HOUSE  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER |
+      | 0 | 9693632109 | ALBERT HOUSE  | Care home | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER |

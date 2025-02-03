@@ -118,6 +118,7 @@ def click_search_by_local_records_link():
 
 def click_patient_name_link():
     wait_for_element_to_appear(PATIENT_NAME_LINK)
+    find_element_and_perform_action(PATIENT_NAME_LINK, "scroll_to")
     find_element_and_perform_action(PATIENT_NAME_LINK, "click")
 
 def click_view_record():
@@ -133,6 +134,7 @@ def click_search_for_patient_button():
     find_element_and_perform_action(SEARCH_BUTTON, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     time.sleep(2)
+
 
 def click_create_a_new_patient_button():
     wait_for_element_to_appear(CREATE_NEW_PATIENT_BUTTON)

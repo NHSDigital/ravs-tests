@@ -94,7 +94,8 @@ def the_pds_search_section_should_be_displayed():
 
 @given('I click the search button')
 @when('I click the search button')
-def step_click_search_button():
+def step_click_search_button(shared_data):
+    url = get_app_url(config["test_environment"])
     click_search_for_patient_button()
     attach_screenshot("clicked_search_for_patient_button")
 
@@ -114,14 +115,11 @@ def step_click_confirm_and_save_button():
     click_confirm_and_save_button()
     attach_screenshot("clicked_confirm_and_save_button")
 
-@when('I click the search button')
-def step_i_click_the_search_button():
-    click_search_for_patient_button()
-
 @when(parse('I enter a valid {nhsNumber}'))
 @given(parse('I enter {nhsNumber} as the nhs number'))
-def step_i_enter_nhs_number(nhsNumber):
+def step_i_enter_nhs_number(nhsNumber, shared_data):
     enter_nhs_number(nhsNumber)
+    shared_data["nhsNumber"] = nhsNumber
 
 @given('I clear the nhs number')
 def step_i_clear_the_nhs_number():
@@ -170,7 +168,9 @@ def step_error_message_appears_for_postcode(errorMessage):
 def step_patient_information_page_should_be_available(name, nhsNumber, dob, address):
     attach_screenshot("patient_information_page_should_be_visible")
     assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True
+    attach_screenshot("patient_nhs_number_search_result_should_exist")
     assert check_patient_name_search_result_exists(name, True) == True
+    attach_screenshot("patient_name_search_result_should_exist")
     assert check_patient_dob_search_result_exists(dob, True) == True
     assert check_patient_address_search_result_exists(address, True) == True
 
@@ -194,6 +194,7 @@ def step_patient_information_page_should_be_available(shared_data):
     postcode = shared_data["postcode"]
 
     assert check_patient_name_search_result_exists(name, True) == True
+    attach_screenshot("patient_name_search_result_should_exist")
     assert check_patient_dob_search_result_exists(dob, True) == True
     assert check_patient_postcode_search_result_exists(postcode, True) == True
 
@@ -201,6 +202,7 @@ def step_patient_information_page_should_be_available(shared_data):
 def step_assert_no_results_found_for_nhs_number_message(nhsNumber):
     attach_screenshot("no_results_found_should_be_visible")
     assert check_patient_not_found_for_nhs_number_message_exists(format_nhs_number(nhsNumber), True) == True
+    attach_screenshot("patient_not_found_for_nhs_number_message_should_exist")
     assert check_create_new_patient_button_exists(True) == True
 
 @then("I can see a message that no results are found for the patient")
@@ -293,8 +295,8 @@ def step_patient_added_message_should_be_available(shared_data):
 @then("the patient's phone-number, address and site information should not be visible")
 def step_sensitive_patients_details_should_be_hidden(shared_data):
     assert get_patient_name_value_in_patient_details_screen().lower() == shared_data["patient_name"].lower()
-    assert get_patient_nhs_number_in_patient_details_screen_value() == ""
-    assert get_patient_address_in_patient_details_screen_value().strip() == ""
+    assert get_patient_nhs_number_value_in_patient_details_screen() == ""
+    assert get_patient_address_value_in_patient_details_screen().strip() == ""
 
     vaccine_types = [
         {"name": "COVID-19", "check_exists": check_covid_history_element_exists, "show_all": click_show_all_covid_history_button},

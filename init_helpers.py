@@ -4,6 +4,7 @@ import shutil
 from helpers.apiHelper import ApiHelper
 from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
+from helpers.mockdatabaseHelper import MockDatabaseHelper
 import pytest
 from playwright.sync_api import sync_playwright
 import allure
@@ -11,6 +12,7 @@ import logging
 from _pytest.main import Session
 
 playwright_helper_instance = None
+mockdatabase_helper_instance = None
 api_helper_instance = None
 datetime_helper_instance = None
 chrome_binary_path = None
@@ -36,9 +38,10 @@ def get_mobile_devices():
         }
 
 def initialize_helpers():
-    global api_helper_instance, datetime_helper_instance, playwright_helper_instance, config
+    global api_helper_instance, datetime_helper_instance, playwright_helper_instance, mockdatabase_helper_instance, config
 
     working_directory = get_working_directory()
+    mock_data_file = os.path.join(working_directory, "mock_data", "mock_patients.json")
 
     if playwright_helper_instance is None:
         playwright_helper_instance = PlaywrightHelper(working_directory, config)
@@ -48,6 +51,9 @@ def initialize_helpers():
 
     if datetime_helper_instance is None:
         datetime_helper_instance = DatetimeHelper()
+
+    if mockdatabase_helper_instance is None:
+        mockdatabase_helper_instance = MockDatabaseHelper(mock_data_file)
 
 def load_config_from_env():
     config = {
@@ -340,6 +346,10 @@ def find_element_and_perform_action(element, action, inputValue=None):
         element = get_element_by_type(element)
     wait_until_page_loading_message_disappears()
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
+
+def mock_api_response():
+    working_directory = get_working_directory()
+    return playwright_helper_instance.mock_api_response(working_directory)
 
 def wait_until_page_loading_message_disappears():
     PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
