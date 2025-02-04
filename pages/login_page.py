@@ -9,9 +9,9 @@ PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 def navigate_to_ravs_login_page(url):
     navigate_to_url(url)
     wait_for_element_to_appear(LOGIN_BUTTON_ELEMENT)
+    add_cookie(url, "ravs-cookie-consent", "false")
     if check_element_exists(ACCEPT_COOKIES_ELEMENT, False) is True:
         find_element_and_perform_action(ACCEPT_COOKIES_ELEMENT, "click")
-        find_element_and_perform_action(DO_NOT_USE_ANALYTICS_COOKIES_ELEMENT, "click")
 
 def check_login_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)

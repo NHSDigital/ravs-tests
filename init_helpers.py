@@ -243,6 +243,9 @@ def quit_browser():
 def get_current_url():
     return playwright_helper_instance.get_current_url()
 
+def add_cookie(url, cookie, value):
+    return playwright_helper_instance.add_cookie(url, cookie, value)
+
 def get_browser_version():
     return playwright_helper_instance.get_browser_version()
 
