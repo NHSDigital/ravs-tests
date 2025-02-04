@@ -88,11 +88,6 @@ def setup_logging():
     yield
     logger.info("Test session complete")
 
-@pytest.mark.reports
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app(navigate_and_login):
-    pass
-
 @when("I click the reports navigation link")
 def I_click_reports_nav_link():
     click_reports_nav_link()

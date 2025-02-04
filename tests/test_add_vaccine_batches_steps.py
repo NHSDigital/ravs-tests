@@ -30,9 +30,7 @@ def test_batch_error_messages_should_appear_when_no_values_are_entered(navigate_
     pass
 
 
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app():
-    pass
+
 
 @given("I am on the RAVS home page")
 def logged_into_homepage(navigate_and_login):

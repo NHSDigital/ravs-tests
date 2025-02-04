@@ -236,6 +236,10 @@ def choose_vaccine_and_vaccine_type_only(site, vaccine, vaccine_type):
 def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineType, batch_number, expirydate):
     pass
 
+@given("I am logged into the RAVS app")
+def logged_into_ravs_app(navigate_and_login):
+    pass
+
 def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccine_type, batch_number, expiry_date):
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
