@@ -43,7 +43,7 @@ on:
 
 jobs:
   regression_tests:
-    runs-on: ubuntu-20.04-4cores
+    runs-on: ubuntu-20.04
     environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }} # Dynamically set environment based on event type
 
     steps:
