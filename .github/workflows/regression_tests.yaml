@@ -154,6 +154,12 @@ jobs:
           playwright install
           sudo $(which python) -m playwright install-deps
 
+      - name: Enable Additional Repositories
+        run: |
+          sudo add-apt-repository universe
+          sudo add-apt-repository multiverse
+          sudo apt-get update        
+
       # Step 7: Install Required System Libraries
       - name: Install Required System Libraries
         run: |
@@ -161,19 +167,19 @@ jobs:
           sudo apt-get install -y --no-install-recommends --fix-missing \
             libgtk-4-1 \
             libgraphene-1.0-0 \
-            libwoff2-2 \
+            libwoff2-dev \
             libvpx-dev \
             libevent-2.1-7 \
             libopus0 \
             libgstreamer-plugins-base1.0-0 \
             libgstreamer1.0-0 \
-            libavif14 \
+            libavif-dev \
             libharfbuzz-icu0 \
             libsecret-1-0 \
             libhyphen0 \
             libmanette-0.2-0 \
             libgles2 \
-            libx264-164
+            libx264-164 || true
 
       - name: Force Install Missing Playwright Dependencies
         run: |
