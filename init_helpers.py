@@ -117,11 +117,11 @@ def attach_screenshot(filename):
         # screenshot = capture_screenshot(full_path)
 
         # Check if screenshot was captured and file exists
-        if screenshot and os.path.exists(full_path):
-            allure.attach.file(full_path, name=filename, attachment_type=allure.attachment_type.PNG)
-            logging.debug(f"Screenshot attached at: {full_path}")
-        else:
-            logging.error(f"Screenshot capture failed or file not found at: {full_path}")
+        # if screenshot and os.path.exists(full_path):
+        #     allure.attach.file(full_path, name=filename, attachment_type=allure.attachment_type.PNG)
+        #     logging.debug(f"Screenshot attached at: {full_path}")
+        # else:
+        #     logging.error(f"Screenshot capture failed or file not found at: {full_path}")
     except Exception as e:
         logging.error(f"Failed to capture screenshot: {e}")
 
