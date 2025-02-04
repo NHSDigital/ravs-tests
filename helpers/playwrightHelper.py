@@ -9,6 +9,7 @@ import pytest
 import logging
 import platform
 from helpers.mockdatabaseHelper import MockDatabaseHelper
+from urllib.parse import urlparse
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -34,30 +35,14 @@ class BasePlaywrightHelper:
                 locale="en-GB",
                 timezone_id="Europe/London"
             )
-            self.context.add_cookies([
-                {
-                    "name": "ravs-cookie-consent",
-                    "value": "false",
-                    "domain": "www.ravs-dev.england.nhs.uk",
-                    "path": "/"
-                }
-            ])
-            self.page = self.context.new_page()
+            page = self.context.new_page()
         except Exception as e:
             print(f"Error launching Chromium: {e}")
 
-    def launch_edge(self, headless_mode):
+    def launch_edge(self, headless_mode, url):
         try:
             self.browser = self.playwright.chromium.launch(channel="msedge",headless=headless_mode, args=["--fullscreen"])
             self.context = self.browser.new_context()
-            self.context.add_cookies([
-                {
-                    "name": "ravs-cookie-consent",
-                    "value": "false",
-                    "domain": "www.ravs-dev.england.nhs.uk",
-                    "path": "/"
-                }
-            ])
             self.page = self.context.new_page()
         except Exception as e:
                 print(f"Error launching Edge: {e}")
@@ -116,6 +101,18 @@ class BasePlaywrightHelper:
             else:
                 raise error
         return full_path
+
+    def add_cookie(self, url, cookie, value):
+       self.page.goto(url)
+       domain = urlparse(url).netloc
+       self.context.add_cookies([
+                {
+                    "name": cookie,
+                    "value": value,
+                    "domain": domain,
+                    "path": "/"
+                }
+            ])
 
     def get_browser_version(self):
         if self.browser:
