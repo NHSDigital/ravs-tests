@@ -103,9 +103,9 @@ class BasePlaywrightHelper:
         return full_path
 
     def add_cookie(self, url, cookie, value):
-       self.page.goto(url)
-       domain = urlparse(url).netloc
-       self.context.add_cookies([
+        self.page.goto(url)
+        domain = urlparse(url).netloc
+        self.context.add_cookies([
                 {
                     "name": cookie,
                     "value": value,
