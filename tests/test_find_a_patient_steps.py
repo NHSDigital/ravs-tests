@@ -25,11 +25,6 @@ fake = Faker('en_GB')
 
 scenarios(f'{features_directory}/find_a_patient.feature')
 
-@pytest.mark.sflag
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app(navigate_and_login):
-    pass
-
 @given('I am on the find a patient by pds details page')
 def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
     if config["browser"] == "mobile":
@@ -54,10 +49,6 @@ def step_i_click_the_find_a_patient_nav_link():
 @then('the alert message should appear for nhs number')
 def the_alert_messages_should_appear_nhs_number():
     attach_screenshot("required_alerts_should_appear_for_nhsNumber")
-
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app():
-    pass
 
 @given('I am on the PDS search page')
 def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
