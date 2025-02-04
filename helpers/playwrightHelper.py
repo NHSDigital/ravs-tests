@@ -39,7 +39,7 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"Error launching Chromium: {e}")
 
-    def launch_edge(self, headless_mode, url):
+    def launch_edge(self, headless_mode):
         try:
             self.browser = self.playwright.chromium.launch(channel="msedge",headless=headless_mode, args=["--fullscreen"])
             self.context = self.browser.new_context()
