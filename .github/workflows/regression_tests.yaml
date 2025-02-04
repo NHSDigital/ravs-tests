@@ -43,7 +43,7 @@ on:
 
 jobs:
   regression_tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }} # Dynamically set environment based on event type
 
     steps:
@@ -163,7 +163,21 @@ jobs:
         run: |
           python -m pip install playwright
           playwright install
-          playwright install-deps
+          sudo playwright install-deps
+
+      - name: Force Install Missing Playwright Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libwoff1 \
+            libopus0 \
+            libwebpdemux2 \
+            libharfbuzz-icu0 \
+            libhyphen0 \
+            libegl1 \
+            libevdev2 \
+            libgles2 \
+            gstreamer1.0-libav        
 
       # Step 7: Install Allure Commandline
       - name: Install Allure Commandline
