@@ -34,17 +34,15 @@ on:
         default: "main"
   push:
     branches:
-      - '**'   # Triggers on push to any branch
+      - '**'
   schedule:
-    # QA environment at 6:00 AM UTC
-    - cron: '0 6 * * *'  # This will run the tests for the QA environment
-    # DEV environment at 6:30 AM UTC
-    - cron: '30 6 * * *'  # This will run the tests for the DEV environment
+    - cron: '0 6 * * *'
+    - cron: '30 6 * * *'
 
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }} # Dynamically set environment based on event type
+    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }}
 
     steps:
       # Step 1: Checkout the repository
@@ -84,49 +82,34 @@ jobs:
             echo ENV=dev >> $GITHUB_ENV
           fi
 
-      # - name: Notify Slack - Test Run Started
-      #   if: ${{ github.event_name == 'workflow_dispatch' }}
-      #   run: |
-      #     BRANCH_NAME=${{ github.ref_name || 'manual trigger (branch not specified)' }}
-      #     curl -X POST -H 'Content-type: application/json' \
-      #     --data '{
-      #       "text": "🚀 Tests have been kicked off manually by *${{ github.actor }}*.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* '$BRANCH_NAME'"
-      #     }' \
-      #     ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Notify Slack - Test Run Started
+      - name: Notify Slack - Test Run Started (Workflow Dispatch)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          # Detect Azure DevOps trigger
           if [[ "${{ github.actor }}" == "azure-pipelines[bot]" ]] || [[ "${{ github.event.inputs.trigger_source }}" == "Azure devops" ]]; then
             TRIGGER_SOURCE="Azure DevOps Pipeline"
           else
             TRIGGER_SOURCE="manually by *${{ github.actor }}*"
           fi
-
-          # Branch name
           BRANCH_NAME=${{ github.ref_name || 'manual trigger (branch not specified)' }}
-
-          # Notify Slack
           curl -X POST -H 'Content-type: application/json' \
-          --data "{
-            \"text\": \"🚀 Tests have been kicked off $TRIGGER_SOURCE.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* ${BRANCH_NAME}\"
-          }" \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+            --data "{
+              \"text\": \"🚀 Tests have been kicked off $TRIGGER_SOURCE.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* ${BRANCH_NAME}\"
+            }" \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Notify Slack - Test Run Started
+      - name: Notify Slack - Test Run Started (Push)
         if: ${{ github.event_name == 'push' }}
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"text": "🚀 Tests have been triggered by a push to branch *${{ github.ref_name }}*.\n*Environment:* ${{ env.ENV }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}"}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+            --data '{"text": "🚀 Tests have been triggered by a push to branch *${{ github.ref_name }}*.\n*Environment:* ${{ env.ENV }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Notify Slack - Test Run Started
+      - name: Notify Slack - Test Run Started (Schedule)
         if: ${{ github.event_name == 'schedule' }}
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"text": "🚀 Tests have been triggered by a scheduled run.\n*Environment:* ${{ env.ENV }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}"}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+            --data '{"text": "🚀 Tests have been triggered by a scheduled run.\n*Environment:* ${{ env.ENV }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Set up en_GB.UTF-8 locale
         run: |
@@ -154,23 +137,24 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ inputs.environment }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}-${{ hashFiles('package.json') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
+      # Step 6: Install Playwright and its dependencies
       - name: Install Playwright
         run: |
           python -m pip install --upgrade pip
           python -m pip install playwright
-          npx playwright install --with-deps         
+          npx playwright install --with-deps
 
-      # Step 6: Install Playwright dependencies
       - name: Install Playwright dependencies
         run: |
           python -m pip install playwright
           playwright install
-          sudo playwright install-deps
+          sudo $(which python) -m playwright install-deps
 
+      # Step 7: Install Required System Libraries
       - name: Install Required System Libraries
         run: |
           sudo apt-get update
@@ -189,7 +173,7 @@ jobs:
             libhyphen0 \
             libmanette-0.2-0 \
             libgles2 \
-            libx264-163     
+            libx264-163
 
       - name: Force Install Missing Playwright Dependencies
         run: |
@@ -203,9 +187,9 @@ jobs:
             libegl1 \
             libevdev2 \
             libgles2 \
-            gstreamer1.0-libav        
+            gstreamer1.0-libav
 
-      # Step 7: Install Allure Commandline
+      # Step 8: Install Allure Commandline
       - name: Install Allure Commandline
         run: |
           curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
@@ -213,11 +197,11 @@ jobs:
           sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
           rm -rf allure-commandline-2.17.3.tgz
 
-      # Step 8: Verify Allure Installation
+      # Step 9: Verify Allure Installation
       - name: Verify Allure Installation
         run: allure --version
 
-      # Step 9: Debug tox.ini content for visibility
+      # Step 10: Debug configuration files (Optional)
       - name: Debug tox.ini
         run: cat tox.ini
 
@@ -229,7 +213,7 @@ jobs:
           echo "Current Locale:"
           locale
 
-      # Step 10: Run Tests using tox
+      # Step 11: Run Tests using tox
       - name: Run Tests
         env:
           TZ: "Europe/London"
@@ -246,7 +230,7 @@ jobs:
           tox -v
         continue-on-error: true
 
-      # Step 11: Upload Allure Results as an artifact
+      # Step 12: Upload Allure Results as an artifact
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
         with:
@@ -254,7 +238,7 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
-      # Step 12: Generate a token and trigger report generation
+      # Step 13: Generate a token and trigger report generation
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
@@ -267,8 +251,8 @@ jobs:
       - name: Trigger test report generation
         run: |
           curl -X POST \
-          -H "Accept: application/vnd.github+json" \
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
-          -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}"}}' \
-          "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
+            -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}"}}' \
+            "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
