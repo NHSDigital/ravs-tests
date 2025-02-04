@@ -114,7 +114,7 @@ def attach_screenshot(filename):
 
         # Capture the screenshot
         logging.debug(f"Saving screenshot to: {full_path}")
-        screenshot = capture_screenshot(full_path)
+        # screenshot = capture_screenshot(full_path)
 
         # Check if screenshot was captured and file exists
         if screenshot and os.path.exists(full_path):

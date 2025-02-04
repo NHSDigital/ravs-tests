@@ -1,7 +1,7 @@
 Feature: Find a patient
 
   @findpatient
-  Scenario: Find a patient page should launch
+    Scenario: Find a patient page should launch
     Given I am logged into the RAVS app
     When I click the find a patient navigation link
     Then the find a patient page should be displayed
