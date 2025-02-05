@@ -118,6 +118,7 @@ def click_search_by_local_records_link():
 
 def click_patient_name_link():
     wait_for_element_to_appear(PATIENT_NAME_LINK)
+    find_element_and_perform_action(PATIENT_NAME_LINK, "scroll_to")
     find_element_and_perform_action(PATIENT_NAME_LINK, "click")
 
 def click_view_record():

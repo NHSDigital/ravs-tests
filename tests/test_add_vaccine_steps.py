@@ -15,10 +15,6 @@ logger = logging.getLogger(__name__)
 
 scenarios(f'{features_directory}/add_vaccines.feature')
 
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app(navigate_and_login):
-    pass
-
 @given("I am on the RAVS home page")
 def logged_into_homepage(navigate_and_login):
     pass

@@ -25,11 +25,6 @@ fake = Faker('en_GB')
 
 scenarios(f'{features_directory}/find_a_patient.feature')
 
-@pytest.mark.sflag
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app(navigate_and_login):
-    pass
-
 @given('I am on the find a patient by pds details page')
 def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
     if config["browser"] == "mobile":
@@ -54,10 +49,6 @@ def step_i_click_the_find_a_patient_nav_link():
 @then('the alert message should appear for nhs number')
 def the_alert_messages_should_appear_nhs_number():
     attach_screenshot("required_alerts_should_appear_for_nhsNumber")
-
-@given("I am logged into the RAVS app")
-def logged_into_ravs_app():
-    pass
 
 @given('I am on the PDS search page')
 def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
@@ -94,7 +85,8 @@ def the_pds_search_section_should_be_displayed():
 
 @given('I click the search button')
 @when('I click the search button')
-def step_click_search_button():
+def step_click_search_button(shared_data):
+    url = get_app_url(config["test_environment"])
     click_search_for_patient_button()
     attach_screenshot("clicked_search_for_patient_button")
 
@@ -114,14 +106,11 @@ def step_click_confirm_and_save_button():
     click_confirm_and_save_button()
     attach_screenshot("clicked_confirm_and_save_button")
 
-@when('I click the search button')
-def step_i_click_the_search_button():
-    click_search_for_patient_button()
-
 @when(parse('I enter a valid {nhsNumber}'))
 @given(parse('I enter {nhsNumber} as the nhs number'))
-def step_i_enter_nhs_number(nhsNumber):
+def step_i_enter_nhs_number(nhsNumber, shared_data):
     enter_nhs_number(nhsNumber)
+    shared_data["nhsNumber"] = nhsNumber
 
 @given('I clear the nhs number')
 def step_i_clear_the_nhs_number():
@@ -170,7 +159,9 @@ def step_error_message_appears_for_postcode(errorMessage):
 def step_patient_information_page_should_be_available(name, nhsNumber, dob, address):
     attach_screenshot("patient_information_page_should_be_visible")
     assert check_patient_nhs_number_search_result_exists(nhsNumber, True) == True
+    attach_screenshot("patient_nhs_number_search_result_should_exist")
     assert check_patient_name_search_result_exists(name, True) == True
+    attach_screenshot("patient_name_search_result_should_exist")
     assert check_patient_dob_search_result_exists(dob, True) == True
     assert check_patient_address_search_result_exists(address, True) == True
 
@@ -194,6 +185,7 @@ def step_patient_information_page_should_be_available(shared_data):
     postcode = shared_data["postcode"]
 
     assert check_patient_name_search_result_exists(name, True) == True
+    attach_screenshot("patient_name_search_result_should_exist")
     assert check_patient_dob_search_result_exists(dob, True) == True
     assert check_patient_postcode_search_result_exists(postcode, True) == True
 
@@ -201,6 +193,7 @@ def step_patient_information_page_should_be_available(shared_data):
 def step_assert_no_results_found_for_nhs_number_message(nhsNumber):
     attach_screenshot("no_results_found_should_be_visible")
     assert check_patient_not_found_for_nhs_number_message_exists(format_nhs_number(nhsNumber), True) == True
+    attach_screenshot("patient_not_found_for_nhs_number_message_should_exist")
     assert check_create_new_patient_button_exists(True) == True
 
 @then("I can see a message that no results are found for the patient")
@@ -292,10 +285,9 @@ def step_patient_added_message_should_be_available(shared_data):
 
 @then("the patient's phone-number, address and site information should not be visible")
 def step_sensitive_patients_details_should_be_hidden(shared_data):
-    assert get_patient_name_value().lower() == shared_data["patient_name"].lower()
-    assert get_patient_phone_number_value() == ""
-    assert get_patient_address_value().strip() == ""
-
+    assert get_patient_name_value_in_patient_details_screen().lower() == shared_data["patient_name"].lower()
+    assert get_patient_phone_number_value_in_patient_details_screen() == None
+    assert get_patient_address_value_in_patient_details_screen().strip() == ""
     vaccine_types = [
         {"name": "COVID-19", "check_exists": check_covid_history_element_exists, "show_all": click_show_all_covid_history_button},
         {"name": "Flu", "check_exists": check_flu_history_element_exists, "show_all": click_show_all_flu_history_button},

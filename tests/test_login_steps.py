@@ -77,12 +77,14 @@ def provide_credentials(emailAddress, password, shared_data):
     else:
         enter_email_address(emailAddress)
         enter_password(password)
+    attach_screenshot("entered_emailAddress_and_password")
     shared_data['emailAddress'] = emailAddress
     shared_data['password'] = password
 
 @when("the NHS sign in button is clicked")
 def click_nhssignin():
     click_nhs_signin_button()
+    attach_screenshot("clicked_nhs_signin_button")
 
 @then(parse("sign in should {status}"))
 @then("sign in should <status>")
@@ -91,18 +93,24 @@ def verify_signin_status(status, shared_data):
     data = shared_data
     if status.lower() == "fail":
         if data['password'] == "None" and "valid" not in data["emailAddress"].lower():
+            attach_screenshot("check_password_error_alert_exists")
             assert check_password_error_alert_exists()
             assert get_password_missing_error_text() == "This field cannot be left blank"
         elif data['emailAddress'] == "None" and "valid" not in data["emailAddress"].lower():
             click_nhs_signin_button()
+            attach_screenshot("clicked_nhs_signin_button_and_check_error_alerts_exist")
             assert check_emailAddress_error_alert_exists()
             assert check_found_some_errors_alert_exists()
             assert get_emailAddress_missing_error_text() == "This field cannot be left blank"
         elif "long_email_address" in data['emailAddress']:
+            attach_screenshot("check_emailAddress_error_alert_exists")
             assert check_emailAddress_error_alert_exists()
             assert get_emailAddress_missing_error_text() == "This field cannot be left blank"
         elif "valid" in data['emailAddress'] and status.lower()=="pass":
+            attach_screenshot("logout_button_should_exist")
             assert check_logout_button_exists()
             click_logout_button()
+            attach_screenshot("clicked_logout_button")
         else:
+            attach_screenshot("check_unable_to_sign_in_error_exists")
             assert check_unable_to_sign_in_error_exists()

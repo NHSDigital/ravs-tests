@@ -2,7 +2,8 @@ import time
 from init_helpers import *
 
 LOGIN_BUTTON_ELEMENT = ("role", "button", "Log In")
-ACCEPT_COOKIES_ELEMENT = ("role", "button", "I'm ok with analytics cookies")
+ACCEPT_COOKIES_ELEMENT = ("role", "button", "I'm OK with analytics cookies")
+DO_NOT_USE_ANALYTICS_COOKIES_ELEMENT = ("role", "button", "Do not use analytics cookies")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def navigate_to_ravs_login_page(url):
