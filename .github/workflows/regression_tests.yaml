@@ -56,53 +56,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Set Environment Variables
-        run: |
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            case "${{ github.event.schedule }}" in
-              "0 6 * * *")
-                echo ENV=qa >> $GITHUB_ENV
-                ;;
-              "30 6 * * *")
-                echo ENV=dev >> $GITHUB_ENV
-                ;;
-              *)
-                echo "Unrecognized schedule. Defaulting to dev."
-                echo ENV=dev >> $GITHUB_ENV
-                ;;
-            esac
-          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo ENV=${{ inputs.environment }} >> $GITHUB_ENV
-          elif [[ "${{ github.event_name }}" == "push" ]]; then
-            echo ENV=dev >> $GITHUB_ENV
-          else
-            echo "Unknown event. Defaulting to dev."
-            echo ENV=dev >> $GITHUB_ENV
-          fi
-
-      - name: Notify Slack - Test Run Started
-        run: |
-          MESSAGE="🚀 Tests have been triggered."
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            TRIGGER_SOURCE="manually by *${{ github.actor }}*"
-          elif [[ "${{ github.event_name }}" == "push" ]]; then
-            TRIGGER_SOURCE="by a push to branch *${{ github.ref_name }}*"
-          elif [[ "${{ github.event_name }}" == "schedule" ]]; then
-            TRIGGER_SOURCE="by a scheduled run"
-          fi
-          curl -X POST -H 'Content-type: application/json' \
-            --data "{\"text\": \"${MESSAGE} ${TRIGGER_SOURCE}.\n*Environment:* ${{ env.ENV }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\"}" \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Set up en_GB.UTF-8 locale
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y locales
-          sudo locale-gen "en_GB.UTF-8"
-          sudo update-locale LANG=en_GB.UTF-8 LANGUAGE=en_GB:en LC_ALL=en_GB.UTF-8
-        env:
-          DEBIAN_FRONTEND: noninteractive
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -111,32 +64,17 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --upgrade pytest-playwright  # Ensure latest pytest-playwright
+          pip install --upgrade -r requirements.txt
 
-      - name: Cache Playwright binaries
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}-${{ hashFiles('package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
-      # - name: Install Playwright (Using Cache)
-      #   run: |
-      #     python -m pip install --no-cache-dir playwright
-      #     if [ ! -d ~/.cache/ms-playwright ]; then
-      #       npx playwright install --with-deps
-      #     else
-      #       echo "Using cached Playwright binaries."
-      #     fi
-
-      - name: Install Playwright (Version 1.50.0)
+      - name: Verify Playwright & Pytest Installation
         run: |
-          python -m pip install --no-cache-dir playwright==1.50.0
+          python -m pip list | grep playwright
+          python -m pip list | grep pytest
 
-      - name: Install Playwright Dependencies
+      - name: Install Playwright (Latest)
         run: |
-          npm install @playwright/test
+          python -m pip install --no-cache-dir --upgrade playwright
           npx playwright install --with-deps
 
       - name: Enable Additional Repositories
@@ -154,13 +92,6 @@ jobs:
             libavif-dev libharfbuzz-icu0 libsecret-1-0 libhyphen0 libmanette-0.2-0 \
             libgles2 libx264-164 || true
 
-      - name: Force Install Missing Playwright Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            libwoff1 libopus0 libwebpdemux2 libharfbuzz-icu0 \
-            libhyphen0 libegl1 libevdev2 libgles2 gstreamer1.0-libav
-
       - name: Install Allure Commandline
         run: |
           curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
@@ -170,15 +101,6 @@ jobs:
 
       - name: Verify Allure Installation
         run: allure --version
-
-      - name: Debug Configuration Files
-        run: |
-          echo "Debugging tox.ini:"
-          cat tox.ini || echo "tox.ini not found"
-          echo "Debugging regression_tests.yaml:"
-          cat .github/workflows/regression_tests.yaml || echo "regression_tests.yaml not found"
-          echo "Current Locale:"
-          locale
 
       - name: Run Tests
         env:
