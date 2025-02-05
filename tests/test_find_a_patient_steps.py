@@ -288,7 +288,7 @@ def step_sensitive_patients_details_should_be_hidden(shared_data):
     assert get_patient_name_value_in_patient_details_screen().lower() == shared_data["patient_name"].lower()
     assert get_patient_phone_number_value_in_patient_details_screen() == None
     assert get_patient_address_value_in_patient_details_screen().strip() == ""
-
+    
     vaccine_types = [
         {"name": "COVID-19", "check_exists": check_covid_history_element_exists, "show_all": click_show_all_covid_history_button},
         {"name": "Flu", "check_exists": check_flu_history_element_exists, "show_all": click_show_all_flu_history_button},
