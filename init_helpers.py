@@ -137,11 +137,6 @@ def shared_data():
     """
     return {}
 
-
-@pytest.fixture(scope="session")
-def shared_data():
-    return {}
-
 @pytest.fixture(scope="session", autouse=True)
 def initialize_session(shared_data):
     initialize_helpers()
