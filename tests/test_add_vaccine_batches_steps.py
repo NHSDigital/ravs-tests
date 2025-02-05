@@ -72,6 +72,7 @@ def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date):
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_batch_number")
+    click_continue_to_add_batch_button()
 
 @then("the add batch page should be launched")
 def add_batch_page_should_launch():
@@ -82,7 +83,6 @@ def add_batch_page_should_launch():
 def batch_already_added_warning_should_exist():
     attach_screenshot("batch_already_added_warning_message_exists")
     assert check_batch_already_exists_error_message_is_displayed() == True
-    click_continue_to_add_batch_button()
     assert check_batch_already_exists_error_message_link_is_displayed() == True
 
 @when('I click continue to confirm batch details page')
