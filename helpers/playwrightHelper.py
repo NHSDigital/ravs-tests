@@ -449,13 +449,9 @@ class BasePlaywrightHelper:
                 if element.is_visible():
                     element.scroll_into_view_if_needed()
 
-                    # Perform action based on the specified type
                     if action.lower() == "click":
-                        if element.is_enabled():
-                            element.click()
-                            print(f"Clicked the element successfully.")
-                        else:
-                            print(f"Element is either not visible or not enabled.")
+                        element.click()
+                        print(f"Clicked the element successfully.")
                     elif action.lower() == "check":
                         if not element.is_checked():
                             element.check()
