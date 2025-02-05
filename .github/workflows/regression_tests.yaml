@@ -130,9 +130,13 @@ jobs:
       #       echo "Using cached Playwright binaries."
       #     fi
 
-      - name: Install Playwright (Enforce Version 1.50.0)
+      - name: Install Playwright (Version 1.50.0)
         run: |
           python -m pip install --no-cache-dir playwright==1.50.0
+
+      - name: Install Playwright Dependencies
+        run: |
+          npm install @playwright/test
           npx playwright install --with-deps
 
       - name: Enable Additional Repositories
