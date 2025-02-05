@@ -14,6 +14,7 @@ VACCINATION_SITE_DROPDOWN_ELEMENT = ("label", "Vaccination site")
 BATCH_NUMBER_DROPDOWN_ELEMENT = ("label", "Batch number")
 BATCH_EXPIRY_DATE_READONLY_ELEMENT = ("label", "Batch expiry date")
 DOSE_AMOUNT_READONLY_ELEMENT = ("label", "Dose amount (ml)")
+VACCINATION_SITE_READONLY_ELEMENT = ("label", "Vaccination site")
 VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_TEXT = ("text", "Error: Date cannot be older than a year")
 VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_LINK = ("text", "Date cannot be older than a year")
 VACCINATED_YES_OR_NO_SELECTION_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select 'Yes' if you have vaccinated the patient, or 'No' if you haven't")
@@ -51,6 +52,9 @@ def enter_dose_amount_value(dose_amount):
 def set_vaccination_date(date):
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "clear")
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "type_text", date)
+
+def get_vaccination_date():
+    return find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "get_text")
 
 def enter_vaccination_comments(comments):
     find_element_and_perform_action(VACCINATION_COMMENTS_ELEMENT, "type_text", comments)
@@ -90,7 +94,7 @@ def click_save_and_return_button_on_record_vaccinated_page():
     find_element_and_perform_action(SAVE_AND_RETURN_BUTTON, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
-def click_continue_to_check_and_confirm_screen_button():
+def click_continue_to_check_and_confirm_vaccination_screen_button():
     wait_for_element_to_appear(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
     time.sleep(2)
     find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
@@ -111,6 +115,15 @@ def check_vaccination_date_incorrect_error_message_link_exists():
 def click_vaccination_date_incorrect_error_message_link():
     return find_element_and_perform_action(VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_LINK, "click")
 
+def check_vaccination_site_missing_error_message_exists():
+    return check_element_exists(VACCINATION_SITE_MISSING_ERROR_MESSAGE_TEXT, False)
+
+def check_vaccination_site_missing_error_message_link_exists():
+    return check_element_exists(VACCINATION_SITE_MISSING_ERROR_MESSAGE_LINK, False)
+
+def click_vaccination_site_missing_error_message_link():
+    return find_element_and_perform_action(VACCINATION_SITE_MISSING_ERROR_MESSAGE_LINK, "click")
+
 def click_care_model_option(care_model):
     element = ("label", care_model)
     if check_element_exists(element, False):
@@ -130,3 +143,32 @@ def enter_care_home_details(name):
     element = ("text", name)
     find_element_and_perform_action(element, "click")
 
+def get_is_patient_vaccinated_value_on_vaccinated_page():
+    selected_value = get_checked_radio_button_text("Have you vaccinated the patient?")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Patient vaccinated value did not persist"
+
+def get_vaccination_care_model_value_on_vaccinated_page():
+    selected_value = get_checked_radio_button_text("Where is the vaccination taking place?")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Care model value did not persist"
+
+def get_vaccine_product_value_on_vaccinated_page():
+    selected_value = get_checked_radio_button_text("Vaccine product")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Vaccine product value did not persist"
+
+def get_vaccinator_value_on_vaccinated_page():
+    return find_element_and_perform_action(VACCINATOR_DROPDOWN_ELEMENT, "get_selected_option")
+
+def get_batch_number_on_vaccinated_screen():
+    return find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "get_selected_option")
+
+def get_vaccination_site_on_vaccinated_screen():
+    return find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "get_selected_option")

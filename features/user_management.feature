@@ -72,8 +72,8 @@ Scenario: Add user details - Check and confirm page should be visible
 
 Examples:
 | first_name | last_name             | nhs_email_address                                        | clinician_status | permission_level       |
-| Automated  | administrator         | neelima.guntupalli1+administrator_automated@nhs.net      | yes              | administrator          |
-| Automated  | administrator         | neelima.guntupalli1+administrator_automated@nhs.test     | yes              | administrator          |
+| Automated  | administrator         | neelima.guntupalli1+admin_automated@nhs.net      | yes              | administrator          |
+| Automated  | administrator         | neelima.guntupalli1+admin_automated@nhs.test     | yes              | administrator          |
 | Automated  | tester                | automated.tester@nhs.net                                 | yes              | recorder               |
 | Automated  | lead administrator    | automated.tester@nhs.net                                 | no               | lead administrator     |
 | Bethany    | lead administrator    | bethany.north4+lead_administrator_automated@rmh.nhs.uk   | no               | lead administrator     |
@@ -113,7 +113,7 @@ Scenario: Change details in the check and confirm user screen when adding a new 
 
 Examples:
 | first_name | last_name          | nhs_email_address                                    | clinician_status | permission_level | detail | new_detail |
-| Manual  | administrator      | automated.tester@nhs.net    | Yes              | administrator    | name | Automated recorder |
+| Manual  | administrator      | automated.tester@nhs.net        | Yes              | administrator    | name | Automated recorder |
 | Automated  | tester             | automated.tester@nhs.net     | Yes              | recorder              | clinician_status | No |
 | Automated  | lead administrator | automated.tester@nhs.net     | No               | lead administrator         | permission_level | Recorder |
 | Automated  | administrator      | automated.tester@nhs.net     | No               | lead administrator    |  email_address   | neelima.guntupalli1+automated_tester@nhs.net |

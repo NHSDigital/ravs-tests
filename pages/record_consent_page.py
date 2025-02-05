@@ -115,3 +115,16 @@ def enter_relationship_to_patient(relationship):
 
 def enter_clinician_details(clinician):
     find_element_and_perform_action(CONSENT_CLINICIAN_DROPDOWN_ELEMENT, "select_option", clinician)
+
+def get_consenting_clinician_details():
+    return find_element_and_perform_action(CONSENT_CLINICIAN_DROPDOWN_ELEMENT, "get_selected_option")
+
+def get_patient_consent_value_on_consent_page():
+    selected_value = get_checked_radio_button_text("Does the patient or someone on their behalf consent to the vaccination?")
+    if selected_value != "":
+        if "they consent" in selected_value:
+            return selected_value.replace(", they consent", "").strip()
+        else:
+            return selected_value
+    else:
+        return "Is patient eligible selection did not persist"

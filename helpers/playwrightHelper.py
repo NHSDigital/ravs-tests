@@ -1,10 +1,15 @@
+from asyncio.log import logger
+import json
 import time
 from playwright.sync_api import sync_playwright, TimeoutError, Locator
 from axe_core_python.sync_playwright import Axe
+from requests import request
 from init_helpers import *
 import pytest
 import logging
 import platform
+from helpers.mockdatabaseHelper import MockDatabaseHelper
+from urllib.parse import urlparse
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -30,7 +35,7 @@ class BasePlaywrightHelper:
                 locale="en-GB",
                 timezone_id="Europe/London"
             )
-            self.page = self.context.new_page()
+            page = self.context.new_page()
         except Exception as e:
             print(f"Error launching Chromium: {e}")
 
@@ -96,6 +101,18 @@ class BasePlaywrightHelper:
             else:
                 raise error
         return full_path
+
+    def add_cookie(self, url, cookie, value):
+        self.page.goto(url)
+        domain = urlparse(url).netloc
+        self.context.add_cookies([
+                {
+                    "name": cookie,
+                    "value": value,
+                    "domain": domain,
+                    "path": "/"
+                }
+            ])
 
     def get_browser_version(self):
         if self.browser:
@@ -278,6 +295,135 @@ class BasePlaywrightHelper:
             print(f"Error during download: {e}")
             raise
 
+    def get_checked_radio_button_text(self, name):
+        try:
+            legend_selector = f'//legend[text()="{name}"]'
+            self.page.wait_for_selector(legend_selector, timeout=5000)
+
+            fieldset = self.page.query_selector(legend_selector).evaluate_handle(
+                'element => element.closest("fieldset")'
+            )
+            selected_radio = fieldset.query_selector('input[type="radio"]:checked')
+
+            if not selected_radio:
+                print("No radio button is selected.")
+                return ""
+
+            radio_id = selected_radio.get_attribute("id")
+
+            label_selector = f'//label[@for="{radio_id}"]'
+            label = self.page.query_selector(label_selector)
+
+            if label:
+                selected_text = label.text_content().strip()
+                print(f"Selected radio button text: {selected_text}")
+                return selected_text
+            else:
+                print(f"Label not found for radio button ID: {radio_id}")
+                return ""
+        except Exception as e:
+            print(f"Error checking if radio button is selected: {e}")
+            return False
+
+    def get_mock_database_helper(self, working_directory):
+        """Returns an instance of MockDatabaseHelper, initializing with mock data."""
+        mock_data_file = os.path.join(working_directory, "mock_data", "mock_patients.json")
+        if not os.path.exists(mock_data_file):
+            raise FileNotFoundError(f"Mock data file not found: {mock_data_file}")
+        return MockDatabaseHelper(mock_data_file)
+
+    def mock_api_response(self, working_directory):
+        endpoint_pattern = "**/api/patient/nhsNumberSearch*"
+        endpoint_pattern = "https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**"
+        logger.info(f"Setting up mock for API: {endpoint_pattern}")
+
+        def handler(route):
+            """Intercept API requests and return mock data."""
+            request_url = route.request.url
+            logger.info(f"API Request Detected: {request_url}")
+
+            if "nhsNumber=" in request_url:
+                nhs_number = request_url.split("nhsNumber=")[-1]
+            else:
+                nhs_number = None
+
+            logger.info(f"Extracted NHS number: {nhs_number}")
+
+            if not nhs_number:
+                logger.warning(f"No NHS number found in request: {request_url}")
+                route.continue_()
+                return
+
+            mock_db = self.get_mock_database_helper(working_directory)
+            patient = mock_db.fetch_one("SELECT * FROM patients WHERE nhs_number = ?", (nhs_number,))
+
+            if patient:
+                patient_id = int(patient[0])
+                nhs_number = patient[2]
+                full_name = patient[1].split()
+                first_name = full_name[0]
+                last_name = full_name[1] if len(full_name) > 1 else ""
+                dob = patient[3]
+                address = patient[4]
+                postcode = "DN18 5DW"
+
+                response_body = json.dumps({
+                    "PdsPatient": {
+                        "PatientId": patient_id,
+                        "NhsNumber": nhs_number,
+                        "FirstName": first_name,
+                        "LastName": last_name,
+                        "DateOfBirth": dob,
+                        "GenderId": 1,
+                        "Gender": None,
+                        "Telephone": None,
+                        "Address": address,
+                        "Postcode": postcode,
+                        "GpCode": None,
+                        "TooManyReturnedResults": False,
+                        "PatientExists": True,
+                        "IsDeceased": False,
+                        "PdsPatientDto": None,
+                        "Vaccinations": None,
+                        "SecurityCode": 0,
+                        "AuditTypeId": None,
+                        "AuditDateTime": None,
+                        "AuditUserId": None,
+                        "AuditIpAddress": None
+                    },
+                    "RavsPatient": {
+                        "PatientId": patient_id,
+                        "NhsNumber": nhs_number,
+                        "FirstName": first_name,
+                        "LastName": last_name,
+                        "DateOfBirth": dob,
+                        "GenderId": 1,
+                        "Gender": None,
+                        "Telephone": None,
+                        "Address": None,
+                        "Postcode": None,
+                        "GpCode": None,
+                        "TooManyReturnedResults": False,
+                        "PatientExists": False,
+                        "IsDeceased": False,
+                        "PdsPatientDto": None,
+                        "Vaccinations": None,
+                        "SecurityCode": 0,
+                        "AuditTypeId": None,
+                        "AuditDateTime": None,
+                        "AuditUserId": None,
+                        "AuditIpAddress": None
+                    }
+                })
+                logger.info(f"Mocking API response for NHS Number {nhs_number}: {response_body}")
+
+                route.fulfill(status=200, content_type="application/json", body=response_body)
+            else:
+                logger.warning(f"No mock data found for NHS Number: {nhs_number}")
+                route.fulfill(status=404, content_type="application/json", body='{"error": "Patient not found"}')
+
+        self.page.route(endpoint_pattern, handler)
+        self.page.route("https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**", lambda route: route.abort())
 
     def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None, max_retries=3, retry_delay=2):
         if not screenshot_name:
@@ -305,11 +451,9 @@ class BasePlaywrightHelper:
 
                     # Perform action based on the specified type
                     if action.lower() == "click":
-                        if element.is_enabled():
-                            element.click()
-                            print(f"Clicked the element successfully.")
-                        else:
-                            print(f"Element is either not visible or not enabled.")
+                        element.wait_for(state="attached")
+                        element.click()
+                        print(f"Clicked the element successfully.")
                     elif action.lower() == "check":
                         if not element.is_checked():
                             element.check()
@@ -342,8 +486,27 @@ class BasePlaywrightHelper:
                             print(f"Entered text '{inputValue}' successfully.")
                     elif action.lower() == "get_text":
                         text = element.text_content()
+                        if text == "":
+                            text = element.get_attribute("value")
                         print(f"Text from the element: {text}")
                         return text
+                    elif action.lower() == "get_value":
+                        text = element.get_attribute("value")
+                        print(f"Text from the element: {text}")
+                        return text
+                    elif action.lower() == "scroll_to":
+                        element.scroll_into_view_if_needed()
+                        print(f"Scrolled to {element}")
+                    elif action.lower() == "get_selected_option":
+                        selected_option = element.locator("option:checked")
+                        if selected_option.count() > 0:
+                            text = selected_option.text_content()
+                            value = selected_option.get_attribute("value")
+                            print(f"Selected option text: '{text}', value: '{value}'")
+                            return text
+                        else:
+                            print("No option is currently selected.")
+                            return None
                     elif action.lower() == "type_text":
                         if inputValue is None:
                             raise ValueError("`inputValue` cannot be None for 'type_text' action.")

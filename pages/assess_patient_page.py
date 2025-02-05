@@ -24,6 +24,8 @@ ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select the ass
 ASSESSING_CLINICIAN_MISSING_ERROR_MESSAGE_LINK = ("text", "Select the assessing clinician")
 LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select a legal mechanism")
 LEGAL_MECHANISM_MISSING_ERROR_MESSAGE_LINK = ("text", "Select a legal mechanism")
+ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select eligibility type")
+ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_LINK = ("text", "Select eligibility type")
 ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_TEXT = ("text", "Error: Select an assessment outcome")
 ASSESSMENT_OUTCOME_MISSING_ERROR_MESSAGE_LINK = ("text", "Select an assessment outcome")
 STAFF_ROLE_DROPDOWN_ELEMENT = ("label", "Staff role")
@@ -48,6 +50,14 @@ def check_assessment_date_missing_error_message_text_exists():
 def check_assessment_date_missing_error_message_link_exists():
     wait_for_element_to_appear(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
     return check_element_exists(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
+
+def check_eligibility_type_missing_error_message_text_exists():
+    wait_for_element_to_appear(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_TEXT)
+    return check_element_exists(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_TEXT)
+
+def check_eligibility_type_missing_error_message_link_exists():
+    wait_for_element_to_appear(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_LINK)
+    return check_element_exists(ELIGIBILITY_TYPE_MISSING_ERROR_MESSAGE_LINK)
 
 def click_assessment_date_missing_error_message_link():
     wait_for_element_to_appear(ASSESSMENT_DATE_MISSING_ERROR_MESSAGE_LINK)
@@ -205,3 +215,28 @@ def click_continue_to_record_consent_button():
     wait_for_element_to_appear(CONTINUE_TO_RECORD_CONSENT_BUTTON)
     find_element_and_perform_action(CONTINUE_TO_RECORD_CONSENT_BUTTON, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+
+def get_is_patient_eligible_value_on_assessing_the_patient_page():
+    selected_value = get_checked_radio_button_text("Is the patient eligible for the vaccine? ")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Is patient eligible selection did not persist"
+
+def get_legal_mechanism_value_on_assessing_the_patient_page():
+    selected_value = get_checked_radio_button_text("Legal mechanism")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Legal mechanism selection did not persist"
+
+def get_assessing_clinician_value_on_assessing_the_patient_page():
+    wait_for_element_to_appear(ASSESSING_CLINICIAN_DROPDOWN_ELEMENT)
+    return find_element_and_perform_action(ASSESSING_CLINICIAN_DROPDOWN_ELEMENT, "get_selected_option")
+
+def get_assessment_outcome_value_on_assessing_the_patient_page():
+    selected_value = get_checked_radio_button_text("Assessment outcome")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Assessment outcome selection did not persist"
