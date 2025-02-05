@@ -229,7 +229,7 @@ jobs:
           TEST_ENVIRONMENT: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }}
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
-          BROWSER: "chrome"
+          BROWSER: "edge"
           # MARKER: ${{ inputs.marker || '' }}
           MARKER: "login"
           AGENTS: 3
