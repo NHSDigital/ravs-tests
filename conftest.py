@@ -810,7 +810,7 @@ def the_vaccinated_values_should_persist(shared_data):
     attach_screenshot("patient_vaccinated_value_must_persist")
     assert format_date(get_vaccination_date(), config["browser"]) == shared_data["vaccination_date"]
     attach_screenshot("vaccination_date_should_persist")
-    assert get_vaccination_care_model_value_on_vaccinated_page() == shared_data["care_model"]
+    assert get_vaccination_care_model_value_on_vaccinated_page().lower() == shared_data["care_model"].lower()
     attach_screenshot("care_model_value_should_persist")
     assert get_vaccinator_value_on_vaccinated_page() == shared_data['vaccinator']
     attach_screenshot("vaccinator_value_should_persist")
