@@ -29,8 +29,16 @@ features_directory = get_working_directory() + "features"
 def test_persisting_fields_when_recording_a_vaccine(navigate_and_login):
     pass
 
+@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes delivery team when recording a vaccination')
+def test_fields_should_not_persist_if_delivery_team_is_changed_when_recording_a_vaccine(navigate_and_login):
+    pass
+
 @scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes vaccine product when recording a vaccination')
 def test_fields_should_not_persist_if_vaccine_product_is_changed_when_recording_a_vaccine(navigate_and_login):
+    pass
+
+@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes vaccine product type when recording a vaccination')
+def test_fields_should_not_persist_if_vaccine_product_type_is_changed_when_recording_a_vaccine(navigate_and_login):
     pass
 
 @when("I change the delivery team on the choose vaccine page")
@@ -40,6 +48,33 @@ def change_delivery_team_choose_vaccine(shared_data):
     attach_screenshot("vaccine_selection_should_persist")
     assert str(get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page()).replace("Active batches available", "").strip() == shared_data["chosen_vaccine_type"]
     attach_screenshot("vaccine_product_selection_should_persist")
+    click_continue_to_assess_patient_button()
+    get_is_patient_eligible_value_on_assessing_the_patient_page() == "Is patient eligible selection did not persist"
+    attach_screenshot("assessment_patient_eligible_value_should_not_persist")
+
+@when("I change the vaccination product on the choose vaccine page")
+def change_vaccine_product_choose_vaccine(shared_data):
+    click_vaccine_radiobutton(shared_data["chosen_vaccine_new"])
+    shared_data["chosen_vaccine_type_new"] = get_vaccination_type(1, shared_data["chosen_vaccine_new"])
+    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page() == shared_data["site"]
+    attach_screenshot("site_selection_should_persist")
+    assert str(get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page()).replace("Active batches available", "").strip() == "Vaccine product selection did not persist"
+    attach_screenshot("vaccine_product_selection_should_not_persist")
+    click_vaccine_type_radiobutton(shared_data["chosen_vaccine_type_new"])
+    click_continue_to_assess_patient_button()
+    get_is_patient_eligible_value_on_assessing_the_patient_page() == "Is patient eligible selection did not persist"
+    attach_screenshot("assessment_patient_eligible_value_should_not_persist")
+
+@when("I change the vaccination product type on the choose vaccine page")
+def change_vaccine_product_choose_vaccine(shared_data):
+    shared_data["chosen_vaccine_new"] = "Flu"
+    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page() == shared_data["site"]
+    attach_screenshot("site_selection_should_persist")
+    assert get_selected_vaccine_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine"]
+    attach_screenshot("vaccine_product_selection_should_persist")
+    assert str(get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page()).replace("Active batches available", "").strip() == shared_data["chosen_vaccine_type"]
+    attach_screenshot("vaccine_product_selection_should_persist")
+    click_vaccine_type_radiobutton(shared_data["chosen_vaccine_type_new"])
     click_continue_to_assess_patient_button()
     get_is_patient_eligible_value_on_assessing_the_patient_page() == "Is patient eligible selection did not persist"
     attach_screenshot("assessment_patient_eligible_value_should_not_persist")
@@ -60,7 +95,10 @@ def consent_values_should_not_persist(shared_data):
 def consent_values_must_not_persist(shared_data):
     assert get_patient_consent_value_on_consent_page() == "Patient consent selection did not persist"
     attach_screenshot("patient_consent_value_did_not_persist")
-    assert get_patient_consent_recorded_by_clinician_value()== ""
+    if shared_data['legal_mechanism'] != "Patient Group Direction (PGD)":
+        assert get_consenting_clinician_details_on_consent_page() == ""
+    else:
+        assert get_consenting_clinician_details_on_consent_page() == shared_data['eligibility_assessing_clinician']
     attach_screenshot("consent_clinician_value_did_not_persist")
     name_of_person_consenting = "Automation tester"
     relationship_to_patient = "RAVS tester"
@@ -79,5 +117,8 @@ def vaccinated_values_must_not_persist(shared_data):
     attach_screenshot("vaccinated_date_value_did_not_persist")
     assert get_vaccination_care_model_value_on_vaccinated_page() == "Care model value did not persist"
     attach_screenshot("care_model_value_did_not_persist")
-    assert get_vaccinator_value_on_vaccinated_page() == ""
+    if shared_data['legal_mechanism'] != "Patient Group Direction (PGD)":
+        assert get_vaccinator_value_on_vaccinated_page() == ""
+    else:
+        assert get_vaccinator_value_on_vaccinated_page() == shared_data['vaccinator']
     attach_screenshot("vaccinator_value_did_not_persist")

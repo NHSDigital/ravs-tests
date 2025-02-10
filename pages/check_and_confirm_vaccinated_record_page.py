@@ -110,10 +110,7 @@ def get_patient_consent_given_by_person_relationship_to_patient_value():
     return find_element_and_perform_action(PATIENT_CONSENT_PERSON_CONSENTING_RELATIONSHIP_TO_PARENT_LABEL_ELEMENT, "get_text")
 
 def get_patient_consent_recorded_by_clinician_value():
-    text = find_element_and_perform_action(PATIENT_CONSENT_RECORDED_BY_CLINICIAN_LABEL_ELEMENT, "get_text")
-    if text:
-        return " ".join(text.split())
-    return ""
+    return find_element_and_perform_action(PATIENT_CONSENT_RECORDED_BY_CLINICIAN_LABEL_ELEMENT, "get_text")
 
 def get_patient_vaccinated_value():
     return find_element_and_perform_action(PATIENT_VACCINATED_LABEL_ELEMENT, "get_text")
