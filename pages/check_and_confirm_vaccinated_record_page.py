@@ -83,8 +83,10 @@ def get_patient_eligibility_type_vaccine_value():
 
 def get_patient_eligibility_assessing_clinician_vaccine_value():
     text = find_element_and_perform_action(PATIENT_ELIGIBILITY_ASSESSING_CLINICIAN_LABEL_ELEMENT, "get_text")
-    cleaned_text = " ".join(text.split())
-    return cleaned_text
+    if text:
+        return " ".join(text.split())
+
+    return ""
 
 def get_patient_eligibility_assessment_date_value():
     return find_element_and_perform_action(PATIENT_ELIGIBILITY_ASSESSMENT_DATE_LABEL_ELEMENT, "get_text")
@@ -109,8 +111,9 @@ def get_patient_consent_given_by_person_relationship_to_patient_value():
 
 def get_patient_consent_recorded_by_clinician_value():
     text = find_element_and_perform_action(PATIENT_CONSENT_RECORDED_BY_CLINICIAN_LABEL_ELEMENT, "get_text")
-    cleaned_text = " ".join(text.split())
-    return cleaned_text
+    if text:
+        return " ".join(text.split())
+    return ""
 
 def get_patient_vaccinated_value():
     return find_element_and_perform_action(PATIENT_VACCINATED_LABEL_ELEMENT, "get_text")

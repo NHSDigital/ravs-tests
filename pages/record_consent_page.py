@@ -127,4 +127,8 @@ def get_patient_consent_value_on_consent_page():
         else:
             return selected_value
     else:
-        return "Is patient eligible selection did not persist"
+        return "Patient consent selection did not persist"
+
+def get_patient_consent_given_by_value_on_consent_page():
+    return find_element_and_perform_action(CONSENT_GIVEN_BY_DROPDOWN_ELEMENT,"get_selected_option")
+

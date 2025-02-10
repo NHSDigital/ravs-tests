@@ -42,7 +42,7 @@ pytest.mark.addvaccine = pytest.mark.mark(addvaccine=True)
 pytest.mark.addbatches = pytest.mark.mark(addbatches=True)
 pytest.mark.reports = pytest.mark.mark(reports=True)
 pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
-pytest.mark.persist_values = pytest.mark.mark(persist_values=True)
+pytest.mark.persistValues = pytest.mark.mark(persistValues=True)
 pytest.mark.sflag = pytest.mark.mark(sflag=True)
 
 @pytest.fixture(scope='function', autouse=True)
@@ -528,6 +528,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
+    shared_data["new_site"] = "KINGSTON HOUSE"
     shared_data["care_model"] = get_care_model(index)
 
     today_str = datetime.today().strftime('%d/%m/%Y')
@@ -537,6 +538,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(shared_data["new_site"], chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
@@ -781,7 +783,7 @@ def the_eligibility_values_should_persist(shared_data):
         attach_screenshot("selected_eligibility_type")
     click_continue_to_record_consent_button()
 
-@then("the patient's consent answer, consent given by, consenting clinician, selection must persist on the assessment screen")
+@then("the patient's consent answer, consent given by, consenting clinician, selection must persist on the consent screen")
 def the_consent_values_should_persist(shared_data):
     assert get_patient_consent_value_on_consent_page().lower() == str(shared_data["eligible_decision"]).lower()
     attach_screenshot("consent_value_should_persist")
