@@ -14,6 +14,7 @@ def check_deactivated_user_exists_in_list(user_email_address):
 def click_reactivate_user_link(user_email_address):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("xpath", f'//td[@class="nhsuk-table__cell" and text()="{user_email_address}"]/following-sibling::td[@class="nhsuk-table__cell"]/a[text()="Reactivate"]')
+    wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
 
 def click_back_to_manage_users_link():
@@ -36,6 +37,7 @@ def check_deactivated_users_page_heading_exists():
 def get_first_deactivated_users_name():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("xpath", '(//a[text()="Reactivate"]/ancestor::tr/td[1])[1]')
+    wait_for_element_to_appear(element)
     if check_element_exists(element):
         return find_element_and_perform_action(element, "get_text")
     else:
@@ -44,6 +46,7 @@ def get_first_deactivated_users_name():
 def get_first_deactivated_users_email_address():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("xpath", '(//a[text()="Reactivate"]/ancestor::tr/td[2])[1]')
+    wait_for_element_to_appear(element)
     if check_element_exists(element):
         return find_element_and_perform_action(element, "get_text")
     else:
@@ -52,6 +55,7 @@ def get_first_deactivated_users_email_address():
 def click_first_deactivated_users_reactivate_link():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("xpath", '(//a[text()="Reactivate"])[1]')
+    wait_for_element_to_appear(element)
     if check_element_exists(element):
         find_element_and_perform_action(element, "click")
     else:
