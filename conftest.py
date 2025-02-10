@@ -528,7 +528,6 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
-    shared_data["new_site"] = "KINGSTON HOUSE"
     shared_data["care_model"] = get_care_model(index)
 
     today_str = datetime.today().strftime('%d/%m/%Y')
@@ -538,7 +537,68 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    return shared_data
+
+@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new delivery team {new_delivery_team}"))
+def step_login_to_ravs_check_new_site_batch_exists(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_delivery_team, shared_data):
+    shared_data["nhs_number"] = nhs_number
+    shared_data["index"] = index
+    shared_data["chosen_vaccine"] = chosen_vaccine
+    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
+    shared_data["batch_number"] = batch_number
+    shared_data["site"] = site
+    shared_data["new_site"] = new_delivery_team
+    shared_data["care_model"] = get_care_model(index)
+
+    today_str = datetime.today().strftime('%d/%m/%Y')
+    today = datetime.strptime(today_str, '%d/%m/%Y')
+    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
+        batch_expiry_date = today + timedelta(days=7)
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
+    shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(shared_data["new_site"], chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    return shared_data
+
+@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new vaccine product {new_vaccine_product}"))
+def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_vaccine_product, shared_data):
+    shared_data["nhs_number"] = nhs_number
+    shared_data["index"] = index
+    shared_data["chosen_vaccine"] = chosen_vaccine
+    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
+    shared_data["batch_number"] = batch_number
+    shared_data["site"] = site
+    shared_data["chosen_vaccine_new"] = new_vaccine_product
+    shared_data["chosen_vaccine_type_new"] = get_vaccination_type(1, shared_data["chosen_vaccine_new"])
+    shared_data["care_model"] = get_care_model(index)
+
+    today_str = datetime.today().strftime('%d/%m/%Y')
+    today = datetime.strptime(today_str, '%d/%m/%Y')
+    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
+        batch_expiry_date = today + timedelta(days=7)
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
+    shared_data["batch_expiry_date"] = batch_expiry_date
+    check_vaccine_and_batch_exists_in_site(shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-FLU", "19/11/2026")
+    return shared_data
+
+@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new random vaccine product type"))
+def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
+    shared_data["nhs_number"] = nhs_number
+    shared_data["index"] = index
+    shared_data["chosen_vaccine"] = chosen_vaccine
+    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
+    shared_data["batch_number"] = batch_number
+    shared_data["site"] = site
+    shared_data["chosen_vaccine_new"] = shared_data["chosen_vaccine"]
+    shared_data["chosen_vaccine_type_new"] = get_vaccination_type(2, shared_data["chosen_vaccine_new"])
+    shared_data["care_model"] = get_care_model(index)
+
+    today_str = datetime.today().strftime('%d/%m/%Y')
+    today = datetime.strptime(today_str, '%d/%m/%Y')
+    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
+        batch_expiry_date = today + timedelta(days=7)
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
+    shared_data["batch_expiry_date"] = batch_expiry_date
+    check_vaccine_and_batch_exists_in_site(shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-COVID", "19/11/2026")
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
@@ -787,7 +847,7 @@ def the_eligibility_values_should_persist(shared_data):
 def the_consent_values_should_persist(shared_data):
     assert get_patient_consent_value_on_consent_page().lower() == str(shared_data["eligible_decision"]).lower()
     attach_screenshot("consent_value_should_persist")
-    assert get_consenting_clinician_details() == shared_data["consent_clinician_details"]
+    assert get_consenting_clinician_details_on_consent_page() == shared_data["consent_clinician_details"]
     attach_screenshot("consent_clinician_value_should_persist")
     name_of_person_consenting = "Automation tester"
     relationship_to_patient = "RAVS tester"
