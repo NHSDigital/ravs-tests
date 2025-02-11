@@ -448,8 +448,6 @@ class BasePlaywrightHelper:
 
                 if element.is_visible():
                     element.scroll_into_view_if_needed()
-
-                    # Perform action based on the specified type
                     if action.lower() == "click":
                         element.wait_for(state="attached")
                         element.click()

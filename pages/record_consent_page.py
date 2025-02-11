@@ -116,8 +116,11 @@ def enter_relationship_to_patient(relationship):
 def enter_clinician_details(clinician):
     find_element_and_perform_action(CONSENT_CLINICIAN_DROPDOWN_ELEMENT, "select_option", clinician)
 
-def get_consenting_clinician_details():
-    return find_element_and_perform_action(CONSENT_CLINICIAN_DROPDOWN_ELEMENT, "get_selected_option")
+def get_consenting_clinician_details_on_consent_page():
+    text = find_element_and_perform_action(CONSENT_CLINICIAN_DROPDOWN_ELEMENT, "get_selected_option")
+    if text:
+        return " ".join(text.split())
+    return ""
 
 def get_patient_consent_value_on_consent_page():
     selected_value = get_checked_radio_button_text("Does the patient or someone on their behalf consent to the vaccination?")
@@ -127,4 +130,8 @@ def get_patient_consent_value_on_consent_page():
         else:
             return selected_value
     else:
-        return "Is patient eligible selection did not persist"
+        return "Patient consent selection did not persist"
+
+def get_patient_consent_given_by_value_on_consent_page():
+    return find_element_and_perform_action(CONSENT_GIVEN_BY_DROPDOWN_ELEMENT,"get_selected_option")
+
