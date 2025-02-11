@@ -86,16 +86,20 @@ def click_change_detail_link(detail):
 
 def get_users_name():
     element = ("xpath", "//dt[text()='Name']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def get_users_email_address():
     element = ("xpath", "//dt[text()='Email address']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def get_users_clinician_status():
     element = ("xpath", "//dt[text()='Clinical']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def get_users_permission_level():
     element = ("xpath", "//dt[text()='Permission level']/following-sibling::dd[@class='nhsuk-summary-list__value']")
+    wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
