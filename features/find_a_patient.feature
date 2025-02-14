@@ -69,16 +69,17 @@ Feature: Find a patient
       | nhsNumber  |
       | 9449306621 |
 
-  @findpatient
-  Scenario Outline: NHS Number: Existing patients can be found using their NHS number
-    Given I am on the find a patient by nhs number page
-    And I enter <nhsNumber> as the nhs number
-    When I click the search button
-    Then I can see the patient's information in the search results, showing their name: <name>, nhs number: <nhsNumber>, dob: <dateofbirth> and address: <address>
+### This test is not needed as it is a duplicate
+  # @findpatient
+  # Scenario Outline: NHS Number: Existing patients can be found using their NHS number
+  #   Given I am on the find a patient by nhs number page
+  #   And I enter <nhsNumber> as the nhs number
+  #   When I click the search button
+  #   Then I can see the patient's information in the search results, showing their name: <name>, nhs number: <nhsNumber>, dob: <dateofbirth> and address: <address>
 
-    Examples:
-      | nhsNumber  | name        | dateofbirth | address                                                    |
-      | 9693632109 | Bill GARTON |   23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW |
+  #   Examples:
+  #     | nhsNumber  | name        | dateofbirth | address                                                    |
+  #     | 9693632109 | Bill GARTON |   23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW |
 
   @findpatient
   Scenario Outline: Demographics: Existing patients can be found using their mandatory demographic details
