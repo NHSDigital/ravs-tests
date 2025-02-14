@@ -12,5 +12,5 @@ Feature: Accessibility Feature
     Then the page <page> should be accessible
 
     Examples:
-    | page      |
-    | dashboard |
+    | page     |
+    | home     |
