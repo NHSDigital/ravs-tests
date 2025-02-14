@@ -27,7 +27,7 @@ def check_accessibility():
 @when(parse('I access the page {page}'))
 def access_page(page, shared_data):
     attach_screenshot("user_should_be_logged_in")
-    if page != "dashboard":
+    if page != "home":
         navigate_to_url(page)
     else:
         shared_data["page"] = ""
