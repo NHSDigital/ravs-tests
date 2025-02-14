@@ -44,6 +44,7 @@ pytest.mark.reports = pytest.mark.mark(reports=True)
 pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
 pytest.mark.persistValues = pytest.mark.mark(persistValues=True)
 pytest.mark.sflag = pytest.mark.mark(sflag=True)
+pytest.mark.accessibility = pytest.mark.mark(accessibility=True)
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):

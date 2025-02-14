@@ -235,6 +235,9 @@ def write_properties_file(file_path, properties_dict):
 def quit_browser():
     playwright_helper_instance.quit_browser()
 
+def get_accessibility_violations():
+    return playwright_helper_instance.get_accessibility_violations()
+
 def get_current_url():
     return playwright_helper_instance.get_current_url()
 
