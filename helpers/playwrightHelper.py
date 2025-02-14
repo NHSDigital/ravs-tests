@@ -10,6 +10,7 @@ import logging
 import platform
 from helpers.mockdatabaseHelper import MockDatabaseHelper
 from urllib.parse import urlparse
+import allure
 
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
@@ -134,7 +135,8 @@ class BasePlaywrightHelper:
     def navigate_to_url(self,url):
         print(f"Navigating to URL: {url}")
         self.page.goto(url)
-        self.page.wait_for_load_state()
+        self.page.wait_for_load_state('domcontentloaded', timeout=0.1 * 1000)
+        self.page.wait_for_selector('*', timeout=0.1 * 1000)
 
     def wait_for_page_to_load(self, timeout=0.1):
         try:
@@ -637,16 +639,19 @@ class BasePlaywrightHelper:
 
     def get_accessibility_violations(self):
         try:
-            current_url = self.get_current_url(self.page)
-
-            self.page.goto(current_url)
-
-            axe = self.page.accessibility
-            results = axe.check()
+            current_url = self.page.url
+            axe = Axe()
+            results = axe.run(self.page)
             violations = results['violations']
 
             if violations:
-                print(f"Accessibility Violations for {current_url}: {violations}")
+                violations_json = json.dumps(violations, indent=4)
+                allure.attach(
+                                violations_json,
+                                name=f"Accessibility Violations for {current_url}",
+                                attachment_type=allure.attachment_type.JSON
+                            )
+                print(f"Accessibility Violations for {current_url}: {violations_json}")
             else:
                 print(f"No accessibility violations found for {current_url}.")
 
