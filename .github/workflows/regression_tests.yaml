@@ -13,6 +13,17 @@ on:
         type: environment
         required: true
         default: "dev"
+      browser:
+          description: 'Browser to run tests on'
+          type: choice
+          options:
+            - chrome
+            - firefox
+            - safari
+            - edge
+            - mobile
+          required: false
+          default: "edge"
       product:
         description: 'The product we are testing'
         type: choice
