@@ -187,10 +187,13 @@ jobs:
           # Branch name
           BRANCH_NAME=${{ github.ref_name || 'manual trigger (branch not specified)' }}
 
+          # Selected browser
+          SELECTED_BROWSER=${{ inputs.browser || 'edge' }}
+
           # Notify Slack
           curl -X POST -H 'Content-type: application/json' \
           --data "{
-            \"text\": \"🚀 Tests have been kicked off $TRIGGER_SOURCE.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Branch:* ${BRANCH_NAME}\"
+            \"text\": \"🚀 Tests have been kicked off $TRIGGER_SOURCE.\n*Environment:* ${{ inputs.environment }}\n*Product:* RAVS\n*Run ID:* ${{ github.run_id }}\n*Browser:* $SELECTED_BROWSER\n*Branch:* ${BRANCH_NAME}\"
           }" \
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
