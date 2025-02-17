@@ -29,33 +29,28 @@ def test_batch_already_added_to_site_warning_should_appear():
 def test_batch_error_messages_should_appear_when_no_values_are_entered(navigate_and_login):
     pass
 
-
-
-
 @given("I am on the RAVS home page")
 def logged_into_homepage(navigate_and_login):
     pass
 
 @when("I am on the vaccines page")
 def i_am_on_the_vaccines_page():
+    attach_screenshot("logged_into_ravs")
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
     click_vaccines_nav_link()
+    attach_screenshot("clicked_vaccines_nav_link")
 
 @when("I click on an available add batch link")
 def i_click_first_add_batch_link():
     click_first_available_add_batch_link()
+    attach_screenshot("click_first_available_add_batch_link")
 
 @when("I click Add batch button")
 def i_click_add_batch_button():
     click_add_batch_button()
     attach_screenshot("clicked_add_batch_button")
-
-@when("I click confirm choices button")
-def i_click_confirm_choices_button():
-    click_confirm_vaccine_batch_choices_button()
-    attach_screenshot("clicked_confirm_choices_button")
 
 @when("I click confirm button")
 def i_click_confirm_button():
@@ -65,10 +60,12 @@ def i_click_confirm_button():
 @when("I view product for the existing vaccine in an existing site")
 def view_product_for_site_and_vaccine_type(shared_data):
     click_view_product_link("Comirnaty 10 JN.1")
+    attach_screenshot("clicked_view_product_link")
 
 @when(parse("I enter {batch_number} that already exists and {expiry_date}"))
 def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date):
     click_add_batch_button()
+    attach_screenshot("clicked_add_batch_button")
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_batch_number")
@@ -88,6 +85,7 @@ def batch_already_added_warning_should_exist():
 @when('I click continue to confirm batch details page')
 def step_when_i_click_continue():
     click_continue_to_confirm_batch_details_button()
+    attach_screenshot("clicked_continue_to_confirm_batch_details_button")
 
 @then('the error messages and error links should appear highlighting missing required fields')
 def step_then_the_error_messages_for_missing_fields_should_appear():

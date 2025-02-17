@@ -29,22 +29,6 @@ from allure_commons.types import LabelType
 import logging
 from test_data.get_values_from_models import *
 
-# Define marks
-pytest.mark.login = pytest.mark.mark(login=True)
-pytest.mark.logout = pytest.mark.mark(logout=True)
-pytest.mark.smoke = pytest.mark.mark(smoke=True)
-pytest.mark.appointments = pytest.mark.mark(appointments=True)
-pytest.mark.consent = pytest.mark.mark(consent=True)
-pytest.mark.findpatient = pytest.mark.mark(findpatient=True)
-pytest.mark.createpatient = pytest.mark.mark(createpatient=True)
-pytest.mark.recordvaccine = pytest.mark.mark(recordvaccine=True)
-pytest.mark.addvaccine = pytest.mark.mark(addvaccine=True)
-pytest.mark.addbatches = pytest.mark.mark(addbatches=True)
-pytest.mark.reports = pytest.mark.mark(reports=True)
-pytest.mark.usermanagement = pytest.mark.mark(usermanagement=True)
-pytest.mark.persistValues = pytest.mark.mark(persistValues=True)
-pytest.mark.sflag = pytest.mark.mark(sflag=True)
-
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
     browser_version = get_browser_version()
