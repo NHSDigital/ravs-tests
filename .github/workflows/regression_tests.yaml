@@ -115,15 +115,40 @@ jobs:
           echo "BROWSER=edge" >> $GITHUB_ENV
           echo "DEVICE=iphone_12" >> $GITHUB_ENV
 
-      - name: Notify Slack - Tests Started
-        run: |
-          if [ "$BROWSER" == "mobile" ]; then
-            SLACK_MESSAGE="🚀 *Regression Tests Started* for *${{ env.PRODUCT }}* on *${{ env.ENV }}* using *mobile on $DEVICE*"
-          else
-            SLACK_MESSAGE="🚀 *Regression Tests Started* for *${{ env.PRODUCT }}* on *${{ env.ENV }}* using *$BROWSER*"
-          fi
+          - name: Notify Slack - Tests Started
+          run: |
+            BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+            TRIGGERED_BY=${{ github.actor }}
+            RUN_ID=${{ github.run_id }}
+            EVENT_TYPE=${{ github.event_name }}
 
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+            # Determine how the tests were triggered
+            if [ "$EVENT_TYPE" == "workflow_dispatch" ]; then
+              TRIGGER_MESSAGE="manually by ${TRIGGERED_BY}"
+            elif [ "$EVENT_TYPE" == "schedule" ]; then
+              TRIGGER_MESSAGE="on a scheduled run"
+            elif [ "$EVENT_TYPE" == "push" ]; then
+              TRIGGER_MESSAGE="automatically due to a code push"
+            else
+              TRIGGER_MESSAGE="by an unknown trigger"
+            fi
+
+            # Determine browser/device message
+            if [ "${{ env.BROWSER }}" == "mobile" ]; then
+              BROWSER_MESSAGE="Mobile (${{ env.DEVICE }})"
+            else
+              BROWSER_MESSAGE="${{ env.BROWSER }}"
+            fi
+
+            # Construct Slack message
+            SLACK_MESSAGE="🚀 *Tests have been kicked off ${TRIGGER_MESSAGE}.*\n
+            *Environment:* ${{ env.ENV }}\n
+            *Product:* ${{ env.PRODUCT }}\n
+            *Run ID:* ${RUN_ID}\n
+            *Browser:* ${BROWSER_MESSAGE}\n
+            *Branch:* ${BRANCH_NAME}"
+
+            curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
