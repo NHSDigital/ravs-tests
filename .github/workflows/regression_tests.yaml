@@ -105,74 +105,8 @@ jobs:
       #     }' \
       #     ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Run Tests - Chrome (Manual)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          TZ: "Europe/London"
-          LANG: "en_GB.UTF-8"
-          LANGUAGE: "en_GB:en"
-          LC_ALL: "en_GB.UTF-8"
-          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
-          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
-          HEADLESS_MODE: "true"
-          BROWSER: "chrome"
-          MARKER: ${{ inputs.marker || '' }}
-          AGENTS: 3
-        run: |
-          tox -v
-        continue-on-error: true
-
-      - name: Run Tests - Firefox (Manual)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          TZ: "Europe/London"
-          LANG: "en_GB.UTF-8"
-          LANGUAGE: "en_GB:en"
-          LC_ALL: "en_GB.UTF-8"
-          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
-          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
-          HEADLESS_MODE: "true"
-          BROWSER: "firefox"
-          MARKER: ${{ inputs.marker || '' }}
-          AGENTS: 3
-        run: |
-          tox -v
-        continue-on-error: true
-
-      - name: Run Tests - Mobile (Manual)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          TZ: "Europe/London"
-          LANG: "en_GB.UTF-8"
-          LANGUAGE: "en_GB:en"
-          LC_ALL: "en_GB.UTF-8"
-          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
-          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
-          HEADLESS_MODE: "true"
-          BROWSER: "mobile"
-          DEVICE: "iphone_12"
-          MARKER: ${{ inputs.marker || '' }}
-          AGENTS: 3
-        run: |
-          tox -v
-        continue-on-error: true
-
-      - name: Run Tests - Safari (Manual)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          TZ: "Europe/London"
-          LANG: "en_GB.UTF-8"
-          LANGUAGE: "en_GB:en"
-          LC_ALL: "en_GB.UTF-8"
-          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
-          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
-          HEADLESS_MODE: "true"
-          BROWSER: "safari"
-          MARKER: ${{ inputs.marker || '' }}
-          AGENTS: 3
-        run: |
-          tox -v
-        continue-on-error: true
+      - name: Set Browser Environment Variable
+        run: echo "BROWSER=${{ inputs.browser }}" >> $GITHUB_ENV
 
       - name: Notify Slack - Test Run Started
         if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -290,6 +224,75 @@ jobs:
           tox -v
         continue-on-error: true
 
+      - name: Run Tests - Chrome (Manual)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          TZ: "Europe/London"
+          LANG: "en_GB.UTF-8"
+          LANGUAGE: "en_GB:en"
+          LC_ALL: "en_GB.UTF-8"
+          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
+          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
+          HEADLESS_MODE: "true"
+          BROWSER: "chrome"
+          MARKER: ${{ inputs.marker || '' }}
+          AGENTS: 3
+        run: |
+          tox -v
+        continue-on-error: true
+
+      - name: Run Tests - Firefox (Manual)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          TZ: "Europe/London"
+          LANG: "en_GB.UTF-8"
+          LANGUAGE: "en_GB:en"
+          LC_ALL: "en_GB.UTF-8"
+          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
+          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
+          HEADLESS_MODE: "true"
+          BROWSER: "firefox"
+          MARKER: ${{ inputs.marker || '' }}
+          AGENTS: 3
+        run: |
+          tox -v
+        continue-on-error: true
+
+      - name: Run Tests - Mobile (Manual)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          TZ: "Europe/London"
+          LANG: "en_GB.UTF-8"
+          LANGUAGE: "en_GB:en"
+          LC_ALL: "en_GB.UTF-8"
+          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
+          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
+          HEADLESS_MODE: "true"
+          BROWSER: "mobile"
+          DEVICE: "iphone_12"
+          MARKER: ${{ inputs.marker || '' }}
+          AGENTS: 3
+        run: |
+          tox -v
+        continue-on-error: true
+
+      - name: Run Tests - Safari (Manual)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          TZ: "Europe/London"
+          LANG: "en_GB.UTF-8"
+          LANGUAGE: "en_GB:en"
+          LC_ALL: "en_GB.UTF-8"
+          TEST_ENVIRONMENT: ${{ inputs.environment || 'dev' }}
+          RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
+          HEADLESS_MODE: "true"
+          BROWSER: "safari"
+          MARKER: ${{ inputs.marker || '' }}
+          AGENTS: 3
+        run: |
+          tox -v
+        continue-on-error: true
+
       # Step 11: Upload Allure Results as an artifact
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
@@ -314,5 +317,5 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
-          -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}"}}' \
+          -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}, "browser": "${{ env.BROWSER }}"}}'"}}' \
           "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
