@@ -114,6 +114,16 @@ jobs:
           echo "BROWSER=edge" >> $GITHUB_ENV
           echo "DEVICE=iphone_12" >> $GITHUB_ENV
 
+      - name: Notify Slack - Tests Started
+        run: |
+          if [ "$BROWSER" == "mobile" ]; then
+            SLACK_MESSAGE="🚀 *Regression Tests Started* for *${{ env.PRODUCT }}* on *${{ env.ENV }}* using *mobile on $DEVICE*"
+          else
+            SLACK_MESSAGE="🚀 *Regression Tests Started* for *${{ env.PRODUCT }}* on *${{ env.ENV }}* using *$BROWSER*"
+          fi
+
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -182,4 +192,3 @@ jobs:
           -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
           -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}", "browser": "${{ env.BROWSER }}", "device": "${{ env.DEVICE }}"}}' \
           "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
-
