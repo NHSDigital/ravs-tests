@@ -101,6 +101,7 @@ jobs:
             echo "Unknown event. Defaulting to dev."
             echo ENV=dev >> $GITHUB_ENV
           fi
+          echo "PRODUCT=RAVS" >> $GITHUB_ENV
 
       - name: Set Browser for Manual Runs
         if: ${{ github.event_name == 'workflow_dispatch' }}
