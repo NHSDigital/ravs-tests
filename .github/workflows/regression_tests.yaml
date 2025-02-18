@@ -13,6 +13,13 @@ on:
         type: environment
         required: true
         default: "dev"
+      product:
+        description: 'The product we are testing'
+        type: choice
+        options:
+          - RAVS
+        required: false
+        default: RAVS
       browser:
         description: 'Browser to run tests on'
         type: choice
@@ -24,13 +31,15 @@ on:
           - mobile
         required: false
         default: "edge"
-      product:
-        description: 'The product we are testing'
+      device:
+        description: 'Device to run tests on'
         type: choice
         options:
-          - RAVS
+          - iphone_12
+          - iphone_11
+          - pixel_5
         required: false
-        default: RAVS
+        default: "iphone_12"
       id:
         description: 'Unique run identifier (Do not change this)'
         required: false
@@ -43,23 +52,14 @@ on:
         description: 'The GitHub tag to run the test pack from'
         required: false
         default: "main"
-      device:
-        description: 'Device to run tests on'
-        type: choice
-        options:
-          - iphone_12
-          - iphone_11
-          - pixel_5
-        required: false
-        default: "iphone_12"
 
   push:
     branches:
       - '**'
 
   schedule:
-    - cron: '0 6 * * *'  # Runs for QA at 6:00 AM UTC
-    - cron: '30 6 * * *'  # Runs for DEV at 6:30 AM UTC
+    - cron: '0 6 * * *'
+    - cron: '30 6 * * *'
 
 jobs:
   regression_tests:
@@ -80,82 +80,40 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            case "${{ github.event.schedule }}" in
-              "0 6 * * *")
-                echo ENV=qa >> $GITHUB_ENV
-                ;;
-              "30 6 * * *")
-                echo ENV=dev >> $GITHUB_ENV
-                ;;
-              *)
-                echo "Unrecognized schedule. Defaulting to dev."
-                echo ENV=dev >> $GITHUB_ENV
-                ;;
-            esac
-          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo ENV=${{ inputs.environment }} >> $GITHUB_ENV
-          elif [[ "${{ github.event_name }}" == "push" ]]; then
-            echo ENV=dev >> $GITHUB_ENV
-          else
-            echo "Unknown event. Defaulting to dev."
-            echo ENV=dev >> $GITHUB_ENV
-          fi
-          echo "PRODUCT=RAVS" >> $GITHUB_ENV
-
-      - name: Set Browser for Manual Runs
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: |
-          echo "BROWSER=${{ inputs.browser }}" >> $GITHUB_ENV
-          echo "DEVICE=${{ inputs.device }}" >> $GITHUB_ENV
-
-      - name: Set Default Browser for Push/Schedule
-        if: ${{ github.event_name != 'workflow_dispatch' }}
-        run: |
-          echo "BROWSER=edge" >> $GITHUB_ENV
-          echo "DEVICE=iphone_12" >> $GITHUB_ENV
+          echo "ENV=${{ inputs.environment || 'dev' }}" >> $GITHUB_ENV
+          echo "BROWSER=${{ inputs.browser || 'edge' }}" >> $GITHUB_ENV
+          echo "DEVICE=${{ inputs.device || 'iphone_12' }}" >> $GITHUB_ENV
 
       - name: Notify Slack - Tests Started
         run: |
-            BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-            TRIGGERED_BY=${{ github.actor }}
-            RUN_ID=${{ github.run_id }}
-            EVENT_TYPE=${{ github.event_name }}
+          TRIGGER_SOURCE="Triggered by *${{ github.actor }}*"
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            TRIGGER_SOURCE="Triggered by a scheduled run"
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            TRIGGER_SOURCE="Triggered by a code push"
+          fi
 
-            # Determine how the tests were triggered
-            if [ "$EVENT_TYPE" == "workflow_dispatch" ]; then
-              TRIGGER_MESSAGE="manually by ${TRIGGERED_BY}"
-            elif [ "$EVENT_TYPE" == "schedule" ]; then
-              TRIGGER_MESSAGE="on a scheduled run"
-            elif [ "$EVENT_TYPE" == "push" ]; then
-              TRIGGER_MESSAGE="automatically due to a code push"
-            else
-              TRIGGER_MESSAGE="by an unknown trigger"
-            fi
+          BROWSER_MESSAGE="${{ env.BROWSER }}"
+          if [[ "${{ env.BROWSER }}" == "mobile" ]]; then
+            BROWSER_MESSAGE="Mobile (${{ env.DEVICE }})"
+          fi
 
-            # Determine browser/device message
-            if [ "${{ env.BROWSER }}" == "mobile" ]; then
-              BROWSER_MESSAGE="Mobile (${{ env.DEVICE }})"
-            else
-              BROWSER_MESSAGE="${{ env.BROWSER }}"
-            fi
+          SLACK_MESSAGE="🚀 *Tests have started.*\n
+          *Environment:* ${{ env.ENV }}\n
+          *Product:* ${{ inputs.product }}\n
+          *Run ID:* ${{ github.run_id }}\n
+          *Browser:* ${BROWSER_MESSAGE}\n
+          *Branch:* ${{ github.ref_name }}\n
+          *${TRIGGER_SOURCE}*"
 
-            # Construct Slack message
-            SLACK_MESSAGE="🚀 *Tests have been kicked off ${TRIGGER_MESSAGE}.*\n
-            *Environment:* ${{ env.ENV }}\n
-            *Product:* ${{ env.PRODUCT }}\n
-            *Run ID:* ${RUN_ID}\n
-            *Browser:* ${BROWSER_MESSAGE}\n
-            *Branch:* ${BRANCH_NAME}"
-
-            curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -173,15 +131,10 @@ jobs:
           sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
           rm -rf allure-commandline-2.17.3.tgz
 
-      - name: Verify Allure Installation
-        run: allure --version
-
       - name: Run Tests
-        if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         env:
           TZ: "Europe/London"
           LANG: "en_GB.UTF-8"
-          LANGUAGE: "en_GB:en"
           LC_ALL: "en_GB.UTF-8"
           TEST_ENVIRONMENT: ${{ env.ENV }}
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
