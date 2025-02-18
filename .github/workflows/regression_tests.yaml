@@ -43,9 +43,20 @@ on:
         description: 'The GitHub tag to run the test pack from'
         required: false
         default: "main"
+      device:
+        description: 'Device to run tests on'
+        type: choice
+        options:
+          - iphone_12
+          - iphone_11
+          - pixel_5
+        required: false
+        default: "iphone_12"
+
   push:
     branches:
-      - '**'   # Triggers on push to any branch
+      - '**'
+
   schedule:
     - cron: '0 6 * * *'  # Runs for QA at 6:00 AM UTC
     - cron: '30 6 * * *'  # Runs for DEV at 6:30 AM UTC
@@ -93,11 +104,15 @@ jobs:
 
       - name: Set Browser for Manual Runs
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: echo "BROWSER=${{ inputs.browser }}" >> $GITHUB_ENV
+        run: |
+          echo "BROWSER=${{ inputs.browser }}" >> $GITHUB_ENV
+          echo "DEVICE=${{ inputs.device }}" >> $GITHUB_ENV
 
       - name: Set Default Browser for Push/Schedule
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        run: echo "BROWSER=edge" >> $GITHUB_ENV
+        run: |
+          echo "BROWSER=edge" >> $GITHUB_ENV
+          echo "DEVICE=iphone_12" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -136,6 +151,7 @@ jobs:
           RAVS_PASSWORD: ${{ secrets.RAVS_PASSWORD }}
           HEADLESS_MODE: "true"
           BROWSER: ${{ env.BROWSER }}
+          DEVICE: ${{ env.DEVICE }}
           MARKER: ${{ inputs.marker || '' }}
           AGENTS: 3
         run: |
@@ -164,5 +180,6 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
-          -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}", "browser": "${{ env.BROWSER }}"}}' \
+          -d '{"ref": "main", "inputs": {"run_id": "${{ github.run_id }}", "browser": "${{ env.BROWSER }}", "device": "${{ env.DEVICE }}"}}' \
           "https://api.github.com/repos/NHSDigital/ravs-test-reports/actions/workflows/publish_report.yml/dispatches"
+
