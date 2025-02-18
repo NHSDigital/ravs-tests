@@ -115,8 +115,8 @@ jobs:
           echo "BROWSER=edge" >> $GITHUB_ENV
           echo "DEVICE=iphone_12" >> $GITHUB_ENV
 
-          - name: Notify Slack - Tests Started
-          run: |
+      - name: Notify Slack - Tests Started
+        run: |
             BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
             TRIGGERED_BY=${{ github.actor }}
             RUN_ID=${{ github.run_id }}
