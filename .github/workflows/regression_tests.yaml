@@ -99,11 +99,11 @@ jobs:
           fi
 
           SLACK_MESSAGE="🚀 *Tests have started.*\n
-          *Environment:* ${{ env.ENV }}\n
-          *Product:* ${{ inputs.product }}\n
-          *Run ID:* ${{ github.run_id }}\n
-          *Browser:* ${BROWSER_MESSAGE}\n
-          *Branch:* ${{ github.ref_name }}\n
+          *Environment:* ${{ env.ENV }}
+          *Product:* ${{ inputs.product }}
+          *Run ID:* ${{ github.run_id }}
+          *Browser:* ${BROWSER_MESSAGE}
+          *Branch:* ${{ github.ref_name }}
           *${TRIGGER_SOURCE}*"
 
           curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
