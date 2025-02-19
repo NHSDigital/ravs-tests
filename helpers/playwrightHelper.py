@@ -73,20 +73,35 @@ class BasePlaywrightHelper:
 
     def launch_mobile_browser(self, device_name, headless_mode):
         try:
+            locale = "en-GB"
+
             if "iphone_12" == device_name.lower():
-                self.browser = self.playwright.webkit.launch(headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["iPhone 12"])
+                device_settings = self.playwright.devices["iPhone 12"]
             elif "iphone_11" == device_name.lower():
-                self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["iPhone 11"])
+                device_settings = self.playwright.devices["iPhone 11"]
             elif "pixel_5" == device_name.lower():
+                device_settings = self.playwright.devices["Pixel 5"]
+            else:
+                device_settings = self.playwright.devices["Galaxy S9+"]
+
+            if "iphone" in device_name.lower() or "pixel" in device_name.lower():
                 self.browser = self.playwright.webkit.launch(headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["Pixel 5"])
             else:
                 self.browser = self.playwright.chromium.launch(channel='chromium', headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["Galaxy S9+"])
+
+            device_settings = {
+                k: v for k, v in device_settings.items()
+                if k not in ["is_mobile", "viewport", "device_scale_factor"]
+            }
+
+            self.context = self.browser.new_context(
+                **device_settings,
+                locale=locale,
+            )
 
             self.page = self.context.new_page()
+            self.page.set_viewport_size(device_settings["viewport"])
+
         except Exception as e:
             print(f"Error launching mobile browser for {device_name}: {e}")
 
@@ -637,16 +652,19 @@ class BasePlaywrightHelper:
 
     def get_accessibility_violations(self):
         try:
-            current_url = self.get_current_url(self.page)
-
-            self.page.goto(current_url)
-
-            axe = self.page.accessibility
-            results = axe.check()
+            current_url = self.page.url
+            axe = Axe()
+            results = axe.run(self.page)
             violations = results['violations']
 
             if violations:
-                print(f"Accessibility Violations for {current_url}: {violations}")
+                violations_json = json.dumps(violations, indent=4)
+                allure.attach(
+                                violations_json,
+                                name=f"Accessibility Violations for {current_url}",
+                                attachment_type=allure.attachment_type.JSON
+                            )
+                print(f"Accessibility Violations for {current_url}: {violations_json}")
             else:
                 print(f"No accessibility violations found for {current_url}.")
 
