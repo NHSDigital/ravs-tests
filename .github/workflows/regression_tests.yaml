@@ -131,11 +131,6 @@ jobs:
           playwright install --with-deps webkit
           playwright install-deps
 
-      - name: Verify Playwright Browsers
-        run: |
-          npx playwright --version
-          npx playwright show-browsers
-
       - name: Install Allure Commandline
         run: |
           curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
