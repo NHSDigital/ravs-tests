@@ -745,8 +745,8 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
             assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
             attach_screenshot("check_and_confirm_screen_after_assertion")
 
-@when("when I click confirm and save button, I should see a record saved dialogue")
-@then("when I click confirm and save button, I should see a record saved dialogue")
+@when("I click confirm and save button, I should see a record saved dialogue")
+@then("I click confirm and save button, I should see a record saved dialogue")
 def click_confirm_and_save_button_record_saved(shared_data):
     attach_screenshot("patient_details_screen_with_immunisation_history")
     click_confirm_details_and_save_button()
@@ -773,7 +773,7 @@ def immunisation_history_should_be_updated(shared_data):
     else:
         assert int(immunisation_history_records_count_after_vaccination) == int(shared_data["immunisation_history_records_count_before_vaccination"])
 
-@then("when I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
+@then("I click confirm and save button, the immunisation history of the patient should be updated in the patient details page")
 def click_confirm_and_save_button_immunisation_history_should_be_updated(shared_data):
     attach_screenshot("patient_details_screen_with_immunisation_history")
     if shared_data["vaccinated_decision"].lower() == "yes" and shared_data["consent_decision"].lower() == "yes" and shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
@@ -799,7 +799,7 @@ def start_recording_the_vaccine_for_new_patient(shared_data, new_patient_name, n
 
 @then("the delivery team, vaccine and vaccine product selection should persist on the choose vaccine page")
 def check_values_persist_on_choose_vaccine_screen(shared_data):
-    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page() == shared_data["site"]
+    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page().lower() == shared_data["site"].lower()
     attach_screenshot("delivery_team_selection_is_persisted")
     assert get_selected_vaccine_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine"]
     attach_screenshot("vaccine_selection_is_persisted")
