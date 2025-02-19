@@ -121,12 +121,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
+
       - name: Install Playwright
         run: |
           python -m pip install playwright
           playwright install
           playwright install --with-deps webkit
           playwright install-deps
+
+      - name: Verify Playwright Browsers
+        run: |
+          npx playwright --version
+          npx playwright show-browsers
 
       - name: Install Allure Commandline
         run: |
