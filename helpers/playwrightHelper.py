@@ -652,16 +652,19 @@ class BasePlaywrightHelper:
 
     def get_accessibility_violations(self):
         try:
-            current_url = self.get_current_url(self.page)
-
-            self.page.goto(current_url)
-
-            axe = self.page.accessibility
-            results = axe.check()
+            current_url = self.page.url
+            axe = Axe()
+            results = axe.run(self.page)
             violations = results['violations']
 
             if violations:
-                print(f"Accessibility Violations for {current_url}: {violations}")
+                violations_json = json.dumps(violations, indent=4)
+                allure.attach(
+                                violations_json,
+                                name=f"Accessibility Violations for {current_url}",
+                                attachment_type=allure.attachment_type.JSON
+                            )
+                print(f"Accessibility Violations for {current_url}: {violations_json}")
             else:
                 print(f"No accessibility violations found for {current_url}.")
 
