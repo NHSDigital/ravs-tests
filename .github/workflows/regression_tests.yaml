@@ -83,14 +83,18 @@ jobs:
           echo "ENV=${{ inputs.environment || 'dev' }}" >> $GITHUB_ENV
           echo "BROWSER=${{ inputs.browser || 'edge' }}" >> $GITHUB_ENV
           echo "DEVICE=${{ inputs.device || 'iphone_12' }}" >> $GITHUB_ENV
+          echo "PRODUCT=${{ inputs.product || 'RAVS' }}" >> $GITHUB_ENV
 
       - name: Notify Slack - Tests Started
         run: |
-          TRIGGER_SOURCE="Triggered by *${{ github.actor }}*"
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            TRIGGER_SOURCE="Triggered by a scheduled run"
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            TRIGGER_SOURCE="🚀 *Tests have been kicked off manually by* ${{ github.actor }}."
+          elif [[ "${{ github.event_name }}" == "schedule" ]]; then
+            TRIGGER_SOURCE="🕒 *Tests have been triggered by a scheduled run.*"
           elif [[ "${{ github.event_name }}" == "push" ]]; then
-            TRIGGER_SOURCE="Triggered by a code push"
+            TRIGGER_SOURCE="🔄 *Tests have been triggered by a code push.*"
+          else
+            TRIGGER_SOURCE="🔍 *Tests have started.*"
           fi
 
           BROWSER_MESSAGE="${{ env.BROWSER }}"
@@ -98,13 +102,12 @@ jobs:
             BROWSER_MESSAGE="Mobile (${{ env.DEVICE }})"
           fi
 
-          SLACK_MESSAGE="🚀 *Tests have started.*\n
+          SLACK_MESSAGE="${TRIGGER_SOURCE}\n
           *Environment:* ${{ env.ENV }}
-          *Product:* ${{ inputs.product }}
+          *Product:* ${{ env.PRODUCT }}
           *Run ID:* ${{ github.run_id }}
           *Browser:* ${BROWSER_MESSAGE}
-          *Branch:* ${{ github.ref_name }}
-          *${TRIGGER_SOURCE}*"
+          *Branch:* ${{ github.ref_name }}"
 
           curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
 
