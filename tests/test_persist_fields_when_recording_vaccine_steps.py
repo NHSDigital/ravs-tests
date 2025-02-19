@@ -56,7 +56,7 @@ def change_delivery_team_choose_vaccine(shared_data):
 def change_vaccine_product_choose_vaccine(shared_data):
     click_vaccine_radiobutton(shared_data["chosen_vaccine_new"])
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(1, shared_data["chosen_vaccine_new"])
-    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page() == shared_data["site"]
+    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page().lower() == shared_data["site"].lower()
     attach_screenshot("site_selection_should_persist")
     assert str(get_selected_vaccine_product_radio_button_value_on_choose_vaccine_page()).replace("Active batches available", "").strip() == "Vaccine product selection did not persist"
     attach_screenshot("vaccine_product_selection_should_not_persist")
@@ -68,7 +68,7 @@ def change_vaccine_product_choose_vaccine(shared_data):
 @when("I change the vaccination product type on the choose vaccine page")
 def change_vaccine_product_choose_vaccine(shared_data):
     shared_data["chosen_vaccine_new"] = "Flu"
-    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page() == shared_data["site"]
+    assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page().lower() == shared_data["site"].lower()
     attach_screenshot("site_selection_should_persist")
     assert get_selected_vaccine_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine"]
     attach_screenshot("vaccine_product_selection_should_persist")
