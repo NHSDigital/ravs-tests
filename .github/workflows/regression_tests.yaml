@@ -122,6 +122,7 @@ jobs:
         run: |
           python -m pip install playwright
           playwright install
+          playwright install webkit
           playwright install-deps
 
       - name: Install Allure Commandline
