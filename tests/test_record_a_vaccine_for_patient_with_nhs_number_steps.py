@@ -26,10 +26,6 @@ logger = logging.getLogger(__name__)
 def test_record_a_vaccine_with_nhs_number(navigate_and_login):
     pass
 
-@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a vaccine with nhs number and auto-select batch number as only one vaccine product')
-def test_record_a_vaccine_with_nhs_number_auto_select_batch_number(navigate_and_login):
-    pass
-
 @scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a maternity vaccine with nhs number')
 def test_record_a_maternity_vaccine_with_nhs_number(navigate_and_login):
     pass # All test steps are in conftest.py

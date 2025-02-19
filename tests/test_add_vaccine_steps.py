@@ -21,22 +21,30 @@ def logged_into_homepage(navigate_and_login):
 
 @when("I am on the vaccines page")
 def i_am_on_the_vaccines_page():
+    attach_screenshot("logged_into_ravs")
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
     click_vaccines_nav_link()
+    attach_screenshot("clicked_vaccines_nav_link")
 
 @when("I click add vaccine button")
 def i_click_add_vaccine():
     click_add_vaccine_button()
+    attach_screenshot("clicked_add_vaccine_button")
 
 @when(parse("I select {site}, {vaccine}, {vaccine_type}"))
 def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_data):
     enter_site_name(site)
+    attach_screenshot("entered_site_name")
     select_site_from_list(site)
+    attach_screenshot("selected_site_from_list")
     click_continue_to_add_vaccine_button()
+    attach_screenshot("clicked_continue_to_add_vaccine_button")
     click_vaccine_radiobutton(vaccine)
+    attach_screenshot("clicked_vaccine_radiobutton")
     click_vaccine_type_radiobutton(vaccine_type)
+    attach_screenshot("clicked_vaccine_type_radiobutton")
     shared_data['site'] = site
     shared_data['vaccineType'] = vaccine_type
 

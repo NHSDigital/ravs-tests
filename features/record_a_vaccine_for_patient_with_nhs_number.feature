@@ -10,7 +10,7 @@ Feature: Record vaccine
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
     Then I need to be able to see the patient <name>, <dob>, <address> and vaccination details on the check and confirm screen
-    And when I click confirm and save button, I should see a record saved dialogue
+    And I click confirm and save button, I should see a record saved dialogue
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
     And the immunisation history of the patient should be updated in the patient details page
@@ -57,7 +57,7 @@ Feature: Record vaccine
   #   And I record <consent> with the details and click continue to vaccinate button
   #   And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen without selecting batch number as the vaccine product has only one batch so it should be auto-selected
   #   Then I need to be able to see the patient <name>, <dob>, <address> and vaccination details on the check and confirm screen
-  #   And when I click confirm and save button, I should see a record saved dialogue
+  #   And I click confirm and save button, I should see a record saved dialogue
   #   And I search for a patient with the NHS number in the find a patient screen
   #   And I open the patient record by clicking on patient <name>
   #   And the immunisation history of the patient should be updated in the patient details page
@@ -76,7 +76,7 @@ Feature: Record vaccine
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
     Then I need to be able to see the patient <name>, <dob>, <address> and vaccination details on the check and confirm screen
-    And when I click confirm and save button, I should see a record saved dialogue
+    And I click confirm and save button, I should see a record saved dialogue
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
     And the immunisation history of the patient should be updated in the patient details page

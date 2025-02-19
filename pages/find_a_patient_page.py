@@ -131,6 +131,7 @@ def check_search_for_patient_button_visible():
 
 def click_search_for_patient_button():
     wait_for_element_to_appear(SEARCH_BUTTON)
+    time.sleep(1)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     time.sleep(2)
