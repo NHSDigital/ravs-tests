@@ -73,20 +73,35 @@ class BasePlaywrightHelper:
 
     def launch_mobile_browser(self, device_name, headless_mode):
         try:
+            locale = "en-GB"
+
             if "iphone_12" == device_name.lower():
-                self.browser = self.playwright.webkit.launch(headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["iPhone 12"])
+                device_settings = self.playwright.devices["iPhone 12"]
             elif "iphone_11" == device_name.lower():
-                self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["iPhone 11"])
+                device_settings = self.playwright.devices["iPhone 11"]
             elif "pixel_5" == device_name.lower():
+                device_settings = self.playwright.devices["Pixel 5"]
+            else:
+                device_settings = self.playwright.devices["Galaxy S9+"]
+
+            if "iphone" in device_name.lower() or "pixel" in device_name.lower():
                 self.browser = self.playwright.webkit.launch(headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["Pixel 5"])
             else:
                 self.browser = self.playwright.chromium.launch(channel='chromium', headless=headless_mode)
-                self.context = self.browser.new_context(**self.playwright.devices["Galaxy S9+"])
+
+            device_settings = {
+                k: v for k, v in device_settings.items()
+                if k not in ["is_mobile", "viewport", "device_scale_factor"]
+            }
+
+            self.context = self.browser.new_context(
+                **device_settings,
+                locale=locale,
+            )
 
             self.page = self.context.new_page()
+            self.page.set_viewport_size(device_settings["viewport"])
+
         except Exception as e:
             print(f"Error launching mobile browser for {device_name}: {e}")
 
