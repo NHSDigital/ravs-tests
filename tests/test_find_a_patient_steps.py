@@ -86,7 +86,6 @@ def the_pds_search_section_should_be_displayed():
 @given('I click the search button')
 @when('I click the search button')
 def step_click_search_button(shared_data):
-    url = get_app_url(config["test_environment"])
     click_search_for_patient_button()
     attach_screenshot("clicked_search_for_patient_button")
 
