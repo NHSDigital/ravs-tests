@@ -1,6 +1,6 @@
 from init_helpers import *
 
-ADD_BATCH_BUTTON = ("role", "link", "Add batch")
+FIRST_ADD_BATCH_BUTTON = ("role", "link", "Add batch")
 BACK_BUTTON_ON_VACCINE_BATCHES_PAGE = ("role", "link", "Back", True)
 CONTINUE_TO_CHECK_AND_CONFIRM_VACCINE_BATCH_BUTTON = ("role", "button", "Continue")
 BATCH_NUMBER_INPUT_FIELD = ("label", "Batch number")
@@ -17,8 +17,9 @@ ERROR_MESSAGE_LINK_ENTER_THE_BATCH_NUMBER = ("role", "link", "Enter the batch nu
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_EXPIRY_DATE = ("role", "link", "Enter the expiry date")
 
 def click_add_batch_button():
-    wait_for_element_to_appear(ADD_BATCH_BUTTON)
-    find_element_and_perform_action(ADD_BATCH_BUTTON, "click")
+    first_add_batch_button = get_element_by_type(*FIRST_ADD_BATCH_BUTTON).nth(0)
+    wait_for_element_to_appear(first_add_batch_button)
+    find_element_and_perform_action(first_add_batch_button, "click")
 
 def check_batch_already_exists_error_message_is_displayed():
     wait_for_element_to_appear(ERROR_MESSAGE_BATCH_ALREADY_EXISTS)
