@@ -64,7 +64,7 @@ on:
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }}
+    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.ref_name == 'refs/heads/main' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }}
 
     steps:
       - name: Checkout code
