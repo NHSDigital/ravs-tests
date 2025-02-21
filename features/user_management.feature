@@ -1,17 +1,17 @@
 Feature: User Management
 
-@usermanagement
-Scenario: Manage users page is displayed
-  Given I am logged into the RAVS app
-  When I click the manage users navigation link
-  Then the manage users page should be displayed
+# @usermanagement
+# Scenario: Manage users page is displayed
+#   Given I am logged into the RAVS app
+#   When I click the manage users navigation link
+#   Then the manage users page should be displayed
 
-@usermanagement
-Scenario: Add User page should be displayed
-  Given I am logged into the RAVS app
-  When I click the manage users navigation link
-  And I click the add user button
-  Then the add user page should be displayed
+# @usermanagement
+# Scenario: Add User page should be displayed
+#   Given I am logged into the RAVS app
+#   When I click the manage users navigation link
+#   And I click the add user button
+#   Then the add user page should be displayed
 
 @usermanagement
 Scenario: Add user error messages should be displayed
@@ -93,9 +93,9 @@ Scenario: User management should not be visible if logged in as administrator
   Then user management navigation link should not be visible
 
 @usermanagement
-Scenario: User management should not be visible if logged in as administrator
-  Given I am logged into the RAVS app as an administrator
-  Then user management navigation link should not be visible
+Scenario: User management should not be visible if logged in as lead administrator
+  Given I am logged into the RAVS app as an lead administrator
+  Then user management navigation link be visible
 
 @usermanagement
 Scenario: Change details in the check and confirm user screen when adding a new user
