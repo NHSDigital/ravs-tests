@@ -133,6 +133,21 @@ def navigate_and_login_as_administrator(request, navigate_to_ravs):
     enter_password(password)
     click_nhs_signin_button()
 
+# Fixture for navigating and logging in as lead administrator
+@pytest.fixture(scope='function')
+def navigate_and_login_as_lead_administrator(request, navigate_to_ravs):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
 # Fixture for navigating to RAVS
 @pytest.fixture(scope='function')
 def navigate_to_ravs(request):
@@ -888,3 +903,14 @@ def the_vaccinated_values_should_persist(shared_data):
     # assert check_vaccination_site_missing_error_message_exists() == True #commenting because error text does not appear only link appears even when it is the first vaccination after logging in
     assert check_vaccination_site_missing_error_message_link_exists() == True
 
+@given("I am logged into the RAVS app as an administrator")
+def logged_into_ravs_as_recorder(navigate_and_login_as_administrator):
+    pass
+
+@given("I am logged into the RAVS app as a lead administrator")
+def logged_into_ravs_as_recorder(navigate_and_login_as_lead_administrator):
+    pass
+
+@given("I am logged into the RAVS app as a recorder")
+def logged_into_ravs_as_recorder(navigate_and_login_as_recorder):
+    pass
