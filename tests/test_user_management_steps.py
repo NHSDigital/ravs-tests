@@ -239,18 +239,15 @@ def check_and_confirm_screen_should_be_visible(shared_data):
         assert check_change_name_link_exists() == True
         attach_screenshot("change_name_link_exists")
 
-@given("I am logged into the RAVS app as a recorder")
-def logged_into_ravs_as_recorder(navigate_and_login_as_recorder):
-    pass
-
-@given("I am logged into the RAVS app as an administrator")
-def logged_into_ravs_as_recorder(navigate_and_login_as_administrator):
-    pass
-
 @then("user management navigation link should not be visible")
 def user_management_nav_link_should_not_be_visible():
     assert check_manage_users_nav_link_exists() == False
     attach_screenshot("manage_users_nav_link_should_not_exist")
+
+@then("user management navigation link should be visible")
+def user_management_nav_link_should_be_visible():
+    assert check_manage_users_nav_link_exists() == True
+    attach_screenshot("manage_users_nav_link_should_exist")
 
 @when(parse("I click the change user's {detail} detail link"))
 def change_detail_link(shared_data, detail):

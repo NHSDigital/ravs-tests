@@ -93,9 +93,9 @@ Scenario: User management should not be visible if logged in as administrator
   Then user management navigation link should not be visible
 
 @usermanagement
-Scenario: User management should not be visible if logged in as lead administrator
-  Given I am logged into the RAVS app as an lead administrator
-  Then user management navigation link be visible
+Scenario: User management should be visible if logged in as lead administrator
+  Given I am logged into the RAVS app as a lead administrator
+  Then user management navigation link should be visible
 
 @usermanagement
 Scenario: Change details in the check and confirm user screen when adding a new user
