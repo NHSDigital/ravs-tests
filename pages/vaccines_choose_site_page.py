@@ -8,13 +8,15 @@ CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
 
 def enter_site_name(site):
     wait_for_element_to_appear(SITE_SEARCH)
-    find_element_and_perform_action(SITE_SEARCH, "input_text", site)
+    if check_element_exists(SITE_SEARCH): # site search will not be available for community pharmacy
+        find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):
     # element = (f"//div[@class='siteRows' and contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{site.lower()}')]")
     element = ("text", site)
     wait_for_element_to_appear(element)
-    find_element_and_perform_action(element, "click")
+    if check_element_exists(element):
+        find_element_and_perform_action(element, "click")
 
 def click_continue_to_add_vaccine_button():
     wait_for_element_to_appear(CONTINUE_TO_ADD_VACCINE_BUTTON)
