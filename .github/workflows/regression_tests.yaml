@@ -64,7 +64,7 @@ on:
 jobs:
   regression_tests:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.ref_name == 'refs/heads/main' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }}
+    environment: ${{ github.event_name == 'push' && 'dev' || (github.event_name == 'schedule' && github.event.schedule == '0 6 * * *' && 'qa' || (github.event_name == 'workflow_dispatch' && inputs.environment || 'dev')) }}
 
     steps:
       - name: Checkout code
@@ -80,10 +80,32 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          echo "ENV=${{ inputs.environment || 'dev' }}" >> $GITHUB_ENV
-          echo "BROWSER=${{ inputs.browser || 'edge' }}" >> $GITHUB_ENV
-          echo "DEVICE=${{ inputs.device || 'iphone_12' }}" >> $GITHUB_ENV
-          echo "PRODUCT=${{ inputs.product || 'RAVS' }}" >> $GITHUB_ENV
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            case "${{ github.event.schedule }}" in
+                "0 6 * * *")
+                echo "ENV=qa" >> $GITHUB_ENV
+                ;;
+                "30 6 * * *")
+                echo "ENV=dev" >> $GITHUB_ENV
+                ;;
+              *)
+              echo "Unrecognized schedule. Defaulting to dev."
+              echo "ENV=dev" >> $GITHUB_ENV
+              ;;
+              esac
+              elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+                echo "ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+              elif [[ "${{ github.event_name }}" == "push" ]]; then
+                echo "ENV=dev" >> $GITHUB_ENV
+              else
+                echo "Unknown event. Defaulting to dev."
+                echo "ENV=dev" >> $GITHUB_ENV
+              fi
+
+              echo "BROWSER=${{ github.event.inputs.browser || 'edge' }}" >> $GITHUB_ENV
+              echo "DEVICE=${{ github.event.inputs.device || 'iphone_12' }}" >> $GITHUB_ENV
+              echo "PRODUCT=${{ github.event.inputs.product || 'RAVS' }}" >> $GITHUB_ENV
+
 
       - name: Notify Slack - Tests Started
         run: |
