@@ -53,21 +53,13 @@ def the_choose_site_page_is_launched():
     attach_screenshot("choose_site_page_should_launch")
     assert check_choose_site_title_exists(True) == True
 
-@given("I am logged into the RAVS app as a recorder")
-def logged_into_ravs_as_recorder(navigate_and_login_as_recorder):
-    pass
-
 @then("vaccines navigation link should not be visible")
 def vaccines_nav_link_should_not_be_visible_for_recorder():
     assert check_vaccines_nav_link_exists() == False
     attach_screenshot("vaccines_nav_link_should_not_exist")
 
-@given("I am logged into the RAVS app as an administrator")
-def logged_into_ravs_as_recorder(navigate_and_login_as_administrator):
-    pass
-
 @then("vaccines navigation link should be visible")
-def vaccines_nav_link_should_not_be_visible_for_administrator():
+def vaccines_nav_link_should_be_visible_for_administrator():
     assert check_vaccines_nav_link_exists() == True
     attach_screenshot("vaccines_nav_link_should_exist")
 
