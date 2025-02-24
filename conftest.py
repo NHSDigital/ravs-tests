@@ -49,7 +49,7 @@ def site(request):
     return request.param
 
 # Fixture for care_model parameter
-@pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event"])
+@pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event", "Community pharmacy"])
 def care_model(request):
     return request.param
 
@@ -68,6 +68,21 @@ def navigate_and_login(request, navigate_to_ravs):
         click_logout_button()
     click_login_button()
     emailAddress = "neelima.guntupalli1@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
+# Fixture for navigating and logging in as community pharmacist
+@pytest.fixture(scope='function')
+def navigate_and_login_as_community_pharmacist(request, navigate_to_ravs):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1+community_pharmacy@nhs.net"
     enter_email_address(emailAddress)
     password = config["credentials"]["ravs_password"]
     enter_password(password)
