@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-
+from dateutil.relativedelta import relativedelta
 
 class BaseDatetimeHelper:
     @staticmethod
@@ -51,25 +51,33 @@ class BaseDatetimeHelper:
 
     @staticmethod
     def get_date_value(date):
-        if "today" in date.lower():
-            if "-" in date.lower():
+        date = date.lower()
+
+        if "today" in date:
+            if "-" in date:
                 parts = date.split("-")
-            elif "+" in date.lower():
+                offset = int(parts[1].strip()) if len(parts) > 1 else 0
+
+                if offset >= 90:  # 🔥 Handling for ~3 months ago
+                    return (datetime.today() - relativedelta(months=3) - timedelta(days=offset - 90)).date()
+
+                elif offset >= 30:  # 🔥 Handling for ~1 month ago
+                    return (datetime.today() - relativedelta(months=1) - timedelta(days=offset - 30)).date()
+
+                elif offset >= 15:  # 🔥 Handling for ~15 days ago
+                    return (datetime.today() - timedelta(days=15)).date()
+
+                else:  # Regular subtraction for small offsets
+                    return (datetime.today() - timedelta(days=offset)).date()
+
+            elif "+" in date:
                 parts = date.split("+")
-            else:
-                parts = date.lower()
-
-            if len(parts) != 5:
-                offset = int(parts[1].strip())
-            else:
-                offset = 0
-
-            if "-" in date.lower():
-                return (datetime.today() - timedelta(days=offset)).date()
-            elif "+" in date.lower():
+                offset = int(parts[1].strip()) if len(parts) > 1 else 0
                 return (datetime.today() + timedelta(days=offset)).date()
+
             else:
                 return datetime.today().date()
+
         else:
             return datetime.strptime(date, "%Y-%m-%d").date()
 
