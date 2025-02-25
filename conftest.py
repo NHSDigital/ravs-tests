@@ -626,7 +626,7 @@ def step_search_for_patient(shared_data, name):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
-    # time.sleep(3)
+    time.sleep(3)
     if shared_data["nhs_number"] != "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == False
     else:
