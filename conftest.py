@@ -120,6 +120,8 @@ def navigate_and_login_as_administrator(request, navigate_to_ravs):
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
+    select_site("Leeds Pharmacy")
+    click_continue_to_home_page_button()
 
 # Fixture for navigating and logging in as lead administrator
 @pytest.fixture(scope='function')
@@ -892,11 +894,11 @@ def the_vaccinated_values_should_persist(shared_data):
     assert check_vaccination_site_missing_error_message_link_exists() == True
 
 @given("I am logged into the RAVS app as an administrator")
-def logged_into_ravs_as_recorder(navigate_and_login_as_administrator):
+def logged_into_ravs_as_administrator(navigate_and_login_as_administrator):
     pass
 
 @given("I am logged into the RAVS app as a lead administrator")
-def logged_into_ravs_as_recorder(navigate_and_login_as_lead_administrator):
+def logged_into_ravs_as_lead_administrator(navigate_and_login_as_lead_administrator):
     pass
 
 @given("I am logged into the RAVS app as a recorder")
