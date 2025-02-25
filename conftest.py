@@ -23,6 +23,7 @@ from pages.vaccines_choose_site_page import *
 from pages.vaccines_choose_vaccine_page import *
 from pages.site_vaccines_add_batch_page import *
 from pages.vaccines_view_products_page import *
+from pages.select_organization import *
 from init_helpers import *
 from datetime import datetime, timedelta
 from allure_commons.types import LabelType
@@ -102,21 +103,8 @@ def navigate_and_login_as_recorder(request, navigate_to_ravs):
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
-
-# Fixture for navigating and logging in as recorder
-@pytest.fixture(scope='function')
-def navigate_and_login_as_recorder(request, navigate_to_ravs):
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1+recorder_automated@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
+    select_site("Leeds Pharmacy")
+    click_continue_to_home_page_button()
 
 # Fixture for navigating and logging in as administrator
 @pytest.fixture(scope='function')
@@ -638,7 +626,7 @@ def step_search_for_patient(shared_data, name):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
-    time.sleep(3)
+    # time.sleep(3)
     if shared_data["nhs_number"] != "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == False
     else:

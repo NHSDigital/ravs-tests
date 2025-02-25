@@ -17,8 +17,14 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date |
-      | 0 | 9693632109 | Leeds Pharmacy  | Community pharmacy | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
-      | 11 | 9450134391 | Leeds Pharmacy | Community pharmacy | yes | today-3 | yes | yes  | today | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
+      | 0 | 9693632109 | Leeds Pharmacy  | Community pharmacy | yes | today  | yes  | yes | today    | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 1 | 9693632109 | Leeds Pharmacy  | Community pharmacy | yes | today  | yes  | yes | today-15   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 2 | 9693632109 | Leeds Pharmacy  | Community pharmacy | yes | today  | yes  | yes | today-16   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 3 | 9693632109 | Leeds Pharmacy  | Community pharmacy | yes | today  | yes  | yes | today-13   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 11 | 9450134391 | Leeds Pharmacy | Community pharmacy | yes | today-3 | yes | yes  | today-3 | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
+      | 11 | 9450134391 | Leeds Pharmacy | Community pharmacy | yes| today | yes | yes  | today-91 | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
+      | 2 | 9450134391 | Leeds Pharmacy | Community pharmacy | yes| today | yes | yes  | today-92 | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
+      | 11 | 9450134391 | Leeds Pharmacy | Community pharmacy | yes | today | yes | yes  | today-89 | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
 
   @recordvaccine
   Scenario Outline: Record a maternity vaccine with nhs number - Add
