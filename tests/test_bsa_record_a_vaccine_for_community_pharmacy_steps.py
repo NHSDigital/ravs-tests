@@ -22,11 +22,11 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@scenario(f'{features_directory}/bsa_record_a_vaccine_for_community_pharmacy.feature', 'Record a vaccine at community pharmacy - Add')
+@scenario(f'{features_directory}/bsa_record_a_vaccine_for_community_pharmacy.feature', 'Record a vaccine at community pharmacy - Add and delete')
 def test_record_a_vaccine_at_community_pharmacy(navigate_and_login_as_community_pharmacist):
     pass
 
-@scenario(f'{features_directory}/bsa_record_a_vaccine_for_community_pharmacy.feature', 'Record a maternity vaccine at community pharmacy with nhs number - Add')
+@scenario(f'{features_directory}/bsa_record_a_vaccine_for_community_pharmacy.feature', 'Record a maternity vaccine at community pharmacy with nhs number - Add and delete')
 def test_record_a_maternity_vaccine_at_community_pharmacy(navigate_and_login_as_community_pharmacist):
     pass
 
