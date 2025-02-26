@@ -26,15 +26,19 @@ logger = logging.getLogger(__name__)
 def test_record_a_vaccine_at_community_pharmacy(navigate_and_login_as_community_pharmacist):
     pass
 
-@given(parse("I login to RAVS as a community pharmacist and set vaccinator details with {site} and care model as community pharmacy and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
-def step_login_to_ravs_community_pharmacy(site, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
+@scenario(f'{features_directory}/bsa_record_a_vaccine_for_community_pharmacy.feature', 'Record a maternity vaccine at community pharmacy with nhs number - Add')
+def test_record_a_maternity_vaccine_at_community_pharmacy(navigate_and_login_as_community_pharmacist):
+    pass
+
+@given(parse("I login to RAVS as a community pharmacist and set vaccinator details with {site} and {care_model} as community pharmacy and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
     shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
-    shared_data["care_model"] = "Community pharmacy"
+    shared_data["care_model"] = care_model
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')

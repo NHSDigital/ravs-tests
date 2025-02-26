@@ -646,7 +646,7 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -660,9 +660,9 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['eligibility_type'] = "Pregnancy"
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    due_date = format_date(str(get_date_value(due_date)), config["browser"])
+    due_date = format_date(str(get_date_value_by_months(due_date)), config["browser"])
     shared_data['eligibility_due_date'] = due_date
-    assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -688,7 +688,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -709,7 +709,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -728,7 +728,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
