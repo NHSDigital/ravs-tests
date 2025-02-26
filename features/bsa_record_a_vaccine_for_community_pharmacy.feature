@@ -27,6 +27,26 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
       | 11 | 9450134391 | Leeds Pharmacy | Hospital hub for staff and patients | yes | today | yes | yes  | today-89 | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
       | 12 | 9470011902 | Leeds Pharmacy | Community pharmacy | yes | today | yes | yes  |  today-121 | KATEE TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | AUTOMATION-QI | 19/10/2026 |
 
+@bsarecordvaccine
+  Scenario Outline: Record a vaccine at community pharmacy - sflag patient
+    Given I login to RAVS as a community pharmacist and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
+    And I search for a patient with the NHS number in the find a patient screen
+    And I open the patient record by clicking on patient <name>
+    When I click choose vaccine button and choose the <chosen_vaccine>, <batch_number> with <batch_expiry_date> and click continue
+    And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
+    And I record <consent> with the details and click continue to vaccinate button
+    And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
+    Then I need to be able to see the patient <name>, <dob> and vaccination details on the check and confirm screen
+    And I click confirm and save button, I should see a record saved dialogue
+    And I search for a patient with the NHS number in the find a patient screen
+    And I open the patient record by clicking on patient <name>
+    And the immunisation history of the patient should be updated in the patient details page
+
+    Examples:
+      | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   |  chosen_vaccine | batch_number | batch_expiry_date |
+      | 0 | 9733907723 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today    | Sandra Ryan |  7/4/1994 | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+
+
   @bsarecordvaccine
   Scenario Outline: Record a maternity vaccine at community pharmacy with nhs number - Add and delete
     Given I login to RAVS as a community pharmacist and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
