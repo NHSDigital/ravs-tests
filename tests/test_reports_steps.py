@@ -133,9 +133,9 @@ def the_create_report_button_should_be_disabled():
 def I_click_date_range_button_to_generate_reports(day):
     click_day_range_radio_button(day)
     if day == "Select a custom date range up to 31 days":
-        from_date = format_date(str(get_date_value("today-31")), config["browser"])
+        from_date = format_date(str(get_date_value_by_days("today-31")), config["browser"])
         enter_from_date(from_date)
-        to_date = format_date(str(get_date_value("today")), config["browser"])
+        to_date = format_date(str(get_date_value_by_days("today")), config["browser"])
         enter_to_date(to_date)
     attach_screenshot("day_range_radio_button_is_clicked_and_date_range_Selected")
     logging.info("day_range_radio_button_is_clicked_and_date_range_Selected")
@@ -166,8 +166,8 @@ def I_select_no_date_range_and_click_continue(shared_data):
 def I_click_date_range_button_to_generate_reports(shared_data, from_date, to_date):
     click_day_range_radio_button("Select a custom date range up to 31 days")
     if (from_date != "null" and to_date != "null"):
-        from_date = format_date(str(get_date_value(from_date)), config["browser"])
-        to_date = format_date(str(get_date_value(to_date)), config["browser"])
+        from_date = format_date(str(get_date_value_by_days(from_date)), config["browser"])
+        to_date = format_date(str(get_date_value_by_days(to_date)), config["browser"])
         enter_from_date(from_date)
         enter_to_date(to_date)
         attach_screenshot("day_range_radio_button_is_clicked_and_date_range_Selected")

@@ -50,7 +50,29 @@ class BaseDatetimeHelper:
                     )
 
     @staticmethod
-    def get_date_value(date):
+    def get_date_value_by_days(date):
+        date_str = date.lower().strip()
+
+        try:
+            if "today" in date_str:
+                if "-" in date_str:
+                    offset = int(date_str.split("-")[1].strip())
+                    return (datetime.today() - timedelta(days=offset)).date()
+
+                elif "+" in date_str:
+                    offset = int(date_str.split("+")[1].strip())
+                    return (datetime.today() + timedelta(days=offset)).date()
+
+                else:
+                    return datetime.today().date()
+
+            return datetime.strptime(date_str, "%Y-%m-%d").date()
+        except (ValueError, IndexError):
+            raise ValueError(f"Invalid date format: {date_str}. Expected 'YYYY-MM-DD' or 'today[+/-]X'.")
+
+
+    @staticmethod
+    def get_date_value_by_months(date):
         date = date.lower()
 
         if "today" in date:
@@ -58,13 +80,13 @@ class BaseDatetimeHelper:
                 parts = date.split("-")
                 offset = int(parts[1].strip()) if len(parts) > 1 else 0
 
-                if offset >= 90:  # 🔥 Handling for ~3 months ago
+                if offset >= 90:  # Handling for ~3 months ago
                     return (datetime.today() - relativedelta(months=3) - timedelta(days=offset - 90)).date()
 
-                elif offset >= 30:  # 🔥 Handling for ~1 month ago
+                elif offset >= 30:  # Handling for ~1 month ago
                     return (datetime.today() - relativedelta(months=1) - timedelta(days=offset - 30)).date()
 
-                elif offset >= 15:  # 🔥 Handling for ~15 days ago
+                elif offset >= 15:  # Handling for ~15 days ago
                     return (datetime.today() - timedelta(days=15)).date()
 
                 else:  # Regular subtraction for small offsets
