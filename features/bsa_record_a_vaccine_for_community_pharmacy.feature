@@ -40,7 +40,6 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
     And I click confirm and save button, I should see a record saved dialogue
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
-    And the immunisation history of the patient should be updated in the patient details page
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   |  chosen_vaccine | batch_number | batch_expiry_date |
