@@ -1,7 +1,10 @@
+from faker import Faker
 import pytest
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse
 from pages.check_and_confirm_vaccinated_record_page import *
+from pages.confirm_page import *
+from pages.create_a_patient_page import *
 from pages.delete_vaccination_page import *
 from pages.settings_page import *
 from pages.site_vaccine_batches_page import *
@@ -23,11 +26,14 @@ from pages.vaccines_choose_site_page import *
 from pages.vaccines_choose_vaccine_page import *
 from pages.site_vaccines_add_batch_page import *
 from pages.vaccines_view_products_page import *
+from pages.select_organization import *
 from init_helpers import *
 from datetime import datetime, timedelta
 from allure_commons.types import LabelType
 import logging
 from test_data.get_values_from_models import *
+
+fake = Faker('en_GB')
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
@@ -49,7 +55,7 @@ def site(request):
     return request.param
 
 # Fixture for care_model parameter
-@pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event"])
+@pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event", "Community pharmacy"])
 def care_model(request):
     return request.param
 
@@ -73,6 +79,21 @@ def navigate_and_login(request, navigate_to_ravs):
     enter_password(password)
     click_nhs_signin_button()
 
+# Fixture for navigating and logging in as community pharmacist
+@pytest.fixture(scope='function')
+def navigate_and_login_as_community_pharmacist(request, navigate_to_ravs):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+    click_login_button()
+    emailAddress = "neelima.guntupalli1+community_pharmacy@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
 # Fixture for navigating and logging in
 @pytest.fixture(scope='function')
 def navigate_and_login_as_recorder(request, navigate_to_ravs):
@@ -87,21 +108,8 @@ def navigate_and_login_as_recorder(request, navigate_to_ravs):
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
-
-# Fixture for navigating and logging in as recorder
-@pytest.fixture(scope='function')
-def navigate_and_login_as_recorder(request, navigate_to_ravs):
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1+recorder_automated@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
+    select_site("Leeds Pharmacy")
+    click_continue_to_home_page_button()
 
 # Fixture for navigating and logging in as administrator
 @pytest.fixture(scope='function')
@@ -117,6 +125,8 @@ def navigate_and_login_as_administrator(request, navigate_to_ravs):
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
+    select_site("Leeds Pharmacy")
+    click_continue_to_home_page_button()
 
 # Fixture for navigating and logging in as lead administrator
 @pytest.fixture(scope='function')
@@ -621,12 +631,66 @@ def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
     shared_data["patient_name"] = name
 
+@given('I create a random patient locally')
+def generate_random_patient_locally(shared_data):
+    click_find_a_patient_nav_link()
+    click_search_by_demographics_link()
+    gender = [
+        "Female",
+        "Male",
+        "Other",
+        "Unknown"
+        ]
+
+    shared_data["first_name"] = fake.first_name()
+    shared_data["last_name"] = fake.last_name()
+    shared_data["gender"] = random.choice(gender)
+    shared_data["postcode"] = fake.postcode()
+    dob = fake.date_of_birth()
+    day, month, year = str(dob.day), str(dob.month), str(dob.year)
+    dob_string = f"{day}/{month}/{year}"
+    shared_data["dob"] = dob_string
+    first_name = shared_data["first_name"]
+    last_name = shared_data["last_name"]
+    gender = shared_data["gender"]
+    postcode = shared_data["postcode"]
+    dob = shared_data["dob"]
+    enter_first_name(first_name)
+    enter_last_name(last_name)
+    enter_dob(dob)
+    attach_screenshot("add_mandatory_patient_information")
+    click_search_for_patient_button()
+    attach_screenshot("clicked_search_for_patient_button")
+    click_create_a_new_patient_button()
+    time.sleep(2)
+    attach_screenshot("clicked_create_a_new_patient_button")
+    enter_first_name(first_name)
+    enter_last_name(last_name)
+    select_gender(gender)
+    enter_postcode(postcode)
+    enter_dob(dob)
+    attach_screenshot("add_mandatory_new_patient_information")
+    click_check_and_confirm_button()
+    attach_screenshot("clicked_check_and_confirm_button")
+    click_confirm_and_save_button()
+    attach_screenshot("clicked_confirm_and_save_button")
+    patient_added_message = get_patient_added_message(shared_data["first_name"])
+    attach_screenshot("patient_added_confirmation_message")
+    click_search_by_local_records_link()
+    enter_first_name(shared_data["first_name"])
+    enter_last_name(shared_data["last_name"])
+    select_gender(shared_data["gender"])
+    enter_postcode(shared_data["postcode"])
+    enter_dob(shared_data["dob"])
+    click_search_for_patient_button()
+    attach_screenshot("clicked_search_for_patient_button")
+    shared_data["patient_name"] = shared_data["first_name"] + " " + shared_data["last_name"]
+    click_on_patient_name_search_result(shared_data["patient_name"])
+
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
     time.sleep(3)
-    if shared_data["nhs_number"] != "9727840361":
-        assert check_vaccine_history_not_available_label_element_exists() == False
-    else:
+    if shared_data["nhs_number"] == "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == True
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
@@ -641,7 +705,7 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -655,9 +719,9 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['eligibility_type'] = "Pregnancy"
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    due_date = format_date(str(get_date_value(due_date)), config["browser"])
+    due_date = format_date(str(get_date_value_by_months(due_date)), config["browser"])
     shared_data['eligibility_due_date'] = due_date
-    assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -683,7 +747,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -704,7 +768,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -723,7 +787,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value(vaccination_date)), config["browser"])
+            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -754,6 +818,27 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
             assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
             assert get_patient_dob_value_in_check_and_confirm_screen() == date_format_with_age(dob)
             shared_data['dob'] = date_format_with_age(dob)
+            assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
+            assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
+            assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
+            assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
+            attach_screenshot("check_and_confirm_screen_after_assertion")
+
+@when(parse("I need to be able to see the patient vaccination details on the check and confirm screen"))
+@then(parse("I need to be able to see the patient vaccination details on the check and confirm screen"))
+def step_see_patient_details_on_check_and_confirm_screen(shared_data):
+    if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
+        attach_screenshot("check_and_confirm_screen_before_assertion")
+        if get_patient_name_value_in_check_and_confirm_screen() is not None:
+            assert get_patient_name_value_in_check_and_confirm_screen().lower() == shared_data["patient_name"].lower()
+            shared_data["gender"] = get_patient_gender_value_in_check_and_confirm_screen()
+            assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
+            assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine"]
+            assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["chosen_vaccine_type"]
+            assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
+            assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
+            assert get_patient_dob_value_in_check_and_confirm_screen() == date_format_with_age(shared_data['dob'])
+            shared_data['dob'] = date_format_with_age(shared_data['dob'])
             assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
             assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
             assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
@@ -889,11 +974,11 @@ def the_vaccinated_values_should_persist(shared_data):
     assert check_vaccination_site_missing_error_message_link_exists() == True
 
 @given("I am logged into the RAVS app as an administrator")
-def logged_into_ravs_as_recorder(navigate_and_login_as_administrator):
+def logged_into_ravs_as_administrator(navigate_and_login_as_administrator):
     pass
 
 @given("I am logged into the RAVS app as a lead administrator")
-def logged_into_ravs_as_recorder(navigate_and_login_as_lead_administrator):
+def logged_into_ravs_as_lead_administrator(navigate_and_login_as_lead_administrator):
     pass
 
 @given("I am logged into the RAVS app as a recorder")

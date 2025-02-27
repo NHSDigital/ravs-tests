@@ -85,7 +85,7 @@ def the_pds_search_section_should_be_displayed():
 
 @given('I click the search button')
 @when('I click the search button')
-def step_click_search_button(shared_data):
+def step_click_search_button():
     click_search_for_patient_button()
     attach_screenshot("clicked_search_for_patient_button")
 
@@ -177,7 +177,7 @@ def patient_information_page_should_be_available(name, nhsNumber, dob, address):
         assert check_create_new_patient_button_exists(True) == True
 
 @then("I can see the patient's local record in the search results")
-def step_patient_information_page_should_be_available(shared_data):
+def step_local_patient_information_page_should_be_available(shared_data):
     attach_screenshot("patient_local_record_should_be_visible")
     name = f'{shared_data["first_name"]} {shared_data["last_name"]}'
     dob = shared_data["dob"]
@@ -248,7 +248,7 @@ def step_generate_random_patient_details(shared_data):
     shared_data["dob"] = dob_string
 
 @given("I enter the new patient details on find by demographics page")
-def step_add_mandatory_patient_information(shared_data):
+def step_add_mandatory_patient_information_find_by_demographics(shared_data):
     enter_first_name(shared_data["first_name"])
     enter_last_name(shared_data["last_name"])
     select_optional_gender(shared_data["gender"])
@@ -259,7 +259,7 @@ def step_add_mandatory_patient_information(shared_data):
 @when("I enter the new patient details")
 @given("I enter the new patient details on create a new patient page")
 @then("I enter the new patient details")
-def step_add_mandatory_patient_information(shared_data):
+def step_add_mandatory_patient_information_create_patient(shared_data):
     enter_first_name(shared_data["first_name"])
     enter_last_name(shared_data["last_name"])
     select_gender(shared_data["gender"])

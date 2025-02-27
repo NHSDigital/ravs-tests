@@ -383,6 +383,8 @@ def date_format_with_name_of_month(date):
 def date_format_with_name_of_month_shortened(date):
     return datetime_helper_instance.date_format_with_name_of_month_shortened(date)
 
-def get_date_value(date):
-    return datetime_helper_instance.get_date_value(date)
+def get_date_value_by_months(date):
+    return datetime_helper_instance.get_date_value_by_months(date)
 
+def get_date_value_by_days(date):
+    return datetime_helper_instance.get_date_value_by_days(date)

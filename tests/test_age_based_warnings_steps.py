@@ -78,7 +78,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
     assess_date = "today"
-    assess_date = format_date(str(get_date_value(assess_date)), config["browser"])
+    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -95,7 +95,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
     record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
     shared_data["vaccinated_decision"] = "yes"
-    shared_data["vaccination_date"] = format_date(str(get_date_value("today")), config["browser"])
+    shared_data["vaccination_date"] = format_date(str(get_date_value_by_months("today")), config["browser"])
     chosen_vaccine = shared_data["chosen_vaccine"]
     shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
     shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine"]))

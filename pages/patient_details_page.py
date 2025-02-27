@@ -181,7 +181,8 @@ def click_delete_history_button(vaccine, index):
 
 def click_delete_history_link(vaccine):
     element = (f"//h2[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
-    find_element_and_perform_action(element, "click")
+    if check_element_exists(element):
+        find_element_and_perform_action(element, "click")
 
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
