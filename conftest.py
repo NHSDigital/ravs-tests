@@ -1,7 +1,10 @@
+from faker import Faker
 import pytest
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse
 from pages.check_and_confirm_vaccinated_record_page import *
+from pages.confirm_page import *
+from pages.create_a_patient_page import *
 from pages.delete_vaccination_page import *
 from pages.settings_page import *
 from pages.site_vaccine_batches_page import *
@@ -29,6 +32,8 @@ from datetime import datetime, timedelta
 from allure_commons.types import LabelType
 import logging
 from test_data.get_values_from_models import *
+
+fake = Faker('en_GB')
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
@@ -626,6 +631,62 @@ def step_search_for_patient(shared_data, name):
     attach_screenshot("before_clicking_patient_name")
     shared_data["patient_name"] = name
 
+@given('I create a random patient locally')
+def generate_random_patient_locally(shared_data):
+    click_find_a_patient_nav_link()
+    click_search_by_demographics_link()
+    gender = [
+        "Female",
+        "Male",
+        "Other",
+        "Unknown"
+        ]
+
+    shared_data["first_name"] = fake.first_name()
+    shared_data["last_name"] = fake.last_name()
+    shared_data["gender"] = random.choice(gender)
+    shared_data["postcode"] = fake.postcode()
+    dob = fake.date_of_birth()
+    day, month, year = str(dob.day), str(dob.month), str(dob.year)
+    dob_string = f"{day}/{month}/{year}"
+    shared_data["dob"] = dob_string
+    first_name = shared_data["first_name"]
+    last_name = shared_data["last_name"]
+    gender = shared_data["gender"]
+    postcode = shared_data["postcode"]
+    dob = shared_data["dob"]
+    enter_first_name(first_name)
+    enter_last_name(last_name)
+    enter_dob(dob)
+    attach_screenshot("add_mandatory_patient_information")
+    click_search_for_patient_button()
+    attach_screenshot("clicked_search_for_patient_button")
+    click_create_a_new_patient_button()
+    time.sleep(2)
+    attach_screenshot("clicked_create_a_new_patient_button")
+    enter_first_name(first_name)
+    enter_last_name(last_name)
+    select_gender(gender)
+    enter_postcode(postcode)
+    enter_dob(dob)
+    attach_screenshot("add_mandatory_new_patient_information")
+    click_check_and_confirm_button()
+    attach_screenshot("clicked_check_and_confirm_button")
+    click_confirm_and_save_button()
+    attach_screenshot("clicked_confirm_and_save_button")
+    patient_added_message = get_patient_added_message(shared_data["first_name"])
+    attach_screenshot("patient_added_confirmation_message")
+    click_search_by_local_records_link()
+    enter_first_name(shared_data["first_name"])
+    enter_last_name(shared_data["last_name"])
+    select_gender(shared_data["gender"])
+    enter_postcode(shared_data["postcode"])
+    enter_dob(shared_data["dob"])
+    click_search_for_patient_button()
+    attach_screenshot("clicked_search_for_patient_button")
+    shared_data["patient_name"] = shared_data["first_name"] + " " + shared_data["last_name"]
+    click_on_patient_name_search_result(shared_data["patient_name"])
+
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
     time.sleep(3)
@@ -763,9 +824,9 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
             assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
             attach_screenshot("check_and_confirm_screen_after_assertion")
 
-@when(parse("I need to be able to see the patient {name}, {dob} and vaccination details on the check and confirm screen"))
-@then(parse("I need to be able to see the patient {name}, {dob} and vaccination details on the check and confirm screen"))
-def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob):
+@when(parse("I need to be able to see the patient vaccination details on the check and confirm screen"))
+@then(parse("I need to be able to see the patient vaccination details on the check and confirm screen"))
+def step_see_patient_details_on_check_and_confirm_screen(shared_data):
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         attach_screenshot("check_and_confirm_screen_before_assertion")
         if get_patient_name_value_in_check_and_confirm_screen() is not None:
@@ -776,8 +837,8 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob)
             assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["chosen_vaccine_type"]
             assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
             assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
-            assert get_patient_dob_value_in_check_and_confirm_screen() == date_format_with_age(dob)
-            shared_data['dob'] = date_format_with_age(dob)
+            assert get_patient_dob_value_in_check_and_confirm_screen() == date_format_with_age(shared_data['dob'])
+            shared_data['dob'] = date_format_with_age(shared_data['dob'])
             assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
             assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
             assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
