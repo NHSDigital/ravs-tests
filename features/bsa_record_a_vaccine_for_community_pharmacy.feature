@@ -43,7 +43,8 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   |  chosen_vaccine | batch_number | batch_expiry_date |
-      | 0 | 9733907723 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today    | Sandra Ryan |  7/4/1994 | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 0 | 9733907723 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today-14    | Sandra Ryan |  7/4/1994 | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 1 | 9733907723 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  |Sandra Ryan |  7/4/1994 | Flu  | AUTOMATION-SJ1   | 19/10/2026 |
 
 @bsarecordvaccine
   Scenario Outline: Record a vaccine at community pharmacy - local patient
@@ -59,6 +60,7 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
     Examples:
       | index | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | chosen_vaccine | batch_number | batch_expiry_date |
       | 0 |  Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today    |  COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 1 |  Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today    | Flu         | AUTOMATION-SJ1   | 19/10/2026 |
 
 
   @bsarecordvaccine
