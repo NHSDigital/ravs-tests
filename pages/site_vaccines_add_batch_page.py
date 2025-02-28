@@ -8,13 +8,41 @@ EXPIRY_DATE_DAY_INPUT_FIELD = ("label", "Day")
 EXPIRY_DATE_MONTH_INPUT_FIELD = ("label", "Month")
 EXPIRY_DATE_YEAR_INPUT_FIELD = ("label", "Year")
 ADD_BATCH_TITLE = ("role", "heading", "Add batch")
+SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON = ("role", "radio", "Single vial")
+MULTI_VIALS_PACK_SIZE_RADIO_BUTTON = ("role", "radio", "10 vials")
 CONTINUE_TO_CONFIRM_BATCH_BUTTON = ("role", "button", "Continue")
 ERROR_MESSAGE_BATCH_ALREADY_EXISTS = ("text", "Error: There is already a batch with this number and expiry date")
 ERROR_MESSAGE_ENTER_THE_BATCH_NUMBER = ("text", "Error: Enter the batch number")
 ERROR_MESSAGE_ENTER_THE_BATCH_EXPIRY_DATE = ("text", "Error: Enter the expiry date")
+ERROR_MESSAGE_SELECT_THE_PACK_SIZE = ("text", "Error: Select a pack size")
 ERROR_MESSAGE_LINK_BATCH_ALREADY_EXISTS = ("role", "link", "There is already a batch with this number and expiry date")
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_NUMBER = ("role", "link", "Enter the batch number")
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_EXPIRY_DATE = ("role", "link", "Enter the expiry date")
+ERROR_MESSAGE_LINK_SELECT_PACK_SIZE = ("role", "link", "Select a pack size")
+
+def select_pack_size(pack_size):
+    if pack_size == "Single vial":
+        select_single_vial_pack_radio_button()
+    elif pack_size == "10 vials":
+        select_multi_vial_pack_radio_button()
+    else:
+        print("Pack size is not available")
+
+def select_single_vial_pack_radio_button():
+    if check_element_exists(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON):
+        find_element_and_perform_action(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON, "check")
+
+def select_multi_vial_pack_radio_button():
+    if check_element_exists(MULTI_VIALS_PACK_SIZE_RADIO_BUTTON):
+        find_element_and_perform_action(MULTI_VIALS_PACK_SIZE_RADIO_BUTTON, "check")
+
+def check_select_pack_size_error_message_is_displayed():
+    wait_for_element_to_appear(ERROR_MESSAGE_SELECT_THE_PACK_SIZE)
+    return check_element_exists(ERROR_MESSAGE_SELECT_THE_PACK_SIZE, True)
+
+def check_select_pack_size_error_message_link_is_displayed():
+    wait_for_element_to_appear(ERROR_MESSAGE_LINK_SELECT_PACK_SIZE)
+    return check_element_exists(ERROR_MESSAGE_LINK_SELECT_PACK_SIZE, True)
 
 def click_add_batch_button():
     first_add_batch_button = get_element_by_type(*FIRST_ADD_BATCH_BUTTON).nth(0)
