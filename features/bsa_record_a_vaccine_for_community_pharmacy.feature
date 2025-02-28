@@ -42,6 +42,25 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
       | 1 | 9733907723 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  |Sandra Ryan |  7/4/1994 | Flu  | AUTOMATION-SJ1   | 19/10/2026 |
 
 @bsarecordvaccine
+  Scenario Outline: Record a vaccine at community pharmacy - superceded patient
+    Given I login to RAVS as a community pharmacist and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
+    And I search for a patient with the NHS number in the find a patient screen
+    And I open the patient record by clicking on patient <name>
+    When I click choose vaccine button and choose the <chosen_vaccine>, <batch_number> with <batch_expiry_date> and click continue
+    And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
+    And I record <consent> with the details and click continue to vaccinate button
+    And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
+    Then I need to be able to see the patient <name>, <dob> and vaccination details on the check and confirm screen
+    And I click confirm and save button, I should see a record saved dialogue
+
+    Examples:
+      | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   |  chosen_vaccine | batch_number | batch_expiry_date |
+      | 0 | 9467361590 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today-9    | WALLIS ADEYEMO |  19/4/2015 | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 1 | 3508118053 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today-9    | WALLIS ADEYEMO |  19/4/2015 | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 2 | 9734250221 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  26/5/2016 | Flu  | AUTOMATION-SJ1   | 19/10/2026 |
+      | 2 | 9449304033 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  26/5/2016 | Flu  | AUTOMATION-SJ1   | 19/10/2026 |
+
+@bsarecordvaccine
   Scenario Outline: Record a vaccine at community pharmacy - local patient
     Given I login to RAVS as a community pharmacist and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <batch_number> with <batch_expiry_date>
     And I create a random patient locally
