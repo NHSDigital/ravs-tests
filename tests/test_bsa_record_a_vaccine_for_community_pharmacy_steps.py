@@ -57,6 +57,7 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
     shared_data["care_model"] = care_model
+    shared_data["pack_size"] = get_random_vaccine_type_pack_size(shared_data["chosen_vaccine_type"])
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
@@ -64,7 +65,7 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date, shared_data["pack_size"])
     return shared_data
 
 
