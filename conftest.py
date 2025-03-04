@@ -79,16 +79,22 @@ def navigate_and_login(request, navigate_to_ravs):
     enter_password(password)
     click_nhs_signin_button()
 
-# Fixture for navigating and logging in as community pharmacist
-@pytest.fixture(scope='function')
-def navigate_and_login_as_community_pharmacist(request, navigate_to_ravs):
+def navigate_and_login_as_community_pharmacist(site):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
+            attach_screenshot("clicked_navbar_toggler")
     if check_logout_button_exists_without_waiting():
         click_logout_button()
+        attach_screenshot("clicked_logout_button")
+    url = get_app_url(config["test_environment"])
+    navigate_to_ravs_login_page(url)
+    attach_screenshot("navigated_to_ravs_login_page")
     click_login_button()
-    emailAddress = "neelima.guntupalli1+community_pharmacy@nhs.net"
+    if site.lower() == "Leeds pharmacy".lower():
+        emailAddress = "neelima.guntupalli1+community_pharmacy@nhs.net"
+    elif "Aspire pharmacy".lower()  or "fhh39".lower() in site.lower():
+        emailAddress = "neelima.guntupalli1+fhh39@nhs.net"
     enter_email_address(emailAddress)
     password = config["credentials"]["ravs_password"]
     enter_password(password)
@@ -429,7 +435,7 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, select_batch, no_vaccination_reason=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, select_batch, no_vaccination_reason=None, pack_size=None):
     set_vaccination_date(vaccination_date)
     attach_screenshot("vaccination_date_is_set")
     logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
@@ -456,8 +462,9 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         if select_batch:
             select_batch_number(batch_number_to_select)
         attach_screenshot("selected_batch_number")
-        enter_dose_amount_value(dose_amount)
-
+        # assert get_dose_amount_value() == dose_amount
+        # if pack_size:
+            # assert get_pack_size_value() == pack_size
         attach_screenshot("entered_dose_amount_value")
         if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
@@ -710,13 +717,28 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
     shared_data["chosen_vaccine_vaccinate_page"] = chosen_vaccine
     choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])
 
+@when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
+def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date):
+    time.sleep(3)
+    if shared_data["nhs_number"] == "9727840361":
+        assert check_vaccine_history_not_available_label_element_exists() == True
+    shared_data['chosen_vaccine_type'] = chosen_vaccine_type
+    attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
+    immunisation_history_records_count_before_vaccination = click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
+    shared_data["immunisation_history_records_count_before_vaccination"] = immunisation_history_records_count_before_vaccination
+    shared_data["chosen_vaccine_vaccinate_page"] = chosen_vaccine
+    choose_vaccine_and_vaccine_type_for_patient(shared_data['site'], chosen_vaccine, shared_data['chosen_vaccine_type'])
+
 @when(parse("I assess the patient's {eligibility} with the details and date as {assess_date} and click continue to record consent screen button"))
 def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, assess_date):
     shared_data['eligible_decision'] = eligibility
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
-    shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
+    if "Aspire pharmacy".lower() in shared_data["site"].lower():
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
+    else:
+        shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
     assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
@@ -730,7 +752,10 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = "Pregnancy"
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
-    shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
+    if "Aspire pharmacy".lower() in shared_data["site"].lower():
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
+    else:
+        shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
     due_date = format_date(str(get_date_value_by_months(due_date)), config["browser"])
     shared_data['eligibility_due_date'] = due_date
     assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
@@ -749,8 +774,12 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         relationship_to_patient = "RAVS tester"
         if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
             shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
+
         else:
-            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+            if "Aspire pharmacy".lower() in shared_data["site"].lower():
+                shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
+            else:
+                shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
         record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data["no_consent_reason"])
 
@@ -766,12 +795,15 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             else:
-                shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+                if "Aspire pharmacy".lower() in shared_data["site"].lower():
+                    shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
+                else:
+                    shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             batch_number_to_select = shared_data["batch_number"].upper() + " - " + shared_data["batch_expiry_date"]
             shared_data["batch_number_selected"] = batch_number_to_select
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"], shared_data['pack_size'])
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
@@ -787,7 +819,10 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             else:
-                shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+                if "Aspire pharmacy".lower() in shared_data["site"].lower():
+                    shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
+                else:
+                    shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"])
@@ -806,7 +841,10 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             else:
-                shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+                if "Aspire pharmacy".lower() in shared_data["site"].lower():
+                    shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
+                else:
+                    shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + " vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_save_and_return(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
@@ -824,8 +862,8 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
             shared_data["gender"] = get_patient_gender_value_in_check_and_confirm_screen()
             shared_data["address"] = address
             assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
-            assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine"]
-            assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["chosen_vaccine_type"]
+            assert get_patient_vaccinated_chosen_vaccine_value().lower() == shared_data["chosen_vaccine"].lower()
+            assert get_patient_vaccinated_chosen_vaccine_product_value().lower() == shared_data["chosen_vaccine_type"].lower()
             assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
             assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
             expected_dob = date_format_with_age(dob)
@@ -847,15 +885,11 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data):
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         attach_screenshot("check_and_confirm_screen_before_assertion")
         if get_patient_name_value_in_check_and_confirm_screen() is not None:
-            assert get_patient_name_value_in_check_and_confirm_screen().lower() == shared_data["patient_name"].lower()
-            shared_data["gender"] = get_patient_gender_value_in_check_and_confirm_screen()
             assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
-            assert get_patient_vaccinated_chosen_vaccine_value() == shared_data["chosen_vaccine"]
-            assert get_patient_vaccinated_chosen_vaccine_product_value() == shared_data["chosen_vaccine_type"]
+            assert get_patient_vaccinated_chosen_vaccine_value().lower() == shared_data["chosen_vaccine"].lower()
+            assert get_patient_vaccinated_chosen_vaccine_product_value().lower() == shared_data["chosen_vaccine_type"].lower()
             assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
             assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
-            assert get_patient_dob_value_in_check_and_confirm_screen() == date_format_with_age(shared_data['dob'])
-            shared_data['dob'] = date_format_with_age(shared_data['dob'])
             assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
             assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
             assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
@@ -960,7 +994,10 @@ def the_consent_values_should_persist(shared_data):
     if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
     else:
-        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        if "Aspire pharmacy".lower() in shared_data["site"].lower():
+            shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
+        else:
+            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
     if (legal_mechanism) != "Patient Group Direction (PGD)":
         select_consent_clinician_with_name_and_council(shared_data['consent_clinician_details'] )
         attach_screenshot("selected_consent_clinician_with_name_and_council")

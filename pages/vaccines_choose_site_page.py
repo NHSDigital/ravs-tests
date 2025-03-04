@@ -8,6 +8,8 @@ CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def enter_site_name(site):
+    if site.lower() == "Aspire Pharmacy".lower():
+        site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if check_element_exists(SITE_SEARCH): # site search will not be available for community pharmacy
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)

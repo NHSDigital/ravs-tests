@@ -76,7 +76,10 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data['chosen_vaccine'])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
-    shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
+    if "Aspire pharmacy".lower() in shared_data["site"].lower():
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
+    else:
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
     assess_date = "today"
     assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
@@ -91,7 +94,10 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
     else:
-        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        if "Aspire pharmacy".lower() in shared_data["site"].lower():
+            shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
+        else:
+            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
     shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
     record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
     shared_data["vaccinated_decision"] = "yes"
@@ -102,7 +108,10 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
     else:
-        shared_data["vaccinator"] = get_vaccinator(shared_data["index"])
+        if "Aspire pharmacy".lower() in shared_data["site"].lower():
+            shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
+        else:
+            shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
     shared_data["vaccination_comments"] = shared_data["chosen_vaccine"] + "vaccination given on " + shared_data["vaccination_date"]
     shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
     click_yes_vaccinated_radiobutton()
