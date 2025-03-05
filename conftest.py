@@ -283,13 +283,11 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         click_vaccines_nav_link()
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
         return True
-    else:
-        if "pharmacy" in site.lower():
+    elif "pharmacy" in site.lower():
             if shared_data["chosen_vaccine"].lower() == "covid-19" or shared_data["chosen_vaccine"].lower() == "flu":
                 pack_size = shared_data["pack_size"]
                 shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date, pack_size)
-
-    if not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
+    elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
         click_reactivate_batch_link(batch_number)
         click_reactivate_batch_confirmation_button()
 
@@ -344,7 +342,6 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pac
         attach_screenshot("selected_pack_size")
     click_continue_to_confirm_batch_details_button()
     attach_screenshot("clicked_continue_to_confirm_batch_details_button")
-    # vaccines_check_and_confirm_page
     if not check_batch_already_exists_error_message_is_displayed():
         click_confirm_add_vaccine_and_batch_button()
         attach_screenshot("clicked_confirm_add_vaccine_and_batch_button")
