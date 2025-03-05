@@ -3,6 +3,7 @@ from init_helpers import *
 FIRST_ADD_BATCH_BUTTON = ("role", "link", "Add batch")
 BACK_BUTTON_ON_VACCINE_BATCHES_PAGE = ("role", "link", "Back", True)
 CONTINUE_TO_CHECK_AND_CONFIRM_VACCINE_BATCH_BUTTON = ("role", "button", "Continue")
+SAVE_CHANGES_TO_VACCINE_BATCH_BUTTON = ("role", "button", "Save Changes")
 BATCH_NUMBER_INPUT_FIELD = ("label", "Batch number")
 EXPIRY_DATE_DAY_INPUT_FIELD = ("label", "Day")
 EXPIRY_DATE_MONTH_INPUT_FIELD = ("label", "Month")
@@ -19,8 +20,11 @@ ERROR_MESSAGE_LINK_BATCH_ALREADY_EXISTS = ("role", "link", "There is already a b
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_NUMBER = ("role", "link", "Enter the batch number")
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_EXPIRY_DATE = ("role", "link", "Enter the expiry date")
 ERROR_MESSAGE_LINK_SELECT_PACK_SIZE = ("role", "link", "Select a pack size")
+PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
 
 def select_pack_size(pack_size):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(select_single_vial_pack_radio_button)
     if pack_size == "Single vial":
         select_single_vial_pack_radio_button()
     elif pack_size == "10 vials":
@@ -103,3 +107,5 @@ def enter_expiry_date(expiry_date):
 def click_continue_To_confirm_vaccine_details_button():
     find_element_and_perform_action(CONTINUE_TO_CONFIRM_BATCH_BUTTON, "click")
 
+def click_save_changes_to_vaccine_details_button():
+    find_element_and_perform_action(SAVE_CHANGES_TO_VACCINE_BATCH_BUTTON, "click")

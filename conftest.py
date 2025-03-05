@@ -285,7 +285,9 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         return True
     else:
         if "pharmacy" in site.lower():
-            shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date)
+            if shared_data["chosen_vaccine"].lower() == "covid-19" or shared_data["chosen_vaccine"].lower() == "flu":
+                pack_size = shared_data["pack_size"]
+                shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date, pack_size)
 
     if not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
         click_reactivate_batch_link(batch_number)
@@ -766,7 +768,11 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
         shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
     else:
         shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
+    if shared_data["chosen_vaccine"].lower() == "covid-19":
+        date = get_date_value_by_days(assess_date)
+    else:
+        date = get_date_value_by_months(assess_date)
+    assess_date = format_date(str(date), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -783,9 +789,17 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
         shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
     else:
         shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
-    due_date = format_date(str(get_date_value_by_months(due_date)), config["browser"])
+    if shared_data["chosen_vaccine"].lower() == "covid-19":
+        date = get_date_value_by_days(due_date)
+    else:
+        date = get_date_value_by_months(due_date)
+    due_date = format_date(str(date), config["browser"])
     shared_data['eligibility_due_date'] = due_date
-    assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
+    if shared_data["chosen_vaccine"].lower() == "covid-19":
+        a_date = get_date_value_by_days(assess_date)
+    else:
+        a_date = get_date_value_by_months(assess_date)
+    assess_date = format_date(str(a_date), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
     shared_data['eligibility_assessment_outcome'] = get_assessment_outcome(0)
     shared_data['eligibility_assessment_no_vaccine_given_reason'] = get_assess_vaccine_not_given_reason(shared_data["index"])
@@ -815,7 +829,11 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
+            if shared_data["chosen_vaccine"].lower() == "covid-19":
+                date = get_date_value_by_days(vaccination_date)
+            else:
+                date = get_date_value_by_months(vaccination_date)
+            shared_data["vaccination_date"] = format_date(str(date), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -839,7 +857,11 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
+            if shared_data["chosen_vaccine"].lower() == "covid-19":
+                date = get_date_value_by_days(vaccination_date)
+            else:
+                date = get_date_value_by_months(vaccination_date)
+            shared_data["vaccination_date"] = format_date(str(date), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
@@ -861,7 +883,11 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
     shared_data["vaccinated_decision"] = vaccination
     if shared_data["consent_decision"].lower() == "yes":
         if shared_data["eligibility_assessment_outcome"].lower() == "give vaccine":
-            shared_data["vaccination_date"] = format_date(str(get_date_value_by_months(vaccination_date)), config["browser"])
+            if shared_data["chosen_vaccine"].lower() == "covid-19":
+                date = get_date_value_by_days(vaccination_date)
+            else:
+                date = get_date_value_by_months(vaccination_date)
+            shared_data["vaccination_date"] = format_date(str(date), config["browser"])
             chosen_vaccine = shared_data["chosen_vaccine"]
             shared_data["vaccination_site"] = get_vaccination_site(shared_data["index"])
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
