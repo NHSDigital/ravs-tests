@@ -32,6 +32,13 @@ def select_pack_size(pack_size):
     else:
         print("Pack size is not available")
 
+def get_selected_pack_size_radio_button_value_on_choose_vaccine_page():
+    selected_value = get_checked_radio_button_text("Pack size")
+    if selected_value != "":
+        return selected_value
+    else:
+        return "Pack size not already selected"
+
 def select_single_vial_pack_radio_button():
     if check_element_exists(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON):
         find_element_and_perform_action(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON, "check")

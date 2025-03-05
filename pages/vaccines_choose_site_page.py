@@ -13,7 +13,7 @@ def enter_site_name(site):
         site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if check_element_exists(SITE_SEARCH):
-        time.sleep(2)
+        time.sleep(5)
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):

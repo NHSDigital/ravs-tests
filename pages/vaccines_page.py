@@ -56,19 +56,21 @@ def to_title_case(text):
 
 def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-
     if vaccine.lower() == "covid-19":
         vaccine = "COVID-19"
 
     site = to_title_case(site)
-    vaccine_element = f"//table[caption[text()='{site}']]//tr[td[text()='{vaccine}'] and td[text()='{vaccine_type}']]"
-    wait_for_element_to_appear(vaccine_element)
+    vaccine_element = (f"//table[caption[text()='{site}']]//tr[td[text()='{vaccine}'] and td[text()='{vaccine_type}']]")
     if check_element_exists(vaccine_element, True):
         print(f"DEBUG: Found vaccine element for {site}, {vaccine}, {vaccine_type}")
 
-        view_vaccine_element = f"//table[caption[text()='{site}']]//tr[td[text()='{vaccine}'] and td[text()='{vaccine_type}']]//a[text()='View']"
-        wait_for_element_to_appear(view_vaccine_element)
-        find_element_and_perform_action(view_vaccine_element, "click")
+        view_vaccine_element = (
+            f"//table[caption[normalize-space(text())='{site}']]"
+            f"//tr[td[normalize-space(text())='{vaccine}'] and td[normalize-space(text())='{vaccine_type}']]"
+            f"//td[normalize-space(text())='{vaccine_type}']/following-sibling::td//a[normalize-space(text())='View']"
+        )
+
+        javascript_click(view_vaccine_element)
 
         batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
         batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']"
@@ -86,7 +88,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(si
 def get_pack_size_value_vaccines_page(batch_number, batch_expiry_date, pack_size):
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
     element = (f"//tr[td[text()='{batch_number}'] and td[3][text()='{batch_expiry_date}'] and td[4]/strong[text()='Active']]/td[2]")
-    # wait_for_element_to_appear(element)
+    wait_for_element_to_appear(element)
     if check_element_exists(element):
         return find_element_and_perform_action(element, "get_text")
     else:
