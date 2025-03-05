@@ -191,13 +191,13 @@ def get_vaccine_type_pack_size_by_index(index, vaccine_type):
                 return size_options[wrapped_index]
             else:
                 print("Error: No valid 'size' values found in pack_sizes_data")
-                return "Unknown pack size"
+                return None
         else:
             print("Error: packSizes is not a list or is empty")
-            return "Unknown pack size"
+            return None
     else:
         print("Error: 'packSizes' key is missing in pack_sizes")
-        return "Unknown pack size"
+        return None
 
 
 def get_flu_consent_vaccine_xpath(vaccine_type):

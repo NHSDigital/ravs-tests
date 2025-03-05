@@ -2,6 +2,8 @@ import time
 from init_helpers import *
 import re
 
+from pages.site_vaccines_add_batch_page import *
+
 add_vaccine_button = ("role", "button", "Add vaccine")
 site_search_input_element = ("placeholder", "Enter 3 or more characters to search")
 continue_to_add_batch_page_button = ("role", "Continue")
@@ -81,11 +83,18 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(si
     print(f"DEBUG: Vaccine element not found, checking again: {vaccine_element}")
     return check_element_exists(vaccine_element, True)
 
-def get_pack_size_value_vaccines_page(batch_number, batch_expiry_date):
+def get_pack_size_value_vaccines_page(batch_number, batch_expiry_date, pack_size):
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
     element = (f"//tr[td[text()='{batch_number}'] and td[3][text()='{batch_expiry_date}'] and td[4]/strong[text()='Active']]/td[2]")
-    wait_for_element_to_appear(element)
-    return find_element_and_perform_action(element, "get_text")
+    # wait_for_element_to_appear(element)
+    if check_element_exists(element):
+        return find_element_and_perform_action(element, "get_text")
+    else:
+        edit_element = (f"//tr[td[1][normalize-space()='{batch_number}'] and td[2][normalize-space()='{batch_expiry_date}'] and td[3]/strong[normalize-space()='Active']]/td[5]//a[normalize-space()='Edit']")
+        find_element_and_perform_action(edit_element, "click")
+        select_pack_size(pack_size)
+        click_save_changes_to_vaccine_details_button()
+        return pack_size
 
 def check_vaccine_has_been_added(site, vaccine, wait):
     if vaccine.lower() == "covid-19":
