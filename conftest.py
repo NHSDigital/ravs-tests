@@ -264,41 +264,52 @@ def check_vaccine_and_batch_exists_in_community_pharmacy(site, vaccine, vaccine_
     attach_screenshot("clicked_vaccines_nav_link")
     check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
-def check_vaccine_and_batch_exists_in_site(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
+def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-
     click_vaccines_nav_link()
     attach_screenshot("clicked_vaccines_nav_link")
-    check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
+    time.sleep(3)
+    check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
-def check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
+def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
     # If the site does NOT currently have the vaccine, then add a site vaccine
     # Adding a vaccine also adds a vaccine type and an active batch, so we don't need to do further checks
-    if not check_vaccine_has_been_added(site, vaccine, True):
-        add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
-        return True
 
-    # If the site has the vaccine, but does NOT currently have the vaccine type, then add a site vaccine
-    # Adding a vaccine type is the same process as adding a vaccine for a site
-    if not check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
+    exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
+    if not exists:
+    # if not check_vaccine_has_been_added(site, vaccine, True):
+        click_vaccines_nav_link()
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
         return True
+    else:
+        if "pharmacy" in site.lower():
+            shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date)
+
+    if not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
+        click_reactivate_batch_link(batch_number)
+        click_reactivate_batch_confirmation_button()
+
+    return True
+
+    # # If the site has the vaccine, but does NOT currently have the vaccine type, then add a site vaccine
+    # # Adding a vaccine type is the same process as adding a vaccine for a site
+    # if not check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
+    #     add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
+    #     return True
 
     # Open the vaccine type to see the batches.
     # If the batch does NOT currently exist, add a batch
     # This adds an active batch, so we don't need to do further checks
-    click_view_product(site, vaccine_type)
-    if not check_batch_number_and_expiry_date_exists(batch_number, expiry_date, True):
-        add_vaccine_type_batch(batch_number, expiry_date)
-        return True
+    # click_view_product(site, vaccine_type)
+    # if not check_batch_number_and_expiry_date_exists(batch_number, expiry_date, True):
+    #     add_vaccine_type_batch(batch_number, expiry_date)
+    #     return True
 
     # If we get this far, the batch does exists but is currently INACTIVE
     # This reactivates the batch
-    if not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
-        click_reactivate_batch_link(batch_number)
-        click_reactivate_batch_confirmation_button()
+
 
 def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
     # vaccines_page
@@ -462,9 +473,9 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         if select_batch:
             select_batch_number(batch_number_to_select)
         attach_screenshot("selected_batch_number")
-        # assert get_dose_amount_value() == dose_amount
-        # if pack_size:
-            # assert get_pack_size_value() == pack_size
+        assert get_dose_amount_value() == dose_amount
+        if pack_size:
+            assert get_pack_size_value() == pack_size
         attach_screenshot("entered_dose_amount_value")
         if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
@@ -557,6 +568,10 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
     shared_data["care_model"] = get_care_model(index)
+    if "pharmacy" in site.lower():
+        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+    else:
+        shared_data["pack_size"] = None
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
@@ -564,7 +579,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
 @given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new delivery team {new_delivery_team}"))
@@ -577,6 +592,10 @@ def step_login_to_ravs_check_new_site_batch_exists(site, care_model, nhs_number,
     shared_data["site"] = site
     shared_data["new_site"] = new_delivery_team
     shared_data["care_model"] = get_care_model(index)
+    if "pharmacy" in site.lower():
+        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+    else:
+        shared_data["pack_size"] = None
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
@@ -584,7 +603,7 @@ def step_login_to_ravs_check_new_site_batch_exists(site, care_model, nhs_number,
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(shared_data["new_site"], chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(shared_data, shared_data["new_site"], chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
 @given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new vaccine product {new_vaccine_product}"))
@@ -598,6 +617,10 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, care_model, n
     shared_data["chosen_vaccine_new"] = new_vaccine_product
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(1, shared_data["chosen_vaccine_new"])
     shared_data["care_model"] = get_care_model(index)
+    if "pharmacy" in site.lower():
+        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+    else:
+        shared_data["pack_size"] = None
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
@@ -605,7 +628,7 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, care_model, n
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-FLU", "19/11/2026")
+    check_vaccine_and_batch_exists_in_site(shared_data, shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-FLU", "19/11/2026")
     return shared_data
 
 @given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new random vaccine product type"))
@@ -619,6 +642,10 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, care_mod
     shared_data["chosen_vaccine_new"] = shared_data["chosen_vaccine"]
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(2, shared_data["chosen_vaccine_new"])
     shared_data["care_model"] = get_care_model(index)
+    if "pharmacy" in site.lower():
+        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+    else:
+        shared_data["pack_size"] = None
 
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
@@ -626,7 +653,7 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, care_mod
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-COVID", "19/11/2026")
+    check_vaccine_and_batch_exists_in_site(shared_data, shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-COVID", "19/11/2026")
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
