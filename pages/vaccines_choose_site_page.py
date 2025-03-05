@@ -1,3 +1,4 @@
+import time
 from init_helpers import *
 
 SITE_SEARCH = ("placeholder", "Enter 3 or more characters to search")
@@ -11,7 +12,8 @@ def enter_site_name(site):
     if site.lower() == "Aspire Pharmacy".lower():
         site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    if check_element_exists(SITE_SEARCH): # site search will not be available for community pharmacy
+    if check_element_exists(SITE_SEARCH):
+        time.sleep(2)
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):

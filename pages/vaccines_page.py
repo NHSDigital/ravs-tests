@@ -1,3 +1,4 @@
+import time
 from init_helpers import *
 import re
 
@@ -48,8 +49,48 @@ def click_site_in_search_results_dropdown(site):
     element = get_element_by_type("text", site)
     find_element_and_perform_action(element, "click")
 
+def to_title_case(text):
+    return ' '.join(word.capitalize() for word in text.split())
+
+def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+
+    if vaccine.lower() == "covid-19":
+        vaccine = "COVID-19"
+
+    site = to_title_case(site)
+    vaccine_element = f"//table[caption[text()='{site}']]//tr[td[text()='{vaccine}'] and td[text()='{vaccine_type}']]"
+    wait_for_element_to_appear(vaccine_element)
+    if check_element_exists(vaccine_element, True):
+        print(f"DEBUG: Found vaccine element for {site}, {vaccine}, {vaccine_type}")
+
+        view_vaccine_element = f"//table[caption[text()='{site}']]//tr[td[text()='{vaccine}'] and td[text()='{vaccine_type}']]//a[text()='View']"
+        wait_for_element_to_appear(view_vaccine_element)
+        find_element_and_perform_action(view_vaccine_element, "click")
+
+        batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
+        batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']"
+
+        print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
+
+        wait_for_element_to_appear(batch_number_with_expiry_date_element)
+        result = check_element_exists(batch_number_with_expiry_date_element, True)
+        print(f"DEBUG: Batch element exists -> {result}")
+        return result
+
+    print(f"DEBUG: Vaccine element not found, checking again: {vaccine_element}")
+    return check_element_exists(vaccine_element, True)
+
+def get_pack_size_value_vaccines_page(batch_number, batch_expiry_date):
+    batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
+    element = (f"//tr[td[text()='{batch_number}'] and td[3][text()='{batch_expiry_date}'] and td[4]/strong[text()='Active']]/td[2]")
+    wait_for_element_to_appear(element)
+    return find_element_and_perform_action(element, "get_text")
+
 def check_vaccine_has_been_added(site, vaccine, wait):
-    element = (f"//h1[text() = '{site}']/following-sibling::div//h2[text()='{vaccine}']")
+    if vaccine.lower() == "covid-19":
+        vaccine = "COVID-19"
+    element = (f"//caption[text() = '{site}']/following-sibling::tbody//td[text()='{vaccine}']")
     return check_element_exists(element, wait)
 
 def check_vaccine_type_has_been_added(site, vaccine, vaccine_type, wait):
