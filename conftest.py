@@ -287,6 +287,7 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
             if shared_data["chosen_vaccine"].lower() == "covid-19" or shared_data["chosen_vaccine"].lower() == "flu":
                 pack_size = shared_data["pack_size"]
                 shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date, pack_size)
+                attach_screenshot("pack_size_pharmacy")
     elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
         click_reactivate_batch_link(batch_number)
         click_reactivate_batch_confirmation_button()

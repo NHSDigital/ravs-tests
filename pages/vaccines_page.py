@@ -71,6 +71,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(si
         )
 
         javascript_click(view_vaccine_element)
+        attach_screenshot("clicked_view_vaccine_element")
 
         batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
         batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']"
@@ -79,6 +80,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(si
 
         wait_for_element_to_appear(batch_number_with_expiry_date_element)
         result = check_element_exists(batch_number_with_expiry_date_element, True)
+        attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
         print(f"DEBUG: Batch element exists -> {result}")
         return result
 
