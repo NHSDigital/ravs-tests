@@ -83,7 +83,7 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address |  chosen_vaccine | batch_number | batch_expiry_date |
       | 0 | 9467361590 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today-9  | WALLIS ADEYEMO |  19/4/2015 |	1 MIDLAND ROAD, LEEDS, LS6 1BQ | COVID-19   | AUTO-SUP-C-1   | 19/10/2026 |
       | 1 | 3508118053 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today-9  | WALLIS ADEYEMO |  19/4/2015 | 	1 MIDLAND ROAD, LEEDS, LS6 1BQ |COVID-19   | AUTO-SUPER-C-1   | 19/10/2026 |
-      | 2 | 9734250221 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  26/5/2016 | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ | Flu  | AUTOMATION-SJ1   | 19/10/2026 |
+      | 2 | 9734250221 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  26/5/2016 | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ | Flu  | AUTO-SUP-N-F  | 19/10/2026 |
 
 @bsarecordvaccine
   Scenario Outline: Record a vaccine at community pharmacy - superseded patient old nhs number
