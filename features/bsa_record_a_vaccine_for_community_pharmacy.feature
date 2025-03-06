@@ -133,8 +133,8 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
 
     Examples:
       | index | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | chosen_vaccine | batch_number | batch_expiry_date |
-      | 0 |  Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today    |  COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
-      | 1 |  Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today    | Flu         | AUTOMATION-SJ1   | 19/10/2026 |
+      | 0 |  Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today    |  COVID-19   | AUTOMATION-LOCAL-C  | 19/10/2026 |
+      | 1 |  Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today    | Flu         | AUTO-LOCAL-F  | 19/10/2026 |
 
   @bsarecordvaccine
   Scenario Outline: Record a maternity vaccine at community pharmacy with nhs number - Add and delete
