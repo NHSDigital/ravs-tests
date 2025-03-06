@@ -100,6 +100,7 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | chosen_vaccine | batch_number | batch_expiry_date |
       | 2 | 9449304033 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  Flu  | AUTOMATION-SJ1   | 19/10/2026 |
+      | 3 | 9449304033 | Aspire Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  Covid-19  | AUTO-3-OM | 19/10/2026 |
 
 @bsarecordvaccine
   Scenario Outline: Record a vaccine at community pharmacy - deceased patient
