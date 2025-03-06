@@ -116,6 +116,7 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address |  chosen_vaccine | batch_number | batch_expiry_date |
       | 0 | 9449304424 | Leeds Pharmacy  | Outreach event | yes | today  | yes  | yes | today-9    | John Test |  2/1/1997 |	121C, Durants Road, ENFIELD, EN3 7DG | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 0 | 9449304424 | Aspire Pharmacy  | Outreach event | yes | today  | yes  | yes | today-9    | John Test |  2/1/1997 |	121C, Durants Road, ENFIELD, EN3 7DG | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
 
 @bsarecordvaccine
   Scenario Outline: Record a vaccine at community pharmacy - local patient
