@@ -134,7 +134,7 @@ def click_search_for_patient_button():
     time.sleep(1)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(2)
+    time.sleep(1)
 
 def click_create_a_new_patient_button():
     wait_for_element_to_appear(CREATE_NEW_PATIENT_BUTTON)
@@ -172,14 +172,14 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     element = ("role", "cell", nhsNumber)
-    time.sleep(2)
+    time.sleep(1)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = ("role", "heading", f"No result found for {nhsNumber}")
-    time.sleep(2)
+    time.sleep(1)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
