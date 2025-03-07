@@ -73,4 +73,5 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
 def step_login_to_ravs_community_pharmacy(site, shared_data):
     shared_data["site"] = site
     navigate_and_login_as_community_pharmacist(site)
+    click_find_a_patient_nav_link()
     return shared_data
