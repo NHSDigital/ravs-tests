@@ -48,7 +48,6 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
     check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date, shared_data["pack_size"])
     return shared_data
 
-
 @given(parse("I login to RAVS as a community pharmacist to the {site} and set vaccinator details with {site} and {care_model} as community pharmacy and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date}"))
 def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
@@ -68,4 +67,10 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date, shared_data["pack_size"])
+    return shared_data
+
+@given(parse("I login to RAVS as a community pharmacist to the {site}"))
+def step_login_to_ravs_community_pharmacy(site, shared_data):
+    shared_data["site"] = site
+    navigate_and_login_as_community_pharmacist(site)
     return shared_data
