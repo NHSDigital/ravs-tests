@@ -210,7 +210,7 @@ def I_click_today_date_range_and_click_continue(shared_data):
 
 @then("the choose sites page should be displayed")
 def the_choose_sites_page_should_be_displayed():
-    assert check_site_check_box_exists("ALBERT HOUSE") == True
+    assert check_site_check_box_exists("Weaverham Surgery") == True
     attach_screenshot("check_choose_sites_page_is_displayed")
     logging.info("check_choose_sites_page_is_displayed")
 
@@ -499,7 +499,7 @@ def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
 
 @then("the choose sites page should be displayed")
 def the_choose_sites_page_should_be_displayed():
-    assert check_site_check_box_exists("ALBERT HOUSE") == True
+    assert check_site_check_box_exists("Weaverham Surgery") == True
     attach_screenshot("check_choose_sites_page_is_displayed")
     logging.info("check_choose_sites_page_is_displayed")
 

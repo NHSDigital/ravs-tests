@@ -22,8 +22,8 @@ Feature: Persist fields when recording vaccination
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | new_nhs_number | new_patient_name |
-      | 0 | 9693632109 | ALBERT HOUSE  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER |
-      | 0 | 9693632109 | ALBERT HOUSE  | Care home | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER |
+      | 0 | 9693632109 | Weaverham Surgery  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER |
+      | 0 | 9693632109 | Weaverham Surgery  | Care home | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes delivery team when recording a vaccination
@@ -46,7 +46,7 @@ Feature: Persist fields when recording vaccination
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | new_nhs_number | new_patient_name | new_delivery_team |
-      | 0 | 9693632109 | ALBERT HOUSE  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER | KINGSTON HOUSE |
+      | 0 | 9693632109 | Weaverham Surgery  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | 9472710255 | DELICE PINKER | Spire Regency Hospital |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes vaccine product when recording a vaccination
@@ -69,7 +69,7 @@ Feature: Persist fields when recording vaccination
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | new_nhs_number | new_patient_name | new_vaccine_product |
-      | 5 | 9449303975 | CARDINAL SQUARE  | Outreach event | yes | today-1 | yes | yes | today-1 | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 | 9449306125 | NEELY SCULLION | Flu |
+      | 5 | 9449303975 | Spire Regency Hospital  | Outreach event | yes | today-1 | yes | yes | today-1 | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 | 9449306125 | NEELY SCULLION | Flu |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes vaccine product type when recording a vaccination
@@ -92,4 +92,4 @@ Feature: Persist fields when recording vaccination
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | new_nhs_number | new_patient_name |
-      | 5 | 9449303975 | CARDINAL SQUARE  | Outreach event | yes | today-1 | yes | yes | today-1 | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 | 9449306125 | NEELY SCULLION |
+      | 5 | 9449303975 | Spire Regency Hospital  | Outreach event | yes | today-1 | yes | yes | today-1 | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 | 9449306125 | NEELY SCULLION |

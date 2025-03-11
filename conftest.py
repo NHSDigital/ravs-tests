@@ -49,11 +49,6 @@ def format_nhs_number(nhs_number):
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
 
-# Fixture for site parameter
-@pytest.fixture(params=["NEELIMA HOUSE", "ALBERT HOUSE", "ST JOHN'S HOUSE"])
-def site(request):
-    return request.param
-
 # Fixture for care_model parameter
 @pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event", "Community pharmacy"])
 def care_model(request):
@@ -147,9 +142,7 @@ def navigate_and_login_as_recorder():
     select_site("Leeds Pharmacy")
     click_continue_to_home_page_button()
 
-# Fixture for navigating and logging in as administrator
-@pytest.fixture(scope='function')
-def navigate_and_login_as_administrator(request):
+def navigate_and_login_as_administrator():
     navigate_to_ravs()
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
@@ -1097,16 +1090,16 @@ def the_vaccinated_values_should_persist(shared_data):
     assert check_vaccination_site_missing_error_message_link_exists() == True
 
 @given("I am logged into the RAVS app as an administrator")
-def logged_into_ravs_as_administrator(navigate_and_login_as_administrator):
-    pass
+def logged_into_ravs_as_administrator():
+    navigate_and_login_as_administrator()
 
 @given("I am logged into the RAVS app as a lead administrator")
-def logged_into_ravs_as_lead_administrator(navigate_and_login_as_lead_administrator):
-    pass
+def logged_into_ravs_as_lead_administrator():
+    navigate_and_login_as_lead_administrator()
 
 @given("I am logged into the RAVS app as a recorder")
-def logged_into_ravs_as_recorder(navigate_and_login_as_recorder):
-    pass
+def logged_into_ravs_as_recorder():
+    navigate_and_login_as_recorder()
 
 @when(parse('I search for the patient with NHS number {nhs_number}'))
 def step_search_for_patient_with_nhs_number(nhs_number, shared_data):
@@ -1130,7 +1123,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
         if "site" in shared_data:
             click_delivery_team_radiobutton(shared_data["site"])
         else:
-            click_delivery_team_radiobutton("ALBERT HOUSE")
+            click_delivery_team_radiobutton("Weaverham Surgery")
         click_vaccine_radiobutton(vaccine_name)
         warning_count = 0
         # comirnaty_original_omicron_ba_age_above_12 = get_vaccination_type(0, vaccine_name)
