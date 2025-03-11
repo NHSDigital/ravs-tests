@@ -17,33 +17,33 @@ Feature: Record vaccine
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date |
-      | 0 | 9693632109 | ALBERT HOUSE  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
-      | 1 | 9693632109 | BECCLES HOUSE | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 |
-      | 2 | 9470040228 | BIRCH HOUSE  | Hospital hub for staff and patients | yes  | today-1  | yes | yes | today | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 |  AUTOMATION-C10  | 19/2/2026 |
-      | 3 | 9470057589 | ALBERT HOUSE  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
-      | 4 | 9472710255 | BECCLES HOUSE | Housebound patient's home | yes | today-3 | yes | yes  | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | 	AUTOMATION-SJ1 | 19/10/2026 |
-      | 5 | 9473629885 | BIRCH HOUSE | Outreach event | yes | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | COVID-19 | AUTOMATION-C30 | 19/10/2026 |
-      | 6 | 9437540233 | ALBERT HOUSE  | Vaccination Centre | yes | today-5 | yes | yes | today-2 | RANDY FOGDEN | 8/6/1961 | 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
-      | 7 | 9474374228 | BECCLES HOUSE | Hospital hub for staff and patients  | yes  | today-6 | yes | yes | today-3 | ORINDA JUDD | 20/7/1963 | 2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL | COVID-19 | AUTOMATION-C3 | 19/10/2026 |
-      | 8 | 9437580812 | BIRCH HOUSE | Care home | yes | today-7 | yes | yes | today-7 | INDIGO CATCHESIDE | 1/3/1959 | 12 CANBERRA STREET, MANCHESTER, M11 4WL | COVID-19 | AUTOMATION-SJ1 | 19/10/2026 |
-      | 9 | 9437599165 | ALBERT HOUSE | Housebound patient's home | yes | today-30 | yes | yes | today-30 | CAWRDAV BOBBETT | 21/7/1959 | 127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN | COVID-19 | AUTOMATION-C30 | 19/10/2026 |
-      | 10 | 9474335052 | BECCLES HOUSE | Outreach event | yes | today-2 | yes | yes | today-2 | AMERY PIGGOTT | 20/4/1968 | 10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ | COVID-19 | AUTOMATION-C10 | 19/10/2026 |
-      | 11 | 9437541817 | BIRCH HOUSE | Vaccination Centre | yes  | today-3 | yes | yes | today-1 | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | COVID-19 | AUTOMATION-C3 | 19/10/2026 |
-      | 12 | 9437540233 | ALBERT HOUSE  | Hospital hub for staff and patients | yes | today-15 | yes | yes | today-7 | RANDY FOGDEN | 8/6/1961 | 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19 | AUTOMATION-SJ1 | 19/10/2026 |
-      | 8 | 9474376638 | BECCLES HOUSE | Care home | yes | today-32 | yes | yes | today-30 | PHYLLIDA ZYLKO | 6/2/1968 | BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG      | Flu | AUTOMATION-QIHD | 19/10/2026 |
-      | 9 | 9474405174 | BIRCH HOUSE   | Housebound patient's home | yes | today | yes | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | AUTOMATED-AQI | 19/10/2026 |
-      | 10 | 9474405174 | ALBERT HOUSE  | Outreach event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | AUTOMATION-CBQI | 19/10/2026 |
-      | 11 | 9450134391 | BECCLES HOUSE | Vaccination Centre | yes | today-3 | yes | yes  | today | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
-      | 12 | 9450140960 | BIRCH HOUSE | Hospital hub for staff and patients | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  AUTOMATION-SJ1 | 19/10/2026 |
-      | 1 | 9450141444 | ALBERT HOUSE  | Care home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  AUTOMATION-QI |  19/10/2026 |
-      | 2 | 9450141711 | BECCLES HOUSE | Housebound patient's home | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | AUTOMATION-IT | 19/10/2026  |
-      | 3 | 9450144699 | BIRCH HOUSE   | Outreach event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  AUTOMATION-LAIV | 19/10/2026 |
-      | 4 | 9437541817 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-LAIV | 19/10/2026 |
-      | 5 | 9223638941 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | MICHELLE DONNELLY |  05/5/1900 | 	6 WHESSOE ROAD, HARDWICK, STOCKTON-ON-TEES, CLEVELAND, TS19 8LB | Flu | AUTOMATION-LAIV | 19/10/2026 |
-      | 6 | 9449306125 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 |	35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
-      | 6 | 9449306125 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 |	35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
-      | 4 | 9727840361 | ALBERT HOUSE  | Outreach event | yes | today | yes | yes | today | BOBBY TICKLE |  04/5/1983 |  1 Canning Way, LOUGHBOROUGH, Leics, LE11 5YA | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
-      | 5 | 9449303975 | CARDINAL SQUARE  | Outreach event | yes | today | yes | yes | today | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+      | 0 | 9693632109 | Weaverham Surgery  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |
+      | 1 | 9693632109 | Watling Street Surgery | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 |
+      | 2 | 9470040228 | Spire Cheshire Hospital  | Hospital hub for staff and patients | yes  | today-1  | yes | yes | today | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 |  AUTOMATION-C10  | 19/2/2026 |
+      | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
+      | 4 | 9472710255 | Watling Street Surgery | Housebound patient's home | yes | today-3 | yes | yes  | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | 	AUTOMATION-SJ1 | 19/10/2026 |
+      | 5 | 9473629885 | Spire Cheshire Hospital | Outreach event | yes | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | COVID-19 | AUTOMATION-C30 | 19/10/2026 |
+      | 6 | 9437540233 | Weaverham Surgery  | Vaccination Centre | yes | today-5 | yes | yes | today-2 | RANDY FOGDEN | 8/6/1961 | 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+      | 7 | 9474374228 | Watling Street Surgery | Hospital hub for staff and patients  | yes  | today-6 | yes | yes | today-3 | ORINDA JUDD | 20/7/1963 | 2 RECTORY PADDOCK, HALTON, LANCASTER, LA2 6LL | COVID-19 | AUTOMATION-C3 | 19/10/2026 |
+      | 8 | 9437580812 | Spire Cheshire Hospital | Care home | yes | today-7 | yes | yes | today-7 | INDIGO CATCHESIDE | 1/3/1959 | 12 CANBERRA STREET, MANCHESTER, M11 4WL | COVID-19 | AUTOMATION-SJ1 | 19/10/2026 |
+      | 9 | 9437599165 | Weaverham Surgery | Housebound patient's home | yes | today-30 | yes | yes | today-30 | CAWRDAV BOBBETT | 21/7/1959 | 127 ALINORA CRESCENT, GORING-BY-SEA, WORTHING, W SUSSEX, BN12 4HN | COVID-19 | AUTOMATION-C30 | 19/10/2026 |
+      | 10 | 9474335052 | Watling Street Surgery | Outreach event | yes | today-2 | yes | yes | today-2 | AMERY PIGGOTT | 20/4/1968 | 10 CONNAUGHT ROAD, LANCASTER, LA1 4BQ | COVID-19 | AUTOMATION-C10 | 19/10/2026 |
+      | 11 | 9437541817 | Spire Cheshire Hospital | Vaccination Centre | yes  | today-3 | yes | yes | today-1 | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | COVID-19 | AUTOMATION-C3 | 19/10/2026 |
+      | 12 | 9437540233 | Weaverham Surgery  | Hospital hub for staff and patients | yes | today-15 | yes | yes | today-7 | RANDY FOGDEN | 8/6/1961 | 10 ASHVILLE TERRACE, MANCHESTER, M40 9WG | COVID-19 | AUTOMATION-SJ1 | 19/10/2026 |
+      | 8 | 9474376638 | Watling Street Surgery | Care home | yes | today-32 | yes | yes | today-30 | PHYLLIDA ZYLKO | 6/2/1968 | BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG      | Flu | AUTOMATION-QIHD | 19/10/2026 |
+      | 9 | 9474405174 | Spire Cheshire Hospital   | Housebound patient's home | yes | today | yes | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | AUTOMATED-AQI | 19/10/2026 |
+      | 10 | 9474405174 | Weaverham Surgery  | Outreach event | yes | today-2 | yes  | yes | today | PHINEAS FAYLE | 4/9/1965 | 2 DIXON TERRACE, NETHER KELLET, CARNFORTH, LANCS, LA6 1EX | Flu | AUTOMATION-CBQI | 19/10/2026 |
+      | 11 | 9450134391 | Watling Street Surgery | Vaccination Centre | yes | today-3 | yes | yes  | today | MARIAN PIESSE | 17/7/1994 | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT | Flu | AUTOMATION-QI | 19/10/2026 |
+      | 12 | 9450140960 | Spire Cheshire Hospital | Hospital hub for staff and patients | yes | today-1  | yes | yes| today | DEANA GAMBLES | 5/9/1993 | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ | Flu |  AUTOMATION-SJ1 | 19/10/2026 |
+      | 1 | 9450141444 | Weaverham Surgery  | Care home | yes | today-4 | yes | yes | today-2 | BRANDIE DYBLE | 25/8/1992 | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF | Flu  |  AUTOMATION-QI |  19/10/2026 |
+      | 2 | 9450141711 | Watling Street Surgery | Housebound patient's home | yes | today-2| yes | yes | today-1 | KRISTIA SIDAWAY | 24/6/1992 | 41 BALTIMORE ROAD, LYTHAM ST. ANNES, LANCS, FY8 3NY | Flu | AUTOMATION-IT | 19/10/2026  |
+      | 3 | 9450144699 | Spire Cheshire Hospital   | Outreach event  | yes | today-1 | yes | yes | today-1 | HOPE TULLY | 10/1/1993 | 2 CHAPEL CLOSE, WESHAM, PRESTON, PR4 3HB | Flu    |  AUTOMATION-LAIV | 19/10/2026 |
+      | 4 | 9437541817 | Weaverham Surgery  | Outreach event | yes | today | yes | yes | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-LAIV | 19/10/2026 |
+      | 5 | 9223638941 | Weaverham Surgery  | Outreach event | yes | today | yes | yes | today | MICHELLE DONNELLY |  05/5/1900 | 	6 WHESSOE ROAD, HARDWICK, STOCKTON-ON-TEES, CLEVELAND, TS19 8LB | Flu | AUTOMATION-LAIV | 19/10/2026 |
+      | 6 | 9449306125 | Weaverham Surgery  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 |	35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+      | 6 | 9449306125 | Weaverham Surgery  | Outreach event | yes | today | yes | yes | today | NEELY SCULLION |  14/09/1946 |	35 THE AVENUE, TADWORTH, SURREY, KT20 5DG | Flu | AUTOMATION-SJ1 | 19/10/2026 |
+      | 4 | 9727840361 | Weaverham Surgery  | Outreach event | yes | today | yes | yes | today | BOBBY TICKLE |  04/5/1983 |  1 Canning Way, LOUGHBOROUGH, Leics, LE11 5YA | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+      | 5 | 9449303975 | Spire Regency Hospital  | Outreach event | yes | today | yes | yes | today | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
 
 
   ### This test is no longer needed because of the changes being made to vaccine and batch management ###
@@ -64,7 +64,7 @@ Feature: Record vaccine
 
   #   Examples:
   #     | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date |
-  #     | 5 | 9449303975 | CARDINAL SQUARE  | Outreach event | yes | today | yes | yes | today | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
+  #     | 5 | 9449303975 | Spire Regency Hospital  | Outreach event | yes | today | yes | yes | today | ROS METHERALL |  19/8/1999 |  	10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19   |  AUTOMATION-C10 | 19/10/2026 |
 
   @recordvaccine
   Scenario Outline: Record a maternity vaccine with nhs number
@@ -83,11 +83,11 @@ Feature: Record vaccine
 
     Examples:
       | index | nhs_number | site   | care_model      | eligibility | due_date | assess_date | consent | vaccination | vaccination_date | name  | dob    | address     | chosen_vaccine  | batch_number | batch_expiry_date |
-      |  4 | 9473629885 | KINGSTON HOUSE | Outreach event | yes | today+50 | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | 	AUTOMATION-ABR | 1/2/2026 |
-      | 0 | 9693632109 | ALBERT HOUSE | Vaccination Centre | yes | today | today | yes | yes | today | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis | AUTOMATION-AVS | 19/10/2027 |
-      | 1 | 9693632109 | BECCLES HOUSE | Vaccination Centre | yes | today+100 | today-1 | yes | yes | today-1  | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis |  AUTOMATION-BIS | 19/10/2028 |
-      | 2 | 9470040228 | BIRCH HOUSE | Hospital hub for staff and patients | yes | today+290 | today-1 | yes | yes | today  | HERBERT HAAG  | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis | AUTOMATION-RVS | 19/2/2029 |
-      | 3 | 9472710255 | ALBERT HOUSE  | Housebound patient's home | yes | today+5 | today-3 | yes | yes | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | Respiratory syncytial virus (RSV) |  AUTOMATION-ARX | 19/10/2026 |
-      # | 4 | 9473629885 | BECCLES HOUSE | Outreach event | yes | today+50 | today-4 | yes | yes | today-3  | MARGIE PUCKEY |  27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) |  AREX2-15A | 19/10/2026 |   - # This test is no longer needed as Arexvy has been decommissioned on 29th Nov 2024
+      |  4 | 9473629885 | Spire Regency Hospital | Outreach event | yes | today+50 | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | 	AUTOMATION-ABR | 1/2/2026 |
+      | 0 | 9693632109 | Weaverham Surgery | Vaccination Centre | yes | today | today | yes | yes | today | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis | AUTOMATION-AVS | 19/10/2027 |
+      | 1 | 9693632109 | Watling Street Surgery | Vaccination Centre | yes | today+100 | today-1 | yes | yes | today-1  | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis |  AUTOMATION-BIS | 19/10/2028 |
+      | 2 | 9470040228 | Spire Cheshire Hospital | Hospital hub for staff and patients | yes | today+290 | today-1 | yes | yes | today  | HERBERT HAAG  | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis | AUTOMATION-RVS | 19/2/2029 |
+      | 3 | 9472710255 | Weaverham Surgery  | Housebound patient's home | yes | today+5 | today-3 | yes | yes | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | Respiratory syncytial virus (RSV) |  AUTOMATION-ARX | 19/10/2026 |
+      # | 4 | 9473629885 | Watling Street Surgery | Outreach event | yes | today+50 | today-4 | yes | yes | today-3  | MARGIE PUCKEY |  27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) |  AREX2-15A | 19/10/2026 |   - # This test is no longer needed as Arexvy has been decommissioned on 29th Nov 2024
 
 

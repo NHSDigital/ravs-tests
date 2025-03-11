@@ -25,4 +25,4 @@ Feature: Add Batches to vaccine
 
     Examples:
       | site         | vaccine  | vaccine_type  | batch_number       | expiry_date |
-      | ALBERT HOUSE | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
+      | Weaverham Surgery | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |

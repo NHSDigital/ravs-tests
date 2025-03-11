@@ -86,10 +86,10 @@ Scenario Outline: Choose data page is displayed
 
   Examples:
   |vaccineType                        | site          |
-  | COVID-19                          | Albert House  |
-  | Flu                               | Albert House  |
-  | Pertussis                         | Albert House  |
-  | Respiratory syncytial virus (RSV) | Albert House  |
+  | COVID-19                          | Weaverham Surgery  |
+  | Flu                               | Weaverham Surgery  |
+  | Pertussis                         | Weaverham Surgery  |
+  | Respiratory syncytial virus (RSV) | Weaverham Surgery  |
 
 Scenario Outline: Check and confirm page should be displayed
   Given I am logged into the RAVS app
@@ -103,11 +103,11 @@ Scenario Outline: Check and confirm page should be displayed
 
   Examples:
   |vaccineType                        | site          |
-  | COVID-19                          | Albert House  |
-  | Flu                               | Albert House  |
-  | Pertussis                         | Albert House  |
-  | Respiratory syncytial virus (RSV) | Albert House  |
-  | COVID-19                          | Albert House  |
+  | COVID-19                          | Weaverham Surgery  |
+  | Flu                               | Weaverham Surgery  |
+  | Pertussis                         | Weaverham Surgery  |
+  | Respiratory syncytial virus (RSV) | Weaverham Surgery  |
+  | COVID-19                          | Weaverham Surgery  |
 
 Scenario Outline: Report is ready page should be displayed
   Given I am logged into the RAVS app
@@ -122,11 +122,11 @@ Scenario Outline: Report is ready page should be displayed
 
   Examples:
   |vaccineType                        | site          |
-  | COVID-19                          | Albert House  |
-  | Flu                               | Albert House  |
-  | Pertussis                         | Albert House  |
-  | Respiratory syncytial virus (RSV) | Albert House  |
-  | COVID-19                          | Albert House  |
+  | COVID-19                          | Weaverham Surgery  |
+  | Flu                               | Weaverham Surgery  |
+  | Pertussis                         | Weaverham Surgery  |
+  | Respiratory syncytial virus (RSV) | Weaverham Surgery  |
+  | COVID-19                          | Weaverham Surgery  |
 
 Scenario Outline: User can download the report
   Given I am logged into the RAVS app
@@ -142,12 +142,12 @@ Scenario Outline: User can download the report
 
   Examples:
   |vaccineType                        | site          | day                                       |
-  | COVID-19                          | Albert House  | Last 31 days (includes today)             |
-  | Flu                               | Albert House  | Last 31 days (includes today)             |
-  | Pertussis                         | Albert House  | Last 7 days (includes today)              |
-  | Respiratory syncytial virus (RSV) | Albert House  | Last 14 days (includes today)             |
-  | COVID-19                          | Albert House  | Last 31 days (includes today)             |
-  | COVID-19                          | Albert House  | Select a custom date range up to 31 days  |
+  | COVID-19                          | Weaverham Surgery  | Last 31 days (includes today)             |
+  | Flu                               | Weaverham Surgery  | Last 31 days (includes today)             |
+  | Pertussis                         | Weaverham Surgery  | Last 7 days (includes today)              |
+  | Respiratory syncytial virus (RSV) | Weaverham Surgery  | Last 14 days (includes today)             |
+  | COVID-19                          | Weaverham Surgery  | Last 31 days (includes today)             |
+  | COVID-19                          | Weaverham Surgery  | Select a custom date range up to 31 days  |
 
   Scenario Outline: Record a vaccine and generate a report for today
     Given I am logged into the RAVS app
@@ -175,8 +175,8 @@ Scenario Outline: User can download the report
 
   Examples:
     | index | nhs_number | site | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob        | address                                       | chosen_vaccine | batch_number     | batch_expiry_date |
-    | 0  | 9693632109 | Albert House | Vaccination Centre open to the public | yes        | today      | yes     | yes         | today | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-SJ1   | 19/10/2026   |
-    | 0  | 9693632109 | Albert House | Vaccination Centre open to the public | yes        | today      | yes     | yes         | today-32 | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-SJ1   | 19/10/2026   |
+    | 0  | 9693632109 | Weaverham Surgery | Vaccination Centre open to the public | yes        | today      | yes     | yes         | today | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-SJ1   | 19/10/2026   |
+    | 0  | 9693632109 | Weaverham Surgery | Vaccination Centre open to the public | yes        | today      | yes     | yes         | today-32 | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-SJ1   | 19/10/2026   |
 
   Scenario Outline: Record a vaccine and generate a report for no vaccination decision on the last screen
     Given I am logged into the RAVS app
@@ -203,7 +203,7 @@ Scenario Outline: User can download the report
 
   Examples:
     | index | nhs_number | site | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob        | address    | chosen_vaccine | batch_number     | batch_expiry_date |  gender |
-    | 4 | 9437541817 | KINGSTON HOUSE  | Outreach event | yes | today | yes | no | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 | female |
+    | 4 | 9437541817 | Spire Regency Hospital  | Outreach event | yes | today | yes | no | today | FLORINDA DUNNER |  27/3/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP | Flu | AUTOMATION-SJ1 | 19/10/2026 | female |
 
 
   Scenario Outline: User should be able to filter vaccine event data before creating a report
@@ -220,11 +220,11 @@ Scenario Outline: User can download the report
 
   Examples:
   |vaccineType                        | site          | day                            |   data   |
-  | COVID-19                          | Albert House  | Last 31 days (includes today)  | Patients |
-  | Flu                               | Albert House  | Last 31 days (includes today)  | Staff    |
-  | Pertussis                         | Albert House  | Last 7 days (includes today)   | Site or delivery team |
-  | Respiratory syncytial virus (RSV) | Albert House  | Last 14 days (includes today)  | Assessment and consent |
-  | COVID-19                          | Albert House  | Last 31 days (includes today)  | Vaccination |
+  | COVID-19                          | Weaverham Surgery  | Last 31 days (includes today)  | Patients |
+  | Flu                               | Weaverham Surgery  | Last 31 days (includes today)  | Staff    |
+  | Pertussis                         | Weaverham Surgery  | Last 7 days (includes today)   | Site or delivery team |
+  | Respiratory syncytial virus (RSV) | Weaverham Surgery  | Last 14 days (includes today)  | Assessment and consent |
+  | COVID-19                          | Weaverham Surgery  | Last 31 days (includes today)  | Vaccination |
 
 
   @reports
