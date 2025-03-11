@@ -27,8 +27,8 @@ logger = logging.getLogger(__name__)
 
 scenarios(f'{features_directory}/bsa_record_a_vaccine_for_branch_surgery.feature')
 
-@given(parse("I login to RAVS as a branch surgery to the {site} and set vaccinator details with {site} and {care_model} as community pharmacy and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date}"))
-def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date, shared_data):
+@given(parse("I login to RAVS as a branch surgery to the {site} and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs_branch_surgery(site, care_model, nhs_number, index, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
