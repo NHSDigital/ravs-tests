@@ -25,21 +25,7 @@ logger = logging.getLogger(__name__)
 
 features_directory = get_working_directory() + "features"
 
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Persist fields when recording a vaccination')
-def test_persisting_fields_when_recording_a_vaccine(navigate_and_login):
-    pass
-
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes delivery team when recording a vaccination')
-def test_fields_should_not_persist_if_delivery_team_is_changed_when_recording_a_vaccine(navigate_and_login):
-    pass
-
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes vaccine product when recording a vaccination')
-def test_fields_should_not_persist_if_vaccine_product_is_changed_when_recording_a_vaccine(navigate_and_login):
-    pass
-
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes vaccine product type when recording a vaccination')
-def test_fields_should_not_persist_if_vaccine_product_type_is_changed_when_recording_a_vaccine(navigate_and_login):
-    pass
+scenarios(f'{features_directory}/persist_field_when_recording_a_vaccine.feature')
 
 @when("I change the delivery team on the choose vaccine page")
 def change_delivery_team_choose_vaccine(shared_data):
