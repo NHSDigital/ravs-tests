@@ -26,6 +26,22 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
 
 
   @bsarecordvaccine
+  Scenario Outline: ADD BRANCH Surgery - Record a vaccine at branch surgery
+    Given I login to RAVS as a branch surgery to the <site> and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date>
+    And I search for a patient with the NHS number in the find a patient screen
+    And I open the patient record by clicking on patient <name>
+    When I click choose vaccine button and choose the <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date> and click continue
+    And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
+    And I record <consent> with the details and click continue to vaccinate button
+    And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
+    Then I need to be able to see the patient vaccination details on the check and confirm screen
+    And I click confirm and save button, I should see a record saved dialogue
+
+    Examples:
+      | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | chosen_vaccine_type | batch_number | batch_expiry_date |
+      | 0 | 9470006143 | Aire Valley Surgery (rawdon) | Branch surgery | yes | today | yes | yes  |  today | TABBY FERN | 2202/2022 | CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ | Covid-19 | Spikevax JN.1 | AUTO-SJ-AP | 19/10/2026 |
+
+  @bsarecordvaccine
   Scenario Outline: ADD PHARMACY WITH SUB SITES - Record a vaccine at community pharmacy
     Given I login to RAVS as a community pharmacist to the <site> and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date>
     And I search for a patient with the NHS number in the find a patient screen
@@ -39,19 +55,20 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | chosen_vaccine_type | batch_number | batch_expiry_date |
-      | 0 | 9470006143 | Aspire Pharmacy | Community pharmacy | yes | today | yes | yes  |  today-5 | TABBY FERN | 2202/2022 | CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ | Covid-19 | Spikevax JN.1 | AUTO-SJ-AP | 19/10/2026 |
+      | 0 | 9470006143 | Aspire Pharmacy | Community pharmacy | yes | today | yes | yes  |  today | TABBY FERN | 2202/2022 | CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ | Covid-19 | Spikevax JN.1 | AUTO-SJ-AP | 19/10/2026 |
       | 0 | 9470006143 | Aspire Pharmacy | Community pharmacy | yes | today | yes | yes  |  today-14 | TABBY FERN | 2202/2022 | CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ | Covid-19 | Spikevax JN.1 | AUTO-SJ-AP | 19/10/2026 |
-      | 1 | 9732596996 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service  | Vaccination Centre | yes | today  | yes  | yes | today-15   | Lisa WORTHY |  30/6/2024 |  10 NORTON PARK VIEW, SHEFFIELD, S8 8GS  | COVID-19   | Comirnaty 30 JN.1 | AUTO-30-APCSC   | 19/10/2026 |
-      | 2 | 9470006739 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-11 | JANNETTE ARD | 09/12/2015 | 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ | Covid-19 | Comirnaty 10 JN.1 | AUTO-10-CSC | 19/10/2026 |
+      | 1 | 9732596996 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service  | Vaccination Centre | yes | today  | yes  | yes | today-19   | Lisa WORTHY |  30/6/2024 |  10 NORTON PARK VIEW, SHEFFIELD, S8 8GS  | COVID-19   | Comirnaty 30 JN.1 | AUTO-30-APCSC   | 19/10/2026 |
+      | 2 | 9470006739 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-9 | JANNETTE ARD | 09/12/2015 | 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ | Covid-19 | Comirnaty 10 JN.1 | AUTO-10-CSC | 19/10/2026 |
       | 3 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-3 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Covid-19 | Comirnaty 3 JN.1 | AUTO-3-OM | 19/10/2026 |
       | 4 | 9650594000 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-60 | Archie STRAIN | 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Quadrivalent Influenza Vaccine (QIVe) | AUTO-QIVE-CSC | 19/10/2026 |
       | 5 | 9732743476 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-3 | Mike HEESOM  | 24/10/1992 | 2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY  | Flu | Cell-based Quadrivalent Influenza Vaccine (QIVc) | AUTO-QIVC-CSC | 19/10/2026 |
       | 6 | 9449303762 | Aspire Pharmacy | Community pharmacy | yes | today | yes | yes  |  today-5 | Pryderi Warnford-Davis | 14/04/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Flu | Adjuvanted Quadrivalent Influenza Vaccine (aQIV) | AUTO-QIV-AP | 19/10/2026 |
       | 7 | 9470011902 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-2 | KATEE TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | Fluenz (LAIV) | AUTO-F-CSC | 19/10/2026 |
       | 8 | 9650594000 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-12 | Archie STRAIN | 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Influenza Tetra MYL (QIVe)  | AUTO-ITM-CSC | 19/10/2026 |
+      | 13 | 9650594000 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-100 | Archie STRAIN | 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Influenza Tetra MYL (QIVe)  | AUTO-ITM-CSC | 19/10/2026 |
       | 9 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-14 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM | 19/10/2026 |
-      | 9 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-366 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM | 19/10/2026 |
-      | 12 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-100 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM | 19/10/2026 |
+      | 9 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-365 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM | 19/10/2026 |
+      | 12 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM | 19/10/2026 |
 
 
   @bsarecordvaccine
@@ -72,7 +89,9 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | chosen_vaccine_type | batch_number | batch_expiry_date |
       | 0 | 9470006143 | Aspire Pharmacy | Community pharmacy | yes | today | yes | yes  |  today-5 | TABBY FERN | 2202/2022 | CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ | Covid-19 | Spikevax JN.1 | AUTO-SJ-AP | 19/10/2026 |
+      | 3 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-25 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Covid-19 | Comirnaty 3 JN.1 | AUTO-3-OM | 19/10/2026 |
       | 9 | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-14 | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM | 19/10/2026 |
+      | 13 | 9650594000 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Community pharmacy | yes | today | yes | yes  |  today-94 | Archie STRAIN | 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Influenza Tetra MYL (QIVe)  | AUTO-ITM-CSC | 19/10/2026 |
 
 @bsarecordvaccine
   Scenario Outline: SFLAG - Record a vaccine at community pharmacy

@@ -100,6 +100,25 @@ def navigate_and_login_as_community_pharmacist(site):
     enter_password(password)
     click_nhs_signin_button()
 
+def navigate_and_login_as_branch_surgery(site):
+    if config["browser"] == "mobile":
+        if check_navbar_toggle_exists_without_waiting():
+            click_navbar_toggler()
+            attach_screenshot("clicked_navbar_toggler")
+    if check_logout_button_exists_without_waiting():
+        click_logout_button()
+        attach_screenshot("clicked_logout_button")
+    url = get_app_url(config["test_environment"])
+    navigate_to_ravs_login_page(url)
+    attach_screenshot("navigated_to_ravs_login_page")
+    click_login_button()
+    if site.lower() == "Aire Valley Surgery (rawdon)".lower():
+        emailAddress = "neelima.guntupalli1+airevalley@nhs.net"
+    enter_email_address(emailAddress)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password)
+    click_nhs_signin_button()
+
 # Fixture for navigating and logging in
 @pytest.fixture(scope='function')
 def navigate_and_login_as_recorder(request, navigate_to_ravs):

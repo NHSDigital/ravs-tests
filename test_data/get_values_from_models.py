@@ -12,12 +12,15 @@ from test_data.models.eligible_decision import eligible_decision
 from test_data.models.vaccination_sites import vaccination_sites
 from test_data.models.vaccinated_decision import vaccinated_decision
 from test_data.models.vaccinating_clinicians_fhh39 import vaccinating_clinicians_fhh39
+from test_data.models.vaccinating_clinicians_airevalley import vaccinating_clinicians_airevalley
 from test_data.models.vaccinating_clinicians import vaccinating_clinicians
 from test_data.models.consent_types import consent_types
 from test_data.models.consenting_clinicians import consenting_clinicians
 from test_data.models.consenting_clinicians_fhh39 import consenting_clinicians_fhh39
+from test_data.models.consenting_clinicians_airevalley import consenting_clinicians_airevalley
 from test_data.models.assess_outcome_decisions import assessment_outcome
 from test_data.models.assessing_clinicians_fhh39 import assessing_clinicians_fhh39
+from test_data.models.assessing_clinicians_airevalley import assessing_clinicians_airevalley
 from test_data.models.assessing_clinicians import assessing_clinicians
 from test_data.models.care_models import care_models
 from test_data.models.legal_mechanism import legal_mechanism
@@ -80,6 +83,9 @@ def get_assessing_clinician(index):
 def get_assessing_clinician_fhh39(index):
     return assessing_clinicians_fhh39[get_wrapped_index(index, len(assessing_clinicians_fhh39))]
 
+def get_assessing_clinician_airevalley(index):
+    return assessing_clinicians_airevalley[get_wrapped_index(index, len(assessing_clinicians_airevalley))]
+
 def get_random_assessing_clinician():
     return assessing_clinicians[get_random_index(len(assessing_clinicians))]
 
@@ -103,6 +109,9 @@ def get_consenting_clinician(index):
 
 def get_consenting_clinician_fhh39(index):
     return consenting_clinicians_fhh39[get_wrapped_index(index, len(consenting_clinicians_fhh39))]
+
+def get_consenting_clinician_airevalley(index):
+    return consenting_clinicians_airevalley[get_wrapped_index(index, len(consenting_clinicians_airevalley))]
 
 def get_no_consent_reason(index):
     return no_consent_reasons[get_wrapped_index(index, len(no_consent_reasons))]
@@ -134,6 +143,9 @@ def get_vaccinator(index):
 
 def get_vaccinator_fhh39(index):
     return vaccinating_clinicians_fhh39[get_wrapped_index(index, len(vaccinating_clinicians_fhh39))]
+
+def get_vaccinator_airevalley(index):
+    return vaccinating_clinicians_airevalley[get_wrapped_index(index, len(vaccinating_clinicians_airevalley))]
 
 def get_vaccination_not_given_reason(index):
     return assessment_vaccine_not_given_reasons[get_wrapped_index(index, len(assessment_vaccine_not_given_reasons))]
