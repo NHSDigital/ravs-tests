@@ -16,8 +16,8 @@ logger = logging.getLogger(__name__)
 scenarios(f'{features_directory}/add_vaccines.feature')
 
 @given("I am on the RAVS home page")
-def logged_into_homepage(navigate_and_login):
-    pass
+def logged_into_homepage(shared_data):
+    navigate_and_login(shared_data)
 
 @when("I am on the vaccines page")
 def i_am_on_the_vaccines_page():

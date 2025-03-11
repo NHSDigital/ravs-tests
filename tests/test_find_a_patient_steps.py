@@ -26,7 +26,8 @@ fake = Faker('en_GB')
 scenarios(f'{features_directory}/find_a_patient.feature')
 
 @given('I am on the find a patient by pds details page')
-def given_im_on_the_find_a_patient_by_pds_details_page(navigate_and_login):
+def given_im_on_the_find_a_patient_by_pds_details_page(shared_data):
+    navigate_and_login(shared_data)
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
@@ -51,20 +52,22 @@ def the_alert_messages_should_appear_nhs_number():
     attach_screenshot("required_alerts_should_appear_for_nhsNumber")
 
 @given('I am on the PDS search page')
-def step_given_im_on_pds_search_page(login_and_navigate_to_find_a_patient):
-    pass
+def step_given_im_on_pds_search_page():
+    login_and_navigate_to_find_a_patient()
 
 @given('I am on the find a patient by nhs number page')
-def step_i_am_on_the_find_a_patient_by_nhs_number_page(login_and_navigate_to_find_a_patient):
-    pass
+def step_i_am_on_the_find_a_patient_by_nhs_number_page():
+    login_and_navigate_to_find_a_patient()
 
 @given('I am on the find a patient by demographics page')
-def step_given_i_am_on_the_find_a_patient_by_demographics_page(login_and_navigate_to_find_a_patient):
+def step_given_i_am_on_the_find_a_patient_by_demographics_page():
+    login_and_navigate_to_find_a_patient()
     click_search_by_demographics_link()
 
 @then('I am on the find a patient by local records page')
 @given('I am on the find a patient by local records page')
-def step_given_i_am_on_the_find_a_patient_by_local_records_page(login_and_navigate_to_find_a_patient):
+def step_given_i_am_on_the_find_a_patient_by_local_records_page():
+    login_and_navigate_to_find_a_patient()
     click_search_by_local_records_link()
 
 @given('I click the find a patient by local records link')
@@ -74,7 +77,8 @@ def step_click_the_find_a_patient_by_local_records_link():
     attach_screenshot("clicked_search_by_local_records_link")
 
 @given('I am on the create a new patient page')
-def step_given_i_am_on_the_find_a_patient_by_local_records_page(login_and_navigate_to_find_a_patient):
+def step_given_i_am_on_the_find_a_patient_by_local_records_page():
+    login_and_navigate_to_find_a_patient()
     click_search_by_local_records_link()
     attach_screenshot("clicked_search_by_local_records_link")
 

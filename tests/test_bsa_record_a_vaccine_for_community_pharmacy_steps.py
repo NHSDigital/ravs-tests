@@ -38,7 +38,7 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
     shared_data["care_model"] = care_model
     shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
 
-    navigate_and_login_as_community_pharmacist(site)
+    navigate_and_login_as_community_pharmacist(site, shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -59,7 +59,7 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
     shared_data["care_model"] = care_model
     shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
 
-    navigate_and_login_as_community_pharmacist(site)
+    navigate_and_login_as_community_pharmacist(site, shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -80,7 +80,7 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
     shared_data["care_model"] = care_model
     shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
 
-    navigate_and_login_as_community_pharmacist(site)
+    navigate_and_login_as_community_pharmacist(site, shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -93,6 +93,6 @@ def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, c
 @given(parse("I login to RAVS as a community pharmacist to the {site}"))
 def step_login_to_ravs_community_pharmacy(site, shared_data):
     shared_data["site"] = site
-    navigate_and_login_as_community_pharmacist(site)
+    navigate_and_login_as_community_pharmacist(site, shared_data)
     click_find_a_patient_nav_link()
     return shared_data

@@ -25,20 +25,20 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-scenarios(f'{features_directory}/bsa_record_a_vaccine_for_community_pharmacy.feature')
+scenarios(f'{features_directory}/bsa_record_a_vaccine_for_branch_surgery.feature')
 
-@given(parse("I login to RAVS as a branch surgery to the {site} and set vaccinator details with {site} and {care_model} as community pharmacy and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
-def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
+@given(parse("I login to RAVS as a branch surgery to the {site} and set vaccinator details with {site} and {care_model} as community pharmacy and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs_community_pharmacy(site, care_model, nhs_number, index, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
-    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
+    shared_data["chosen_vaccine_type"] = chosen_vaccine_type
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
     shared_data["care_model"] = care_model
     shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
 
-    navigate_and_login_as_branch_surgery(site)
+    navigate_and_login_as_branch_surgery(site, shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:

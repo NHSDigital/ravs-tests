@@ -64,9 +64,8 @@ def care_model(request):
 def covid_vaccine_type(request):
     return request.param
 
-# Fixture for navigating and logging in
-@pytest.fixture(scope='function')
-def navigate_and_login(request, navigate_to_ravs):
+def navigate_and_login(shared_data):
+    navigate_to_ravs()
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -76,10 +75,14 @@ def navigate_and_login(request, navigate_to_ravs):
     emailAddress = "neelima.guntupalli1@nhs.net"
     enter_email_address(emailAddress)
     password = config["credentials"]["ravs_password"]
+    if "index" in shared_data:
+        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
+        shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
     enter_password(password)
     click_nhs_signin_button()
 
-def navigate_and_login_as_community_pharmacist(site):
+def navigate_and_login_as_community_pharmacist(site, shared_data):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -93,14 +96,20 @@ def navigate_and_login_as_community_pharmacist(site):
     click_login_button()
     if site.lower() == "Leeds pharmacy".lower():
         emailAddress = "neelima.guntupalli1+community_pharmacy@nhs.net"
+        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
+        shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
     elif "Aspire pharmacy".lower()  or "fhh39".lower() in site.lower():
         emailAddress = "neelima.guntupalli1+fhh39@nhs.net"
+        shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
+        shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
     enter_email_address(emailAddress)
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
 
-def navigate_and_login_as_branch_surgery(site):
+def navigate_and_login_as_branch_surgery(site, shared_data):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -114,14 +123,16 @@ def navigate_and_login_as_branch_surgery(site):
     click_login_button()
     if site.lower() == "Aire Valley Surgery (rawdon)".lower():
         emailAddress = "neelima.guntupalli1+airevalley@nhs.net"
+        shared_data['vaccinator'] = get_vaccinator_airevalley(shared_data["index"])
+        shared_data['consent_clinician_details'] = get_consenting_clinician_airevalley(shared_data["index"])
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_airevalley(shared_data["index"])
     enter_email_address(emailAddress)
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
 
-# Fixture for navigating and logging in
-@pytest.fixture(scope='function')
-def navigate_and_login_as_recorder(request, navigate_to_ravs):
+def navigate_and_login_as_recorder():
+    navigate_to_ravs()
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -138,7 +149,8 @@ def navigate_and_login_as_recorder(request, navigate_to_ravs):
 
 # Fixture for navigating and logging in as administrator
 @pytest.fixture(scope='function')
-def navigate_and_login_as_administrator(request, navigate_to_ravs):
+def navigate_and_login_as_administrator(request):
+    navigate_to_ravs()
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -153,9 +165,8 @@ def navigate_and_login_as_administrator(request, navigate_to_ravs):
     select_site("Leeds Pharmacy")
     click_continue_to_home_page_button()
 
-# Fixture for navigating and logging in as lead administrator
-@pytest.fixture(scope='function')
-def navigate_and_login_as_lead_administrator(request, navigate_to_ravs):
+def navigate_and_login_as_lead_administrator():
+    navigate_to_ravs()
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -168,9 +179,7 @@ def navigate_and_login_as_lead_administrator(request, navigate_to_ravs):
     enter_password(password)
     click_nhs_signin_button()
 
-# Fixture for navigating to RAVS
-@pytest.fixture(scope='function')
-def navigate_to_ravs(request):
+def navigate_to_ravs():
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -183,9 +192,8 @@ def navigate_to_ravs(request):
     attach_screenshot("navigated_to_ravs_login_page")
     return True
 
-# Fixture for logging in and navigating to find a patient
-@pytest.fixture(scope='function')
-def login_and_navigate_to_find_a_patient(request, navigate_to_ravs):
+def login_and_navigate_to_find_a_patient():
+    navigate_to_ravs()
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
             click_navbar_toggler()
@@ -199,9 +207,8 @@ def login_and_navigate_to_find_a_patient(request, navigate_to_ravs):
     click_nhs_signin_button()
     click_find_a_patient_nav_link()
 
-# Fixture for logging in and finding a patient by NHS number
-@pytest.fixture(scope='function')
-def login_and_find_a_patient_by_nhs_number(request, login_and_navigate_to_find_a_patient, nhs_number):
+def login_and_find_a_patient_by_nhs_number(nhs_number):
+    login_and_navigate_to_find_a_patient()
     enter_nhs_number(nhs_number)
     click_search_for_patient_button()
 
@@ -210,9 +217,8 @@ def login_and_find_a_patient_by_nhs_number(request, login_and_navigate_to_find_a
 def goto_appointments_open_first_patient_and_click_choose_vaccine(request, login_and_navigate_to_appointments_open_first_patient):
     click_choose_vaccine_button()
 
-# Fixture for logging out
-@pytest.fixture(scope='function')
-def logout(request, navigate_and_login):
+def logout(shared_data):
+    navigate_and_login(shared_data)
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists():
             click_navbar_toggler()
@@ -271,8 +277,8 @@ def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineTyp
     pass
 
 @given("I am logged into the RAVS app")
-def logged_into_ravs_app(navigate_and_login):
-    pass
+def logged_into_ravs_app(shared_data):
+    navigate_and_login(shared_data)
 
 def check_vaccine_and_batch_exists_in_community_pharmacy(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size):
     if config["browser"] == "mobile":
@@ -302,7 +308,7 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         click_vaccines_nav_link()
         add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
         return True
-    elif "pharmacy" in site.lower():
+    elif "pharmacy" in site.lower() or "surgery" in site.lower():
             if shared_data["chosen_vaccine"].lower() == "covid-19" or shared_data["chosen_vaccine"].lower() == "flu":
                 pack_size = shared_data["pack_size"]
                 shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date, pack_size)
@@ -591,7 +597,7 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-
+    navigate_and_login(shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -615,7 +621,7 @@ def step_login_to_ravs_check_new_site_batch_exists(site, care_model, nhs_number,
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-
+    navigate_and_login(shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -640,7 +646,7 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, care_model, n
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-
+    navigate_and_login(shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -665,7 +671,7 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, care_mod
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-
+    navigate_and_login(shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -781,10 +787,6 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
-    if "Aspire pharmacy".lower() in shared_data["site"].lower():
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
-    else:
-        shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
     if shared_data["chosen_vaccine"].lower() == "covid-19":
         date = get_date_value_by_days(assess_date)
     else:
@@ -802,10 +804,6 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = "Pregnancy"
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
-    if "Aspire pharmacy".lower() in shared_data["site"].lower():
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
-    else:
-        shared_data['eligibility_assessing_clinician'] = get_random_assessing_clinician()
     if shared_data["chosen_vaccine"].lower() == "covid-19":
         date = get_date_value_by_days(due_date)
     else:
@@ -832,12 +830,6 @@ def step_record_consent_and_click_continue_to_vaccinate_screen(shared_data, cons
         relationship_to_patient = "RAVS tester"
         if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
             shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
-
-        else:
-            if "Aspire pharmacy".lower() in shared_data["site"].lower():
-                shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
-            else:
-                shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
         shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
         record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data["no_consent_reason"])
 
@@ -856,11 +848,6 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
             if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
-            else:
-                if "Aspire pharmacy".lower() in shared_data["site"].lower():
-                    shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
-                else:
-                    shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             batch_number_to_select = shared_data["batch_number"].upper() + " - " + shared_data["batch_expiry_date"]
             shared_data["batch_number_selected"] = batch_number_to_select
@@ -884,11 +871,6 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
             if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
-            else:
-                if "Aspire pharmacy".lower() in shared_data["site"].lower():
-                    shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
-                else:
-                    shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"])
@@ -910,11 +892,6 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             shared_data["dose_amount"] = str(get_vaccine_dose_amount(shared_data["chosen_vaccine_type"]))
             if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
-            else:
-                if "Aspire pharmacy".lower() in shared_data["site"].lower():
-                    shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
-                else:
-                    shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + " vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_save_and_return(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
@@ -1089,11 +1066,7 @@ def the_consent_values_should_persist(shared_data):
         attach_screenshot("entered_relationship_to_patient")
     if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
-    else:
-        if "Aspire pharmacy".lower() in shared_data["site"].lower():
-            shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
-        else:
-            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+
     if (legal_mechanism) != "Patient Group Direction (PGD)":
         select_consent_clinician_with_name_and_council(shared_data['consent_clinician_details'] )
         attach_screenshot("selected_consent_clinician_with_name_and_council")
@@ -1212,11 +1185,6 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     relationship_to_patient = "RAVS tester"
     if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
-    else:
-        if "site" in shared_data and "Aspire pharmacy".lower() in shared_data["site"].lower():
-            shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
-        else:
-            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
     shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
     record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data["no_consent_reason"])
     shared_data["vaccinated_decision"] = "yes"
