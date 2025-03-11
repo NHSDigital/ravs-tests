@@ -126,7 +126,7 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
 
     Examples:
       | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | chosen_vaccine | batch_number | batch_expiry_date |
-      | 2 | 9449304033 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-30  | BARAK SELIGMANN |  Flu  | AUTO-SUP-O-F   | 19/10/2026 |
+      | 2 | 9449304033 | Leeds Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-5  | BARAK SELIGMANN |  Flu  | AUTO-SUP-O-F   | 19/10/2026 |
       | 3 | 9449304033 | Aspire Pharmacy  | Vaccination Centre | yes | today  | yes  | yes | today-5  | BARAK SELIGMANN |  Covid-19  | AUTO-SUP-O-C | 19/10/2026 |
 
 @bsarecordvaccine
