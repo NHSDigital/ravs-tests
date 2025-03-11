@@ -25,22 +25,6 @@ Feature: Business services authority (BSA) - Record vaccine for community pharma
       | 12 | 9470011902 | Leeds Pharmacy | Community pharmacy | yes | today | yes | yes  |  today-121 | KATEE TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | AUTOMATION-QI | 19/10/2026 |
 
 
-  # @bsarecordvaccine
-  # Scenario Outline: ADD BRANCH Surgery - Record a vaccine at branch surgery
-  #   Given I login to RAVS as a branch surgery to the <site> and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date>
-  #   And I search for a patient with the NHS number in the find a patient screen
-  #   And I open the patient record by clicking on patient <name>
-  #   When I click choose vaccine button and choose the <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date> and click continue
-  #   And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
-  #   And I record <consent> with the details and click continue to vaccinate button
-  #   And I record <vaccination> details and date as <vaccination_date> and click Continue to Check and confirm screen
-  #   Then I need to be able to see the patient vaccination details on the check and confirm screen
-  #   And I click confirm and save button, I should see a record saved dialogue
-
-  #   Examples:
-  #     | index | nhs_number | site  | care_model | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | chosen_vaccine_type | batch_number | batch_expiry_date |
-  #     | 0 | 9470006143 | Aire Valley Surgery (rawdon) | Branch surgery | yes | today | yes | yes  |  today | TABBY FERN | 2202/2022 | CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ | Covid-19 | Spikevax JN.1 | AUTO-SJ-AP | 19/10/2026 |
-
   @bsarecordvaccine
   Scenario Outline: ADD PHARMACY WITH SUB SITES - Record a vaccine at community pharmacy
     Given I login to RAVS as a community pharmacist to the <site> and set vaccinator details with <site> and <care_model> as community pharmacy and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date>
