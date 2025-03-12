@@ -49,15 +49,6 @@ def format_nhs_number(nhs_number):
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
 
-# Fixture for care_model parameter
-@pytest.fixture(params=["Vaccination Centre", "Hospital Hub", "Care Home", "Home Of Housebound Patient", "Off-site Outreach Event", "Community pharmacy"])
-def care_model(request):
-    return request.param
-
-# Fixture for covid vaccination types parameter
-@pytest.fixture(params=["Comirnaty Original/Omicron BA.4-5", "Comirnaty 30 Omicron XBB.1.5", "Comirnaty 3 Omicron XBB.1.5", "Comirnaty 10 Omicron XBB.1.5", "Spikevax XBB.1.5"])
-def covid_vaccine_type(request):
-    return request.param
 
 def navigate_and_login(shared_data):
     navigate_to_ravs()
