@@ -22,7 +22,7 @@ from test_data.models.assess_outcome_decisions import assessment_outcome
 from test_data.models.assessing_clinicians_fhh39 import assessing_clinicians_fhh39
 from test_data.models.assessing_clinicians_airevalley import assessing_clinicians_airevalley
 from test_data.models.assessing_clinicians import assessing_clinicians
-from test_data.models.care_models import care_models
+from test_data.models.vaccination_locations import vaccination_locations
 from test_data.models.legal_mechanism import legal_mechanism
 from test_data.models.assess_vaccine_not_given_reasons import assessment_vaccine_not_given_reasons
 from test_data.models.no_consent_reasons import no_consent_reasons
@@ -132,8 +132,8 @@ def get_vaccination_type(index, vaccine):
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
 
-def get_care_model(index):
-    return care_models[get_wrapped_index(index, len(care_models))]
+def get_vaccination_location(index):
+    return vaccination_locations[get_wrapped_index(index, len(vaccination_locations))]
 
 def get_legal_mechanism(index):
     return legal_mechanism[get_wrapped_index(index, len(legal_mechanism))]

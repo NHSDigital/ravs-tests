@@ -17,21 +17,11 @@ features_directory = get_working_directory() + "features"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@scenario(f"{features_directory}/add_batches.feature", "Add vaccine batches page should launch")
-def test_add_vaccine_batches_page_should_launch(shared_data):
-    navigate_and_login(shared_data)
+scenarios(f"{features_directory}/add_batches.feature")
 
-@scenario(f"{features_directory}/add_batches.feature", "Add batch to vaccine")
-def test_batch_already_added_to_site_warning_should_appear():
-    pass
-
-@scenario(f"{features_directory}/add_batches.feature", "Error messages should appear when no values are entered")
-def test_batch_error_messages_should_appear_when_no_values_are_entered(shared_data):
-    navigate_and_login(shared_data)
-
-@given("I am on the RAVS home page")
-def logged_into_homepage(shared_data):
-    navigate_and_login(shared_data)
+# @given("I am on the RAVS home page")
+# def logged_into_homepage(shared_data):
+#     navigate_and_login(shared_data)
 
 @when("I am on the vaccines page")
 def i_am_on_the_vaccines_page():
@@ -57,9 +47,9 @@ def i_click_confirm_button():
     click_continue_to_confirm_batch_details_button()
     attach_screenshot("clicked_confirm_choices_button")
 
-@when("I view product for the existing vaccine in an existing site")
-def view_product_for_site_and_vaccine_type(shared_data):
-    click_view_product_link("Comirnaty 10 JN.1")
+@when(parse("I view product for the existing {vaccine_type} in an existing {site}"))
+def view_product_for_site_and_vaccine_type(shared_data, vaccine_type, site):
+    click_view_product(site, vaccine_type)
     attach_screenshot("clicked_view_product_link")
 
 @when(parse("I enter {batch_number} that already exists and {expiry_date}"))

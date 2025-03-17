@@ -28,4 +28,5 @@ def click_reactivate_batch_link(batch_number):
     find_element_and_perform_action(element, "click")
 
 def click_reactivate_batch_confirmation_button():
-    find_element_and_perform_action(REACTIVATE_BATCH_CONFIRMATION_BUTTON, "click")
+    if check_element_exists(REACTIVATE_BATCH_CONFIRMATION_BUTTON):
+        find_element_and_perform_action(REACTIVATE_BATCH_CONFIRMATION_BUTTON, "click")

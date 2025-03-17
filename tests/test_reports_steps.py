@@ -425,7 +425,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                         f"Mismatch in 'SiteName': expected '{shared_data['site']}' but found '{last_row['SiteName']}'."
                     )
 
-                    assert last_row["CareModel"].lower() == shared_data["care_model"].lower(), (
+                    assert last_row["CareModel"].lower() == shared_data["vaccination_location"].lower(), (
                         f"Mismatch in 'CareModel': expected '{shared_data['care_model']}' but found '{last_row['CareModel']}'."
                     )
 

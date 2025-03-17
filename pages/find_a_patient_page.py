@@ -109,8 +109,10 @@ def click_search_by_nhs_number_link():
     find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_LINK, "click")
 
 def click_search_by_demographics_link():
+    wait_for_element_to_appear(SEARCH_BUTTON)
     wait_for_element_to_appear(SEARCH_BY_DEMOGRAPHICS_LINK)
     find_element_and_perform_action(SEARCH_BY_DEMOGRAPHICS_LINK, "click")
+    wait_for_element_to_appear(SEARCH_BUTTON)
 
 def click_search_by_local_records_link():
     wait_for_element_to_appear(SEARCH_BY_LOCAL_RECORDS_LINK)
