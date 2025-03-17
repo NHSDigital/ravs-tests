@@ -41,7 +41,7 @@ def click_add_batch_for_vaccine_link(vaccine):
 
 def click_first_available_add_batch_link():
     element = "(//a[text()='Add batch'])[1]"
-    find_element_and_perform_action(element, "click")
+    javascript_click(element)
 
 def search_for_site(site):
     element  = get_element_by_type("site_search_input_element")
@@ -111,5 +111,9 @@ def check_vaccine_type_has_been_added(site, vaccine, vaccine_type, wait):
     return check_element_exists(element, wait)
 
 def click_view_product(site, vaccine_type):
-    element = (f"//h1[text() = '{site}']/following-sibling::div//td[text()='{vaccine_type}']/following-sibling::td/a[text()='View product']")
-    find_element_and_perform_action(element, "click")
+    view_vaccine_element = (
+        f"//table[caption[normalize-space(text())='{site}']]"
+            f"//tr[td[normalize-space(text())='{vaccine_type}']]"
+            f"//td[normalize-space(text())='{vaccine_type}']/following-sibling::td//a[normalize-space(text())='View']"
+    )
+    javascript_click(view_vaccine_element)

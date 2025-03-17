@@ -50,118 +50,148 @@ def format_nhs_number(nhs_number):
     return formatted_number
 
 
-def navigate_and_login(shared_data):
+def navigate_and_login(shared_data, user_role=None, site=None):
     navigate_to_ravs()
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    if "index" in shared_data:
-        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
-        shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
-    enter_password(password)
-    click_nhs_signin_button()
 
-def navigate_and_login_as_community_pharmacist(site, shared_data):
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-            attach_screenshot("clicked_navbar_toggler")
+    if config["browser"] == "mobile" and check_navbar_toggle_exists_without_waiting():
+        click_navbar_toggler()
+        attach_screenshot("clicked_navbar_toggler")
+
     if check_logout_button_exists_without_waiting():
         click_logout_button()
         attach_screenshot("clicked_logout_button")
+
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
     attach_screenshot("navigated_to_ravs_login_page")
     click_login_button()
-    if site.lower() == "Leeds pharmacy".lower():
-        emailAddress = "neelima.guntupalli1+community_pharmacy@nhs.net"
-        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
-        shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
-    elif "Aspire pharmacy".lower()  or "fhh39".lower() in site.lower():
-        emailAddress = "neelima.guntupalli1+fhh39@nhs.net"
-        shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
-        shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
-    enter_email_address(emailAddress)
+
+    shared_data["emailAddress"] = "neelima.guntupalli1@nhs.net"
+
+    email_mapping = {
+        "trust site": {
+            "recorder": "neelima.guntupalli1+recorder_automated@nhs.net",
+            "administrator": "neelima.guntupalli1+admin_automated@nhs.net",
+            "lead administrator": "neelima.guntupalli1@nhs.net",
+            "default_site": "Weaverham Surgery"
+        },
+        "community pharmacy": {
+            "leeds pharmacy": {
+                "recorder": "neelima.guntupalli1+recorder_automated@nhs.net",
+                "administrator": "neelima.guntupalli1+admin_automated@nhs.net",
+                "lead administrator": "neelima.guntupalli1+community_pharmacy@nhs.net",
+                "default_site": "Leeds Pharmacy"
+            },
+            "aspire pharmacy": {
+                "recorder": "neelima.guntupalli1+fhh39_recorder@nhs.net",
+                "administrator": "neelima.guntupalli1+fhh39_admin@nhs.net",
+                "lead administrator": "neelima.guntupalli1+fhh39@nhs.net",
+                "default_site": "Aspire Pharmacy"
+            },
+            "aspire pharmacy - ormskirk - covid local vaccination service": {
+                "recorder": "neelima.guntupalli1+fhh39_recorder@nhs.net",
+                "administrator": "neelima.guntupalli1+fhh39_admin@nhs.net",
+                "lead administrator": "neelima.guntupalli1+fhh39@nhs.net",
+                "default_site": "Aspire Pharmacy"
+            },
+            "aspire pharmacy (the concourse shopping centre)": {
+                "recorder": "neelima.guntupalli1+fhh39_recorder@nhs.net",
+                "administrator": "neelima.guntupalli1+fhh39_admin@nhs.net",
+                "lead administrator": "neelima.guntupalli1+fhh39@nhs.net",
+                "default_site": "Aspire Pharmacy"
+            }
+        },
+        "branch surgery": {
+            "recorder": "neelima.guntupalli1+airevalley_recorder@nhs.net",
+            "administrator": "neelima.guntupalli1+airevalley_admin@nhs.net",
+            "lead administrator": "neelima.guntupalli1+airevalley@nhs.net",
+            "default_site": "Aire Valley Surgery"
+        }
+    }
+
+    site_normalization = {
+        "aspire pharmacy (the concourse shopping centre) - covid local vaccination service": "aspire pharmacy",
+        "aspire pharmacy": "aspire pharmacy",
+        "aspire Pharmacy - ormskirk - covid local vaccination service": "aspire pharmacy",
+        "leeds pharmacy": "leeds pharmacy",
+        "aire valley surgery (rawdon)": "branch surgery",
+        "weaverham surgery": "trust site"
+    }
+
+    user_role = user_role.lower() if isinstance(user_role, str) else None
+
+    site = site.lower() if site else shared_data.get("site", "").lower()
+
+    site = site_normalization.get(site, site)
+
+    care_model = shared_data.get("care_model", "").lower()
+
+    if care_model == "community pharmacy" and site in email_mapping["community pharmacy"]:
+        shared_data["emailAddress"] = email_mapping["community pharmacy"][site].get(user_role, "neelima.guntupalli1@nhs.net")
+    elif site in email_mapping and user_role in email_mapping.get(site, {}):
+        shared_data["emailAddress"] = email_mapping[site].get(user_role, "neelima.guntupalli1@nhs.net")
+
+    if site:
+        site_lower = site.lower()
+        community_pharmacy_sites = ["aspire pharmacy", "leeds pharmacy"]
+        recognized_sites = community_pharmacy_sites + ["branch surgery", "trust site"]
+
+        if any(recognized_site in site_lower for recognized_site in recognized_sites):
+            if any(community_site in site_lower for community_site in community_pharmacy_sites):
+                set_clinician_details(shared_data, "community pharmacy")
+            else:
+                set_clinician_details(shared_data, site_lower)
+        else:
+            shared_data["emailAddress"] = "neelima.guntupalli1@nhs.net"
+            set_clinician_details(shared_data, site_lower)
+
+    enter_email_address(shared_data["emailAddress"])
     password = config["credentials"]["ravs_password"]
     enter_password(password)
     click_nhs_signin_button()
 
-def navigate_and_login_as_branch_surgery(site, shared_data):
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-            attach_screenshot("clicked_navbar_toggler")
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-        attach_screenshot("clicked_logout_button")
-    url = get_app_url(config["test_environment"])
-    navigate_to_ravs_login_page(url)
-    attach_screenshot("navigated_to_ravs_login_page")
-    click_login_button()
-    if site.lower() == "Aire Valley Surgery (rawdon)".lower():
-        emailAddress = "neelima.guntupalli1+airevalley@nhs.net"
-        shared_data['vaccinator'] = get_vaccinator_airevalley(shared_data["index"])
+    if user_role in ["recorder", "administrator"] and site:
+        if site == "leeds pharmacy":
+            select_site(site)
+        elif care_model == "trust site":
+            select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
+        click_continue_to_home_page_button()
+
+def set_clinician_details(shared_data, site):
+    if "index" not in shared_data:
+        shared_data["index"] = 0
+
+    site_normalization = {
+        "aspire pharmacy (the concourse shopping centre) - covid local vaccination service": "community pharmacy",
+        "aspire pharmacy": "community pharmacy",
+        "aspire Pharmacy - ormskirk - covid local vaccination service": "community pharmacy",
+        "leeds pharmacy": "community pharmacy",
+        "aire valley surgery (rawdon)": "branch surgery",
+        "weaverham surgery": "trust site"
+    }
+
+    site_lower = site.lower()
+
+    normalized_site = site_normalization.get(site_lower, site_lower)
+
+    if "community pharmacy" in shared_data["care_model"].lower():
+        if "aspire pharmacy" in shared_data["site"].lower():
+            shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
+            shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
+            shared_data['vaccinator'] = get_vaccinator_fhh39(shared_data["index"])
+        elif "leeds pharmacy" in shared_data["site"].lower():
+            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+            shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
+            shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
+    elif "branch surgery" in site_lower:
         shared_data['consent_clinician_details'] = get_consenting_clinician_airevalley(shared_data["index"])
         shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_airevalley(shared_data["index"])
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
+        shared_data['vaccinator'] = get_vaccinator_airevalley(shared_data["index"])
+    else:
+        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
+        shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
 
-def navigate_and_login_as_recorder():
-    navigate_to_ravs()
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1+recorder_automated@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
-    select_site("Leeds Pharmacy")
-    click_continue_to_home_page_button()
-
-def navigate_and_login_as_administrator():
-    navigate_to_ravs()
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1+admin_automated@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
-    select_site("Leeds Pharmacy")
-    click_continue_to_home_page_button()
-
-def navigate_and_login_as_lead_administrator():
-    navigate_to_ravs()
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
 
 def navigate_to_ravs():
     if config["browser"] == "mobile":
@@ -176,33 +206,12 @@ def navigate_to_ravs():
     attach_screenshot("navigated_to_ravs_login_page")
     return True
 
-def login_and_navigate_to_find_a_patient():
-    navigate_to_ravs()
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-    click_login_button()
-    emailAddress = "neelima.guntupalli1@nhs.net"
-    enter_email_address(emailAddress)
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
-    click_find_a_patient_nav_link()
-
-def login_and_find_a_patient_by_nhs_number(nhs_number):
-    login_and_navigate_to_find_a_patient()
-    enter_nhs_number(nhs_number)
-    click_search_for_patient_button()
-
 # Fixture for navigating to appointments open first patient and clicking choose vaccine
 @pytest.fixture(scope='function')
 def goto_appointments_open_first_patient_and_click_choose_vaccine(request, login_and_navigate_to_appointments_open_first_patient):
     click_choose_vaccine_button()
 
 def logout(shared_data):
-    navigate_and_login(shared_data)
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists():
             click_navbar_toggler()
@@ -264,6 +273,19 @@ def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineTyp
 def logged_into_ravs_app(shared_data):
     navigate_and_login(shared_data)
 
+# @given(parse("I am logged into the RAVS app as {user_role} into care model {care_model}"))
+# def logged_into_ravs_app(shared_data, user_role, care_model):
+#     shared_data["care_model"] = care_model
+#     shared_data["user_role"] = user_role
+#     navigate_and_login(shared_data, user_role, care_model)
+
+@given(parse("I am logged into the RAVS app as {user_role} into care model {care_model} with {site}"))
+def logged_into_ravs_app(shared_data, user_role, care_model, site):
+    shared_data["care_model"] = care_model
+    shared_data["user_role"] = user_role
+    shared_data["site"] = site
+    navigate_and_login(shared_data, user_role, site)
+
 def check_vaccine_and_batch_exists_in_community_pharmacy(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size):
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
@@ -277,8 +299,9 @@ def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_t
     if config["browser"] == "mobile":
         if check_nav_link_bar_toggle_exists():
             click_nav_link_bar_toggler()
-    click_vaccines_nav_link()
-    attach_screenshot("clicked_vaccines_nav_link")
+    if shared_data["user_role"] != "recorder":
+        click_vaccines_nav_link()
+        attach_screenshot("clicked_vaccines_nav_link")
     time.sleep(1)
     check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
@@ -286,42 +309,32 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
     # If the site does NOT currently have the vaccine, then add a site vaccine
     # Adding a vaccine also adds a vaccine type and an active batch, so we don't need to do further checks
 
-    exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
-    if not exists:
-    # if not check_vaccine_has_been_added(site, vaccine, True):
+    if shared_data["user_role"].lower() == "recorder":
+        click_logout_button()
+        navigate_and_login(shared_data, "lead administrator", shared_data["site"])
         click_vaccines_nav_link()
-        add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
-        return True
-    elif "pharmacy" in site.lower() or "surgery" in site.lower():
-            if shared_data["chosen_vaccine"].lower() == "covid-19" or shared_data["chosen_vaccine"].lower() == "flu":
-                pack_size = shared_data["pack_size"]
-                shared_data['pack_size'] = get_pack_size_value_vaccines_page(batch_number, expiry_date, pack_size)
-                attach_screenshot("pack_size_pharmacy")
-    elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
-        click_reactivate_batch_link(batch_number)
-        click_reactivate_batch_confirmation_button()
-
+        exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
+        if not exists:
+            click_vaccines_nav_link()
+            add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
+            return True
+        # elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
+        #     click_reactivate_batch_link(batch_number)
+        #     click_reactivate_batch_confirmation_button()
+        click_logout_button()
+        navigate_and_login(shared_data, "recorder", shared_data["site"])
+    else:
+        exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
+        if not exists:
+            click_vaccines_nav_link()
+            add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
+            return True
+        # elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
+        #     click_reactivate_batch_link(batch_number)
+        #     click_reactivate_batch_confirmation_button()
     return True
 
-    # # If the site has the vaccine, but does NOT currently have the vaccine type, then add a site vaccine
-    # # Adding a vaccine type is the same process as adding a vaccine for a site
-    # if not check_vaccine_type_has_been_added(site, vaccine, vaccine_type, False):
-    #     add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
-    #     return True
-
-    # Open the vaccine type to see the batches.
-    # If the batch does NOT currently exist, add a batch
-    # This adds an active batch, so we don't need to do further checks
-    # click_view_product(site, vaccine_type)
-    # if not check_batch_number_and_expiry_date_exists(batch_number, expiry_date, True):
-    #     add_vaccine_type_batch(batch_number, expiry_date)
-    #     return True
-
-    # If we get this far, the batch does exists but is currently INACTIVE
-    # This reactivates the batch
-
-
-def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
+def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size=None):
     # vaccines_page
     click_add_vaccine_button()
     attach_screenshot("clicked_add_vaccine_button")
@@ -347,8 +360,8 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, pac
     attach_screenshot("entered_batch_number")
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_expiry_date")
-    if pack_size is not None:
-        select_pack_size(pack_size)
+    if "pack_size" in shared_data:
+        select_pack_size(shared_data["pack_size"])
         attach_screenshot("selected_pack_size")
     click_continue_to_confirm_batch_details_button()
     attach_screenshot("clicked_continue_to_confirm_batch_details_button")
@@ -568,20 +581,65 @@ def navigate_and_login_with_username(username):
     click_nhs_signin_button()
     attach_screenshot("clicked_nhs_signin_button")
 
-@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
-def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
+@given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
     shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
-    shared_data["care_model"] = get_care_model(index)
-    if "pharmacy" in site.lower():
+    shared_data["vaccination_location"] = get_vaccination_location(index)
+    if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-    navigate_and_login(shared_data)
+    today_str = datetime.today().strftime('%d/%m/%Y')
+    today = datetime.strptime(today_str, '%d/%m/%Y')
+    batch_expiry_date = batch_expiry_date.strip('>')
+    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
+        batch_expiry_date = today + timedelta(days=7)
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
+    shared_data["batch_expiry_date"] = batch_expiry_date
+    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+
+@given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date}"))
+def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date, shared_data):
+    shared_data["nhs_number"] = nhs_number
+    shared_data["index"] = index
+    shared_data["chosen_vaccine"] = chosen_vaccine
+    shared_data["chosen_vaccine_type"] = chosen_vaccine_type
+    shared_data["batch_number"] = batch_number
+    shared_data["site"] = site
+    shared_data["vaccination_location"] = get_vaccination_location(index)
+    if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
+        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+    else:
+        shared_data["pack_size"] = None
+    today_str = datetime.today().strftime('%d/%m/%Y')
+    today = datetime.strptime(today_str, '%d/%m/%Y')
+    batch_expiry_date = batch_expiry_date.strip('>')
+    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
+        batch_expiry_date = today + timedelta(days=7)
+        batch_expiry_date = standardize_date_format(batch_expiry_date)
+    shared_data["batch_expiry_date"] = batch_expiry_date
+    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+
+
+@given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new delivery team {new_delivery_team}"))
+def step_login_to_ravs_check_new_site_batch_exists(site, vaccination_location, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_delivery_team, shared_data):
+    shared_data["nhs_number"] = nhs_number
+    shared_data["index"] = index
+    shared_data["chosen_vaccine"] = chosen_vaccine
+    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
+    shared_data["batch_number"] = batch_number
+    shared_data["site"] = site
+    shared_data["new_site"] = new_delivery_team
+    shared_data["vaccination_location"] = get_vaccination_location(index)
+    if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
+        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+    else:
+        shared_data["pack_size"] = None
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
@@ -591,32 +649,8 @@ def step_login_to_ravs(site, care_model, nhs_number, index, chosen_vaccine, batc
     check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
-@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new delivery team {new_delivery_team}"))
-def step_login_to_ravs_check_new_site_batch_exists(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_delivery_team, shared_data):
-    shared_data["nhs_number"] = nhs_number
-    shared_data["index"] = index
-    shared_data["chosen_vaccine"] = chosen_vaccine
-    shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
-    shared_data["batch_number"] = batch_number
-    shared_data["site"] = site
-    shared_data["new_site"] = new_delivery_team
-    shared_data["care_model"] = get_care_model(index)
-    if "pharmacy" in site.lower():
-        shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
-    else:
-        shared_data["pack_size"] = None
-    navigate_and_login(shared_data)
-    today_str = datetime.today().strftime('%d/%m/%Y')
-    today = datetime.strptime(today_str, '%d/%m/%Y')
-    if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
-        batch_expiry_date = today + timedelta(days=7)
-        batch_expiry_date = standardize_date_format(batch_expiry_date)
-    shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(shared_data, shared_data["new_site"], chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
-    return shared_data
-
-@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new vaccine product {new_vaccine_product}"))
-def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_vaccine_product, shared_data):
+@given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new vaccine product {new_vaccine_product}"))
+def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, vaccination_location, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_vaccine_product, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
@@ -625,23 +659,22 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, care_model, n
     shared_data["site"] = site
     shared_data["chosen_vaccine_new"] = new_vaccine_product
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(1, shared_data["chosen_vaccine_new"])
-    shared_data["care_model"] = get_care_model(index)
-    if "pharmacy" in site.lower():
+    shared_data["vaccination_location"] = get_vaccination_location(index)
+    if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-    navigate_and_login(shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(shared_data, shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-FLU", "19/11/2026")
+    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
-@given(parse("I login to RAVS and set vaccinator details with {site} and {care_model} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new random vaccine product type"))
-def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, care_model, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
+@given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new random vaccine product type"))
+def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, vaccination_location, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
     shared_data["index"] = index
     shared_data["chosen_vaccine"] = chosen_vaccine
@@ -650,19 +683,18 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, care_mod
     shared_data["site"] = site
     shared_data["chosen_vaccine_new"] = shared_data["chosen_vaccine"]
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(2, shared_data["chosen_vaccine_new"])
-    shared_data["care_model"] = get_care_model(index)
-    if "pharmacy" in site.lower():
+    shared_data["vaccination_location"] = get_vaccination_location(index)
+    if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
     else:
         shared_data["pack_size"] = None
-    navigate_and_login(shared_data)
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     if datetime.strptime(batch_expiry_date, '%d/%m/%Y') <= today:
         batch_expiry_date = today + timedelta(days=7)
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
-    check_vaccine_and_batch_exists_in_site(shared_data, shared_data["site"], shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], "AUTOMATED-COVID", "19/11/2026")
+    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")
@@ -836,7 +868,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             batch_number_to_select = shared_data["batch_number"].upper() + " - " + shared_data["batch_expiry_date"]
             shared_data["batch_number_selected"] = batch_number_to_select
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"], shared_data['pack_size'])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"], shared_data['pack_size'])
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
@@ -857,7 +889,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
@@ -878,7 +910,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + " vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_save_and_return(shared_data["vaccinated_decision"], shared_data["care_model"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_save_and_return(shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], shared_data["no_vaccination_reason"])
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
@@ -1063,7 +1095,7 @@ def the_vaccinated_values_should_persist(shared_data):
     attach_screenshot("patient_vaccinated_value_must_persist")
     assert format_date(get_vaccination_date(), config["browser"]) == shared_data["vaccination_date"]
     attach_screenshot("vaccination_date_should_persist")
-    assert get_vaccination_care_model_value_on_vaccinated_page().lower() == shared_data["care_model"].lower()
+    assert get_vaccination_care_model_value_on_vaccinated_page().lower() == shared_data["vaccination_location"].lower()
     attach_screenshot("care_model_value_should_persist")
     assert get_vaccinator_value_on_vaccinated_page() == shared_data['vaccinator']
     attach_screenshot("vaccinator_value_should_persist")
@@ -1080,20 +1112,21 @@ def the_vaccinated_values_should_persist(shared_data):
     # assert check_vaccination_site_missing_error_message_exists() == True #commenting because error text does not appear only link appears even when it is the first vaccination after logging in
     assert check_vaccination_site_missing_error_message_link_exists() == True
 
-@given("I am logged into the RAVS app as an administrator")
-def logged_into_ravs_as_administrator():
-    navigate_and_login_as_administrator()
+# @given("I am logged into the RAVS app as an administrator")
+# def logged_into_ravs_as_administrator(shared_data):
+#     navigate_and_login_as_administrator(shared_data)
 
-@given("I am logged into the RAVS app as a lead administrator")
-def logged_into_ravs_as_lead_administrator():
-    navigate_and_login_as_lead_administrator()
+# @given("I am logged into the RAVS app as a lead administrator")
+# def logged_into_ravs_as_lead_administrator(shared_data):
+#     navigate_and_login_as_lead_administrator(shared_data)
 
-@given("I am logged into the RAVS app as a recorder")
-def logged_into_ravs_as_recorder():
-    navigate_and_login_as_recorder()
+# @given("I am logged into the RAVS app as a recorder")
+# def logged_into_ravs_as_recorder(shared_data):
+#     navigate_and_login_as_recorder(shared_data)
 
 @when(parse('I search for the patient with NHS number {nhs_number}'))
 def step_search_for_patient_with_nhs_number(nhs_number, shared_data):
+    click_find_a_patient_nav_link()
     enter_nhs_number(nhs_number)
     shared_data["nhs_number"] = nhs_number
     click_search_for_patient_button()
@@ -1152,10 +1185,10 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
     shared_data['eligibility_type'] = get_eligibility_type(shared_data["index"], shared_data['chosen_vaccine'])
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
-    if "site" in shared_data and "Aspire pharmacy".lower() in shared_data["site"].lower():
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
-    else:
-        shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
+    # if "site" in shared_data and "Aspire pharmacy".lower() in shared_data["site"].lower():
+    #     shared_data['eligibility_assessing_clinician'] = get_assessing_clinician_fhh39(shared_data["index"])
+    # else:
+    #     shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
     assess_date = "today"
     assess_date = format_date(str(get_date_value_by_months(assess_date)), config["browser"])
     shared_data['eligibility_assessment_date'] = assess_date
