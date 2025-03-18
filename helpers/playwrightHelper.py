@@ -621,6 +621,8 @@ class BasePlaywrightHelper:
             return self.page.locator(locator_value)
         elif locator_type_or_selector == "link":
             return self.page.get_by_role("link", name=locator_value, exact=exact)
+        elif locator_type_or_selector == "radio":
+            return self.page.get_by_role("radio", name=locator_value, exact=exact)
         elif locator_type_or_selector == "title":
             return self.page.get_by_title(locator_value, exact=exact)
         elif locator_type_or_selector == "row":
