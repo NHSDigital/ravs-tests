@@ -208,9 +208,9 @@ def I_click_today_date_range_and_click_continue(shared_data):
     attach_screenshot("clicked_continue_to_reports_select_vaccine_button")
     logging.info("clicked_continue_to_reports_select_vaccine_button")
 
-@then("the choose sites page should be displayed")
-def the_choose_sites_page_should_be_displayed():
-    assert check_site_check_box_exists("Weaverham Surgery") == True
+@then(parse("the choose sites page should be displayed"))
+def the_choose_sites_page_should_be_displayed(shared_data):
+    assert check_site_check_box_exists(shared_data["site"]) == True
     attach_screenshot("check_choose_sites_page_is_displayed")
     logging.info("check_choose_sites_page_is_displayed")
 
@@ -498,8 +498,8 @@ def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
     logging.info("clicked_continue_to_reports_select_site_button")
 
 @then("the choose sites page should be displayed")
-def the_choose_sites_page_should_be_displayed():
-    assert check_site_check_box_exists("Weaverham Surgery") == True
+def the_choose_sites_page_should_be_displayed(shared_data):
+    assert check_site_check_box_exists(shared_data["site"]) == True
     attach_screenshot("check_choose_sites_page_is_displayed")
     logging.info("check_choose_sites_page_is_displayed")
 
