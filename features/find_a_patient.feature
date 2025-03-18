@@ -127,10 +127,10 @@ Scenario Outline: Demographics: Existing patients can be found using their optio
   Then I can see the patient's information in the search results, showing their name: <firstName> <lastName>, nhs number: <nhsNumber>, dob: <dob> and address: <address>
 
 Examples:
-  | nhsNumber   | care_model         | user_role          | firstName | lastName        | dob        | address                                  | site                          |
-  | 9449303762  | Trust site         | lead administrator | Pryderi   | Warnford-Davis  | 14/4/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Weaverham Surgery             |
-  | 9449303762  | Community pharmacy | administrator      | Pryderi   | Warnford-Davis  | 14/4/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Aspire Pharmacy               |
-  | 9449303762  | Branch surgery     | recorder           | Pryderi   | Warnford-Davis  | 14/4/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Aire Valley Surgery (Rawdon)  |
+  | nhsNumber   | care_model         | user_role          | firstName | lastName        | dob        | address                                  | site                          | postcode |
+  | 9449303762  | Trust site         | lead administrator | Pryderi   | Warnford-Davis  | 14/4/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Weaverham Surgery             | KT10 8DF |
+  | 9449303762  | Community pharmacy | administrator      | Pryderi   | Warnford-Davis  | 14/4/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Aspire Pharmacy               | KT10 8DF |
+  | 9449303762  | Branch surgery     | recorder           | Pryderi   | Warnford-Davis  | 14/4/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF | Aire Valley Surgery (Rawdon)  | KT10 8DF |
 
 
 @findpatient
