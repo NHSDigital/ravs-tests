@@ -22,7 +22,7 @@ Feature: Record vaccine
       | index | nhs_number | site  | vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | care_model         | user_role          |
       | 0 | 9693632109 | Weaverham Surgery  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |Trust site         | lead administrator |
       | 1 | 9693632109 | Aspire Pharmacy | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 |Community pharmacy | administrator      |
-      | 1 | 9693632109 | Aire Valley Surgery (rawdon) | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 | Community pharmacy | administrator      |
+      | 1 | 9693632109 | Aire Valley Surgery (rawdon) | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 | Branch surgery | administrator      |
 
       # | 2 | 9470040228 | Spire Cheshire Hospital  | Hospital hub for staff and patients | yes  | today-1  | yes | yes | today | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 |  AUTOMATION-C10  | 19/2/2026 |
       # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
@@ -89,7 +89,7 @@ Feature: Record vaccine
 
     Examples:
       | index | nhs_number | site   | vaccination_location      | eligibility | due_date | assess_date | consent | vaccination | vaccination_date | name  | dob    | address     | chosen_vaccine  | batch_number | batch_expiry_date | care_model         | user_role          |
-      |  4 | 9473629885 | Spire Regency Hospital | Outreach event | yes | today+50 | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | 	AUTOMATION-ABR | 1/2/2026 | Community pharmacy | administrator      |
+      |  4 | 9473629885 | Spire Regency Hospital | Outreach event | yes | today+50 | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | 	AUTOMATION-ABR | 1/2/2026 | Trust site | administrator      |
 
       # | 0 | 9693632109 | Weaverham Surgery | Vaccination Centre | yes | today | today | yes | yes | today | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis | AUTOMATION-AVS | 19/10/2027 |
       # | 1 | 9693632109 | Watling Street Surgery | Vaccination Centre | yes | today+100 | today-1 | yes | yes | today-1  | Bill GARTON | 23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Pertussis |  AUTOMATION-BIS | 19/10/2028 |
