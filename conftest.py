@@ -273,12 +273,6 @@ def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineTyp
 def logged_into_ravs_app(shared_data):
     navigate_and_login(shared_data)
 
-# @given(parse("I am logged into the RAVS app as {user_role} into care model {care_model}"))
-# def logged_into_ravs_app(shared_data, user_role, care_model):
-#     shared_data["care_model"] = care_model
-#     shared_data["user_role"] = user_role
-#     navigate_and_login(shared_data, user_role, care_model)
-
 @given(parse("I am logged into the RAVS app as {user_role} into care model {care_model} with {site}"))
 def logged_into_ravs_app(shared_data, user_role, care_model, site):
     shared_data["care_model"] = care_model
