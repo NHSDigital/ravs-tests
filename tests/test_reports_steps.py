@@ -133,9 +133,9 @@ def the_create_report_button_should_be_disabled():
 def I_click_date_range_button_to_generate_reports(day):
     click_day_range_radio_button(day)
     if day == "Select a custom date range up to 31 days":
-        from_date = format_date(str(get_date_value("today-31")), config["browser"])
+        from_date = format_date(str(get_date_value_by_days("today-31")), config["browser"])
         enter_from_date(from_date)
-        to_date = format_date(str(get_date_value("today")), config["browser"])
+        to_date = format_date(str(get_date_value_by_days("today")), config["browser"])
         enter_to_date(to_date)
     attach_screenshot("day_range_radio_button_is_clicked_and_date_range_Selected")
     logging.info("day_range_radio_button_is_clicked_and_date_range_Selected")
@@ -166,8 +166,8 @@ def I_select_no_date_range_and_click_continue(shared_data):
 def I_click_date_range_button_to_generate_reports(shared_data, from_date, to_date):
     click_day_range_radio_button("Select a custom date range up to 31 days")
     if (from_date != "null" and to_date != "null"):
-        from_date = format_date(str(get_date_value(from_date)), config["browser"])
-        to_date = format_date(str(get_date_value(to_date)), config["browser"])
+        from_date = format_date(str(get_date_value_by_days(from_date)), config["browser"])
+        to_date = format_date(str(get_date_value_by_days(to_date)), config["browser"])
         enter_from_date(from_date)
         enter_to_date(to_date)
         attach_screenshot("day_range_radio_button_is_clicked_and_date_range_Selected")
@@ -208,9 +208,9 @@ def I_click_today_date_range_and_click_continue(shared_data):
     attach_screenshot("clicked_continue_to_reports_select_vaccine_button")
     logging.info("clicked_continue_to_reports_select_vaccine_button")
 
-@then("the choose sites page should be displayed")
-def the_choose_sites_page_should_be_displayed():
-    assert check_site_check_box_exists("ALBERT HOUSE") == True
+@then(parse("the choose sites page should be displayed"))
+def the_choose_sites_page_should_be_displayed(shared_data):
+    assert check_site_check_box_exists(shared_data["site"]) == True
     attach_screenshot("check_choose_sites_page_is_displayed")
     logging.info("check_choose_sites_page_is_displayed")
 
@@ -425,7 +425,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                         f"Mismatch in 'SiteName': expected '{shared_data['site']}' but found '{last_row['SiteName']}'."
                     )
 
-                    assert last_row["CareModel"].lower() == shared_data["care_model"].lower(), (
+                    assert last_row["CareModel"].lower() == shared_data["vaccination_location"].lower(), (
                         f"Mismatch in 'CareModel': expected '{shared_data['care_model']}' but found '{last_row['CareModel']}'."
                     )
 
@@ -498,8 +498,8 @@ def I_select_vaccinetype_and_click_continue(shared_data, vaccineType):
     logging.info("clicked_continue_to_reports_select_site_button")
 
 @then("the choose sites page should be displayed")
-def the_choose_sites_page_should_be_displayed():
-    assert check_site_check_box_exists("ALBERT HOUSE") == True
+def the_choose_sites_page_should_be_displayed(shared_data):
+    assert check_site_check_box_exists(shared_data["site"]) == True
     attach_screenshot("check_choose_sites_page_is_displayed")
     logging.info("check_choose_sites_page_is_displayed")
 

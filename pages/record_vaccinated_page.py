@@ -13,7 +13,8 @@ VACCINATION_COMMENTS_ELEMENT = ("label", "Comments (Optional)")
 VACCINATION_SITE_DROPDOWN_ELEMENT = ("label", "Vaccination site")
 BATCH_NUMBER_DROPDOWN_ELEMENT = ("label", "Batch number")
 BATCH_EXPIRY_DATE_READONLY_ELEMENT = ("label", "Batch expiry date")
-DOSE_AMOUNT_READONLY_ELEMENT = ("label", "Dose amount (ml)")
+DOSE_AMOUNT_READONLY_ELEMENT = ("role", "textbox", "Dose amount (ml)")
+PACK_SIZE_READONLY_ELEMENT = ("role", "textbox", "Pack size")
 VACCINATION_SITE_READONLY_ELEMENT = ("label", "Vaccination site")
 VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_TEXT = ("text", "Error: Date cannot be older than a year")
 VACCINATION_DATE_INCORRECT_ERROR_MESSAGE_LINK = ("text", "Date cannot be older than a year")
@@ -48,6 +49,12 @@ def get_dose_amount_value():
 
 def enter_dose_amount_value(dose_amount):
     find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "type", dose_amount)
+
+def get_dose_amount_value():
+    return find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "get_text")
+
+def get_pack_size_value():
+    return find_element_and_perform_action(PACK_SIZE_READONLY_ELEMENT, "get_text")
 
 def set_vaccination_date(date):
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "clear")
@@ -96,7 +103,7 @@ def click_save_and_return_button_on_record_vaccinated_page():
 
 def click_continue_to_check_and_confirm_vaccination_screen_button():
     wait_for_element_to_appear(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
-    time.sleep(2)
+    time.sleep(1)
     find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
     if check_vaccination_date_incorrect_error_message_exists() == True:
         return True

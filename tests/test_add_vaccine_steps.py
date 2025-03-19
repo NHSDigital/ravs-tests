@@ -16,8 +16,8 @@ logger = logging.getLogger(__name__)
 scenarios(f'{features_directory}/add_vaccines.feature')
 
 @given("I am on the RAVS home page")
-def logged_into_homepage(navigate_and_login):
-    pass
+def logged_into_homepage(shared_data):
+    navigate_and_login(shared_data)
 
 @when("I am on the vaccines page")
 def i_am_on_the_vaccines_page():
@@ -49,9 +49,12 @@ def i_select_site_vaccine_and_vaccinetype(site, vaccine, vaccine_type, shared_da
     shared_data['vaccineType'] = vaccine_type
 
 @then("the choose site page should be launched")
-def the_choose_site_page_is_launched():
+def the_choose_site_page_is_launched(shared_data):
     attach_screenshot("choose_site_page_should_launch")
-    assert check_choose_site_title_exists(True) == True
+    if shared_data["care_model"].lower() != "Branch surgery".lower():
+        assert check_choose_site_title_exists(True) == True
+    else:
+        assert check_choose_site_title_exists(True) == False
 
 @then("vaccines navigation link should not be visible")
 def vaccines_nav_link_should_not_be_visible_for_recorder():

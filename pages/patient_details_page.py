@@ -81,7 +81,10 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
     time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
-    element = ("xpath", f"//h2[contains(text(), '{chosen_vaccine}')]/following-sibling::div/p[contains(text(), 'Displaying')]")
+    element = (
+        "xpath",
+        f"//h2[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{chosen_vaccine.lower()}')]/following-sibling::div/p[contains(text(), 'Displaying')]"
+    )
     wait_for_element_to_appear(element)
     if check_element_exists(element, True):
         display_text = find_element_and_perform_action(element, "get_text")
@@ -180,8 +183,10 @@ def click_delete_history_button(vaccine, index):
     find_element_and_perform_action(element, "click")
 
 def click_delete_history_link(vaccine):
+    showAllElement = ()
     element = (f"//h2[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
-    find_element_and_perform_action(element, "click")
+    if check_element_exists(element):
+        find_element_and_perform_action(element, "click")
 
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
