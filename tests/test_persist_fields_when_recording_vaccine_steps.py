@@ -25,21 +25,7 @@ logger = logging.getLogger(__name__)
 
 features_directory = get_working_directory() + "features"
 
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Persist fields when recording a vaccination')
-def test_persisting_fields_when_recording_a_vaccine(navigate_and_login):
-    pass
-
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes delivery team when recording a vaccination')
-def test_fields_should_not_persist_if_delivery_team_is_changed_when_recording_a_vaccine(navigate_and_login):
-    pass
-
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes vaccine product when recording a vaccination')
-def test_fields_should_not_persist_if_vaccine_product_is_changed_when_recording_a_vaccine(navigate_and_login):
-    pass
-
-@scenario(f'{features_directory}/persist_field_when_recording_a_vaccine.feature', 'Fields should not persist when user changes vaccine product type when recording a vaccination')
-def test_fields_should_not_persist_if_vaccine_product_type_is_changed_when_recording_a_vaccine(navigate_and_login):
-    pass
+scenarios(f'{features_directory}/persist_field_when_recording_a_vaccine.feature')
 
 @when("I change the delivery team on the choose vaccine page")
 def change_delivery_team_choose_vaccine(shared_data):
@@ -105,7 +91,10 @@ def consent_values_must_not_persist(shared_data):
     if shared_data['legal_mechanism'] == "Patient Group Direction (PGD)":
         shared_data['consent_clinician_details'] = shared_data['eligibility_assessing_clinician']
     else:
-        shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
+        if "Aspire pharmacy".lower() in shared_data["site"].lower():
+            shared_data['consent_clinician_details'] = get_consenting_clinician_fhh39(shared_data["index"])
+        else:
+            shared_data['consent_clinician_details'] = get_consenting_clinician(shared_data["index"])
     shared_data["no_consent_reason"] = get_no_consent_reason(shared_data["index"])
     record_consent_details_and_click_continue_to_vaccinate(shared_data['consent_decision'],shared_data['consent_given_by'], name_of_person_consenting, relationship_to_patient, shared_data['consent_clinician_details'], shared_data['legal_mechanism'], shared_data["no_consent_reason"])
 

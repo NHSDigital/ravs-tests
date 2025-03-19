@@ -1,3 +1,4 @@
+import time
 from init_helpers import *
 
 FIND_A_PATIENT_NAV_ELEMENT = ("role", "link", "Find a patient")
@@ -56,6 +57,8 @@ def click_help_and_guidance_link_exists():
 def click_logout_button():
     wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(1)
 
 def click_navbar_toggler():
     wait_for_element_to_appear(NAV_BAR_TOGGLER)

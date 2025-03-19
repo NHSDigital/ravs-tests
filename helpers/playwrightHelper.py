@@ -347,6 +347,10 @@ class BasePlaywrightHelper:
             raise FileNotFoundError(f"Mock data file not found: {mock_data_file}")
         return MockDatabaseHelper(mock_data_file)
 
+    def javascript_click(self, element):
+        element_handle = element.element_handle()
+        self.page.evaluate("element => element.click()", element_handle)
+
     def mock_api_response(self, working_directory):
         endpoint_pattern = "**/api/patient/nhsNumberSearch*"
         endpoint_pattern = "https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**"
@@ -617,6 +621,8 @@ class BasePlaywrightHelper:
             return self.page.locator(locator_value)
         elif locator_type_or_selector == "link":
             return self.page.get_by_role("link", name=locator_value, exact=exact)
+        elif locator_type_or_selector == "radio":
+            return self.page.get_by_role("radio", name=locator_value, exact=exact)
         elif locator_type_or_selector == "title":
             return self.page.get_by_title(locator_value, exact=exact)
         elif locator_type_or_selector == "row":

@@ -356,6 +356,14 @@ def wait_until_page_loading_message_disappears():
 def click_cell_in_row(row_name, cell_index):
     return playwright_helper_instance.click_cell_in_row(row_name, cell_index)
 
+def javascript_click(element):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    elif isinstance(element, str):
+        element = get_element_by_type(element)
+    wait_until_page_loading_message_disappears()
+    return playwright_helper_instance.javascript_click(element)
+
 def click_link_in_row(row_name, link_index):
     return playwright_helper_instance.click_link_in_row(row_name, link_index)
 
@@ -383,6 +391,8 @@ def date_format_with_name_of_month(date):
 def date_format_with_name_of_month_shortened(date):
     return datetime_helper_instance.date_format_with_name_of_month_shortened(date)
 
-def get_date_value(date):
-    return datetime_helper_instance.get_date_value(date)
+def get_date_value_by_months(date):
+    return datetime_helper_instance.get_date_value_by_months(date)
 
+def get_date_value_by_days(date):
+    return datetime_helper_instance.get_date_value_by_days(date)

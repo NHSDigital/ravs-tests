@@ -3,6 +3,8 @@ import json
 from pytest import Parser
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse, cfparse
+from pages.confirm_page import *
+from pages.create_a_patient_page import *
 from pages.vaccinator_location_page import *
 from pages.settings_page import *
 from pages.vaccines_page import *
@@ -16,16 +18,12 @@ from init_helpers import *
 from conftest import *
 from helpers.datetimeHelper import *
 from test_data.get_values_from_models import *
+from faker import Faker
 
 features_directory = get_working_directory() + "features"
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a vaccine with nhs number')
-def test_record_a_vaccine_with_nhs_number():
-    pass
-
-@scenario(f'{features_directory}/record_a_vaccine_for_patient_with_nhs_number.feature', 'Record a maternity vaccine with nhs number')
-def test_record_a_maternity_vaccine_with_nhs_number():
-    pass # All test steps are in conftest.py
+scenarios(f'{features_directory}/bsa_record_a_vaccine.feature')
+# All steps are in conftest.py

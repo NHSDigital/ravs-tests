@@ -24,8 +24,8 @@ def generate_random_string(length=10):
 
 @pytest.mark.login
 @given("I access the ravs web app")
-def given_I_access_the_ravs_web_app(navigate_to_ravs):
-    pass
+def given_I_access_the_ravs_web_app():
+    navigate_to_ravs()
 
 @then("the login button should be visible")
 def then_the_login_button_should_be_visible():
