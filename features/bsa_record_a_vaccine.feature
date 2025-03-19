@@ -227,7 +227,7 @@ Examples:
     | 0     | 9469997956  | Aspire Pharmacy   | Vaccination Centre   | yes  | today| yes     | yes | today| SOLOMON DAZLEY  | 30/01/2016 | 10 BROOK STREET, LANCASTER, LA1 1SL    | COVID-19 | AUTO-NO-C-SJ1     | 19/10/2026| male   | Community Pharmacy| lead administrator|
     | 4     | 9437541817  | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Outreach event | yes  | today| yes     | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Community Pharmacy| administrator    |
     | 0     | 9469997956  | Aire Valley Surgery (rawdon) | Vaccination Centre   | yes  | today| yes     | yes | today| SOLOMON DAZLEY  | 30/01/2016 | 10 BROOK STREET, LANCASTER, LA1 1SL    | COVID-19 | AUTO-NO-C-SJ1     | 19/10/2026| male   | Branch Surgery   | lead administrator|
-    | 4     | 9437541817  | Aspire Pharmacy - Ormskirk   | Outreach event | yes  | today| no      | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Community Pharmacy | recorder   |
+    | 4     | 9437541817  | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service   | Outreach event | yes  | today| no      | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Community Pharmacy | recorder   |
     | 0     | 9469997956  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Outreach event | yes  | today| yes     | yes | today| SOLOMON DAZLEY  | 30/01/2016 | 10 BROOK STREET, LANCASTER, LA1 1SL    | COVID-19 | AUTO-NO-C-SJ1     | 19/10/2026| male   | Community Pharmacy | recorder   |
 
 
