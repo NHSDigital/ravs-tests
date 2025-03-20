@@ -665,7 +665,7 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, vaccination_l
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
-    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type_new"], batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(shared_data, site, shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], batch_number, batch_expiry_date)
     return shared_data
 
 @given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new random vaccine product type"))
@@ -690,7 +690,7 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, vaccinat
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
-    check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type_new"], batch_number, batch_expiry_date)
+    check_vaccine_and_batch_exists_in_site(shared_data, site, shared_data["chosen_vaccine_new"], shared_data["chosen_vaccine_type_new"], batch_number, batch_expiry_date)
     return shared_data
 
 @given("I search for a patient with the NHS number in the find a patient screen")

@@ -52,7 +52,6 @@ def change_vaccine_product_choose_vaccine(shared_data):
 
 @when("I change the vaccination product type on the choose vaccine page")
 def change_vaccine_product_choose_vaccine(shared_data):
-    # shared_data["chosen_vaccine_new"] = "Flu"
     assert get_selected_delivery_team_radio_button_value_on_choose_vaccine_page().lower() == shared_data["site"].lower()
     attach_screenshot("site_selection_should_persist")
     assert get_selected_vaccine_radio_button_value_on_choose_vaccine_page() == shared_data["chosen_vaccine"]
