@@ -307,10 +307,16 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         click_logout_button()
         navigate_and_login(shared_data, "lead administrator", shared_data["site"])
         click_vaccines_nav_link()
-        exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
+        exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date)
         if not exists:
-            click_vaccines_nav_link()
-            add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
+            pending_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(shared_data, batch_number, expiry_date)
+            inactive_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(shared_data, batch_number, expiry_date)
+            if pending_batch or inactive_batch:
+                click_reactivate_batch_link(batch_number, expiry_date)
+                click_reactivate_batch_confirmation_button()
+            else:
+                click_vaccines_nav_link()
+                add_site_vaccine(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
             return True
         # elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
         #     click_reactivate_batch_link(batch_number)
@@ -318,14 +324,17 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         click_logout_button()
         navigate_and_login(shared_data, "recorder", shared_data["site"])
     else:
-        exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, expiry_date)
+        exists = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date)
         if not exists:
-            click_vaccines_nav_link()
-            add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
+            pending_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(shared_data, batch_number, expiry_date)
+            inactive_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(shared_data, batch_number, expiry_date)
+            if pending_batch or inactive_batch:
+                click_reactivate_batch_link(batch_number, expiry_date)
+                click_reactivate_batch_confirmation_button()
+            else:
+                click_vaccines_nav_link()
+                add_site_vaccine(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
             return True
-        # elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
-        #     click_reactivate_batch_link(batch_number)
-        #     click_reactivate_batch_confirmation_button()
     return True
 
 def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size=None):
