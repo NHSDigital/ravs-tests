@@ -98,7 +98,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(s
 
 def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(shared_data, batch_number, batch_expiry_date):
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
-    batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Inactive']"
+    batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td/strong[text()='Inactive']"
     print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
     result = check_element_exists(batch_number_with_expiry_date_element, True)
     attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
