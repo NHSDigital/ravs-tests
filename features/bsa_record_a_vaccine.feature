@@ -34,7 +34,7 @@ Background:
   | 12    | 9470032640 | Aire Valley Surgery (rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5  | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Influenza Tetra MYL (QIVe)| AUTO-ITM-CSC     | 19/10/2026 | male   | administrator | branch surgery   |
 
   @bsarecordvaccine
-   Scenario Outline: DELETE - BSA Record a vaccine
+  Scenario Outline: DELETE - BSA Record a vaccine
     Given I set vaccinator details with <site> and set vaccinator details with <site> and <vaccination_location> and get patient details for <nhs_number> with option <index> and choose to vaccinate with vaccine details as <chosen_vaccine>, <chosen_vaccine_type>, <batch_number> with <batch_expiry_date>
     And I search for a patient with the NHS number in the find a patient screen
     And I open the patient record by clicking on patient <name>
