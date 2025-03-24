@@ -267,6 +267,10 @@ def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineTyp
 def logged_into_ravs_app(shared_data):
     navigate_and_login(shared_data)
 
+@given(parse('I am logged into the RAVS app with the {username}'))
+def logged_into_ravs_app_with_username(username):
+    navigate_and_login_with_username(username)
+
 @given(parse("I am logged into the RAVS app as {user_role} into care model {care_model} with {site}"))
 def logged_into_ravs_app(shared_data, user_role, care_model, site):
     shared_data["care_model"] = care_model
@@ -1116,18 +1120,6 @@ def the_vaccinated_values_should_persist(shared_data):
     click_continue_to_check_and_confirm_vaccination_screen_button()
     # assert check_vaccination_site_missing_error_message_exists() == True #commenting because error text does not appear only link appears even when it is the first vaccination after logging in
     assert check_vaccination_site_missing_error_message_link_exists() == True
-
-# @given("I am logged into the RAVS app as an administrator")
-# def logged_into_ravs_as_administrator(shared_data):
-#     navigate_and_login_as_administrator(shared_data)
-
-# @given("I am logged into the RAVS app as a lead administrator")
-# def logged_into_ravs_as_lead_administrator(shared_data):
-#     navigate_and_login_as_lead_administrator(shared_data)
-
-# @given("I am logged into the RAVS app as a recorder")
-# def logged_into_ravs_as_recorder(shared_data):
-#     navigate_and_login_as_recorder(shared_data)
 
 @when(parse('I search for the patient with NHS number {nhs_number}'))
 def step_search_for_patient_with_nhs_number(nhs_number, shared_data):
