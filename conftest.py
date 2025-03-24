@@ -49,7 +49,6 @@ def format_nhs_number(nhs_number):
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
 
-
 def navigate_and_login(shared_data, user_role=None, site=None):
     navigate_to_ravs()
 
@@ -206,11 +205,6 @@ def navigate_to_ravs():
     attach_screenshot("navigated_to_ravs_login_page")
     return True
 
-# Fixture for navigating to appointments open first patient and clicking choose vaccine
-@pytest.fixture(scope='function')
-def goto_appointments_open_first_patient_and_click_choose_vaccine(request, login_and_navigate_to_appointments_open_first_patient):
-    click_choose_vaccine_button()
-
 def logout(shared_data):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists():
@@ -300,9 +294,6 @@ def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_t
     check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
 def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
-    # If the site does NOT currently have the vaccine, then add a site vaccine
-    # Adding a vaccine also adds a vaccine type and an active batch, so we don't need to do further checks
-
     if shared_data["user_role"].lower() == "recorder":
         click_logout_button()
         navigate_and_login(shared_data, "lead administrator", shared_data["site"])
@@ -324,9 +315,6 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
                 click_vaccines_nav_link()
                 add_site_vaccine(site, vaccine, vaccine_type, batch_number, shared_data["batch_expiry_date"], shared_data, pack_size)
             return True
-        # elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
-        #     click_reactivate_batch_link(batch_number)
-        #     click_reactivate_batch_confirmation_button()
         click_logout_button()
         navigate_and_login(shared_data, "recorder", shared_data["site"])
     else:
