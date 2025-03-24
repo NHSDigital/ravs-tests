@@ -311,12 +311,18 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         if not exists:
             pending_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(shared_data, batch_number, expiry_date)
             inactive_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(shared_data, batch_number, expiry_date)
-            if pending_batch or inactive_batch:
+            if pending_batch:
                 click_reactivate_batch_link(batch_number, expiry_date)
                 click_reactivate_batch_confirmation_button()
+            elif inactive_batch:
+                expiry_date = datetime.today() + timedelta(days=365)
+                batch_expiry_date = standardize_date_format(expiry_date)
+                shared_data["batch_expiry_date"] = batch_expiry_date
+                click_vaccines_nav_link()
+                add_site_vaccine(site, vaccine, vaccine_type, batch_number, batch_expiry_date, shared_data, pack_size)
             else:
                 click_vaccines_nav_link()
-                add_site_vaccine(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
+                add_site_vaccine(site, vaccine, vaccine_type, batch_number, shared_data["batch_expiry_date"], shared_data, pack_size)
             return True
         # elif not check_batch_number_is_active_with_date(batch_number, expiry_date, True):
         #     click_reactivate_batch_link(batch_number)
@@ -328,12 +334,18 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
         if not exists:
             pending_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(shared_data, batch_number, expiry_date)
             inactive_batch = check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(shared_data, batch_number, expiry_date)
-            if pending_batch or inactive_batch:
+            if pending_batch:
                 click_reactivate_batch_link(batch_number, expiry_date)
                 click_reactivate_batch_confirmation_button()
+            elif inactive_batch:
+                expiry_date = datetime.today() + timedelta(days=365)
+                batch_expiry_date = standardize_date_format(expiry_date)
+                shared_data["batch_expiry_date"] = batch_expiry_date
+                click_vaccines_nav_link()
+                add_site_vaccine(site, vaccine, vaccine_type, batch_number, batch_expiry_date, shared_data, pack_size)
             else:
                 click_vaccines_nav_link()
-                add_site_vaccine(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
+                add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)
             return True
     return True
 
