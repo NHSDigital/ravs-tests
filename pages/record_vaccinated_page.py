@@ -54,6 +54,7 @@ def get_dose_amount_value():
     return find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "get_text")
 
 def get_pack_size_value():
+    scroll_into_view(PACK_SIZE_READONLY_ELEMENT)
     return find_element_and_perform_action(PACK_SIZE_READONLY_ELEMENT, "get_text")
 
 def set_vaccination_date(date):
