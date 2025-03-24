@@ -112,10 +112,6 @@ def the_choose_dates_page_should_be_displayed():
     attach_screenshot("choose_dates_range_page_should_be_displayed")
     logging.info("choose_dates_range_page_should_be_displayed")
 
-@given(parse('I am logged into the RAVS app with the {username}'))
-def logged_into_ravs_app_with_username(username):
-    navigate_and_login_with_username(username)
-
 @then("the `No vaccination data to report on` message should be displayed")
 def the_no_vaccination_data_to_report_on_message_should_be_displayed():
     assert check_no_vaccination_data_to_report_message_exists() == True

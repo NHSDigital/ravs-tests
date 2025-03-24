@@ -18,10 +18,38 @@ SEARCH_BUTTON = ("role", "button", "Search")
 ADD_VACCINE_BUTTON = ("role", "button", "Add vaccine")
 CREATE_REPORT_BUTTON = ("role", "button", "Create report")
 PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+TODAY_VACCINATION_COUNT = ("id", "today-vaccinations")
+WEEK_VACCINATION_COUNT = ("id", "week-vaccinations")
+MONTH_VACCINATION_COUNT = ("id", "month-vaccinations")
+CREATE_A_REPORT_LINK = ("role", "link", "create a report")
 
 def check_feedback_link_exists():
     wait_for_element_to_appear(FEEDBACK_LINK)
     return check_element_exists(FEEDBACK_LINK)
+
+def check_site_name_exists_in_dashboard(site):
+    element = ("role", "heading", site)
+    wait_for_element_to_disappear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(element)
+
+def get_today_vaccinations_count():
+    text = find_element_and_perform_action(TODAY_VACCINATION_COUNT, "get_text")
+    count = re.findall(r'\d+', text)
+    return count[0]
+
+def get_week_vaccinations_count():
+    text = find_element_and_perform_action(WEEK_VACCINATION_COUNT, "get_text")
+    count = re.findall(r'\d+', text)
+    return count[0]
+
+def get_month_vaccinations_count():
+    text = find_element_and_perform_action(MONTH_VACCINATION_COUNT, "get_text")
+    count = re.findall(r'\d+', text)
+    return count[0]
+
+def check_create_a_report_link_exists():
+    wait_for_element_to_appear(CREATE_A_REPORT_LINK)
+    return check_element_exists(CREATE_A_REPORT_LINK)
 
 def click_feedback_link_exists():
     wait_for_element_to_appear(FEEDBACK_LINK)
