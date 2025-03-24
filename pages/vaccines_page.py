@@ -54,7 +54,7 @@ def click_site_in_search_results_dropdown(site):
 def to_title_case(text):
     return ' '.join(word.capitalize() for word in text.split())
 
-def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
+def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(shared_data, site, vaccine, vaccine_type, batch_number, batch_expiry_date):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if vaccine.lower() == "covid-19":
         vaccine = "COVID-19"
@@ -78,7 +78,6 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(si
 
         print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
 
-        wait_for_element_to_appear(batch_number_with_expiry_date_element)
         result = check_element_exists(batch_number_with_expiry_date_element, True)
         attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
         print(f"DEBUG: Batch element exists -> {result}")
@@ -86,6 +85,25 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(si
 
     print(f"DEBUG: Vaccine element not found, checking again: {vaccine_element}")
     return check_element_exists(vaccine_element, True)
+
+def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(shared_data, batch_number, batch_expiry_date):
+    batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
+    batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Pending']"
+    print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
+    result = check_element_exists(batch_number_with_expiry_date_element, True)
+    attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
+    print(f"DEBUG: Batch element exists -> {result}")
+    return result
+
+
+def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(shared_data, batch_number, batch_expiry_date):
+    batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
+    batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td/strong[text()='Inactive']"
+    print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
+    result = check_element_exists(batch_number_with_expiry_date_element, True)
+    attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
+    print(f"DEBUG: Batch element exists -> {result}")
+    return result
 
 def get_pack_size_value_vaccines_page(batch_number, batch_expiry_date, pack_size):
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
