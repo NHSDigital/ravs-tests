@@ -23,8 +23,10 @@ def check_batch_number_is_active_with_date(batch_number, expiry_date, wait):
                f"/following-sibling::td/strong[not(contains(., 'Inactive'))]")
     return check_element_exists(element, wait)
 
-def click_reactivate_batch_link(batch_number):
-    element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']/following-sibling::td/a[text()='Reactivate batch']")
+def click_reactivate_batch_link(batch_number, batch_expiry_date):
+    date = date_format_with_name_of_month(batch_expiry_date)
+    element = (f"//tr[td[contains(text(), '{batch_number}')] and td[contains(text(), '{date}')]]"
+           "//a[contains(@id, 'reactivateBatchId')]")
     find_element_and_perform_action(element, "click")
 
 def click_reactivate_batch_confirmation_button():
