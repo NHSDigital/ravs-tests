@@ -11,3 +11,21 @@ Feature: Dashboard
     Examples:
       | username                                      | site                        |
       | neelima.guntupalli1+no_location_sites@nhs.net | Tquila Automation Ltd. (uk) |
+
+  Scenario Outline: Create a report link should be visible for lead administrators and administrators
+    Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
+    Then the create a report link should be visible
+
+    Examples:
+      | care_model          | user_role             | site                          |
+      | Trust site          | lead administrator    | Weaverham Surgery             |
+      | Branch surgery      | administrator         | Aire Valley Surgery (rawdon)  |
+
+  Scenario Outline: Create a report link should not be visible for recorders
+    Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
+    Then the create a report link should not be visible
+
+    Examples:
+      | care_model          | user_role        | site                                                          |
+      | Community pharmacy  | recorder         | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service  |
+

@@ -65,3 +65,9 @@ def create_a_report_link_should_be_visible():
     assert check_create_a_report_link_exists() == True
     attach_screenshot("Create a report link should be available in the dashboard")
     logging.info("Create a report link should be available in the dashboard")
+
+@then("the create a report link should not be visible")
+def create_a_report_link_should_not_be_visible():
+    assert check_create_a_report_link_exists() == False
+    attach_screenshot("Create a report link should not be available in the dashboard")
+    logging.info("Create a report link should not be available in the dashboard")
