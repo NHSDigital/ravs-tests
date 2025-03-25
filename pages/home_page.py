@@ -48,7 +48,7 @@ def get_month_vaccinations_count():
     return count[0]
 
 def check_create_a_report_link_exists():
-    wait_for_element_to_appear(CREATE_A_REPORT_LINK)
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
     return check_element_exists(CREATE_A_REPORT_LINK)
 
 def click_feedback_link_exists():
