@@ -158,9 +158,9 @@ def datetime_helper():
     return datetime_helper_instance
 
 def get_app_url(test_environment):
-    if test_environment is not None and "dev" in test_environment:
+    if test_environment is not None and "dev" in test_environment.lower():
         return "https://www.ravs-dev.england.nhs.uk"
-    elif test_environment is not None and "qa" in test_environment:
+    elif test_environment is not None and "qa" in test_environment.lower():
         return "https://www.ravs-qa.england.nhs.uk"
     else:
         raise ValueError(f"Unknown test environment: {test_environment}")
