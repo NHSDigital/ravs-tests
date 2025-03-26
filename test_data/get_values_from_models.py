@@ -244,3 +244,10 @@ def get_covid_vaccine_xpath(vaccine_type):
 
 def get_user_permission_level(index):
     return permission_levels[get_wrapped_index(index, len(permission_levels))]
+
+def get_single_packsize_vaccines() -> list:
+    return [
+        vaccine["name"]
+        for vaccine in vaccine_type_ampp_codes_pack_sizes["vaccines"]
+        if len(vaccine["packSizes"]) == 1
+    ]
