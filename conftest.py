@@ -475,7 +475,7 @@ def record_consent_details_and_click_continue_to_vaccinate(consent_decision,  co
         click_save_and_return_button_on_record_consent_page()
         attach_screenshot("patient_decided_to_not_consent_saved_and_returned")
 
-def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, select_batch, no_vaccination_reason=None, pack_size=None):
+def enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, vaccinate_decision, care_model, vaccination_date, vaccine, vaccine_type2, vaccination_site,  batch_number, batch_expiry_date, dose_amount, vaccinator, vaccination_comments, legal_mechanism, select_batch, no_vaccination_reason=None, pack_size=None):
     set_vaccination_date(vaccination_date)
     attach_screenshot("vaccination_date_is_set")
     logging.debug("Vaccination legal mechanism is: " + legal_mechanism)
@@ -504,7 +504,11 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(vaccinate_deci
         attach_screenshot("selected_batch_number")
         assert get_dose_amount_value() == dose_amount
         if pack_size:
-            assert get_pack_size_value() == pack_size
+            if "single_packsize_vaccines" in shared_data:
+                if vaccine_type2 in shared_data["single_packsize_vaccines"]:
+                    assert check_pack_size_element_exists() == False
+                else:
+                    assert get_pack_size_value() == pack_size
         attach_screenshot("entered_dose_amount_value")
         if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
@@ -599,8 +603,10 @@ def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vac
     shared_data["vaccination_location"] = get_vaccination_location(index)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+        shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
     else:
         shared_data["pack_size"] = None
+        shared_data["single_packsize_vaccines"] = None
     today_str = datetime.today().strftime('%d/%m/%Y')
     today = datetime.strptime(today_str, '%d/%m/%Y')
     batch_expiry_date = batch_expiry_date.strip('>')
@@ -621,6 +627,7 @@ def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vac
     shared_data["vaccination_location"] = get_vaccination_location(index)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+        shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
     else:
         shared_data["pack_size"] = None
     today_str = datetime.today().strftime('%d/%m/%Y')
@@ -645,6 +652,7 @@ def step_login_to_ravs_check_new_site_batch_exists(site, vaccination_location, n
     shared_data["vaccination_location"] = get_vaccination_location(index)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+        shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
     else:
         shared_data["pack_size"] = None
     today_str = datetime.today().strftime('%d/%m/%Y')
@@ -669,6 +677,7 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, vaccination_l
     shared_data["vaccination_location"] = get_vaccination_location(index)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+        shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
     else:
         shared_data["pack_size"] = None
     today_str = datetime.today().strftime('%d/%m/%Y')
@@ -694,6 +703,7 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, vaccinat
     shared_data["vaccination_location"] = get_vaccination_location(index)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
+        shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
     else:
         shared_data["pack_size"] = None
     today_str = datetime.today().strftime('%d/%m/%Y')
@@ -877,7 +887,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             batch_number_to_select = shared_data["batch_number"].upper() + " - " + shared_data["batch_expiry_date"]
             shared_data["batch_number_selected"] = batch_number_to_select
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"], shared_data['pack_size'])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"], shared_data['pack_size'])
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
@@ -898,7 +908,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
                 shared_data['vaccinator'] = shared_data['eligibility_assessing_clinician']
             shared_data["vaccination_comments"] = shared_data["chosen_vaccine_type"] + "vaccination given on " + shared_data["vaccination_date"] + " for " + shared_data["patient_name"]
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
-            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"])
+            enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], False, shared_data["no_vaccination_reason"], None)
             attach_screenshot("entered_vaccination_details")
     logging.info(shared_data)
 
