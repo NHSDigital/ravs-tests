@@ -71,3 +71,39 @@ def create_a_report_link_should_not_be_visible():
     assert check_create_a_report_link_exists() == False
     attach_screenshot("Create a report link should not be available in the dashboard")
     logging.info("Create a report link should not be available in the dashboard")
+
+@then("the add vaccines link should not be visible")
+def add_vaccines_link_should_not_be_visible():
+    assert check_add_vaccines_link_exists() == False
+    attach_screenshot("Add vaccines link should not be available in the dashboard")
+    logging.info("Add vaccines link should not be available in the dashboard")
+
+@then("the add users link should not be visible")
+def add_users_link_should_not_be_visible():
+    assert check_add_users_link_exists() == False
+    attach_screenshot("Add users link should not be available in the dashboard")
+    logging.info("Add users link should not be available in the dashboard")
+
+@then("the find a patient link should not be visible")
+def find_a_patient_link_should_not_be_visible():
+    assert check_find_a_patient_link_exists() == False
+    attach_screenshot("Find a patient link should not be available in the dashboard")
+    logging.info("Find a patient link should not be available in the dashboard")
+
+@then("the add vaccines link should be visible")
+def add_vaccines_link_should_be_visible():
+    assert check_add_vaccines_link_exists() == True
+    attach_screenshot("Add vaccines link should be available in the dashboard")
+    logging.info("Add vaccines link should be available in the dashboard")
+
+@then("the add users link should be visible")
+def add_users_link_should_be_visible():
+    assert check_add_users_link_exists() == True
+    attach_screenshot("Add users link should be available in the dashboard")
+    logging.info("Add users link should be available in the dashboard")
+
+@then("the find a patient link should be visible")
+def find_a_patient_link_should_be_visible():
+    assert check_find_a_patient_link_exists() == True
+    attach_screenshot("Find a patient link should be available in the dashboard")
+    logging.info("Find a patient link should be available in the dashboard")
