@@ -56,6 +56,9 @@ def get_dose_amount_value():
 def get_pack_size_value():
     return find_element_and_perform_action(PACK_SIZE_READONLY_ELEMENT, "get_text")
 
+def check_pack_size_element_exists():
+    return check_element_exists(PACK_SIZE_READONLY_ELEMENT)
+
 def set_vaccination_date(date):
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "clear")
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "type_text", date)
