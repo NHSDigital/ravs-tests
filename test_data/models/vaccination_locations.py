@@ -3,6 +3,7 @@ vaccination_locations = [
     "Vaccination centre open to the public",
     "Community Pharmacy",
     "Care home",
+    "GP clinic",
     "Housebound patient's home",
     "Outreach event"
 ]

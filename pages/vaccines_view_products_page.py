@@ -11,22 +11,18 @@ def click_add_batch_link():
 
 def check_batch_number_and_expiry_date_exists(batch_number, expiry_date, wait):
     formatted_expiry_date = date_format_with_name_of_month_shortened(expiry_date)
-    element = (f"//tr[td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']"
-               f" and td[normalize-space(text()) = '{formatted_expiry_date}']]")
+    element = (f"//tr[td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}'] and td[normalize-space(text()) = '{formatted_expiry_date}']]")
     return check_element_exists(element, wait)
 
 def check_batch_number_is_active_with_date(batch_number, expiry_date, wait):
     click_vaccines_nav_link()
     formatted_expiry_date = date_format_with_name_of_month(expiry_date)
-    element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']"
-               f"/following-sibling::td['{formatted_expiry_date}']"
-               f"/following-sibling::td/strong[not(contains(., 'Inactive'))]")
+    element = (f"//td[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{batch_number.lower()}']/following-sibling::td['{formatted_expiry_date}']/following-sibling::td/strong[not(contains(., 'Inactive'))]")
     return check_element_exists(element, wait)
 
 def click_reactivate_batch_link(batch_number, batch_expiry_date):
     date = date_format_with_name_of_month(batch_expiry_date)
-    element = (f"//tr[td[contains(text(), '{batch_number}')] and td[contains(text(), '{date}')]]"
-           "//a[contains(@id, 'reactivateBatchId')]")
+    element = (f"//tr[td[contains(text(), '{batch_number}')] and td[contains(text(), '{date}')]]//a[contains(@id, 'reactivateBatchId')]")
     find_element_and_perform_action(element, "click")
 
 def click_reactivate_batch_confirmation_button():

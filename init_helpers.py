@@ -158,9 +158,9 @@ def datetime_helper():
     return datetime_helper_instance
 
 def get_app_url(test_environment):
-    if test_environment is not None and "dev" in test_environment:
+    if test_environment is not None and "dev" in test_environment.lower():
         return "https://www.ravs-dev.england.nhs.uk"
-    elif test_environment is not None and "qa" in test_environment:
+    elif test_environment is not None and "qa" in test_environment.lower():
         return "https://www.ravs-qa.england.nhs.uk"
     else:
         raise ValueError(f"Unknown test environment: {test_environment}")
@@ -367,8 +367,8 @@ def javascript_click(element):
 def click_link_in_row(row_name, link_index):
     return playwright_helper_instance.click_link_in_row(row_name, link_index)
 
-def get_element_by_type(locator_type, locator_value=None, name=None, exact=False):
-    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact)
+def get_element_by_type(locator_type, locator_value=None, name=None, exact=False, parent_locator=None):
+    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact, parent_locator)
 
 def release_mouse():
     return playwright_helper_instance.release_mouse()
