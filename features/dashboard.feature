@@ -6,7 +6,10 @@ Feature: Dashboard
     And the today vaccinations count should be 0
     And the past 7 days vaccinations count should be 0
     And the past month's vaccinations count should be 0
-    And the create a report link should be visible
+    And the add vaccines link should be visible
+    And the add users link should be visible
+    And the find a patient link should be visible
+    And the create a report link should not be visible
 
     Examples:
       | username                                      | site                        |
@@ -14,7 +17,10 @@ Feature: Dashboard
 
   Scenario Outline: Create a report link should be visible for lead administrators and administrators
     Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
-    Then the create a report link should be visible
+    Then the add vaccines link should not be visible
+    And the add users link should not be visible
+    And the find a patient link should not be visible
+    And the create a report link should be visible
 
     Examples:
       | care_model          | user_role             | site                          |
@@ -23,7 +29,10 @@ Feature: Dashboard
 
   Scenario Outline: Create a report link should not be visible for recorders
     Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
-    Then the create a report link should not be visible
+    Then the add vaccines link should not be visible
+    And the add users link should not be visible
+    And the find a patient link should not be visible
+    And the create a report link should not be visible
 
     Examples:
       | care_model          | user_role        | site                                                          |

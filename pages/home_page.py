@@ -11,8 +11,15 @@ NAV_BAR_TOGGLER = ("//button[@class='navbar-toggler']")
 NAV_LINK_BAR_TOGGLER = ("//button[@class='navbar-toggler p-2']")
 FEEDBACK_LINK = ("role", "link", "feedback (opens in a new tab)")
 REPORT_AN_ISSUE_LINK = ("role", "link", "Report an issue")
+ADD_VACCINES_LINK = ("role", "link", "Add vaccines")
+ADD_USERS_LINK = ("role", "link", "Add users")
+FIND_A_PATIENT_LINK = ("nested_role", "link", "Find a patient", True, "#maincontent")
 CONTACT_US_LINK = ("role", "link", "Contact us")
 HELP_AND_GUIDANCE_LINK = ("role", "link", "Help and guidance")
+USER_GUIDE_LINK = ("role", "link", "User guide (opens in new tab)")
+TERMS_OF_USE_LINK = ("role", "link", "Terms of use")
+COOKIES_LINK = ("role", "link", "Cookies")
+ACCESSIBILITY_STATEMENT_LINK = ("role", "link", "Accessibility statement")
 ADD_USER_BUTTON = ("role", "button", "Add user")
 SEARCH_BUTTON = ("role", "button", "Search")
 ADD_VACCINE_BUTTON = ("role", "button", "Add vaccine")
@@ -24,12 +31,60 @@ MONTH_VACCINATION_COUNT = ("id", "month-vaccinations")
 CREATE_A_REPORT_LINK = ("role", "link", "create a report")
 
 def check_feedback_link_exists():
-    wait_for_element_to_appear(FEEDBACK_LINK)
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
     return check_element_exists(FEEDBACK_LINK)
+
+def check_accessibility_statement_link_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(ACCESSIBILITY_STATEMENT_LINK)
+
+def check_terms_of_use_link_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(TERMS_OF_USE_LINK)
+
+def check_user_guide_link_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(USER_GUIDE_LINK)
+
+def click_accessibility_statement_link():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    find_element_and_perform_action(ACCESSIBILITY_STATEMENT_LINK, "click")
+
+def click_user_guide_link():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    find_element_and_perform_action(USER_GUIDE_LINK, "click")
+
+def click_terms_of_use_link():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    find_element_and_perform_action(TERMS_OF_USE_LINK, "click")
+
+def check_add_vaccines_link_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(ADD_VACCINES_LINK)
+
+def check_add_users_link_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(ADD_USERS_LINK)
+
+def check_find_a_patient_link_exists():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    return check_element_exists(FIND_A_PATIENT_LINK)
+
+def click_add_vaccines_link():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    find_element_and_perform_action(ADD_VACCINES_LINK, "click")
+
+def click_add_users_link():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    find_element_and_perform_action(ADD_USERS_LINK, "click")
+
+def click_find_a_patient_link():
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    find_element_and_perform_action(FIND_A_PATIENT_LINK, "click")
 
 def check_site_name_exists_in_dashboard(site):
     element = ("role", "heading", site)
-    wait_for_element_to_disappear(LOGOUT_NAV_ELEMENT)
+    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
     return check_element_exists(element)
 
 def get_today_vaccinations_count():

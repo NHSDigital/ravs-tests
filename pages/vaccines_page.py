@@ -75,10 +75,19 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(sh
 
         batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
         batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']"
-
         print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
-
         result = check_element_exists(batch_number_with_expiry_date_element, True)
+        if result == True:
+            if "community pharmacy" in shared_data["care_model"].lower() or "branch surgery" in shared_data["care_model"].lower():
+                pack_size_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/preceding-sibling::td[1]"
+                if check_element_exists(pack_size_element):
+                    pack_size = find_element_and_perform_action(pack_size_element, "get_text").strip()
+                    shared_data["pack_size"] = pack_size
+                else:
+                    edit_batch_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']/parent::td/following-sibling::td[2]//a[contains(@id, 'editBatchId')]"
+                    find_element_and_perform_action(edit_batch_element, "click")
+                    select_pack_size(shared_data["pack_size"])
+
         attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
         print(f"DEBUG: Batch element exists -> {result}")
         return result

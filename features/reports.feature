@@ -68,7 +68,6 @@ Feature: Reports
       | COVID-19                           | Branch surgery      | administrator      | Aire Valley Surgery (rawdon)  |
       | Flu                                | Branch surgery      | administrator      | Aire Valley Surgery (rawdon)  |
 
-
   Scenario Outline: Check and confirm page should be displayed
     When I click the reports navigation link
     And I click the create report button

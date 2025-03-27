@@ -185,33 +185,34 @@ class BasePlaywrightHelper:
             print(f"Error retrieving element '{locator_or_element}': {e}")
             return None
 
-    def wait_for_element_to_appear(self, locator_or_element, timeout=10):
+    def wait_for_element_to_appear(self, locator_or_element, timeout=2000, poll_interval=0.1):
+        """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
         start_time = time.time()
-        while True:
-            if time.time() - start_time > timeout:
-                print(f"Timeout: Element '{locator_or_element}' did not appear.")
-                return None
+        while time.time() - start_time < timeout / 1000:
+            try:
+                element = self.get_element(locator_or_element, wait=True)
+                if element.is_visible():
+                    print(f"✅ Element '{locator_or_element}' appeared.")
+                    return element
+            except TimeoutError:
+                pass
+            time.sleep(poll_interval)  # Poll every 0.1s
+        print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
+        return None
 
-            element = self.get_element(locator_or_element, wait=True)
-            if element and element.is_visible():
-                print(f"Element with locator '{locator_or_element}' appeared on the page.")
-                return element
-
-            time.sleep(0.5)  # Check every 0.5 seconds
-
-    def wait_for_element_to_disappear(self, locator_or_element, timeout=20):
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=2000, poll_interval=0.1):
         start_time = time.time()
-        while True:
-            if time.time() - start_time > timeout:
-                print(f"Timeout: Element '{locator_or_element}' did not appear.")
-                return None
-
-            element = self.get_element(locator_or_element, wait=True)
-            if not element or not element.is_visible():
-                print(f"Element with locator '{locator_or_element}' appeared on the page.")
-                return True
-
-            time.sleep(0.5)  # Check every 0.5 seconds
+        while time.time() - start_time < timeout / 1000:
+            try:
+                element = self.get_element(locator_or_element, wait=True)
+                if not element.is_visible():
+                    print(f"✅ Element '{locator_or_element}' disappeared.")
+                    return True
+            except TimeoutError:
+                pass
+            time.sleep(poll_interval)  # Poll every 0.1s
+        print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not disappear.")
+        return False
 
     def check_element_exists(self, locator_or_element, wait=False, timeout=5):
         element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
@@ -599,7 +600,7 @@ class BasePlaywrightHelper:
         self.page.mouse.down()
         self.page.mouse.up()
 
-    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None, exact=False):
+    def get_element_by_type(self, locator_type_or_selector, locator_value=None, name=None, exact=False, parent_locator=None):
         # If locator_type_or_selector is just a string, return it as a selector
         if isinstance(locator_type_or_selector, Locator):
             return locator_type_or_selector  # Directly return the Locator object
@@ -631,6 +632,9 @@ class BasePlaywrightHelper:
             return self.page.get_by_role("cell", name=locator_value, exact=exact)
         elif locator_type_or_selector == "id":
             return self.page.locator(f"#{locator_value}")
+        elif locator_type_or_selector == "nested_role":
+            parent_locator = self.page.locator(parent_locator)
+            return parent_locator.get_by_role(locator_value, name=name, exact=exact)
         else:
             # Log a warning for unsupported locator types
             print(f"Warning: Unsupported locator type '{locator_type_or_selector}'. Assuming it is a selector.")
