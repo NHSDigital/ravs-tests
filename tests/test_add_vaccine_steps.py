@@ -68,7 +68,9 @@ def vaccines_nav_link_should_be_visible_for_administrator():
 
 @when("I click the vaccines navigation link")
 def click_vaccines_navigation_link():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     click_vaccines_nav_link()
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     attach_screenshot("clicked_vaccines_nav_link")
 
 @then("the vaccines page should be visible")

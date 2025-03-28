@@ -191,7 +191,7 @@ class BasePlaywrightHelper:
         while time.time() - start_time < timeout / 1000:
             try:
                 element = self.get_element(locator_or_element, wait=True)
-                if element.is_visible():
+                if element and element.is_visible():
                     print(f"✅ Element '{locator_or_element}' appeared.")
                     return element
             except TimeoutError:
@@ -205,7 +205,7 @@ class BasePlaywrightHelper:
         while time.time() - start_time < timeout / 1000:
             try:
                 element = self.get_element(locator_or_element, wait=True)
-                if not element.is_visible():
+                if element and not element.is_visible():
                     print(f"✅ Element '{locator_or_element}' disappeared.")
                     return True
             except TimeoutError:

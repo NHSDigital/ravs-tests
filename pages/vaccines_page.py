@@ -78,15 +78,19 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(sh
         print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
         result = check_element_exists(batch_number_with_expiry_date_element, True)
         if result == True:
-            if "community pharmacy" in shared_data["care_model"].lower() or "branch surgery" in shared_data["care_model"].lower():
+            if ("community pharmacy" in shared_data["care_model"].lower() or
+                "branch surgery" in shared_data["care_model"].lower()) and ("covid" in shared_data["chosen_vaccine"].lower() or
+                "flu" in shared_data["chosen_vaccine"].lower()):
                 pack_size_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/preceding-sibling::td[1]"
                 if check_element_exists(pack_size_element):
-                    pack_size = find_element_and_perform_action(pack_size_element, "get_text").strip()
-                    shared_data["pack_size"] = pack_size
-                else:
-                    edit_batch_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']/parent::td/following-sibling::td[2]//a[contains(@id, 'editBatchId')]"
-                    find_element_and_perform_action(edit_batch_element, "click")
-                    select_pack_size(shared_data["pack_size"])
+                    pack_size = find_element_and_perform_action(pack_size_element, "get_text")
+                    if pack_size:
+                        pack_size = pack_size.strip()
+                        shared_data["pack_size"] = pack_size
+                    else:
+                        edit_batch_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Active']/parent::td/following-sibling::td[2]//a[contains(@id, 'editBatchId')]"
+                        find_element_and_perform_action(edit_batch_element, "click")
+                        select_pack_size(shared_data["pack_size"])
 
         attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
         print(f"DEBUG: Batch element exists -> {result}")
