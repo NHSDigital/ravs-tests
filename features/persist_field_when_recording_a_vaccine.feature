@@ -25,8 +25,7 @@ Feature: Persist fields when recording vaccination
 Examples:
   | index | nhs_number | site               | vaccination_location                          | eligibility | assess_date | consent | vaccination | vaccination_date | name        | dob        | address                                                   | chosen_vaccine | batch_number     | batch_expiry_date | new_nhs_number | new_patient_name | care_model         | user_role          |
   | 0     | 9693632109 | Weaverham Surgery  | Vaccination Centre open to the public       | yes         | today       | yes     | yes         | today            | Bill GARTON | 23/6/1946  | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19       | AUTOMATION-SJ1   | 19/10/2026        | 9472710255     | DELICE PINKER    | Trust site         | lead administrator |
-  | 0     | 9693632109 | Aspire Pharmacy  | Care home                                   | yes         | today       | yes     | yes         | today            | Bill GARTON | 23/6/1946  | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19       | AUTOMATION-SJ1   | 19/10/2026        | 9472710255     | DELICE PINKER    | Community pharmacy | administrator      |
-
+  | 1     | 9693632109 | Aspire Pharmacy  | Care home                                   | yes         | today       | yes     | yes         | today            | Bill GARTON | 23/6/1946  | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Flu       | AUTOMATION-SJ1   | 19/10/2026        | 9472710255     | DELICE PINKER    | Community pharmacy | administrator      |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes delivery team when recording a vaccination
@@ -50,7 +49,7 @@ Examples:
 Examples:
   | index | nhs_number | site                               | vaccination_location                          | eligibility | assess_date | consent | vaccination | vaccination_date | name        | dob        | address                                                   | chosen_vaccine | batch_number     | batch_expiry_date | new_nhs_number | new_patient_name | care_model         | user_role          | new_delivery_team           |
   | 0     | 9693632109 | Weaverham Surgery                 | Vaccination Centre open to the public       | yes         | today       | yes     | yes         | today            | Bill GARTON | 23/6/1946  | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19       | AUTOMATION-SJ1   | 19/10/2026        | 9472710255     | DELICE PINKER    | Trust site         | lead administrator | Spire Regency Hospital      |
-  | 0     | 9693632109 | Aspire Pharmacy                   | Care home                                   | yes         | today       | yes     | yes         | today            | Bill GARTON | 23/6/1946  | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19       | AUTOMATION-SJ1   | 19/10/2026        | 9472710255     | DELICE PINKER    | Community pharmacy | administrator      | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service      |
+  | 1     | 9693632109 | Aspire Pharmacy                   | Care home                                   | yes         | today       | yes     | yes         | today            | Bill GARTON | 23/6/1946  | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Flu       | AUTOMATION-SJ1   | 19/10/2026        | 9472710255     | DELICE PINKER    | Community pharmacy | administrator      | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service      |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes vaccine product when recording a vaccination
@@ -74,7 +73,7 @@ Examples:
 Examples:
   | index | nhs_number | site                     | vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name          | dob        | address                                          | chosen_vaccine | batch_number     | batch_expiry_date | new_nhs_number | new_patient_name | new_vaccine_product | care_model         | user_role          |
   | 5     | 9449303975 | Weaverham Surgery   | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Flu                  | Trust site         | lead administrator |
-  | 5     | 9449303975 | Aspire Pharmacy  | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Flu                  | Community pharmacy | administrator      |
+  | 6     | 9449303975 | Aspire Pharmacy  | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | Flu       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Flu                  | Community pharmacy | administrator      |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes vaccine product type when recording a vaccination
@@ -97,7 +96,7 @@ Examples:
 
 Examples:
   | index | nhs_number | site                     | vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name          | dob        | address                                          | chosen_vaccine | batch_number     | batch_expiry_date | new_nhs_number | new_patient_name | care_model         | user_role          |
-  | 5     | 9449303975 | Weaverham Surgery   | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Trust site         | lead administrator |
-  | 5     | 9449303975 | Aspire Pharmacy  | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    |   Community pharmacy | administrator      |
+  | 6     | 9449303975 | Weaverham Surgery   | Outreach event   | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Trust site         | lead administrator |
+  | 7     | 9449303975 | Aspire Pharmacy  | Outreach event     | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | Flu       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    |   Community pharmacy | administrator      |
 
 
