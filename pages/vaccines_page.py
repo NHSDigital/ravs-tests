@@ -52,7 +52,7 @@ def click_site_in_search_results_dropdown(site):
     find_element_and_perform_action(element, "click")
 
 def to_title_case(text):
-    return ' '.join(word.capitalize() for word in text.split())
+    return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
 
 def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(shared_data, site, vaccine, vaccine_type, batch_number, batch_expiry_date):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
