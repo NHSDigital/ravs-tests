@@ -151,7 +151,7 @@ def navigate_and_login(shared_data, user_role=None, site=None):
 
     if user_role.lower() in ["recorder", "administrator"] and site:
         if site == "leeds pharmacy":
-            select_site(site)
+            select_site("Leeds Pharmacy (FDP35)")
         elif care_model == "trust site":
             select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
         click_continue_to_home_page_button()
