@@ -15,7 +15,7 @@ Scenario: Add user error messages should be displayed
     | care_model |  user_role | site        |
     | Trust site |  lead administrator | Weaverham Surgery    |
     | Community pharmacy  |  lead administrator | Aspire Pharmacy  |
-    | Branch surgery  |  lead administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery  |  lead administrator | Aire Valley Surgery (Rawdon)  |
 
 @usermanagement
 Scenario: Deactivated users page should be displayed
@@ -27,7 +27,7 @@ Scenario: Deactivated users page should be displayed
     | care_model |  user_role | site        |
     | Trust site |  lead administrator | Weaverham Surgery    |
     | Community pharmacy  |  lead administrator | Aspire Pharmacy  |
-    | Branch surgery  |  lead administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery  |  lead administrator | Aire Valley Surgery (Rawdon)  |
 
 @usermanagement
 Scenario: Reactivate user page should be displayed
@@ -40,7 +40,7 @@ Scenario: Reactivate user page should be displayed
     | care_model |  user_role | site        |
     | Trust site |  lead administrator | Weaverham Surgery    |
     | Community pharmacy  |  lead administrator | Aspire Pharmacy  |
-    | Branch surgery  |  lead administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery  |  lead administrator | Aire Valley Surgery (Rawdon)  |
 
 @usermanagement
 Scenario: Change user details page should launch
@@ -52,7 +52,7 @@ Scenario: Change user details page should launch
     | care_model |  user_role | site        |
     | Trust site |  lead administrator | Weaverham Surgery    |
     | Community pharmacy  |  lead administrator | Aspire Pharmacy  |
-    | Branch surgery  |  lead administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery  |  lead administrator | Aire Valley Surgery (Rawdon)  |
 
 @usermanagement
 Scenario: Change user details
@@ -100,7 +100,7 @@ Scenario: User management should not be visible if logged in as recorder
     | care_model |  user_role | site        |
     | Trust site |  recorder | Weaverham Surgery    |
     | Community pharmacy  |  recorder | Aspire Pharmacy  |
-    | Branch surgery  |  recorder | Aire Valley Surgery (rawdon)  |
+    | Branch surgery  |  recorder | Aire Valley Surgery (Rawdon)  |
 
 @usermanagement
 Scenario: User management should not be visible if logged in as administrator
@@ -110,7 +110,7 @@ Scenario: User management should not be visible if logged in as administrator
     | care_model |  user_role | site        |
     | Trust site |  administrator | Weaverham Surgery    |
     | Community pharmacy  |  administrator | Aspire Pharmacy  |
-    | Branch surgery  |  administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery  |  administrator | Aire Valley Surgery (Rawdon)  |
 
 @usermanagement
 Scenario: User management should be visible if logged in as lead administrator
