@@ -149,11 +149,14 @@ def navigate_and_login(shared_data, user_role=None, site=None):
     enter_password(password)
     click_nhs_signin_button()
 
-    if user_role.lower() in ["recorder", "administrator"] and site:
+    if user_role.lower() in ["recorder", "administrator", "lead administrator"] and site:
         if site == "leeds pharmacy":
+            attach_screenshot("select_multi_org_site")
             select_site("Leeds Pharmacy (FDP35)")
         elif care_model == "trust site":
+            attach_screenshot("select_multi_org_site")
             select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
+        attach_screenshot("selected_site")
         click_continue_to_home_page_button()
 
 def set_clinician_details(shared_data, site):
