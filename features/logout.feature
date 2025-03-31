@@ -12,4 +12,4 @@ Feature: Logout Feature
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       administrator | Aire Valley Surgery (Rawdon)  |
