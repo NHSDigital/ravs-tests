@@ -35,6 +35,8 @@ from test_data.get_values_from_models import *
 
 fake = Faker('en_GB')
 
+SPINNER_ELEMENT = ("role", "status")
+
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
     browser_version = get_browser_version()
@@ -227,24 +229,24 @@ def click_find_a_patient_and_search_with_nhs_number(nhs_number):
 
 def click_find_a_patient_top_nav_bar():
     click_find_a_patient_nav_link()
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(SPINNER_ELEMENT)
 
 def click_manage_users_top_nav_bar():
     click_manage_users_nav_link()
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(SPINNER_ELEMENT)
 
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(SPINNER_ELEMENT)
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
     attach_screenshot("immunisation_history_records_count_is_" + str(immunisation_history_records))
     click_choose_vaccine_button()
     attach_screenshot("clicked_choose_vaccine_button")
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(SPINNER_ELEMENT)
     attach_screenshot("clicked_on_patient_" + name + "_and_clicked_choose_vaccine_button")
     return immunisation_history_records
 
 def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(SPINNER_ELEMENT)
     click_delivery_team_radiobutton(site)
     attach_screenshot("clicked_delivery_team")
     click_vaccine_radiobutton(vaccine)
@@ -255,7 +257,7 @@ def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
     attach_screenshot("selected_vaccine_" + vaccine + "_and_" + vaccine_type + "_and_clicked_continue_button")
 
 def choose_vaccine_and_vaccine_type_only(site, vaccine, vaccine_type):
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(SPINNER_ELEMENT)
     click_delivery_team_radiobutton(site)
     attach_screenshot("clicked_delivery_team")
     click_vaccine_radiobutton(vaccine)
