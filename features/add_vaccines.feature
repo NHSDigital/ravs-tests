@@ -13,7 +13,7 @@ Feature: Add vaccine to site
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       administrator | Aire Valley Surgery (Rawdon)  |
 
   @addvaccine
   Scenario: Vaccines navigation link should not be visible when logged in as recorder
@@ -23,7 +23,7 @@ Feature: Add vaccine to site
     | care_model          |  user_role | site                      |
     | Trust site          |  recorder  | Weaverham Surgery             |
     | Community pharmacy  |  recorder  | Aspire Pharmacy               |
-    | Branch surgery      |  recorder  | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |  recorder  | Aire Valley Surgery (Rawdon)  |
 
   @addvaccine
   Scenario: Vaccines navigation link should be visible when logged in as an administrator
@@ -38,4 +38,4 @@ Feature: Add vaccine to site
     | care_model          |  user_role      | site                      |
     | Trust site          |  administrator  | Weaverham Surgery             |
     | Community pharmacy  |  administrator  | Aspire Pharmacy               |
-    | Branch surgery      |  administrator  | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |  administrator  | Aire Valley Surgery (Rawdon)  |
