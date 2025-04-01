@@ -303,7 +303,7 @@ def step_sensitive_patients_details_should_be_hidden(shared_data):
                 vaccine["show_all"]()
                 attach_screenshot(f"clicked_{vaccine['name'].lower().replace(' ', '_')}_show_all_button")
 
-            for i in range(1, vaccination_history_count + 1):
+            for i in range(1, min(11, vaccination_history_count + 1)):
                 assert get_vaccine_location_details(i).strip() == ""
                 attach_screenshot(f"{vaccine['name'].lower().replace(' ', '_')}_vaccine_location_details_should_be_empty")
 

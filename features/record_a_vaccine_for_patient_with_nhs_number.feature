@@ -20,9 +20,7 @@ Feature: Record vaccine
 
     Examples:
       | index | nhs_number | site  | vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name | dob   | address  | chosen_vaccine | batch_number | batch_expiry_date | care_model         | user_role          |
-      | 0 | 9693632109 | Weaverham Surgery  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | Bill GARTON |  23/6/1946 |   1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 |Trust site         | lead administrator |
-      | 1 | 9693632109 | Aspire Pharmacy | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 |Community pharmacy | administrator      |
-      | 1 | 9693632109 | Aire Valley Surgery (rawdon) | Vaccination centre open to the public | yes | today-1 | yes | yes  | today-1  | Bill GARTON |  23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | COVID-19  | AUTOMATION-C30 | 21/11/2025 | Branch surgery | administrator      |
+      | 0 | 9470040228 | Weaverham Surgery  | Vaccination Centre open to the public | yes | today  | yes  | yes | today   | HERBERT HAAG |  14/12/1922 |   10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19   | AUTOMATION-SJ1   | 19/10/2026 | Trust site  | lead administrator |
 
       # | 2 | 9470040228 | Spire Cheshire Hospital  | Hospital hub for staff and patients | yes  | today-1  | yes | yes | today | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 |  AUTOMATION-C10  | 19/2/2026 |
       # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |

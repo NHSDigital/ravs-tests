@@ -13,7 +13,7 @@ Feature: Add Batches to vaccine
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       administrator | Aire Valley Surgery (Rawdon)  |
 
   @addbatches
   Scenario: Error messages should appear when no values are entered
@@ -26,7 +26,7 @@ Feature: Add Batches to vaccine
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       administrator | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       administrator | Aire Valley Surgery (Rawdon)  |
 
   @addbatches
   Scenario Outline: Add batch to vaccine
@@ -39,4 +39,4 @@ Feature: Add Batches to vaccine
       | care_model          | user_role           | site                          | vaccine  | vaccine_type  | batch_number       | expiry_date |
       | Trust site          | lead administrator  | Weaverham Surgery             | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
       | Community pharmacy  | administrator       | Aspire Pharmacy               | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
-      | Branch surgery      | administrator       | Aire Valley Surgery (rawdon)  | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
+      | Branch surgery      | administrator       | Aire Valley Surgery (Rawdon)  | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |

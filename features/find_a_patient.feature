@@ -12,7 +12,7 @@ Scenario: Find a patient page should launch
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       recorder      | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       recorder      | Aire Valley Surgery (Rawdon)  |
 
 @findpatient
 Scenario: Search without entering nhs number
@@ -24,7 +24,7 @@ Scenario: Search without entering nhs number
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       recorder      | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       recorder      | Aire Valley Surgery (Rawdon)  |
 
 @findpatient
 Scenario: Search without entering patient details
@@ -36,7 +36,7 @@ Scenario: Search without entering patient details
     | care_model          |  user_role          | site                          |
     | Trust site          |  lead administrator | Weaverham Surgery             |
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
-    | Branch surgery      |       recorder      | Aire Valley Surgery (rawdon)  |
+    | Branch surgery      |       recorder      | Aire Valley Surgery (Rawdon)  |
 
 @findpatient
 Scenario Outline: Search by NHS number
@@ -49,7 +49,7 @@ Scenario Outline: Search by NHS number
 | nhsNumber  | name             | dateofbirth | address                                                       | care_model         | user_role          |site                          |
 | 9693632109 | Bill GARTON      |   23/6/1946 |  1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW   | Trust site         | lead administrator |Weaverham Surgery             |
 | 9732743476 | Mike HEESOM      |  24/10/1992 |  2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY                 | Community pharmacy | administrator      |Aspire Pharmacy               |
-| 9650594000 | Archie STRAIN    |   30/7/2014 |  1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ           | Branch surgery     | recorder           | Aire Valley Surgery (rawdon)  |
+| 9650594000 | Archie STRAIN    |   30/7/2014 |  1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ           | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon)  |
 # | 9732596996 | Lisa WORTHY      |   30/6/2024 |  10 NORTON PARK VIEW, SHEFFIELD, S8 8GS                       | Trust site         | lead administrator |Weaverham Surgery             |
 # | 9449306621 | Not found        |    20110509 |  KT21 1LJ                                                     | Community pharmacy | administrator      |Aspire Pharmacy               |
 # | 9449306605 | Srinivasarao Patel |  03/03/2020 |  4 Calicut Lane2, Line 2, Line 3, SLOUGH, Berkshire, KT21 1EJ | Branch surgery   | recorder           |
@@ -74,7 +74,7 @@ Examples:
   | nhsNumber  | errorMessage                | care_model         | user_role          | site                          |
   | 123456789  | Enter 10 digits             | Trust site         | lead administrator | Weaverham Surgery             |
   | 9753108642 | Enter a correct NHS number  | Community pharmacy | administrator      | Aspire Pharmacy               |
-  | 123456789  | Enter 10 digits             | Branch surgery     | recorder           | Aire Valley Surgery (rawdon)  |
+  | 123456789  | Enter 10 digits             | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon)  |
 
 
 @findpatient
@@ -89,7 +89,7 @@ Examples:
   | nhsNumber   | care_model         | user_role          | site                          |
   | 9449306621  | Trust site         | lead administrator | Weaverham Surgery             |
   | 9449306621  | Community pharmacy | administrator      | Aspire Pharmacy               |
-  | 9449306621  | Branch surgery     | recorder           | Aire Valley Surgery (rawdon)  |
+  | 9449306621  | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon)  |
 
 ### This test is not needed as it is a duplicate
   # @findpatient

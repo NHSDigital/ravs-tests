@@ -25,7 +25,7 @@ Feature: Dashboard
     Examples:
       | care_model          | user_role             | site                          |
       | Trust site          | lead administrator    | Weaverham Surgery             |
-      | Branch surgery      | administrator         | Aire Valley Surgery (rawdon)  |
+      | Branch surgery      | administrator         | Aire Valley Surgery (Rawdon)  |
 
   Scenario Outline: Create a report link should not be visible for recorders
     Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
