@@ -155,10 +155,18 @@ jobs:
 
       - name: Install Allure Commandline
         run: |
-          curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
-          tar -zxvf allure-commandline-2.17.3.tgz -C /opt/ && \
-          sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
-          rm -rf allure-commandline-2.17.3.tgz
+          LATEST_ALLURE_VERSION=$(curl -s https://api.github.com/repos/allure-framework/allure2/releases/latest | jq -r '.tag_name' | sed 's/v//')
+          echo "Installing Allure version: $LATEST_ALLURE_VERSION"
+
+          curl -o allure-commandline.tgz -Ls "https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$LATEST_ALLURE_VERSION/allure-commandline-$LATEST_ALLURE_VERSION.tgz" && \
+          tar -zxvf allure-commandline.tgz -C /opt/ && \
+          sudo ln -s /opt/allure-$LATEST_ALLURE_VERSION/bin/allure /usr/bin/allure && \
+          rm -rf allure-commandline.tgz
+      #     curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
+      #     tar -zxvf allure-commandline-2.17.3.tgz -C /opt/ && \
+      #     sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
+      #     rm -rf allure-commandline-2.17.3.tgz
+
 
       - name: Run Tests
         env:
