@@ -81,7 +81,7 @@ Scenario: Add user details - Check and confirm page should be visible
 
 Examples:
 | first_name | last_name  | nhs_email_address  | clinician_status | permission_level    | site  | care_model    | user_role    |
-| Automated  | administrator | neelima.guntupalli1+admin_automated@nhs.net | yes | administrator   | Weaverham Surgery   | Trust site    | lead administrator    |
+| Automated  | administrator | neelima.guntupalli1+admin_automated1@nhs.net | yes | administrator   | Weaverham Surgery   | Trust site    | lead administrator    |
 | Automated  | administrator  | neelima.guntupalli1+admin_automated@nhs.test   | yes | administrator   | Aspire Pharmacy | Community pharmacy| lead administrator    |
 | Automated  | tester   | automated.tester@nhs.net | yes | recorder   | Aire Valley Surgery | Branch surgery  | lead administrator |
 | Automated  | lead administrator | automated.tester@nhs.net  | no  | lead administrator  | Weaverham Surgery   | Trust site    | lead administrator |
