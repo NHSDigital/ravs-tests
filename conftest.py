@@ -71,41 +71,41 @@ def navigate_and_login(shared_data, user_role=None, site=None):
 
     email_mapping = {
         "trust site": {
-            "recorder": "neelima.guntupalli1+recorder_automated@nhs.net",
-            "administrator": "neelima.guntupalli1+admin_automated@nhs.net",
+            "recorder": "neelima.guntupalli1+recorder_automated1@nhs.net",
+            "administrator": "neelima.guntupalli1+admin_automated1@nhs.net",
             "lead administrator": "neelima.guntupalli1@nhs.net",
             "default_site": "Weaverham Surgery"
         },
         "community pharmacy": {
             "leeds pharmacy": {
-                "recorder": "neelima.guntupalli1+recorder_automated@nhs.net",
-                "administrator": "neelima.guntupalli1+admin_automated@nhs.net",
-                "lead administrator": "neelima.guntupalli1+community_pharmacy@nhs.net",
+                "recorder": "neelima.guntupalli1+recorder_automated1@nhs.net",
+                "administrator": "neelima.guntupalli1+admin_automated1@nhs.net",
+                "lead administrator": "neelima.guntupalli1+community_pharmacy1@nhs.net",
                 "default_site": "Leeds Pharmacy"
             },
             "aspire pharmacy": {
-                "recorder": "neelima.guntupalli1+fhh39_recorder@nhs.net",
-                "administrator": "neelima.guntupalli1+fhh39_admin@nhs.net",
-                "lead administrator": "neelima.guntupalli1+fhh39@nhs.net",
+                "recorder": "neelima.guntupalli1+fhh39_recorder1@nhs.net",
+                "administrator": "neelima.guntupalli1+fhh39_admin1@nhs.net",
+                "lead administrator": "neelima.guntupalli1+fhh39lead@nhs.net",
                 "default_site": "Aspire Pharmacy"
             },
             "aspire pharmacy - ormskirk - covid local vaccination service": {
-                "recorder": "neelima.guntupalli1+fhh39_recorder@nhs.net",
-                "administrator": "neelima.guntupalli1+fhh39_admin@nhs.net",
-                "lead administrator": "neelima.guntupalli1+fhh39@nhs.net",
+                "recorder": "neelima.guntupalli1+fhh39_recorder1@nhs.net",
+                "administrator": "neelima.guntupalli1+fhh39_admin1@nhs.net",
+                "lead administrator": "neelima.guntupalli1+fhh39lead@nhs.net",
                 "default_site": "Aspire Pharmacy"
             },
             "aspire pharmacy (the concourse shopping centre)": {
-                "recorder": "neelima.guntupalli1+fhh39_recorder@nhs.net",
-                "administrator": "neelima.guntupalli1+fhh39_admin@nhs.net",
-                "lead administrator": "neelima.guntupalli1+fhh39@nhs.net",
+                "recorder": "neelima.guntupalli1+fhh39_recorder1@nhs.net",
+                "administrator": "neelima.guntupalli1+fhh39_admin1@nhs.net",
+                "lead administrator": "neelima.guntupalli1+fhh39lead@nhs.net",
                 "default_site": "Aspire Pharmacy"
             }
         },
         "branch surgery": {
-            "recorder": "neelima.guntupalli1+airevalley_recorder@nhs.net",
-            "administrator": "neelima.guntupalli1+airevalley_admin@nhs.net",
-            "lead administrator": "neelima.guntupalli1+airevalley@nhs.net",
+            "recorder": "neelima.guntupalli1+airevalley_recorder1@nhs.net",
+            "administrator": "neelima.guntupalli1+airevalley_admin1@nhs.net",
+            "lead administrator": "neelima.guntupalli1+airevalley1@nhs.net",
             "default_site": "Aire Valley Surgery"
         }
     }
