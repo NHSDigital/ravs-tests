@@ -5,12 +5,12 @@ import re
 from pages.site_vaccines_add_batch_page import *
 
 add_vaccine_button = ("role", "button", "Add vaccine")
-site_search_input_element = ("placeholder", "Enter 3 or more characters to search")
+site_search_input_element = ("role", "text", "Enter 3 or more characters to search")
 continue_to_add_batch_page_button = ("role", "Continue")
 view_product_button = "//a[text()='View Product']"
 add_batch_link = "//a[text()='Add batch']"
 filter_by_site_dropdown = ("label", "Select site")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def click_view_product_link(vaccine):
     click_link_in_row(vaccine, 0)
