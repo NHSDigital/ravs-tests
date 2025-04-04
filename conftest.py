@@ -40,8 +40,6 @@ SPINNER_ELEMENT = ("role", "status")
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
     browser_version = get_browser_version()
-    # allure.dynamic.label(LabelType.TAG, browser_version)
-    # allure.dynamic.label("browser_version", browser_version)
     if config["browser"] == "mobile":
         logging.info(config["browser"].upper() + f" browser version for " + config["device"] + f" is : {browser_version}")
     else:
