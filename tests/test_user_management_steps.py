@@ -225,7 +225,7 @@ def enter_user_details_for_adding(shared_data, permission_level):
 @then("the check and confirm user screen should be visible")
 def check_and_confirm_screen_should_be_visible(shared_data):
     attach_screenshot("check_and_confirm_user_page_visible")
-    if shared_data["nhs_email_address"] == "neelima.guntupalli1+admin_automated@nhs.net":
+    if shared_data["nhs_email_address"] == "neelima.guntupalli1+admin_automated1@nhs.net":
         assert check_email_already_exists_in_organisation_error_message_text_exists() == True
         attach_screenshot("email_already_exists_in_organisation_error_message_text_exists")
         assert check_email_already_exists_in_organisation_error_message_link_exists() == True
