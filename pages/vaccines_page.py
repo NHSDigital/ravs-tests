@@ -90,9 +90,7 @@ def get_pack_size_if_required(shared_data, batch_number, batch_expiry_date, pack
     chosen_vaccine = shared_data.get("chosen_vaccine", "").lower()
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
 
-    if ("community pharmacy" in care_model or "branch surgery" in care_model) and \
-       ("covid" in chosen_vaccine or "flu" in chosen_vaccine):
-
+    if ("community pharmacy" in care_model or "branch surgery" in care_model) and ("covid" in chosen_vaccine or "flu" in chosen_vaccine):
         pack_size_xpath = (
             f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/preceding-sibling::td[1]"
