@@ -5,12 +5,12 @@ import re
 from pages.site_vaccines_add_batch_page import *
 
 add_vaccine_button = ("role", "button", "Add vaccine")
-site_search_input_element = ("placeholder", "Enter 3 or more characters to search")
+site_search_input_element = ("role", "textbox", "Enter 3 or more characters to search")
 continue_to_add_batch_page_button = ("role", "Continue")
 view_product_button = "//a[text()='View Product']"
 add_batch_link = "//a[text()='Add batch']"
 filter_by_site_dropdown = ("label", "Select site")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def click_view_product_link(vaccine):
     click_link_in_row(vaccine, 0)
@@ -53,6 +53,63 @@ def click_site_in_search_results_dropdown(site):
 
 def to_title_case(text):
     return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
+
+def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    site = to_title_case(site)
+    vaccine = "COVID-19" if vaccine.lower() == "covid-19" else vaccine
+
+    vaccine_xpath = (
+        f"//table[caption[normalize-space(text())='{site}']]"
+        f"//tr[td[normalize-space(text())='{vaccine}'] and td[normalize-space(text())='{vaccine_type}']]"
+    )
+
+    if check_element_exists(vaccine_xpath, True):
+        view_xpath = (
+            f"{vaccine_xpath}//td[normalize-space(text())='{vaccine_type}']"
+            f"/following-sibling::td//a[normalize-space(text())='View']"
+        )
+
+        javascript_click(view_xpath)
+        attach_screenshot("clicked_view_vaccine_element")
+
+        batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
+        batch_xpath = (
+            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"/following-sibling::td/strong[text()='Active']"
+        )
+
+        print(f"DEBUG: Checking batch XPath: {batch_xpath}")
+        return check_element_exists(batch_xpath, True)
+
+    print(f"DEBUG: Vaccine row not found: {vaccine_xpath}")
+    return False
+
+def get_pack_size_if_required(shared_data, batch_number, batch_expiry_date, pack_size):
+    care_model = shared_data.get("care_model", "").lower()
+    chosen_vaccine = shared_data.get("chosen_vaccine", "").lower()
+    batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
+
+    if ("community pharmacy" in care_model or "branch surgery" in care_model) and ("covid" in chosen_vaccine or "flu" in chosen_vaccine):
+        pack_size_xpath = (
+            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"/preceding-sibling::td[1]"
+        )
+
+        if check_element_exists(pack_size_xpath):
+            pack_size_text = find_element_and_perform_action(pack_size_xpath, "get_text")
+            if pack_size_text:
+                return pack_size_text.strip()
+        edit_batch_xpath = (
+            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"/following-sibling::td/strong[text()='Active']/parent::td"
+            f"/following-sibling::td[2]//a[contains(@id, 'editBatchId')]"
+        )
+        find_element_and_perform_action(edit_batch_xpath, "click")
+        select_pack_size(pack_size)
+        return pack_size
+    return None
+
 
 def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_active(shared_data, site, vaccine, vaccine_type, batch_number, batch_expiry_date):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)

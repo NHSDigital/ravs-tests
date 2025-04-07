@@ -73,7 +73,7 @@ Examples:
 Examples:
   | index | nhs_number | site                     | vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name          | dob        | address                                          | chosen_vaccine | batch_number     | batch_expiry_date | new_nhs_number | new_patient_name | new_vaccine_product | care_model         | user_role          |
   | 5     | 9449303975 | Weaverham Surgery   | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Flu                  | Trust site         | lead administrator |
-  | 6     | 9449303975 | Aspire Pharmacy  | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | Flu       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Flu                  | Community pharmacy | administrator      |
+  | 6     | 9449303975 | Aspire Pharmacy  | Outreach event       | yes         | today-1     | yes     | yes         | today-1          | ROS METHERALL | 19/8/1999  | 10 GREENACRES, BOOKHAM, LEATHERHEAD, SURREY, KT23 3NG | COVID-19       | AUTOMATION-C10   | 19/10/2026        | 9449306125     | NEELY SCULLION    | Flu                  | Community pharmacy | administrator      |
 
 @persistValues
   Scenario Outline: Fields should not persist when user changes vaccine product type when recording a vaccination

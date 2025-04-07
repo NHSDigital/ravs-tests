@@ -1,17 +1,18 @@
 import time
 from init_helpers import *
 
-SITE_SEARCH = ("placeholder", "Enter 3 or more characters to search")
+SITE_SEARCH = ("role", "textbox", "Enter 3 or more characters to search")
 CONTINUE_TO_ADD_VACCINE_BUTTON = ("role", "button", "Continue")
 SITE_LIST = (".siteRows")
 # ERROR_BATCH_ALREADY_EXISTS = "//p[text()='Error! One or more vaccine batches already exist at a site.']"
 CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def enter_site_name(site):
     if site.lower() == "Aspire Pharmacy".lower():
         site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(2)
     if check_element_exists(SITE_SEARCH):
         time.sleep(5)
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)

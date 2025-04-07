@@ -155,10 +155,10 @@ jobs:
 
       - name: Install Allure Commandline
         run: |
-          curl -o allure-commandline-2.17.3.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.3/allure-commandline-2.17.3.tgz && \
-          tar -zxvf allure-commandline-2.17.3.tgz -C /opt/ && \
-          sudo ln -s /opt/allure-2.17.3/bin/allure /usr/bin/allure && \
-          rm -rf allure-commandline-2.17.3.tgz
+          curl -o allure-commandline-2.25.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.25.0/allure-commandline-2.25.0.tgz && \
+          tar -zxvf allure-commandline-2.25.0.tgz -C /opt/ && \
+          sudo ln -s /opt/allure-2.25.0/bin/allure /usr/bin/allure && \
+          rm -rf allure-commandline-2.25.0.tgz
 
       - name: Run Tests
         env:
