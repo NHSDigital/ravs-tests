@@ -5,6 +5,7 @@ FIND_A_PATIENT_NAV_ELEMENT = ("role", "link", "Find a patient")
 VACCINES_NAV_ELEMENT = ("role", "link", "Vaccines")
 REPORTS_NAV_ELEMENT = ("role", "link", "Reports")
 MANAGE_USERS_NAV_ELEMENT = ("role", "link", "Manage users")
+RECORD_VACCINATIONS_NAV_ELEMENT = ("role", "link", "Record vaccinations")
 NHS_LOGO_NAV_ELEMENT = ("role", "link", "NHS Logo Record a vaccination")
 LOGOUT_NAV_ELEMENT = ("role", "link", "Log Out")
 NAV_BAR_TOGGLER = ("//button[@class='navbar-toggler']")
@@ -214,6 +215,16 @@ def click_manage_users_nav_link():
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(ADD_USER_BUTTON)
+
+def check_record_vaccinations_nav_link_exists():
+    handle_unresponsive_page()
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_exists(RECORD_VACCINATIONS_NAV_ELEMENT)
+
+def click_record_vaccinations_nav_link():
+    handle_unresponsive_page()
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    find_element_and_perform_action(RECORD_VACCINATIONS_NAV_ELEMENT, "click")
 
 def click_find_a_patient_nav_link():
     handle_unresponsive_page()
