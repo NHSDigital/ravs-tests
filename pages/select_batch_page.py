@@ -5,7 +5,7 @@ CONTINUE_TO_ELIGIBILITY_SCREEN = ("role", "button", "Continue")
 SELECT_BATCH_ERROR_MESSAGE_LINK = ("role", "link", "Select a batch")
 SELECT_BATCH_ERROR_MESSAGE_TEXT = ("text", "Error: Select a batch")
 
-def check_which_vaccine_are_you_giving_label_exists():
+def check_which_batch_are_you_giving_label_exists():
     wait_for_element_to_appear(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT)
     return check_element_exists(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT)
 
@@ -22,7 +22,7 @@ def check_select_batch_error_message_text_exists():
     wait_for_element_to_appear(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT)
     return check_element_exists(SELECT_BATCH_ERROR_MESSAGE_TEXT)
 
-def click_select_vaccine_error_message_link():
+def click_select_batch_error_message_link():
     wait_for_element_to_appear(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT)
     find_element_and_perform_action(SELECT_BATCH_ERROR_MESSAGE_LINK, "click")
 
