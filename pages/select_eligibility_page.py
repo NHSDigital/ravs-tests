@@ -5,7 +5,7 @@ CONTINUE_TO_VACCINATION_LOCATION_SCREEN = ("role", "button", "Continue")
 SELECT_ELIGIBILITY_ERROR_MESSAGE_LINK = ("role", "link", "Select why you are giving them the vaccine")
 SELECT_ELIGIBILITY_ERROR_MESSAGE_TEXT = ("text", "Error: Select why you are giving them the vaccine")
 
-def check_why_are_you_giving_eligibility_label_exists():
+def check_why_are_you_giving_vaccination_label_exists():
     wait_for_element_to_appear(WHY_ARE_YOU_GIVING_THE_THEM_THE_VACCINE_TEXT_ELEMENT)
     return check_element_exists(WHY_ARE_YOU_GIVING_THE_THEM_THE_VACCINE_TEXT_ELEMENT)
 
