@@ -195,7 +195,6 @@ def set_clinician_details(shared_data, site):
         shared_data['eligibility_assessing_clinician'] = get_assessing_clinician(shared_data["index"])
         shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
 
-
 def navigate_to_ravs():
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
@@ -271,7 +270,34 @@ def check_vaccine_and_batch_exists_in_site_api_request(site, vaccine, vaccineTyp
 def logged_into_ravs_app(shared_data):
     navigate_and_login(shared_data)
 
-@given(parse('I am logged into the RAVS app with the {username}'))
+@given(parse('I am logged into the RAVS app as role {user_role} with the email address {email_address}'))
+def logged_into_ravs_app_with_email_address(shared_data, user_role, email_address):
+    shared_data["email_address"] = email_address
+    shared_data["user_role"] = user_role
+    navigate_and_login_with_username(email_address)
+
+@given(parse("the logged in user is identified as a {clinician} (true/false)"))
+def logged_in_user_is_clinician(shared_data, clinician):
+    shared_data["is_clinician"] = clinician
+
+@given(parse("I retrieve the vaccine product at index {index} for {chosen_vaccine}"))
+def get_vaccine_product_based_on_index_and_chosen_vaccine(shared_data, index, chosen_vaccine):
+    shared_data["index"] = index
+    shared_data["chosen_vaccine"] = chosen_vaccine
+    shared_data["chosen_vaccine_product"] = get_vaccination_type(index, chosen_vaccine)
+
+@given(parse("I ensure that site has the batch number {batch_number} and expiry date {expiry_date} for the chosen vaccine"))
+def get_vaccine_product_based_on_index_and_chosen_vaccine(shared_data, batch_number, expiry_date):
+    shared_data["batch_number"] = batch_number
+    shared_data["batch_expiry_date"] = expiry_date
+    shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_product"])
+    shared_data["pack_size"] = check_vaccine_and_batch_exists_in_site(shared_data, shared_data["site"], shared_data["chosen_vaccine"], shared_data["chosen_vaccine_product"], batch_number, expiry_date, shared_data["pack_size"])
+
+@given('I click record vaccinations navigation link')
+def I_click_record_vaccinations_nav_link():
+    click_record_vaccinations_nav_link()
+
+@given(parse('I am logged into the RAVS app with the username {username}'))
 def logged_into_ravs_app_with_username(username):
     navigate_and_login_with_username(username)
 
@@ -322,7 +348,6 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
                 shared_data["batch_expiry_date"] = batch_expiry_date
                 click_vaccines_nav_link()
                 add_site_vaccine(site, vaccine, vaccine_type, batch_number, batch_expiry_date, shared_data, pack_size)
-
             else:
                 click_vaccines_nav_link()
                 add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, shared_data, pack_size)

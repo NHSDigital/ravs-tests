@@ -1,7 +1,7 @@
 Feature: Dashboard
 
   Scenario Outline: Dashboard for an organization with no location sites
-    Given I am logged into the RAVS app with the <username>
+    Given I am logged into the RAVS app with the username <username>
     Then the <site> name should be visible on the dashboard page
     And the today vaccinations count should be 0
     And the past 7 days vaccinations count should be 0
