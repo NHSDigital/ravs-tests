@@ -162,7 +162,7 @@ Feature: Reports
       | Branch surgery      | administrator    | Aire Valley Surgery (Rawdon)  |
 
   Scenario Outline: Create report for an organization with no location sites
-    Given I am logged into the RAVS app with the <username>
+    Given I am logged into the RAVS app with the username <username>
     When I click the reports navigation link
     Then the `No vaccination data to report on` message should be displayed
     And the Create report button should be disabled
