@@ -37,7 +37,7 @@ fake = Faker('en_GB')
 
 SPINNER_ELEMENT = ("role", "status")
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
