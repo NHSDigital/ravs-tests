@@ -11,13 +11,13 @@ Feature: Streamlining Recording vaccine
   Scenario Outline: Record a vaccine with nhs number
     Given I click record vaccinations navigation link
     And I set vaccinator as <vaccinator>
-    And I select vaccine - <chosen_vaccine>  # Only covid-19 for MVP
+    And I select vaccine - <chosen_vaccine>
     And I select vaccine product
     And I select batch
-    # And I select patient's eligibility for the vaccine
-    # And I select the location where vaccination was given
-    # And I enter the patient's NHS number - <nhs_number>
-    # And I select where the injection was given
+    And I select patient's eligibility for the vaccine
+    And I select the location where vaccination was given
+    And I enter the patient's NHS number - <nhs_number>
+    And I select where the injection was given
     # And I confirm all details and click check and confirm button
     # Then the vaccination should be recorded successfully
 

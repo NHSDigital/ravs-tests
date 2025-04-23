@@ -9,9 +9,9 @@ def check_where_did_you_give_the_injection_label_exists():
     wait_for_element_to_appear(WHERE_DID_YOU_GIVE_THE_INJECTION_TEXT_ELEMENT)
     return check_element_exists(WHERE_DID_YOU_GIVE_THE_INJECTION_TEXT_ELEMENT)
 
-def click_injection_location_radio_button(location, is_somewhere_else):
+def click_injection_location_radio_button(location):
     wait_for_element_to_appear(WHERE_DID_YOU_GIVE_THE_INJECTION_TEXT_ELEMENT)
-    if is_somewhere_else:
+    if "arm" not in location.lower():
         element = ("role", "radio", "Somewhere else")
         find_element_and_perform_action(element, "click")
     element = ("role", "radio", location)

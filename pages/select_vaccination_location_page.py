@@ -26,5 +26,5 @@ def click_select_vaccination_location_error_message_link():
     wait_for_element_to_appear(WHERE_DID_THE_VACCINATION_TAKE_PLACE_TEXT_ELEMENT)
     find_element_and_perform_action(SELECT_VACCINATION_LOCATION_ERROR_MESSAGE_LINK, "click")
 
-def click_continue_to_find_patient_nhs_number_screen():
+def click_continue_to_find_patient_by_nhs_number_screen():
     find_element_and_perform_action(CONTINUE_TO_PATIENT_NHS_NUMBER_SCREEN, "click")

@@ -1,7 +1,7 @@
 from init_helpers import *
 
 WHICH_VACCINE_ARE_YOU_GIVING_TEXT_ELEMENT = ("role", "heading", "Which vaccine are you giving?")
-CONTINUE_TO_CHOOSE_BATCH_SCREEN = ("role", "button", "Continue")
+CONTINUE_TO_CHOOSE_VACCINE_BATCH_SCREEN_BUTTON = ("role", "button", "Continue")
 SELECT_VACCINE_ERROR_MESSAGE_LINK = ("role", "link", "Select the vaccine")
 SELECT_VACCINE_ERROR_MESSAGE_TEXT = ("text", "Error: Select the vaccine")
 SELECT_VACCINE_PRODUCT_ERROR_MESSAGE_LINK = ("role", "link", "Select the vaccine product")
@@ -46,4 +46,4 @@ def click_select_vaccine_product_error_message_link():
     find_element_and_perform_action(SELECT_VACCINE_PRODUCT_ERROR_MESSAGE_LINK, "click")
 
 def click_continue_to_choose_batch_screen():
-    find_element_and_perform_action(CONTINUE_TO_CHOOSE_BATCH_SCREEN, "click")
+    find_element_and_perform_action(CONTINUE_TO_CHOOSE_VACCINE_BATCH_SCREEN_BUTTON, "click")

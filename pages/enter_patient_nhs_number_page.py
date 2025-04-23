@@ -2,6 +2,7 @@ from init_helpers import *
 
 WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT = ("role", "heading", "What is the patient's NHS number?")
 CONTINUE_TO_INJECTION_LOCATION_SCREEN = ("role", "button", "Continue")
+PATIENT_NHS_NUMBER_TEXTBOX = ("role", "textbox", "What is the patient's NHS number?")
 ENTER_PATIENT_NHS_NUMBER_ERROR_MESSAGE_LINK = ("role", "link", "Enter the patient's NHS number")
 ENTER_PATIENT_NHS_NUMBER_ERROR_MESSAGE_TEXT = ("text", "Error: Enter the patient's NHS number")
 ENTER_VALID_NHS_NUMBER_ERROR_MESSAGE_LINK = ("role", "link", "Enter a valid NHS number")
@@ -12,6 +13,10 @@ ENTER_10_DIGIT_NHS_NUMBER_ERROR_MESSAGE_TEXT = ("text", "Error: Enter a valid NH
 def check_what_is_the_patients_nhs_number_label_exists():
     wait_for_element_to_appear(WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT)
     return check_element_exists(WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT)
+
+def enter_patient_nhs_number(nhs_number):
+    wait_for_element_to_appear(WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT)
+    find_element_and_perform_action(PATIENT_NHS_NUMBER_TEXTBOX, "input_text", nhs_number)
 
 def click_eligibility_radio_button(location):
     wait_for_element_to_appear(WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT)
