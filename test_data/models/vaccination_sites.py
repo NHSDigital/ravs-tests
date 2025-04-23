@@ -5,6 +5,4 @@ vaccination_sites = [
     "Right buttock",
     "Left thigh",
     "Right thigh",
-    "Nasal",
-    "Oral"
 ]
