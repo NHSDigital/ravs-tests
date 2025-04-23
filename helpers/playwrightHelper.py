@@ -494,6 +494,9 @@ class BasePlaywrightHelper:
                         else:
                             element.select_option(value=inputValue)
                             print(f"Selected option by label '{inputValue}' successfully.")
+                    elif action.lower() == "get_options":
+                        options = element.evaluate("(el) => Array.from(el.options).map(option => option.text)")
+                        return options
                     elif action.lower() == "clear":
                         element.fill('')
                         print(f"Cleared text from the element: {element}.")
