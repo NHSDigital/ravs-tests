@@ -97,6 +97,9 @@ def select_vaccination_site(site):
 def select_batch_number(batchNumber):
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
 
+def get_batch_number_options():
+    return find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "get_options")
+
 def select_reason_for_no_vaccination(reason):
     find_element_and_perform_action(NO_VACCINATION_REASON_DROPDOWN_ELEMENT, "select_option", reason)
 

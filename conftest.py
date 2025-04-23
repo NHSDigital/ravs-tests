@@ -130,7 +130,6 @@ def navigate_and_login(shared_data, user_role=None, site=None):
         shared_data["emailAddress"] = email_mapping["community pharmacy"][site].get(user_role, "neelima.guntupalli1@nhs.net")
     elif site in email_mapping and user_role in email_mapping.get(site, {}):
         shared_data["emailAddress"] = email_mapping[site].get(user_role, "neelima.guntupalli1@nhs.net")
-
     if site:
         site_lower = site.lower()
         community_pharmacy_sites = ["aspire pharmacy", "leeds pharmacy"]
@@ -528,6 +527,8 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, v
         attach_screenshot("selected_vaccination_site")
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         logging.debug("Batch number to select is: " + batch_number_to_select)
+        batch_number_options = get_batch_number_options()
+        logging.debug("Batch number options are: " + str(batch_number_options))
         if select_batch:
             select_batch_number(batch_number_to_select)
         attach_screenshot("selected_batch_number")
@@ -541,6 +542,8 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, v
         attach_screenshot("entered_dose_amount_value")
         if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
+            batch_number_options = get_batch_number_options()
+            logging.debug("Batch number options are: " + str(batch_number_options))
             select_batch_number(batch_number_to_select)
             attach_screenshot("selected_batch_number")
             click_continue_to_check_and_confirm_vaccination_screen_button()
@@ -579,6 +582,8 @@ def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_mod
         attach_screenshot("selected_vaccination_site")
         batch_number_to_select = batch_number.upper() + " - " + batch_expiry_date
         logging.debug("Batch number to select is: " + batch_number_to_select)
+        batch_number_options = get_batch_number_options()
+        logging.debug("Batch number options are: " + str(batch_number_options))
         select_batch_number(batch_number_to_select)
         attach_screenshot("selected_batch_number")
         enter_dose_amount_value(dose_amount)
