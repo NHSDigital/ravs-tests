@@ -6,6 +6,7 @@ Feature: Streamlining Recording vaccine
   And the logged in user is identified as a <clinician> (true/false)
   And I retrieve the vaccine product at index <index> for <chosen_vaccine>
   And I ensure that site has the batch number <batch_number> and expiry date <expiry_date> for the chosen vaccine
+  And I find the patient with <nhs_number> and click on patient's <name> and the get the count of immunisation history records for the chosen vaccine <chosen_vaccine>
 
   @recordvaccine
   Scenario Outline: Record a vaccine with nhs number
@@ -18,12 +19,13 @@ Feature: Streamlining Recording vaccine
     And I select the location where vaccination was given
     And I enter the patient's NHS number - <nhs_number>
     And I select where the injection was given
-    # And I confirm all details and click check and confirm button
-    # Then the vaccination should be recorded successfully
+    And I confirm patient's name as <name>, date of birth as <date_of_birth>, address as <address> and the given vaccination details
+    And I click confirm and save button
+    Then the vaccination should be recorded successfully
 
     Examples:
-    | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model |
-    | 0     | lead administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C-10-JN | 19/10/2031  | None | 9470040228 | community pharmacy |
+    | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model | name | date_of_birth | address |
+    | 0     | lead administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C-10-JN | 19/10/2031  | None | 9470040228 | community pharmacy | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN |
 
   #     # | 2 | 9470040228 | Spire Cheshire Hospital  | Hospital hub for staff and patients | yes  | today-1  | yes | yes | today | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | COVID-19 |  AUTOMATION-C10  | 19/2/2026 |
   #     # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |

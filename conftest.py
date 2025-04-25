@@ -626,6 +626,14 @@ def navigate_and_login_with_username(username):
     click_nhs_signin_button()
     attach_screenshot("clicked_nhs_signin_button")
 
+@given(parse("I find the patient with {nhs_number} and click on patient's {name} and the get the count of immunisation history records for the chosen vaccine {chosen_vaccine}"))
+def step_find_patient_and_get_count_of_immunisation_history_records_before_recording_using_streamlining(name, nhs_number, chosen_vaccine, shared_data):
+    click_find_a_patient_and_search_with_nhs_number(nhs_number)
+    click_on_patient_name_search_result(name)
+    immunisation_history_records = get_count_of_immunisation_history_records(chosen_vaccine)
+    attach_screenshot("immunisation_history_records_count_is_" + str(immunisation_history_records))
+    shared_data["immunisation_history_records_count_before_recording"] = immunisation_history_records
+
 @given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date}"))
 def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, shared_data):
     shared_data["nhs_number"] = nhs_number
