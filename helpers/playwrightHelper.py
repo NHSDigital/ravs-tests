@@ -43,6 +43,7 @@ class BasePlaywrightHelper:
         try:
             self.browser = self.playwright.chromium.launch(channel="msedge",headless=headless_mode, args=["--fullscreen"])
             self.context = self.browser.new_context()
+            self.context.tracing.start(screenshots=True, snapshots=True, sources=True)
             self.page = self.context.new_page()
         except Exception as e:
                 print(f"Error launching Edge: {e}")
@@ -139,6 +140,13 @@ class BasePlaywrightHelper:
     def close_browser(self):
         try:
             if self.context:
+                trace_path = os.path.join(self.working_directory, "trace.zip")
+                try:
+                    self.context.tracing.stop(path=trace_path)
+                    print(f"Trace saved to {trace_path}")
+                except Exception as trace_error:
+                    print(f"An error occurred while stopping tracing: {trace_error}")
+
                 self.context.close()
             if self.browser:
                 self.browser.close()

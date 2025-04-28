@@ -183,6 +183,13 @@ jobs:
           path: allure-results
           if-no-files-found: error
 
+      - name: Upload Playwright Trace
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-trace
+          path: trace*.zip
+          if-no-files-found: warn
+
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
