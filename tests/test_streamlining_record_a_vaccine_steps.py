@@ -64,7 +64,7 @@ def I_select_batch(shared_data):
 
 @given(parse("I select patient's eligibility for the vaccine"))
 def I_select_eligibility(shared_data):
-    shared_data["eligibility"] = get_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
+    shared_data["eligibility"] = get_new_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
     click_eligibility_radio_button(shared_data["eligibility"])
     attach_screenshot(f'click_{shared_data["eligibility"]}_radio_button')
     click_continue_to_choose_vaccination_location_screen()
@@ -76,7 +76,7 @@ def I_select_vaccination_location(shared_data):
     click_vaccination_location_radio_button(shared_data["vaccination_location"])
     attach_screenshot(f'clicked_{shared_data["vaccination_location"]}_radio_button')
     if shared_data["vaccination_location"].lower() == "care home":
-        enter_care_home_details("WHITESTONES CARE HOME")
+        enter_and_select_care_home_details("WHITESTONES CARE HOME")
         attach_screenshot("entered__whitestones_care_home_details")
     click_continue_to_find_patient_by_nhs_number_screen()
     attach_screenshot("clicked_continue_to_find_patient_by_nhs_number_screen")
