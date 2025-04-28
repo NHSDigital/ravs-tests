@@ -28,6 +28,7 @@ from test_data.models.assess_vaccine_not_given_reasons import assessment_vaccine
 from test_data.models.no_consent_reasons import no_consent_reasons
 from test_data.models.no_vaccination_reasons import assessment_vaccine_not_given_reasons
 from test_data.models.covid_eligibility_types import covid_eligibility_types
+from test_data.models.covid_new_eligibility_types import covid_new_eligibility_types
 from test_data.models.flu_eligibility_types import flu_eligibility_types
 from test_data.models.rsv_eligibility_types import rsv_eligibility_types
 from test_data.models.pertussis_eligibility_types import pertussis_eligibility_types
@@ -76,6 +77,17 @@ def get_eligibility_type(index, vaccine):
     if vaccine.lower() == "covid-19":
         index = get_wrapped_index(index, len(covid_eligibility_types))
         return covid_eligibility_types[index]
+    elif vaccine.lower() == "flu":
+        return flu_eligibility_types[get_wrapped_index(index, len(flu_eligibility_types))]
+    elif "rsv" in vaccine.lower():
+        return rsv_eligibility_types[get_wrapped_index(index, len(rsv_eligibility_types))]
+    elif vaccine.lower() == "pertussis":
+        return pertussis_eligibility_types[get_wrapped_index(index, len(pertussis_eligibility_types))]
+
+def get_new_eligibility_type(index, vaccine):
+    if vaccine.lower() == "covid-19":
+        index = get_wrapped_index(index, len(covid_new_eligibility_types))
+        return covid_new_eligibility_types[index]
     elif vaccine.lower() == "flu":
         return flu_eligibility_types[get_wrapped_index(index, len(flu_eligibility_types))]
     elif "rsv" in vaccine.lower():

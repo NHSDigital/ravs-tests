@@ -52,7 +52,7 @@ def click_continue_to_find_patient_by_nhs_number_screen():
     ensure_where_did_the_vaccination_take_place_heading_label_is_visible()
     find_element_and_perform_action(CONTINUE_TO_PATIENT_NHS_NUMBER_SCREEN, "click")
 
-def enter_care_home_details(care_home):
+def enter_and_select_care_home_details(care_home):
     ensure_where_did_the_vaccination_take_place_heading_label_is_visible()
     find_element_and_perform_action(CARE_HOME_TEXTBOX, "input_text", care_home)
     element = ("role", "option", care_home)
