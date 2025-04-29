@@ -7,7 +7,7 @@ REPORTS_NAV_ELEMENT = ("role", "link", "Reports")
 MANAGE_USERS_NAV_ELEMENT = ("role", "link", "Manage users")
 RECORD_VACCINATIONS_NAV_ELEMENT = ("role", "link", "Record vaccinations")
 NHS_LOGO_NAV_ELEMENT = ("role", "link", "NHS Logo Record a vaccination")
-LOGOUT_NAV_ELEMENT = ("role", "link", "Log Out")
+LOGOUT_NAV_ELEMENT = ("role", "link", "Log out")
 NAV_BAR_TOGGLER = ("//button[@class='navbar-toggler']")
 NAV_LINK_BAR_TOGGLER = ("//button[@class='navbar-toggler p-2']")
 FEEDBACK_LINK = ("role", "link", "feedback (opens in a new tab)")
@@ -30,62 +30,67 @@ TODAY_VACCINATION_COUNT = ("id", "today-vaccinations")
 WEEK_VACCINATION_COUNT = ("id", "week-vaccinations")
 MONTH_VACCINATION_COUNT = ("id", "month-vaccinations")
 CREATE_A_REPORT_LINK = ("role", "link", "create a report")
+TOTAL_VACCINATIONS_TEXT_ELEMENT = ("role", "heading", "Total vaccinations")
+
+def ensure_log_out_nav_element_exists():
+    if not check_element_exists(LOGOUT_NAV_ELEMENT):
+        wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
 
 def check_feedback_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(FEEDBACK_LINK)
 
 def check_accessibility_statement_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(ACCESSIBILITY_STATEMENT_LINK)
 
 def check_terms_of_use_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(TERMS_OF_USE_LINK)
 
 def check_user_guide_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(USER_GUIDE_LINK)
 
 def click_accessibility_statement_link():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(ACCESSIBILITY_STATEMENT_LINK, "click")
 
 def click_user_guide_link():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(USER_GUIDE_LINK, "click")
 
 def click_terms_of_use_link():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(TERMS_OF_USE_LINK, "click")
 
 def check_add_vaccines_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(ADD_VACCINES_LINK)
 
 def check_add_users_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(ADD_USERS_LINK)
 
 def check_find_a_patient_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(FIND_A_PATIENT_LINK)
 
 def click_add_vaccines_link():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(ADD_VACCINES_LINK, "click")
 
 def click_add_users_link():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(ADD_USERS_LINK, "click")
 
 def click_find_a_patient_link():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(FIND_A_PATIENT_LINK, "click")
 
 def check_site_name_exists_in_dashboard(site):
     element = ("role", "heading", site)
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(element)
 
 def get_today_vaccinations_count():
@@ -104,7 +109,7 @@ def get_month_vaccinations_count():
     return count[0]
 
 def check_create_a_report_link_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(CREATE_A_REPORT_LINK)
 
 def click_feedback_link_exists():
@@ -139,7 +144,7 @@ def click_help_and_guidance_link_exists():
     find_element_and_perform_action(HELP_AND_GUIDANCE_LINK, "click")
 
 def click_logout_button():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     time.sleep(1)
@@ -153,81 +158,87 @@ def click_nav_link_bar_toggler():
     find_element_and_perform_action(NAV_LINK_BAR_TOGGLER, "click")
 
 def check_logout_button_exists():
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    ensure_log_out_nav_element_exists()
     return check_element_exists(LOGOUT_NAV_ELEMENT, True)
 
 def check_navbar_toggle_exists_without_waiting():
+    ensure_log_out_nav_element_exists()
     return check_element_exists(NAV_BAR_TOGGLER, False)
 
 def check_navbar_toggle_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(NAV_BAR_TOGGLER)
     return check_element_exists(NAV_BAR_TOGGLER, True)
 
 def check_nav_link_bar_toggle_exists_without_waiting():
+    ensure_log_out_nav_element_exists()
     return check_element_exists(NAV_LINK_BAR_TOGGLER, False)
 
 def check_nav_link_bar_toggle_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(NAV_LINK_BAR_TOGGLER)
     return check_element_exists(NAV_LINK_BAR_TOGGLER, True)
 
 def check_logout_button_exists_without_waiting():
+    ensure_log_out_nav_element_exists()
     return check_element_exists(LOGOUT_NAV_ELEMENT, False)
 
 def click_profile_nav_link(email):
+    # ensure_log_out_nav_element_exists()
+    ensure_log_out_nav_element_exists()
     element = ("role", "link", email)
-    handle_unresponsive_page()
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_reports_nav_link_exists():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     return check_element_exists(REPORTS_NAV_ELEMENT)
 
 def click_reports_nav_link():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(REPORTS_NAV_ELEMENT)
     find_element_and_perform_action(REPORTS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)
 
 def check_vaccines_nav_link_exists():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     return check_element_exists(VACCINES_NAV_ELEMENT)
 
 def click_vaccines_nav_link():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(VACCINES_NAV_ELEMENT)
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(ADD_VACCINE_BUTTON)
 
 def check_manage_users_nav_link_exists():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     return check_element_exists(MANAGE_USERS_NAV_ELEMENT)
 
 def click_manage_users_nav_link():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(MANAGE_USERS_NAV_ELEMENT)
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(ADD_USER_BUTTON)
 
 def check_record_vaccinations_nav_link_exists():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     return check_element_exists(RECORD_VACCINATIONS_NAV_ELEMENT)
 
 def click_record_vaccinations_nav_link():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     find_element_and_perform_action(RECORD_VACCINATIONS_NAV_ELEMENT, "click")
 
 def click_find_a_patient_nav_link():
-    handle_unresponsive_page()
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     find_element_and_perform_action(FIND_A_PATIENT_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)

@@ -34,50 +34,64 @@ PATIENT_DATE_OF_BIRTH_ELEMENT = ("xpath", "//dt[text()='Date of birth']/followin
 PATIENT_GENDER_ELEMENT = ("xpath", "//dt[text()='Gender']/following-sibling::dd")
 PATIENT_PHONE_NUMBER_ELEMENT = ("xpath", "//dt[text()='Phone number']/following-sibling::dd")
 PATIENT_ADDRESS_ELEMENT = ("xpath", "//dt[text()='Address']/following-sibling::dd")
+PATIENT_DETAILS_TEXT_HEADING_ELEMENT = ("role", "heading", "Patient details")
+
+def ensure_patient_details_heading_element_exists():
+    if not check_element_exists(PATIENT_DETAILS_TEXT_HEADING_ELEMENT):
+        wait_for_element_to_appear(PATIENT_DETAILS_TEXT_HEADING_ELEMENT)
 
 def get_patient_name_value_in_patient_details_screen():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
     return find_element_and_perform_action(PATIENT_NAME_ELEMENT, "get_text")
 
 def get_patient_nhs_number_value_in_patient_details_screen():
+    ensure_patient_details_heading_element_exists()
     return find_element_and_perform_action(PATIENT_NHS_NUMBER_ELEMENT, "get_text")
 
 def get_patient_date_of_birth_value_in_patient_details_screen():
+    ensure_patient_details_heading_element_exists()
     return find_element_and_perform_action(PATIENT_DATE_OF_BIRTH_ELEMENT, "get_text")
 
 def get_patient_gender_value_in_patient_details_screen():
+    ensure_patient_details_heading_element_exists()
     return find_element_and_perform_action(PATIENT_GENDER_ELEMENT, "get_text")
 
 def get_patient_phone_number_value_in_patient_details_screen():
+    ensure_patient_details_heading_element_exists()
     return find_element_and_perform_action(PATIENT_PHONE_NUMBER_ELEMENT, "get_text")
 
 def get_patient_address_value_in_patient_details_screen():
+    ensure_patient_details_heading_element_exists()
     return find_element_and_perform_action(PATIENT_ADDRESS_ELEMENT, "get_text")
 
 def check_vaccine_history_not_available_label_element_exists():
     time.sleep(2)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
     time.sleep(3)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
 
 def check_covid_history_element_exists():
+    ensure_patient_details_heading_element_exists()
     return check_element_exists(COVID_HISTORY_ELEMENT)
 
 def check_flu_history_element_exists():
+    ensure_patient_details_heading_element_exists()
     return check_element_exists(FLU_HISTORY_ELEMENT)
 
 def check_rsv_history_element_exists():
+    ensure_patient_details_heading_element_exists()
     return check_element_exists(RSV_HISTORY_ELEMENT)
 
 def check_pertussis_history_element_exists():
+    ensure_patient_details_heading_element_exists()
     return check_element_exists(PERTUSSIS_HISTORY_ELEMENT)
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
     time.sleep(3)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
     time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
@@ -98,7 +112,7 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
         return 0
 
 def get_immunisation_history_details_of_vaccine(index):
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     element_selector = f"(//dl[@class='nhsuk-summary-list mb-1'])[{index}]"
     element = ("xpath", element_selector)
@@ -107,7 +121,7 @@ def get_immunisation_history_details_of_vaccine(index):
     return vaccine_summary_list_rows_elements
 
 def get_vaccine_program_details(history_index):
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
     vaccine_summary_list_rows_elements = get_immunisation_history_details_of_vaccine(history_index)
     if vaccine_summary_list_rows_elements:
         vaccine_program = vaccine_summary_list_rows_elements[0].query_selector('.nhsuk-summary-list__row:nth-child(1) .nhsuk-summary-list__value').inner_text()
@@ -160,15 +174,19 @@ def get_vaccine_data_source_details(history_index):
         return None
 
 def click_show_all_covid_history_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(SHOW_ALL_BUTTON_COVID_RECORDS, "click")
 
 def click_show_all_flu_history_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(SHOW_ALL_BUTTON_FLU_RECORDS, "click")
 
 def click_show_all_rsv_history_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(SHOW_ALL_BUTTON_RSV_RECORDS, "click")
 
 def click_show_all_pertussis_history_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(SHOW_ALL_BUTTON_PERTUSSIS_RECORDS, "click")
 
 def click_delete_history_button(vaccine, index):
@@ -200,47 +218,61 @@ def click_edit_history_button(vaccine, index):
     find_element_and_perform_action(element, "click")
 
 def click_report_errors_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(REPORT_ERRORS_BUTTON, "click")
 
 def click_expand_covid_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(COLLAPSED_COVID_19_BUTTON, "click")
 
 def click_collapse_covid_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(EXPANDED_COVID_19_BUTTON, "click")
 
 def click_expand_flu_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(COLLAPSED_FLU_BUTTON, "click")
 
 def click_collapse_flu_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(EXPANDED_FLU_BUTTON, "click")
 
 def click_expand_rsv_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(COLLAPSED_RSV_BUTTON, "click")
 
 def click_collapse_rsv_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(EXPANDED_RSV_BUTTON, "click")
 
 def click_expand_pertussis_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(COLLAPSED_PERTUSSIS_BUTTON, "click")
 
 def click_collapse_pertussis_history():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(EXPANDED_PERTUSSIS_BUTTON, "click")
 
 def click_check_in_and_return_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(CHECK_IN_AND_RETURN_BUTTON, "click")
 
 def click_choose_vaccine_button():
+    ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     find_element_and_perform_action(CHOOSE_VACCINE_BUTTON, "click")
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_patient_details_heading_element_exists()
 
 def click_patient_did_not_show_button():
+    ensure_patient_details_heading_element_exists()
     find_element_and_perform_action(PATIENT_DID_NOT_SHOW_BUTTON, "click")
 
 def click_back_button_on_patient_details_page():
+    ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(BACK_BUTTON_ON_PATIENT_DETAILS_PAGE)
     find_element_and_perform_action(BACK_BUTTON_ON_PATIENT_DETAILS_PAGE, "click")
 
 def check_choose_vaccine_button_exists():
+    ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(CHOOSE_VACCINE_BUTTON, True)
