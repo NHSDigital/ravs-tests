@@ -4,6 +4,7 @@ CONFIRM_DETAILS_AND_SAVE_BUTTON = ("//button[text()='Confirm details and save']"
 CANCEL_CHECK_AND_CONFIRM_BUTTON = ("//button[text()='Cancel']")
 ERROR_VACCINE_ALREADY_EXIST_AT_SITE = ("#error-summary-title")
 
+
 def check_confirm_details_and_save_button_exists():
     return check_element_exists(CONFIRM_DETAILS_AND_SAVE_BUTTON, False)
 

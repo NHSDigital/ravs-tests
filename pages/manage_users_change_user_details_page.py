@@ -14,6 +14,7 @@ ARE_THEY_NO_LONGING_WORKING_HERE_TEXT_ELEMENT = ("text", "Are they no longer wor
 
 def ensure_are_they_no_longer_working_test_element_exists():
     if not check_element_exists(ARE_THEY_NO_LONGING_WORKING_HERE_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ARE_THEY_NO_LONGING_WORKING_HERE_TEXT_ELEMENT)
 
 def get_users_name():

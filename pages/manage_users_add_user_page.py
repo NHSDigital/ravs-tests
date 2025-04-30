@@ -28,6 +28,7 @@ ADD_USER_HEADER_ELEMENT = ("role", "heading", "Add user")
 
 def ensure_add_user_heading_exists():
     if not check_element_exists(ADD_USER_HEADER_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ADD_USER_HEADER_ELEMENT)
 
 def enter_first_name_to_add_user(first_name):

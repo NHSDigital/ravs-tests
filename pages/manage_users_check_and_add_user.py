@@ -15,6 +15,7 @@ CHECK_AND_ADD_USER_TEXT_ELEMENT = ("role", "heading", "Check and add user")
 
 def ensure_check_and_add_user_test_element_exists():
     if not check_element_exists(CHECK_AND_ADD_USER_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHECK_AND_ADD_USER_TEXT_ELEMENT)
 
 def check_confirm_and_send_button_exists():

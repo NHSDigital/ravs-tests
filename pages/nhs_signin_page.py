@@ -15,6 +15,7 @@ NHS_SIGN_IN_HEADING_ELEMENT = ("role", "heading", "NHS Sign In")
 
 def ensure_sign_in_heading_element_exists():
     if not check_element_exists(NHS_SIGN_IN_HEADING_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(NHS_SIGN_IN_HEADING_ELEMENT)
 
 def navigate_to_nhs_signin_page(url):

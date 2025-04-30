@@ -11,6 +11,7 @@ LOGOUT_NAV_ELEMENT = ("role", "link", "Log out")
 
 def ensure_you_are_not_logged_in_label_exists():
     if not check_element_exists(YOU_ARE_NOT_LOGGED_IN_LABEL_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(YOU_ARE_NOT_LOGGED_IN_LABEL_ELEMENT)
 
 def navigate_to_ravs_login_page(url):

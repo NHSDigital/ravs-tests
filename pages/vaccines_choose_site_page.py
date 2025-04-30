@@ -8,7 +8,13 @@ SITE_LIST = (".siteRows")
 CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
+def ensure_choose_site_heading_text_is_visible():
+    if not check_element_exists(CHOOSE_SITE_TITLE):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_appear(CHOOSE_SITE_TITLE)
+
 def enter_site_name(site):
+    ensure_choose_site_heading_text_is_visible()
     if site.lower() == "Aspire Pharmacy".lower():
         site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
@@ -18,17 +24,17 @@ def enter_site_name(site):
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):
+    ensure_choose_site_heading_text_is_visible()
     # element = (f"//div[@class='siteRows' and contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{site.lower()}')]")
     element = ("text", site)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if check_element_exists(element):
         find_element_and_perform_action(element, "click")
 
 def click_continue_to_add_vaccine_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_site_heading_text_is_visible()
     if check_element_exists(SITE_SEARCH):
         find_element_and_perform_action(CONTINUE_TO_ADD_VACCINE_BUTTON, "click")
 
 def check_choose_site_title_exists(wait):
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_site_heading_text_is_visible()
     return check_element_exists(CHOOSE_SITE_TITLE, wait)
