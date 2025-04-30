@@ -34,7 +34,7 @@ PATIENT_DATE_OF_BIRTH_ELEMENT = ("xpath", "//dt[text()='Date of birth']/followin
 PATIENT_GENDER_ELEMENT = ("xpath", "//dt[text()='Gender']/following-sibling::dd")
 PATIENT_PHONE_NUMBER_ELEMENT = ("xpath", "//dt[text()='Phone number']/following-sibling::dd")
 PATIENT_ADDRESS_ELEMENT = ("xpath", "//dt[text()='Address']/following-sibling::dd")
-PATIENT_DETAILS_TEXT_HEADING_ELEMENT = ("role", "heading", "Patient details")
+PATIENT_DETAILS_TEXT_HEADING_ELEMENT = ("role", "heading", "Patient details", True)
 
 def ensure_patient_details_heading_element_exists():
     if not check_element_exists(PATIENT_DETAILS_TEXT_HEADING_ELEMENT):
