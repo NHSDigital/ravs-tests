@@ -57,7 +57,8 @@ def I_set_vaccine_product(shared_data):
 @given(parse("I select batch"))
 def I_select_batch(shared_data):
     shared_data["batch_number_to_select"] = shared_data["batch_number"] + shared_data["batch_expiry_date"]
-    click_batch_radio_button(shared_data["batch_number"])
+    shared_data["batch_expiry_date"] = date_format_with_name_of_month(shared_data["batch_expiry_date"])
+    click_batch_radio_button(shared_data["batch_number"], shared_data["batch_expiry_date"])
     attach_screenshot(f'clicked_{shared_data["batch_number"]}_radio_button')
     click_continue_to_choose_eligibility_screen()
     attach_screenshot("clicked_continue_to_choose_eligibility_screen")
@@ -114,6 +115,9 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     assert get_patient_nhs_number_value_in_check_and_confirm_screen() == shared_data["patient_nhs_number"]
     attach_screenshot(f'patient_nhs_number_value_in_check_and_confirm_screen_should_be_{shared_data["patient_nhs_number"]}')
     assert get_patient_name_value_in_check_and_confirm_screen() == name
+    assert shared_data["batch_number"] in get_patient_vaccination_batch_number_value()
+    assert shared_data["batch_expiry_date"] in get_patient_vaccination_batch_number_value()
+    assert "Expires" in get_patient_vaccination_batch_number_value()
     attach_screenshot("patient_name_value_in_check_and_confirm_screen_should_be_{name}")
     assert get_patient_address_value_in_check_and_confirm_screen() == address
     attach_screenshot(f"patient_address_value_in_check_and_confirm_screen_should_be_{address}")

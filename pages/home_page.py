@@ -89,21 +89,24 @@ def click_find_a_patient_link():
     find_element_and_perform_action(FIND_A_PATIENT_LINK, "click")
 
 def check_site_name_exists_in_dashboard(site):
-    element = ("role", "heading", site)
     ensure_log_out_nav_element_exists()
+    element = ("role", "heading", site)
     return check_element_exists(element)
 
 def get_today_vaccinations_count():
+    ensure_log_out_nav_element_exists()
     text = find_element_and_perform_action(TODAY_VACCINATION_COUNT, "get_text")
     count = re.findall(r'\d+', text)
     return count[0]
 
 def get_week_vaccinations_count():
+    ensure_log_out_nav_element_exists()
     text = find_element_and_perform_action(WEEK_VACCINATION_COUNT, "get_text")
     count = re.findall(r'\d+', text)
     return count[0]
 
 def get_month_vaccinations_count():
+    ensure_log_out_nav_element_exists()
     text = find_element_and_perform_action(MONTH_VACCINATION_COUNT, "get_text")
     count = re.findall(r'\d+', text)
     return count[0]
@@ -113,33 +116,40 @@ def check_create_a_report_link_exists():
     return check_element_exists(CREATE_A_REPORT_LINK)
 
 def click_feedback_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(FEEDBACK_LINK)
     find_element_and_perform_action(FEEDBACK_LINK, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_report_an_issue_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(REPORT_AN_ISSUE_LINK)
     return check_element_exists(REPORT_AN_ISSUE_LINK)
 
 def click_report_an_issue_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(REPORT_AN_ISSUE_LINK)
     find_element_and_perform_action(REPORT_AN_ISSUE_LINK, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_contact_us_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(CONTACT_US_LINK)
     return check_element_exists(CONTACT_US_LINK)
 
 def click_contact_us_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(CONTACT_US_LINK)
     find_element_and_perform_action(CONTACT_US_LINK, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_help_and_guidance_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(HELP_AND_GUIDANCE_LINK)
     return check_element_exists(HELP_AND_GUIDANCE_LINK)
 
 def click_help_and_guidance_link_exists():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(HELP_AND_GUIDANCE_LINK)
     find_element_and_perform_action(HELP_AND_GUIDANCE_LINK, "click")
 
@@ -150,10 +160,12 @@ def click_logout_button():
     time.sleep(1)
 
 def click_navbar_toggler():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(NAV_BAR_TOGGLER)
     find_element_and_perform_action(NAV_BAR_TOGGLER, "click")
 
 def click_nav_link_bar_toggler():
+    ensure_log_out_nav_element_exists()
     wait_for_element_to_appear(NAV_LINK_BAR_TOGGLER)
     find_element_and_perform_action(NAV_LINK_BAR_TOGGLER, "click")
 
