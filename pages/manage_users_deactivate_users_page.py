@@ -8,6 +8,7 @@ DEACTIVATE_HEADING_TEXT_ELEMENT = ("role", "heading", "Deactivate")
 
 def ensure_deactivate_heading_element_exists():
     if not check_element_exists(DEACTIVATE_HEADING_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(DEACTIVATE_HEADING_TEXT_ELEMENT)
 
 def check_deactivated_user_exists_in_list(user_email_address):
