@@ -1,6 +1,6 @@
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 CONTINUE_TO_ADD_USER_BUTTON = ("role", "button", "Continue")
 FIRST_NAME_INPUT_ELEMENT = ("label", "First name")
 LAST_NAME_INPUT_ELEMENT = ("label", "Last name")

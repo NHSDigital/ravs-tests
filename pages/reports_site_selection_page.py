@@ -1,6 +1,6 @@
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 SELECT_SITES_ERROR_MESSAGE_LINK = ("role", "button", "Select sites")
 SELECT_SITES_ERROR_MESSAGE_TEXT = ("text", "Select sites")
 CONTINUE_TO_CHOOSE_DATA_BUTTON = ("role", "button", "Continue")

@@ -1,6 +1,6 @@
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 CONTINUE_TO_CHANGE_USER_DETAILS_USER_BUTTON = ("role", "button", "Continue")
 YES_REGISTERED_CLINICIAN_RADIO_BUTTON = ("label", "Yes")
 NO_REGISTERED_CLINICIAN_RADIO_BUTTON = ("label", "No")

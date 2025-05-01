@@ -1,6 +1,6 @@
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 CONFIRM_AND_SEND_BUTTON = ("role", "button", "Confirm and send")
 CHANGE_NAME_LINK = ("role", "button", "Change name")
 CHANGE_EMAIL_ADDRESS_LINK = ("role", "button", "Change email address")

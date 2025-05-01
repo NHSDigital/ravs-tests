@@ -20,7 +20,7 @@ ERROR_MESSAGE_LINK_BATCH_ALREADY_EXISTS = ("role", "link", "There is already a b
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_NUMBER = ("role", "link", "Enter the batch number")
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_EXPIRY_DATE = ("role", "link", "Enter the expiry date")
 ERROR_MESSAGE_LINK_SELECT_PACK_SIZE = ("role", "link", "Select a pack size")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 VACCINES_HEADING_TEXT_ELEMENT = ("role", "heading", "Vaccines")
 ADD_BATCH_HEADING_TEXT_ELEMENT = ("role", "heading", "Add batch")
 ADD_BATCH_BUTTON = ("role", "link", "Add batch")
@@ -28,18 +28,22 @@ EDIT_BATCH_BUTTON = ("role", "link", "Add batch")
 
 def ensure_vaccines_heading_text_is_visible():
     if not check_element_exists(VACCINES_HEADING_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(VACCINES_HEADING_TEXT_ELEMENT)
 
 def ensure_add_batch_heading_text_is_visible():
     if not check_element_exists(ADD_BATCH_HEADING_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ADD_BATCH_HEADING_TEXT_ELEMENT)
 
 def ensure_edit_batch_heading_text_is_visible():
     if not check_element_exists(ensure_edit_batch_heading_text_is_visible):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ensure_edit_batch_heading_text_is_visible)
 
 def ensure_add_batch_button_is_visible():
     if not check_element_exists(FIRST_ADD_BATCH_BUTTON):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(FIRST_ADD_BATCH_BUTTON)
 
 def select_pack_size(pack_size):

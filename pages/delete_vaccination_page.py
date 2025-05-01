@@ -3,7 +3,7 @@ from pages.patient_details_page import CHOOSE_VACCINE_BUTTON
 
 DELETE_VACCINATION_BUTTON=("role", "button", "delete")
 CANCEL_VACCINATION_DELETE_BUTTON=("role", "button", "Cancel")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_delete_vaccination_button_exists():
     if not check_element_exists(DELETE_VACCINATION_BUTTON):

@@ -1,7 +1,7 @@
 import time
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 REACTIVATE_BUTTON = ("role", "button", "Reactivate")
 REACTIVATE_HEADING_TEXT_ELEMENT = ("role", "heading", "Reactivate")
 

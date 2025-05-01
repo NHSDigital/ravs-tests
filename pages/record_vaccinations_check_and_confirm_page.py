@@ -30,10 +30,11 @@ OPTIONAL_NOTE_TEXT_MESSAGE_ELEMENT = ("text", "This will not be sent to the pati
 CONFIRM_AND_SAVE_BUTTON = ("role", "button", "Confirm and save")
 CANCEL_CONFIRM_DETAILS_BUTTON = ("role", "button", "Cancel")
 BACK_ON_CONFIRM_DETAILS_PAGE_BUTTON = ("role", "link", "Back")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_check_and_confirm_label_is_visible():
     if not check_element_exists(CHECK_AND_CONFIRM_LABEL_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHECK_AND_CONFIRM_LABEL_ELEMENT)
 
 def check_change_patient_nhs_number_link_exists():
