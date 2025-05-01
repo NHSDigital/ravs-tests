@@ -18,7 +18,7 @@ def ensure_choose_site_heading_text_is_visible():
     if not check_element_exists(CHOOSE_SITE_TITLE):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHOOSE_SITE_TITLE)
-        
+
 def ensure_add_vaccine_button_is_visible():
     if not check_element_exists(add_vaccine_button):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
