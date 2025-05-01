@@ -1,7 +1,7 @@
 import time
 from init_helpers import *
 
-LOGIN_BUTTON_ELEMENT = ("role", "button", "Log In")
+LOGIN_BUTTON_ELEMENT = ("role", "button", "Log in")
 YOU_ARE_NOT_LOGGED_IN_LABEL_ELEMENT = ("text", "You are not logged in.")
 ACCEPT_COOKIES_ELEMENT = ("role", "button", "I'm OK with analytics cookies")
 DO_NOT_USE_ANALYTICS_COOKIES_ELEMENT = ("role", "button", "Do not use analytics cookies")
