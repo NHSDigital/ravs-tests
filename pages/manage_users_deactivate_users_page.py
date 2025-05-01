@@ -1,6 +1,6 @@
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 BACK_TO_MANAGE_USERS_LINK = ("role", "button", "Back to Manage users")
 DEACTIVATED_USERS_HEADING = ("role", "heading", "Deactivated users")
 DEACTIVATED_USERS_LIST_TABLE = ("xpath", '//table[contains(@class, "nhsuk-table")]')

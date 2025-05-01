@@ -1,6 +1,6 @@
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 COVID_CHECK_BOX = ("label", "COVID-19")
 FLU_CHECK_BOX = ("label", "Flu")
 PERTUSSIS_CHECK_BOX = ("label", "Pertussis")

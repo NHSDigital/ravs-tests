@@ -28,7 +28,7 @@ FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK = ("role", "link", "From date m
 FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT = ("text", "Error: From date must be in the past")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_LINK = ("role", "button", "The date range must be within 31 days")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_TEXT = ("text", "Error: The date range must be within 31 days")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 FROM_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.day']")
 FROM_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.month']")
 FROM_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.year']")

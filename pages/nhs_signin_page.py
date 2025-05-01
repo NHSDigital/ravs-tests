@@ -10,7 +10,7 @@ ALERT_TEXT_PASSWORD = ("//p[contains(@id, 'input-container-error')]")
 ERROR_UNABLE_TO_SIGN_IN = ("text", "Unable to sign in")
 FOUND_SOME_ERRORS = ("text", "We found some errors. Please review the form and make corrections.")
 LOGOUT_NAV_ELEMENT = ("role", "link", "Log Out")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 NHS_SIGN_IN_HEADING_ELEMENT = ("role", "heading", "NHS Sign In")
 
 def ensure_sign_in_heading_element_exists():

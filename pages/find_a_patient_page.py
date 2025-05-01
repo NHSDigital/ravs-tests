@@ -12,7 +12,7 @@ RECORD_SAVED_DIALOGUE = ("text", "Record saved")
 CLOSE_RECORD_SAVED_DIALOGUE_BUTTON = ("text", "Close")
 SUCCESSFULLY_SAVED_MESSAGE = ("text", "You successfully saved")
 VIEW_RECORD_LINK = ("text", "View record")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 # Shared
 NHS_NUMBER_INPUT = ("id", "NhsNumber")

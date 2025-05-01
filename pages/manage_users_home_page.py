@@ -1,7 +1,7 @@
 import time
 from init_helpers import *
 
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 ADD_USER_BUTTON = ("role", "button", "Add user")
 DEACTIVATED_USERS_LINK = ("xpath", "//a[@href='/manage-users/deactivated-users']")
 MANAGE_USERS_HEADING_ELEMENT = ("role", "heading", "Manage users")

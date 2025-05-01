@@ -5,7 +5,7 @@ LOGIN_BUTTON_ELEMENT = ("role", "button", "Log In")
 YOU_ARE_NOT_LOGGED_IN_LABEL_ELEMENT = ("text", "You are not logged in.")
 ACCEPT_COOKIES_ELEMENT = ("role", "button", "I'm OK with analytics cookies")
 DO_NOT_USE_ANALYTICS_COOKIES_ELEMENT = ("role", "button", "Do not use analytics cookies")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 TOTAL_VACCINATIONS_TEXT_ELEMENT = ("role", "heading", "Total vaccinations")
 LOGOUT_NAV_ELEMENT = ("role", "link", "Log out")
 
