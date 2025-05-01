@@ -3,10 +3,11 @@ from init_helpers import *
 
 VACCINATION_SAVED_LABEL_ELEMENT = ("role", "heading", "Vaccination saved")
 NEXT_VACCINATION_LINK_ELEMENT = ("role", "link", "Next vaccination")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_vaccination_saved_visible():
     if not check_element_exists(VACCINATION_SAVED_LABEL_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(VACCINATION_SAVED_LABEL_ELEMENT)
 
 def check_vaccination_saved_label_exists():

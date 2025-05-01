@@ -25,10 +25,10 @@ Feature: Streamlining Recording vaccine
 
     Examples:
     | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model | name | date_of_birth | address |
-    | 0     | lead administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-SPIKE-JN | 19/10/2031  | None | 9470040228 | community pharmacy | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN |
-    | 1     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C30 | 19/10/2031  | None | 9470057589 | community pharmacy | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIALA15 8BG |
-    | 2     | recorder | Leeds Pharmacy | True      | COVID-19       | AUTO-c10 | 19/10/2031  | None | 9472710255 | community pharmacy | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIALA11 6BH |
-    | 3     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C3 | 19/10/2031  | None | 9473629885 | community pharmacy | MARGIE PUCKEY  | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTERM20 6QB |
+    | 0     | lead administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-SPIKE-JN | 1/10/2031  | None | 9470040228 | community pharmacy | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN |
+    | 1     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C30 | 1/10/2025  | None | 9470057589 | community pharmacy | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIALA15 8BG |
+    | 2     | recorder | Leeds Pharmacy | True      | COVID-19       | AUTO-c10 | 2/5/2025  | None | 9472710255 | community pharmacy | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIALA11 6BH |
+    | 3     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C3 | 1/8/2025  | None | 9473629885 | community pharmacy | MARGIE PUCKEY  | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTERM20 6QB |
 #     # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
   #     # | 4 | 9472710255 | Watling Street Surgery | Housebound patient's home | yes | today-3 | yes | yes  | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | 	AUTOMATION-SJ1 | 19/10/2026 |
   #     # | 5 | 9473629885 | Spire Cheshire Hospital | Outreach event | yes | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | COVID-19 | AUTOMATION-C30 | 19/10/2026 |

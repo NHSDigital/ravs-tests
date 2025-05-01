@@ -350,7 +350,7 @@ def mock_api_response():
     return playwright_helper_instance.mock_api_response(working_directory)
 
 def wait_until_page_loading_message_disappears():
-    PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+    PAGE_LOADING_ELEMENT = ("role", "status")
     return wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def wait_until_spinner_disappears():

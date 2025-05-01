@@ -39,7 +39,7 @@ BATCH_DOSE_AMOUNT_MISSING_ERROR_MESSAGE_LINK = ("text", "Dose amount (ml) is req
 YELLOW_CARD_MESSAGE_LINK = ("role", "link", "Yellow Card Report (opens a")
 POST_VACCINATION_MESSAGE_LINK = ("role", "link", "COVID-19 vaccinations on NHS.")
 CAREHOME_NAME_INPUT_ELEMENT = ("#CareHomeName")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def get_batch_expiry_date_value():
     return find_element_and_perform_action(BATCH_EXPIRY_DATE_READONLY_ELEMENT, "get_text")

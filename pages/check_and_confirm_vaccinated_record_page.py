@@ -34,7 +34,7 @@ CHANGE_VACCINATE_PAGE_DETAILS_BUTTON = ("role", "button", "Change vaccinate page
 CONFIRM_DETAILS_AND_SAVE_BUTTON = ("role", "button", "Confirm details and save")
 CANCEL_CONFIRM_DETAILS_BUTTON = ("role", "button", "Cancel")
 BACK_ON_CONFIRM_DETAILS_PAGE_BUTTON = ("role", "link", "Back")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 SEARCH_BUTTON = ("role", "button", "Search")
 
 def click_change_assess_patient_page_details_button():

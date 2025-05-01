@@ -1164,7 +1164,7 @@ def the_vaccinated_values_should_persist(shared_data):
     if get_is_patient_vaccinated_value_on_vaccinated_page().lower() == "yes":
         assert get_vaccine_product_value_on_vaccinated_page() == shared_data["chosen_vaccine_type"]
         attach_screenshot("vaccine_product_value_should_persist")
-        assert get_batch_number_on_vaccinated_screen() == shared_data["batch_number_selected"]
+        assert get_batch_number_on_vaccinated_screen() == "" #Following the fix for RAVS-2067, the batch number will always be forced cleared
         attach_screenshot("vaccine_product_batch_number_value_should_persist")
         assert get_dose_amount_value() == shared_data["dose_amount"]
         attach_screenshot("vaccine_product_does_amount_value_should_persist")

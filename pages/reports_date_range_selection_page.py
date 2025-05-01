@@ -28,100 +28,114 @@ FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_LINK = ("role", "link", "From date m
 FROM_DATE_MUST_BE_IN_THE_PAST_ERROR_MESSAGE_TEXT = ("text", "Error: From date must be in the past")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_LINK = ("role", "button", "The date range must be within 31 days")
 DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_TEXT = ("text", "Error: The date range must be within 31 days")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 FROM_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.day']")
 FROM_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.month']")
 FROM_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.year']")
 TO_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.day']")
 TO_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.month']")
 TO_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.year']")
+REPORTS_HEADING_TEXT_ELEMENT = ("role", "heading", "Reports")
+CHOOSE_DATES_HEADING_TEXT_ELEMENT = ("role", "heading", "Choose dates")
+
+def ensure_reports_heading_text_element_exists():
+    if not check_element_exists(REPORTS_HEADING_TEXT_ELEMENT):
+        ensure_choose_dates_heading_text_element_exists()
+        wait_for_element_to_appear(REPORTS_HEADING_TEXT_ELEMENT)
+
+def ensure_choose_dates_heading_text_element_exists():
+    if not check_element_exists(CHOOSE_DATES_HEADING_TEXT_ELEMENT):
+        ensure_choose_dates_heading_text_element_exists()
+        wait_for_element_to_appear(CHOOSE_DATES_HEADING_TEXT_ELEMENT)
 
 def check_create_report_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_reports_heading_text_element_exists()
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)
     return check_element_exists(CREATE_REPORT_BUTTON)
 
 def check_no_vaccination_data_to_report_message_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_reports_heading_text_element_exists()
     wait_for_element_to_appear(NO_VACCINATION_DATE_TO_REPORT)
     return check_element_exists(NO_VACCINATION_DATE_TO_REPORT)
 
 def check_create_report_button_enabled():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_reports_heading_text_element_exists()
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)
     return check_element_enabled(CREATE_REPORT_BUTTON)
 
 def click_create_report_button():
+    ensure_reports_heading_text_element_exists()
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)
     find_element_and_perform_action(CREATE_REPORT_BUTTON, "click")
 
 def check_today_radio_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(TODAY_RADIO_BUTTON)
     return check_element_exists(TODAY_RADIO_BUTTON)
 
 def click_today_radio_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(TODAY_RADIO_BUTTON)
     find_element_and_perform_action(TODAY_RADIO_BUTTON, "check")
 
 def click_day_range_radio_button(day):
     element = ("label", day, None, True)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
 
 def check_yesterday_radio_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(YESTERDAY_RADIO_BUTTON)
     return check_element_exists(YESTERDAY_RADIO_BUTTON)
 
 def click_yesterday_radio_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(YESTERDAY_RADIO_BUTTON)
     find_element_and_perform_action(YESTERDAY_RADIO_BUTTON, "check")
 
 def check_last_7_days_radio_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(LAST_7_DAYS_RADIO_BUTTON)
     return check_element_exists(LAST_7_DAYS_RADIO_BUTTON)
 
 def click_last_7_days_radio_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(LAST_7_DAYS_RADIO_BUTTON)
     find_element_and_perform_action(LAST_7_DAYS_RADIO_BUTTON, "check")
 
 def check_last_14_days_radio_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(LAST_14_DAYS_RADIO_BUTTON)
     return check_element_exists(LAST_14_DAYS_RADIO_BUTTON)
 
 def click_last_14_days_radio_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(LAST_14_DAYS_RADIO_BUTTON)
     find_element_and_perform_action(LAST_14_DAYS_RADIO_BUTTON, "check")
 
 def check_last_31_days_radio_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(LAST_31_DAYS_RADIO_BUTTON)
     return check_element_exists(LAST_31_DAYS_RADIO_BUTTON)
 
 def click_last_31_days_radio_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(LAST_31_DAYS_RADIO_BUTTON)
     find_element_and_perform_action(LAST_31_DAYS_RADIO_BUTTON, "check")
 
 def check_select_a_custom_date_range_up_to_31_days_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(CUSTOM_DATE_RANGE_RADIO_BUTTON)
     return check_element_exists(CUSTOM_DATE_RANGE_RADIO_BUTTON)
 
 def click_select_a_custom_date_range_up_to_31_days_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(CUSTOM_DATE_RANGE_RADIO_BUTTON)
     find_element_and_perform_action(CUSTOM_DATE_RANGE_RADIO_BUTTON, "check")
 
 def enter_from_date(date):
+    ensure_choose_dates_heading_text_element_exists()
     day, month, year = date.split('/')
     wait_for_element_to_appear(FROM_DATE_DAY_INPUT_ELEMENT)
     find_element_and_perform_action(FROM_DATE_DAY_INPUT_ELEMENT, "input_text",day)
@@ -129,6 +143,7 @@ def enter_from_date(date):
     find_element_and_perform_action(FROM_DATE_YEAR_INPUT_ELEMENT, "input_text",year)
 
 def enter_to_date(date):
+    ensure_choose_dates_heading_text_element_exists()
     day, month, year = date.split('/')
     wait_for_element_to_appear(TO_DATE_DAY_INPUT_ELEMENT)
     find_element_and_perform_action(TO_DATE_DAY_INPUT_ELEMENT, "input_text",day)
@@ -184,22 +199,22 @@ def click_date_range_must_be_valid_error_message_link():
     find_element_and_perform_action(DATE_RANGE_SHOULD_BE_WITHIN_31_DAYS_ERROR_MESSAGE_LINK, "click")
 
 def check_continue_to_reports_select_vaccine_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(CONTINUE_TO_SELECT_VACCINE_BUTTON)
     return check_element_exists(CONTINUE_TO_SELECT_VACCINE_BUTTON)
 
 def click_continue_to_reports_select_vaccine_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(CONTINUE_TO_SELECT_VACCINE_BUTTON)
     find_element_and_perform_action(CONTINUE_TO_SELECT_VACCINE_BUTTON, "click")
 
 def check_back_to_reports_homepage_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(BACK_TO_REPORTS_HOMEPAGE_BUTTON)
     return check_element_exists(BACK_TO_REPORTS_HOMEPAGE_BUTTON)
 
 def click_back_to_reports_homepage_button():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_choose_dates_heading_text_element_exists()
     wait_for_element_to_appear(BACK_TO_REPORTS_HOMEPAGE_BUTTON)
     find_element_and_perform_action(BACK_TO_REPORTS_HOMEPAGE_BUTTON, "click")
 
