@@ -20,7 +20,6 @@ from test_data.get_values_from_models import *
 from faker import Faker
 
 features_directory = get_working_directory() + "features"
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -30,8 +29,8 @@ scenarios(f'{features_directory}/streamlining_recording_a_vaccine.feature')
 @given(parse("I set vaccinator as {vaccinator}"))
 def I_set_vaccinator(shared_data, vaccinator):
     if vaccinator == "me":
-       click_vaccinator_radio_button("Me")
-       attach_screenshot("click_vaccinator_me_radio_button")
+        click_vaccinator_radio_button("Me")
+        attach_screenshot("click_vaccinator_me_radio_button")
     else:
         set_clinician_details(shared_data, shared_data["site"])
         formatted = shared_data["vaccinator"].replace(" - ", " (") + ")"
