@@ -16,9 +16,12 @@ def check_which_batch_are_you_giving_label_exists():
     ensure_which_batch_are_you_using_heading_label_is_visible()
     return check_element_exists(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT)
 
-def click_batch_radio_button(batch):
+def click_batch_radio_button(batch_number, batch_expiry_date):
     ensure_which_batch_are_you_using_heading_label_is_visible()
-    element = ("role", "radio", batch)
+    xpath = f"//div[contains(@class, 'nhsuk-radios__item') and " \
+            f".//label[contains(text(), '{batch_number}')] and " \
+            f".//div[contains(text(), 'Expires {batch_expiry_date}')]]/input"
+    element = ("xpath", xpath)
     find_element_and_perform_action(element, "click")
 
 def click_add_a_batch_radio_button():

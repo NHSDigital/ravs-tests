@@ -11,35 +11,60 @@ view_product_button = "//a[text()='View Product']"
 add_batch_link = "//a[text()='Add batch']"
 filter_by_site_dropdown = ("label", "Select site")
 PAGE_LOADING_ELEMENT = ("role", "status")
+CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON=("role", "button", "Continue")
+CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
+
+def ensure_choose_site_heading_text_is_visible():
+    if not check_element_exists(CHOOSE_SITE_TITLE):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_appear(CHOOSE_SITE_TITLE)
+
+def ensure_add_vaccine_button_is_visible():
+    if not check_element_exists(add_vaccine_button):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_appear(add_vaccine_button)
+
+def ensure_to_enter_batch_details_button_is_visible():
+    if not check_element_exists(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_appear(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON)
 
 def click_view_product_link(vaccine):
+    ensure_add_vaccine_button_is_visible()
     click_link_in_row(vaccine, 0)
 
 def click_first_available_view_product_link():
+    ensure_add_vaccine_button_is_visible()
     xpath = "(//tr[@role='row']//a[contains(text(),'View product')])[1]"
     find_element_and_perform_action(("xpath", xpath), "click")
 
 def check_add_vaccine_button_exists():
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    ensure_add_vaccine_button_is_visible()
     wait_for_element_to_appear(add_vaccine_button)
     return check_element_exists(add_vaccine_button)
 
 def click_add_vaccine_button():
+    ensure_add_vaccine_button_is_visible()
     find_element_and_perform_action(add_vaccine_button, "click")
 
 def click_continue_to_add_batch_page_button():
+    ensure_to_enter_batch_details_button_is_visible()
     find_element_and_perform_action(continue_to_add_batch_page_button, "click")
 
 def filter_by_site(site):
+    ensure_add_vaccine_button_is_visible()
     find_element_and_perform_action(filter_by_site_dropdown, "select_option", site)
 
 def click_view_vaccine_product_link(vaccine):
+    ensure_add_vaccine_button_is_visible()
     click_link_in_row(vaccine, 0)
 
 def click_add_batch_for_vaccine_link(vaccine):
+    ensure_add_vaccine_button_is_visible()
     click_link_in_row(vaccine, 1)
 
 def click_first_available_add_batch_link():
+    ensure_add_vaccine_button_is_visible()
     element = "(//a[text()='Add batch'])[1]"
     javascript_click(element)
 

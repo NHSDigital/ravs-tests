@@ -33,7 +33,7 @@ DUE_DATE_DAY = ("label", "Day")
 DUE_DATE_MONTH = ("label", "Month")
 DUE_DATE_YEAR = ("label", "Year")
 SCREENING_CONSIDERATIONS_ELEMENT = ("text", "Screening considerations")
-PAGE_LOADING_ELEMENT = ("text", "Loading...Loading...")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def check_screening_considerations_exist():
     wait_for_element_to_appear(SCREENING_CONSIDERATIONS_ELEMENT)
