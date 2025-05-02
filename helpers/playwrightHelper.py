@@ -108,6 +108,7 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, full_path):
         try:
+            # self.page.wait_for_timeout(500)
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):
@@ -192,76 +193,37 @@ class BasePlaywrightHelper:
             print(f"Error retrieving element '{locator_or_element}': {e}")
             return None
 
-    # def wait_for_element_to_appear(self, locator_or_element, timeout=1000, poll_interval=0.1):
-    #     """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
-    #     start_time = time.time()
-    #     while time.time() - start_time < timeout / 1000:
-    #         try:
-    #             element = self.get_element(locator_or_element, wait=True)
-    #             if element and element.is_visible():
-    #                 print(f"✅ Element '{locator_or_element}' appeared.")
-    #                 return element
-    #         except Exception:
-    #             pass
-    #         time.sleep(poll_interval)
-    #     print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
-    #     return None
+    def wait_for_element_to_appear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+        """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
+        start_time = time.time()
+        while time.time() - start_time < timeout / 1000:
+            try:
+                element = self.get_element(locator_or_element, wait=True)
+                if element and element.is_visible():
+                    print(f"✅ Element '{locator_or_element}' appeared.")
+                    return element
+            except Exception:
+                pass
+            time.sleep(poll_interval)
+        print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
+        return None
 
-    def wait_for_element_to_appear(self, locator_or_element, timeout=1000):
-        try:
-            timeout_ms = int(timeout)  # Ensure it's an integer in milliseconds
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+        start_time = time.time()
 
-            if isinstance(locator_or_element, str):
-                element = self.page.locator(locator_or_element)
-            elif isinstance(locator_or_element, Locator):
-                element = locator_or_element
-            else:
-                raise ValueError(f"Unsupported locator type: {type(locator_or_element)}")
+        while time.time() - start_time < timeout / 1000:
+            try:
+                element = self.get_element(locator_or_element, wait=True)
+                if not element or not element.is_visible():
+                    print(f"✅ Element '{locator_or_element}' disappeared.")
+                    return True
+            except Exception:
+                print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
+                return True
+            time.sleep(poll_interval)
 
-            element.wait_for(state="visible", timeout=timeout_ms)
-            print(f"✅ Element '{locator_or_element}' appeared.")
-            return element
-
-        except Exception as e:
-            print(f"⚠️ Element '{locator_or_element}' did not appear within {timeout}ms. Error: {e}")
-            return None
-
-    # def wait_for_element_to_disappear(self, locator_or_element, timeout=2000, poll_interval=0.1):
-    #     start_time = time.time()
-
-    #     while time.time() - start_time < timeout / 1000:
-    #         try:
-    #             element = self.get_element(locator_or_element, wait=True)
-    #             if not element or not element.is_visible():
-    #                 print(f"✅ Element '{locator_or_element}' disappeared.")
-    #                 return True
-    #         except Exception:
-    #             print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
-    #             return True
-    #         time.sleep(poll_interval)
-
-    #     print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
-    #     return False
-
-    def wait_for_element_to_disappear(self, locator_or_element, timeout=2000):
-        try:
-            timeout_ms = int(timeout)
-
-            if isinstance(locator_or_element, str):
-                element = self.page.locator(locator_or_element)
-            elif isinstance(locator_or_element, Locator):
-                element = locator_or_element
-            else:
-                raise ValueError(f"Unsupported locator type: {type(locator_or_element)}")
-
-            # Wait until the element is either detached or hidden
-            element.wait_for(state="hidden", timeout=timeout_ms)
-            print(f"✅ Element '{locator_or_element}' disappeared.")
-            return True
-
-        except Exception as e:
-            print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout}ms. Error: {e}")
-            return False
+        print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
+        return False
 
     def check_element_exists(self, locator_or_element, wait=False, timeout=5):
         element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
