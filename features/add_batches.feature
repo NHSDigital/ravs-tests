@@ -28,6 +28,20 @@ Feature: Add Batches to vaccine
     | Community pharmacy  |       administrator | Aspire Pharmacy               |
     | Branch surgery      |       administrator | Aire Valley Surgery (Rawdon)  |
 
+
+  @addbatches
+  Scenario: Error message should appear when batch expiry date is in the past
+    When I am on the vaccines page
+    And I click on an available add batch link
+    And I enter batch expiry date in the past
+    Then the error message and error link should appear highlighting batch expiry date is in past
+
+    Examples:
+    | care_model          |  user_role          | site                          |
+    | Trust site          |  lead administrator | Weaverham Surgery             |
+    | Community pharmacy  |       administrator | Aspire Pharmacy               |
+    | Branch surgery      |       administrator | Aire Valley Surgery (Rawdon)  |
+
   @addbatches
   Scenario Outline: Add batch to vaccine
     When I am on the vaccines page
