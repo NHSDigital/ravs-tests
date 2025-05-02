@@ -19,10 +19,6 @@ logger = logging.getLogger(__name__)
 
 scenarios(f"{features_directory}/add_batches.feature")
 
-# @given("I am on the RAVS home page")
-# def logged_into_homepage(shared_data):
-#     navigate_and_login(shared_data)
-
 @when("I am on the vaccines page")
 def i_am_on_the_vaccines_page():
     attach_screenshot("logged_into_ravs")
@@ -78,6 +74,23 @@ def step_when_i_click_continue():
     attach_screenshot("clicked_continue_to_confirm_batch_details_button")
 
 @then('the error messages and error links should appear highlighting missing required fields')
+def step_then_the_error_messages_for_missing_fields_should_appear():
+    attach_screenshot(check_enter_batch_number_error_message_is_displayed)
+    assert check_enter_batch_number_error_message_is_displayed()
+    assert check_enter_batch_number_error_message_link_is_displayed()
+    assert check_enter_batch_expiry_date_error_message_is_displayed()
+    assert check_enter_batch_expiry_date_error_message_link_is_displayed()
+
+@when('I enter batch expiry date in the past')
+def step_when_i_click_continue():
+    enter_batch_number("TEST-PAST")
+    date = get_date_value_by_days("today-10")
+    date = format_date(str(date), config["browser"])
+    enter_expiry_date(date)
+    click_continue_to_confirm_batch_details_button()
+    attach_screenshot(f"entered_batch_expiry_date_in_the_past_{date}")
+
+@then('the error message and error link should appear highlighting batch expiry date is in past')
 def step_then_the_error_messages_for_missing_fields_should_appear():
     attach_screenshot(check_enter_batch_number_error_message_is_displayed)
     assert check_enter_batch_number_error_message_is_displayed()
