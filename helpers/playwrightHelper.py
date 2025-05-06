@@ -108,7 +108,7 @@ class BasePlaywrightHelper:
 
     def capture_screenshot(self, full_path):
         try:
-            self.page.wait_for_timeout(500)
+            # self.page.wait_for_timeout(500)
             self.page.screenshot(path=full_path)
         except Exception as error:
             if "Timeout" in str(error):
@@ -193,7 +193,7 @@ class BasePlaywrightHelper:
             print(f"Error retrieving element '{locator_or_element}': {e}")
             return None
 
-    def wait_for_element_to_appear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+    def wait_for_element_to_appear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
         start_time = time.time()
         while time.time() - start_time < timeout / 1000:
