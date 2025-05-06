@@ -20,6 +20,8 @@ ERROR_MESSAGE_LINK_BATCH_ALREADY_EXISTS = ("role", "link", "There is already a b
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_NUMBER = ("role", "link", "Enter the batch number")
 ERROR_MESSAGE_LINK_ENTER_THE_BATCH_EXPIRY_DATE = ("role", "link", "Enter the expiry date")
 ERROR_MESSAGE_LINK_SELECT_PACK_SIZE = ("role", "link", "Select a pack size")
+ERROR_MESSAGE_TEXT_EXPIRY_DATE_MUST_BE_IN_FUTURE = ("text", "Error: Expiry date must be in the future")
+ERROR_MESSAGE_LINK_EXPIRY_DATE_MUST_BE_IN_FUTURE = ("role", "link", "Expiry date must be in the future")
 PAGE_LOADING_ELEMENT = ("role", "status")
 VACCINES_HEADING_TEXT_ELEMENT = ("role", "heading", "Vaccines")
 ADD_BATCH_HEADING_TEXT_ELEMENT = ("role", "heading", "Add batch")
@@ -159,3 +161,18 @@ def click_continue_To_confirm_vaccine_details_button():
 def click_save_changes_to_vaccine_details_button():
     ensure_edit_batch_heading_text_is_visible()
     find_element_and_perform_action(SAVE_CHANGES_TO_VACCINE_BATCH_BUTTON, "click")
+
+def check_expiry_date_must_be_in_future_error_message_text_is_displayed():
+    ensure_add_batch_heading_text_is_visible()
+    wait_for_element_to_appear(ERROR_MESSAGE_TEXT_EXPIRY_DATE_MUST_BE_IN_FUTURE)
+    return check_element_exists(ERROR_MESSAGE_TEXT_EXPIRY_DATE_MUST_BE_IN_FUTURE, False)
+
+def check_expiry_date_must_be_in_future_error_message_link_is_displayed():
+    ensure_add_batch_heading_text_is_visible()
+    wait_for_element_to_appear(ERROR_MESSAGE_LINK_EXPIRY_DATE_MUST_BE_IN_FUTURE)
+    return check_element_exists(ERROR_MESSAGE_LINK_EXPIRY_DATE_MUST_BE_IN_FUTURE, False)
+
+def click_expiry_date_must_be_in_future_error_message_link():
+    ensure_add_batch_heading_text_is_visible()
+    wait_for_element_to_appear(ERROR_MESSAGE_LINK_EXPIRY_DATE_MUST_BE_IN_FUTURE)
+    find_element_and_perform_action(ERROR_MESSAGE_LINK_EXPIRY_DATE_MUST_BE_IN_FUTURE, "click")
