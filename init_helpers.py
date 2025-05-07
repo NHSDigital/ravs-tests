@@ -338,9 +338,8 @@ def click_and_get_download_path(element, action, timeout, download_dir='download
 
 def find_element_and_perform_action(element, action, inputValue=None):
     if isinstance(element, (tuple, list)):
-        element = get_element_by_type(*element)  # Unpack the tuple/list
+        element = get_element_by_type(*element)
     else:
-        # If it's a string, treat it as a selector directly
         element = get_element_by_type(element)
     wait_until_spinner_disappears()
     return playwright_helper_instance.find_element_and_perform_action(element, action, inputValue)
