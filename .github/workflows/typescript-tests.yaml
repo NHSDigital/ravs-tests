@@ -72,7 +72,7 @@ jobs:
     - name: Run Playwright Tests
       env:
         CI: true
-      run:
+      run: |
         cd ts-tests/e2e
         npm run test
 
