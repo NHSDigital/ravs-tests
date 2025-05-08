@@ -1,50 +1,71 @@
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
-import { devices, BrowserContext, Page, chromium, webkit, firefox, Browser} from 'playwright';
 import { DatetimeHelper } from './helpers/datetimeHelper';
-import { BasePlaywrightHelper } from './helpers/playwrightHelper';
+import { BasePlaywrightHelper, SupportedBrowser } from './helpers/playwrightHelper';
 import * as allure from 'allure-js-commons';
-import { Locator } from 'playwright';
-import test from 'playwright/test';
 import { After, Before, BeforeAll, AfterAll } from '@cucumber/cucumber';
+import dotenv from 'dotenv';
+
+if (!process.env.CI) {
+  const envFile = `../../.env`;
+  dotenv.config({ path: path.resolve(__dirname, envFile) });
+  console.log(`🔧 Loaded environment from ${envFile}`);
+} else {
+  console.log("🔧 Using CI environment variables");
+}
 
 const config = loadConfigFromEnv();
 const workingDirectory = getWorkingDirectory();
 
 let playwrightHelperInstance: BasePlaywrightHelper;
 let datetimeHelperInstance: DatetimeHelper;
-let globalPage: Page;
 
 export async function initializeHelpers() {
-  const browser = await chromium.launch({ headless: false });
-  const context = await browser.newContext();
-  const page = await context.newPage();
   if (!playwrightHelperInstance) {
     playwrightHelperInstance = new BasePlaywrightHelper(config, workingDirectory);
-    await playwrightHelperInstance.launchBrowser('chromium', false);
+    const browserType = process.env.BROWSER as SupportedBrowser || SupportedBrowser.EDGE;
+    const headless = process.env.HEADLESS_MODE === 'true';
+    console.log(`🌐 Launching main browser instance with browser type: ${browserType} and headless mode: ${headless ? 'enabled' : 'disabled'}`);
+    await playwrightHelperInstance.launchBrowser(browserType, headless);
   }
 
   if (!datetimeHelperInstance) {
     datetimeHelperInstance = new DatetimeHelper();
   }
+    const browser = playwrightHelperInstance.getBrowser();
+    const page = playwrightHelperInstance.getPage()
 
-  await playwrightHelperInstance.launchBrowser('chromium', false);  // Example
-
-  return { browser, page };
-
+    console.log("✅ Helpers initialized successfully.");
+    return { browser, page };
 }
 
 BeforeAll(async function () {
-  const { page } = await initializeHelpers();
-  globalPage = page;
+  const { browser } = await initializeHelpers();
+  console.log("✅ Browser and context initialized.");
 });
 
 AfterAll(async function () {
   if (playwrightHelperInstance) {
     await playwrightHelperInstance.quitBrowser();
   }
-});
+    const env = process.env.TEST_ENVIRONMENT || 'qa';
+    const product = 'RAVS';
+    const propertiesDict = { PRODUCT: product, ENV: env };
+
+    const workingDir = getWorkingDirectory();
+    const filePath = path.join(workingDir, 'allure-results', 'environment.properties');
+
+    try {
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      const data = Object.entries(propertiesDict).map(([key, value]) => `${key}=${value}`).join('\n');
+      fs.writeFileSync(filePath, data);
+      console.log(`✅ Allure environment properties written to ${filePath}`);
+    } catch (error) {
+      console.error(`❌ Failed to write environment properties: ${error}`);
+    }
+
+    console.log('✅ Browser closed and environment properties written.');
+  });
 
 export function generateRandomString(length: number = 10): string {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -117,228 +138,14 @@ export async function attachScreenshot(filename: string): Promise<void> {
   }
 }
 
-export function getAppUrl(testEnvironment: string): string {
+export function getAppUrl(): string {
+  const testEnvironment = process.env.TEST_ENVIRONMENT || 'dev';
   if (testEnvironment.toLowerCase().includes('dev')) {
     return 'https://www.ravs-dev.england.nhs.uk';
   } else if (testEnvironment.toLowerCase().includes('qa')) {
     return 'https://www.ravs-qa.england.nhs.uk';
   }
   throw new Error(`Unknown test environment: ${testEnvironment}`);
-}
-
-// export function afterAll(): void {
-//   const env = process.env.TEST_ENVIRONMENT || 'qa';
-//   const product = 'RAVS';
-//   const properties = { PRODUCT: product, ENV: env };
-//   const filePath = path.join(getWorkingDirectory(), 'allure-results', 'environment.properties');
-//   writePropertiesFile(filePath, properties);
-// }
-
-function writePropertiesFile(filePath: string, properties: Record<string, string>): void {
-  try {
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    const content = Object.entries(properties)
-      .map(([key, value]) => `${key}=${value}`)
-      .join('\n');
-    fs.writeFileSync(filePath, content);
-  } catch (e) {
-    console.error(`Error writing properties file: ${e}`);
-  }
-}
-
-export function quitBrowser(): void {
-  playwrightHelperInstance?.quitBrowser();
-}
-
-export function getCurrentUrl(): string | undefined {
-  return playwrightHelperInstance?.getCurrentUrl();
-}
-
-export function addCookie(url: string, cookie: string, value: string): void {
-  playwrightHelperInstance?.addCookie(url, cookie, value);
-}
-
-export async function getBrowserVersion(): Promise<string> {
-  const version = await playwrightHelperInstance?.getBrowserVersion();
-  return version || 'unknown';
-}
-
-export function findElements(selector: string): any {
-  return playwrightHelperInstance?.findElements(selector);
-}
-
-export function waitForPageToLoad(timeout: number = 3): void {
-  playwrightHelperInstance?.waitForPageToLoad(timeout);
-}
-
-export async function checkElementExists(element: any, wait: boolean = false): Promise<boolean> {
-  return await playwrightHelperInstance?.checkElementExists(element) ?? false;
-}
-
-export async function getCheckedRadioButtonText(name: string): Promise<string | undefined> {
-  return await playwrightHelperInstance?.getCheckedRadioButtonText(name);
-}
-
-export async function checkElementEnabled(element: any): Promise<boolean> {
-  return await playwrightHelperInstance?.checkElementEnabled(element) ?? false;
-}
-
-export async function checkElementChecked(element: any): Promise<boolean> {
-  return await playwrightHelperInstance?.checkElementChecked(element) ?? false;
-}
-
-export function scrollIntoView(element: any): void {
-  playwrightHelperInstance?.scrollIntoView(element);
-}
-
-export function waitForElementToAppear(element: any): void {
-  playwrightHelperInstance?.waitForElementToAppear(element);
-}
-
-export function waitForElementToDisappear(element: any): void {
-  playwrightHelperInstance?.waitForElementToDisappear(element);
-}
-
-export function captureScreenshot(filename: string): void {
-  playwrightHelperInstance?.captureScreenshot(filename);
-}
-
-export function handleUnresponsivePage(): void {
-  playwrightHelperInstance?.handleUnresponsivePage();
-}
-
-export async function clickAndGetDownloadPath(
-  elementDefinition: { type: string; value: string; name?: string; exact?: boolean },
-  action: string = 'click',
-  timeout: number = 30_000,
-  downloadDir: string = 'downloads'
-): Promise<string> {
-  if (!playwrightHelperInstance) {
-    throw new Error("❌ Playwright helper instance is not initialized.");
-  }
-
-  try {
-    const downloadPath = await playwrightHelperInstance.clickAndGetDownloadPath(
-      elementDefinition,
-      action,
-      timeout,
-      downloadDir
-    );
-    return downloadPath;
-  } catch (error) {
-    console.error("❌ Error in clickAndGetDownloadPath:", error);
-    throw error;
-  }
-}
-
-export async function findElementAndPerformAction(
-  elementDefinition: { type: string; value: string; name?: string; exact?: boolean },
-  action: string,
-  inputValue?: any
-): Promise<void>  {
-  if (!playwrightHelperInstance) {
-    console.error("❌ Playwright helper instance is not initialized.");
-    return;
-  }
-
-  try {
-    const locator = playwrightHelperInstance.getElementByType(
-      elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
-      elementDefinition.value,
-      elementDefinition.name,
-      elementDefinition.exact ?? false
-    );
-
-    playwrightHelperInstance.findElementAndPerformAction(elementDefinition, action, inputValue);
-  } catch (error) {
-    console.error(`❌ Failed to perform action '${action}' on element:`, elementDefinition, error);
-  }
-}
-
-export function mockApiResponse(): void {
-  const workingDirectory = getWorkingDirectory();
-  playwrightHelperInstance?.mockApiResponse(workingDirectory);
-}
-
-export function waitUntilPageLoadingMessageDisappears(): void {
-  const PAGE_LOADING_ELEMENT = ['role', 'status'];
-  waitForElementToDisappear(PAGE_LOADING_ELEMENT);
-}
-
-export function waitUntilSpinnerDisappears(): void {
-  const SPINNER_ELEMENT = ['role', 'status'];
-  waitForElementToDisappear(SPINNER_ELEMENT);
-}
-
-export function clickCellInRow(rowName: string, cellIndex: number): void {
-  playwrightHelperInstance?.clickCellInRow(rowName, cellIndex);
-}
-
-export function javascriptClick(element: any): void {
-  waitUntilSpinnerDisappears();
-  playwrightHelperInstance?.javascriptClick(element);
-}
-
-export function clickLinkInRow(rowName: string, linkIndex: number): void {
-  playwrightHelperInstance?.clickLinkInRow(rowName, linkIndex);
-}
-
-export function getElementByType(
-  locatorType: 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
-  locatorValue?: string,
-  name?: string,
-  exact: boolean = false
-): Locator | undefined {
-  if (!playwrightHelperInstance) {
-    console.error('Playwright helper instance is not initialized.');
-    return undefined;
-  }
-
-  try {
-    return playwrightHelperInstance.getElementByType(locatorType, locatorValue, name, exact);
-  } catch (error) {
-    console.error("Error getting element by type: ${error}");
-    return undefined;
-  }
-}
-
-export function releaseMouse(): void {
-  playwrightHelperInstance?.releaseMouse();
-}
-
-export function formatDate(date: string, browser: string): string | undefined {
-  return datetimeHelperInstance?.formatDate(date, browser);
-}
-
-export function standardizeDateFormat(date: string): string | undefined {
-  return datetimeHelperInstance?.standardizeDateFormat(date);
-}
-
-export function dateFormatWithDayOfWeek(date: string): string | undefined {
-  return datetimeHelperInstance?.dateFormatWithDayOfWeek(date);
-}
-
-export function dateFormatWithAge(date: string): string | undefined {
-  return datetimeHelperInstance?.dateFormatWithAge(date);
-}
-
-export function dateFormatWithNameOfMonth(date: string): string | undefined {
-  return datetimeHelperInstance?.dateFormatWithNameOfMonth(date);
-}
-
-export function dateFormatWithNameOfMonthShortened(date: string): string | undefined {
-  return datetimeHelperInstance?.dateFormatWithNameOfMonthShortened(date);
-}
-
-export function getDateValueByMonths(date: string | Date): string | undefined {
-  const dateStr = typeof date === 'string' ? date : date.toISOString();
-  return datetimeHelperInstance?.getDateValueByMonths(dateStr)?.toString();
-}
-
-export function getDateValueByDays(date: string | Date): string | undefined {
-  const dateStr = typeof date === 'string' ? date : date.toISOString();
-  return datetimeHelperInstance?.getDateValueByDays(dateStr)?.toString();
 }
 
 export { playwrightHelperInstance, datetimeHelperInstance };
