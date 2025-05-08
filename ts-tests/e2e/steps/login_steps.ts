@@ -13,7 +13,7 @@ interface SharedData {
 const sharedData: SharedData = {};
 const config = InitHelpers.loadConfigFromEnv();
 console.log('Loaded Config: ', config);
-const appUrl = InitHelpers.getAppUrl(config.test_environment);
+const appUrl = InitHelpers.getAppUrl();
 console.log('appUrl: ', appUrl);
 
 Given('I access the ravs web app', async function () {

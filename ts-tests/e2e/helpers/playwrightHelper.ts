@@ -13,7 +13,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { URL } from 'url';
 
-type SupportedBrowser = 'chromium' | 'firefox' | 'webkit' | 'edge';
+export enum SupportedBrowser {
+  CHROMIUM = 'chromium',
+  FIREFOX = 'firefox',
+  WEBKIT = 'webkit',
+  EDGE = 'edge',
+}
 
 const maxRetries = 3;
 const retryDelay = 1000;
@@ -31,7 +36,6 @@ export class BasePlaywrightHelper {
     this.config = config;
     this.workingDirectory = workingDirectory;
 
-    // Ensure the screenshots directory exists
     if (!fs.existsSync(this.screenshotsDir)) {
       fs.mkdirSync(this.screenshotsDir);
     }
@@ -65,6 +69,7 @@ export class BasePlaywrightHelper {
       }
       this.context = await this.browser.newContext();
       this.page = await this.context.newPage();
+      return this.browser
     } catch (error) {
       console.error(`Error launching ${browserType}:`, error);
     }
@@ -680,7 +685,7 @@ async clickCellInRow(rowName: string, cellIndex: number) {
           await context.close();
         }
 
-        await this.browser.close();  
+        await this.browser.close();
         this.browser = null;
         console.log("Browser closed successfully.");
       }
