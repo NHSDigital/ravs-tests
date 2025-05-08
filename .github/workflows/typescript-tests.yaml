@@ -57,7 +57,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        cd ts-tests/e2e
+        cd ts-tests
         npm install
 
     - name: Setup Environment Variables
@@ -73,7 +73,7 @@ jobs:
       env:
         CI: true
       run: |
-        cd ts-tests/e2e
+        cd ts-tests
         npm run test
 
     - name: Upload Test Results
