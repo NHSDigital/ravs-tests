@@ -56,7 +56,10 @@ jobs:
         node-version: 22
 
     - name: Install Dependencies
-      run: npm ci
+      run: |
+        cd ts-tests/e2e
+        npm ci
+        npm install @cucumber/cucumber ts-node typescript @types/node --save-dev
 
     - name: Setup Environment Variables
       run: |
@@ -70,7 +73,7 @@ jobs:
     - name: Run Playwright Tests
       env:
         CI: true
-      run: npx cucumber-js --require './src/**/*.ts' --require-module ts-node/register
+      run:  npm run test
 
     - name: Upload Test Results
       if: always()
