@@ -42,7 +42,7 @@ export class BasePlaywrightHelper {
     options: LaunchOptions = {}
   ) {
     try {
-      const timeout = 1000;
+      const timeout = 60000;
       switch (browserType) {
         case 'chromium':
           this.browser = await chromium.launch({ headless, timeout, ...options });
