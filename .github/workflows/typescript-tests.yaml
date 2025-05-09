@@ -59,6 +59,11 @@ jobs:
       working-directory: ts-tests
       run: npm install
 
+    - name: Install Required System Packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libx11-dev libfontconfig1 libgbm-dev
+
     - name: Setup Environment Variables
       run: |
         echo "TEST_ENVIRONMENT=${{ inputs.environment || 'dev' }}" >> $GITHUB_ENV
