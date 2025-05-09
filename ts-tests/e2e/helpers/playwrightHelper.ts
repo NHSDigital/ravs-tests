@@ -47,20 +47,22 @@ export class BasePlaywrightHelper {
     options: LaunchOptions = {}
   ) {
     try {
+      const timeout = 30000;
       switch (browserType) {
         case 'chromium':
-          this.browser = await chromium.launch({ headless, ...options });
+          this.browser = await chromium.launch({ headless, timeout, ...options });
           break;
         case 'firefox':
-          this.browser = await firefox.launch({ headless, ...options });
+          this.browser = await firefox.launch({ headless, timeout, ...options });
           break;
         case 'webkit':
-          this.browser = await webkit.launch({ headless, ...options });
+          this.browser = await webkit.launch({ headless, timeout, ...options });
           break;
         case 'edge':
           this.browser = await chromium.launch({
             channel: 'msedge',
             headless,
+            timeout,
             ...options,
           });
           break;
