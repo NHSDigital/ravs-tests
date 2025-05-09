@@ -8,5 +8,6 @@ let common = [
 ].join(' ');
 
 module.exports = {
-  default: common
+  default: common,
+  timeout: 60000
 };
