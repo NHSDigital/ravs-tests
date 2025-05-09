@@ -58,6 +58,7 @@ jobs:
         node-version: 22
 
     - name: Install Dependencies
+      working-directory: ts-tests
       run: |
         npm install
 
@@ -71,6 +72,7 @@ jobs:
         echo "RAVS_PASSWORD=${{ secrets.RAVS_PASSWORD }}" >> $GITHUB_ENV
 
     - name: Run Playwright Tests
+      working-directory: ts-tests
       env:
         CI: true
       run: |
@@ -84,6 +86,7 @@ jobs:
         path: data/attachments/*.png
 
     - name: Generate Allure Report
+      working-directory: ts-tests
       run: |
         npm run allure:generate
         npm run allure:serve
@@ -93,8 +96,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
-        path: allure-report
+        path: ts-tests/allure-report
 
     - name: Clean Up
+      working-directory: ts-tests
       if: always()
       run: rm -rf allure-results allure-report
