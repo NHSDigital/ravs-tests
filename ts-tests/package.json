@@ -3,28 +3,25 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js",
-    "allure:generate": "allure generate allure-results --clean",
-    "allure:serve": "allure serve allure-results"
+    "test": "npx cucumber-js"
   },
   "author": "Neelima Guntupalli",
   "license": "ISC",
   "description": "End-to-end tests for the ravs web app",
   "devDependencies": {
-    "@cucumber/cucumber": "^7.0.0",
+    "@cucumber/cucumber": "^7.3.2",
     "@cucumber/pretty-formatter": "^1.0.0",
     "@playwright/test": "^1.52.0",
     "@types/node": "^20.8.0",
     "allure-commandline": "^2.34.0",
-    "allure-playwright": "^3.2.1",
-    "cucumber": "^6.0.7",
+    "allure-cucumberjs": "^3.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@cucumber/playwright": "^3.1.0",
-    "allure-js-commons": "^3.2.1",
     "date-fns": "^4.1.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "playwright": "^1.52.0"
   }
 }

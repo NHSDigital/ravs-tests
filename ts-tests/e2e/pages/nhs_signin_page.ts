@@ -14,7 +14,6 @@ const NHS_SIGN_IN_HEADING_ELEMENT = { type: 'role', value: 'heading', name: 'NHS
 
 export async function ensureSignInHeadingElementExists(): Promise<void> {
     if (!(await playwrightHelperInstance!.checkElementExists(NHS_SIGN_IN_HEADING_ELEMENT))) {
-        await playwrightHelperInstance!.waitForElementToDisappear(PAGE_LOADING_ELEMENT);
         await playwrightHelperInstance!.waitForElementToAppear(NHS_SIGN_IN_HEADING_ELEMENT);
     }
 }
