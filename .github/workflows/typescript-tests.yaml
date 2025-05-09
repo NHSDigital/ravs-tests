@@ -59,6 +59,11 @@ jobs:
       working-directory: ts-tests
       run: npm install
 
+    - name: Install Playwright Browsers
+      working-directory: ts-tests
+      run: |
+        npx playwright install
+
     - name: Install Required System Packages
       run: |
         sudo apt-get update
