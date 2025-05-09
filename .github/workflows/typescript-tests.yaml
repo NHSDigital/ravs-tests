@@ -49,8 +49,6 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-      with:
-        path: ts-tests
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -59,8 +57,7 @@ jobs:
 
     - name: Install Dependencies
       working-directory: ts-tests
-      run: |
-        npm install
+      run: npm install
 
     - name: Setup Environment Variables
       run: |
@@ -75,15 +72,14 @@ jobs:
       working-directory: ts-tests
       env:
         CI: true
-      run: |
-        npm run test
+      run: npm run test
 
     - name: Upload Test Results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: data/attachments/*.png
+        path: ts-tests/data/attachments/*.png
 
     - name: Generate Allure Report
       working-directory: ts-tests
