@@ -27,7 +27,6 @@ export class BasePlaywrightHelper {
   private browser: Browser | null = null;
   private context: BrowserContext | null = null;
   private page: Page | null = null;
-  private screenshotsDir: string = 'screenshots';
   private config: Record<string, any>;
   private workingDirectory: string;
 
@@ -35,10 +34,6 @@ export class BasePlaywrightHelper {
   constructor(config: Record<string, any>, workingDirectory: string) {
     this.config = config;
     this.workingDirectory = workingDirectory;
-
-    if (!fs.existsSync(this.screenshotsDir)) {
-      fs.mkdirSync(this.screenshotsDir);
-    }
   }
 
   async launchBrowser(
@@ -109,7 +104,7 @@ export class BasePlaywrightHelper {
 
   async captureScreenshot(filename: string): Promise<string | null> {
     if (this.page) {
-      const filepath = path.join(this.screenshotsDir, filename);
+      const filepath = path.join(filename);
       try {
         await this.page.screenshot({ path: filepath });
         return filepath;
