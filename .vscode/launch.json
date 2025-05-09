@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Cucumber Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "cucumber-js"
+      ],
+      "program": "${workspaceFolder}/node_modules/cucumber/bin/cucumber-js",
+      "args": [
+        "--require",
+        "ts-tests/e2e/steps/**/*.ts", // path to your step definition files
+        "ts-tests/e2e/features/**/*.feature" // path to your feature files
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ],
+      "sourceMaps": true
+    }
+  ]
+}

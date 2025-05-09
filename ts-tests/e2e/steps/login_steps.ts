@@ -21,6 +21,7 @@ Given('I access the ravs web app', async function () {
     throw new Error('appUrl is undefined or invalid');
   }
     await navigateToRavsLoginPage(appUrl);
+    await InitHelpers.attachScreenshot('access_ravs_Web_app');
 });
 
 Then('the login button should be visible', async function () {
@@ -30,12 +31,11 @@ Then('the login button should be visible', async function () {
 });
 
 Then('the NHS sign in page should be visible', async function () {
-    await InitHelpers.attachScreenshot('nhs_sign_in_button_should_be_visible');
     const signinButtonExists = await nhsSigninPage.checkSigninButtonExists();
+    await InitHelpers.attachScreenshot('nhs_sign_in_button_should_be_visible');
     assert(signinButtonExists, 'NHS signin button is not visible');
 });
 
-// 🥒 When Steps
 When('I click on the log in button', async function () {
     await clickLoginButton();
     await InitHelpers.attachScreenshot('clicked_login_button');
@@ -76,12 +76,10 @@ When(/^I provide the (.+) and (.+)$/, async function (emailAddress: string, pass
 
 When('the NHS sign in button is clicked', async function () {
     await nhsSigninPage.clickNhsSigninButton();
-    await InitHelpers.attachScreenshot('clicked_nhs_signin_button');
 });
 
 Then(/^sign in should (.+)$/, async function (status: string) {
     await InitHelpers.attachScreenshot('sign_in_should_' + status.toLowerCase());
-
     if (status.toLowerCase() === 'fail') {
         if (sharedData.password === 'None' && !sharedData.emailAddress?.toLowerCase().includes('valid')) {
             await InitHelpers.attachScreenshot('check_password_error_alert_exists');

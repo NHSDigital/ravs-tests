@@ -9,5 +9,9 @@ let common = [
 
 module.exports = {
   default: common,
-  timeout: 60000
+  parallel: 4,
+  publishQuiet: true,
+  failFast: true,
+  worldParameters: {},
+  timeout: 1000
 };

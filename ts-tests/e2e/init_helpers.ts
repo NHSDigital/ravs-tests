@@ -1,9 +1,8 @@
+import { Before, After, BeforeAll, AfterAll, setDefaultTimeout } from '@cucumber/cucumber';
 import fs from 'fs';
 import path from 'path';
-import { DatetimeHelper } from './helpers/datetimeHelper';
 import { BasePlaywrightHelper, SupportedBrowser } from './helpers/playwrightHelper';
-import * as allure from 'allure-js-commons';
-import { After, Before, BeforeAll, AfterAll } from '@cucumber/cucumber';
+import { DatetimeHelper } from './helpers/datetimeHelper';
 import dotenv from 'dotenv';
 
 if (!process.env.CI) {
@@ -13,6 +12,12 @@ if (!process.env.CI) {
 } else {
   console.log("🔧 Using CI environment variables");
 }
+
+declare global {
+  var browser: any;
+}
+
+setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 
 const config = loadConfigFromEnv();
 const workingDirectory = getWorkingDirectory();
@@ -32,40 +37,59 @@ export async function initializeHelpers() {
   if (!datetimeHelperInstance) {
     datetimeHelperInstance = new DatetimeHelper();
   }
-    const browser = playwrightHelperInstance.getBrowser();
-    const page = playwrightHelperInstance.getPage()
 
-    console.log("✅ Helpers initialized successfully.");
-    return { browser, page };
+  const browser = playwrightHelperInstance.getBrowser();
+  const page = playwrightHelperInstance.getPage();
+
+  if (!browser || !page) {
+    throw new Error("Failed to retrieve browser or page instance.");
+  }
+
+  console.log("✅ Helpers initialized successfully.");
+  return { browser, page };
 }
 
 BeforeAll(async function () {
-  const { browser } = await initializeHelpers();
-  console.log("✅ Browser and context initialized.");
+  console.log("🚀 Initializing helpers...");
+
+  const { browser, page } = await initializeHelpers();
+  global.browser = browser;
+
+  console.log("✅ Helpers initialized and directories prepared.");
+});
+
+Before({ tags: '@ignore' }, function () {
+  console.log("🚫 Skipping ignored test...");
+  return 'skipped';
+});
+
+Before({ tags: '@debug' }, function () {
+  this.debug = true;
+  console.log("🐛 Debug mode enabled for this scenario.");
+});
+
+After(async function () {
+  console.log(`🛑 Finishing scenario: ${this.testName}`);
+
+  // Clean up: close the page and context
+  await this.page?.close();
+  await this.context?.close();
+
+  console.log("✅ Scenario cleanup complete.");
 });
 
 AfterAll(async function () {
-  if (playwrightHelperInstance) {
-    await playwrightHelperInstance.quitBrowser();
-  }
-    const env = process.env.TEST_ENVIRONMENT || 'qa';
-    const product = 'RAVS';
-    const propertiesDict = { PRODUCT: product, ENV: env };
+  console.log("🛑 Shutting down browser...");
 
-    const workingDir = getWorkingDirectory();
-    const filePath = path.join(workingDir, 'allure-results', 'environment.properties');
-
-    try {
-      fs.mkdirSync(path.dirname(filePath), { recursive: true });
-      const data = Object.entries(propertiesDict).map(([key, value]) => `${key}=${value}`).join('\n');
-      fs.writeFileSync(filePath, data);
-      console.log(`✅ Allure environment properties written to ${filePath}`);
-    } catch (error) {
-      console.error(`❌ Failed to write environment properties: ${error}`);
+  try {
+    if (global.browser) {
+      await global.browser.close();
     }
-
-    console.log('✅ Browser closed and environment properties written.');
-  });
+    console.log("✅ Browser closed successfully.");
+  } catch (error) {
+    console.error(`❌ Error during browser shutdown: ${error}`);
+  }
+});
 
 export function generateRandomString(length: number = 10): string {
   const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -124,7 +148,7 @@ export async function attachScreenshot(filename: string): Promise<void> {
     );
 
     const dir = path.join(baseDir, 'data', 'attachments');
-    const fullPath = path.join(dir, fullFilename);  
+    const fullPath = path.join(dir, fullFilename);
 
     console.log("Full Screenshot Path:", fullPath);
 
@@ -137,7 +161,7 @@ export async function attachScreenshot(filename: string): Promise<void> {
 
     if (screenshot && fs.existsSync(fullPath)) {
       console.log("Screenshot saved at:", fullPath);
-      allure.attachment(fullFilename, fs.readFileSync(fullPath), 'image/png');
+      // allure.attachment(fullFilename, fs.readFileSync(fullPath), 'image/png');
     } else {
       console.error("Failed to capture screenshot or file not found:", fullPath);
     }

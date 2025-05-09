@@ -42,7 +42,7 @@ export class BasePlaywrightHelper {
     options: LaunchOptions = {}
   ) {
     try {
-      const timeout = 30000;
+      const timeout = 1000;
       switch (browserType) {
         case 'chromium':
           this.browser = await chromium.launch({ headless, timeout, ...options });
@@ -72,13 +72,42 @@ export class BasePlaywrightHelper {
     }
   }
 
-  public getPage(): Page | null {
-    return this.page;
-  }
+public async getPage(): Promise<Page> {
+    if (!this.page || this.page.isClosed()) {
+        if (!this.browser) {
+            throw new Error('❌ Browser is not initialized. Call launchBrowser() first.');
+        }
 
-  public getBrowser(): Browser | null {
+        console.log('🌐 Reinitializing context and page...');
+
+        // Reuse existing context if available, otherwise create a new one
+        if (!this.context || this.context?.pages().every(p => p.isClosed())) {
+            this.context = await this.browser.newContext();
+            console.log('✅ New context created.');
+        }
+
+        // Create a fresh page within the existing context
+        this.page = await this.context.newPage();
+        console.log('✅ Page reinitialized.');
+    }
+
+    return this.page;
+}
+
+
+  public getBrowser(): Browser {
+    if (!this.browser) {
+      throw new Error('❌ Browser is not initialized. Call launchBrowser() first.');
+    }
     return this.browser;
   }
+
+public getContext(): BrowserContext | null {
+  if (!this.page) {
+    throw new Error('❌ Page is not initialized. Call launchBrowser() first.');
+  }
+  return this.page.context();
+}
 
   async launchMobileBrowser(deviceName: string, headless: boolean = true) {
     try {
@@ -95,12 +124,27 @@ export class BasePlaywrightHelper {
     }
   }
 
-  async navigateToUrl(url: string) {
-    if (this.page) {
-      await this.page.goto(url);
-      await this.page.waitForLoadState();
-    }
+async navigateToUrl(url: string, timeout: number = 1000): Promise<void> {
+  if (!this.page || this.page.isClosed()) {
+    console.error("⚠️ Page is not initialized or is closed.");
+    return;
   }
+
+  try {
+    console.log(`🌐 Navigating to ${url}...`);
+
+    // Navigate to the URL
+    await this.page.goto(url, { waitUntil: 'networkidle' });
+
+    console.log(`✅ Successfully navigated to ${url}`);
+  } catch (error: any) {
+    console.error(`❌ Failed to navigate to ${url} within ${timeout / 1000}s:`, error);
+    if (error.name === 'TimeoutError') {
+      console.error(`⚠️ Timeout while navigating to ${url}. Consider increasing the timeout.`);
+    }
+    throw error; // Rethrow the error to fail the test properly
+  }
+}
 
   async captureScreenshot(filename: string): Promise<string | null> {
     if (this.page) {
@@ -156,7 +200,7 @@ export class BasePlaywrightHelper {
     return this.page ? await this.page.$$(selector) : [];
   }
 
-  async waitForElement(selector: string, timeout = 5000) {
+  async waitForElement(selector: string, timeout = 1000) {
     if (this.page) {
       try {
         await this.page.waitForSelector(selector, { timeout });
@@ -168,12 +212,16 @@ export class BasePlaywrightHelper {
     return null;
   }
 
-  async checkElementExists(element: { type: string, value: string, name?: string, exact?: boolean; parent?: string }): Promise<boolean> {
-    const { type, value, name, exact } = element;
-    const elementLocator = await this.getElementByType(type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id', value, name, exact);
-    return elementLocator !== null;
+async checkElementExists(element: { type: string, value: string, name?: string, exact?: boolean; parent?: string }): Promise<boolean> {
+    try {
+        const { type, value, name, exact } = element;
+        const elementLocator = this.getElementByType(type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id', value, name, exact);
+        return elementLocator !== null;
+    } catch (error) {
+        console.error(`Error occurred while checking if element exists: ${error}`);
+        return false; // Returning false as the element was not found or there was an error
+    }
 }
-
 
   async getCheckedRadioButtonText(name: string): Promise<string | undefined> {
     if (this.page) {
@@ -213,31 +261,32 @@ export class BasePlaywrightHelper {
     throw new Error('Invalid argument: locatorOrElement must be a string or Locator.');
   }
 
-  async waitForElementToAppear(elementDefinition: { type: string; value: string; name?: string; exact?: boolean }, timeout: number = 10000, pollInterval: number = 100): Promise<Locator | null> {
-    const startTime = Date.now();
-    while (Date.now() - startTime < timeout) {
-      try {
-        const locator = this.getElementByType(
-          elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
-          elementDefinition.value,
-          elementDefinition.name,
-          elementDefinition.exact ?? false
-        );
-        const element = await this.getElement(locator);
-        if (element && await element.isVisible()) {
-          console.log(`✅ Element '${locator}' appeared.`);
-          return element;
-        }
-      } catch (e) {
+  async waitForElementToAppear(elementDefinition: { type: string; value: string; name?: string; exact?: boolean }, timeout: number = 1000, pollInterval: number = 100): Promise<Locator | null> {
+  const startTime = Date.now();
+  while (Date.now() - startTime < timeout) {
+    try {
+      const locator = this.getElementByType(
+        elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
+        elementDefinition.value,
+        elementDefinition.name,
+        elementDefinition.exact ?? false
+      );
+      const element = await this.getElement(locator);
+      if (element && await element.isVisible()) {
+        console.log(`✅ Element '${elementDefinition.value}' appeared.`);
+        return element;
       }
-      await new Promise(resolve => setTimeout(resolve, pollInterval)); // Polling interval
+    } catch (e) {
+      console.warn(`⚠️ Error while waiting for element '${elementDefinition.value}': ${e}`);
     }
-
-    console.log(`⚠️ Fast-fail: Element '${elementDefinition.value}'}' did not appear.`);
-    return null;
+    await new Promise(resolve => setTimeout(resolve, pollInterval));
   }
+  console.log(`⚠️ Element '${elementDefinition.value}' did not appear within the timeout.`);
+  return null;
+}
 
-  async waitForElementToDisappear(elementDefinition: { type: string; value: string; name?: string; exact?: boolean }, timeout: number = 10000, pollInterval: number = 100): Promise<boolean> {
+
+  async waitForElementToDisappear(elementDefinition: { type: string; value: string; name?: string; exact?: boolean }, timeout: number = 1000, pollInterval: number = 100): Promise<boolean> {
     const startTime = Date.now();
     while (Date.now() - startTime < timeout) {
       try {
@@ -266,7 +315,7 @@ export class BasePlaywrightHelper {
   async isPageResponsive(): Promise<boolean> {
     if (this.page) {
       try {
-        await this.page.waitForSelector('body', { timeout: 2000 });
+        await this.page.waitForSelector('body', { timeout: 1000 });
         return true;
       } catch {
         return false;
@@ -375,120 +424,144 @@ export class BasePlaywrightHelper {
     await this.page.route('**/FHIR/R4/Patient/**', route => route.abort());
   }
 
-  async findElementAndPerformAction(
-    elementDefinition: { type: string; value: string | any; name?: string; exact?: boolean; parent?: string },
-    action: string,
-    inputValue?: any,
-  ): Promise<any> {
-    if (!this.page) {
-      throw new Error('❌ Page is not initialized. Call launchBrowser() first.');
-    }
-
-    for (let retry = 0; retry < maxRetries; retry++) {
-      try {
-        let locator;
-
-        if (elementDefinition.value && typeof (elementDefinition.value as any).locator === 'function') {
-          locator = elementDefinition.value as Locator;
-        } else {
-          if (elementDefinition.parent) {
-              const parentLocator = this.page.locator(elementDefinition.parent);
-              locator = parentLocator.locator(this.getElementByType(
-                  elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
-                  elementDefinition.value,
-                  elementDefinition.name,
-                  elementDefinition.exact ?? false
-              ));
-          } else {
-              locator = this.getElementByType(
-                  elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
-                  elementDefinition.value,
-                  elementDefinition.name,
-                  elementDefinition.exact ?? false
-              );
-            }
-        }
-
-        // Wait for the element to be visible
-        await locator.waitFor({ state: 'visible', timeout: 5000 });
-
-        // Perform the specified action
-        switch (action.toLowerCase()) {
-          case 'click':
-            await locator.click();
-            break;
-
-          case 'check':
-            if (!(await locator.isChecked())) await locator.check();
-            break;
-
-          case 'uncheck':
-            if (await locator.isChecked()) await locator.uncheck();
-            break;
-
-          case 'select_option':
-            if (typeof inputValue === 'number') {
-              await locator.selectOption({ index: inputValue });
-            } else if (typeof inputValue === 'string') {
-              await locator.selectOption({ value: inputValue });
-            } else {
-              throw new Error('❌ select_option requires a string or number as inputValue');
-            }
-            break;
-
-          case 'get_options':
-            return await locator.evaluate(el =>
-              Array.from((el as HTMLSelectElement).options).map(opt => opt.text)
-            );
-
-          case 'clear':
-            await locator.fill('');
-            break;
-
-          case 'input_text':
-            if (!inputValue) throw new Error('❌ input_text requires inputValue');
-            await locator.fill(String(inputValue));
-            break;
-
-          case 'get_text':
-            return await locator.textContent();
-
-          case 'get_value':
-            return await locator.getAttribute('value');
-
-          case 'scroll_to':
-            await locator.scrollIntoViewIfNeeded();
-            break;
-
-          case 'get_selected_option':
-            const selected = locator.locator('option:checked');
-            return {
-              text: await selected.textContent(),
-              value: await selected.getAttribute('value')
-            };
-
-          case 'type_text':
-            if (!inputValue) throw new Error('❌ type_text requires inputValue');
-            await locator.type(String(inputValue), { delay: 50 });
-            break;
-
-          default:
-            console.warn(`⚠️ Unsupported action: ${action}`);
-        }
-
-        return;
-      } catch (err) {
-        console.error(`⚠️ Error on attempt ${retry + 1}:`, err);
-        if (retry < maxRetries - 1) {
-          await this.page.waitForTimeout(retryDelay);
-        } else {
-          throw err;
-        }
-      }
-    }
+async findElementAndPerformAction(
+  elementDefinition: { type: string; value: string | any; name?: string; exact?: boolean; parent?: string },
+  action: string,
+  inputValue?: any,
+): Promise<any> {
+  if (!this.page) {
+    throw new Error('❌ Page is not initialized. Call launchBrowser() first.');
   }
 
-  async waitForPageToLoad(timeout: number = 3000, loadState: 'load' | 'domcontentloaded' | 'networkidle' = 'load' ): Promise<void> {
+  for (let retry = 0; retry < maxRetries; retry++) {
+    try {
+      let locator;
+
+      if (elementDefinition.value && typeof (elementDefinition.value as any).locator === 'function') {
+        locator = elementDefinition.value as Locator;
+      } else {
+        if (elementDefinition.parent) {
+          const parentLocator = this.page.locator(elementDefinition.parent);
+          locator = parentLocator.locator(this.getElementByType(
+            elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
+            elementDefinition.value,
+            elementDefinition.name,
+            elementDefinition.exact ?? false
+          ));
+        } else {
+          locator = this.getElementByType(
+            elementDefinition.type as 'role' | 'text' | 'label' | 'placeholder' | 'xpath' | 'link' | 'radio' | 'title' | 'row' | 'cell' | 'id',
+            elementDefinition.value,
+            elementDefinition.name,
+            elementDefinition.exact ?? false
+          );
+        }
+      }
+
+      try {
+        await locator.waitFor({ state: 'visible', timeout: 1000 });
+      } catch (e) {
+        console.warn(`⚠️ Element '${elementDefinition.value}' not found or not visible after ${maxRetries} attempts.`);
+        return;
+      }
+
+      switch (action.toLowerCase()) {
+        case 'click':
+          await locator.click();
+          break;
+
+        case 'check':
+          if (!(await locator.isChecked())) await locator.check();
+          break;
+
+        case 'uncheck':
+          if (await locator.isChecked()) await locator.uncheck();
+          break;
+
+        case 'select_option':
+          if (typeof inputValue === 'number') {
+            await locator.selectOption({ index: inputValue });
+          } else if (typeof inputValue === 'string') {
+            await locator.selectOption({ value: inputValue });
+          } else {
+            throw new Error('❌ select_option requires a string or number as inputValue');
+          }
+          break;
+
+        case 'get_options':
+          return await locator.evaluate(el =>
+            Array.from((el as HTMLSelectElement).options).map(opt => opt.text)
+          );
+
+        case 'clear':
+          await locator.fill('');
+          break;
+
+        case 'input_text':
+          if (!inputValue) throw new Error('❌ input_text requires inputValue');
+          await locator.fill(String(inputValue));
+          break;
+
+        case 'get_text':
+          return await locator.textContent();
+
+        case 'get_value':
+          return await locator.getAttribute('value');
+
+        case 'scroll_to':
+          await locator.scrollIntoViewIfNeeded();
+          break;
+
+        case 'get_selected_option':
+          const selected = locator.locator('option:checked');
+          return {
+            text: await selected.textContent(),
+            value: await selected.getAttribute('value')
+          };
+
+        case 'type_text':
+          if (!inputValue) throw new Error('❌ type_text requires inputValue');
+          await locator.type(String(inputValue), { delay: 50 });
+          break;
+
+        default:
+          console.warn(`⚠️ Unsupported action: ${action}`);
+      }
+
+      return;
+    } catch (err) {
+      console.warn(`⚠️ Error on attempt ${retry + 1}:`, err);
+    }
+  }
+}
+
+async waitForLoadingToDisappear(timeout: number = 1000): Promise<void> {
+    try {
+        if (this.page) {
+            await this.page.waitForLoadState('networkidle', { timeout: 1000 });
+
+            const loadingSelectors = [
+                '[role="status"]',
+                '.loading',
+                '.spinner',
+                '.loading-overlay',
+                '.overlay'
+            ];
+
+            for (const selector of loadingSelectors) {
+                const loadingElement = this.page.locator(selector);
+                if (await loadingElement.count() > 0) {
+                    console.log(`⏳ Waiting for loading element (${selector}) to disappear...`);
+                    await loadingElement.waitFor({ state: 'hidden', timeout });
+                }
+            }
+        }
+    } catch (error) {
+        console.error('❌ Error while waiting for loading element to disappear:', error);
+    }
+}
+
+  async waitForPageToLoad(timeout: number = 1000, loadState: 'load' | 'domcontentloaded' | 'networkidle' = 'load' ): Promise<void> {
     if (this.page) {
       await this.page.waitForLoadState(loadState, { timeout });
     } else {
@@ -496,7 +569,7 @@ export class BasePlaywrightHelper {
     }
   }
 
-  async waitForSelectorToDisappear(selector: string, timeout = 5000) {
+  async waitForSelectorToDisappear(selector: string, timeout = 1000) {
     if (!this.page) {
       throw new Error('Page is not initialized. Call launchBrowser() first.');
     }
@@ -553,7 +626,6 @@ export class BasePlaywrightHelper {
         throw new Error('Page is not initialized. Call launchBrowser() first.');
     }
 
-    // Handle nested role separately
     if (type === 'nested_role') {
         if (!value || !parent) throw new Error('Nested role requires both a value and a parent');
         const parentLocator = this.page.locator(parent);
