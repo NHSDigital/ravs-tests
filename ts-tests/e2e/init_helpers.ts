@@ -106,35 +106,44 @@ export function sanitizeFilename(filename: string): string {
 export async function attachScreenshot(filename: string): Promise<void> {
   const workingDir = getWorkingDirectory();
   const browser = config.browser;
-  const version = playwrightHelperInstance?.getBrowserVersion() || 'unknown';
-
-  console.log("Working Dir:", workingDir);
-  console.log("Browser:", browser);
-  console.log("Version:", version);
-  console.log("Filename:", filename);
-
-  const baseDir = path.normalize(workingDir);
-
-  const fullFilename = sanitizeFilename(
-    browser === 'mobile'
-      ? `${config.test_environment}_${browser}_${config.device}_${version}_${filename}.png`
-      : `${config.test_environment}_${browser}_${version}_${filename}.png`
-  );
-
-  const dir = path.join('data', 'attachments', fullFilename);
-  const fullPath = path.join(dir, fullFilename);
 
   try {
+    const version = await playwrightHelperInstance?.getBrowserVersion() || 'unknown';
+
+    console.log("Working Dir:", workingDir);
+    console.log("Browser:", browser);
+    console.log("Version:", version);
+    console.log("Filename:", filename);
+
+    const baseDir = path.normalize(workingDir);
+
+    const fullFilename = sanitizeFilename(
+      browser === 'mobile'
+        ? `${config.test_environment}_${browser}_${config.device}_${version}_${filename}.png`
+        : `${config.test_environment}_${browser}_${version}_${filename}.png`
+    );
+
+    const dir = path.join(baseDir, 'data', 'attachments');
+    const fullPath = path.join(dir, fullFilename);  
+
+    console.log("Full Screenshot Path:", fullPath);
+
     if (!fs.existsSync(dir)) {
       console.log(`Directory does not exist. Creating: ${dir}`);
       fs.mkdirSync(dir, { recursive: true });
     }
+
     const screenshot = await playwrightHelperInstance?.captureScreenshot(fullPath);
+
     if (screenshot && fs.existsSync(fullPath)) {
+      console.log("Screenshot saved at:", fullPath);
       allure.attachment(fullFilename, fs.readFileSync(fullPath), 'image/png');
+    } else {
+      console.error("Failed to capture screenshot or file not found:", fullPath);
     }
+
   } catch (e) {
-    console.error(`Failed to capture screenshot: ${e}`);
+    console.error(`Error capturing screenshot: ${e}`);
   }
 }
 
