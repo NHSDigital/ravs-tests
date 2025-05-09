@@ -4,10 +4,10 @@ let common = [
   '--require ./e2e/steps/*.ts',
   '--format progress-bar',
   '--publish-quiet',
-  `--format-options '{"snippetInterface": "synchronous"}'`,
-  '--timeout 10000'
+  `--format-options '{"snippetInterface": "synchronous"}'`
 ].join(' ');
 
 module.exports = {
-  default: common
-}
+  default: common,
+  defaultTimeout: 10000
+};
