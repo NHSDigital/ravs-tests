@@ -9,8 +9,9 @@
       "runtimeArgs": [
         "cucumber-js",
         "--require", "e2e/steps/**/*.ts",
-        "e2e/features/**/*.feature",
-        "--publish-quiet"
+        "e2e/features/*.feature",
+        "--publish-quiet",
+        "--format", "json:./test-reports/results.json"
       ],
       "program": "${workspaceFolder}/node_modules/@cucumber/cucumber/bin/cucumber-js",
       "args": [],
@@ -18,7 +19,8 @@
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ],
-      "sourceMaps": true
+      "sourceMaps": true,
+      "console": "integratedTerminal"
     }
   ]
 }

@@ -21,22 +21,18 @@ export async function navigateToRavsLoginPage(url: string): Promise<void> {
     await ensureYouAreNotLoggedInLabelExists();
 
       try {
-      // Wait for the accept cookies element, and handle if it does not appear
       const acceptCookiesExists = await playwrightHelperInstance!.checkElementExists(ACCEPT_COOKIES_ELEMENT);
 
       if (acceptCookiesExists) {
-        // Element found, perform the action
         await playwrightHelperInstance!.findElementAndPerformAction(ACCEPT_COOKIES_ELEMENT, 'click');
         console.log('Accepted cookies successfully.');
       } else {
         console.log('No accept cookies prompt found. Continuing with the test.');
       }
     } catch (error) {
-      // Log error but don't interrupt the test if any error happens during checking element
       console.warn('No accept cookies element found or timed out. Continuing with the test...');
     }
   } catch (error) {
-    // Log error but don't throw
     console.warn('Error while navigating or checking accept cookies element. Continuing with the test...');
   }
 }
