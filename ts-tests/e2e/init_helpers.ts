@@ -10,14 +10,16 @@ if (!process.env.CI) {
   dotenv.config({ path: path.resolve(__dirname, envFile) });
   console.log(`🔧 Loaded environment from ${envFile}`);
 } else {
+  const timeout = process.env.PWDEBUG ? -1 : 60 * 1000;
+  setDefaultTimeout(timeout);
+  console.log(`🌐 Timeout for CI set to ${timeout / 1000} seconds.`);
   console.log("🔧 Using CI environment variables");
 }
 
 declare global {
   var browser: any;
+  var page: any;
 }
-
-setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 
 const config = loadConfigFromEnv();
 const workingDirectory = getWorkingDirectory();
@@ -45,6 +47,9 @@ export async function initializeHelpers() {
     throw new Error("Failed to retrieve browser or page instance.");
   }
 
+  global.browser = browser;
+  global.page = page;
+
   console.log("✅ Helpers initialized successfully.");
   return { browser, page };
 }
@@ -54,6 +59,7 @@ BeforeAll(async function () {
 
   const { browser, page } = await initializeHelpers();
   global.browser = browser;
+  global.page = page;
 
   console.log("✅ Helpers initialized and directories prepared.");
 });
@@ -69,12 +75,13 @@ Before({ tags: '@debug' }, function () {
 });
 
 After(async function () {
-  console.log(`🛑 Finishing scenario: ${this.testName}`);
+    if (global.page && typeof global.page.close === 'function') {
+      await global.page.close();
+    }
 
-  // Clean up: close the page and context
-  await this.page?.close();
-  await this.context?.close();
-
+    if (this.context) {
+      await this.context.close();
+    }
   console.log("✅ Scenario cleanup complete.");
 });
 
@@ -84,8 +91,10 @@ AfterAll(async function () {
   try {
     if (global.browser) {
       await global.browser.close();
+      global.browser = null;
+      global.page = null;
+      console.log("✅ Browser closed successfully.");
     }
-    console.log("✅ Browser closed successfully.");
   } catch (error) {
     console.error(`❌ Error during browser shutdown: ${error}`);
   }
@@ -132,6 +141,7 @@ export async function attachScreenshot(filename: string): Promise<void> {
   const browser = config.browser;
 
   try {
+
     const version = await playwrightHelperInstance?.getBrowserVersion() || 'unknown';
 
     console.log("Working Dir:", workingDir);
@@ -146,6 +156,7 @@ export async function attachScreenshot(filename: string): Promise<void> {
         ? `${config.test_environment}_${browser}_${config.device}_${version}_${filename}.png`
         : `${config.test_environment}_${browser}_${version}_${filename}.png`
     );
+
 
     const dir = path.join(baseDir, 'data', 'attachments');
     const fullPath = path.join(dir, fullFilename);

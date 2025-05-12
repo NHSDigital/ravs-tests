@@ -82,27 +82,27 @@ Then(/^sign in should (.+)$/, async function (status: string) {
     await InitHelpers.attachScreenshot('sign_in_should_' + status.toLowerCase());
     if (status.toLowerCase() === 'fail') {
         if (sharedData.password === 'None' && !sharedData.emailAddress?.toLowerCase().includes('valid')) {
-            await InitHelpers.attachScreenshot('check_password_error_alert_exists');
             assert(await nhsSigninPage.checkPasswordErrorAlertExists(), 'Password error alert not found');
             assert.strictEqual(await nhsSigninPage.getPasswordMissingErrorText(), 'This field cannot be left blank');
+            await InitHelpers.attachScreenshot('check_password_error_alert_exists');
         } else if (sharedData.emailAddress === 'None' && !sharedData.emailAddress?.toLowerCase().includes('valid')) {
             await nhsSigninPage.clickNhsSigninButton();
-            await InitHelpers.attachScreenshot('clicked_nhs_signin_button_and_check_error_alerts_exist');
             assert(await nhsSigninPage.checkEmailAddressErrorAlertExists(), 'Email address error alert not found');
             assert(await nhsSigninPage.checkFoundSomeErrorsAlertExists(), 'General error alert not found');
             assert.strictEqual(await nhsSigninPage.getEmailAddressMissingErrorText(), 'This field cannot be left blank');
+            await InitHelpers.attachScreenshot('clicked_nhs_signin_button_and_check_error_alerts_exist');
         } else if (sharedData.emailAddress?.includes('long_email_address')) {
-            await InitHelpers.attachScreenshot('check_emailAddress_error_alert_exists');
             assert(await nhsSigninPage.checkEmailAddressErrorAlertExists(), 'Email address error alert not found');
             assert.strictEqual(await nhsSigninPage.getEmailAddressMissingErrorText(), 'This field cannot be left blank');
+            await InitHelpers.attachScreenshot('check_emailAddress_error_alert_exists');
         } else if (sharedData.emailAddress?.includes('valid') && status.toLowerCase() === 'pass') {
-            await InitHelpers.attachScreenshot('logout_button_should_exist');
             assert(await homePage.checkLogoutButtonExists(), 'Logout button not found');
+            await InitHelpers.attachScreenshot('logout_button_should_exist');
             await homePage.clickLogoutButton();
             await InitHelpers.attachScreenshot('clicked_logout_button');
         } else {
-            await InitHelpers.attachScreenshot('check_unable_to_sign_in_error_exists');
             assert(await nhsSigninPage.checkUnableToSignInErrorExists(), 'Unable to sign in error not found');
+            await InitHelpers.attachScreenshot('check_unable_to_sign_in_error_exists');
         }
     }
 });
