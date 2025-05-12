@@ -54,7 +54,7 @@ export async function initializeHelpers() {
   return { browser, page };
 }
 
-BeforeAll(async function () {
+Before(async function () {
   console.log("🚀 Initializing helpers...");
 
   const { browser, page } = await initializeHelpers();
