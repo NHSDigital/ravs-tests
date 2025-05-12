@@ -95,14 +95,19 @@ Then(/^sign in should (.+)$/, async function (status: string) {
             assert(await nhsSigninPage.checkEmailAddressErrorAlertExists(), 'Email address error alert not found');
             assert.strictEqual(await nhsSigninPage.getEmailAddressMissingErrorText(), 'This field cannot be left blank');
             await InitHelpers.attachScreenshot('check_emailAddress_error_alert_exists');
-        } else if (sharedData.emailAddress?.includes('valid') && status.toLowerCase() === 'pass') {
+        } else {
+            assert(await nhsSigninPage.checkUnableToSignInErrorExists(), 'Unable to sign in error not found');
+            await InitHelpers.attachScreenshot('check_unable_to_sign_in_error_exists');
+        }
+    } else if (status.toLowerCase() === 'pass') {
+        if (sharedData.emailAddress?.includes('valid')) {
             assert(await homePage.checkLogoutButtonExists(), 'Logout button not found');
             await InitHelpers.attachScreenshot('logout_button_should_exist');
             await homePage.clickLogoutButton();
             await InitHelpers.attachScreenshot('clicked_logout_button');
         } else {
-            assert(await nhsSigninPage.checkUnableToSignInErrorExists(), 'Unable to sign in error not found');
-            await InitHelpers.attachScreenshot('check_unable_to_sign_in_error_exists');
+            console.log('This should pass, but no specific conditions are met.');
         }
     }
 });
+
