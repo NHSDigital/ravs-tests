@@ -25,11 +25,21 @@ Background:
   # | 4     | 9650594000 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-60   | Archie STRAIN| 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Quadrivalent Influenza Vaccine (QIVe)| AUTO-QIVE-CSC    | 19/10/2026 | male   | lead administrator | branch surgery   |
   # | 5     | 9449303762 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5    | Pryderi Warnford-Davis | 14/04/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF     | Flu | Adjuvanted Quadrivalent Influenza Vaccine (aQIV)  | AUTO-QIV-AP      | 19/10/2026 | female | administrator | branch surgery   |
   # | 6     | 9470011902 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-12   | Katee TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | Fluenz (LAIV)   |AUTO-F-CSC| 19/10/2026 | female | administrator | branch surgery   |
-  | 7     | 9732743476 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | GP clinic | yes  | today| yes     | yes  | today-100  | Mike HEESOM  | 24/10/1992 | 2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY   | Flu | Cell-based Quadrivalent Influenza Vaccine (QIVc)  | AUTO-QIVC-CSC    | 19/10/2026 | male   | recorder | community pharmacy |
+
+  #commented
+
+  # | 7     | 9732743476 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | GP clinic | yes  | today| yes     | yes  | today-100  | Mike HEESOM  | 24/10/1992 | 2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY   | Flu | Cell-based Quadrivalent Influenza Vaccine (QIVc)  | AUTO-QIVC-CSC    | 19/10/2026 | male   | recorder | community pharmacy |
+
   # | 8     | 9650594000 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service|GP clinic   |yes  | today| yes     | yes  | today-200  | Archie STRAIN| 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM     | 19/10/2026 | female | lead administrator | community pharmacy |
-  | 9     | 9470032640 | Aire Valley Surgery (Rawdon)  | GP clinic   |yes  | today| yes     | yes  | today-12   | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD)    | AUTO-QIHD-OM     | 19/10/2026 | male   | administrator | branch surgery   |
-  | 10    | 9470011902 | Aspire Pharmacy|GP clinic   |yes  | today| yes     | yes  | today  | KATEE TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | Quadrivalent Influenza Vaccine (QIVe)| AUTO-QIVE-CSC    | 19/10/2026 | female | administrator | community pharmacy |
-  | 11    | 9470032640 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5  | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Influenza Tetra MYL (QIVe)| AUTO-ITM-CSC     | 19/10/2026 | male   | lead administrator | branch surgery   |
+
+  # commented these below 3
+
+
+  # | 9     | 9470032640 | Aire Valley Surgery (Rawdon)  | GP clinic   |yes  | today| yes     | yes  | today-12   | SYBIL PELLING | 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD)    | AUTO-QIHD-OM     | 19/10/2026 | male   | administrator | branch surgery   |
+  # | 10    | 9470011902 | Aspire Pharmacy|GP clinic   |yes  | today| yes     | yes  | today  | KATEE TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | Quadrivalent Influenza Vaccine (QIVe)| AUTO-QIVE-CSC    | 19/10/2026 | female | administrator | community pharmacy |
+  # | 11    | 9470032640 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5  | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Influenza Tetra MYL (QIVe)| AUTO-ITM-CSC     | 19/10/2026 | male   | lead administrator | branch surgery   |
+
+
   # | 12    | 9470032640 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-100  | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Influenza Tetra MYL (QIVe)| AUTO-ITM-CSC     | 19/10/2026 | male   | lead administrator | branch surgery   |
   # | 12    | 9470032640 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5  | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Influenza Tetra MYL (QIVe)| AUTO-ITM-CSC     | 19/10/2026 | male   | administrator | branch surgery   |
 
@@ -55,10 +65,15 @@ Background:
     | 1     | 9732596996 | Leeds Pharmacy |Vaccination Centre  | yes  | today| yes     | yes  | today-20  | Lisa WORTHY  | 30/6/2024  | 10 NORTON PARK VIEW, SHEFFIELD, S8 8GS      | COVID-19 | Comirnaty 30 JN.1 |AUTO-30-APCSC    | 19/10/2026 | male   | recorder | community pharmacy |
     | 2     | 9470006739 | Aspire Pharmacy |GP clinic   |yes  | today| yes     | yes  | today-7  | JANNETTE ARD | 09/12/2015 | 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ | Covid-19 | Comirnaty 10 JN.1      |AUTO-10-CSC      | 19/10/2026 | female | lead administrator | community pharmacy |
     | 3     | 9470006739 | Aspire Pharmacy |GP clinic   |yes  | today| yes     | yes  | today-3  | JANNETTE ARD | 09/12/2015 | 1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ | Covid-19 | Comirnaty 3 JN.1      |AUTO-10-CSC      | 19/10/2026 | female | lead administrator | community pharmacy |
-    | 4     | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | GP clinic   |yes  | today| yes     | yes  | today-3    | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD)    | AUTO-QIHD-OM     | 19/10/2026 | male   | administrator | community pharmacy |
-    | 5     | 9650594000 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-60   | Archie STRAIN| 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Quadrivalent Influenza Vaccine (QIVe)| AUTO-QIVE-CSC    | 19/10/2026 | male   | lead administrator | branch surgery   |
-    | 6     | 9449303762 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5    | Pryderi Warnford-Davis | 14/04/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF     | Flu | Adjuvanted Quadrivalent Influenza Vaccine (aQIV)  | AUTO-QIV-AP      | 19/10/2026 | female | administrator | branch surgery   |
-    | 7     | 9470011902 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-2   | Katee TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | Fluenz (LAIV)   |AUTO-F-CSC| 19/10/2026 | female | administrator | branch surgery   |
+
+    # commented these below 4
+
+    # | 4     | 9470032640 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | GP clinic   |yes  | today| yes     | yes  | today-3    | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD)    | AUTO-QIHD-OM     | 19/10/2026 | male   | administrator | community pharmacy |
+    # | 5     | 9650594000 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-60   | Archie STRAIN| 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Quadrivalent Influenza Vaccine (QIVe)| AUTO-QIVE-CSC    | 19/10/2026 | male   | lead administrator | branch surgery   |
+    # | 6     | 9449303762 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-5    | Pryderi Warnford-Davis | 14/04/2001 | 1 CRANLEIGH ROAD, ESHER, SURREY, KT10 8DF     | Flu | Adjuvanted Quadrivalent Influenza Vaccine (aQIV)  | AUTO-QIV-AP      | 19/10/2026 | female | administrator | branch surgery   |
+    # | 7     | 9470011902 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-2   | Katee TUZZIO | 27/05/2015 | BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN | Flu | Fluenz (LAIV)   |AUTO-F-CSC| 19/10/2026 | female | administrator | branch surgery   |
+
+
     # | 7     | 9732743476 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | GP clinic | yes  | today| yes     | yes  | today-100  | Mike HEESOM  | 24/10/1992 | 2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY   | Flu | Cell-based Quadrivalent Influenza Vaccine (QIVc)  | AUTO-QIVC-CSC    | 19/10/2026 | male   | recorder | community pharmacy |
     # | 8     | 9650594000 | Aspire Pharmacy|GP clinic   |yes  | today| yes     | yes  | today-200  | Archie STRAIN| 30/07/2014 | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD) | AUTO-QIHD-OM     | 19/10/2026 | female | lead administrator | community pharmacy |
     # | 9     | 9470032640 | Aire Valley Surgery (Rawdon) | GP clinic   |yes  | today| yes     | yes  | today-12   | SYBIL PELLING| 17/12/2015 | 50 ST. GEORGES QUAY, LANCASTER, LA1 1SA | Flu | Quadrivalent Influenza Vaccine – High Dose (QIV-HD)    | AUTO-QIHD-OM     | 19/10/2026 | male   | administrator | branch surgery   |
@@ -82,7 +97,11 @@ Background:
   Examples:
       | index | nhs_number | site  |vaccination_location  | eligibility | assess_date | consent | vaccination | vaccination_date | name   | dob | chosen_vaccine | batch_number    | batch_expiry_date | user_role| care_model |
       | 0     | 9733907723 | Aire Valley Surgery (Rawdon)  |Outreach event   | yes  | today| yes     | yes  | today-14   | Sandra Ryan   | 07/04/1994 | COVID-19 | AUTO-C-SFLAG    | 19/10/2026| administrator    | Branch Surgery    |
-      | 1     | 9733907723 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre     | yes  | today| yes     | yes  | today-5   | Sandra Ryan   | 07/04/1994 | Flu | AUTO-F-SFLAG    | 19/10/2026| lead administrator| Community Pharmacy |
+
+
+      # | 1     | 9733907723 | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre     | yes  | today| yes     | yes  | today-5   | Sandra Ryan   | 07/04/1994 | Flu | AUTO-F-SFLAG    | 19/10/2026| lead administrator| Community Pharmacy |
+
+
       # | 2     | 9450127077 | Leeds Pharmacy   | GP clinic   | yes  | today| yes     | yes  | today-200  | LUDMILLA MCKSN-PDS-ALPHA-SENSITIVE   | 2/5/1974 | COVID-19 | AUTO-SJ-AP      | 19/10/2026| recorder  | Community Pharmacy    |
       # | 3     | 9450127077 | Aire Valley Surgery (Rawdon)  |Vaccination Centre     | yes  | today| yes     | yes  | today-60   | LUDMILLA MCKSN-PDS-ALPHA-SENSITIVE   | 2/5/1974 | Flu | AUTO-QIVC-CSC   | 19/10/2026| lead administrator| Branch Surgery    |
       # | 4     | 9733907723 | Aspire Pharmacy   |Outreach event   | yes  | today| yes     | yes  | today-90   | Sandra Ryan   | 07/04/1994 | COVID-19 | AUTO-30-APCSC   | 19/10/2026| administrator    | Community Pharmacy |
@@ -108,7 +127,11 @@ Background:
 Examples:
       | index | nhs_number   | site    |vaccination_location    | eligibility | assess_date | consent | vaccination | vaccination_date | name    | dob | address  |chosen_vaccine | batch_number     | batch_expiry_date | user_role | care_model |
       | 0     | 9467361590   | Aire Valley Surgery (Rawdon)    |Outreach event    | yes  | today| yes     | yes  | today-9    | WALLIS ADEYEMO  | 19/4/2015  | 1 MIDLAND ROAD, LEEDS, LS6 1BQ  | COVID-19 | AUTO-SUP-C-1     | 19/10/2026 | lead administrator | Branch Surgery    |
-      | 8     | 9734250221   | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre      | yes  | today| yes     | yes  | today-20   | BARAK SELIGMANN | 26/5/2016  | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ | Flu | AUTO-SUP-N-F     | 19/10/2026 | recorder    | Community Pharmacy |
+
+
+      # | 8     | 9734250221   | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre      | yes  | today| yes     | yes  | today-20   | BARAK SELIGMANN | 26/5/2016  | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ | Flu | AUTO-SUP-N-F     | 19/10/2026 | recorder    | Community Pharmacy |
+
+
       # | 1     | 3508118053   | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Outreach event    | yes  | today| yes     | yes  | today-9    | WALLIS ADEYEMO  | 19/4/2015  | 1 MIDLAND ROAD, LEEDS, LS6 1BQ  | COVID-19 | AUTO-SUPER-C-1   | 19/10/2026 | administrator      | Community Pharmacy |
       # | 2     | 9734250221   | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Vaccination Centre      | yes  | today| yes     | yes  | today-30   | BARAK SELIGMANN | 26/5/2016  | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ | Flu | AUTO-SUP-N-F     | 19/10/2026 | recorder    | Community Pharmacy |
       # | 3     | 9467361590   | Leeds Pharmacy      |Vaccination Centre      | yes  | today| yes     | yes  | today-9    | WALLIS ADEYEMO  | 19/4/2015  | 1 MIDLAND ROAD, LEEDS, LS6 1BQ  | COVID-19 | AUTO-SUP-C-1     | 19/10/2026 | lead administrator | Community Pharmacy |
@@ -132,7 +155,7 @@ Examples:
 
 Examples:
     | index | nhs_number  | site    |vaccination_location  | eligibility | assess_date | consent | vaccination | vaccination_date | name    | chosen_vaccine | batch_number     | batch_expiry_date | care_model | user_role |
-    | 0     | 9449304033  | Aire Valley Surgery (Rawdon)| Vaccination Centre    | yes  | today| yes     | yes  | today-8   | BARAK SELIGMANN | Flu | AUTO-SUP-O-F      | 19/10/2026 | Branch Surgery    | lead administrator |
+    # | 0     | 9449304033  | Aire Valley Surgery (Rawdon)| Vaccination Centre    | yes  | today| yes     | yes  | today-8   | BARAK SELIGMANN | Flu | AUTO-SUP-O-F      | 19/10/2026 | Branch Surgery    | lead administrator |
     | 1     | 9449304033  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre    | yes  | today| yes     | yes  | today-14   | BARAK SELIGMANN | COVID-19 | AUTO-SUP-O-C      | 19/10/2026 | Community Pharmacy | administrator      |
     # | 2     | 3508118053  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre    | yes  | today| yes     | yes  | today-60   | WALLIS ADEYEMO  | Flu | AUTO-SUP-O-F      | 19/10/2026 | Community Pharmacy | recorder    |
     # | 3     | 3508118053  | Leeds Pharmacy      |Vaccination Centre    | yes  | today| yes     | yes  | today-10   | WALLIS ADEYEMO  | COVID-19 | AUTO-SUP-O-C      | 19/10/2026 | Community Pharmacy | lead administrator |
@@ -156,7 +179,11 @@ Examples:
   Examples:
     | index | nhs_number  | site      |vaccination_location  | eligibility | assess_date | consent | vaccination | vaccination_date | name      | dob| address     |chosen_vaccine | batch_number    | batch_expiry_date | user_role | care_model |
     | 0     | 9449304424  | Aire Valley Surgery (Rawdon) | Outreach event   | yes  | today| yes     | yes  | today-9   | John Test | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | COVID-19 | AUTO-DEC-SJ1     | 19/10/2026 | lead administrator | Branch Surgery    |
-    | 1     | 9449304424  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre   | yes  | today | yes     | yes  | today-15  | John Test | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | Flu | AUTO-DEC-F-SJ1   | 19/10/2026 | administrator      | Community Pharmacy |
+
+
+    # | 1     | 9449304424  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre   | yes  | today | yes     | yes  | today-15  | John Test | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | Flu | AUTO-DEC-F-SJ1   | 19/10/2026 | administrator      | Community Pharmacy |
+
+
     # | 2     | 9449304424  | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Vaccination Centre   | yes  | today| yes     | yes  | today-25  | John Test | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | COVID-19 | AUTO-DEC-SJ1     | 19/10/2026 | recorder    | Community Pharmacy |
     # | 3     | 9449304424  | Leeds Pharmacy | Vaccination Centre   | yes  | today| yes     | yes  | today-10  | John Test | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | Flu | AUTO-DEC-F-SJ1   | 19/10/2026 | lead administrator | Community Pharmacy |
     # | 4     | 9449304424  | Aspire Pharmacy | Outreach event   | yes  | today| yes     | yes  | today-30  | John Test | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | COVID-19 | AUTO-DEC-SJ1     | 19/10/2026 | administrator      | Community Pharmacy |
@@ -175,7 +202,11 @@ Examples:
 Examples:
     | index | site|vaccination_location    | eligibility | assess_date | consent | vaccination | vaccination_date | chosen_vaccine | batch_number    | batch_expiry_date | user_role | care_model |
     | 0     | Aire Valley Surgery (Rawdon)    | Outreach event     | yes  | today| yes     | yes  | today-6   | COVID-19 | AUTO-LOCAL-C     | 19/10/2026 | lead administrator | Branch Surgery    |
-    | 1     | Aire Valley Surgery (Rawdon)    | Vaccination Centre | yes  | today| yes     | yes  | today-30   | Flu | AUTO-LOCAL-F     | 19/10/2026 | administrator      | Branch Surgery    |
+
+
+    # | 1     | Aire Valley Surgery (Rawdon)    | Vaccination Centre | yes  | today| yes     | yes  | today-30   | Flu | AUTO-LOCAL-F     | 19/10/2026 | administrator      | Branch Surgery    |
+
+
     # | 2     | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre | yes  | today| yes     | yes  | today-60   | COVID-19 | AUTO-LOCAL-C     | 19/10/2026 | recorder    | Community Pharmacy |
     # | 3     | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre | yes  | today| yes     | yes  | today-10   | Flu | AUTO-LOCAL-F     | 19/10/2026 | lead administrator | Community Pharmacy |
     # | 4     | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Vaccination Centre | yes  | today| yes     | yes  | today-90   | COVID-19 | AUTO-LOCAL-C     | 19/10/2026 | administrator      | Community Pharmacy |
@@ -222,7 +253,11 @@ Examples:
     | index | nhs_number  | site    |vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name| dob | address  |chosen_vaccine | batch_number     | batch_expiry_date | gender | care_model| user_role|
     | 4     | 9437541817  | Aire Valley Surgery (Rawdon) | Outreach event | no  | today| yes     | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Branch Surgery   | administrator    |
     | 0     | 9469997956  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service | Vaccination Centre     | yes  | today| no     | yes | today| SOLOMON DAZLEY  | 30/01/2016 | 10 BROOK STREET, LANCASTER, LA1 1SL    | COVID-19 | AUTO-NO-C-SJ1     | 19/10/2026| male   | Community Pharmacy | lead administrator|
-    | 4     | 9437541817  | Leeds Pharmacy   | Outreach event | no   | today| yes     | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Community Pharmacy   | administrator    |
+
+
+    # | 4     | 9437541817  | Leeds Pharmacy   | Outreach event | no   | today| yes     | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Community Pharmacy   | administrator    |
+
+
     # | 0     | 9469997956  | Leeds Pharmacy   | Vaccination Centre   | yes  | today| yes     | yes | today| SOLOMON DAZLEY  | 30/01/2016 | 10 BROOK STREET, LANCASTER, LA1 1SL    | COVID-19 | AUTO-NO-C-SJ1     | 19/10/2026| male   | Community Pharmacy   | lead administrator|
     # | 4     | 9437541817  | Aspire Pharmacy   | Outreach event | yes  | today| no      | no  | today| FLORINDA DUNNER | 27/03/1957 | 32 HOLLAND ROAD, MANCHESTER, M8 4NP    | Flu | AUTO-NO-F-SJ1     | 19/10/2026| female | Community Pharmacy | administrator    |
     # | 0     | 9469997956  | Aspire Pharmacy   | Vaccination Centre   | yes  | today| yes     | yes | today| SOLOMON DAZLEY  | 30/01/2016 | 10 BROOK STREET, LANCASTER, LA1 1SL    | COVID-19 | AUTO-NO-C-SJ1     | 19/10/2026| male   | Community Pharmacy| lead administrator|
