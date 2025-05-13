@@ -1055,6 +1055,12 @@ def click_confirm_and_save_button_record_saved(shared_data):
     attach_screenshot("before_assert_record_saved")
     assert check_record_saved_element_exists(False)
 
+@when("I should see a record saved dialogue")
+@then("I should see a record saved dialogue")
+def record_saved(shared_data):
+    attach_screenshot("before_assert_record_saved")
+    assert check_record_saved_element_exists(False)
+
 @when("the immunisation history of the patient should be updated in the patient details page")
 @then("the immunisation history of the patient should be updated in the patient details page")
 def immunisation_history_should_be_updated(shared_data):

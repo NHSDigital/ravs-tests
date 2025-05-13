@@ -248,6 +248,7 @@ Scenario Outline: NO - Record a vaccine and choose no vaccination decision on th
     And I assess the patient's <eligibility> with the details and date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Save and return button
+    And I should see a record saved dialogue
 
 Examples:
     | index | nhs_number  | site    |vaccination_location | eligibility | assess_date | consent | vaccination | vaccination_date | name| dob | address  |chosen_vaccine | batch_number     | batch_expiry_date | gender | care_model| user_role|
@@ -275,6 +276,7 @@ Examples:
     And I assess the pregnant patient's <eligibility> with the details of due date as <due_date> and assessment date as <assess_date> and click continue to record consent screen button
     And I record <consent> with the details and click continue to vaccinate button
     And I record <vaccination> details and date as <vaccination_date> and click Save and return button
+    And I should see a record saved dialogue
 
     Examples:
       | index | nhs_number | site   | vaccination_location      | eligibility | due_date | assess_date | consent | vaccination | vaccination_date | name  | dob    | address     | chosen_vaccine  | batch_number | batch_expiry_date | care_model| user_role|
