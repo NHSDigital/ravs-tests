@@ -101,6 +101,7 @@ Then(/^sign in should (.+)$/, async function (status: string) {
         }
     } else if (status.toLowerCase() === 'pass') {
         if (sharedData.emailAddress?.includes('valid')) {
+            await nhsSigninPage.clickNhsSigninButton();
             assert(await homePage.checkLogoutButtonExists(), 'Logout button not found');
             await InitHelpers.attachScreenshot('logout_button_should_exist');
             await homePage.clickLogoutButton();
