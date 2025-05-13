@@ -8,7 +8,7 @@ let common = [
 
 module.exports = {
   default: common,
-  parallel: 4,
+  workers: 4,
   failFast: true,
   worldParameters: {},
   timeout: 1000
