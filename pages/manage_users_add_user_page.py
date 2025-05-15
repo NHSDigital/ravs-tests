@@ -4,7 +4,7 @@ PAGE_LOADING_ELEMENT = ("role", "status")
 CONTINUE_TO_ADD_USER_BUTTON = ("role", "button", "Continue")
 FIRST_NAME_INPUT_ELEMENT = ("label", "First name")
 LAST_NAME_INPUT_ELEMENT = ("label", "Last name")
-EMAIL_ADDRESS_INPUT_ELEMENT = ("label", "NHS email address")
+EMAIL_ADDRESS_INPUT_ELEMENT = ("label", "NHS-approved email address")
 YES_REGISTERED_CLINICIAN_RADIO_BUTTON = ("label", "Yes")
 NO_REGISTERED_CLINICIAN_RADIO_BUTTON = ("label", "No")
 RECORDER_PERMISSION_LEVEL_RADIO_BUTTON = ("label", "Recorder")
@@ -18,12 +18,14 @@ ENTER_EMAIL_ADDRESS_ERROR_MESSAGE_LINK = ("role", "button", "Enter an NHS-approv
 ENTER_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT = ("text", "Error: Enter an NHS-approved email address")
 ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_LINK = ("role", "button", "Enter an NHS-approved email address")
 ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT = ("text", "Error: Enter an NHS-approved email address")
+EMAIL_ADDRESS_MUST_BE_NHS_APPROVED_ERROR_MESSAGE_LINK = ("role", "button", "Email address must be NHS-approved")
+EMAIL_ADDRESS_MUST_BE_NHS_APPROVED_ERROR_MESSAGE_TEXT = ("text", "Error: Email address must be NHS-approved")
 SELECT_CLINICIAN_ERROR_MESSAGE_LINK = ("role", "button", "Select if they are a clinician")
 SELECT_CLINICIAN_ERROR_MESSAGE_TEXT = ("text", "Error: Select if they are a clinician")
 SELECT_PERMISSION_LEVEL_ERROR_MESSAGE_LINK = ("role", "button", "Select a permission level")
 SELECT_PERMISSION_LEVEL_ERROR_MESSAGE_TEXT = ("text", "Error: Select a permission level")
-EMAIL_ALREADY_EXISTS_IN_THIS_ORG_ERROR_MESSAGE_LINK = ("role", "button", "Email already exists in this organisation")
-EMAIL_ALREADY_EXISTS_IN_THIS_ORG_ERROR_MESSAGE_TEXT = ("text", "Error: Email already exists in this organisation")
+EMAIL_ALREADY_EXISTS_IN_THIS_ORG_ERROR_MESSAGE_LINK = ("role", "button", "This email address has already been added")
+EMAIL_ALREADY_EXISTS_IN_THIS_ORG_ERROR_MESSAGE_TEXT = ("text", "Error: This email address has already been added")
 ADD_USER_HEADER_ELEMENT = ("role", "heading", "Add user")
 
 def ensure_add_user_heading_exists():
@@ -146,6 +148,21 @@ def check_enter_an_nhs_email_address_error_message_text_exists():
     ensure_add_user_heading_exists()
     wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
     return check_element_exists(ENTER_AN_NHS_EMAIL_ADDRESS_ERROR_MESSAGE_TEXT)
+
+def check_email_address_must_be_nhs_approved_error_message_link_exists():
+    ensure_add_user_heading_exists()
+    wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
+    return check_element_exists(EMAIL_ADDRESS_MUST_BE_NHS_APPROVED_ERROR_MESSAGE_LINK)
+
+def click_email_address_must_be_nhs_approved_error_message_link():
+    ensure_add_user_heading_exists()
+    wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
+    find_element_and_perform_action(EMAIL_ADDRESS_MUST_BE_NHS_APPROVED_ERROR_MESSAGE_LINK, "click")
+
+def check_email_address_must_be_nhs_approved_error_message_text_exists():
+    ensure_add_user_heading_exists()
+    wait_for_element_to_appear(CONTINUE_TO_ADD_USER_BUTTON)
+    return check_element_exists(EMAIL_ADDRESS_MUST_BE_NHS_APPROVED_ERROR_MESSAGE_TEXT)
 
 def check_select_clinician_error_message_link_exists():
     ensure_add_user_heading_exists()
