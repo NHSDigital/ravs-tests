@@ -704,6 +704,7 @@ def step_login_to_ravs_check_new_site_batch_exists(site, vaccination_location, n
         batch_expiry_date = standardize_date_format(batch_expiry_date)
     shared_data["batch_expiry_date"] = batch_expiry_date
     shared_data["pack_size"] = check_vaccine_and_batch_exists_in_site(shared_data, site, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
+    shared_data["pack_size_new"] = check_vaccine_and_batch_exists_in_site(shared_data, new_delivery_team, chosen_vaccine, shared_data["chosen_vaccine_type"], batch_number, batch_expiry_date)
 
 @given(parse("I set vaccinator details with {site} and {vaccination_location} and get patient details for {nhs_number} with option {index} and choose to vaccinate with vaccine details as {chosen_vaccine}, {batch_number} with {batch_expiry_date} and new vaccine product {new_vaccine_product}"))
 def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, vaccination_location, nhs_number, index, chosen_vaccine, batch_number, batch_expiry_date, new_vaccine_product, shared_data):
@@ -1172,7 +1173,7 @@ def the_vaccinated_values_should_persist(shared_data):
         attach_screenshot("vaccine_product_value_should_persist")
         assert get_batch_number_on_vaccinated_screen() == "" #Following the fix for RAVS-2067, the batch number will always be forced cleared
         attach_screenshot("vaccine_product_batch_number_value_should_persist")
-        assert get_dose_amount_value() == shared_data["dose_amount"]
+        assert get_dose_amount_value() == "" #Following the fix for RAVS-2067, the batch number will always be forced cleared
         attach_screenshot("vaccine_product_does_amount_value_should_persist")
         assert get_vaccination_site_on_vaccinated_screen() == ""
         attach_screenshot("vaccination_site_value_should_not_persist")
