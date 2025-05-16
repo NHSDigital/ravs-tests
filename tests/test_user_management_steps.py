@@ -25,15 +25,13 @@ scenarios(f'{features_directory}/user_management.feature')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  # Log rotation (optional)
+log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  
 log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 
-# Add the handler to the logger
 logger.addHandler(log_handler)
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_logging():
-    # You can add logging setup here if needed
     logger.info("Logging setup complete")
     yield
     logger.info("Test session complete")
@@ -231,10 +229,10 @@ def check_and_confirm_screen_should_be_visible(shared_data):
         assert check_email_already_exists_in_organisation_error_message_link_exists() == True
         attach_screenshot("email_already_exists_in_organisation_error_message_link_exists")
     elif shared_data["nhs_email_address"] == "neelima.guntupalli1+admin_automated@nhs.test":
-        assert check_enter_an_nhs_email_address_error_message_text_exists() == True
-        attach_screenshot("enter_an_nhs_email_address_error_message_text_exists")
-        assert check_enter_an_nhs_email_address_error_message_link_exists() == True
-        attach_screenshot("enter_an_nhs_email_address_error_message_link_exists")
+        assert check_email_address_must_be_nhs_approved_error_message_text_exists() == True
+        attach_screenshot("check_email_address_must_be_nhs_approved_error_message_text_exists")
+        assert check_email_address_must_be_nhs_approved_error_message_link_exists() == True
+        attach_screenshot("check_email_address_must_be_nhs_approved_error_message_link_exists")
     else:
         assert check_change_name_link_exists() == True
         attach_screenshot("change_name_link_exists")

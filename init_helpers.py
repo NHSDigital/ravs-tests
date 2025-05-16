@@ -61,7 +61,7 @@ def load_config_from_env():
         "headless_mode": os.environ.get("HEADLESS_MODE",""),
         "browser": os.environ.get("BROWSER", "chrome"),
         "device": os.environ.get("DEVICE", "iphone_12"),
-        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 1)),
+        "timeout_seconds": int(os.environ.get("TIMEOUT_SECONDS", 10)),
         "credentials": {
             "ravs_password": os.environ.get("RAVS_PASSWORD", "")
         }
@@ -74,8 +74,6 @@ def sanitize_filename(filename):
     For example, Windows does not allow: \\ / : * ? " < > |
     """
     sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)
-
-    # Remove leading/trailing spaces and periods (invalid in some OS)
     sanitized = sanitized.strip().strip('.')
 
     return sanitized[:200]
@@ -85,38 +83,29 @@ def attach_screenshot(filename):
 
     working_dir = get_working_directory()
 
-    # Dynamically generate the filename
     if config["browser"] == "mobile":
         filename = f'{config["test_environment"]}_{config["browser"]}_{config["device"]}_{get_browser_version()}_{filename}.png'
     else:
         filename = f'{config["test_environment"]}_{config["browser"]}_{get_browser_version()}_{filename}.png'
 
-    # Sanitize the filename
     filename = sanitize_filename(filename)
 
-    # Define the directory
     directory = os.path.join(working_dir, 'data', 'attachments')
     full_path = os.path.join(directory, filename)
 
-    # Ensure the directory exists
     try:
-        # Check if directory exists, create it if not
         if not os.path.exists(directory):
             logging.debug(f"Directory does not exist, creating it: {directory}")
             os.makedirs(directory, exist_ok=True)
 
-        # Confirm that directory creation was successful
         if os.path.exists(directory):
             logging.debug(f"Directory verified: {directory}")
         else:
             logging.error(f"Failed to create directory: {directory}")
-            return  # Abort if directory creation failed
 
-        # Capture the screenshot
         logging.debug(f"Saving screenshot to: {full_path}")
         screenshot = capture_screenshot(full_path)
 
-        # Check if screenshot was captured and file exists
         if screenshot and os.path.exists(full_path):
             allure.attach.file(full_path, name=filename, attachment_type=allure.attachment_type.PNG)
             logging.debug(f"Screenshot attached at: {full_path}")
@@ -250,7 +239,7 @@ def get_current_url():
 def find_elements(selector):
     return playwright_helper_instance.find_elements(selector)
 
-def wait_for_page_to_load(timeout=3):
+def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
 def check_element_exists(element, wait=False):
