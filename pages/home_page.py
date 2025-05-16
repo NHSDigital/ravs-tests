@@ -33,6 +33,7 @@ CREATE_A_REPORT_LINK = ("role", "link", "create a report")
 TOTAL_VACCINATIONS_TEXT_ELEMENT = ("role", "heading", "Total vaccinations")
 
 def ensure_log_out_nav_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(LOGOUT_NAV_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
