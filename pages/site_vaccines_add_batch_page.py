@@ -29,6 +29,7 @@ ADD_BATCH_BUTTON = ("role", "link", "Add batch")
 EDIT_BATCH_BUTTON = ("role", "link", "Add batch")
 
 def ensure_vaccines_heading_text_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(VACCINES_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(VACCINES_HEADING_TEXT_ELEMENT)
