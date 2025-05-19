@@ -50,6 +50,7 @@ GENDER_MAPPING = {
 
 def ensure_find_a_patient_heading_element_exists():
     if not check_element_exists(FIND_A_PATIENT_LABEL_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(FIND_A_PATIENT_LABEL_ELEMENT)
 
 def format_nhs_number(nhs_number):
