@@ -11,7 +11,6 @@ from playwright.sync_api import sync_playwright
 import allure
 from _pytest.main import Session
 
-# Singleton instances
 playwright_helper_instance = None
 mockdatabase_helper_instance = None
 api_helper_instance = None
@@ -228,6 +227,30 @@ def wait_for_element_to_disappear(element, timeout=10):
         return get_playwright_helper().wait_for_element_to_disappear(resolved_element, timeout)
     except Exception as e:
         pytest.fail(f"An error occurred while waiting for element to disappear: {e}")
+
+def format_date(date, browser):
+    return datetime_helper_instance.format_date(date, browser)
+
+def standardize_date_format(date):
+    return datetime_helper_instance.standardize_date_format(date)
+
+def date_format_with_day_of_week(date):
+    return datetime_helper_instance.date_format_with_day_of_week(date)
+
+def date_format_with_age(date):
+    return datetime_helper_instance.date_format_with_age(date)
+
+def date_format_with_name_of_month(date):
+    return datetime_helper_instance.date_format_with_name_of_month(date)
+
+def date_format_with_name_of_month_shortened(date):
+    return datetime_helper_instance.date_format_with_name_of_month_shortened(date)
+
+def get_date_value_by_months(date):
+    return datetime_helper_instance.get_date_value_by_months(date)
+
+def get_date_value_by_days(date):
+    return datetime_helper_instance.get_date_value_by_days(date)
 
 config = load_config_from_env()
 
