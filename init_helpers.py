@@ -1,3 +1,4 @@
+import asyncio
 import os
 import re
 import shutil
@@ -7,7 +8,7 @@ from helpers.datetimeHelper import DatetimeHelper
 from helpers.playwrightHelper import PlaywrightHelper
 from helpers.mockdatabaseHelper import MockDatabaseHelper
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 import allure
 from _pytest.main import Session
 
@@ -36,10 +37,10 @@ def get_working_directory():
     print("Working directory is : " + working_dir)
     return working_dir
 
-def get_mobile_devices():
+async def get_mobile_devices():
     global _device_cache
     if _device_cache is None:
-        with sync_playwright() as p:
+        async with async_playwright() as p:
             _device_cache = {
                 "iPhone_12": p.devices["iPhone 12"],
                 "iPhone_11": p.devices["iPhone 11"],
@@ -254,4 +255,4 @@ def get_date_value_by_days(date):
 
 config = load_config_from_env()
 
-mobile_devices = get_mobile_devices()
+mobile_devices = asyncio.run(get_mobile_devices())
