@@ -78,6 +78,9 @@ def sanitize_filename(filename):
     sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename).strip().strip('.')
     return sanitized[:200]
 
+def find_elements(selector):
+    return playwright_helper_instance.find_elements(selector)
+
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
 

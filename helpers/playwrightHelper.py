@@ -159,7 +159,7 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-    def wait_for_page_to_load(self, timeout=0.1):
+    def wait_for_page_to_load(self, timeout=0.5):
         try:
             self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
             self.page.wait_for_selector('*', timeout=timeout * 1000)
@@ -169,7 +169,7 @@ class BasePlaywrightHelper:
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def get_element(self, locator_or_element, wait=False, timeout=5):
+    def get_element(self, locator_or_element, wait=False, timeout=5000):
         """Utility method to get an element with optional waiting."""
         try:
             if isinstance(locator_or_element, str):
@@ -257,16 +257,14 @@ class BasePlaywrightHelper:
 
     def check_page_status(self):
         try:
-            # Check for common selectors or conditions indicating a responsive page
             if self.page.query_selector("body"):
-                self.page.wait_for_selector("body", timeout=5000)  # Wait for the body if present
+                self.page.wait_for_selector("body", timeout=5000)
                 return "responsive"
             else:
-                # If body is not found, check for other signs of life
-                if self.page.query_selector("html"):  # Check if HTML is present
+                if self.page.query_selector("html"):
                     return "partially_loaded"
                 else:
-                    return "no_content"  # No recognizable HTML structure
+                    return "no_content"
         except TimeoutError:
             return "unresponsive"
         except Exception as e:

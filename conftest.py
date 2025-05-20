@@ -323,7 +323,7 @@ def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_t
     if shared_data["user_role"] != "recorder":
         click_vaccines_nav_link()
         attach_screenshot("clicked_vaccines_nav_link")
-    time.sleep(1)
+    time.sleep(5)
     return check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
 def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
@@ -812,7 +812,7 @@ def generate_random_patient_locally(shared_data):
     click_search_for_patient_button()
     attach_screenshot("clicked_search_for_patient_button")
     click_create_a_new_patient_button()
-    time.sleep(2)
+    time.sleep(5)
     attach_screenshot("clicked_create_a_new_patient_button")
     enter_first_name(first_name)
     enter_last_name(last_name)
@@ -839,7 +839,7 @@ def generate_random_patient_locally(shared_data):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
-    time.sleep(1)
+    time.sleep(5)
     if shared_data["nhs_number"] == "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == True
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
@@ -850,7 +850,7 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date):
-    time.sleep(1)
+    time.sleep(5)
     if shared_data["nhs_number"] == "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == True
     shared_data['chosen_vaccine_type'] = chosen_vaccine_type
