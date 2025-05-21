@@ -235,6 +235,9 @@ def wait_for_element_to_disappear(element, timeout=10):
 def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 
+def get_element_by_type(locator_type, locator_value=None, name=None, exact=False, parent_locator=None):
+    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact, parent_locator)
+
 def format_date(date, browser):
     return datetime_helper_instance.format_date(date, browser)
 
