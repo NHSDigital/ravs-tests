@@ -319,7 +319,6 @@ def check_record_saved_element_exists(wait):
     return check_element_exists(RECORD_SAVED_DIALOGUE, wait)
 
 def check_record_saved_message_appears(name):
-    # checks the message exists, includes the patient name, includes a valid time value, and is the expected format
     ensure_find_a_patient_heading_element_exists()
     element = (f"You successfully saved {name} record")
     saved_message = find_element_and_perform_action(element, "get_text")
