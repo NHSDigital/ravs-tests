@@ -232,6 +232,9 @@ def wait_for_element_to_disappear(element, timeout=10):
     except Exception as e:
         pytest.fail(f"An error occurred while waiting for element to disappear: {e}")
 
+def wait_for_page_to_load(timeout=1):
+    playwright_helper_instance.wait_for_page_to_load(timeout)
+
 def format_date(date, browser):
     return datetime_helper_instance.format_date(date, browser)
 
