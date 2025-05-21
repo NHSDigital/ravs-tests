@@ -238,6 +238,12 @@ def wait_for_page_to_load(timeout=1):
 def get_element_by_type(locator_type, locator_value=None, name=None, exact=False, parent_locator=None):
     return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact, parent_locator)
 
+def get_checked_radio_button_text(name):
+    try:
+        return playwright_helper_instance.get_checked_radio_button_text(name)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
 def format_date(date, browser):
     return datetime_helper_instance.format_date(date, browser)
 

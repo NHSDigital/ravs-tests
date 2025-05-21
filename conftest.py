@@ -234,8 +234,10 @@ def click_manage_users_top_nav_bar():
 
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     wait_for_element_to_disappear(SPINNER_ELEMENT)
+    time.sleep(3)
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
     attach_screenshot("immunisation_history_records_count_is_" + str(immunisation_history_records))
+    time.sleep(3)
     click_choose_vaccine_button()
     attach_screenshot("clicked_choose_vaccine_button")
     wait_for_element_to_disappear(SPINNER_ELEMENT)

@@ -262,7 +262,6 @@ def click_choose_vaccine_button():
     ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     find_element_and_perform_action(CHOOSE_VACCINE_BUTTON, "click")
-    ensure_patient_details_heading_element_exists()
 
 def click_patient_did_not_show_button():
     ensure_patient_details_heading_element_exists()
