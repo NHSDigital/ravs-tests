@@ -122,15 +122,15 @@ def initialize_session(shared_data):
     shared_data.clear()
     quit_browser()
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def playwright_helper():
     return get_playwright_helper()
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def api_helper():
     return api_helper_instance
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def datetime_helper():
     return datetime_helper_instance
 
