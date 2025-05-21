@@ -35,16 +35,19 @@ def ensure_vaccines_heading_text_is_visible():
         wait_for_element_to_appear(VACCINES_HEADING_TEXT_ELEMENT)
 
 def ensure_add_batch_heading_text_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(ADD_BATCH_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ADD_BATCH_HEADING_TEXT_ELEMENT)
 
 def ensure_edit_batch_heading_text_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(ensure_edit_batch_heading_text_is_visible):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ensure_edit_batch_heading_text_is_visible)
 
 def ensure_add_batch_button_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(FIRST_ADD_BATCH_BUTTON):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(FIRST_ADD_BATCH_BUTTON)
