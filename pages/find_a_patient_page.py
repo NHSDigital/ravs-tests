@@ -315,6 +315,7 @@ def check_required_field_error_appears_for_nhsNumber(wait):
 
 def check_record_saved_element_exists(wait):
     ensure_find_a_patient_heading_element_exists()
+    time.sleep(3)
     wait_for_element_to_appear(RECORD_SAVED_DIALOGUE)
     return check_element_exists(RECORD_SAVED_DIALOGUE, wait)
 

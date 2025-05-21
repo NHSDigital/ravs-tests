@@ -37,6 +37,7 @@ PATIENT_ADDRESS_ELEMENT = ("xpath", "//dt[text()='Address']/following-sibling::d
 PATIENT_DETAILS_TEXT_HEADING_ELEMENT = ("role", "heading", "Patient details", True)
 
 def ensure_patient_details_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(PATIENT_DETAILS_TEXT_HEADING_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(PATIENT_DETAILS_TEXT_HEADING_ELEMENT)

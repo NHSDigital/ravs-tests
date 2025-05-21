@@ -14,6 +14,7 @@ PAGE_LOADING_ELEMENT = ("role", "status")
 NHS_SIGN_IN_HEADING_ELEMENT = ("role", "heading", "NHS Sign In")
 
 def ensure_sign_in_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(NHS_SIGN_IN_HEADING_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(NHS_SIGN_IN_HEADING_ELEMENT)

@@ -10,6 +10,7 @@ TOTAL_VACCINATIONS_TEXT_ELEMENT = ("role", "heading", "Total vaccinations")
 LOGOUT_NAV_ELEMENT = ("role", "link", "Log out")
 
 def ensure_you_are_not_logged_in_label_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(YOU_ARE_NOT_LOGGED_IN_LABEL_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(YOU_ARE_NOT_LOGGED_IN_LABEL_ELEMENT)
