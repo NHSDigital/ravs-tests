@@ -426,7 +426,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         click_eligible_yes_radiobutton()
         attach_screenshot("clicked_eligible_yes_radiobutton")
 
-        if check_eligibility_type_is_enabled():
+        if check_eligibility_type_is_visible():
             select_eligibility_type(eligibility_type)
             attach_screenshot("selected_eligibility_type")
 
@@ -1133,7 +1133,7 @@ def the_eligibility_values_should_persist(shared_data):
     attach_screenshot("assessing_clinician_value_should_persist")
     assert get_assessment_outcome_value_on_assessing_the_patient_page().lower() == str(shared_data["eligibility_assessment_outcome"]).lower()
     attach_screenshot("assessment_outcome_value_should_persist")
-    if check_eligibility_type_is_enabled():
+    if check_eligibility_type_is_visible():
         select_eligibility_type(shared_data["eligibility_type"])
         attach_screenshot("selected_eligibility_type")
     click_continue_to_record_consent_button()

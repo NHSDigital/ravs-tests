@@ -6,7 +6,9 @@ CANCEL_VACCINATION_DELETE_BUTTON=("role", "button", "Cancel")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_delete_vaccination_button_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(DELETE_VACCINATION_BUTTON):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(DELETE_VACCINATION_BUTTON)
 
 def click_delete_vaccination_button():

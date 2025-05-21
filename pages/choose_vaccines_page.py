@@ -12,9 +12,12 @@ BACK_ELEMENT = ("link", "back")
 AGE_BASED_WARNING = ("text", "This vaccine may not be recommended for a person of this age. Please check before proceeding or refer to a prescriber for a Patient Specific Direction.")
 MIN_INTERVAL_BASED_WARNING = ("text", "You may have not reached the minimal interval between COVID-19 vaccine doses for this patient. This could depend on the clinical circumstances. For vaccination guidance, visit ")
 CHOOSE_VACCINE_HEADING_TEXT_ELEMENT = ("role", "heading", "Choose vaccine")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_choose_vaccine_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHOOSE_VACCINE_HEADING_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHOOSE_VACCINE_HEADING_TEXT_ELEMENT)
 
 def click_site_radiobutton(site):

@@ -6,6 +6,7 @@ REACTIVATE_BUTTON = ("role", "button", "Reactivate")
 REACTIVATE_HEADING_TEXT_ELEMENT = ("role", "heading", "Reactivate")
 
 def ensure_reactivate_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(REACTIVATE_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(REACTIVATE_HEADING_TEXT_ELEMENT)

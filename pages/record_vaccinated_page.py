@@ -42,9 +42,11 @@ CAREHOME_NAME_INPUT_ELEMENT = ("#CareHomeName")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def get_batch_expiry_date_value():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     return find_element_and_perform_action(BATCH_EXPIRY_DATE_READONLY_ELEMENT, "get_text")
 
 def get_dose_amount_value():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     return find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "get_text")
 
 def enter_dose_amount_value(dose_amount):
@@ -76,10 +78,12 @@ def check_no_to_vaccinated_radiobutton_exists():
     return check_element_exists(NO_VACCINATED_RADIO_BUTTON, True)
 
 def click_yes_vaccinated_radiobutton():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(YES_VACCINATED_RADIO_BUTTON)
     find_element_and_perform_action(YES_VACCINATED_RADIO_BUTTON, "click")
 
 def click_not_vaccinated_radiobutton():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(NO_VACCINATED_RADIO_BUTTON)
     find_element_and_perform_action(NO_VACCINATED_RADIO_BUTTON, "check")
 

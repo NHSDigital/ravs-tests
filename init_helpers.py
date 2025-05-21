@@ -232,6 +232,13 @@ def wait_for_element_to_disappear(element, timeout=10):
     except Exception as e:
         pytest.fail(f"An error occurred while waiting for element to disappear: {e}")
 
+def click_and_get_download_path(element, action, timeout, download_dir='downloads'):
+    if isinstance(element, (tuple, list)):
+        element = get_element_by_type(*element)
+    else:
+        element = get_element_by_type(element)
+    return playwright_helper_instance.click_and_get_download_path(element, action, timeout, 'downloads')
+
 def wait_for_page_to_load(timeout=1):
     playwright_helper_instance.wait_for_page_to_load(timeout)
 

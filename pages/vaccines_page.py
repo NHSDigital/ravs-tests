@@ -15,16 +15,19 @@ CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON=("role", "button", "Continue")
 CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
 
 def ensure_choose_site_heading_text_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHOOSE_SITE_TITLE):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHOOSE_SITE_TITLE)
 
 def ensure_add_vaccine_button_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(add_vaccine_button):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(add_vaccine_button)
 
 def ensure_to_enter_batch_details_button_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON)

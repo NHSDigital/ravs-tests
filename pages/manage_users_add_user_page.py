@@ -29,6 +29,7 @@ EMAIL_ALREADY_EXISTS_IN_THIS_ORG_ERROR_MESSAGE_TEXT = ("text", "Error: This emai
 ADD_USER_HEADER_ELEMENT = ("role", "heading", "Add user")
 
 def ensure_add_user_heading_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(ADD_USER_HEADER_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ADD_USER_HEADER_ELEMENT)
