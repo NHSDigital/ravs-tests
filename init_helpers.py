@@ -53,6 +53,8 @@ async def get_mobile_devices():
 def initialize_helpers():
     global api_helper_instance, datetime_helper_instance, mockdatabase_helper_instance, config
 
+    config = load_config_from_env()
+
     if api_helper_instance is None:
         api_helper_instance = ApiHelper()
 
@@ -80,7 +82,7 @@ def sanitize_filename(filename):
     return sanitized[:200]
 
 def find_elements(selector):
-    return playwright_helper_instance.find_elements(selector)
+    return get_playwright_helper().find_elements(selector)
 
 def attach_screenshot(filename):
     logging.basicConfig(level=logging.DEBUG)
@@ -147,7 +149,7 @@ def navigate_to_url(url):
     get_playwright_helper().navigate_to_url(url)
 
 def check_element_exists(element, wait=False):
-    time.sleep(0.25)
+    wait_for_page_to_load(10)
     try:
         resolved_element = resolve_element(element)
         return get_playwright_helper().check_element_exists(resolved_element, wait)
@@ -239,17 +241,17 @@ def click_and_get_download_path(element, action, timeout, download_dir='download
         element = get_element_by_type(*element)
     else:
         element = get_element_by_type(element)
-    return playwright_helper_instance.click_and_get_download_path(element, action, timeout, 'downloads')
+    return get_playwright_helper().click_and_get_download_path(element, action, timeout, 'downloads')
 
-def wait_for_page_to_load(timeout=1):
-    playwright_helper_instance.wait_for_page_to_load(timeout)
+def wait_for_page_to_load(timeout=5):
+    get_playwright_helper().wait_for_page_to_load(timeout)
 
 def get_element_by_type(locator_type, locator_value=None, name=None, exact=False, parent_locator=None):
-    return playwright_helper_instance.get_element_by_type(locator_type, locator_value, name, exact, parent_locator)
+    return get_playwright_helper().get_element_by_type(locator_type, locator_value, name, exact, parent_locator)
 
 def get_checked_radio_button_text(name):
     try:
-        return playwright_helper_instance.get_checked_radio_button_text(name)
+        return get_playwright_helper().get_checked_radio_button_text(name)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
@@ -277,6 +279,7 @@ def get_date_value_by_months(date):
 def get_date_value_by_days(date):
     return datetime_helper_instance.get_date_value_by_days(date)
 
-config = load_config_from_env()
+if not config:
+    config = load_config_from_env()
 
 mobile_devices = asyncio.run(get_mobile_devices())

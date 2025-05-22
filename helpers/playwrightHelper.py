@@ -159,12 +159,17 @@ class BasePlaywrightHelper:
         self.page.goto(url)
         self.page.wait_for_load_state()
 
-    def wait_for_page_to_load(self, timeout=0.5):
+    def wait_for_page_to_load(self, timeout=5):
         try:
-            self.page.wait_for_load_state('domcontentloaded', timeout=timeout * 1000)
-            self.page.wait_for_selector('*', timeout=timeout * 1000)
+            time.sleep(1)
+            self.page.wait_for_load_state('load', timeout=timeout * 1000)
+            self.page.wait_for_selector('body', timeout=timeout * 1000)
+            self.page.wait_for_function(
+                "() => [...document.querySelectorAll('*')].every(el => el.isConnected)",
+                timeout=timeout * 1000
+            )
         except Exception as e:
-            print(f"Page did not fully load within {timeout} seconds. Proceeding anyway.")
+            print(f"Page did not fully load or elements not attached within {timeout} seconds. Proceeding anyway.")
 
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
