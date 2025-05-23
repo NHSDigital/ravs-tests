@@ -43,12 +43,12 @@ def ensure_reports_heading_text_element_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(REPORTS_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-        ensure_choose_dates_heading_text_element_exists()
         wait_for_element_to_appear(REPORTS_HEADING_TEXT_ELEMENT)
 
 def ensure_choose_dates_heading_text_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHOOSE_DATES_HEADING_TEXT_ELEMENT):
-        ensure_choose_dates_heading_text_element_exists()
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHOOSE_DATES_HEADING_TEXT_ELEMENT)
 
 def check_create_report_button_exists():
