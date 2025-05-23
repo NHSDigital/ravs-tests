@@ -188,7 +188,7 @@ class BasePlaywrightHelper:
                 else:
                     element = self.page.locator(locator_or_element)
             else:
-                element = locator_or_element  
+                element = locator_or_element
 
             return element
         except Exception as e:
@@ -282,7 +282,7 @@ class BasePlaywrightHelper:
                 print(f"Retrying page action: Attempt {attempt + 1}")
                 try:
                     self.page.reload(wait_until="networkidle")
-                    self.wait_for_page_to_load(timeout=15)
+                    self.wait_for_page_to_load(timeout=5)
                     print("Page reloaded successfully.")
                     return True
                 except Exception as e:
