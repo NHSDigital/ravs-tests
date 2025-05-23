@@ -282,4 +282,4 @@ def get_date_value_by_days(date):
 if not config:
     config = load_config_from_env()
 
-mobile_devices = asyncio.run(get_mobile_devices())
+
