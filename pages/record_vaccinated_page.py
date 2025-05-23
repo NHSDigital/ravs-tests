@@ -113,7 +113,7 @@ def click_save_and_return_button_on_record_vaccinated_page():
 
 def click_continue_to_check_and_confirm_vaccination_screen_button():
     wait_for_element_to_appear(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
-    time.sleep(1)
+    time.sleep(2)
     find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
     if check_vaccination_date_incorrect_error_message_exists() == True:
         return True
