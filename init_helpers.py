@@ -25,6 +25,7 @@ def get_playwright_helper():
     global playwright_helper_instance
     if playwright_helper_instance is None:
         playwright_helper_instance = PlaywrightHelper(get_working_directory(), config)
+    playwright_helper_instance.start_browser_if_needed()
     return playwright_helper_instance
 
 def get_working_directory():
@@ -127,7 +128,9 @@ def initialize_session(shared_data):
 
 @pytest.fixture(scope="function")
 def playwright_helper():
-    return get_playwright_helper()
+    global config
+    helper = get_playwright_helper()
+    return helper
 
 @pytest.fixture(scope="function")
 def api_helper():
