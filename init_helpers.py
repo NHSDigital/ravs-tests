@@ -149,7 +149,7 @@ def navigate_to_url(url):
     get_playwright_helper().navigate_to_url(url)
 
 def check_element_exists(element, wait=False):
-    wait_for_page_to_load(10)
+    wait_for_page_to_load(5)
     try:
         resolved_element = resolve_element(element)
         return get_playwright_helper().check_element_exists(resolved_element, wait)
