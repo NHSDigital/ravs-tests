@@ -158,8 +158,8 @@ def click_help_and_guidance_link_exists():
 def click_logout_button():
     ensure_log_out_nav_element_exists()
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(5)
+    wait_for_element_to_disappear(LOGOUT_NAV_ELEMENT)
+    time.sleep(2)
 
 def click_navbar_toggler():
     ensure_log_out_nav_element_exists()

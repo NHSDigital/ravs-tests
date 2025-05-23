@@ -174,24 +174,21 @@ class BasePlaywrightHelper:
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def get_element(self, locator_or_element, wait=False, timeout=5000):
+    def get_element(self, locator_or_element, wait=False, timeout=5):
         """Utility method to get an element with optional waiting."""
         try:
             if isinstance(locator_or_element, str):
-                # Wait for selector if specified
                 if wait:
-                    # Use state='attached' to ensure it's present in the DOM before checking visibility
                     self.page.wait_for_selector(locator_or_element, state="visible", timeout=timeout * 1000)
                     element = self.page.locator(locator_or_element)
 
-                    # Ensure the element is visible and ready for interaction
                     if not element.is_visible():
                         print(f"Element '{locator_or_element}' found, but it is not visible.")
                         return None
                 else:
                     element = self.page.locator(locator_or_element)
             else:
-                element = locator_or_element  # Assume it is already a Locator
+                element = locator_or_element  
 
             return element
         except Exception as e:
