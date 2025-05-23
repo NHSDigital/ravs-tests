@@ -11,17 +11,30 @@ import platform
 from helpers.mockdatabaseHelper import MockDatabaseHelper
 from urllib.parse import urlparse
 
+_cached_playwright = None
+
+def get_sync_playwright():
+    global _cached_playwright
+    if _cached_playwright is None:
+        _cached_playwright = sync_playwright().start()
+    return _cached_playwright
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
-        playwright_instance = sync_playwright().start()
         self.working_directory = working_directory
         self.screenshots_dir = "screenshots"
+        self._browser_started = False
+        self.config = config
         if not os.path.exists(self.screenshots_dir):
             os.makedirs(self.screenshots_dir)
-        self.playwright = playwright_instance
+        self.playwright = get_sync_playwright()
         self.browser = None
         self.context = None
         self.page = None
+
+    def get_or_create_page(self):
+        if not self.page or self.page.is_closed():
+            self.page = self.context.new_page()
+        return self.page
 
     def launch_chromium(self, headless_mode):
         try:
@@ -35,7 +48,7 @@ class BasePlaywrightHelper:
                 locale="en-GB",
                 timezone_id="Europe/London"
             )
-            page = self.context.new_page()
+            self.page = self.get_or_create_page()
         except Exception as e:
             print(f"Error launching Chromium: {e}")
 
@@ -44,7 +57,7 @@ class BasePlaywrightHelper:
             self.browser = self.playwright.chromium.launch(channel="msedge",headless=headless_mode, slow_mo=slow_mo, args=["--fullscreen"])
             self.context = self.browser.new_context()
             self.context.tracing.start(screenshots=True, snapshots=True, sources=True)
-            self.page = self.context.new_page()
+            self.page = self.get_or_create_page()
         except Exception as e:
                 print(f"Error launching Edge: {e}")
 
@@ -52,7 +65,7 @@ class BasePlaywrightHelper:
         try:
             self.browser = self.playwright.webkit.launch(headless=headless_mode, args=["--fullscreen"])
             self.context = self.browser.new_context()
-            self.page = self.context.new_page()
+            self.page = self.get_or_create_page()
         except Exception as e:
                 print(f"Error launching Safari: {e}")
 
@@ -60,7 +73,7 @@ class BasePlaywrightHelper:
         try:
             self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--disable-gpu", "--no-sandbox"])
             self.context = self.browser.new_context()
-            self.page = self.context.new_page()
+            self.page = self.get_or_create_page()
         except Exception as e:
             print(f"Error launching Chrome: {e}")
 
@@ -100,7 +113,7 @@ class BasePlaywrightHelper:
                 locale=locale,
             )
 
-            self.page = self.context.new_page()
+            self.page = self.get_or_create_page()
             self.page.set_viewport_size(device_settings["viewport"])
 
         except Exception as e:
@@ -709,26 +722,55 @@ class BasePlaywrightHelper:
         except Exception as e:
             print(f"An error occurred during browser cleanup: {e}")
 
+    def start_browser_if_needed(self):
+            if self._browser_started:
+                return
+
+            browser_name = self.config["browser"].lower()
+            headless_mode = self.config["headless_mode"].lower() == "true"
+
+            try:
+                if browser_name == "chromium":
+                    self.launch_chromium(headless_mode)
+                elif browser_name == "chrome":
+                    self.launch_chrome(headless_mode)
+                elif browser_name == "firefox":
+                    self.launch_firefox(headless_mode)
+                elif browser_name == "safari":
+                    self.launch_safari(headless_mode)
+                elif "edge" in browser_name:
+                    self.launch_edge(headless_mode)
+                elif browser_name == "mobile":
+                    self.launch_mobile_browser(self.config["device"], headless_mode)
+                else:
+                    raise ValueError(f"Unsupported browser: {browser_name}")
+                self._browser_started = True
+            except Exception as e:
+                print(f"Error launching browser: {e}")
+
 class PlaywrightHelper(BasePlaywrightHelper):
     def __init__(self, working_directory, config):
         super().__init__(working_directory, config)
 
-        try:
-            browser_name = config["browser"].lower()
-            headless_mode = config["headless_mode"].lower() == "true"
-            if browser_name == "chromium":
-                self.launch_chromium(headless_mode)
-            if browser_name == "chrome":
-                self.launch_chrome(headless_mode)
-            elif browser_name == "firefox":
-                self.launch_firefox(headless_mode)
-            elif browser_name == "safari":
-                self.launch_safari(headless_mode)
-            elif "edge" in browser_name:
-                self.launch_edge(headless_mode)
-            elif browser_name == "mobile":
-                self.launch_mobile_browser(config["device"], headless_mode)
-            else:
-                print(f"Unsupported browser: {browser_name}")
-        except Exception as e:
-            print(f"Error launching browser: {e}")
+        self.config = config
+        self._browser_started = False
+
+        # try:
+        #     browser_name = config["browser"].lower()
+        #     headless_mode = config["headless_mode"].lower() == "true"
+        #     if browser_name == "chromium":
+        #         self.launch_chromium(headless_mode)
+        #     if browser_name == "chrome":
+        #         self.launch_chrome(headless_mode)
+        #     elif browser_name == "firefox":
+        #         self.launch_firefox(headless_mode)
+        #     elif browser_name == "safari":
+        #         self.launch_safari(headless_mode)
+        #     elif "edge" in browser_name:
+        #         self.launch_edge(headless_mode)
+        #     elif browser_name == "mobile":
+        #         self.launch_mobile_browser(config["device"], headless_mode)
+        #     else:
+        #         print(f"Unsupported browser: {browser_name}")
+        # except Exception as e:
+        #     print(f"Error launching browser: {e}")
