@@ -167,10 +167,8 @@ def check_search_for_patient_button_visible():
 def click_search_for_patient_button():
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(SEARCH_BUTTON)
-    time.sleep(5)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
     ensure_find_a_patient_heading_element_exists()
-    time.sleep(5)
 
 def click_create_a_new_patient_button():#
     ensure_find_a_patient_heading_element_exists()
@@ -218,7 +216,7 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
     element = ("role", "cell", nhsNumber)
-    time.sleep(5)
+    time.sleep(2)
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
@@ -226,7 +224,7 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
     element = ("role", "heading", f"No result found for {nhsNumber}")
-    time.sleep(5)
+    time.sleep(2)
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)

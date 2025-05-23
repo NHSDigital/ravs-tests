@@ -21,12 +21,11 @@ def enter_site_name(site):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     time.sleep(2)
     if check_element_exists(SITE_SEARCH):
-        time.sleep(5)
+        time.sleep(2)
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):
     ensure_choose_site_heading_text_is_visible()
-    # element = (f"//div[@class='siteRows' and contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{site.lower()}')]")
     element = ("text", site)
     if check_element_exists(element):
         find_element_and_perform_action(element, "click")
