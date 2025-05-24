@@ -9,9 +9,12 @@ ENTER_VALID_NHS_NUMBER_ERROR_MESSAGE_LINK = ("role", "link", "Enter a valid NHS 
 ENTER_VALID_NHS_NUMBER_ERROR_MESSAGE_TEXT = ("text", "Error: Enter a valid NHS number")
 ENTER_10_DIGIT_NHS_NUMBER_ERROR_MESSAGE_LINK = ("role", "link", "Enter a valid NHS number")
 ENTER_10_DIGIT_NHS_NUMBER_ERROR_MESSAGE_TEXT = ("text", "Error: Enter a valid NHS number")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_what_is_patients_nhs_number_heading_label_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(WHAT_IS_THE_PATIENTS_NHS_NUMBER_TEXT_ELEMENT)
 
 def check_what_is_the_patients_nhs_number_label_exists():

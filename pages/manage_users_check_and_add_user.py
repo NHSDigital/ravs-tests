@@ -14,6 +14,7 @@ HELPDESK_TIMES_TEXT = ("text", "Monday to Friday: 8am to 6pm. Weekends: 8am to 4
 CHECK_AND_ADD_USER_TEXT_ELEMENT = ("role", "heading", "Check and add user")
 
 def ensure_check_and_add_user_test_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHECK_AND_ADD_USER_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHECK_AND_ADD_USER_TEXT_ELEMENT)

@@ -160,6 +160,9 @@ jobs:
           sudo ln -s /opt/allure-2.25.0/bin/allure /usr/bin/allure && \
           rm -rf allure-commandline-2.25.0.tgz
 
+      - name: Set AGENTS from available CPU cores
+        run: echo "AGENTS=$(nproc)" >> $GITHUB_ENV
+
       - name: Run Tests
         env:
           TZ: "Europe/London"
@@ -171,7 +174,7 @@ jobs:
           BROWSER: ${{ env.BROWSER }}
           DEVICE: ${{ env.DEVICE }}
           MARKER: ${{ inputs.marker || '' }}
-          AGENTS: 3
+          AGENTS: ${{ env.AGENTS }}
         run: |
           tox -v
         continue-on-error: true

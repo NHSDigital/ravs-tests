@@ -8,11 +8,13 @@ REACTIVATE_BATCH_CONFIRMATION_BUTTON = ("//button[text()='Reactivate']")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_add_batch_link_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(ADD_BATCH_LINK):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(ADD_BATCH_LINK)
 
 def ensure_reactivate_batch_confirmation_button_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(REACTIVATE_BATCH_CONFIRMATION_BUTTON):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(REACTIVATE_BATCH_CONFIRMATION_BUTTON)

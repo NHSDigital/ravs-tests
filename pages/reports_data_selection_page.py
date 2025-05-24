@@ -11,7 +11,6 @@ SITE_DELIVERY_TEAM_CHECKBOX_ELEMENT = ("label", "Site or delivery team")
 ASSESSMENT_AND_CONSENT_CHECKBOX_ELEMENT = ("label", "Assessment and consent")
 VACCINATION_CHECKBOX_ELEMENT = ("label", "Vaccination")
 
-
 def check_reports_data_check_box_checked(data):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     element = ("label", data)

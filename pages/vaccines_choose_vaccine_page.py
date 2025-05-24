@@ -5,6 +5,7 @@ CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON=("role", "button", "Continue")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_to_enter_batch_details_button_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON)

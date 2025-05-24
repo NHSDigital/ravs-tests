@@ -7,9 +7,12 @@ POSTCODE_FIELD = ("//dt[text() = 'Full postcode']/following-sibling::dd")
 DATE_OF_BIRTH_FIELD = ("//dt[text() = 'Date of birth']/following-sibling::dd")
 CONFIRM_AND_SAVE_BUTTON = ("//button[text()='Confirm and save']")
 CANCEL_BUTTON = ("//button[text()='Cancel']")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_confirm_and_save_button_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CONFIRM_AND_SAVE_BUTTON):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CONFIRM_AND_SAVE_BUTTON)
 
 def click_confirm_and_save_button():

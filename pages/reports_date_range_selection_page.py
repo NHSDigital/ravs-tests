@@ -37,15 +37,18 @@ TO_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.month']"
 TO_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.year']")
 REPORTS_HEADING_TEXT_ELEMENT = ("role", "heading", "Reports")
 CHOOSE_DATES_HEADING_TEXT_ELEMENT = ("role", "heading", "Choose dates")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_reports_heading_text_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(REPORTS_HEADING_TEXT_ELEMENT):
-        ensure_choose_dates_heading_text_element_exists()
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(REPORTS_HEADING_TEXT_ELEMENT)
 
 def ensure_choose_dates_heading_text_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHOOSE_DATES_HEADING_TEXT_ELEMENT):
-        ensure_choose_dates_heading_text_element_exists()
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHOOSE_DATES_HEADING_TEXT_ELEMENT)
 
 def check_create_report_button_exists():

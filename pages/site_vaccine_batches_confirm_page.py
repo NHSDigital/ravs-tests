@@ -8,6 +8,7 @@ CHECK_AND_CONFIRM_HEADING_TEXT_ELEMENT = ("role", "heading", "Check and confirm"
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_check_and_confirm_heading_text_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHECK_AND_CONFIRM_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHECK_AND_CONFIRM_HEADING_TEXT_ELEMENT)

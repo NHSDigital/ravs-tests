@@ -6,6 +6,7 @@ REACTIVATE_BUTTON = ("role", "button", "Reactivate")
 REACTIVATE_HEADING_TEXT_ELEMENT = ("role", "heading", "Reactivate")
 
 def ensure_reactivate_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(REACTIVATE_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(REACTIVATE_HEADING_TEXT_ELEMENT)
@@ -24,6 +25,6 @@ def click_reactivate_button():
 def check_reactivate_message_text_exists(name, email_address):
     ensure_reactivate_heading_element_exists()
     wait_for_element_to_appear(REACTIVATE_BUTTON)
-    time.sleep(3)
+    time.sleep(2)
     element = ("text", f"Once you have reactivated {name} ({email_address}), they can sign in to NHS Record a vaccination again using their Okta account.")
     return check_element_exists(element)

@@ -33,6 +33,7 @@ BACK_ON_CONFIRM_DETAILS_PAGE_BUTTON = ("role", "link", "Back")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_check_and_confirm_label_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHECK_AND_CONFIRM_LABEL_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHECK_AND_CONFIRM_LABEL_ELEMENT)

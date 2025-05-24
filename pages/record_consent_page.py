@@ -17,6 +17,7 @@ CONSENT_CLINICIAN_MISSING_DETAIL_ERROR_MESSAGE_LINK = ("Select the consenting cl
 CONSENT_CLINICIAN_MISSING_DETAIL_ERROR_MESSAGE_TEXT = ("Error: Select the consenting clinician")
 NO_CONSENT_REASON_MISSING_ERROR_MESSAGE_LINK = ("Select a no consent reason")
 NO_CONSENT_REASON_MISSING_ERROR_MESSAGE_TEXT = ("Error: Select a no consent reason")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def check_consent_given_by_missing_detail_error_message_text_exists():
     wait_for_element_to_appear(CONSENT_GIVEN_BY_MISSING_DETAIL_ERROR_MESSAGE_TEXT)
@@ -63,10 +64,12 @@ def check_no_to_consent_radiobutton_exists():
     return check_element_exists(NO_CONSENT_RADIO_BUTTON, True)
 
 def click_yes_to_consent():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(YES_CONSENT_RADIO_BUTTON)
     find_element_and_perform_action(YES_CONSENT_RADIO_BUTTON, "check")
 
 def click_no_to_consent():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(NO_CONSENT_RADIO_BUTTON)
     find_element_and_perform_action(NO_CONSENT_RADIO_BUTTON, "check")
 

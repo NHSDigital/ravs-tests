@@ -7,6 +7,7 @@ DEACTIVATED_USERS_LIST_TABLE = ("xpath", '//table[contains(@class, "nhsuk-table"
 DEACTIVATE_HEADING_TEXT_ELEMENT = ("role", "heading", "Deactivate")
 
 def ensure_deactivate_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(DEACTIVATE_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(DEACTIVATE_HEADING_TEXT_ELEMENT)

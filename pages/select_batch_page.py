@@ -7,9 +7,12 @@ SELECT_BATCH_ERROR_MESSAGE_LINK = ("role", "link", "Select a batch")
 SELECT_BATCH_ERROR_MESSAGE_TEXT = ("text", "Error: Select a batch")
 SELECT_BATCH_OR_ADD_A_BATCH_ERROR_MESSAGE_LINK = ("role", "link", "Select a batch or add a batch")
 SELECT_BATCH_OR_ADD_A_BATCH_ERROR_MESSAGE_TEXT = ("text", "Error: Select a batch or add a batch")
+PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_which_batch_are_you_using_heading_label_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(WHICH_BATCH_ARE_YOU_USING_TEXT_ELEMENT)
 
 def check_which_batch_are_you_giving_label_exists():
