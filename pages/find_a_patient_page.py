@@ -216,7 +216,7 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
     element = ("role", "cell", nhsNumber)
-    time.sleep(1)
+    time.sleep(2)
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
@@ -224,7 +224,7 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
     element = ("role", "heading", f"No result found for {nhsNumber}")
-    time.sleep(1)
+    time.sleep(2)
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
