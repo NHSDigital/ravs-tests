@@ -68,7 +68,7 @@ def get_patient_address_value_in_patient_details_screen():
 
 def check_vaccine_history_not_available_label_element_exists():
     ensure_patient_details_heading_element_exists()
-    time.sleep(2)
+    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
 
@@ -90,9 +90,9 @@ def check_pertussis_history_element_exists():
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
-    time.sleep(2)
+    time.sleep(3)
     ensure_patient_details_heading_element_exists()
-    time.sleep(2)
+    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
     element = (
