@@ -187,7 +187,7 @@ class BasePlaywrightHelper:
     def find_elements(self, selector):
         return self.page.query_selector_all(selector)
 
-    def get_element(self, locator_or_element, wait=False, timeout=5):
+    def get_element(self, locator_or_element, wait=False, timeout=5000):
         """Utility method to get an element with optional waiting."""
         try:
             if isinstance(locator_or_element, str):

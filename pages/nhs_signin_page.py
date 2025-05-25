@@ -29,7 +29,7 @@ def check_signin_button_exists():
 def click_nhs_signin_button():
     ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(SIGN_IN_BUTTON_ELEMENT, "click")
-    wait_for_page_to_load(timeout=5)
+    wait_for_page_to_load(timeout=10)
 
 def enter_email_address(emailAddress):
     ensure_sign_in_heading_element_exists()
@@ -52,7 +52,7 @@ def click_keep_me_signedin():
     find_element_and_perform_action(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT, "click")
 
 def check_password_error_alert_exists():
-    wait_for_page_to_load(timeout=5)
+    wait_for_page_to_load(timeout=10)
     wait_for_element_to_appear(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT)
     wait_for_element_to_appear(ALERT_TEXT_PASSWORD)
     return check_element_exists(ALERT_TEXT_PASSWORD, True)
