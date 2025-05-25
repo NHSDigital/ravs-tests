@@ -19,9 +19,9 @@ def enter_site_name(site):
     if site.lower() == "Aspire Pharmacy".lower():
         site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(2)
+    time.sleep(3)
     if check_element_exists(SITE_SEARCH):
-        time.sleep(2)
+        time.sleep(3)
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):

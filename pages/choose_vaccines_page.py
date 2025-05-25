@@ -64,7 +64,7 @@ def check_back_button_exists():
 
 def check_age_based_warning_exists():
     ensure_choose_vaccine_heading_element_exists()
-    time.sleep(2)
+    time.sleep(3)
     attach_screenshot("age_based_warning")
     return check_element_exists(AGE_BASED_WARNING, True)
 
