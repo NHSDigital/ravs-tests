@@ -9,6 +9,7 @@ CHOOSE_SITE_TITLE = ("role", "heading", "Choose site")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_choose_site_heading_text_is_visible():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(CHOOSE_SITE_TITLE):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CHOOSE_SITE_TITLE)
@@ -18,14 +19,13 @@ def enter_site_name(site):
     if site.lower() == "Aspire Pharmacy".lower():
         site = "fhh39"
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(2)
+    time.sleep(3)
     if check_element_exists(SITE_SEARCH):
-        time.sleep(5)
+        time.sleep(3)
         find_element_and_perform_action(SITE_SEARCH, "input_text", site)
 
 def select_site_from_list(site):
     ensure_choose_site_heading_text_is_visible()
-    # element = (f"//div[@class='siteRows' and contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{site.lower()}')]")
     element = ("text", site)
     if check_element_exists(element):
         find_element_and_perform_action(element, "click")

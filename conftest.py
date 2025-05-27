@@ -234,8 +234,10 @@ def click_manage_users_top_nav_bar():
 
 def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     wait_for_element_to_disappear(SPINNER_ELEMENT)
+    time.sleep(3)
     immunisation_history_records = get_count_of_immunisation_history_records(vaccine)
     attach_screenshot("immunisation_history_records_count_is_" + str(immunisation_history_records))
+    time.sleep(3)
     click_choose_vaccine_button()
     attach_screenshot("clicked_choose_vaccine_button")
     wait_for_element_to_disappear(SPINNER_ELEMENT)
@@ -314,6 +316,7 @@ def check_vaccine_and_batch_exists_in_community_pharmacy(site, vaccine, vaccine_
 
     click_vaccines_nav_link()
     attach_screenshot("clicked_vaccines_nav_link")
+    time.sleep(3)
     return check_site_vaccine_type_has_active_batch(site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
 def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
@@ -323,7 +326,6 @@ def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_t
     if shared_data["user_role"] != "recorder":
         click_vaccines_nav_link()
         attach_screenshot("clicked_vaccines_nav_link")
-    time.sleep(1)
     return check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
 def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
@@ -424,7 +426,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         click_eligible_yes_radiobutton()
         attach_screenshot("clicked_eligible_yes_radiobutton")
 
-        if check_eligibility_type_is_enabled():
+        if check_eligibility_type_is_visible():
             select_eligibility_type(eligibility_type)
             attach_screenshot("selected_eligibility_type")
 
@@ -812,7 +814,7 @@ def generate_random_patient_locally(shared_data):
     click_search_for_patient_button()
     attach_screenshot("clicked_search_for_patient_button")
     click_create_a_new_patient_button()
-    time.sleep(2)
+    time.sleep(3)
     attach_screenshot("clicked_create_a_new_patient_button")
     enter_first_name(first_name)
     enter_last_name(last_name)
@@ -839,7 +841,7 @@ def generate_random_patient_locally(shared_data):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
-    time.sleep(1)
+    time.sleep(3)
     if shared_data["nhs_number"] == "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == True
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
@@ -850,7 +852,7 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date):
-    time.sleep(1)
+    time.sleep(3)
     if shared_data["nhs_number"] == "9727840361":
         assert check_vaccine_history_not_available_label_element_exists() == True
     shared_data['chosen_vaccine_type'] = chosen_vaccine_type
@@ -1131,7 +1133,7 @@ def the_eligibility_values_should_persist(shared_data):
     attach_screenshot("assessing_clinician_value_should_persist")
     assert get_assessment_outcome_value_on_assessing_the_patient_page().lower() == str(shared_data["eligibility_assessment_outcome"]).lower()
     attach_screenshot("assessment_outcome_value_should_persist")
-    if check_eligibility_type_is_enabled():
+    if check_eligibility_type_is_visible():
         select_eligibility_type(shared_data["eligibility_type"])
         attach_screenshot("selected_eligibility_type")
     click_continue_to_record_consent_button()

@@ -6,6 +6,7 @@ REACTIVATE_BUTTON = ("role", "button", "Reactivate")
 REACTIVATE_HEADING_TEXT_ELEMENT = ("role", "heading", "Reactivate")
 
 def ensure_reactivate_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(REACTIVATE_HEADING_TEXT_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(REACTIVATE_HEADING_TEXT_ELEMENT)
@@ -18,7 +19,7 @@ def check_reactivate_button_exists():
 def click_reactivate_button():
     ensure_reactivate_heading_element_exists()
     wait_for_element_to_appear(REACTIVATE_BUTTON)
-    time.sleep(2)
+    time.sleep(3)
     find_element_and_perform_action(REACTIVATE_BUTTON, "click")
 
 def check_reactivate_message_text_exists(name, email_address):

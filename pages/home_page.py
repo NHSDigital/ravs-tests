@@ -158,8 +158,8 @@ def click_help_and_guidance_link_exists():
 def click_logout_button():
     ensure_log_out_nav_element_exists()
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(1)
+    wait_for_element_to_disappear(LOGOUT_NAV_ELEMENT)
+    time.sleep(3)
 
 def click_navbar_toggler():
     ensure_log_out_nav_element_exists()
@@ -198,7 +198,6 @@ def check_logout_button_exists_without_waiting():
     return check_element_exists(LOGOUT_NAV_ELEMENT, False)
 
 def click_profile_nav_link(email):
-    # ensure_log_out_nav_element_exists()
     ensure_log_out_nav_element_exists()
     element = ("role", "link", email)
     wait_for_element_to_appear(element)

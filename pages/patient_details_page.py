@@ -37,6 +37,7 @@ PATIENT_ADDRESS_ELEMENT = ("xpath", "//dt[text()='Address']/following-sibling::d
 PATIENT_DETAILS_TEXT_HEADING_ELEMENT = ("role", "heading", "Patient details", True)
 
 def ensure_patient_details_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(PATIENT_DETAILS_TEXT_HEADING_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(PATIENT_DETAILS_TEXT_HEADING_ELEMENT)
@@ -66,10 +67,8 @@ def get_patient_address_value_in_patient_details_screen():
     return find_element_and_perform_action(PATIENT_ADDRESS_ELEMENT, "get_text")
 
 def check_vaccine_history_not_available_label_element_exists():
-    time.sleep(2)
     ensure_patient_details_heading_element_exists()
     time.sleep(3)
-    ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
 
@@ -262,7 +261,6 @@ def click_choose_vaccine_button():
     ensure_patient_details_heading_element_exists()
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
     find_element_and_perform_action(CHOOSE_VACCINE_BUTTON, "click")
-    ensure_patient_details_heading_element_exists()
 
 def click_patient_did_not_show_button():
     ensure_patient_details_heading_element_exists()
