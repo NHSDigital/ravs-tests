@@ -27,6 +27,7 @@ DOB_DAY_INPUT = ("label", "Day")
 DOB_MONTH_INPUT = ("label", "Month")
 DOB_YEAR_INPUT = ("label", "Year")
 FIND_A_PATIENT_LABEL_ELEMENT = ("role", "heading", "Find a patient", True)
+CREATE_A_PATIENT_LABEL_ELEMENT = ("role", "heading", "Create a patient", True)
 NHS_NUMBER_INPUT_ERROR_LABEL= ("text", "Error: Enter an NHS number")
 NHS_NUMBER_INPUT_ERROR_BUTTON = ("button", "Enter an NHS number")
 NHS_NUMBER_ENTER_10_DIGITS_ERROR_LABEL= ("text", "Enter 10 digits")
@@ -49,8 +50,18 @@ GENDER_MAPPING = {
 }
 
 def ensure_find_a_patient_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(1)
     if not check_element_exists(FIND_A_PATIENT_LABEL_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(FIND_A_PATIENT_LABEL_ELEMENT)
+
+def ensure_create_a_patient_heading_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(1)
+    if not check_element_exists(CREATE_A_PATIENT_LABEL_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_appear(CREATE_A_PATIENT_LABEL_ELEMENT)
 
 def format_nhs_number(nhs_number):
     formatted_nhs_number = f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
@@ -58,6 +69,12 @@ def format_nhs_number(nhs_number):
 
 def enter_first_name(first_name):
     ensure_find_a_patient_heading_element_exists()
+    wait_for_element_to_appear(FIRST_NAME_INPUT)
+    wait_for_element_to_appear(LAST_NAME_INPUT)
+    find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
+
+def enter_first_name_create_a_patient_page(first_name):
+    ensure_create_a_patient_heading_element_exists()
     wait_for_element_to_appear(FIRST_NAME_INPUT)
     wait_for_element_to_appear(LAST_NAME_INPUT)
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
@@ -203,7 +220,7 @@ def check_patient_postcode_search_result_exists(postcode, wait):
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
     element = ("role", "cell", nhsNumber)
-    time.sleep(1)
+    time.sleep(3)
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
@@ -211,7 +228,7 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
     element = ("role", "heading", f"No result found for {nhsNumber}")
-    time.sleep(1)
+    time.sleep(3)
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
@@ -219,6 +236,7 @@ def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
 def check_patient_not_found_message_exists(wait):
     ensure_find_a_patient_heading_element_exists()
     element = (f"//h3[contains(text(), 'No result')]")
+    time.sleep(3)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
@@ -300,10 +318,11 @@ def check_required_field_error_appears_for_nhsNumber(wait):
 
 def check_record_saved_element_exists(wait):
     ensure_find_a_patient_heading_element_exists()
+    time.sleep(3)
+    wait_for_element_to_appear(RECORD_SAVED_DIALOGUE)
     return check_element_exists(RECORD_SAVED_DIALOGUE, wait)
 
 def check_record_saved_message_appears(name):
-    # checks the message exists, includes the patient name, includes a valid time value, and is the expected format
     ensure_find_a_patient_heading_element_exists()
     element = (f"You successfully saved {name} record")
     saved_message = find_element_and_perform_action(element, "get_text")

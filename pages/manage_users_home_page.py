@@ -7,9 +7,10 @@ DEACTIVATED_USERS_LINK = ("xpath", "//a[@href='/manage-users/deactivated-users']
 MANAGE_USERS_HEADING_ELEMENT = ("role", "heading", "Manage users")
 
 def ensure_manage_users_heading_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(MANAGE_USERS_HEADING_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-        time.sleep(2)
+        time.sleep(3)
         wait_for_element_to_appear(MANAGE_USERS_HEADING_ELEMENT)
 
 def check_add_user_button_exists():

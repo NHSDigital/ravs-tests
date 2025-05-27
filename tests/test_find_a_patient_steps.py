@@ -260,7 +260,7 @@ def step_add_mandatory_patient_information_find_by_demographics(shared_data):
 @given("I enter the new patient details on create a new patient page")
 @then("I enter the new patient details")
 def step_add_mandatory_patient_information_create_patient(shared_data):
-    enter_first_name(shared_data["first_name"])
+    enter_first_name_create_a_patient_page(shared_data["first_name"])
     enter_last_name(shared_data["last_name"])
     select_gender(shared_data["gender"])
     enter_postcode(shared_data["postcode"])
