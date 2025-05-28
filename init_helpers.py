@@ -145,6 +145,8 @@ def get_app_url(test_environment):
         return "https://www.ravs-dev.england.nhs.uk"
     elif "qa" in test_environment.lower():
         return "https://www.ravs-qa.england.nhs.uk"
+    elif "demo" in test_environment.lower():
+        return "https://www.ravs-demo.england.nhs.uk"
     else:
         raise ValueError(f"Unknown test environment: {test_environment}")
 
