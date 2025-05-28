@@ -51,14 +51,12 @@ GENDER_MAPPING = {
 
 def ensure_find_a_patient_heading_element_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(1)
     if not check_element_exists(FIND_A_PATIENT_LABEL_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(FIND_A_PATIENT_LABEL_ELEMENT)
 
 def ensure_create_a_patient_heading_element_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(1)
     if not check_element_exists(CREATE_A_PATIENT_LABEL_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CREATE_A_PATIENT_LABEL_ELEMENT)
@@ -169,10 +167,8 @@ def check_search_for_patient_button_visible():
 def click_search_for_patient_button():
     ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(SEARCH_BUTTON)
-    time.sleep(1)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
     ensure_find_a_patient_heading_element_exists()
-    time.sleep(1)
 
 def click_create_a_new_patient_button():#
     ensure_find_a_patient_heading_element_exists()

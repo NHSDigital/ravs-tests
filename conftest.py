@@ -151,8 +151,9 @@ def navigate_and_login(shared_data, user_role=None, site=None):
 
     if user_role.lower() in ["recorder", "administrator", "lead administrator"] and site:
         if site == "leeds pharmacy":
-            attach_screenshot("select_multi_org_site")
-            select_site("Leeds Pharmacy (FDP35)")
+            if user_role.lower() in ["recorder", "administrator"]:
+                attach_screenshot("select_multi_org_site")
+                select_site("Leeds Pharmacy (FDP35)")
         elif care_model == "trust site":
             attach_screenshot("select_multi_org_site")
             select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
@@ -329,6 +330,7 @@ def check_vaccine_and_batch_exists_in_site(shared_data, site, vaccine, vaccine_t
     return check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size)
 
 def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine_type, batch_number, expiry_date, pack_size=None):
+    time.sleep(1)
     def ensure_active_batch():
         exists = does_active_batch_exist(site, vaccine, vaccine_type, batch_number, expiry_date)
         if not exists:

@@ -145,6 +145,8 @@ def get_app_url(test_environment):
         return "https://www.ravs-dev.england.nhs.uk"
     elif "qa" in test_environment.lower():
         return "https://www.ravs-qa.england.nhs.uk"
+    elif "demo" in test_environment.lower():
+        return "https://www.ravs-demo.england.nhs.uk"
     else:
         raise ValueError(f"Unknown test environment: {test_environment}")
 
@@ -152,7 +154,7 @@ def navigate_to_url(url):
     get_playwright_helper().navigate_to_url(url)
 
 def check_element_exists(element, wait=False):
-    wait_for_page_to_load(5)
+    wait_for_page_to_load(5000)
     try:
         resolved_element = resolve_element(element)
         return get_playwright_helper().check_element_exists(resolved_element, wait)
