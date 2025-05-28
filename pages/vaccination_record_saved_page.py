@@ -7,6 +7,7 @@ PAGE_LOADING_ELEMENT = ("role", "status")
 
 def ensure_vaccination_saved_visible():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(1)
     if not check_element_exists(VACCINATION_SAVED_LABEL_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(VACCINATION_SAVED_LABEL_ELEMENT)
