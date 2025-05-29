@@ -482,8 +482,17 @@ class BasePlaywrightHelper:
             try:
                 element = self.get_element(locator_or_element, wait=True, timeout=DEFAULT_WAIT_TIMEOUT)
                 if not element:
-                    print(f"Element not found for action: {action}")
-                    return
+                    time.sleep(3)
+                    if not element():
+                        print(f"[FAIL FAST] Element not found for action: {action}. Skipping further retries.")
+                    return None
+
+                if not element.is_visible():
+                    print(f"[FAIL FAST] Element found but not visible for action: {action}. Waiting briefly to confirm...")
+                    time.sleep(3)
+                    if not element.is_visible():
+                        print(f"[FAIL FAST] Still not visible. Skipping further retries.")
+                        return None
 
                 self.disable_smooth_scrolling()
                 self.wait_for_element_to_appear(element)
