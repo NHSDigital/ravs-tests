@@ -13,7 +13,7 @@ Feature: Dashboard
 
     Examples:
       | username                                      | site                        |
-      | neelima.guntupalli1+no_location_sites@nhs.net | Tquila Automation Ltd. (uk) |
+      | neelima.guntupalli1+no_location_sites@nhs.net | Tquila Automation Ltd. (Uk) |
 
   Scenario Outline: Create a report link should be visible for lead administrators and administrators
     Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
