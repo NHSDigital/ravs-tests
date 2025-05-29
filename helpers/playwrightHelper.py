@@ -623,10 +623,10 @@ class BasePlaywrightHelper:
             else:
                 screenshot_name = "element_action"
 
-        self.wait_for_page_to_load(10)
+        self.wait_for_page_to_load(5)
         time.sleep(0.5)
 
-        DEFAULT_WAIT_TIMEOUT = 10000
+        DEFAULT_WAIT_TIMEOUT = 5000
 
         retries = 0
         while retries < max_retries:
@@ -653,8 +653,8 @@ class BasePlaywrightHelper:
                 if element.is_visible():
                     element.scroll_into_view_if_needed()
                     if action.lower() == "click":
-                        element.wait_for(state="attached", timeout=DEFAULT_WAIT_TIMEOUT)
-                        element.wait_for(state="visible", timeout=DEFAULT_WAIT_TIMEOUT)
+                        # element.wait_for(state="attached", timeout=DEFAULT_WAIT_TIMEOUT)
+                        # element.wait_for(state="visible", timeout=DEFAULT_WAIT_TIMEOUT)
                         element.click()
                         print(f"Clicked the element successfully.")
                     elif action.lower() == "check":
