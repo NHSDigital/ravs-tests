@@ -49,7 +49,7 @@ def enter_password(password):
     ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(PASSWORD_INPUT_ELEMENT, "input_text", password)
 
-def click_keep_me_signedin():
+def click_keep_me_signed_in():
     ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT, "click")
 
