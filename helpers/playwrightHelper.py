@@ -513,8 +513,8 @@ class BasePlaywrightHelper:
                     return
 
                 result = action_map[action.lower()]()
-                return result 
-
+                return result
+            
             except TimeoutError:
                 print(f"Timeout waiting for element to perform {action}. Retrying... ({retries+1}/{max_retries})")
             except Exception as e:
