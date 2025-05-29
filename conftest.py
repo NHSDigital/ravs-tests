@@ -149,7 +149,7 @@ def navigate_and_login(shared_data, user_role=None, site=None):
     enter_password(password)
     click_nhs_signin_button()
 
-    if user_role.lower() in ["recorder", "administrator", "lead administrator"] and site:
+    if user_role.lower() in ["recorder", "administrator"] and site:
         if site == "leeds pharmacy":
             if user_role.lower() in ["recorder", "administrator"]:
                 attach_screenshot("select_multi_org_site")
