@@ -93,6 +93,7 @@ def click_find_a_patient_link():
 def check_site_name_exists_in_dashboard(site):
     ensure_log_out_nav_element_exists()
     element = ("role", "heading", site)
+    wait_for_element_to_appear(element)
     return check_element_exists(element)
 
 def get_today_vaccinations_count():
