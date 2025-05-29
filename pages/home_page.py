@@ -158,8 +158,8 @@ def click_help_and_guidance_link_exists():
 def click_logout_button():
     ensure_log_out_nav_element_exists()
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
-    wait_for_element_to_disappear(LOGOUT_NAV_ELEMENT)
-    time.sleep(3)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(1)
 
 def click_navbar_toggler():
     ensure_log_out_nav_element_exists()
@@ -206,7 +206,7 @@ def click_profile_nav_link(email):
 
 def check_reports_nav_link_exists():
     ensure_log_out_nav_element_exists()
-    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    wait_for_element_to_appear(REPORTS_NAV_ELEMENT)
     return check_element_exists(REPORTS_NAV_ELEMENT)
 
 def click_reports_nav_link():

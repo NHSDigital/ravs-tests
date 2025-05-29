@@ -488,25 +488,11 @@ class BasePlaywrightHelper:
                 self.disable_smooth_scrolling()
                 self.wait_for_element_to_appear(element)
 
-                if hasattr(element, 'is_enabled'):
-                    for _ in range(5):
-                        if element.is_enabled():
-                            break
-                        print("Waiting for element to become enabled...")
-                        time.sleep(0.5)
-
                 if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
                     raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
 
-                if not element.is_visible():
-                    print(f"Element is not visible.")
-                    retries += 1
-                    time.sleep(retry_delay)
-                    continue
-
                 element.scroll_into_view_if_needed()
 
-                # Dispatch to the correct helper based on action
                 action_map = {
                     "click": lambda: self._click_element(element, DEFAULT_WAIT_TIMEOUT),
                     "check": lambda: self._check_element(element),
@@ -527,7 +513,7 @@ class BasePlaywrightHelper:
                     return
 
                 result = action_map[action.lower()]()
-                return result  # Return if the action produces a value, else None
+                return result 
 
             except TimeoutError:
                 print(f"Timeout waiting for element to perform {action}. Retrying... ({retries+1}/{max_retries})")
@@ -538,6 +524,12 @@ class BasePlaywrightHelper:
             time.sleep(retry_delay)
 
         print(f"Action '{action}' failed after {max_retries} retries.")
+
+    def is_element_really_visible(self, element):
+        try:
+            return element.bounding_box() is not None
+        except:
+            return False
 
     def _click_element(self, element, timeout):
         element.wait_for(state="attached", timeout=timeout)
