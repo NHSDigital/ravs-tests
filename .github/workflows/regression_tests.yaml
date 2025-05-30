@@ -148,7 +148,6 @@ jobs:
 
       - name: Install Playwright
         run: |
-          python -m pip install playwright
           playwright install
           playwright install --with-deps webkit
           playwright install-deps
