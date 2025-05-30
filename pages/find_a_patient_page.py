@@ -280,6 +280,8 @@ def click_on_patient_name_search_result(name):
     )
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
 def check_patient_dob_search_result_exists(dob, wait):
