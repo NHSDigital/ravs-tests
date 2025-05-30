@@ -174,6 +174,7 @@ class BasePlaywrightHelper:
 
     def wait_for_page_to_load(self, timeout=5):
         try:
+            time.sleep(1)
             self.page.wait_for_load_state('load', timeout=timeout * 1000)
             self.page.wait_for_selector('body', timeout=timeout * 1000)
             self.page.wait_for_function(
@@ -469,15 +470,15 @@ class BasePlaywrightHelper:
         self.wait_for_page_to_load(10)
         time.sleep(0.5)
 
-        DEFAULT_WAIT_TIMEOUT = 10000
+        # DEFAULT_WAIT_TIMEOUT = 10000
         retries = 0
 
         while retries < max_retries:
             try:
-                element = self.get_element(locator_or_element, wait=True, timeout=DEFAULT_WAIT_TIMEOUT)
+                element = self.get_element(locator_or_element, wait=True)
                 if not element:
                     time.sleep(3)
-                    if not element():
+                    if not element:
                         print(f"[FAIL FAST] Element not found for action: {action}. Skipping further retries.")
                     return None
 
@@ -497,7 +498,7 @@ class BasePlaywrightHelper:
                 element.scroll_into_view_if_needed()
 
                 action_map = {
-                    "click": lambda: self._click_element(element, DEFAULT_WAIT_TIMEOUT),
+                    "click": lambda: self._click_element(element),
                     "check": lambda: self._check_element(element),
                     "uncheck": lambda: self._uncheck_element(element),
                     "select_option": lambda: self._select_option(element, inputValue),
@@ -533,8 +534,8 @@ class BasePlaywrightHelper:
         except:
             return False
 
-    def _click_element(self, element, timeout):
-        element.wait_for(state="attached", timeout=timeout)
+    def _click_element(self, element, timeout=5000):
+        # element.wait_for(state="attached", timeout=timeout)
         element.wait_for(state="visible", timeout=timeout)
         element.click()
         print("Clicked the element successfully.")
