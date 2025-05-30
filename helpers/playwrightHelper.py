@@ -207,7 +207,7 @@ class BasePlaywrightHelper:
             print(f"Error retrieving element '{locator_or_element}': {e}")
             return None
 
-    def wait_for_element_to_appear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+    def wait_for_element_to_appear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
         start_time = time.time()
         while time.time() - start_time < timeout / 1000:
@@ -222,9 +222,8 @@ class BasePlaywrightHelper:
         print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
         return None
 
-    def wait_for_element_to_disappear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         start_time = time.time()
-
         while time.time() - start_time < timeout / 1000:
             try:
                 element = self.get_element(locator_or_element, wait=True)
@@ -235,7 +234,6 @@ class BasePlaywrightHelper:
                 print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
                 return True
             time.sleep(poll_interval)
-
         print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
         return False
 
