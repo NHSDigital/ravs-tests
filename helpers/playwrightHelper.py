@@ -536,7 +536,7 @@ class BasePlaywrightHelper:
 
     def _click_element(self, element, timeout=5000):
         # element.wait_for(state="attached", timeout=timeout)
-        element.wait_for(state="visible", timeout=timeout)
+        # element.wait_for(state="visible", timeout=timeout)
         element.click()
         print("Clicked the element successfully.")
 
