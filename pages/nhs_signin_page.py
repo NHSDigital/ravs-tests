@@ -30,8 +30,7 @@ def click_nhs_signin_button():
     ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(SIGN_IN_BUTTON_ELEMENT, "click")
     wait_for_page_to_load(timeout=10)
-    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(1)
+    time.sleep(2)
 
 def enter_email_address(emailAddress):
     ensure_sign_in_heading_element_exists()
