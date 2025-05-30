@@ -28,4 +28,4 @@ def check_login_button_exists():
 def click_login_button():
     ensure_you_are_not_logged_in_label_exists()
     find_element_and_perform_action(LOGIN_BUTTON_ELEMENT, "click")
-    wait_for_element_to_appear(LOGOUT_NAV_ELEMENT)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
