@@ -6,6 +6,7 @@ PAGE_LOADING_ELEMENT = ("role", "status")
 
 def check_reports_download_report_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(2)
     wait_for_element_to_disappear(CREATING_REPORT_ELEMENT)
     wait_for_element_to_appear(DOWNLOAD_REPORT_BUTTON)
     return check_element_exists(DOWNLOAD_REPORT_BUTTON)

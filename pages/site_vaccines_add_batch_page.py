@@ -48,6 +48,7 @@ def ensure_edit_batch_heading_text_is_visible():
 
 def ensure_add_batch_button_is_visible():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(FIRST_ADD_BATCH_BUTTON)
     if not check_element_exists(FIRST_ADD_BATCH_BUTTON):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(FIRST_ADD_BATCH_BUTTON)

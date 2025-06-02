@@ -74,6 +74,7 @@ def click_no_to_consent():
     find_element_and_perform_action(NO_CONSENT_RADIO_BUTTON, "check")
 
 def select_consent_clinician_with_name_and_council(nameandcouncil):
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     wait_for_element_to_appear(CONSENT_CLINICIAN_DROPDOWN_ELEMENT)
     if check_element_enabled(CONSENT_CLINICIAN_DROPDOWN_ELEMENT):
         find_element_and_perform_action(CONSENT_CLINICIAN_DROPDOWN_ELEMENT, "select_option", nameandcouncil)

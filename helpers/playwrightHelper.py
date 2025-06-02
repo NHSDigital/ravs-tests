@@ -174,6 +174,7 @@ class BasePlaywrightHelper:
 
     def wait_for_page_to_load(self, timeout=5):
         try:
+            time.sleep(1)
             self.page.wait_for_load_state('load', timeout=timeout * 1000)
             self.page.wait_for_selector('body', timeout=timeout * 1000)
             self.page.wait_for_function(
@@ -207,7 +208,7 @@ class BasePlaywrightHelper:
             print(f"Error retrieving element '{locator_or_element}': {e}")
             return None
 
-    def wait_for_element_to_appear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+    def wait_for_element_to_appear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
         start_time = time.time()
         while time.time() - start_time < timeout / 1000:
@@ -222,9 +223,8 @@ class BasePlaywrightHelper:
         print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
         return None
 
-    def wait_for_element_to_disappear(self, locator_or_element, timeout=5000, poll_interval=0.1):
+    def wait_for_element_to_disappear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         start_time = time.time()
-
         while time.time() - start_time < timeout / 1000:
             try:
                 element = self.get_element(locator_or_element, wait=True)
@@ -235,7 +235,6 @@ class BasePlaywrightHelper:
                 print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
                 return True
             time.sleep(poll_interval)
-
         print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
         return False
 
@@ -310,20 +309,16 @@ class BasePlaywrightHelper:
         This works cross-platform (Windows and Linux).
         """
         try:
-            # Ensure the custom download directory exists
-            if not os.path.isabs(download_dir):  # Make sure the download_dir is an absolute path
-                download_dir = os.path.join(os.getcwd(), download_dir)  # Use current working directory as base
+            if not os.path.isabs(download_dir):
+                download_dir = os.path.join(os.getcwd(), download_dir)
 
             os.makedirs(download_dir, exist_ok=True)
 
-            # Set the download behavior in Playwright to download files to the specified directory
             self.page.on("download", lambda download: download.save_as(os.path.join(download_dir, download.suggested_filename)))
 
-            # Use Playwright's download expectation
             with self.page.expect_download(timeout=timeout * 1000) as download_info:
                 self.find_element_and_perform_action(locator_or_element, action)
 
-            # Get the download object
             download = download_info.value
             downloaded_file_path = download.path()
 
@@ -475,40 +470,35 @@ class BasePlaywrightHelper:
         self.wait_for_page_to_load(10)
         time.sleep(0.5)
 
-        DEFAULT_WAIT_TIMEOUT = 10000
+        # DEFAULT_WAIT_TIMEOUT = 10000
         retries = 0
 
         while retries < max_retries:
             try:
-                element = self.get_element(locator_or_element, wait=True, timeout=DEFAULT_WAIT_TIMEOUT)
+                element = self.get_element(locator_or_element, wait=True)
                 if not element:
-                    print(f"Element not found for action: {action}")
-                    return
+                    time.sleep(3)
+                    if not element:
+                        print(f"[FAIL FAST] Element not found for action: {action}. Skipping further retries.")
+                    return None
+
+                if not element.is_visible():
+                    print(f"[FAIL FAST] Element found but not visible for action: {action}. Waiting briefly to confirm...")
+                    time.sleep(3)
+                    if not element.is_visible():
+                        print(f"[FAIL FAST] Still not visible. Skipping further retries.")
+                        return None
 
                 self.disable_smooth_scrolling()
                 self.wait_for_element_to_appear(element)
 
-                if hasattr(element, 'is_enabled'):
-                    for _ in range(5):
-                        if element.is_enabled():
-                            break
-                        print("Waiting for element to become enabled...")
-                        time.sleep(0.5)
-
                 if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
                     raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
 
-                if not element.is_visible():
-                    print(f"Element is not visible.")
-                    retries += 1
-                    time.sleep(retry_delay)
-                    continue
-
                 element.scroll_into_view_if_needed()
 
-                # Dispatch to the correct helper based on action
                 action_map = {
-                    "click": lambda: self._click_element(element, DEFAULT_WAIT_TIMEOUT),
+                    "click": lambda: self._click_element(element),
                     "check": lambda: self._check_element(element),
                     "uncheck": lambda: self._uncheck_element(element),
                     "select_option": lambda: self._select_option(element, inputValue),
@@ -527,8 +517,7 @@ class BasePlaywrightHelper:
                     return
 
                 result = action_map[action.lower()]()
-                return result  # Return if the action produces a value, else None
-
+                return result
             except TimeoutError:
                 print(f"Timeout waiting for element to perform {action}. Retrying... ({retries+1}/{max_retries})")
             except Exception as e:
@@ -539,9 +528,13 @@ class BasePlaywrightHelper:
 
         print(f"Action '{action}' failed after {max_retries} retries.")
 
-    def _click_element(self, element, timeout):
-        element.wait_for(state="attached", timeout=timeout)
-        element.wait_for(state="visible", timeout=timeout)
+    def is_element_really_visible(self, element):
+        try:
+            return element.bounding_box() is not None
+        except:
+            return False
+
+    def _click_element(self, element, timeout=5000):
         element.click()
         print("Clicked the element successfully.")
 
@@ -615,140 +608,6 @@ class BasePlaywrightHelper:
         else:
             print("No option is currently selected.")
             return None
-
-    # def find_element_and_perform_action(self, locator_or_element, action, inputValue=None, screenshot_name=None, max_retries=3, retry_delay=2):
-    #     if not screenshot_name:
-    #         if isinstance(locator_or_element, str):
-    #             screenshot_name = "".join(c if c.isalnum() else "_" for c in locator_or_element)
-    #         else:
-    #             screenshot_name = "element_action"
-
-    #     self.wait_for_page_to_load(10)
-    #     time.sleep(0.5)
-
-    #     DEFAULT_WAIT_TIMEOUT = 10000
-
-    #     retries = 0
-    #     while retries < max_retries:
-    #         try:
-    #             element = self.get_element(locator_or_element, wait=True, timeout=DEFAULT_WAIT_TIMEOUT)
-
-    #             if not element:
-    #                 print(f"Element not found for action: {action}")
-    #                 return
-
-    #             self.disable_smooth_scrolling()
-    #             self.wait_for_element_to_appear(element)
-
-    #             if hasattr(element, 'is_enabled'):
-    #                 for _ in range(5):
-    #                     if element.is_enabled():
-    #                         break
-    #                     print("Waiting for element to become enabled...")
-    #                     time.sleep(0.5)
-
-    #             if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
-    #                     raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
-
-    #             if element.is_visible():
-    #                 element.scroll_into_view_if_needed()
-    #                 if action.lower() == "click":
-    #                     element.wait_for(state="attached", timeout=DEFAULT_WAIT_TIMEOUT)
-    #                     element.wait_for(state="visible", timeout=DEFAULT_WAIT_TIMEOUT)
-    #                     element.click()
-    #                     print(f"Clicked the element successfully.")
-    #                 elif action.lower() == "check":
-    #                     if not element.is_checked():
-    #                         element.check()
-    #                         print("Checkbox checked successfully.")
-    #                     elif element.is_checked():
-    #                         print("Checkbox is already checked.")
-    #                 elif action.lower() == "uncheck":
-    #                     if element.is_checked():
-    #                         element.uncheck()
-    #                         print("Checkbox un-checked successfully.")
-    #                     elif not element.is_checked():
-    #                         print("Checkbox is already un-checked.")
-    #                 elif action.lower() == "select_option":
-    #                     if isinstance(inputValue, int):
-    #                         element.select_option(index=inputValue)
-    #                         print(f"Selected option by index '{inputValue}' successfully.")
-    #                     else:
-    #                         element.select_option(value=inputValue)
-    #                         print(f"Selected option by label '{inputValue}' successfully.")
-    #                 elif action.lower() == "get_options":
-    #                     options = element.evaluate("(el) => Array.from(el.options).map(option => option.text)")
-    #                     return options
-    #                 elif action.lower() == "clear":
-    #                     element.fill('')
-    #                     print(f"Cleared text from the element: {element}.")
-    #                 elif action.lower() == "input_text":
-    #                     if element.text_content() != '':
-    #                         element.clear()  # Clear existing text if necessary
-    #                     element.fill(inputValue)
-    #                     print(f"Entered text '{inputValue}' successfully.")
-    #                 elif action.lower() == "get_text":
-    #                     text = element.text_content()
-    #                     if text == "":
-    #                         text = element.get_attribute("value")
-    #                     print(f"Text from the element: {text}")
-    #                     return text
-    #                 elif action.lower() == "get_value":
-    #                     text = element.get_attribute("value")
-    #                     print(f"Text from the element: {text}")
-    #                     return text
-    #                 elif action.lower() == "scroll_to":
-    #                     element.scroll_into_view_if_needed()
-    #                     print(f"Scrolled to {element}")
-    #                 elif action.lower() == "get_selected_option":
-    #                     selected_option = element.locator("option:checked")
-    #                     if selected_option.count() > 0:
-    #                         text = selected_option.text_content()
-    #                         value = selected_option.get_attribute("value")
-    #                         print(f"Selected option text: '{text}', value: '{value}'")
-    #                         return text
-    #                     else:
-    #                         print("No option is currently selected.")
-    #                         return None
-    #                 elif action.lower() == "type_text":
-    #                     if element.text_content() != '':
-    #                         element.clear()  # Clear existing text
-    #                     element.type(inputValue, delay=50)
-    #                     print(f"Typed text '{inputValue}' successfully.")
-    #                 else:
-    #                     print(f"Unsupported action: {action}")
-
-    #                 return  # If the action was successful, exit the method.
-
-    #             else:
-    #                 print(f"Element is not visible.")
-    #                 retries += 1
-    #                 if retries < max_retries:
-    #                     print(f"Retrying... ({retries}/{max_retries})")
-    #                     time.sleep(retry_delay)
-    #                 else:
-    #                     print("Element was not visible after retries.")
-    #                     return
-
-    #         except TimeoutError:
-    #             print(f"Timeout waiting for element to perform {action}. Retrying...")
-    #             retries += 1
-    #             if retries < max_retries:
-    #                 time.sleep(retry_delay)
-    #             else:
-    #                 print(f"Timeout occurred after {max_retries} retries. Aborting action.")
-    #                 return
-    #         except Exception as e:
-    #             print(f"Exception: {e} during {action} on element. Retrying...")
-    #             retries += 1
-    #             if retries < max_retries:
-    #                 time.sleep(retry_delay)
-    #             else:
-    #                 print(f"Failed to perform action {action} after {max_retries} retries.")
-    #                 return
-
-    #     # If we reached here, it means the action couldn't be performed after max retries
-    #     print(f"Action '{action}' failed after {max_retries} retries.")
 
     def wait_for_selector_to_disappear(self, selector, timeout=5):
             try:
