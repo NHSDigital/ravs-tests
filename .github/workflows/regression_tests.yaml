@@ -174,7 +174,6 @@ jobs:
           DEVICE: ${{ env.DEVICE }}
           MARKER: ${{ inputs.marker || '' }}
           AGENTS: ${{ env.AGENTS }}
-          # AGENTS: 3
         run: |
           tox -v
         continue-on-error: true
