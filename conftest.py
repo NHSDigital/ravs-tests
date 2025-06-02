@@ -149,7 +149,7 @@ def navigate_and_login(shared_data, user_role=None, site=None):
     enter_password(password)
     click_nhs_signin_button()
 
-    if user_role.lower() in ["recorder", "administrator", "lead administrator"] and site:
+    if user_role.lower() in ["recorder", "administrator"] and site:
         if site == "leeds pharmacy":
             if user_role.lower() in ["recorder", "administrator"]:
                 attach_screenshot("select_multi_org_site")
@@ -246,7 +246,8 @@ def click_on_patient_search_result_and_click_choose_vaccine(name, vaccine):
     return immunisation_history_records
 
 def choose_vaccine_and_vaccine_type_for_patient(site, vaccine, vaccine_type):
-    wait_for_element_to_disappear(SPINNER_ELEMENT)
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(2)
     click_delivery_team_radiobutton(site)
     attach_screenshot("clicked_delivery_team")
     click_vaccine_radiobutton(vaccine)

@@ -148,7 +148,6 @@ jobs:
 
       - name: Install Playwright
         run: |
-          python -m pip install playwright
           playwright install
           playwright install --with-deps webkit
           playwright install-deps
@@ -174,8 +173,7 @@ jobs:
           BROWSER: ${{ env.BROWSER }}
           DEVICE: ${{ env.DEVICE }}
           MARKER: ${{ inputs.marker || '' }}
-          # AGENTS: ${{ env.AGENTS }}
-          AGENTS: 3
+          AGENTS: ${{ env.AGENTS }}
         run: |
           tox -v
         continue-on-error: true

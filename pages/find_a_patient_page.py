@@ -213,13 +213,36 @@ def check_patient_postcode_search_result_exists(postcode, wait):
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
+def format_nhs_number(nhs_number: str) -> str:
+    # Format the 10-digit string into 'XXX XXX XXXX'
+    return f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
+
+def format_nhs_number(nhs_number: str) -> str:
+    """Format the 10-digit string into 'XXX XXX XXXX'."""
+    return f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
+
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
-    element = ("role", "cell", nhsNumber)
-    time.sleep(3)
+
+    formatted_nhs = format_nhs_number(nhsNumber)
+    element_with_spaces = ("role", "cell", formatted_nhs)
+    element_without_spaces = ("role", "cell", nhsNumber)
+
     ensure_find_a_patient_heading_element_exists()
-    wait_for_element_to_appear(element)
-    return check_element_exists(element, wait)
+
+    try:
+        wait_for_element_to_appear(element_with_spaces)
+        if check_element_exists(element_with_spaces, wait):
+            return True
+    except:
+        pass
+
+    try:
+        wait_for_element_to_appear(element_without_spaces)
+        return check_element_exists(element_without_spaces, wait)
+    except:
+        return False
+
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     ensure_find_a_patient_heading_element_exists()
@@ -257,6 +280,8 @@ def click_on_patient_name_search_result(name):
     )
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
 def check_patient_dob_search_result_exists(dob, wait):
