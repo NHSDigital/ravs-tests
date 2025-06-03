@@ -272,6 +272,9 @@ def date_format_with_day_of_week(date):
 def date_format_with_age(date):
     return datetime_helper_instance.date_format_with_age(date)
 
+def date_format_with_age_for_streamlining(date):
+    return datetime_helper_instance.date_format_with_age_for_streamlining(date)
+
 def date_format_with_name_of_month(date):
     return datetime_helper_instance.date_format_with_name_of_month(date)
 
