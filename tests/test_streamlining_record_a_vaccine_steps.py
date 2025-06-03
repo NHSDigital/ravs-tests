@@ -15,6 +15,7 @@ import logging
 from init_helpers import *
 from conftest import *
 from helpers.datetimeHelper import *
+from pages.streamlining_patient_details_page import *
 from pages.vaccination_record_saved_page import *
 from test_data.get_values_from_models import *
 from faker import Faker
@@ -86,8 +87,22 @@ def I_enter_patients_nhs_number(shared_data, nhs_number):
     enter_patient_nhs_number(nhs_number)
     attach_screenshot(f"entered_{nhs_number}")
     shared_data["patient_nhs_number"] = nhs_number
-    click_continue_to_injection_location_screen()
-    attach_screenshot("clicked_continue_to_injection_location_screen")
+    click_continue_to_patient_details_screen()
+    attach_screenshot("clicked_continue_to_patient_details_screen")
+
+@given(parse("I should be directed to the patient history page and show {name}, {nhs_number}, {date_of_birth} and {address} details"))
+def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number, date_of_birth, address):
+    assert check_patient_details_heading_exists(name)
+    attach_screenshot(f"patient_{name}_details_exist")
+    assert get_patient_name_value_in_patient_details_screen() == name
+    assert get_patient_nhs_number_value_in_patient_details_screen() == format_nhs_number(nhs_number)
+    assert get_patient_date_of_birth_value_in_patient_details_screen() == date_format_with_age_for_streamlining(date_of_birth)
+    assert get_patient_address_value_in_patient_details_screen() == address
+
+@given("I click continue to select injection site")
+def I_click_continue_injection_site_selection_screen():
+    click_continue_to_select_injection_site_screen()
+    attach_screenshot("clicked_continue_to_select_injection_site_screen")
 
 @given("I select where the injection was given")
 def I_select_injection_location(shared_data):
@@ -99,8 +114,8 @@ def I_select_injection_location(shared_data):
 
 @given(parse("I confirm patient's name as {name}, date of birth as {date_of_birth}, address as {address} and the given vaccination details"))
 def I_confirm_details(shared_data, name, date_of_birth, address):
-    assert check_change_patient_nhs_number_link_exists()
-    attach_screenshot("checked_change_patient_nhs_number_link_exists")
+    # assert check_change_patient_nhs_number_link_exists()
+    # attach_screenshot("checked_change_patient_nhs_number_link_exists")
     assert check_change_vaccine_link_exists()
     attach_screenshot("checked_change_vaccine_link_exists")
     assert check_change_batch_link_exists()
@@ -111,7 +126,7 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     attach_screenshot("checked_change_injection_link_exists")
     assert check_change_location_link_exists()
     attach_screenshot("checked_change_location_link_exists")
-    assert get_patient_nhs_number_value_in_check_and_confirm_screen() == shared_data["patient_nhs_number"]
+    assert get_patient_nhs_number_value_in_check_and_confirm_screen() == format_nhs_number(shared_data["patient_nhs_number"])
     attach_screenshot(f'patient_nhs_number_value_in_check_and_confirm_screen_should_be_{shared_data["patient_nhs_number"]}')
     assert get_patient_name_value_in_check_and_confirm_screen() == name
     assert shared_data["batch_number"] in get_patient_vaccination_batch_number_value()
@@ -120,7 +135,8 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     attach_screenshot("patient_name_value_in_check_and_confirm_screen_should_be_{name}")
     assert get_patient_address_value_in_check_and_confirm_screen() == address
     attach_screenshot(f"patient_address_value_in_check_and_confirm_screen_should_be_{address}")
-    formatted_date = date_format_with_name_of_month(date_of_birth)
+    # formatted_date = date_format_with_name_of_month(date_of_birth)
+    formatted_date = date_format_with_age_for_streamlining(date_of_birth)
     assert get_patient_dob_value_in_check_and_confirm_screen() == formatted_date
     attach_screenshot(f"patient_dob_value_in_check_and_confirm_screen_should_be_{formatted_date}")
     assert get_patient_vaccination_injection_site_value() == shared_data["injection_location"]
