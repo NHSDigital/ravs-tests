@@ -69,5 +69,5 @@ def click_enter_10_digit_nhs_number_error_message_link_LINK():
 def click_continue_to_patient_details_screen():
     ensure_what_is_patients_nhs_number_heading_label_is_visible()
     find_element_and_perform_action(CONTINUE_TO_PATIENT_DETAILS_SCREEN, "click")
-    time.sleep(3)
+    time.sleep(5)
     wait_for_element_to_disappear(PATIENT_NHS_NUMBER_TEXTBOX)

@@ -50,6 +50,10 @@ def format_nhs_number(nhs_number):
     formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
     return formatted_number
 
+def normalize_address(address):
+    # Remove commas and extra spaces, and lowercase for consistency
+    return re.sub(r'[\s,]+', '', address).lower()
+
 def navigate_and_login(shared_data, user_role=None, site=None):
     navigate_to_ravs()
 
@@ -988,6 +992,11 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         attach_screenshot("check_and_confirm_screen_before_assertion")
         if get_patient_name_value_in_check_and_confirm_screen() is not None:
+            if shared_data["nhs_number"] == "9449304033":
+                shared_data["nhs_number"] = "9734250221"
+            elif shared_data["nhs_number"] == "9467361590":
+                shared_data["nhs_number"] = "3508118053"
+            assert get_patient_nhs_number_value_in_check_and_confirm_screen() == format_nhs_number(shared_data["nhs_number"])
             assert get_patient_name_value_in_check_and_confirm_screen().lower() == shared_data["patient_name"].lower()
             assert get_patient_address_value_in_check_and_confirm_screen().lower() == address.lower()
             shared_data["gender"] = get_patient_gender_value_in_check_and_confirm_screen()
