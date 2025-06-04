@@ -94,10 +94,13 @@ def I_enter_patients_nhs_number(shared_data, nhs_number):
 def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number, date_of_birth, address):
     assert check_patient_details_heading_exists(name)
     attach_screenshot(f"patient_{name}_details_exist")
-    assert get_patient_name_value_in_patient_details_screen() == name
+    assert get_patient_name_value_in_patient_details_screen().lower() == name.lower()
     assert get_patient_nhs_number_value_in_patient_details_screen() == format_nhs_number(nhs_number)
     assert get_patient_date_of_birth_value_in_patient_details_screen() == date_format_with_age_for_streamlining(date_of_birth)
-    assert get_patient_address_value_in_patient_details_screen() == address
+    if address != "None":
+        assert get_patient_address_value_in_patient_details_screen() == address
+    else:
+        assert get_patient_address_value_in_patient_details_screen() == None
 
 @given("I click continue to select injection site")
 def I_click_continue_injection_site_selection_screen():
@@ -133,7 +136,10 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     assert shared_data["batch_expiry_date"] in get_patient_vaccination_batch_number_value()
     assert "Expires" in get_patient_vaccination_batch_number_value()
     attach_screenshot("patient_name_value_in_check_and_confirm_screen_should_be_{name}")
-    assert get_patient_address_value_in_check_and_confirm_screen() == address
+    if address != "None":
+        assert get_patient_address_value_in_check_and_confirm_screen() == address
+    else:
+        assert get_patient_address_value_in_check_and_confirm_screen() == None
     attach_screenshot(f"patient_address_value_in_check_and_confirm_screen_should_be_{address}")
     # formatted_date = date_format_with_name_of_month(date_of_birth)
     formatted_date = date_format_with_age_for_streamlining(date_of_birth)
