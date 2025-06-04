@@ -32,7 +32,7 @@ Feature: Streamlining Recording vaccine
     | 2     | recorder | Leeds Pharmacy | True      | COVID-19       | AUTO-c10 | 2/9/2025  | None | 9472710255 | community pharmacy | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIALA11 6BH |
     | 3     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C3 | 1/11/2025  | None | 9473629885 | community pharmacy | MARGIE PUCKEY  | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTERM20 6QB |
     | 4     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304033 |  Community Pharmacy | BARAK SELIGMANN  | 26/5/2016 | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ |
-    | 0     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9733907723 |  Community Pharmacy | Sandra RYAN  | 07/04/1994 | None |
+    | 5     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9733907723 |  Community Pharmacy | Sandra RYAN  | 07/04/1994 | None |
     | 6     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9467361590 |  Community Pharmacy | WALLIS ADEYEMO  | 19/4/2015 | 1 MIDLAND ROAD, LEEDS, LS6 1BQ |
     | 7     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304424 |  Community Pharmacy | John Test  | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG |
 

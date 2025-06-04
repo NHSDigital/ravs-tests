@@ -66,7 +66,7 @@ def I_select_batch(shared_data):
 @given(parse("I select patient's eligibility for the vaccine"))
 def I_select_eligibility(shared_data):
     shared_data["eligibility"] = get_new_eligibility_type(shared_data["index"], shared_data["chosen_vaccine"])
-    click_eligibility_radio_button(shared_data["eligibility"])
+    click_streamlining_eligibility_radio_button(shared_data["eligibility"])
     attach_screenshot(f'click_{shared_data["eligibility"]}_radio_button')
     click_continue_to_choose_vaccination_location_screen()
     attach_screenshot("clicked_continue_to_choose_vaccination_location_screen")
