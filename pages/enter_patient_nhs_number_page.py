@@ -25,9 +25,9 @@ def enter_patient_nhs_number(nhs_number):
     ensure_what_is_patients_nhs_number_heading_label_is_visible()
     find_element_and_perform_action(PATIENT_NHS_NUMBER_TEXTBOX, "input_text", nhs_number)
 
-def click_eligibility_radio_button(location):
+def click_streamlining_eligibility_radio_button(location):
     ensure_what_is_patients_nhs_number_heading_label_is_visible()
-    element = ("role", "radio", location)
+    element = ("role", "radio", location, True, {"nth": 0})
     find_element_and_perform_action(element, "click")
 
 def check_enter_patient_nhs_number_error_message_link_exists():

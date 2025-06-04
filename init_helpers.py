@@ -111,7 +111,33 @@ def attach_screenshot(filename):
 
 def resolve_element(element):
     if isinstance(element, (tuple, list)):
-        return get_playwright_helper().get_element_by_type(*element)
+        locator_type = element[0]
+        locator_value = element[1]
+        name = element[2] if len(element) > 2 and isinstance(element[2], str) else None
+
+        # Default values
+        exact = False
+        nth = None
+
+        # Handle 4th and 5th positions
+        for val in element[3:]:
+            if isinstance(val, dict):
+                exact = val.get("exact", exact)
+                nth = val.get("nth", nth)
+            elif isinstance(val, bool):
+                exact = val
+            elif isinstance(val, int):
+                nth = val
+
+        locator = get_playwright_helper().get_element_by_type(
+            locator_type,
+            locator_value,
+            name=name,
+            exact=exact
+        )
+
+        return locator.nth(nth) if nth is not None else locator
+
     return get_playwright_helper().get_element_by_type(element)
 
 @pytest.fixture(scope="session")
