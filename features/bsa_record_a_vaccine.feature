@@ -284,5 +284,3 @@ Examples:
       | 2 | 9470040228 | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service | Hospital hub for staff and patients | yes | today+290 | today-1 | no | no | today  | HERBERT HAAG  | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis | AUTO-RVS | 19/2/2029 | Community Pharmacy   | administrator    |
       |  4 | 9473629885 | Aire Valley Surgery (Rawdon) | Outreach event | yes | today+50 | today-4 | yes | no | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) | 	AUTO-ABR | 1/2/2026 | Branch Surgery   | administrator    |
       # | 2 | 9470040228 | Aire Valley Surgery (Rawdon) | Hospital hub for staff and patients | yes | today+290 | today-1 | yes | no | today  | HERBERT HAAG  | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis | AUTO-RVS | 19/2/2029 | Branch Surgery   | administrator    |
-
-

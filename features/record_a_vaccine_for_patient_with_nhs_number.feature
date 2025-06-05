@@ -1,3 +1,4 @@
+@recordvaccine
 Feature: Record vaccine
 
   Background:

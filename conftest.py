@@ -46,9 +46,12 @@ def report_browser_version(request):
         logging.info(config["browser"].upper() + f" browser version is : {browser_version}")
 
 def format_nhs_number(nhs_number):
-    # Use regular expressions to insert spaces in the phone number
-    formatted_number = re.sub(r"(\d{3})(\d{3})(\d{4})", r"\1 \2 \3", nhs_number)
-    return formatted_number
+    formatted_nhs_number = f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
+    return formatted_nhs_number
+
+def normalize_address(address):
+    # Remove commas and extra spaces, and lowercase for consistency
+    return re.sub(r'[\s,]+', '', address).lower()
 
 def navigate_and_login(shared_data, user_role=None, site=None):
     navigate_to_ravs()
@@ -988,27 +991,33 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         attach_screenshot("check_and_confirm_screen_before_assertion")
         if get_patient_name_value_in_check_and_confirm_screen() is not None:
-            assert get_patient_name_value_in_check_and_confirm_screen().lower() == shared_data["patient_name"].lower()
-            assert get_patient_address_value_in_check_and_confirm_screen().lower() == address.lower()
-            shared_data["gender"] = get_patient_gender_value_in_check_and_confirm_screen()
-            shared_data["address"] = address
-            assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
-            assert get_patient_vaccinated_chosen_vaccine_value().lower() == shared_data["chosen_vaccine"].lower()
-            assert get_patient_vaccinated_chosen_vaccine_product_value().lower() == shared_data["chosen_vaccine_type"].lower()
-            assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
-            assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
-            expected_dob = date_format_with_age(dob)
-            actual_dob = get_patient_dob_value_in_check_and_confirm_screen()
-            if "0." in actual_dob:
-                print("Warning: Known issue detected RAVS-262 : age displayed as 0.67 instead of expected.")
-            else:
-                assert actual_dob == expected_dob, f"Expected {expected_dob}, but got {actual_dob}"
-            shared_data['dob'] = date_format_with_age(dob)
-            assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
-            assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
-            assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
-            assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
-            attach_screenshot("check_and_confirm_screen_after_assertion")
+            if shared_data["nhs_number"] == "9449304033":
+                shared_data["nhs_number"] = "9734250221"
+            elif shared_data["nhs_number"] == "9467361590":
+                shared_data["nhs_number"] = "3508118053"
+        if "persist_tests" not in shared_data:
+            assert get_patient_nhs_number_value_in_check_and_confirm_screen() == format_nhs_number(shared_data["nhs_number"])
+        assert get_patient_name_value_in_check_and_confirm_screen().lower() == shared_data["patient_name"].lower()
+        assert get_patient_address_value_in_check_and_confirm_screen().lower() == address.lower()
+        shared_data["gender"] = get_patient_gender_value_in_check_and_confirm_screen()
+        shared_data["address"] = address
+        assert get_patient_vaccination_dose_amount_value() == shared_data["dose_amount"]
+        assert get_patient_vaccinated_chosen_vaccine_value().lower() == shared_data["chosen_vaccine"].lower()
+        assert get_patient_vaccinated_chosen_vaccine_product_value().lower() == shared_data["chosen_vaccine_type"].lower()
+        assert get_patient_eligibility_assessment_date_value() == date_format_with_day_of_week(shared_data['eligibility_assessment_date'])
+        assert get_patient_vaccinated_date_value() == date_format_with_day_of_week(shared_data['vaccination_date'])
+        expected_dob = date_format_with_age(dob)
+        actual_dob = get_patient_dob_value_in_check_and_confirm_screen()
+        if "0." in actual_dob:
+            print("Warning: Known issue detected RAVS-262 : age displayed as 0.67 instead of expected.")
+        else:
+            assert actual_dob == expected_dob, f"Expected {expected_dob}, but got {actual_dob}"
+        shared_data['dob'] = date_format_with_age(dob)
+        assert get_patient_vaccination_batch_expiry_date_value() == date_format_with_name_of_month(shared_data['batch_expiry_date'])
+        assert get_patient_eligibility_assessing_clinician_vaccine_value() == shared_data['eligibility_assessing_clinician']
+        assert get_patient_consent_recorded_by_clinician_value() == shared_data['consent_clinician_details']
+        assert get_patient_vaccination_vaccinator_value() == shared_data['vaccinator']
+        attach_screenshot("check_and_confirm_screen_after_assertion")
 
 @when(parse("I need to be able to see the patient {name}, {dob} and vaccination details on the check and confirm screen"))
 @then(parse("I need to be able to see the patient {name}, {dob} and vaccination details on the check and confirm screen"))
@@ -1060,6 +1069,7 @@ def click_confirm_and_save_button_record_saved(shared_data):
     click_confirm_details_and_save_button()
     attach_screenshot("before_assert_record_saved")
     assert check_record_saved_element_exists(False)
+    shared_data["persist_tests"] = "true"
 
 @when("I should see a record saved dialogue")
 @then("I should see a record saved dialogue")
