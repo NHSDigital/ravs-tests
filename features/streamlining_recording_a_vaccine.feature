@@ -1,4 +1,4 @@
-@streamlining
+@streamlining @recordvaccine
 Feature: Streamlining Recording vaccine
 
   Background:
@@ -18,6 +18,8 @@ Feature: Streamlining Recording vaccine
     And I select patient's eligibility for the vaccine
     And I select the location where vaccination was given
     And I enter the patient's NHS number - <nhs_number>
+    And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
+    And I click continue to select injection site
     And I select where the injection was given
     And I confirm patient's name as <name>, date of birth as <date_of_birth>, address as <address> and the given vaccination details
     And I click confirm and save button
@@ -29,6 +31,12 @@ Feature: Streamlining Recording vaccine
     | 1     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C30 | 1/10/2025  | None | 9470057589 | community pharmacy | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIALA15 8BG |
     | 2     | recorder | Leeds Pharmacy | True      | COVID-19       | AUTO-c10 | 2/9/2025  | None | 9472710255 | community pharmacy | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIALA11 6BH |
     | 3     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C3 | 1/11/2025  | None | 9473629885 | community pharmacy | MARGIE PUCKEY  | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTERM20 6QB |
+    | 4     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304033 |  Community Pharmacy | BARAK SELIGMANN  | 26/5/2016 | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ |
+    | 5     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9733907723 |  Community Pharmacy | Sandra RYAN  | 07/04/1994 | None |
+    | 6     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9467361590 |  Community Pharmacy | WALLIS ADEYEMO  | 19/4/2015 | 1 MIDLAND ROAD, LEEDS, LS6 1BQ |
+    | 7     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304424 |  Community Pharmacy | John Test  | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG |
+
+
 #     # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
   #     # | 4 | 9472710255 | Watling Street Surgery | Housebound patient's home | yes | today-3 | yes | yes  | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | 	AUTOMATION-SJ1 | 19/10/2026 |
   #     # | 5 | 9473629885 | Spire Cheshire Hospital | Outreach event | yes | today-4 | yes | yes | today-3 | MARGIE PUCKEY | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | COVID-19 | AUTOMATION-C30 | 19/10/2026 |

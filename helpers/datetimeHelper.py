@@ -146,6 +146,24 @@ class BaseDatetimeHelper:
         return f"{day} {month} {year} (aged {age})"
 
     @staticmethod
+    def date_format_with_age_for_streamlining(date_str):
+        try:
+            parsed_date = datetime.strptime(date_str, "%d/%m/%Y")
+        except ValueError:
+            try:
+                parsed_date = datetime.strptime(date_str, "%m/%d/%Y")
+            except ValueError:
+                return date_str
+
+        today = datetime.today()
+        age = today.year - parsed_date.year - ((today.month, today.day) < (parsed_date.month, parsed_date.day))
+
+        day = parsed_date.day
+        month = parsed_date.strftime('%B')
+        year = parsed_date.year
+        return f"{day} {month} {year}({age} years old)"
+
+    @staticmethod
     def date_format_with_day_of_week(date_str):
         try:
             # Try parsing the date as '%d/%m/%Y'

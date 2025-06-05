@@ -61,9 +61,6 @@ def ensure_create_a_patient_heading_element_exists():
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
         wait_for_element_to_appear(CREATE_A_PATIENT_LABEL_ELEMENT)
 
-def format_nhs_number(nhs_number):
-    formatted_nhs_number = f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
-    return formatted_nhs_number
 
 def enter_first_name(first_name):
     ensure_find_a_patient_heading_element_exists()
