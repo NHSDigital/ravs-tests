@@ -123,8 +123,6 @@ def I_select_injection_location(shared_data):
 
 @given(parse("I confirm patient's name as {name}, date of birth as {date_of_birth}, address as {address} and the given vaccination details"))
 def I_confirm_details(shared_data, name, date_of_birth, address):
-    # assert check_change_patient_nhs_number_link_exists()
-    # attach_screenshot("checked_change_patient_nhs_number_link_exists")
     assert check_change_vaccine_link_exists()
     attach_screenshot("checked_change_vaccine_link_exists")
     assert check_change_batch_link_exists()
@@ -147,7 +145,6 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     else:
         assert get_patient_address_value_in_check_and_confirm_screen() == None
     attach_screenshot(f"patient_address_value_in_check_and_confirm_screen_should_be_{address}")
-    # formatted_date = date_format_with_name_of_month(date_of_birth)
     formatted_date = date_format_with_age_for_streamlining(date_of_birth)
     assert get_patient_dob_value_in_check_and_confirm_screen() == formatted_date
     attach_screenshot(f"patient_dob_value_in_check_and_confirm_screen_should_be_{formatted_date}")
