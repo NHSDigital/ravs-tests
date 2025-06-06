@@ -92,8 +92,6 @@ def step_when_i_click_continue():
 
 @then('the error message and error link should appear highlighting batch expiry date is in past')
 def step_then_the_error_messages_for_missing_fields_should_appear():
-    attach_screenshot(check_enter_batch_number_error_message_is_displayed)
-    assert check_enter_batch_number_error_message_is_displayed()
-    assert check_enter_batch_number_error_message_link_is_displayed()
-    assert check_enter_batch_expiry_date_error_message_is_displayed()
-    assert check_enter_batch_expiry_date_error_message_link_is_displayed()
+    attach_screenshot("check_expiry_date_cannot_be_in_the_past_error_message_is_displayed")
+    assert check_expiry_date_cannot_be_in_the_past_error_message_text_is_displayed()
+    assert check_expiry_date_cannot_be_in_the_past_error_message_link_is_displayed()
