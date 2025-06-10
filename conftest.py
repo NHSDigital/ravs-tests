@@ -941,6 +941,7 @@ def step_enter_vaccination_details_and_continue_to_check_and_confirm_screen(shar
             shared_data["no_vaccination_reason"] = get_vaccination_not_given_reason(shared_data["index"])
             enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, shared_data["vaccinated_decision"], shared_data["vaccination_location"], shared_data["vaccination_date"], chosen_vaccine, shared_data["chosen_vaccine_type"], shared_data["vaccination_site"], shared_data["batch_number"], shared_data["batch_expiry_date"], shared_data["dose_amount"], shared_data["vaccinator"], shared_data["vaccination_comments"], shared_data["legal_mechanism"], True, shared_data["no_vaccination_reason"], shared_data['pack_size'])
             attach_screenshot("entered_vaccination_details")
+            shared_data["persist_tests"] = "true"
     logging.info(shared_data)
 
 @when(parse("I record {vaccination} details and date as {vaccination_date} and click Continue to Check and confirm screen without selecting batch number as the vaccine product has only one batch so it should be auto-selected"))
