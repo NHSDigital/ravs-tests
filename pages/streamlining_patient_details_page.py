@@ -43,9 +43,11 @@ CONTINUE_TO_INJECTION_SITE_SCREEN = ("role", "link", "Continue")
 def ensure_patient_details_heading_element_exists(patient_name):
     check_patient_details_label_element = ("role", "heading", f"Check {patient_name}'s details and vaccination history")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_disappear(CONTINUE_TO_INJECTION_SITE_SCREEN)
     wait_for_element_to_appear(check_patient_details_label_element)
     if not check_element_exists(check_patient_details_label_element):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_disappear(CONTINUE_TO_INJECTION_SITE_SCREEN)
         wait_for_element_to_appear(check_patient_details_label_element)
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT)
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_MESSAGE_ELEMENT)
