@@ -4,6 +4,7 @@ from pytest import Parser
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse
 from pages.enter_patient_nhs_number_page import *
+from pages.select_delivery_team_page import *
 from pages.select_eligibility_page import *
 from pages.select_injection_location_page import *
 from pages.select_vaccination_location_page import *
@@ -26,6 +27,13 @@ logger = logging.getLogger(__name__)
 
 scenarios(f'{features_directory}/streamlining_recording_a_vaccine.feature')
 # All steps are in conftest.py
+
+@given(parse("I set team as {team}"))
+def I_set_vaccinator(shared_data, team):
+    click_team_radio_button(team)
+    attach_screenshot(f"clicked_{team}_radio_button")
+    click_continue_to_select_vaccinator_screen()
+    attach_screenshot("clicked_continue_to_select_vaccinator_screen")
 
 @given(parse("I set vaccinator as {vaccinator}"))
 def I_set_vaccinator(shared_data, vaccinator):
