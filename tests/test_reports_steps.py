@@ -260,7 +260,7 @@ def the_report_is_downloaded_successfully(shared_data):
     attach_screenshot("check_report_downloaded")
     logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
     expected_headers = [
-    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
     "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
     "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
     "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
@@ -287,7 +287,7 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
     attach_screenshot("check_report_downloaded")
     logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
     expected_headers = [
-    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
     "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
     "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
     "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
@@ -311,7 +311,9 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
     vaccinated_decision = shared_data["vaccinated_decision"]
     consent_given_by =  shared_data['consent_given_by']
     eligibility_type = shared_data['eligibility_type']
-    patient_name = shared_data['patient_name']
+    patient_name = shared_data['patient_name'].split()
+    first_name_expected = patient_name[0].lower()
+    last_name_expected = patient_name[1].lower() if len(patient_name) > 1 else ""
 
     if vaccination_date:
         # Convert the vaccination date from shared_data to a datetime object
@@ -397,8 +399,12 @@ def the_report_is_downloaded_successfully(shared_data, nhs_number):
                         f"Value '{shared_data['nhs_number']}' not found in the 'NhsNumber' column of the last row."
                     )
 
-                    assert last_row["PatientName"].lower() == shared_data["patient_name"].lower(), (
-                        f"Mismatch in 'PatientName': expected '{shared_data['patient_name']}' but found '{last_row['PatientName']}'."
+                    assert last_row["PatientFirstName"].lower() == first_name_expected, (
+                        f"Mismatch in 'PatientFirstName': expected '{first_name_expected}' but found '{last_row['PatientFirstName']}'."
+                    )
+
+                    assert last_row["PatientLastName"].lower() == last_name_expected, (
+                        f"Mismatch in 'PatientLastName': expected '{last_name_expected}' but found '{last_row['PatientLastName']}'."
                     )
 
                     assert last_row["Address"].lower() in shared_data["address"].lower(), (
@@ -511,7 +517,7 @@ def the_report_is_downloaded_successfully(shared_data):
     attach_screenshot("check_report_downloaded")
     logger.info("check_report_downloaded_to_" + str(shared_data['report_download_path']))
     expected_headers = [
-    "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+    "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
     "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
     "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
     "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
@@ -563,7 +569,7 @@ def the_report_is_downloaded_successfully(shared_data):
     # Define expected headers based on the data to filter
     headers_map = {
         "Assessment and consent": [
-            "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+            "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
             "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
             # "Vaccinated", "NoVaccinationReason",
             "VaccinationDate", "Vaccine", "VaccineProduct",
@@ -581,7 +587,7 @@ def the_report_is_downloaded_successfully(shared_data):
             "VaccinatingClinician", "ConsentingClinician"
         ],
         "Site or delivery team": [
-            "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+            "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
             "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
             "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
             "AssessmentComments", "VaccinationDate", "Vaccine", "VaccineProduct", "DoseAmount",
@@ -590,7 +596,7 @@ def the_report_is_downloaded_successfully(shared_data):
             "VaccinatingClinician", "ConsentingClinician"
         ],
         "Staff": [
-            "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+            "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
             "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
             "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
             "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
@@ -599,7 +605,7 @@ def the_report_is_downloaded_successfully(shared_data):
             "DateEntered", "UserEnteringData", "VaccinationComments"
         ],
         "Vaccination": [
-        "NhsNumber", "PatientName", "Gender", "DateOfBirth", "Address", "Postcode",
+        "NhsNumber", "PatientFirstName", "PatientLastName", "Gender", "DateOfBirth", "Address", "Postcode",
         "SiteName", "SiteODS", "OrganisationName", "OrganisationODS", "CareModel",
         "Vaccinated", "NoVaccinationReason", "AssessmentDate", "Consented", "ConsentType",
         "ConsentingPersonName", "ConsentingPersonRelationship", "EligibilityType", "StaffType",
