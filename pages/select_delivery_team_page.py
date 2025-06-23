@@ -18,15 +18,15 @@ def click_team_radio_button(team):
     element = ("role", "radio", team)
     find_element_and_perform_action(element, "click")
 
-def check_select_A_TEAM_ERROR_message_link_exists():
+def check_select_a_team_error_message_link_exists():
     ensure_which_team_are_you_working_with_label_is_visible()
     return check_element_exists(SELECT_A_TEAM_ERROR_MESSAGE_LINK)
 
-def check_select_A_TEAM_ERROR_message_text_exists():
+def check_select_a_team_error_message_text_exists():
     ensure_which_team_are_you_working_with_label_is_visible()
     return check_element_exists(SELECT_A_TEAM_ERROR_MESSAGE_TEXT)
 
-def click_select_A_TEAM_ERROR_message_link():
+def click_select_a_team_error_message_link():
     ensure_which_team_are_you_working_with_label_is_visible()
     find_element_and_perform_action(SELECT_A_TEAM_ERROR_MESSAGE_LINK, "click")
 
