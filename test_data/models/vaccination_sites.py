@@ -1,6 +1,6 @@
 vaccination_sites = [
-    "Left arm",
-    "Right arm",
+    "Left upper arm",
+    "Right upper arm",
     "Left buttock",
     "Right buttock",
     "Left thigh",
