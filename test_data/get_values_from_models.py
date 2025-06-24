@@ -15,6 +15,7 @@ from test_data.models.vaccinating_clinicians_fhh39 import vaccinating_clinicians
 from test_data.models.vaccinating_clinicians_airevalley import vaccinating_clinicians_airevalley
 from test_data.models.vaccinating_clinicians import vaccinating_clinicians
 from test_data.models.consent_types import consent_types
+from test_data.models.consent_types_streamlining import consent_types_streamlining
 from test_data.models.consenting_clinicians import consenting_clinicians
 from test_data.models.consenting_clinicians_fhh39 import consenting_clinicians_fhh39
 from test_data.models.consenting_clinicians_airevalley import consenting_clinicians_airevalley
@@ -121,6 +122,9 @@ def get_assess_vaccine_not_given_reason(index):
 
 def get_consent_given_by(index):
     return consent_types[get_wrapped_index(index, len(consent_types))]
+
+def get_streamlining_consent_given_by(index):
+    return consent_types_streamlining[get_wrapped_index(index, len(consent_types_streamlining))]
 
 def get_consenting_clinician(index):
     return consenting_clinicians[get_wrapped_index(index, len(consenting_clinicians))]
