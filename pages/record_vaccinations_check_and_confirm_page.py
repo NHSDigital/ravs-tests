@@ -163,6 +163,10 @@ def get_vaccination_location_value():
     ensure_check_and_confirm_label_is_visible()
     return find_element_and_perform_action(PATIENT_VACCINATION_LOCATION_LABEL_ELEMENT, "get_text")
 
+def get_patient_consent_given_by_value():
+    ensure_check_and_confirm_label_is_visible()
+    return find_element_and_perform_action(PATIENT_CONSENT_GIVEN_BY_LABEL_ELEMENT, "get_text")
+
 def get_patient_vaccination_batch_number_value():
     ensure_check_and_confirm_label_is_visible()
     return find_element_and_perform_action(PATIENT_VACCINE_BATCH_LABEL_ELEMENT, "get_text")
