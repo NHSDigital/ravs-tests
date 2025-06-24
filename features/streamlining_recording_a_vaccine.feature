@@ -9,7 +9,7 @@ Feature: Streamlining Recording vaccine
   And I find the patient with <nhs_number> and click on patient's <name> and the get the count of immunisation history records for the chosen vaccine <chosen_vaccine>
 
   @recordvaccine
-  Scenario Outline: Record a vaccine with nhs number
+  Scenario Outline: Record a vaccination at a org without sub-sites
     Given I click record vaccinations navigation link
     And I set vaccinator as <vaccinator>
     And I select vaccine - <chosen_vaccine>
@@ -36,6 +36,28 @@ Feature: Streamlining Recording vaccine
     | 6     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9467361590 |  Community Pharmacy | WALLIS ADEYEMO  | 19/4/2015 | 1 MIDLAND ROAD, LEEDS, LS6 1BQ |
     | 7     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304424 |  Community Pharmacy | John Test  | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG |
 
+
+  @recordvaccine
+  Scenario Outline: Record a vaccination at a org with sub-sites
+    Given I click record vaccinations navigation link
+    And I select team as <team>
+    And I set vaccinator as <vaccinator>
+    And I select vaccine - <chosen_vaccine>
+    And I select vaccine product
+    And I select batch
+    And I select patient's eligibility for the vaccine
+    And I select the location where vaccination was given
+    And I enter the patient's NHS number - <nhs_number>
+    And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
+    And I click continue to select injection site
+    And I select where the injection was given
+    And I confirm patient's name as <name>, date of birth as <date_of_birth>, address as <address> and the given vaccination details
+    And I click confirm and save button
+    Then the vaccination should be recorded successfully
+
+    Examples:
+    | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model | name | date_of_birth | address | team |
+    | 0     | lead administrator | Weaverham Surgery | True      | COVID-19       | AUTO-SPIKE-JN | 1/10/2031  | None | 9470040228 | Outreach event  | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN | Weaverham Surgery |
 
 #     # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
   #     # | 4 | 9472710255 | Watling Street Surgery | Housebound patient's home | yes | today-3 | yes | yes  | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | 	AUTOMATION-SJ1 | 19/10/2026 |
