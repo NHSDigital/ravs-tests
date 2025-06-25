@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 scenarios(f'{features_directory}/streamlining_recording_a_vaccine.feature')
 # All steps are in conftest.py
 
-@given(parse("I set team as {team}"))
+@given(parse("I select team as {team}"))
 def I_set_vaccinator(shared_data, team):
     click_team_radio_button(team)
     attach_screenshot(f"clicked_{team}_radio_button")
