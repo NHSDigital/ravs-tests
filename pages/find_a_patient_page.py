@@ -219,6 +219,7 @@ def format_nhs_number(nhs_number: str) -> str:
     return f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
+    time.sleep(5)
     ensure_find_a_patient_heading_element_exists()
 
     formatted_nhs = format_nhs_number(nhsNumber)
