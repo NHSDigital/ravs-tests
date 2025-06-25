@@ -41,7 +41,7 @@ VACCINATION_HISTORY_PERTUSSIS_TEXT_MESSAGE_ELEMENT = ("text", "However, pertussi
 CONTINUE_TO_SELECT_CONSENTING_PERSON = ("role", "link", "Continue")
 SCREENING_CONSIDERATIONS_LINK = ("text", "Screening considerations")
 SCREENING_CONSIDERATIONS_QUESTION_1 = ("text", "Does the patient have a history of anaphylaxis or significant allergic reactions to any vaccines or their ingredients?")
-SCREENING_CONSIDERATIONS_QUESTION_2 = ("text", "Has the patient had a serious adverse reactions after the COVID-19 vaccine?")
+SCREENING_CONSIDERATIONS_QUESTION_2 = ("text", "Has the patient had a serious adverse reaction after the COVID-19 vaccine?")
 SCREENING_CONSIDERATIONS_QUESTION_3 = ("text", "Is the patient pregnant or could they be?")
 
 def ensure_patient_details_heading_element_exists(patient_name):
