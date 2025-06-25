@@ -39,6 +39,10 @@ VACCINATION_HISTORY_TEXT_HEADING_ELEMENT = ("role", "heading", "Vaccination hist
 VACCINATION_HISTORY_TEXT_MESSAGE_ELEMENT = ("text", "This shows NHS vaccinations given in England. Currently it includes COVID-19, flu, pertussis and RSV.")
 VACCINATION_HISTORY_PERTUSSIS_TEXT_MESSAGE_ELEMENT = ("text", "However, pertussis vaccinations given at a GP surgery are not shown.")
 CONTINUE_TO_SELECT_CONSENTING_PERSON = ("role", "link", "Continue")
+SCREENING_CONSIDERATIONS_LINK = ("text", "Screening considerations")
+SCREENING_CONSIDERATIONS_QUESTION_1 = ("text", "Does the patient have a history of anaphylaxis or significant allergic reactions to any vaccines or their ingredients?")
+SCREENING_CONSIDERATIONS_QUESTION_2 = ("text", "Has the patient had a serious adverse reactions after the COVID-19 vaccine?")
+SCREENING_CONSIDERATIONS_QUESTION_3 = ("text", "Is the patient pregnant or could they be?")
 
 def ensure_patient_details_heading_element_exists(patient_name):
     check_patient_details_label_element = ("role", "heading", f"Check {patient_name}'s details and vaccination history")
@@ -50,6 +54,33 @@ def ensure_patient_details_heading_element_exists(patient_name):
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT)
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_MESSAGE_ELEMENT)
         wait_for_element_to_appear(VACCINATION_HISTORY_PERTUSSIS_TEXT_MESSAGE_ELEMENT)
+
+def ensure_vaccination_history_element_exists():
+    wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT)
+    if not check_element_exists(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT):
+        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+        wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT)
+
+def check_screening_considerations_link_exists():
+    ensure_vaccination_history_element_exists()
+    return check_element_exists(SCREENING_CONSIDERATIONS_LINK)
+
+def click_screening_considerations_link():
+    ensure_vaccination_history_element_exists()
+    find_element_and_perform_action(SCREENING_CONSIDERATIONS_LINK, "click")
+
+def check_screening_considerations_question_1_exists():
+    ensure_vaccination_history_element_exists()
+    return check_element_exists(SCREENING_CONSIDERATIONS_QUESTION_1)
+
+def check_screening_considerations_question_2_exists():
+    ensure_vaccination_history_element_exists()
+    return check_element_exists(SCREENING_CONSIDERATIONS_QUESTION_2)
+
+def check_screening_considerations_question_3_exists():
+    ensure_vaccination_history_element_exists()
+    return check_element_exists(SCREENING_CONSIDERATIONS_QUESTION_3)
 
 def check_patient_details_heading_exists(patient_name):
     check_patient_details_label_element = ("role", "heading", f"Check {patient_name}'s details and vaccination history")
