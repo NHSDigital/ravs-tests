@@ -173,6 +173,8 @@ def datetime_helper():
 def get_app_url(test_environment):
     if "dev" in test_environment.lower():
         return "https://www.ravs-dev.england.nhs.uk"
+    elif "local" in test_environment.lower():
+        return "https://localhost:44487"
     elif "qa" in test_environment.lower():
         return "https://www.ravs-qa.england.nhs.uk"
     elif "demo" in test_environment.lower():
