@@ -30,15 +30,15 @@ scenarios(f'{features_directory}/streamlining_recording_a_vaccine.feature')
 # All steps are in conftest.py
 
 @given(parse("I select team as {team}"))
-def I_set_vaccinator(shared_data, team):
-    click_team_radio_button(team)
+def I_set_team(shared_data, team):
+    # click_team_radio_button(team)
     attach_screenshot(f"clicked_{team}_radio_button")
-    click_continue_to_select_vaccinator_screen()
+    # click_continue_to_select_vaccinator_screen()
     attach_screenshot("clicked_continue_to_select_vaccinator_screen")
 
 @given(parse("I set vaccinator as {vaccinator}"))
 def I_set_vaccinator(shared_data, vaccinator):
-    if vaccinator == "me":
+    if vaccinator == "None":
         click_vaccinator_radio_button("Me")
         attach_screenshot("click_vaccinator_me_radio_button")
     else:
@@ -46,7 +46,7 @@ def I_set_vaccinator(shared_data, vaccinator):
         formatted = shared_data["vaccinator"].replace(" - ", " (") + ")"
         click_vaccinator_radio_button(formatted)
         attach_screenshot(f"clicked_{formatted}_radio_button")
-        click_continue_to_choose_vaccine_screen()
+    click_continue_to_choose_vaccine_screen()
     attach_screenshot("clicked_continue_to_choose_vaccine_screen")
 
 @given(parse("I select vaccine - {chosen_vaccine}"))

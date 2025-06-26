@@ -2,6 +2,9 @@ import time
 from init_helpers import *
 
 SIGN_IN_BUTTON_ELEMENT = ("role", "button", "Sign in")
+ENTER_ANY_LOGIN_TEXTBOX = ("role", "textbox", "Enter any login")
+PASSWORD_TEXTBOX = ("role", "textbox", "and password")
+LOCAL_SIGN_IN_BUTTON = ("role", "button", "Sign-in")
 KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT = ("text", "Keep me signed in")
 EMAIL_INPUT_ELEMENT = ("label", "Email")
 PASSWORD_INPUT_ELEMENT = ("label", "Password")
@@ -35,6 +38,21 @@ def click_nhs_signin_button():
 def enter_email_address(emailAddress):
     ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "input_text", emailAddress)
+
+def enter_email_address_local(emailAddress):
+    find_element_and_perform_action(ENTER_ANY_LOGIN_TEXTBOX, "input_text", emailAddress)
+
+def enter_password_local(password):
+    find_element_and_perform_action(PASSWORD_TEXTBOX, "input_text", password)
+
+def click_local_signin_button():
+    ensure_sign_in_heading_element_exists()
+    find_element_and_perform_action(LOCAL_SIGN_IN_BUTTON, "click")
+    wait_for_page_to_load(timeout=10)
+    CONTINUE_BUTTON = ("role", "button", "continue")
+    find_element_and_perform_action(CONTINUE_BUTTON, "click")
+    wait_for_page_to_load(timeout=10)
+    time.sleep(2)
 
 def clear_emailAddress():
     ensure_sign_in_heading_element_exists()
