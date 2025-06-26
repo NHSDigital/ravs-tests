@@ -10,6 +10,7 @@ from helpers.playwrightHelper import PlaywrightHelper
 from helpers.mockdatabaseHelper import MockDatabaseHelper
 import pytest
 from playwright.async_api import async_playwright
+from playwright.sync_api import Locator
 import allure
 from _pytest.main import Session
 
@@ -145,6 +146,9 @@ def resolve_element(element):
         )
 
         return locator.nth(nth) if nth is not None else locator
+
+    elif isinstance(element, Locator):
+        return element
 
     return get_playwright_helper().get_element_by_type(element)
 
