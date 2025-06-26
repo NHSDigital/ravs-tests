@@ -31,7 +31,7 @@ scenarios(f'{features_directory}/streamlining_recording_a_vaccine.feature')
 
 @given(parse("I select team as {team}"))
 def I_set_team(shared_data, team):
-    # click_team_radio_button(team)
+    #click_team_radio_button(team)
     attach_screenshot(f"clicked_{team}_radio_button")
     # click_continue_to_select_vaccinator_screen()
     attach_screenshot("clicked_continue_to_select_vaccinator_screen")
