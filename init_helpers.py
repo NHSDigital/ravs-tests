@@ -113,13 +113,21 @@ def resolve_element(element):
     if isinstance(element, (tuple, list)):
         locator_type = element[0]
         locator_value = element[1]
-        name = element[2] if len(element) > 2 and isinstance(element[2], str) else None
-
-        # Default values
+        name = None
         exact = False
         nth = None
 
-        # Handle 4th and 5th positions
+        # Check for label_starts_with in position 2
+        if len(element) > 2:
+            if isinstance(element[2], str):
+                name = element[2]
+            elif isinstance(element[2], dict) and "label_starts_with" in element[2]:
+                prefix = element[2]["label_starts_with"]
+                # Use regex to simulate "starts with" match
+                import re
+                name = re.compile(f"^{re.escape(prefix)}")
+
+        # Handle additional dicts and values
         for val in element[3:]:
             if isinstance(val, dict):
                 exact = val.get("exact", exact)

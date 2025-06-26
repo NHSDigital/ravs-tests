@@ -15,7 +15,7 @@ def check_who_is_vaccinator_label_exists():
 
 def click_vaccinator_radio_button(vaccinator):
     ensure_who_is_vaccinator_heading_label_is_visible()
-    element = ("role", "radio", vaccinator)
+    element = ("role", "radio", {"label_starts_with": vaccinator})
     find_element_and_perform_action(element, "click")
 
 def click_continue_to_choose_vaccine_screen():
