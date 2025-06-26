@@ -19,6 +19,8 @@ Feature: Streamlining Recording vaccine
     And I select the location where vaccination was given
     And I enter the patient's NHS number - <nhs_number>
     And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
+    And I click continue to select consenting person
+    And I select consenting person
     And I click continue to select injection site
     And I select where the injection was given
     And I confirm patient's name as <name>, date of birth as <date_of_birth>, address as <address> and the given vaccination details
@@ -49,6 +51,8 @@ Feature: Streamlining Recording vaccine
     And I select the location where vaccination was given
     And I enter the patient's NHS number - <nhs_number>
     And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
+    And I click continue to select consenting person
+    And I select consenting person
     And I click continue to select injection site
     And I select where the injection was given
     And I confirm patient's name as <name>, date of birth as <date_of_birth>, address as <address> and the given vaccination details
@@ -58,6 +62,8 @@ Feature: Streamlining Recording vaccine
     Examples:
     | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model | name | date_of_birth | address | team |
     | 0     | lead administrator | Weaverham Surgery | True      | COVID-19       | AUTO-SPIKE-JN | 1/10/2031  | None | 9470040228 | Outreach event  | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN | Weaverham Surgery |
+
+    # | 0     | lead administrator | Weaverham Surgery | True      | COVID-19 | AUTO-SPIKE-JN | 1/10/2031  | None | 9920062618 | Outreach event  | Kevin Bland | 22/10/2010 | 1 Trevelyan Square, Boar Lane, City Centre, Leeds | Weaverham Surgery |
 
 #     # | 3 | 9470057589 | Weaverham Surgery  | Care home | yes  | today-2 | yes | yes | today-1 | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIA, LA15 8BG | COVID-19  | 	AUTOMATION-C3 | 19/10/2026 |
   #     # | 4 | 9472710255 | Watling Street Surgery | Housebound patient's home | yes | today-3 | yes | yes  | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | COVID-19 | 	AUTOMATION-SJ1 | 19/10/2026 |
