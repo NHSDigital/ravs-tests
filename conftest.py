@@ -147,10 +147,15 @@ def navigate_and_login(shared_data, user_role=None, site=None):
             shared_data["emailAddress"] = "neelima.guntupalli1@nhs.net"
             set_clinician_details(shared_data, site_lower)
 
-    enter_email_address(shared_data["emailAddress"])
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    click_nhs_signin_button()
+    if config["test_environment"].lower() == "local":
+        enter_email_address_local(shared_data["emailAddress"])
+        enter_password_local("test")
+        click_local_signin_button()
+    else:
+        enter_email_address(shared_data["emailAddress"])
+        password = config["credentials"]["ravs_password"]
+        enter_password(password)
+        click_nhs_signin_button()
 
     if user_role.lower() in ["recorder", "administrator"] and site:
         if site == "leeds pharmacy":
@@ -280,7 +285,7 @@ def logged_into_ravs_app(shared_data):
 def logged_into_ravs_app_with_email_address(shared_data, user_role, email_address):
     shared_data["email_address"] = email_address
     shared_data["user_role"] = user_role
-    navigate_and_login_with_username(email_address)
+    navigate_and_login_with_username(shared_data, email_address)
 
 @given(parse("the logged in user is identified as a {clinician} (true/false)"))
 def logged_in_user_is_clinician(shared_data, clinician):
@@ -304,8 +309,8 @@ def I_click_record_vaccinations_nav_link():
     click_record_vaccinations_nav_link()
 
 @given(parse('I am logged into the RAVS app with the username {username}'))
-def logged_into_ravs_app_with_username(username):
-    navigate_and_login_with_username(username)
+def logged_into_ravs_app_with_username(shared_data, username):
+    navigate_and_login_with_username(shared_data, username)
 
 @given(parse("I am logged into the RAVS app as {user_role} into care model {care_model} with {site}"))
 def logged_into_ravs_app(shared_data, user_role, care_model, site):
@@ -613,7 +618,7 @@ def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_mod
         click_save_and_return_button_on_record_vaccinated_page()
         attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
 
-def navigate_and_login_with_username(username):
+def navigate_and_login_with_username(shared_data, username):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists_without_waiting():
                 click_navbar_toggler()
@@ -626,13 +631,19 @@ def navigate_and_login_with_username(username):
     click_login_button()
     attach_screenshot("clicked_login_button")
     emailAddress = username
-    enter_email_address(emailAddress)
-    attach_screenshot("entered_email_address")
-    password = config["credentials"]["ravs_password"]
-    enter_password(password)
-    attach_screenshot("entered_password")
-    click_nhs_signin_button()
-    attach_screenshot("clicked_nhs_signin_button")
+
+    if shared_data["test_env"].lower() == "local":
+        enter_email_address_local(emailAddress)
+        enter_password_local("test")
+        click_local_signin_button()
+    else:
+        enter_email_address(emailAddress)
+        attach_screenshot("entered_email_address")
+        password = config["credentials"]["ravs_password"]
+        enter_password(password)
+        attach_screenshot("entered_password")
+        click_nhs_signin_button()
+        attach_screenshot("clicked_nhs_signin_button")
 
 @given(parse("I find the patient with {nhs_number} and click on patient's {name} and the get the count of immunisation history records for the chosen vaccine {chosen_vaccine}"))
 def step_find_patient_and_get_count_of_immunisation_history_records_before_recording_using_streamlining(name, nhs_number, chosen_vaccine, shared_data):
