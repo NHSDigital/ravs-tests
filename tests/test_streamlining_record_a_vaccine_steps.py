@@ -4,6 +4,7 @@ from pytest import Parser
 from pytest_bdd import given, when, then, scenarios, scenario
 from pytest_bdd.parsers import parse
 from pages.enter_patient_nhs_number_page import *
+from pages.select_consent_clinician_page import *
 from pages.select_delivery_team_page import *
 from pages.select_eligibility_page import *
 from pages.select_injection_location_page import *
@@ -103,6 +104,7 @@ def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number
     assert check_patient_details_heading_exists(name)
     attach_screenshot(f"patient_{name}_details_exist")
     assert get_patient_name_value_in_patient_details_screen().lower() == name.lower()
+    shared_data["patient_name"] = name
     if "nhs_number" == "9449304033":
         nhs_number = "9734250221"
         shared_data["patient_nhs_number"] = "9734250221"
@@ -116,10 +118,31 @@ def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number
     else:
         assert get_patient_address_value_in_patient_details_screen() == None
 
+@given("I click continue to select consenting person")
+def I_click_continue_consenting_person_selection_screen():
+    click_continue_to_select_consenting_person_screen()
+    attach_screenshot("clicked_continue_to_select_consenting_person_screen")
+
 @given("I click continue to select injection site")
 def I_click_continue_injection_site_selection_screen():
     click_continue_to_select_injection_site_screen()
     attach_screenshot("clicked_continue_to_select_injection_site_screen")
+
+@given("I select consenting person")
+def I_select_consenting_person(shared_data):
+    shared_data["consenting_person"] = get_streamlining_consent_given_by(shared_data["index"])
+    shared_data["name_of_person_consenting"] = "Automation tester"
+    shared_data["relationship_to_patient"] = "RAVS tester"
+    if shared_data["consenting_person"] == "Patient":
+        click_consenting_person_radio_button(shared_data["patient_name"])
+    else:
+        click_consenting_person_radio_button(shared_data["consenting_person"])
+        enter_name_of_person_consenting(shared_data["name_of_person_consenting"])
+        if shared_data["consenting_person"] == "Person with lasting power of attorney for health and welfare" or shared_data["consenting_person"] == "Court appointed deputy":
+            enter_relationship_of_person_consenting_to_patient(shared_data["relationship_to_patient"])
+    attach_screenshot(f'clicked_{shared_data["consenting_person"]}_radio_button')
+    click_continue_to_select_injection_site_screen()
+    attach_screenshot("clicked_continue_to_select_injection_screen")
 
 @given("I select where the injection was given")
 def I_select_injection_location(shared_data):
@@ -144,10 +167,11 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     assert get_patient_nhs_number_value_in_check_and_confirm_screen() == format_nhs_number(shared_data["patient_nhs_number"])
     attach_screenshot(f'patient_nhs_number_value_in_check_and_confirm_screen_should_be_{shared_data["patient_nhs_number"]}')
     assert get_patient_name_value_in_check_and_confirm_screen() == name
-    assert shared_data["batch_number"] in get_patient_vaccination_batch_number_value()
-    assert shared_data["batch_expiry_date"] in get_patient_vaccination_batch_number_value()
-    assert "Expires" in get_patient_vaccination_batch_number_value()
-    attach_screenshot("patient_name_value_in_check_and_confirm_screen_should_be_{name}")
+    batch_text = get_patient_vaccination_batch_number_value()
+    assert shared_data["batch_number"] in batch_text
+    assert shared_data["batch_expiry_date"] in batch_text
+    assert "Expires" in batch_text
+    attach_screenshot(f"patient_name_value_in_check_and_confirm_screen_should_be_{name}")
     if address != "None":
         assert normalize_address(get_patient_address_value_in_patient_details_screen()) == normalize_address(address)
     else:
@@ -159,6 +183,29 @@ def I_confirm_details(shared_data, name, date_of_birth, address):
     assert get_patient_vaccination_injection_site_value() == shared_data["injection_location"]
     attach_screenshot(f'patient_vaccination_injection_site_value_should_be_{shared_data["injection_location"]}')
     assert get_patient_eligibility_value() == shared_data["eligibility"]
+    consent_given_by = get_patient_consent_given_by_value()
+    if shared_data["consenting_person"] == "Patient":
+        assert "Patient" in consent_given_by
+        assert shared_data["name_of_person_consenting"] not in consent_given_by
+        assert shared_data["relationship_to_patient"] not in consent_given_by
+    elif shared_data["consenting_person"] == "Clinician acting in the patient's best interests":
+        assert "Clinician" in consent_given_by
+        assert "acting in the patient's best interests" not in consent_given_by
+        assert shared_data["name_of_person_consenting"] in consent_given_by
+        assert shared_data["relationship_to_patient"] not in consent_given_by
+    elif shared_data["consenting_person"] == "Parent or guardian":
+        assert "Parent or guardian" in consent_given_by
+        assert shared_data["name_of_person_consenting"] in consent_given_by
+        assert shared_data["relationship_to_patient"] not in consent_given_by
+    elif shared_data["consenting_person"] == "Court appointed deputy":
+        assert "Court appointed deputy" in consent_given_by
+        assert shared_data["name_of_person_consenting"] in consent_given_by
+        assert shared_data["relationship_to_patient"] in consent_given_by
+    elif shared_data["consenting_person"] == "Person with lasting power of attorney for health and welfare":
+        assert "Power of attorney" in consent_given_by
+        assert "with lasting power of attorney for health and welfare" not in consent_given_by
+        assert shared_data["name_of_person_consenting"] in consent_given_by
+        assert shared_data["relationship_to_patient"] in consent_given_by
     attach_screenshot(f'patient_eligibility_value_should_be_{shared_data["eligibility"]}')
     assert shared_data["chosen_vaccine"] in get_given_vaccine_value()
     attach_screenshot(f'given_vaccine_value_should_be_{shared_data["chosen_vaccine"]}')
