@@ -41,6 +41,8 @@ def I_set_vaccinator(shared_data, vaccinator):
     if vaccinator == "None":
         click_vaccinator_radio_button("Me")
         attach_screenshot("click_vaccinator_me_radio_button")
+        vaccinator = get_selected_vaccinator_radio_button("Me")
+        shared_data["vaccinator"] = vaccinator[4:-1]
     else:
         set_clinician_details(shared_data, shared_data["site"])
         formatted = shared_data["vaccinator"].replace(" - ", " (") + ")"
@@ -141,8 +143,6 @@ def I_select_consenting_person(shared_data):
         if shared_data["consenting_person"] == "Person with lasting power of attorney for health and welfare" or shared_data["consenting_person"] == "Court appointed deputy":
             enter_relationship_of_person_consenting_to_patient(shared_data["relationship_to_patient"])
     attach_screenshot(f'clicked_{shared_data["consenting_person"]}_radio_button')
-    click_continue_to_select_injection_site_screen()
-    attach_screenshot("clicked_continue_to_select_injection_screen")
 
 @given("I select where the injection was given")
 def I_select_injection_location(shared_data):

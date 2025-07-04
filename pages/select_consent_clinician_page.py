@@ -2,7 +2,7 @@ from init_helpers import *
 import re
 
 WHO_IS_GIVING_CONSENT_TEXT_ELEMENT = ("role", "heading", "Who is giving consent?")
-CONTINUE_TO_INJECTION_SITE_SCREEN = ("role", "link", "Continue")
+CONTINUE_TO_INJECTION_SITE_SCREEN = ("role", "button", "Continue")
 SELECT_WHO_GAVE_CONSENT_ERROR_MESSAGE_LINK = ("role", "link", "Select who gave consent")
 SELECT_WHO_GAVE_CONSENT_ERROR_MESSAGE_TEXT = ("text", "Error: Select who gave consent")
 ENTER_A_NAME_ERROR_MESSAGE_LINK = ("role", "link", "Enter a name")
@@ -22,10 +22,9 @@ def check_who_is_giving_consent_label_exists():
 
 def click_consenting_person_radio_button(option):
     ensure_who_is_giving_consent_label_is_visible()
-    pattern = re.compile(f"^{option.strip()}$", re.IGNORECASE)
-    element = ("role", "radio", pattern, {"exact": True})
+    element = ("role", "radio", option, None, True)
     find_element_and_perform_action(element, "click")
-    
+
 def check_select_who_gave_consent_error_message_link_exists():
     ensure_who_is_giving_consent_label_is_visible()
     return check_element_exists(SELECT_WHO_GAVE_CONSENT_ERROR_MESSAGE_LINK)
