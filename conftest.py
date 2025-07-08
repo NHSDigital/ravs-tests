@@ -14,7 +14,6 @@ from pages.site_vaccines_check_and_confirm_page import *
 from pages.home_page import *
 from pages.login_page import *
 from pages.nhs_signin_page import *
-from pages.appointments_page import *
 from pages.patient_details_page import *
 from pages.find_a_patient_page import *
 from pages.choose_vaccines_page import *

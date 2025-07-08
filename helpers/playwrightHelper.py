@@ -331,7 +331,7 @@ class BasePlaywrightHelper:
 
     def get_checked_radio_button_text(self, name):
         try:
-            legend_selector = f'//legend[text()="{name}"]'
+            legend_selector = f'//legend[contains(normalize-space(), "{name}")]'
             self.page.wait_for_selector(legend_selector, timeout=5000)
 
             fieldset = self.page.query_selector(legend_selector).evaluate_handle(

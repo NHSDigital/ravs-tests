@@ -35,7 +35,7 @@ FROM_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.fromDate.year'
 TO_DATE_DAY_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.day']")
 TO_DATE_MONTH_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.month']")
 TO_DATE_YEAR_INPUT_ELEMENT = ("xpath", "//input[@id='customDate.toDate.year']")
-REPORTS_HEADING_TEXT_ELEMENT = ("role", "heading", "Reports")
+REPORTS_HEADING_TEXT_ELEMENT = ("role", "heading", "Reports", None, True)
 CHOOSE_DATES_HEADING_TEXT_ELEMENT = ("role", "heading", "Choose dates")
 PAGE_LOADING_ELEMENT = ("role", "status")
 
