@@ -37,7 +37,7 @@ sudo apt-get install jq
   In order to make git commits to this repo, you need to use the following command in terminal
 
   ```bash
-  PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit -m "commit message"
+  $env:PRE_COMMIT_ALLOW_NO_CONFIG=1; git commit -m "commit message"
   ```
 
 ### Installation
