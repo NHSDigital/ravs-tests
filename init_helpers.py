@@ -159,6 +159,7 @@ def shared_data():
 @pytest.fixture(scope="session", autouse=True)
 def initialize_session(shared_data):
     initialize_helpers()
+    shared_data["test_env"] = config["test_environment"]
     yield
     after_all()
     shared_data.clear()

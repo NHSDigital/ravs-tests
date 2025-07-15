@@ -119,6 +119,16 @@ def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number
         assert normalize_address(get_patient_address_value_in_patient_details_screen()) == normalize_address(address)
     else:
         assert get_patient_address_value_in_patient_details_screen() == None
+    if shared_data["chosen_vaccine"].lower() == "covid-19".lower():
+        assert check_screening_considerations_exist() is True
+        click_screening_considerations()
+        assert check_screening_considerations_question_1_exists() is True
+        assert check_screening_considerations_question_2_exists() is True
+        assert check_screening_considerations_question_3_exists() is True
+        attach_screenshot("screening_considerations_exist_for_covid")
+    else:
+        assert check_screening_considerations_exist() is False
+        attach_screenshot("screening_considerations_do_not_exist_for_covid")
 
 @given("I click continue to select consenting person")
 def I_click_continue_consenting_person_selection_screen():
