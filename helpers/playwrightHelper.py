@@ -71,7 +71,7 @@ class BasePlaywrightHelper:
 
     def launch_chrome(self, headless_mode):
         try:
-            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--disable-gpu", "--no-sandbox"])
+            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--ignore-certificate-errors", "--disable-gpu", "--no-sandbox"])
             self.context = self.browser.new_context()
             self.page = self.get_or_create_page()
         except Exception as e:
