@@ -55,6 +55,7 @@ def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date):
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_batch_number")
+    select_pack_size("10 vials")
     click_continue_to_add_batch_button()
 
 @then("the add batch page should be launched")
