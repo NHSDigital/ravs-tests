@@ -36,6 +36,16 @@ fake = Faker('en_GB')
 
 SPINNER_ELEMENT = ("role", "status")
 
+original_sleep = time.sleep
+sleep_total = 0
+def custom_sleep(seconds):
+    global sleep_total
+    sleep_total += seconds
+    print(f"😴 Sleeping for {seconds} seconds. Total={sleep_total}")
+    original_sleep(seconds)
+
+time.sleep = custom_sleep
+
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
     browser_version = get_browser_version()
