@@ -19,7 +19,9 @@ Feature: Streamlining Recording vaccine
     And I select the location where vaccination was given
     And I enter the patient's NHS number - <nhs_number>
     And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
-    And I click continue to select consenting person
+    And I continue from the patient history page
+    And I acknowledge the interval warning and continue anyway
+    And I acknowledge the age warning and continue anyway
     And I select consenting person
     And I click continue to select injection site
     And I select where the injection was given
@@ -51,7 +53,9 @@ Feature: Streamlining Recording vaccine
     And I select the location where vaccination was given
     And I enter the patient's NHS number - <nhs_number>
     And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
-    And I click continue to select consenting person
+    And I continue from the patient history page
+    And I acknowledge the interval warning and continue anyway
+    And I acknowledge the age warning and continue anyway
     And I select consenting person
     And I click continue to select injection site
     And I select where the injection was given

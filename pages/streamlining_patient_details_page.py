@@ -38,7 +38,7 @@ PATIENT_DETAILS_TEXT_HEADING_ELEMENT = ("role", "heading", "Patient details", Tr
 VACCINATION_HISTORY_TEXT_HEADING_ELEMENT = ("role", "heading", "Vaccination history", True)
 VACCINATION_HISTORY_TEXT_MESSAGE_ELEMENT = ("text", "This shows NHS vaccinations given in England. Currently it includes COVID-19, flu, pertussis and RSV.")
 VACCINATION_HISTORY_PERTUSSIS_TEXT_MESSAGE_ELEMENT = ("text", "However, pertussis vaccinations given at a GP surgery are not shown.")
-CONTINUE_TO_SELECT_CONSENTING_PERSON = ("role", "link", "Continue")
+CONTINUE_TO_SELECT_INTERVAL_WARNING = ("role", "link", "Continue")
 SCREENING_CONSIDERATIONS_LINK = ("text", "Screening considerations")
 SCREENING_CONSIDERATIONS_QUESTION_1 = ("text", "Does the patient have a history of anaphylaxis or significant allergic reactions to any vaccines or their ingredients?")
 SCREENING_CONSIDERATIONS_QUESTION_2 = ("text", "Has the patient had a serious adverse reaction after the COVID-19 vaccine?")
@@ -47,11 +47,11 @@ SCREENING_CONSIDERATIONS_QUESTION_3 = ("text", "Is the patient pregnant or could
 def ensure_patient_details_heading_element_exists(patient_name):
     check_patient_details_label_element = ("role", "heading", f"Check {patient_name}'s details and vaccination history")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    wait_for_element_to_disappear(CONTINUE_TO_SELECT_CONSENTING_PERSON)
+    wait_for_element_to_disappear(CONTINUE_TO_SELECT_INTERVAL_WARNING)
     wait_for_element_to_appear(check_patient_details_label_element)
     if not check_element_exists(check_patient_details_label_element):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-        wait_for_element_to_disappear(CONTINUE_TO_SELECT_CONSENTING_PERSON)
+        wait_for_element_to_disappear(CONTINUE_TO_SELECT_INTERVAL_WARNING)
         wait_for_element_to_appear(check_patient_details_label_element)
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT)
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_MESSAGE_ELEMENT)
@@ -107,5 +107,5 @@ def get_patient_phone_number_value_in_patient_details_screen():
 def get_patient_address_value_in_patient_details_screen():
     return find_element_and_perform_action(PATIENT_ADDRESS_ELEMENT, "get_text")
 
-def click_continue_to_select_consenting_person_screen():
-    find_element_and_perform_action(CONTINUE_TO_SELECT_CONSENTING_PERSON, "click")
+def click_continue_to_select_interval_warning_screen():
+    find_element_and_perform_action(CONTINUE_TO_SELECT_INTERVAL_WARNING, "click")
