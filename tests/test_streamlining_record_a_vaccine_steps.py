@@ -12,6 +12,8 @@ from pages.select_vaccination_location_page import *
 from pages.select_vaccinator_page import *
 from pages.select_vaccine_page import *
 from pages.select_batch_page import *
+from pages.select_interval_warning_page import *
+from pages.select_age_warning_page import *
 from pages.record_vaccinations_check_and_confirm_page import *
 import logging
 from init_helpers import *
@@ -130,15 +132,20 @@ def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number
         assert check_screening_considerations_exist() is False
         attach_screenshot("screening_considerations_do_not_exist_for_covid")
 
-@given("I click continue to select consenting person")
-def I_click_continue_consenting_person_selection_screen():
-    click_continue_to_select_consenting_person_screen()
-    attach_screenshot("clicked_continue_to_select_consenting_person_screen")
+@given("I continue from the patient history page")
+def i_continue_from_patient_history():
+    click_continue_to_select_interval_warning_screen()
+    attach_screenshot("clicked_continue_from_patient_history_page")
 
-@given("I click continue to select injection site")
-def I_click_continue_injection_site_selection_screen():
-    click_continue_to_select_injection_site_screen()
-    attach_screenshot("clicked_continue_to_select_injection_site_screen")
+@given("I acknowledge the interval warning and continue anyway")
+def i_acknowledge_the_interval_warning():
+    click_continue_anyway_on_interval_warning_page()
+    attach_screenshot("clicked_continue_anyway_on_interval_warning_page")
+
+@given("I acknowledge the age warning and continue anyway")
+def i_acknowledge_the_interval_warning():
+    click_continue_anyway_on_age_warning_page()
+    attach_screenshot("clicked_continue_anyway_on_age_warning_page")
 
 @given("I select consenting person")
 def I_select_consenting_person(shared_data):
@@ -153,6 +160,11 @@ def I_select_consenting_person(shared_data):
         if shared_data["consenting_person"] == "Person with lasting power of attorney for health and welfare" or shared_data["consenting_person"] == "Court appointed deputy":
             enter_relationship_of_person_consenting_to_patient(shared_data["relationship_to_patient"])
     attach_screenshot(f'clicked_{shared_data["consenting_person"]}_radio_button')
+
+@given("I click continue to select injection site")
+def I_click_continue_injection_site_selection_screen():
+    click_continue_to_select_injection_site_screen()
+    attach_screenshot("clicked_continue_to_select_injection_site_screen")
 
 @given("I select where the injection was given")
 def I_select_injection_location(shared_data):
