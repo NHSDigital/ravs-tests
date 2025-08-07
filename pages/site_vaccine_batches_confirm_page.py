@@ -14,31 +14,26 @@ def ensure_check_and_confirm_heading_text_is_visible():
         wait_for_element_to_appear(CHECK_AND_CONFIRM_HEADING_TEXT_ELEMENT)
 
 def check_site_name_is_displayed(site):
-    ensure_check_and_confirm_heading_text_is_visible()
     element = ("text", site)
     wait_for_element_to_appear(element)
     return check_element_exists(element, True)
 
 def check_vaccine_is_displayed(vaccine):
-    ensure_check_and_confirm_heading_text_is_visible()
     element = ("text", vaccine.upper())
     wait_for_element_to_appear(element)
     return check_element_exists(element, True)
 
 def check_vaccine_type_is_displayed(vaccineType):
-    ensure_check_and_confirm_heading_text_is_visible()
     element = ("text", vaccineType)
     wait_for_element_to_appear(element)
     return check_element_exists(element, True)
 
 def check_batchNumber_is_displayed(batch_number):
-    ensure_check_and_confirm_heading_text_is_visible()
     element = ("text", batch_number)
     wait_for_element_to_appear(element)
     return check_element_exists(element, True)
 
 def check_date_is_displayed(date):
-    ensure_check_and_confirm_heading_text_is_visible()
     element = ("text", date)
     wait_for_element_to_appear(element)
     return check_element_exists(element, True)
