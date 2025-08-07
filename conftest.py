@@ -80,6 +80,15 @@ def custom_sleep(seconds):
 
 time.sleep = custom_sleep
 
+@pytest.fixture(scope="function", autouse=True)
+def close_browser():
+    # This fixture should not be needed if we were using playwright properly.
+    # However, we aren't - so we must manually start and close the browser for each test.
+    get_playwright_helper()
+    yield
+    get_playwright_helper().close_browser()
+    clear_playwright_helper()
+
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):
     browser_version = get_browser_version()

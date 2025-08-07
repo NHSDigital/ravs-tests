@@ -29,6 +29,10 @@ def get_playwright_helper():
     playwright_helper_instance.start_browser_if_needed()
     return playwright_helper_instance
 
+def clear_playwright_helper():
+    global playwright_helper_instance
+    playwright_helper_instance = None
+
 def get_working_directory():
     cwd = os.getcwd()
     if "api" in cwd:
