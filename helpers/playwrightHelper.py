@@ -467,66 +467,35 @@ class BasePlaywrightHelper:
         if not screenshot_name:
             screenshot_name = "".join(c if c.isalnum() else "_" for c in str(locator_or_element)) or "element_action"
 
-        self.wait_for_page_to_load(10)
-        time.sleep(0.5)
+        element = self.get_element(locator_or_element, wait=True)
+        self.disable_smooth_scrolling()
 
-        # DEFAULT_WAIT_TIMEOUT = 10000
-        retries = 0
+        if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
+            raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
 
-        while retries < max_retries:
-            try:
-                element = self.get_element(locator_or_element, wait=True)
-                if not element:
-                    time.sleep(3)
-                    if not element:
-                        print(f"[FAIL FAST] Element not found for action: {action}. Skipping further retries.")
-                    return None
+        element.scroll_into_view_if_needed()
 
-                if not element.is_visible():
-                    print(f"[FAIL FAST] Element found but not visible for action: {action}. Waiting briefly to confirm...")
-                    time.sleep(3)
-                    if not element.is_visible():
-                        print(f"[FAIL FAST] Still not visible. Skipping further retries.")
-                        return None
+        action_map = {
+            "click": lambda: self._click_element(element),
+            "check": lambda: self._check_element(element),
+            "uncheck": lambda: self._uncheck_element(element),
+            "select_option": lambda: self._select_option(element, inputValue),
+            "get_options": lambda: self._get_options(element),
+            "clear": lambda: self._clear_element(element),
+            "input_text": lambda: self._input_text(element, inputValue),
+            "type_text": lambda: self._type_text(element, inputValue),
+            "get_text": lambda: self._get_text(element),
+            "get_value": lambda: self._get_value(element),
+            "scroll_to": lambda: self._scroll_to_element(element),
+            "get_selected_option": lambda: self._get_selected_option(element),
+        }
 
-                self.disable_smooth_scrolling()
-                self.wait_for_element_to_appear(element)
+        if action.lower() not in action_map:
+            print(f"Unsupported action: {action}")
+            return
 
-                if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
-                    raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
-
-                element.scroll_into_view_if_needed()
-
-                action_map = {
-                    "click": lambda: self._click_element(element),
-                    "check": lambda: self._check_element(element),
-                    "uncheck": lambda: self._uncheck_element(element),
-                    "select_option": lambda: self._select_option(element, inputValue),
-                    "get_options": lambda: self._get_options(element),
-                    "clear": lambda: self._clear_element(element),
-                    "input_text": lambda: self._input_text(element, inputValue),
-                    "type_text": lambda: self._type_text(element, inputValue),
-                    "get_text": lambda: self._get_text(element),
-                    "get_value": lambda: self._get_value(element),
-                    "scroll_to": lambda: self._scroll_to_element(element),
-                    "get_selected_option": lambda: self._get_selected_option(element),
-                }
-
-                if action.lower() not in action_map:
-                    print(f"Unsupported action: {action}")
-                    return
-
-                result = action_map[action.lower()]()
-                return result
-            except TimeoutError:
-                print(f"Timeout waiting for element to perform {action}. Retrying... ({retries+1}/{max_retries})")
-            except Exception as e:
-                print(f"Exception: {e} during {action} on element. Retrying... ({retries+1}/{max_retries})")
-
-            retries += 1
-            time.sleep(retry_delay)
-
-        print(f"Action '{action}' failed after {max_retries} retries.")
+        result = action_map[action.lower()]()
+        return result
 
     def is_element_really_visible(self, element):
         try:
