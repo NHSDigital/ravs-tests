@@ -31,17 +31,51 @@ from datetime import datetime, timedelta
 from allure_commons.types import LabelType
 import logging
 from test_data.get_values_from_models import *
+import traceback
+import inspect
 
 fake = Faker('en_GB')
 
 SPINNER_ELEMENT = ("role", "status")
 
+def log_current_stack(exclude_current=True, max_depth=10):
+    """Log the current stack trace in foo()->bar()->baz() format"""
+    stack = inspect.stack()
+
+    # Skip this function if exclude_current is True
+    start_idx = 1 if exclude_current else 0
+
+    filtered_functions = []
+    for frame_info in stack[start_idx:start_idx + max_depth]:
+        # Filter out library code - adjust these conditions for your setup
+        filename = frame_info.filename
+
+        # Skip common library paths
+        if (filename.startswith('/usr/') or
+            filename.startswith('/opt/') or
+            'site-packages' in filename or
+            filename.startswith('<frozen')):
+            continue
+
+        # You can also filter by your project directory
+        # if '/path/to/your/project' not in filename:
+        #     continue
+
+        filtered_functions.append(frame_info.function)
+
+    # Reverse to show call order
+    filtered_functions.reverse()
+    stack_trace = "->".join(filtered_functions)
+    print(f"Stack trace: {stack_trace}")
+
 original_sleep = time.sleep
 sleep_total = 0
+sleep_totals = {}
 def custom_sleep(seconds):
     global sleep_total
     sleep_total += seconds
     print(f"😴 Sleeping for {seconds} seconds. Total={sleep_total}")
+    log_current_stack(max_depth=5)
     original_sleep(seconds)
 
 time.sleep = custom_sleep
