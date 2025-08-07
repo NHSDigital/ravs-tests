@@ -65,23 +65,18 @@ def ensure_vaccination_history_element_exists():
         wait_for_element_to_appear(VACCINATION_HISTORY_TEXT_HEADING_ELEMENT)
 
 def check_screening_considerations_link_exists():
-    ensure_vaccination_history_element_exists()
     return check_element_exists(SCREENING_CONSIDERATIONS_LINK)
 
 def click_screening_considerations_link():
-    ensure_vaccination_history_element_exists()
     find_element_and_perform_action(SCREENING_CONSIDERATIONS_LINK, "click")
 
 def check_screening_considerations_question_1_exists():
-    ensure_vaccination_history_element_exists()
     return check_element_exists(SCREENING_CONSIDERATIONS_QUESTION_1)
 
 def check_screening_considerations_question_2_exists():
-    ensure_vaccination_history_element_exists()
     return check_element_exists(SCREENING_CONSIDERATIONS_QUESTION_2)
 
 def check_screening_considerations_question_3_exists():
-    ensure_vaccination_history_element_exists()
     return check_element_exists(SCREENING_CONSIDERATIONS_QUESTION_3)
 
 def check_patient_details_heading_exists(patient_name):

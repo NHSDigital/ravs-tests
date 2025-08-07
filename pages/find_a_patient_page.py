@@ -63,34 +63,28 @@ def ensure_create_a_patient_heading_element_exists():
 
 
 def enter_first_name(first_name):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(FIRST_NAME_INPUT)
     wait_for_element_to_appear(LAST_NAME_INPUT)
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
 
 def enter_first_name_create_a_patient_page(first_name):
-    ensure_create_a_patient_heading_element_exists()
     wait_for_element_to_appear(FIRST_NAME_INPUT)
     wait_for_element_to_appear(LAST_NAME_INPUT)
     find_element_and_perform_action(FIRST_NAME_INPUT, "input_text", first_name)
 
 def enter_last_name(last_name):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(LAST_NAME_INPUT)
     find_element_and_perform_action(LAST_NAME_INPUT, "input_text", last_name)
 
 def enter_dob_day(dob_day):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(DOB_DAY_INPUT)
     find_element_and_perform_action(DOB_DAY_INPUT, "input_text", str(dob_day))
 
 def enter_dob_month(dob_month):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(DOB_MONTH_INPUT)
     find_element_and_perform_action(DOB_MONTH_INPUT, "input_text", str(dob_month))
 
 def enter_dob_year(dob_year):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(DOB_YEAR_INPUT)
     find_element_and_perform_action(DOB_YEAR_INPUT, "input_text", str(dob_year))
 
@@ -103,109 +97,87 @@ def enter_dob(dob):
     enter_dob_year(date.year)
 
 def select_optional_gender(gender):
-    ensure_find_a_patient_heading_element_exists()
     gender_value = GENDER_MAPPING.get(gender)
     wait_for_element_to_appear(GENDER_OPTIONAL_SELECT)
     find_element_and_perform_action(GENDER_OPTIONAL_SELECT, "select_option", gender_value)
 
 def enter_optional_postcode(postcode):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(POSTCODE_OPTIONAL_INPUT)
     find_element_and_perform_action(POSTCODE_OPTIONAL_INPUT, "input_text", postcode)
 
 def select_gender(gender):
     gender_value = GENDER_MAPPING.get(gender)
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(GENDER_SELECT)
     find_element_and_perform_action(GENDER_SELECT, "select_option", gender_value)
 
 def enter_postcode(postcode):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(POSTCODE_INPUT)
     find_element_and_perform_action(POSTCODE_INPUT, "input_text", postcode)
 
 def enter_nhs_number(nhsNumber):
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(NHS_NUMBER_INPUT)
     find_element_and_perform_action(NHS_NUMBER_INPUT, "input_text", nhsNumber)
 
 def click_search_by_nhs_number_link():
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(SEARCH_BY_NHS_NUMBER_LINK)
     find_element_and_perform_action(SEARCH_BY_NHS_NUMBER_LINK, "click")
 
 def click_search_by_demographics_link():
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(SEARCH_BUTTON)
     wait_for_element_to_appear(SEARCH_BY_DEMOGRAPHICS_LINK)
     find_element_and_perform_action(SEARCH_BY_DEMOGRAPHICS_LINK, "click")
     wait_for_element_to_appear(SEARCH_BUTTON)
 
 def click_search_by_local_records_link():
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(SEARCH_BY_LOCAL_RECORDS_LINK)
     find_element_and_perform_action(SEARCH_BY_LOCAL_RECORDS_LINK, "click")
 
 def click_patient_name_link():
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(PATIENT_NAME_LINK)
     find_element_and_perform_action(PATIENT_NAME_LINK, "scroll_to")
     find_element_and_perform_action(PATIENT_NAME_LINK, "click")
 
 def click_view_record():
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(VIEW_RECORD_LINK)
     find_element_and_perform_action(VIEW_RECORD_LINK, "click")
 
 def check_search_for_patient_button_visible():
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(SEARCH_BUTTON)
 
 def click_search_for_patient_button():
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(SEARCH_BUTTON)
     find_element_and_perform_action(SEARCH_BUTTON, "click")
-    ensure_find_a_patient_heading_element_exists()
 
 def click_create_a_new_patient_button():#
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(CREATE_NEW_PATIENT_BUTTON)
     find_element_and_perform_action(CREATE_NEW_PATIENT_BUTTON, "click")
 
 def check_error_appears_for_first_name(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(FIRST_NAME_INPUT_ERROR_LABEL, wait)
 
 def check_nhs_number_error_message_text_exists(errorMessage):
-    ensure_find_a_patient_heading_element_exists()
     element = ("text", f"Error: {errorMessage}")
     wait_for_element_to_appear(element)
     return check_element_exists(element, True)
 
 def check_first_name_error_message_text_exists():
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(FIRST_NAME_INPUT_ERROR_LABEL)
 
 def check_last_name_error_message_text_exists():
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(LAST_NAME_INPUT_ERROR_LABEL)
 
 def check_dob_error_message_text_exists():
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(DOB_INPUT_ERROR_LABEL)
 
 def check_postcode_invalid_error_message_text_exists():
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(POSTCODE_INVALID_INPUT_ERROR_LABEL)
 
 def check_patient_name_search_result_exists(name, wait):
-    ensure_find_a_patient_heading_element_exists()
     element = ("xpath", f"//span[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), \"{name.lower()}\")]")
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_postcode_search_result_exists(postcode, wait):
-    ensure_find_a_patient_heading_element_exists()
     element = ("role", "cell", postcode)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
@@ -220,13 +192,10 @@ def format_nhs_number(nhs_number: str) -> str:
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
     time.sleep(5)
-    ensure_find_a_patient_heading_element_exists()
 
     formatted_nhs = format_nhs_number(nhsNumber)
     element_with_spaces = ("role", "cell", formatted_nhs)
     element_without_spaces = ("role", "cell", nhsNumber)
-
-    ensure_find_a_patient_heading_element_exists()
 
     try:
         wait_for_element_to_appear(element_with_spaces)
@@ -243,32 +212,26 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
 
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
-    ensure_find_a_patient_heading_element_exists()
     element = ("role", "heading", f"No result found for {nhsNumber}")
     time.sleep(3)
-    ensure_find_a_patient_heading_element_exists()
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_not_found_message_exists(wait):
-    ensure_find_a_patient_heading_element_exists()
     element = (f"//h3[contains(text(), 'No result')]")
     time.sleep(3)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_multiple_results_found_message_exists(wait):
-    ensure_find_a_patient_heading_element_exists()
     element = (f"//h3[contains(text(), 'More than one result found')]")
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_create_new_patient_button_exists(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(CREATE_NEW_PATIENT_BUTTON, wait)
 
 def check_search_tips_link_exists(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(SEARCH_TIPS_LINK, wait)
 
 def click_on_patient_name_search_result(name):
@@ -298,7 +261,6 @@ def check_patient_dob_search_result_exists(dob, wait):
     return check_element_exists(element, wait)
 
 def check_patient_address_search_result_exists(address, wait):
-    ensure_find_a_patient_heading_element_exists()
     parts = address.rsplit(",", 1)
     address = parts[0].strip()
     postcode = parts[1].strip()
@@ -306,43 +268,34 @@ def check_patient_address_search_result_exists(address, wait):
     return check_element_exists(element, wait)
 
 def get_patient_added_message(firstName):
-    ensure_find_a_patient_heading_element_exists()
     element = (f"//p[contains(text(),'{firstName}')]")
     wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def check_required_field_error_appears_for_forename(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(FIRST_NAME_INPUT_ERROR_LABEL, wait)
 
 def check_required_field_error_appears_for_surname(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(LAST_NAME_INPUT_ERROR_LABEL, wait)
 
 def check_required_field_error_appears_for_dob(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(DOB_INPUT_ERROR_LABEL, wait)
 
 def check_valid_field_error_appears_for_dob(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(DOB_INPUT_ERROR_LABEL, wait)
 
 def check_required_field_error_appears_for_gender(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(GENDER_SELECT_ERROR_LABEL, wait)
 
 def check_required_field_error_appears_for_nhsNumber(wait):
-    ensure_find_a_patient_heading_element_exists()
     return check_element_exists(NHS_NUMBER_INPUT_ERROR_LABEL, wait)
 
 def check_record_saved_element_exists(wait):
-    ensure_find_a_patient_heading_element_exists()
     time.sleep(3)
     wait_for_element_to_appear(RECORD_SAVED_DIALOGUE)
     return check_element_exists(RECORD_SAVED_DIALOGUE, wait)
 
 def check_record_saved_message_appears(name):
-    ensure_find_a_patient_heading_element_exists()
     element = (f"You successfully saved {name} record")
     saved_message = find_element_and_perform_action(element, "get_text")
 

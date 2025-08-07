@@ -14,33 +14,26 @@ def ensure_you_have_invited_this_organisation_label_exists():
         wait_for_element_to_appear(YOU_HAVE_INVITED_TEXT_ELEMENT)
 
 def check_deactivate_organisation_link_exists():
-    ensure_you_have_invited_this_organisation_label_exists()
     check_element_exists(DEACTIVATE_ORGANISATION_LINK, wait=True)
 
 def click_deactivate_organisation_link():
-    ensure_you_have_invited_this_organisation_label_exists()
     wait_for_element_to_appear(DEACTIVATE_ORGANISATION_LINK)
     find_element_and_perform_action(DEACTIVATE_ORGANISATION_LINK, "click")
 
 def click_add_another_user_button():
-    ensure_you_have_invited_this_organisation_label_exists()
     wait_for_element_to_appear(ADD_ANOTHER_USER_BUTTON)
     find_element_and_perform_action(ADD_ANOTHER_USER_BUTTON, "click")
 
 def check_add_another_user_button_exists():
-    ensure_you_have_invited_this_organisation_label_exists()
     check_element_exists(ADD_ANOTHER_USER_BUTTON, wait=True)
 
 def click_deactivate_organisation_link():
-    ensure_you_have_invited_this_organisation_label_exists()
     wait_for_element_to_appear(DEACTIVATE_ORGANISATION_LINK)
     find_element_and_perform_action(DEACTIVATE_ORGANISATION_LINK, "click")
 
 def check_back_to_all_organisations_link_exists():
-    ensure_you_have_invited_this_organisation_label_exists()
     check_element_exists(BACK_TO_ALL_ORGANISATIONS_PAGE_LINK, wait=True)
 
 def click_back_to_all_organisations_link():
-    ensure_you_have_invited_this_organisation_label_exists()
     wait_for_element_to_appear(BACK_TO_ALL_ORGANISATIONS_PAGE_LINK)
     find_element_and_perform_action(BACK_TO_ALL_ORGANISATIONS_PAGE_LINK, "click")
