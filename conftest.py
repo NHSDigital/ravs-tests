@@ -1295,7 +1295,7 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
             attach_screenshot("check_age_based_warning_exists")
             warning_count += 1
         else:
-            assert check_age_based_warning_exists() is False
+            assert check_age_based_warning_not_exists() is True
             attach_screenshot("check_age_based_warning_does_not_exist")
 
     assert str(warning_count) == expected_warning_count
@@ -1355,6 +1355,6 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
             warning_count += 1
         else:
             attach_screenshot("check_age_based_warning_does_not_exist")
-            assert check_age_based_warning_exists() is False
+            assert check_age_based_warning_not_exists() is True
 
     assert str(warning_count) == expected_warning_count

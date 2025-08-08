@@ -31,7 +31,6 @@ def click_back_button_choosing_vaccine_for_patient():
 
 def click_delivery_team_radiobutton(deliveryTeam):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(3)
     element = ("label", deliveryTeam)
     wait_for_element_to_appear(element)
     if check_element_exists(element, True) == True:
@@ -59,9 +58,12 @@ def check_back_button_exists():
     return check_element_exists(BACK_ELEMENT, True)
 
 def check_age_based_warning_exists():
-    time.sleep(3)
     attach_screenshot("age_based_warning")
     return check_element_exists(AGE_BASED_WARNING, True)
+
+def check_age_based_warning_not_exists():
+    attach_screenshot("age_based_warning")
+    return check_element_not_exists(AGE_BASED_WARNING, True)
 
 def check_minimum_interval_based_warning_exists():
     return check_element_exists(MIN_INTERVAL_BASED_WARNING, False)
