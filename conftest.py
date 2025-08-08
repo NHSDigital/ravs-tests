@@ -938,7 +938,8 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
 def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, due_date, assess_date):
     shared_data['eligible_decision'] = eligibility
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
-    shared_data['eligibility_type'] = None
+    vaccine = shared_data["chosen_vaccine"].lower()
+    shared_data['eligibility_type'] = None if vaccine == "pertussis" else "Pregnancy"
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     if shared_data["chosen_vaccine"].lower() == "covid-19":
         date = get_date_value_by_days(due_date)
