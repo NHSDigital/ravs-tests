@@ -86,7 +86,7 @@ def I_select_eligibility(shared_data):
 
 @given(parse("I select the location where vaccination was given"))
 def I_select_vaccination_location(shared_data):
-    shared_data["vaccination_location"] = get_vaccination_location(shared_data["index"])
+    shared_data["vaccination_location"] = get_vaccination_location(shared_data["index"], shared_data["chosen_vaccine"])
     click_vaccination_location_radio_button(shared_data["vaccination_location"])
     attach_screenshot(f'clicked_{shared_data["vaccination_location"]}_radio_button')
     if shared_data["vaccination_location"].lower() == "care home":

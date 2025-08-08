@@ -154,7 +154,11 @@ def get_vaccination_type(index, vaccine):
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
 
-def get_vaccination_location(index):
+def get_vaccination_location(index, vaccine):
+    if vaccine.lower() == "respiratory syncytial virus (rsv)":
+        return None
+    if vaccine.lower() == "pertussis":
+        return None
     return vaccination_locations[get_wrapped_index(index, len(vaccination_locations))]
 
 def get_legal_mechanism(index):

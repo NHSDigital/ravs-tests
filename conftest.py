@@ -700,7 +700,7 @@ def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vac
     shared_data["chosen_vaccine_type"] = get_vaccination_type(index, chosen_vaccine)
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
-    shared_data["vaccination_location"] = get_vaccination_location(index)
+    shared_data["vaccination_location"] = get_vaccination_location(index, chosen_vaccine)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
         shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
@@ -724,7 +724,7 @@ def step_login_to_ravs(site, vaccination_location, nhs_number, index, chosen_vac
     shared_data["chosen_vaccine_type"] = chosen_vaccine_type
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
-    shared_data["vaccination_location"] = get_vaccination_location(index)
+    shared_data["vaccination_location"] = get_vaccination_location(index, chosen_vaccine)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
         shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
@@ -749,7 +749,7 @@ def step_login_to_ravs_check_new_site_batch_exists(site, vaccination_location, n
     shared_data["batch_number"] = batch_number
     shared_data["site"] = site
     shared_data["new_site"] = new_delivery_team
-    shared_data["vaccination_location"] = get_vaccination_location(index)
+    shared_data["vaccination_location"] = get_vaccination_location(index, chosen_vaccine)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
         shared_data["single_packsize_vaccines"] = get_single_packsize_vaccines()
@@ -774,7 +774,7 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, vaccination_l
     shared_data["site"] = site
     shared_data["chosen_vaccine_new"] = new_vaccine_product
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(int(index)+1, shared_data["chosen_vaccine_new"])
-    shared_data["vaccination_location"] = get_vaccination_location(index)
+    shared_data["vaccination_location"] = get_vaccination_location(index, chosen_vaccine)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
         shared_data["pack_size_new"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type_new"])
@@ -801,7 +801,7 @@ def step_login_to_ravs_check_new_vaccine_product_type_batch_exist(site, vaccinat
     shared_data["site"] = site
     shared_data["chosen_vaccine_new"] = shared_data["chosen_vaccine"]
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(int(index)+1, shared_data["chosen_vaccine_new"])
-    shared_data["vaccination_location"] = get_vaccination_location(index)
+    shared_data["vaccination_location"] = get_vaccination_location(index, chosen_vaccine)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
         shared_data["pack_size_new"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type_new"])
