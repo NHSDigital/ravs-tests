@@ -478,7 +478,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
         click_eligible_yes_radiobutton()
         attach_screenshot("clicked_eligible_yes_radiobutton")
 
-        if check_eligibility_type_is_visible():
+        if eligibility_type:
             select_eligibility_type(eligibility_type)
             attach_screenshot("selected_eligibility_type")
 
@@ -486,7 +486,7 @@ def assess_patient_with_details_and_click_continue_to_consent(eligible_decision,
             select_staff_role(staff_role)
             attach_screenshot("selected_staff_role")
 
-        if eligibility_type == "Pregnancy" and due_date:
+        if due_date:
             enter_due_date(due_date)
             attach_screenshot("entered_due_date")
 
@@ -936,7 +936,7 @@ def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data
 def step_assess_eligibility_and_click_continue_record_consent_screen(shared_data, eligibility, due_date, assess_date):
     shared_data['eligible_decision'] = eligibility
     shared_data['legal_mechanism'] = get_legal_mechanism(shared_data["index"])
-    shared_data['eligibility_type'] = "Pregnancy"
+    shared_data['eligibility_type'] = None
     shared_data["healthcare_worker"] = get_staff_role(shared_data["index"])
     if shared_data["chosen_vaccine"].lower() == "covid-19":
         date = get_date_value_by_days(due_date)
@@ -1194,7 +1194,7 @@ def the_eligibility_values_should_persist(shared_data):
     attach_screenshot("assessing_clinician_value_should_persist")
     assert get_assessment_outcome_value_on_assessing_the_patient_page().lower() == str(shared_data["eligibility_assessment_outcome"]).lower()
     attach_screenshot("assessment_outcome_value_should_persist")
-    if check_eligibility_type_is_visible():
+    if shared_data["eligibility_type"]:
         select_eligibility_type(shared_data["eligibility_type"])
         attach_screenshot("selected_eligibility_type")
     click_continue_to_record_consent_button()
