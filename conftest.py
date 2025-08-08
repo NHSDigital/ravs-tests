@@ -567,8 +567,9 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, v
         attach_screenshot("selected_vaccinator_name_and_council")
     enter_vaccination_comments(vaccination_comments)
     attach_screenshot("entered_vaccination_comments")
-    click_care_model_option(care_model)
-    attach_screenshot("clicked_care_model_option")
+    if care_model:
+        click_care_model_option(care_model)
+        attach_screenshot("clicked_care_model_option")
     if care_model == "Care home":
         enter_care_home_details("WHITESTONES CARE HOME")
         attach_screenshot("entered_care_home_details")
@@ -624,8 +625,9 @@ def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_mod
         attach_screenshot("selected_vaccinator_name_and_council")
     enter_vaccination_comments(vaccination_comments)
     attach_screenshot("entered_vaccination_comments")
-    click_care_model_option(care_model)
-    attach_screenshot("clicked_care_model_option")
+    if care_model:
+        click_care_model_option(care_model)
+        attach_screenshot("clicked_care_model_option")
     if care_model == "Care home":
         enter_care_home_details("WHITESTONES CARE HOME")
         attach_screenshot("entered_care_home_details")
