@@ -80,14 +80,22 @@ def custom_sleep(seconds):
 
 time.sleep = custom_sleep
 
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args):
+    return {
+        **browser_context_args,
+        "ignore_https_errors": True
+    }
+
 @pytest.fixture(scope="function", autouse=True)
-def close_browser():
+def open_and_close_browser(playwright, context, page):
     # This fixture should not be needed if we were using playwright properly.
     # However, we aren't - so we must manually start and close the browser for each test.
-    get_playwright_helper()
+    get_playwright_helper().start(playwright, context, page)
+    get_playwright_helper().mock_fonts()
     yield
-    get_playwright_helper().close_browser()
     clear_playwright_helper()
+
 
 @pytest.fixture(scope='function', autouse=True)
 def report_browser_version(request):

@@ -26,7 +26,6 @@ def get_playwright_helper():
     global playwright_helper_instance
     if playwright_helper_instance is None:
         playwright_helper_instance = PlaywrightHelper(get_working_directory(), config)
-    playwright_helper_instance.start_browser_if_needed()
     return playwright_helper_instance
 
 def clear_playwright_helper():
@@ -167,7 +166,6 @@ def initialize_session(shared_data):
     yield
     after_all()
     shared_data.clear()
-    quit_browser()
 
 @pytest.fixture(scope="function")
 def playwright_helper():
@@ -199,7 +197,6 @@ def navigate_to_url(url):
     get_playwright_helper().navigate_to_url(url)
 
 def check_element_exists(element, wait=False):
-    wait_for_page_to_load(5)
     try:
         resolved_element = resolve_element(element)
         return get_playwright_helper().check_element_exists(resolved_element, wait)
@@ -265,7 +262,6 @@ def javascript_click(element):
 
 def find_element_and_perform_action(element, action, inputValue=None):
     element = resolve_element(element)
-    wait_until_spinner_disappears()
     return get_playwright_helper().find_element_and_perform_action(element, action, inputValue)
 
 def wait_until_spinner_disappears():
@@ -334,5 +330,3 @@ def get_date_value_by_days(date):
 
 if not config:
     config = load_config_from_env()
-
-

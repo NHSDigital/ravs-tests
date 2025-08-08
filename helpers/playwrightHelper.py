@@ -11,13 +11,6 @@ import platform
 from helpers.mockdatabaseHelper import MockDatabaseHelper
 from urllib.parse import urlparse
 
-_cached_playwright = None
-
-def get_sync_playwright():
-    global _cached_playwright
-    if _cached_playwright is None:
-        _cached_playwright = sync_playwright().start()
-    return _cached_playwright
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
         self.working_directory = working_directory
@@ -26,10 +19,15 @@ class BasePlaywrightHelper:
         self.config = config
         if not os.path.exists(self.screenshots_dir):
             os.makedirs(self.screenshots_dir)
-        self.playwright = get_sync_playwright()
         self.browser = None
         self.context = None
         self.page = None
+
+    def start(self, playwright, context, page):
+        self.playwright = playwright
+        self.context = context
+        self.page = page
+        self.browser = self.context.browser
 
     def get_or_create_page(self):
         if not self.page or self.page.is_closed():
