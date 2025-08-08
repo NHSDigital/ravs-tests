@@ -116,14 +116,6 @@ def normalize_address(address):
 def navigate_and_login(shared_data, user_role=None, site=None):
     navigate_to_ravs()
 
-    if config["browser"] == "mobile" and check_navbar_toggle_exists_without_waiting():
-        click_navbar_toggler()
-        attach_screenshot("clicked_navbar_toggler")
-
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-        attach_screenshot("clicked_logout_button")
-
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
     attach_screenshot("navigated_to_ravs_login_page")
@@ -222,11 +214,12 @@ def navigate_and_login(shared_data, user_role=None, site=None):
             if user_role.lower() in ["recorder", "administrator"]:
                 attach_screenshot("select_multi_org_site")
                 select_site("Leeds Pharmacy (FDP35)")
+                click_continue_to_home_page_button()
         elif care_model == "trust site":
             attach_screenshot("select_multi_org_site")
             select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
+            click_continue_to_home_page_button()
         attach_screenshot("selected_site")
-        click_continue_to_home_page_button()
 
 def set_clinician_details(shared_data, site):
     if "index" not in shared_data:
@@ -264,13 +257,6 @@ def set_clinician_details(shared_data, site):
         shared_data['vaccinator'] = get_vaccinator(shared_data["index"])
 
 def navigate_to_ravs():
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-            click_navbar_toggler()
-            attach_screenshot("clicked_navbar_toggler")
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-        attach_screenshot("clicked_logout_button")
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
     attach_screenshot("navigated_to_ravs_login_page")
@@ -679,12 +665,6 @@ def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_mod
         attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
 
 def navigate_and_login_with_username(shared_data, username):
-    if config["browser"] == "mobile":
-        if check_navbar_toggle_exists_without_waiting():
-                click_navbar_toggler()
-    if check_logout_button_exists_without_waiting():
-        click_logout_button()
-        attach_screenshot("clicked_logout_button")
     url = get_app_url(config["test_environment"])
     navigate_to_ravs_login_page(url)
     attach_screenshot("navigated_to_ravs_login_page")

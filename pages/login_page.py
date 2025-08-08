@@ -17,8 +17,6 @@ def ensure_you_are_not_logged_in_label_exists():
 
 def navigate_to_ravs_login_page(url):
     navigate_to_url(url)
-    if check_element_exists(ACCEPT_COOKIES_ELEMENT, False) is True:
-        find_element_and_perform_action(ACCEPT_COOKIES_ELEMENT, "click")
 
 def check_login_button_exists():
     return check_element_exists(LOGIN_BUTTON_ELEMENT, True)
