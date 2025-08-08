@@ -368,6 +368,10 @@ class BasePlaywrightHelper:
         element_handle = element.element_handle()
         self.page.evaluate("element => element.click()", element_handle)
 
+    def mock_fonts(self):
+        """Mock fonts to prevent loading external resources."""
+        self.page.route("**/*.{woff,woff2,ttf,otf}", lambda route: route.abort())
+
     def mock_api_response(self, working_directory):
         endpoint_pattern = "**/api/patient/nhsNumberSearch*"
         endpoint_pattern = "https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**"
