@@ -61,6 +61,9 @@ def get_pack_size_value():
 def check_pack_size_element_exists():
     return check_element_exists(PACK_SIZE_READONLY_ELEMENT)
 
+def check_pack_size_element_not_exists():
+    return check_element_not_exists(PACK_SIZE_READONLY_ELEMENT)
+
 def set_vaccination_date(date):
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "clear")
     find_element_and_perform_action(VACCINATION_DATE_INPUT_ELEMENT, "type_text", date)
@@ -113,12 +116,11 @@ def click_save_and_return_button_on_record_vaccinated_page():
 
 def click_continue_to_check_and_confirm_vaccination_screen_button():
     wait_for_element_to_appear(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)
-    time.sleep(3)
     find_element_and_perform_action(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON, "click")
-    if check_vaccination_date_incorrect_error_message_exists() == True:
-        return True
-    else:
-        wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
+    # if check_vaccination_date_incorrect_error_message_exists() == True:
+    #     return True
+    # else:
+    #     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def check_continue_to_check_and_confirm_screen_button_exists():
     return check_element_exists(CONTINUE_TO_CHECK_AND_CONFIRM_BUTTON)

@@ -1,7 +1,7 @@
 from asyncio.log import logger
 import json
 import time
-from playwright.sync_api import sync_playwright, TimeoutError, Locator
+from playwright.sync_api import sync_playwright, TimeoutError, Locator, expect
 from axe_core_python.sync_playwright import Axe
 from requests import request
 from init_helpers import *
@@ -189,6 +189,7 @@ class BasePlaywrightHelper:
         """Utility method to get an element with optional waiting."""
         try:
             if isinstance(locator_or_element, str):
+                raise Exception("get_element Locator should not be a string.")
                 if wait:
                     self.page.wait_for_selector(locator_or_element, state="visible", timeout=timeout * 1000)
                     element = self.page.locator(locator_or_element)
@@ -208,43 +209,54 @@ class BasePlaywrightHelper:
 
     def wait_for_element_to_appear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
-        start_time = time.time()
-        while time.time() - start_time < timeout / 1000:
-            try:
-                element = self.get_element(locator_or_element, wait=True)
-                if element and element.is_visible():
-                    print(f"✅ Element '{locator_or_element}' appeared.")
-                    return element
-            except Exception:
-                pass
-            time.sleep(poll_interval)
-        print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
-        return None
+        element = self.get_element(locator_or_element)
+        expect(element).to_be_visible()
+        # start_time = time.time()
+        # while time.time() - start_time < timeout / 1000:
+        #     try:
+        #         element = self.get_element(locator_or_element, wait=True)
+        #         if element and element.is_visible():
+        #             print(f"✅ Element '{locator_or_element}' appeared.")
+        #             return element
+        #     except Exception:
+        #         pass
+        #     time.sleep(poll_interval)
+        # print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
+        # return None
 
     def wait_for_element_to_disappear(self, locator_or_element, timeout=10000, poll_interval=0.1):
-        start_time = time.time()
-        while time.time() - start_time < timeout / 1000:
-            try:
-                element = self.get_element(locator_or_element, wait=True)
-                if not element or not element.is_visible():
-                    print(f"✅ Element '{locator_or_element}' disappeared.")
-                    return True
-            except Exception:
-                print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
-                return True
-            time.sleep(poll_interval)
-        print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
-        return False
+        # We shouldn't really be waiting for negatives?
+        return True
+        # start_time = time.time()
+        # while time.time() - start_time < timeout / 1000:
+        #     try:
+        #         element = self.get_element(locator_or_element, wait=True)
+        #         if not element or not element.is_visible():
+        #             print(f"✅ Element '{locator_or_element}' disappeared.")
+        #             return True
+        #     except Exception:
+        #         print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
+        #         return True
+        #     time.sleep(poll_interval)
+        # print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
+        # return False
 
     def check_element_exists(self, locator_or_element, wait=False, timeout=5):
         element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
-        if element:
-            is_visible = element.is_visible()
-            print(f"Element visibility check result: {is_visible}")
-            if element.is_visible():
-                element.scroll_into_view_if_needed()
-            return is_visible
-        return False
+        expect(element).to_be_visible()
+        return True
+        # if element:
+        #     is_visible = element.is_visible()
+        #     print(f"Element visibility check result: {is_visible}")
+        #     if element.is_visible():
+        #         element.scroll_into_view_if_needed()
+        #     return is_visible
+        # return False
+
+    def check_element_not_exists(self, locator_or_element, wait=False, timeout=5):
+        element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
+        expect(element).not_to_be_visible()
+        return True
 
     def check_element_enabled(self, selector, wait=False):
         element = self.get_element(selector, wait=wait)

@@ -590,10 +590,12 @@ def enter_vaccine_details_and_click_continue_to_check_and_confirm(shared_data, v
         if pack_size:
             if "single_packsize_vaccines" in shared_data:
                 if vaccine_type2 in shared_data["single_packsize_vaccines"]:
-                    assert check_pack_size_element_exists() == False
+                    assert check_pack_size_element_not_exists() == True
                 else:
                     assert get_pack_size_value() == pack_size
         attach_screenshot("entered_dose_amount_value")
+
+        ## This never returns true??
         if click_continue_to_check_and_confirm_vaccination_screen_button() == True:
             attach_screenshot("vaccination_date_is_set")
             batch_number_options = get_batch_number_options()
