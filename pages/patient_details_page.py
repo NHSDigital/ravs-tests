@@ -79,10 +79,7 @@ def check_pertussis_history_element_exists():
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0
-    time.sleep(3)
-    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
-    time.sleep(3)
 
     element = (
         "xpath",

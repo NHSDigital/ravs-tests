@@ -74,7 +74,6 @@ def to_title_case(text):
     return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
 
 def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
-    time.sleep(1)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     site = to_title_case(site)
     vaccine = "COVID-19" if vaccine.lower() == "covid-19" else vaccine

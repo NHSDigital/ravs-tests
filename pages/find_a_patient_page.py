@@ -191,8 +191,6 @@ def format_nhs_number(nhs_number: str) -> str:
     return f"{nhs_number[:3]} {nhs_number[3:6]} {nhs_number[6:]}"
 
 def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
-    time.sleep(5)
-
     formatted_nhs = format_nhs_number(nhsNumber)
     element_with_spaces = ("role", "cell", formatted_nhs)
     element_without_spaces = ("role", "cell", nhsNumber)
@@ -242,7 +240,6 @@ def click_on_patient_name_search_result(name):
     wait_for_element_to_appear(element)
     find_element_and_perform_action(element, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
 
 def check_patient_dob_search_result_exists(dob, wait):
@@ -291,7 +288,6 @@ def check_required_field_error_appears_for_nhsNumber(wait):
     return check_element_exists(NHS_NUMBER_INPUT_ERROR_LABEL, wait)
 
 def check_record_saved_element_exists(wait):
-    time.sleep(3)
     wait_for_element_to_appear(RECORD_SAVED_DIALOGUE)
     return check_element_exists(RECORD_SAVED_DIALOGUE, wait)
 
