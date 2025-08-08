@@ -30,8 +30,6 @@ def check_signin_button_exists():
 
 def click_nhs_signin_button():
     find_element_and_perform_action(SIGN_IN_BUTTON_ELEMENT, "click")
-    wait_for_page_to_load(timeout=10)
-    time.sleep(2)
 
 def enter_email_address(emailAddress):
     find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "input_text", emailAddress)
@@ -44,11 +42,8 @@ def enter_password_local(password):
 
 def click_local_signin_button():
     find_element_and_perform_action(LOCAL_SIGN_IN_BUTTON, "click")
-    wait_for_page_to_load(timeout=10)
     CONTINUE_BUTTON = ("role", "button", "continue")
     find_element_and_perform_action(CONTINUE_BUTTON, "click")
-    wait_for_page_to_load(timeout=10)
-    time.sleep(2)
 
 def clear_emailAddress():
     find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "clear")
@@ -63,7 +58,6 @@ def click_keep_me_signed_in():
     find_element_and_perform_action(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT, "click")
 
 def check_password_error_alert_exists():
-    wait_for_page_to_load(timeout=10)
     wait_for_element_to_appear(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT)
     wait_for_element_to_appear(ALERT_TEXT_PASSWORD)
     return check_element_exists(ALERT_TEXT_PASSWORD, True)
