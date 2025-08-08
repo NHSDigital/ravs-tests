@@ -56,7 +56,6 @@ def ensure_add_batch_button_is_visible():
         wait_for_element_to_appear(FIRST_ADD_BATCH_BUTTON)
 
 def select_pack_size(pack_size):
-    wait_for_element_to_appear(select_single_vial_pack_radio_button)
     if pack_size == "Single vial":
         select_single_vial_pack_radio_button()
     elif pack_size == "10 vials":
@@ -125,9 +124,7 @@ def check_add_batch_title_exists(wait):
     return check_element_exists(ADD_BATCH_TITLE, wait)
 
 def enter_batch_number(batch_number):
-    wait_for_element_to_appear(BATCH_NUMBER_INPUT_FIELD)
-    if check_element_exists(BATCH_NUMBER_INPUT_FIELD, False):
-        find_element_and_perform_action(BATCH_NUMBER_INPUT_FIELD, "input_text", batch_number)
+    find_element_and_perform_action(BATCH_NUMBER_INPUT_FIELD, "input_text", batch_number)
 
 def enter_vaccine_batch_number(batch_number):
     wait_for_element_to_appear(BATCH_NUMBER_INPUT_FIELD)

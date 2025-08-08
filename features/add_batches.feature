@@ -46,11 +46,11 @@ Feature: Add Batches to vaccine
   Scenario Outline: Add batch to vaccine
     When I am on the vaccines page
     And I view product for the existing <vaccine_type> in an existing <site>
-    And I enter <batch_number> that already exists and <expiry_date>
+    And I enter <batch_number> that already exists with <expiry_date> and <pack_size>
     Then the batch is already added to site warning should appear
 
     Examples:
-      | care_model          | user_role           | site                          | vaccine  | vaccine_type  | batch_number       | expiry_date |
-      | Trust site          | lead administrator  | Weaverham Surgery             | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
-      | Community pharmacy  | administrator       | Aspire Pharmacy               | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
-      | Branch surgery      | administrator       | Aire Valley Surgery (Rawdon)  | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  |
+      | care_model          | user_role           | site                          | vaccine  | vaccine_type  | batch_number       | expiry_date | pack_size   |
+      | Trust site          | lead administrator  | Weaverham Surgery             | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  | -           |
+      | Community pharmacy  | administrator       | Aspire Pharmacy               | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  | Single vial |
+      | Branch surgery      | administrator       | Aire Valley Surgery (Rawdon)  | COVID-19 | Spikevax JN.1 | AUTOMATION-SJ1     | 19/10/2026  | 10 vials    |
