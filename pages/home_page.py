@@ -131,10 +131,11 @@ def click_help_and_guidance_link_exists():
     wait_for_element_to_appear(HELP_AND_GUIDANCE_LINK)
     find_element_and_perform_action(HELP_AND_GUIDANCE_LINK, "click")
 
-def click_logout_button():
+def click_logout_button(shared_data):
     find_element_and_perform_action(LOGOUT_NAV_ELEMENT, "click")
+    if shared_data["test_env"].lower() == "local":
+        find_element_and_perform_action(("role", "button", "Yes, sign me out"), "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(1)
 
 def click_navbar_toggler():
     wait_for_element_to_appear(NAV_BAR_TOGGLER)
