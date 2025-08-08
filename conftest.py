@@ -267,7 +267,7 @@ def logout(shared_data):
         if check_navbar_toggle_exists():
             click_navbar_toggler()
             attach_screenshot("clicked_navbar_toggler")
-    click_logout_button()
+    click_logout_button(shared_data)
     attach_screenshot("clicked_log_out_button")
 
 def click_find_a_patient_and_search_with_nhs_number(nhs_number):
@@ -412,12 +412,12 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
     updated_pack_size = pack_size
 
     if shared_data["user_role"].lower() == "recorder":
-        click_logout_button()
+        click_logout_button(shared_data)
         navigate_and_login(shared_data, "lead administrator", shared_data["site"])
         click_vaccines_nav_link()
         ensure_active_batch()
         updated_pack_size = get_pack_size_if_required(shared_data, batch_number, expiry_date, pack_size)
-        click_logout_button()
+        click_logout_button(shared_data)
         navigate_and_login(shared_data, "recorder", shared_data["site"])
     else:
         ensure_active_batch()
