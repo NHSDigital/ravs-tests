@@ -75,11 +75,11 @@ def to_title_case(text):
 
 def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    site = to_title_case(site)
+    site = site.lower()
     vaccine = "COVID-19" if vaccine.lower() == "covid-19" else vaccine
 
     vaccine_xpath = (
-        f"//table[caption[normalize-space(text())='{site}']]"
+        f"//table[caption[normalize-space(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'))='{site}']]"
         f"//tr[td[normalize-space(text())='{vaccine}'] and td[normalize-space(text())='{vaccine_type}']]"
     )
 
