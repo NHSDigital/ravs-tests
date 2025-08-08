@@ -56,7 +56,7 @@ def the_choose_site_page_is_launched(shared_data):
 
 @then("vaccines navigation link should not be visible")
 def vaccines_nav_link_should_not_be_visible_for_recorder():
-    assert check_vaccines_nav_link_exists() == False
+    assert check_vaccines_nav_link_not_exists() == True
     attach_screenshot("vaccines_nav_link_should_not_exist")
 
 @then("vaccines navigation link should be visible")

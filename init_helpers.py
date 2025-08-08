@@ -203,6 +203,13 @@ def check_element_exists(element, wait=False):
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
+def check_element_not_exists(element, wait=False):
+    try:
+        resolved_element = resolve_element(element)
+        return get_playwright_helper().check_element_not_exists(resolved_element, wait)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
 def check_element_enabled(element, wait=False):
     try:
         resolved_element = resolve_element(element)

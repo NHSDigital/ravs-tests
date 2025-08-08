@@ -184,6 +184,10 @@ def check_vaccines_nav_link_exists():
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     return check_element_exists(VACCINES_NAV_ELEMENT)
 
+def check_vaccines_nav_link_not_exists():
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_not_exists(VACCINES_NAV_ELEMENT)
+
 def click_vaccines_nav_link():
     wait_for_element_to_appear(VACCINES_NAV_ELEMENT)
     find_element_and_perform_action(VACCINES_NAV_ELEMENT, "click")
