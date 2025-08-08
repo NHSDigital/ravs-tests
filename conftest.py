@@ -1280,11 +1280,11 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
         comirnaty_10_omicron_jn1_above_5_to_11 = get_vaccination_type(2, vaccine_name)
         comirnaty_3_omicron_jn1_above_6months_to_4 = get_vaccination_type(3, vaccine_name)
         vaccine_types = [
-        (comirnaty_30_jn1_age_above_12, ["9732091169", "9692237893", "9474335761", "9474335761"]),
-        # (comirnaty_30_omicron_xbb_age_above_12, ["9732091169", "9692237893", "9474335761"]),
-        (comirnaty_10_omicron_jn1_above_5_to_11, ["9692237893", "9732091169", "9450153485", "9470472918", "9473673388"]),
+        (comirnaty_30_jn1_age_above_12, ["9732091169", "9693865480", "9474335761", "9474335761"]),
+        # (comirnaty_30_omicron_xbb_age_above_12, ["9732091169", "9693865480", "9474335761"]),
+        (comirnaty_10_omicron_jn1_above_5_to_11, ["9693865480", "9732091169", "9450153485", "9470472918", "9473673388"]),
         (comirnaty_3_omicron_jn1_above_6months_to_4, ["9450153485", "9474335761", "9470472918", "9473673388"]),
-        (spikevax_jn1_age_above_18, ["9732091169", "9692237893", "9474335761", "9450153485", "9470472918"]),
+        (spikevax_jn1_age_above_18, ["9732091169", "9693865480", "9474335761", "9450153485", "9470472918"]),
     ]
 
     for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):

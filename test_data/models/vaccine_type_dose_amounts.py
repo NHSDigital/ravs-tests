@@ -25,7 +25,7 @@ vaccine_type_dose_amounts = {
     "Adacel vaccine suspension": 0.5,
     "Boostrix-IPV suspension": 0.5,
     "Repevax vaccine suspension": 0.5,
-    "Abrysvo": 0.5,
+    "RSVpreF (Abrysvo)": 0.5,
     "Arexvy": 0.5,
     "Fluenz (LAIV)": 0.2
 }

@@ -11,7 +11,7 @@ Feature: Age based warnings
     Examples:
       | nhs_number  | expected_warning_count | vaccine_type | care_model         | user_role           |  site               |
       | 9732091169  | 3                      | covid        | Trust site         | lead administrator  |  Weaverham Surgery  |
-      | 9692237893  | 3                      | covid        | Trust site         | lead administrator  |  Weaverham Surgery  |
+      | 9693865480  | 3                      | covid        | Trust site         | lead administrator  |  Weaverham Surgery  |
       | 9474335761  | 3                      | covid        | Community pharmacy | administrator       |  Aspire Pharmacy    |
       | 9450153485  | 3                      | covid        | Community pharmacy | administrator       |  Leeds Pharmacy     |
       | 9470472918  | 3                      | covid        | Branch surgery     | recorder            | Aire Valley Surgery (Rawdon)  |
