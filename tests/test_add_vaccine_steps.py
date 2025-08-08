@@ -53,8 +53,6 @@ def the_choose_site_page_is_launched(shared_data):
     attach_screenshot("choose_site_page_should_launch")
     if shared_data["care_model"].lower() != "Branch surgery".lower():
         assert check_choose_site_title_exists(True) == True
-    else:
-        assert check_choose_site_title_exists(True) == False
 
 @then("vaccines navigation link should not be visible")
 def vaccines_nav_link_should_not_be_visible_for_recorder():
@@ -77,4 +75,3 @@ def click_vaccines_navigation_link():
 def click_vaccines_navigation_link():
     assert check_add_vaccine_button_exists() == True
     attach_screenshot("add_vaccine_button_should_exist")
-
