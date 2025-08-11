@@ -562,7 +562,7 @@ class BasePlaywrightHelper:
     def _type_text(self, element, inputValue):
         if element.text_content() != '':
             element.clear()
-        element.type(inputValue, delay=50)
+        element.type(inputValue)
         print(f"Typed text '{inputValue}'.")
 
     def _get_text(self, element):
