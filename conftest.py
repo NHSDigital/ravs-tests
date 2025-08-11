@@ -126,7 +126,7 @@ def navigate_and_login(shared_data, user_role=None, site=None):
     email_mapping = {
         "trust site": {
             "recorder": "neelima.guntupalli1+recorder_automated1@nhs.net",
-            "administrator": "neelima.guntupalli1+admin_automated1@nhs.net",
+            "administrator": "neelima.guntupalli1@nhs.net",
             "lead administrator": "neelima.guntupalli1@nhs.net",
             "default_site": "Weaverham Surgery"
         },
@@ -210,10 +210,6 @@ def navigate_and_login(shared_data, user_role=None, site=None):
                 attach_screenshot("select_multi_org_site")
                 select_site("Leeds Pharmacy (FDP35)")
                 click_continue_to_home_page_button()
-        elif care_model == "trust site":
-            attach_screenshot("select_multi_org_site")
-            select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
-            click_continue_to_home_page_button()
         attach_screenshot("selected_site")
 
 def set_clinician_details(shared_data, site):
