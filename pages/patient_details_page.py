@@ -63,19 +63,19 @@ def get_patient_address_value_in_patient_details_screen():
 def check_vaccine_history_not_available_label_element_exists():
     time.sleep(3)
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
-    return check_element_exists(VACCINATION_HISTORY_NOT_AVAILABLE)
+    return check_element_exists_immediate(VACCINATION_HISTORY_NOT_AVAILABLE)
 
 def check_covid_history_element_exists():
-    return check_element_exists(COVID_HISTORY_ELEMENT)
+    return check_element_exists_immediate(COVID_HISTORY_ELEMENT)
 
 def check_flu_history_element_exists():
-    return check_element_exists(FLU_HISTORY_ELEMENT)
+    return check_element_exists_immediate(FLU_HISTORY_ELEMENT)
 
 def check_rsv_history_element_exists():
-    return check_element_exists(RSV_HISTORY_ELEMENT)
+    return check_element_exists_immediate(RSV_HISTORY_ELEMENT)
 
 def check_pertussis_history_element_exists():
-    return check_element_exists(PERTUSSIS_HISTORY_ELEMENT)
+    return check_element_exists_immediate(PERTUSSIS_HISTORY_ELEMENT)
 
 def get_count_of_immunisation_history_records(chosen_vaccine):
     count = 0

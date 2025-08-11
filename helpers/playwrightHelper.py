@@ -253,6 +253,10 @@ class BasePlaywrightHelper:
         #     return is_visible
         # return False
 
+    def check_element_exists_immediate(self, locator_or_element):
+        element = self.get_element(locator_or_element)
+        return element.is_visible()
+
     def check_element_not_exists(self, locator_or_element, wait=False, timeout=5):
         element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
         expect(element).not_to_be_visible()
