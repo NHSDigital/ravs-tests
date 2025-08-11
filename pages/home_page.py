@@ -202,6 +202,10 @@ def check_manage_users_nav_link_exists():
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
     return check_element_exists(MANAGE_USERS_NAV_ELEMENT)
 
+def check_manage_users_nav_link_not_exists():
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_not_exists(MANAGE_USERS_NAV_ELEMENT)
+
 def click_manage_users_nav_link():
     wait_for_element_to_appear(MANAGE_USERS_NAV_ELEMENT)
     find_element_and_perform_action(MANAGE_USERS_NAV_ELEMENT, "click")

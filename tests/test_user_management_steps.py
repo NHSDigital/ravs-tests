@@ -25,7 +25,7 @@ scenarios(f'{features_directory}/user_management.feature')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)  
+log_handler = RotatingFileHandler('tox.log', maxBytes=1024*1024, backupCount=3)
 log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 
 logger.addHandler(log_handler)
@@ -239,7 +239,7 @@ def check_and_confirm_screen_should_be_visible(shared_data):
 
 @then("user management navigation link should not be visible")
 def user_management_nav_link_should_not_be_visible():
-    assert check_manage_users_nav_link_exists() == False
+    assert check_manage_users_nav_link_not_exists() == True
     attach_screenshot("manage_users_nav_link_should_not_exist")
 
 @then("user management navigation link should be visible")
