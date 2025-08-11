@@ -175,11 +175,14 @@ def check_reports_nav_link_exists():
     wait_for_element_to_appear(REPORTS_NAV_ELEMENT)
     return check_element_exists(REPORTS_NAV_ELEMENT)
 
+def check_reports_nav_link_not_exists():
+    wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)
+    return check_element_not_exists(REPORTS_NAV_ELEMENT)
+
 def click_reports_nav_link():
     wait_for_element_to_appear(REPORTS_NAV_ELEMENT)
     find_element_and_perform_action(REPORTS_NAV_ELEMENT, "click")
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    wait_for_element_to_appear(CREATE_REPORT_BUTTON)
 
 def check_vaccines_nav_link_exists():
     wait_for_element_to_appear(FIND_A_PATIENT_NAV_ELEMENT)

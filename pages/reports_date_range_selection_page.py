@@ -55,6 +55,10 @@ def check_create_report_button_exists():
     wait_for_element_to_appear(CREATE_REPORT_BUTTON)
     return check_element_exists(CREATE_REPORT_BUTTON)
 
+def check_create_report_button_not_exists():
+    wait_for_element_to_appear(REPORTS_HEADING_TEXT_ELEMENT)
+    return check_element_not_exists(CREATE_REPORT_BUTTON)
+
 def check_no_vaccination_data_to_report_message_exists():
     wait_for_element_to_appear(NO_VACCINATION_DATE_TO_REPORT)
     return check_element_exists(NO_VACCINATION_DATE_TO_REPORT)
