@@ -764,6 +764,7 @@ def step_login_to_ravs_check_new_vaccine_product_batch_exist(site, vaccination_l
     shared_data["site"] = site
     shared_data["chosen_vaccine_new"] = new_vaccine_product
     shared_data["chosen_vaccine_type_new"] = get_vaccination_type(int(index)+1, shared_data["chosen_vaccine_new"])
+    shared_data["eligibility_type_new"] = get_eligibility_type(int(index)+1, shared_data["chosen_vaccine_new"])
     shared_data["vaccination_location"] = get_vaccination_location(index, chosen_vaccine)
     if "pharmacy" in site.lower() or "branch" in shared_data["care_model"].lower():
         shared_data["pack_size"] = get_vaccine_type_pack_size_by_index(shared_data["index"], shared_data["chosen_vaccine_type"])
