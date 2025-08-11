@@ -490,8 +490,6 @@ class BasePlaywrightHelper:
         if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
             raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
 
-        element.scroll_into_view_if_needed()
-
         action_map = {
             "click": lambda: self._click_element(element),
             "check": lambda: self._check_element(element),
