@@ -6,7 +6,7 @@ VACCINES_NAV_ELEMENT = ("role", "link", "Vaccines")
 REPORTS_NAV_ELEMENT = ("role", "link", "Reports")
 MANAGE_USERS_NAV_ELEMENT = ("role", "link", "Manage users")
 RECORD_VACCINATIONS_NAV_ELEMENT = ("role", "link", "Record vaccinations")
-NHS_LOGO_NAV_ELEMENT = ("role", "link", "NHS Logo Record a vaccination")
+NHS_LOGO_NAV_ELEMENT = ("role", "link", "Record a vaccination")
 LOGOUT_NAV_ELEMENT = ("role", "link", "Log out")
 NAV_BAR_TOGGLER = ("//button[@class='navbar-toggler']")
 NAV_LINK_BAR_TOGGLER = ("//button[@class='navbar-toggler p-2']")
@@ -62,11 +62,23 @@ def click_terms_of_use_link():
 def check_add_vaccines_link_exists():
     return check_element_exists(ADD_VACCINES_LINK)
 
+def check_add_vaccines_link_not_exists():
+    wait_for_element_to_appear(NHS_LOGO_NAV_ELEMENT)
+    return check_element_not_exists(ADD_VACCINES_LINK)
+
 def check_add_users_link_exists():
     return check_element_exists(ADD_USERS_LINK)
 
+def check_add_users_link_not_exists():
+    wait_for_element_to_appear(NHS_LOGO_NAV_ELEMENT)
+    return check_element_not_exists(ADD_USERS_LINK)
+
 def check_find_a_patient_link_exists():
     return check_element_exists(FIND_A_PATIENT_LINK)
+
+def check_find_a_patient_link_not_exists():
+    wait_for_element_to_appear(NHS_LOGO_NAV_ELEMENT)
+    return check_element_not_exists(FIND_A_PATIENT_LINK)
 
 def click_add_vaccines_link():
     find_element_and_perform_action(ADD_VACCINES_LINK, "click")
@@ -99,6 +111,10 @@ def get_month_vaccinations_count():
 
 def check_create_a_report_link_exists():
     return check_element_exists(CREATE_A_REPORT_LINK)
+
+def check_create_a_report_link_not_exists():
+    wait_for_element_to_appear(NHS_LOGO_NAV_ELEMENT)
+    return check_element_not_exists(CREATE_A_REPORT_LINK)
 
 def click_feedback_link_exists():
     wait_for_element_to_appear(FEEDBACK_LINK)
