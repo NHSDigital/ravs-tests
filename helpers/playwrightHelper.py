@@ -172,7 +172,6 @@ class BasePlaywrightHelper:
 
     def wait_for_page_to_load(self, timeout=5):
         try:
-            time.sleep(1)
             self.page.wait_for_load_state('load', timeout=timeout * 1000)
             self.page.wait_for_selector('body', timeout=timeout * 1000)
             self.page.wait_for_function(

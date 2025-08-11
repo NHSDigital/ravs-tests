@@ -212,13 +212,11 @@ def check_patient_nhs_number_search_result_exists(nhsNumber, wait):
 
 def check_patient_not_found_for_nhs_number_message_exists(nhsNumber, wait):
     element = ("role", "heading", f"No result found for {nhsNumber}")
-    time.sleep(3)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 
 def check_patient_not_found_message_exists(wait):
     element = (f"//h3[contains(text(), 'No result')]")
-    time.sleep(3)
     wait_for_element_to_appear(element)
     return check_element_exists(element, wait)
 

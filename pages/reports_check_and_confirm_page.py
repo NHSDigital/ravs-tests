@@ -42,7 +42,6 @@ def click_reports_change_sites_button():
 
 def check_reports_change_data_button_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    time.sleep(2)
     wait_for_element_to_appear(CHANGE_DATA_BUTTON)
     return check_element_exists(CHANGE_DATA_BUTTON)
 

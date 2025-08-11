@@ -10,7 +10,6 @@ def ensure_manage_users_heading_exists():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
     if not check_element_exists(MANAGE_USERS_HEADING_ELEMENT):
         wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-        time.sleep(3)
         wait_for_element_to_appear(MANAGE_USERS_HEADING_ELEMENT)
 
 def check_add_user_button_exists():
@@ -28,7 +27,6 @@ def click_change_user_details_link(user):
 
 def get_first_users_name():
     wait_for_element_to_appear(DEACTIVATED_USERS_LINK)
-    time.sleep(3)
     element = ("xpath", '(//button[text()="Change"]/ancestor::tr/td[1])[1]')
     if check_element_exists(element):
         return find_element_and_perform_action(element, "get_text")
@@ -37,7 +35,6 @@ def get_first_users_name():
 
 def get_first_users_clinician_status():
     wait_for_element_to_appear(DEACTIVATED_USERS_LINK)
-    time.sleep(3)
     element = ("xpath", '(//button[text()="Change"]/ancestor::tr/td[1])[1]')
     wait_for_element_to_appear(element)
     full_name = find_element_and_perform_action(element, "get_text")
@@ -48,7 +45,6 @@ def get_first_users_clinician_status():
 
 def get_first_users_email_address():
     wait_for_element_to_appear(DEACTIVATED_USERS_LINK)
-    time.sleep(3)
     element = ("xpath", '(//button[text()="Change"]/ancestor::tr/td[2])[1]')
     wait_for_element_to_appear(element)
     if check_element_exists(element):
@@ -58,7 +54,6 @@ def get_first_users_email_address():
 
 def get_first_users_permission_level():
     wait_for_element_to_appear(DEACTIVATED_USERS_LINK)
-    time.sleep(3)
     element = ("xpath", '(//button[text()="Change"]/ancestor::tr/td[3])[1]')
     wait_for_element_to_appear(element)
     if check_element_exists(element):
@@ -68,7 +63,6 @@ def get_first_users_permission_level():
 
 def get_first_users_active_status():
     wait_for_element_to_appear(DEACTIVATED_USERS_LINK)
-    time.sleep(3)
     element = ("xpath", '(//button[text()="Change"]/ancestor::tr/td[4])[1]')
     wait_for_element_to_appear(element)
     if check_element_exists(element):
