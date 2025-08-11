@@ -195,7 +195,7 @@ def enter_user_details_for_adding(shared_data, first_name, last_name, nhs_email_
     if nhs_email_address == "automated.tester@nhs.net":
         random_number = random.randint(1000, 9999)
         nhs_email_address = f"automated.tester+{random_number}@nhs.net"
-    enter_email_address_to_add_user(nhs_email_address, shared_data)
+    enter_email_address_to_add_user(nhs_email_address)
     attach_screenshot("entered_email_address")
     shared_data["first_name"] = first_name
     shared_data["last_name"] = last_name
