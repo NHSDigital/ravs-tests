@@ -217,7 +217,7 @@ def click_continue_to_record_consent_button():
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
 
 def get_is_patient_eligible_value_on_assessing_the_patient_page():
-    selected_value = get_checked_radio_button_text("Is the patient eligible for the vaccine? ")
+    selected_value = get_checked_radio_button_text("Is the patient eligible for the vaccine?")
     if selected_value != "":
         return selected_value
     else:
