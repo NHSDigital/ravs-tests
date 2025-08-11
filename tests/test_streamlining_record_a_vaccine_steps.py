@@ -142,10 +142,11 @@ def i_acknowledge_the_interval_warning():
     click_continue_anyway_on_interval_warning_page()
     attach_screenshot("clicked_continue_anyway_on_interval_warning_page")
 
-@given("I acknowledge the age warning and continue anyway")
-def i_acknowledge_the_interval_warning():
-    click_continue_anyway_on_age_warning_page()
-    attach_screenshot("clicked_continue_anyway_on_age_warning_page")
+@given(parse("I acknowledge the age warning to be {expect_age_warning} and continue anyway"))
+def i_acknowledge_the_age_warning(expect_age_warning):
+    if expect_age_warning == "True":
+        click_continue_anyway_on_age_warning_page()
+        attach_screenshot("clicked_continue_anyway_on_age_warning_page")
 
 @given("I select consenting person")
 def I_select_consenting_person(shared_data):

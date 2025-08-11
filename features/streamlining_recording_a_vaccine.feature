@@ -21,7 +21,7 @@ Feature: Streamlining Recording vaccine
     And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
     And I continue from the patient history page
     And I acknowledge the interval warning and continue anyway
-    And I acknowledge the age warning and continue anyway
+    And I acknowledge the age warning to be <expect_age_warning> and continue anyway
     And I select consenting person
     And I click continue to select injection site
     And I select where the injection was given
@@ -30,15 +30,15 @@ Feature: Streamlining Recording vaccine
     Then the vaccination should be recorded successfully
 
     Examples:
-    | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model | name | date_of_birth | address |
-    | 0     | lead administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-SPIKE-JN | 1/10/2031  | None | 9470040228 | community pharmacy | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN |
-    | 1     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C30 | 1/10/2025  | None | 9470057589 | community pharmacy | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIALA15 8BG |
-    | 2     | recorder | Leeds Pharmacy | True      | COVID-19       | AUTO-c10 | 2/9/2025  | None | 9472710255 | community pharmacy | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIALA11 6BH |
-    | 3     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C3 | 1/11/2025  | None | 9473629885 | community pharmacy | MARGIE PUCKEY  | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTERM20 6QB |
-    | 4     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9734250221 |  Community Pharmacy | BARAK SELIGMANN  | 26/5/2016 | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ |
-    | 5     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9733907723 |  Community Pharmacy | Sandra RYAN  | 07/04/1994 | None |
-    | 6     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9467361590 |  Community Pharmacy | WALLIS ADEYEMO  | 19/4/2015 | 1 MIDLAND ROAD, LEEDS, LS6 1BQ |
-    | 7     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304424 |  Community Pharmacy | John Test  | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG |
+    | index | user_role           | site     | clinician | chosen_vaccine | batch_number | expiry_date | vaccinator | nhs_number | care_model | name | date_of_birth | address | expect_age_warning |
+    | 0     | lead administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-SPIKE-JN | 1/10/2031  | None | 9470040228 | community pharmacy | HERBERT HAAG | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTERLA2 6HN | False |
+    | 1     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C30 | 1/10/2025  | None | 9470057589 | community pharmacy | ROGER SEABORNE | 13/12/1922 | 10 ANN STREET, DALTON-IN-FURNESS, CUMBRIALA15 8BG | False |
+    | 2     | recorder | Leeds Pharmacy | True      | COVID-19       | AUTO-c10 | 2/9/2025  | None | 9472710255 | community pharmacy | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIALA11 6BH | True |
+    | 3     | administrator | Leeds Pharmacy | True      | COVID-19       | AUTO-C3 | 1/11/2025  | None | 9473629885 | community pharmacy | MARGIE PUCKEY  | 27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTERM20 6QB | True |
+    | 4     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9734250221 |  Community Pharmacy | BARAK SELIGMANN  | 26/5/2016 | 170 WEELSBY ROAD, GRIMSBY, S HUMBERSIDE, DN32 8QQ | True |
+    | 5     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9733907723 |  Community Pharmacy | Sandra RYAN  | 07/04/1994 | None | False |
+    | 6     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9467361590 |  Community Pharmacy | WALLIS ADEYEMO  | 19/4/2015 | 1 MIDLAND ROAD, LEEDS, LS6 1BQ | False |
+    | 7     | lead administrator | Leeds Pharmacy | True   | COVID-19 | AUTO-SUP-O-C      | 1/11/2025  | None | 9449304424 |  Community Pharmacy | John Test  | 02/01/1997 | 121C, Durants Road, ENFIELD, EN3 7DG | True |
 
 
   @recordvaccine
@@ -55,7 +55,7 @@ Feature: Streamlining Recording vaccine
     And I should be directed to the patient history page and show <name>, <nhs_number>, <date_of_birth> and <address> details
     And I continue from the patient history page
     And I acknowledge the interval warning and continue anyway
-    And I acknowledge the age warning and continue anyway
+    And I acknowledge the age warning to be False and continue anyway
     And I select consenting person
     And I click continue to select injection site
     And I select where the injection was given
@@ -140,5 +140,3 @@ Feature: Streamlining Recording vaccine
   #     # | 2 | 9470040228 | Spire Cheshire Hospital | Hospital hub for staff and patients | yes | today+290 | today-1 | yes | yes | today  | HERBERT HAAG  | 14/12/1922 | 10 COASTAL ROAD, HEST BANK, LANCASTER, LA2 6HN | Pertussis | AUTOMATION-RVS | 19/02/2029 |
   #     # | 3 | 9472710255 | Weaverham Surgery  | Housebound patient's home | yes | today+5 | today-3 | yes | yes | today-2 | DELICE PINKER | 10/11/1926 | HARDCRAGG HOUSE, HARDCRAGG WAY, GRANGE-OVER-SANDS, CUMBRIA, LA11 6BH | Respiratory syncytial virus (RSV) |  AUTOMATION-ARX | 19/10/2026 |
   #     # | 4 | 9473629885 | Watling Street Surgery | Outreach event | yes | today+50 | today-4 | yes | yes | today-3  | MARGIE PUCKEY |  27/5/1924 | MANSART COURT, 10 OLIVE SHAPLEY AVENUE, MANCHESTER, M20 6QB | Respiratory syncytial virus (RSV) |  AREX2-15A | 19/10/2026 |   - # This test is no longer needed as Arexvy has been decommissioned on 29th Nov 2024
-
-
