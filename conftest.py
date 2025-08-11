@@ -210,6 +210,11 @@ def navigate_and_login(shared_data, user_role=None, site=None):
                 attach_screenshot("select_multi_org_site")
                 select_site("Leeds Pharmacy (FDP35)")
                 click_continue_to_home_page_button()
+        if site == "trust site":
+            if user_role.lower() in ["recorder"]:
+                attach_screenshot("select_multi_org_site")
+                select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
+                click_continue_to_home_page_button()
         attach_screenshot("selected_site")
 
 def set_clinician_details(shared_data, site):
