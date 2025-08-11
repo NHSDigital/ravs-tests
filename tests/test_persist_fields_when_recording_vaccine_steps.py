@@ -69,7 +69,7 @@ def consent_values_should_not_persist(shared_data):
     attach_screenshot("assessment_date_value_did_not_persist")
     assert get_legal_mechanism_value_on_assessing_the_patient_page()== "Legal mechanism selection did not persist"
     attach_screenshot("legal_mechanism_value_did_not_persist")
-    assert get_patient_eligibility_assessing_clinician_vaccine_value() == ""
+    assert get_assessing_clinician_value_on_assessing_the_patient_page() == ""
     attach_screenshot("assessing_clinician_value_did_not_persist")
     assert get_assessment_outcome_value_on_assessing_the_patient_page() == "Assessment outcome selection did not persist"
     attach_screenshot("assessing_outcome_value_did_not_persist")
