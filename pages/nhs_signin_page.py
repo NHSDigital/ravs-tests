@@ -41,7 +41,7 @@ def enter_email_address(emailAddress, shared_data):
     if shared_data["test_env"].lower() == "local":
         enter_email_address_local(emailAddress)
     else:
-        find_element_and_perform_action(ENTER_ANY_LOGIN_TEXTBOX, "input_text", emailAddress)
+        find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "input_text", emailAddress)
 
 def enter_email_address_local(emailAddress):
     find_element_and_perform_action(ENTER_ANY_LOGIN_TEXTBOX, "input_text", emailAddress)
