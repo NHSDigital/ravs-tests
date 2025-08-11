@@ -16,7 +16,7 @@ def check_where_did_the_vaccination_take_place_label_exists():
     return check_element_exists(WHERE_DID_THE_VACCINATION_TAKE_PLACE_TEXT_ELEMENT)
 
 def click_vaccination_location_radio_button(location):
-    element = ("role", "radio", location)
+    element = ("role", "radio", location, { "exact": True })
     find_element_and_perform_action(element, "click")
 
 def check_select_vaccination_location_error_message_link_exists():
