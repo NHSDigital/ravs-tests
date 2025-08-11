@@ -199,15 +199,10 @@ def navigate_and_login(shared_data, user_role=None, site=None):
             shared_data["emailAddress"] = "neelima.guntupalli1@nhs.net"
             set_clinician_details(shared_data, site_lower)
 
-    if config["test_environment"].lower() == "local":
-        enter_email_address_local(shared_data["emailAddress"])
-        enter_password_local("test")
-        click_local_signin_button()
-    else:
-        enter_email_address(shared_data["emailAddress"])
-        password = config["credentials"]["ravs_password"]
-        enter_password(password)
-        click_nhs_signin_button()
+    enter_email_address(shared_data["emailAddress"], shared_data)
+    password = config["credentials"]["ravs_password"]
+    enter_password(password, shared_data)
+    click_nhs_signin_button(shared_data)
 
     if user_role.lower() in ["recorder", "administrator"] and site:
         if site == "leeds pharmacy":
@@ -671,18 +666,13 @@ def navigate_and_login_with_username(shared_data, username):
     attach_screenshot("clicked_login_button")
     emailAddress = username
 
-    if shared_data["test_env"].lower() == "local":
-        enter_email_address_local(emailAddress)
-        enter_password_local("test")
-        click_local_signin_button()
-    else:
-        enter_email_address(emailAddress)
-        attach_screenshot("entered_email_address")
-        password = config["credentials"]["ravs_password"]
-        enter_password(password)
-        attach_screenshot("entered_password")
-        click_nhs_signin_button()
-        attach_screenshot("clicked_nhs_signin_button")
+    enter_email_address(emailAddress, shared_data)
+    attach_screenshot("entered_email_address")
+    password = config["credentials"]["ravs_password"]
+    enter_password(password, shared_data)
+    attach_screenshot("entered_password")
+    click_nhs_signin_button(shared_data)
+    attach_screenshot("clicked_nhs_signin_button")
 
 @given(parse("I find the patient with {nhs_number} and click on patient's {name} and the get the count of immunisation history records for the chosen vaccine {chosen_vaccine}"))
 def step_find_patient_and_get_count_of_immunisation_history_records_before_recording_using_streamlining(name, nhs_number, chosen_vaccine, shared_data):

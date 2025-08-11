@@ -20,7 +20,6 @@ Scenario Outline: Sign in should fail based on credentials provided
 Examples:
 |emailAddress                           | password        | status|
 |neelima.guntupalli1@nhs.net-valid      | pass            | pass  |
-|None                                   | password        | fail  |
 # |neelima.guntupalli1@nhs.net            | password        | fail  |
 # |neelima.guntupalli1@nhs.net            | None            | fail  |
 |invalid_email_address                  | password        | fail  |

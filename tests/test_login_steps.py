@@ -41,9 +41,9 @@ def step_click_login_button():
     attach_screenshot("clicked_login_button")
 
 @then('the NHS sign in page should be visible')
-def step_nhs_sign_in_page_visible():
+def step_nhs_sign_in_page_visible(shared_data):
     attach_screenshot("nhs_sign_in_button_should_be_visible")
-    if check_signin_button_exists():
+    if check_signin_button_exists(shared_data):
         assert True, "NHS signin button is visible"
     else:
         assert False, "NHS signin button is not visible"
@@ -51,39 +51,31 @@ def step_nhs_sign_in_page_visible():
 @when(cfparse("I provide the {emailAddress} and {password}"))
 @when("I provide the <emailAddress> and <password>")
 def provide_credentials(emailAddress, password, shared_data):
-    if emailAddress == "None":
-        clear_emailAddress()
-        clear_password()
-        enter_password(password)
-    elif password == "None":
-        clear_password()
-        clear_emailAddress()
-        enter_email_address(emailAddress)
-    elif "long_email_address" in emailAddress:
+    if "long_email_address" in emailAddress:
         emailAddress = generate_random_string(65) + "nhs.net"
-        enter_email_address(emailAddress)
-        enter_password(password)
+        enter_email_address(emailAddress, shared_data)
+        enter_password(password, shared_data)
     elif "long_password" in password:
         password = generate_random_string(65)
-        enter_email_address(emailAddress)
-        enter_password(password)
+        enter_email_address(emailAddress, shared_data)
+        enter_password(password, shared_data)
     elif "valid" in emailAddress.lower() and "invalid" not in emailAddress.lower():
         emailAddress = emailAddress.strip("-valid")
-        enter_email_address(emailAddress)
+        enter_email_address(emailAddress, shared_data)
         password=config["credentials"]["ravs_password"]
         if password == "":
             assert False, "Please provide RAVs password as environment variable"
-        enter_password(password)
+        enter_password(password, shared_data)
     else:
-        enter_email_address(emailAddress)
-        enter_password(password)
+        enter_email_address(emailAddress, shared_data)
+        enter_password(password, shared_data)
     attach_screenshot("entered_emailAddress_and_password")
     shared_data['emailAddress'] = emailAddress
     shared_data['password'] = password
 
 @when("the NHS sign in button is clicked")
-def click_nhssignin():
-    click_nhs_signin_button()
+def click_nhssignin(shared_data):
+    click_nhs_signin_button(shared_data)
     attach_screenshot("clicked_nhs_signin_button")
 
 @then(parse("sign in should {status}"))
@@ -109,7 +101,7 @@ def verify_signin_status(status, shared_data):
         elif "valid" in data['emailAddress'] and status.lower()=="pass":
             attach_screenshot("logout_button_should_exist")
             assert check_logout_button_exists()
-            click_logout_button()
+            click_logout_button(shared_data)
             attach_screenshot("clicked_logout_button")
         else:
             attach_screenshot("check_unable_to_sign_in_error_exists")

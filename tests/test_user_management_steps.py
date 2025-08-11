@@ -195,7 +195,7 @@ def enter_user_details_for_adding(shared_data, first_name, last_name, nhs_email_
     if nhs_email_address == "automated.tester@nhs.net":
         random_number = random.randint(1000, 9999)
         nhs_email_address = f"automated.tester+{random_number}@nhs.net"
-    enter_email_address_to_add_user(nhs_email_address)
+    enter_email_address_to_add_user(nhs_email_address, shared_data)
     attach_screenshot("entered_email_address")
     shared_data["first_name"] = first_name
     shared_data["last_name"] = last_name
@@ -261,7 +261,7 @@ def change_detail_to_new_detail(shared_data, new_detail):
         enter_last_name_to_add_user(new_detail.split(" ")[1])
         attach_screenshot("entered_new_name")
     elif shared_data["detail"] == "email_address":
-        enter_email_address(new_detail)
+        enter_email_address(new_detail, shared_data)
         attach_screenshot("entered_new_email_address")
     elif shared_data["detail"] == "clinician_status":
         if new_detail == "yes":
