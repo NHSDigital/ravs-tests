@@ -127,7 +127,7 @@ def click_search_by_demographics_link():
     wait_for_element_to_appear(SEARCH_BUTTON)
     wait_for_element_to_appear(SEARCH_BY_DEMOGRAPHICS_LINK)
     find_element_and_perform_action(SEARCH_BY_DEMOGRAPHICS_LINK, "click")
-    wait_for_element_to_appear(SEARCH_BUTTON)
+    wait_for_element_to_appear(FIRST_NAME_INPUT)
 
 def click_search_by_local_records_link():
     wait_for_element_to_appear(SEARCH_BY_LOCAL_RECORDS_LINK)
