@@ -73,7 +73,8 @@ def consent_values_should_not_persist(shared_data):
     attach_screenshot("assessing_clinician_value_did_not_persist")
     assert get_assessment_outcome_value_on_assessing_the_patient_page() == "Assessment outcome selection did not persist"
     attach_screenshot("assessing_outcome_value_did_not_persist")
-    assess_patient_with_details_and_click_continue_to_consent(shared_data['eligible_decision'], shared_data['eligibility_type_new'], shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], None, shared_data['eligibility_assessment_date'], shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
+    eligibility_type = shared_data.get('eligibility_type_new', None) or shared_data['eligibility_type']
+    assess_patient_with_details_and_click_continue_to_consent(shared_data['eligible_decision'], eligibility_type, shared_data["healthcare_worker"], shared_data['eligibility_assessing_clinician'], None, shared_data['eligibility_assessment_date'], shared_data['legal_mechanism'], shared_data['eligibility_assessment_outcome'], shared_data['assessment_comments'],shared_data['eligibility_assessment_no_vaccine_given_reason'])
 
 @then("the patient's consent answer, consent given by, consenting clinician, selection must not persist on the consent screen")
 def consent_values_must_not_persist(shared_data):
