@@ -210,7 +210,7 @@ class BasePlaywrightHelper:
     def wait_for_element_to_appear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
         element = self.get_element(locator_or_element)
-        expect(element).to_be_visible()
+        expect(element).to_be_visible(timeout=10000)
         # start_time = time.time()
         # while time.time() - start_time < timeout / 1000:
         #     try:
