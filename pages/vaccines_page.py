@@ -94,7 +94,7 @@ def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_exp
 
         batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
         batch_xpath = (
-            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"//td[text()='{batch_number.upper()}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/following-sibling::td/strong[text()='Active']"
         )
 
@@ -111,7 +111,7 @@ def get_pack_size_if_required(shared_data, batch_number, batch_expiry_date, pack
 
     if ("community pharmacy" in care_model or "branch surgery" in care_model) and ("covid" in chosen_vaccine or "flu" in chosen_vaccine):
         pack_size_xpath = (
-            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"//td[text()='{batch_number.upper()}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/preceding-sibling::td[1]"
         )
 
@@ -120,7 +120,7 @@ def get_pack_size_if_required(shared_data, batch_number, batch_expiry_date, pack
             if pack_size_text:
                 return pack_size_text.strip()
         edit_batch_xpath = (
-            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"//td[text()='{batch_number.upper()}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/following-sibling::td/strong[text()='Active']/parent::td"
             f"/following-sibling::td[2]//a[contains(@id, 'editBatchId')]"
         )
