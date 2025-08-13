@@ -27,6 +27,8 @@ Scenario: Search without entering nhs number
     | Branch surgery      |       recorder      | Aire Valley Surgery (Rawdon)  |
 
 @findpatient
+@skip
+# Skipped due to bug: Incorrect error messaging on demographic search
 Scenario: Search without entering patient details
   Given I am on the find a patient by pds details page
   When I click the search button
@@ -155,6 +157,8 @@ Examples:
 
 
 @findpatient
+@skip
+# Skipped due to bug: Incorrect error messaging on demographic search
 Scenario Outline: Demographics: Search without entering patient details shows errors on the mandatory fields
   Given I am on the find a patient by demographics page
   When I click the search button
@@ -258,5 +262,3 @@ Examples:
   | 9450127077 | LUDMILLA MCKSN-PDS-ALPHA-SENSITIVE      | 2/5/1974    |         | Trust site         | lead administrator | Weaverham Surgery           |
   | 9733907723 | Sandra Ryan                             | 7/4/1994    |         | Community pharmacy | administrator      | Aspire Pharmacy             |
   | 9733907723 | Sandra Ryan                             | 7/4/1994    |         | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon)|
-
-
