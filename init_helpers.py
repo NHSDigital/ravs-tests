@@ -155,11 +155,11 @@ def resolve_element(element):
 
     return get_playwright_helper().get_element_by_type(element)
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def shared_data():
     return {}
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def initialize_session(shared_data):
     initialize_helpers()
     shared_data["test_env"] = config["test_environment"]
