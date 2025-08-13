@@ -83,7 +83,7 @@ def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_exp
         f"//tr[td[normalize-space(text())='{vaccine}'] and td[normalize-space(text())='{vaccine_type}']]"
     )
 
-    if check_element_exists(vaccine_xpath, True):
+    if check_element_exists_immediate(vaccine_xpath):
         view_xpath = (
             f"{vaccine_xpath}//td[normalize-space(text())='{vaccine_type}']"
             f"/following-sibling::td//a[normalize-space(text())='View']"
@@ -99,7 +99,7 @@ def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_exp
         )
 
         print(f"DEBUG: Checking batch XPath: {batch_xpath}")
-        return check_element_exists(batch_xpath, True)
+        return check_element_exists_immediate(batch_xpath)
 
     print(f"DEBUG: Vaccine row not found: {vaccine_xpath}")
     return False
@@ -179,7 +179,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(s
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
     batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Pending']"
     print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
-    result = check_element_exists(batch_number_with_expiry_date_element, True)
+    result = check_element_exists_immediate(batch_number_with_expiry_date_element)
     attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
     print(f"DEBUG: Batch element exists -> {result}")
     return result
@@ -189,7 +189,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
     batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td/strong[text()='Inactive']"
     print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
-    result = check_element_exists(batch_number_with_expiry_date_element, True)
+    result = check_element_exists_immediate(batch_number_with_expiry_date_element)
     attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
     print(f"DEBUG: Batch element exists -> {result}")
     return result

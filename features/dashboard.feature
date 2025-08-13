@@ -36,5 +36,4 @@ Feature: Dashboard
 
     Examples:
       | care_model          | user_role        | site                                                          |
-      | Community pharmacy  | recorder         | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service  |
-
+      | Community pharmacy  | recorder         | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service  |

@@ -71,11 +71,11 @@ def get_selected_pack_size_radio_button_value_on_choose_vaccine_page():
         return "Pack size not already selected"
 
 def select_single_vial_pack_radio_button():
-    if check_element_exists(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON):
+    if check_element_exists_immediate(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON):
         find_element_and_perform_action(SINGLE_VIAL_PACK_SIZE_RADIO_BUTTON, "check")
 
 def select_multi_vial_pack_radio_button():
-    if check_element_exists(MULTI_VIALS_PACK_SIZE_RADIO_BUTTON):
+    if check_element_exists_immediate(MULTI_VIALS_PACK_SIZE_RADIO_BUTTON):
         find_element_and_perform_action(MULTI_VIALS_PACK_SIZE_RADIO_BUTTON, "check")
 
 def check_select_pack_size_error_message_is_displayed():
@@ -92,8 +92,8 @@ def click_add_batch_button():
     find_element_and_perform_action(first_add_batch_button, "click")
 
 def check_batch_already_exists_error_message_is_displayed():
-    wait_for_element_to_appear(ERROR_MESSAGE_BATCH_ALREADY_EXISTS)
-    return check_element_exists(ERROR_MESSAGE_BATCH_ALREADY_EXISTS, False)
+    time.sleep(3) # You might be tempted to remove this, but it's going to be very hard to get around it
+    return check_element_exists_immediate(ERROR_MESSAGE_BATCH_ALREADY_EXISTS)
 
 def check_batch_already_exists_error_message_link_is_displayed():
     wait_for_element_to_appear(ERROR_MESSAGE_LINK_BATCH_ALREADY_EXISTS)

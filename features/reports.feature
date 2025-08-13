@@ -126,7 +126,7 @@ Feature: Reports
       | vaccineType                        | day                                       | care_model          | user_role          | site                          |
       | COVID-19                           | Last 31 days (includes today)             | Trust site          | lead administrator | Weaverham Surgery             |
       | Flu                                | Last 31 days (includes today)             | Trust site          | lead administrator | Weaverham Surgery             |
-      | Pertussis                          | Last 7 days (includes today)              | Community pharmacy  | administrator      | Aspire Pharmacy - Ormskirk - Covid Local Vaccination Service                |
+      | Pertussis                          | Last 7 days (includes today)              | Community pharmacy  | administrator      | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service                |
       | Respiratory syncytial virus (RSV)  | Last 14 days (includes today)             | Community pharmacy  | administrator      | Aspire Pharmacy               |
       | COVID-19                           | Select a custom date range up to 31 days  | Branch surgery      | administrator      | Aire Valley Surgery (Rawdon)  |
 

@@ -53,6 +53,7 @@ def enter_dose_amount_value(dose_amount):
     find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "type", dose_amount)
 
 def get_dose_amount_value():
+    wait_for_element_to_appear(DOSE_AMOUNT_READONLY_ELEMENT)
     return find_element_and_perform_action(DOSE_AMOUNT_READONLY_ELEMENT, "get_text")
 
 def get_pack_size_value():
@@ -102,9 +103,11 @@ def select_vaccination_site(site):
     find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
 
 def select_batch_number(batchNumber):
+    wait_for_element_to_disappear("text", "Loading...")
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
 
 def get_batch_number_options():
+    wait_for_element_to_disappear("text", "Loading...")
     return find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "get_options")
 
 def select_reason_for_no_vaccination(reason):

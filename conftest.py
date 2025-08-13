@@ -126,7 +126,7 @@ def navigate_and_login(shared_data, user_role=None, site=None):
     email_mapping = {
         "trust site": {
             "recorder": "neelima.guntupalli1+recorder_automated1@nhs.net",
-            "administrator": "neelima.guntupalli1@nhs.net",
+            "administrator": "neelima.guntupalli1+admin_automated1@nhs.net",
             "lead administrator": "neelima.guntupalli1@nhs.net",
             "default_site": "Weaverham Surgery"
         },
@@ -211,7 +211,7 @@ def navigate_and_login(shared_data, user_role=None, site=None):
                 select_site("Leeds Pharmacy (FDP35)")
                 click_continue_to_home_page_button()
         if site == "trust site":
-            if user_role.lower() in ["recorder"]:
+            if user_role.lower() in ["recorder", "administrator"]:
                 attach_screenshot("select_multi_org_site")
                 select_site("Mid Cheshire Hospitals NHS Foundation Trust (RBT)")
                 click_continue_to_home_page_button()
@@ -393,7 +393,7 @@ def check_site_vaccine_type_has_active_batch(shared_data, site, vaccine, vaccine
 
             elif inactive_batch:
                 future_date = datetime.today() + timedelta(days=365)
-                batch_expiry_date = standardize_date_format(future_date)
+                batch_expiry_date = standardize_date_format(future_date.strftime("%d/%m/%Y"))
                 shared_data["batch_expiry_date"] = batch_expiry_date
                 click_vaccines_nav_link()
                 add_site_vaccine(site, vaccine, vaccine_type, batch_number, batch_expiry_date, shared_data, pack_size)
@@ -421,12 +421,13 @@ def add_site_vaccine(site, vaccine, vaccine_type, batch_number, expiry_date, sha
     attach_screenshot("clicked_add_vaccine_button")
 
     # vaccines_choose_site_page
-    enter_site_name(site)
-    attach_screenshot("entered_site_name")
-    select_site_from_list(site)
-    attach_screenshot("selected_site_from_list")
-    click_continue_to_add_vaccine_button()
-    attach_screenshot("clicked_continue_to_add_vaccine_button")
+    if site not in ["Aire Valley Surgery (Rawdon)", "Leeds Pharmacy"]:
+        enter_site_name(site)
+        attach_screenshot("entered_site_name")
+        select_site_from_list(site)
+        attach_screenshot("selected_site_from_list")
+        click_continue_to_add_vaccine_button()
+        attach_screenshot("clicked_continue_to_add_vaccine_button")
 
     # choose_vaccine_page
     click_vaccine_radiobutton_on_add_vaccine_screen(vaccine)
@@ -652,8 +653,9 @@ def enter_vaccine_details_and_click_save_and_return(vaccinate_decision, care_mod
             attach_screenshot("selected_reason_for_no_vaccination")
             click_save_and_return_button_on_record_vaccinated_page()
             attach_screenshot("clicked_save_and_return_button_on_record_vaccinated_page")
-        click_save_and_return_button_on_record_vaccinated_page()
-        attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
+        else:
+            click_save_and_return_button_on_record_vaccinated_page()
+            attach_screenshot("patient_decided_to_not_vaccinate_saved_and_returned")
 
 def navigate_and_login_with_username(shared_data, username):
     url = get_app_url(config["test_environment"])

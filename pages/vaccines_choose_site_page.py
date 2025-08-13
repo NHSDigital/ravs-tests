@@ -1,7 +1,7 @@
 import time
 from init_helpers import *
 
-SITE_SEARCH = ("role", "textbox", "Enter 3 or more characters to search")
+SITE_SEARCH = ("label", "Search by name or ODS code")
 CONTINUE_TO_ADD_VACCINE_BUTTON = ("role", "button", "Continue")
 SITE_LIST = (".siteRows")
 # ERROR_BATCH_ALREADY_EXISTS = "//p[text()='Error! One or more vaccine batches already exist at a site.']"
