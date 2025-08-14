@@ -23,9 +23,9 @@ Feature: Dashboard
     And the create a report link should be visible
 
     Examples:
-      | care_model          | user_role             | site                          |
-      | Trust site          | lead administrator    | Weaverham Surgery             |
-      | Branch surgery      | administrator         | Aire Valley Surgery (Rawdon)  |
+      | care_model     | user_role          | site                         |
+      | Trust site     | lead administrator | Weaverham Surgery            |
+      | Branch surgery | administrator      | Aire Valley Surgery (Rawdon) |
 
   Scenario Outline: Create a report link should not be visible for recorders
     Given I am logged into the RAVS app as <user_role> into care model <care_model> with <site>
@@ -35,5 +35,5 @@ Feature: Dashboard
     And the create a report link should not be visible
 
     Examples:
-      | care_model          | user_role        | site                                                          |
-      | Community pharmacy  | recorder         | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service  |
+      | care_model         | user_role | site                                                                              |
+      | Community pharmacy | recorder  | Aspire Pharmacy (The Concourse Shopping Centre) - Covid Local Vaccination Service |
