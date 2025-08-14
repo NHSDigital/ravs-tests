@@ -26,8 +26,11 @@ def get_playwright_helper():
     global playwright_helper_instance
     if playwright_helper_instance is None:
         playwright_helper_instance = PlaywrightHelper(get_working_directory(), config)
-    playwright_helper_instance.start_browser_if_needed()
     return playwright_helper_instance
+
+def clear_playwright_helper():
+    global playwright_helper_instance
+    playwright_helper_instance = None
 
 def get_working_directory():
     cwd = os.getcwd()
@@ -152,18 +155,17 @@ def resolve_element(element):
 
     return get_playwright_helper().get_element_by_type(element)
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def shared_data():
     return {}
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def initialize_session(shared_data):
     initialize_helpers()
     shared_data["test_env"] = config["test_environment"]
     yield
     after_all()
     shared_data.clear()
-    quit_browser()
 
 @pytest.fixture(scope="function")
 def playwright_helper():
@@ -195,10 +197,21 @@ def navigate_to_url(url):
     get_playwright_helper().navigate_to_url(url)
 
 def check_element_exists(element, wait=False):
-    wait_for_page_to_load(5)
     try:
         resolved_element = resolve_element(element)
         return get_playwright_helper().check_element_exists(resolved_element, wait)
+    except Exception as e:
+        pytest.fail(f"An error occurred: {e}")
+
+def check_element_exists_immediate(element):
+    # This function checks if an element exists immediately without waiting
+    resolved_element = resolve_element(element)
+    return get_playwright_helper().check_element_exists_immediate(resolved_element)
+
+def check_element_not_exists(element, wait=False):
+    try:
+        resolved_element = resolve_element(element)
+        return get_playwright_helper().check_element_not_exists(resolved_element, wait)
     except Exception as e:
         pytest.fail(f"An error occurred: {e}")
 
@@ -261,7 +274,6 @@ def javascript_click(element):
 
 def find_element_and_perform_action(element, action, inputValue=None):
     element = resolve_element(element)
-    wait_until_spinner_disappears()
     return get_playwright_helper().find_element_and_perform_action(element, action, inputValue)
 
 def wait_until_spinner_disappears():
@@ -330,5 +342,3 @@ def get_date_value_by_days(date):
 
 if not config:
     config = load_config_from_env()
-
-

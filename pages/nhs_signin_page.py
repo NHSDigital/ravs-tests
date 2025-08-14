@@ -25,19 +25,23 @@ def ensure_sign_in_heading_element_exists():
 def navigate_to_nhs_signin_page(url):
     navigate_to_url(url)
 
-def check_signin_button_exists():
-    ensure_sign_in_heading_element_exists()
-    return check_element_exists(SIGN_IN_BUTTON_ELEMENT, True)
+def check_signin_button_exists(shared_data):
+    if shared_data["test_env"].lower() == "local":
+        return check_element_exists(LOCAL_SIGN_IN_BUTTON, True)
+    else:
+        return check_element_exists(SIGN_IN_BUTTON_ELEMENT, True)
 
-def click_nhs_signin_button():
-    ensure_sign_in_heading_element_exists()
-    find_element_and_perform_action(SIGN_IN_BUTTON_ELEMENT, "click")
-    wait_for_page_to_load(timeout=10)
-    time.sleep(2)
+def click_nhs_signin_button(shared_data):
+    if shared_data["test_env"].lower() == "local":
+        click_local_signin_button()
+    else:
+        find_element_and_perform_action(SIGN_IN_BUTTON_ELEMENT, "click")
 
-def enter_email_address(emailAddress):
-    ensure_sign_in_heading_element_exists()
-    find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "input_text", emailAddress)
+def enter_email_address(emailAddress, shared_data):
+    if shared_data["test_env"].lower() == "local":
+        enter_email_address_local(emailAddress)
+    else:
+        find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "input_text", emailAddress)
 
 def enter_email_address_local(emailAddress):
     find_element_and_perform_action(ENTER_ANY_LOGIN_TEXTBOX, "input_text", emailAddress)
@@ -46,32 +50,26 @@ def enter_password_local(password):
     find_element_and_perform_action(PASSWORD_TEXTBOX, "input_text", password)
 
 def click_local_signin_button():
-    ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(LOCAL_SIGN_IN_BUTTON, "click")
-    wait_for_page_to_load(timeout=10)
     CONTINUE_BUTTON = ("role", "button", "continue")
     find_element_and_perform_action(CONTINUE_BUTTON, "click")
-    wait_for_page_to_load(timeout=10)
-    time.sleep(2)
 
 def clear_emailAddress():
-    ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(EMAIL_INPUT_ELEMENT, "clear")
 
 def clear_password():
-    ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(PASSWORD_INPUT_ELEMENT, "clear")
 
-def enter_password(password):
-    ensure_sign_in_heading_element_exists()
-    find_element_and_perform_action(PASSWORD_INPUT_ELEMENT, "input_text", password)
+def enter_password(password, shared_data):
+    if shared_data["test_env"].lower() == "local":
+        enter_password_local(password)
+    else:
+        find_element_and_perform_action(PASSWORD_INPUT_ELEMENT, "input_text", password)
 
 def click_keep_me_signed_in():
-    ensure_sign_in_heading_element_exists()
     find_element_and_perform_action(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT, "click")
 
 def check_password_error_alert_exists():
-    wait_for_page_to_load(timeout=10)
     wait_for_element_to_appear(KEEP_ME_SIGNED_IN_CHECKBOX_ELEMENT)
     wait_for_element_to_appear(ALERT_TEXT_PASSWORD)
     return check_element_exists(ALERT_TEXT_PASSWORD, True)

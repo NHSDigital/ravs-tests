@@ -154,7 +154,11 @@ def get_vaccination_type(index, vaccine):
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
 
-def get_vaccination_location(index):
+def get_vaccination_location(index, vaccine):
+    if vaccine.lower() == "respiratory syncytial virus (rsv)":
+        return None
+    if vaccine.lower() == "pertussis":
+        return None
     return vaccination_locations[get_wrapped_index(index, len(vaccination_locations))]
 
 def get_legal_mechanism(index):
@@ -179,7 +183,6 @@ def get_vaccine_type_ampp_codes(vaccine_type):
     for vaccine in vaccine_type_ampp_codes_pack_sizes["vaccines"]:
         if vaccine["name"] == vaccine_type:
             return {
-                "amppCode": vaccine["amppCode"],
                 "packSizes": vaccine["packSizes"]
             }
     return "Unknown vaccine type"
@@ -218,6 +221,10 @@ def get_vaccine_type_pack_size_by_index(index, vaccine_type):
         print("pack_sizes_data content:", pack_sizes_data)
 
         if isinstance(pack_sizes_data, list) and pack_sizes_data:
+            if(len(pack_sizes_data) < 2):
+                print("Error: not enough packSizes")
+                return None
+
             size_options = [item["size"] for item in pack_sizes_data if "size" in item]
 
             if size_options:

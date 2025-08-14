@@ -20,67 +20,54 @@ def ensure_check_and_add_user_test_element_exists():
         wait_for_element_to_appear(CHECK_AND_ADD_USER_TEXT_ELEMENT)
 
 def check_confirm_and_send_button_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(CONFIRM_AND_SEND_BUTTON)
 
 def click_confirm_and_send_button():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     find_element_and_perform_action(CONFIRM_AND_SEND_BUTTON, "click")
 
 def check_change_name_link_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(CHANGE_NAME_LINK)
 
 def click_change_name_link():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     find_element_and_perform_action(CHANGE_NAME_LINK, "click")
 
 def check_change_email_address_link_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(CHANGE_EMAIL_ADDRESS_LINK)
 
 def click_change_email_address_link():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     find_element_and_perform_action(CHANGE_EMAIL_ADDRESS_LINK, "click")
 
 def check_change_clinical_status_link_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(CHANGE_CLINICAL_STATUS_LINK)
 
 def click_change_clinical_status_link():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     find_element_and_perform_action(CHANGE_CLINICAL_STATUS_LINK, "click")
 
 def check_change_permission_level_link_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(CHANGE_PERMISSION_LEVEL_LINK)
 
 def click_change_permission_level_link():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     find_element_and_perform_action(CHANGE_PERMISSION_LEVEL_LINK, "click")
 
 def check_activate_your_okta_account_message_text_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(ACTIVATE_YOUR_OKTA_ACCOUNT_TEXT)
 
 def check_login_to_ravs_message_text_exists():
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     return check_element_exists(LOGIN_TO_RAVS_TEXT)
 
 def click_change_detail_link(detail):
-    ensure_check_and_add_user_test_element_exists()
     wait_for_element_to_appear(CONFIRM_AND_SEND_BUTTON)
     if detail == "name":
         click_change_name_link()
@@ -92,25 +79,21 @@ def click_change_detail_link(detail):
         click_change_clinical_status_link()
 
 def get_users_name():
-    ensure_check_and_add_user_test_element_exists()
     element = ("xpath", "//dt[text()='Name']/following-sibling::dd[@class='nhsuk-summary-list__value']")
     wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def get_users_email_address():
-    ensure_check_and_add_user_test_element_exists()
     element = ("xpath", "//dt[text()='Email address']/following-sibling::dd[@class='nhsuk-summary-list__value']")
     wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def get_users_clinician_status():
-    ensure_check_and_add_user_test_element_exists()
     element = ("xpath", "//dt[text()='Clinical']/following-sibling::dd[@class='nhsuk-summary-list__value']")
     wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")
 
 def get_users_permission_level():
-    ensure_check_and_add_user_test_element_exists()
     element = ("xpath", "//dt[text()='Permission level']/following-sibling::dd[@class='nhsuk-summary-list__value']")
     wait_for_element_to_appear(element)
     return find_element_and_perform_action(element, "get_text")

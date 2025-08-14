@@ -1,7 +1,7 @@
 from asyncio.log import logger
 import json
 import time
-from playwright.sync_api import sync_playwright, TimeoutError, Locator
+from playwright.sync_api import sync_playwright, TimeoutError, Locator, expect
 from axe_core_python.sync_playwright import Axe
 from requests import request
 from init_helpers import *
@@ -11,13 +11,6 @@ import platform
 from helpers.mockdatabaseHelper import MockDatabaseHelper
 from urllib.parse import urlparse
 
-_cached_playwright = None
-
-def get_sync_playwright():
-    global _cached_playwright
-    if _cached_playwright is None:
-        _cached_playwright = sync_playwright().start()
-    return _cached_playwright
 class BasePlaywrightHelper:
     def __init__(self, working_directory, config):
         self.working_directory = working_directory
@@ -26,10 +19,15 @@ class BasePlaywrightHelper:
         self.config = config
         if not os.path.exists(self.screenshots_dir):
             os.makedirs(self.screenshots_dir)
-        self.playwright = get_sync_playwright()
         self.browser = None
         self.context = None
         self.page = None
+
+    def start(self, playwright, context, page):
+        self.playwright = playwright
+        self.context = context
+        self.page = page
+        self.browser = self.context.browser
 
     def get_or_create_page(self):
         if not self.page or self.page.is_closed():
@@ -71,7 +69,7 @@ class BasePlaywrightHelper:
 
     def launch_chrome(self, headless_mode):
         try:
-            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--disable-gpu", "--no-sandbox"])
+            self.browser = self.playwright.chromium.launch(channel="chrome", headless=headless_mode, args=["--fullscreen", "--ignore-certificate-errors", "--disable-gpu"])
             self.context = self.browser.new_context()
             self.page = self.get_or_create_page()
         except Exception as e:
@@ -174,7 +172,6 @@ class BasePlaywrightHelper:
 
     def wait_for_page_to_load(self, timeout=5):
         try:
-            time.sleep(1)
             self.page.wait_for_load_state('load', timeout=timeout * 1000)
             self.page.wait_for_selector('body', timeout=timeout * 1000)
             self.page.wait_for_function(
@@ -191,6 +188,7 @@ class BasePlaywrightHelper:
         """Utility method to get an element with optional waiting."""
         try:
             if isinstance(locator_or_element, str):
+                raise Exception("get_element Locator should not be a string.")
                 if wait:
                     self.page.wait_for_selector(locator_or_element, state="visible", timeout=timeout * 1000)
                     element = self.page.locator(locator_or_element)
@@ -210,43 +208,58 @@ class BasePlaywrightHelper:
 
     def wait_for_element_to_appear(self, locator_or_element, timeout=10000, poll_interval=0.1):
         """Waits for an element to be visible, polling every 0.1s, failing fast if missing."""
-        start_time = time.time()
-        while time.time() - start_time < timeout / 1000:
-            try:
-                element = self.get_element(locator_or_element, wait=True)
-                if element and element.is_visible():
-                    print(f"✅ Element '{locator_or_element}' appeared.")
-                    return element
-            except Exception:
-                pass
-            time.sleep(poll_interval)
-        print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
-        return None
+        element = self.get_element(locator_or_element)
+        expect(element).to_be_visible(timeout=10000)
+        # start_time = time.time()
+        # while time.time() - start_time < timeout / 1000:
+        #     try:
+        #         element = self.get_element(locator_or_element, wait=True)
+        #         if element and element.is_visible():
+        #             print(f"✅ Element '{locator_or_element}' appeared.")
+        #             return element
+        #     except Exception:
+        #         pass
+        #     time.sleep(poll_interval)
+        # print(f"⚠️ Fast-fail: Element '{locator_or_element}' did not appear.")
+        # return None
 
     def wait_for_element_to_disappear(self, locator_or_element, timeout=10000, poll_interval=0.1):
-        start_time = time.time()
-        while time.time() - start_time < timeout / 1000:
-            try:
-                element = self.get_element(locator_or_element, wait=True)
-                if not element or not element.is_visible():
-                    print(f"✅ Element '{locator_or_element}' disappeared.")
-                    return True
-            except Exception:
-                print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
-                return True
-            time.sleep(poll_interval)
-        print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
-        return False
+        # We shouldn't really be waiting for negatives?
+        return True
+        # start_time = time.time()
+        # while time.time() - start_time < timeout / 1000:
+        #     try:
+        #         element = self.get_element(locator_or_element, wait=True)
+        #         if not element or not element.is_visible():
+        #             print(f"✅ Element '{locator_or_element}' disappeared.")
+        #             return True
+        #     except Exception:
+        #         print(f"⚠️ Exception occurred while checking '{locator_or_element}', assuming it's gone.")
+        #         return True
+        #     time.sleep(poll_interval)
+        # print(f"⚠️ Timeout: Element '{locator_or_element}' did not disappear within {timeout} ms.")
+        # return False
 
     def check_element_exists(self, locator_or_element, wait=False, timeout=5):
         element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
-        if element:
-            is_visible = element.is_visible()
-            print(f"Element visibility check result: {is_visible}")
-            if element.is_visible():
-                element.scroll_into_view_if_needed()
-            return is_visible
-        return False
+        expect(element).to_be_visible()
+        return True
+        # if element:
+        #     is_visible = element.is_visible()
+        #     print(f"Element visibility check result: {is_visible}")
+        #     if element.is_visible():
+        #         element.scroll_into_view_if_needed()
+        #     return is_visible
+        # return False
+
+    def check_element_exists_immediate(self, locator_or_element):
+        element = self.get_element(locator_or_element)
+        return element.is_visible()
+
+    def check_element_not_exists(self, locator_or_element, wait=False, timeout=5):
+        element = self.get_element(locator_or_element, wait=wait, timeout=timeout)
+        expect(element).not_to_be_visible()
+        return True
 
     def check_element_enabled(self, selector, wait=False):
         element = self.get_element(selector, wait=wait)
@@ -370,6 +383,10 @@ class BasePlaywrightHelper:
         element_handle = element.element_handle()
         self.page.evaluate("element => element.click()", element_handle)
 
+    def mock_fonts(self):
+        """Mock fonts to prevent loading external resources."""
+        self.page.route("**/*.{woff,woff2,ttf,otf}", lambda route: route.abort())
+
     def mock_api_response(self, working_directory):
         endpoint_pattern = "**/api/patient/nhsNumberSearch*"
         endpoint_pattern = "https://api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/**"
@@ -467,66 +484,33 @@ class BasePlaywrightHelper:
         if not screenshot_name:
             screenshot_name = "".join(c if c.isalnum() else "_" for c in str(locator_or_element)) or "element_action"
 
-        self.wait_for_page_to_load(10)
-        time.sleep(0.5)
+        element = self.get_element(locator_or_element, wait=True)
+        self.disable_smooth_scrolling()
 
-        # DEFAULT_WAIT_TIMEOUT = 10000
-        retries = 0
+        if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
+            raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
 
-        while retries < max_retries:
-            try:
-                element = self.get_element(locator_or_element, wait=True)
-                if not element:
-                    time.sleep(3)
-                    if not element:
-                        print(f"[FAIL FAST] Element not found for action: {action}. Skipping further retries.")
-                    return None
+        action_map = {
+            "click": lambda: self._click_element(element),
+            "check": lambda: self._check_element(element),
+            "uncheck": lambda: self._uncheck_element(element),
+            "select_option": lambda: self._select_option(element, inputValue),
+            "get_options": lambda: self._get_options(element),
+            "clear": lambda: self._clear_element(element),
+            "input_text": lambda: self._input_text(element, inputValue),
+            "type_text": lambda: self._type_text(element, inputValue),
+            "get_text": lambda: self._get_text(element),
+            "get_value": lambda: self._get_value(element),
+            "scroll_to": lambda: self._scroll_to_element(element),
+            "get_selected_option": lambda: self._get_selected_option(element),
+        }
 
-                if not element.is_visible():
-                    print(f"[FAIL FAST] Element found but not visible for action: {action}. Waiting briefly to confirm...")
-                    time.sleep(3)
-                    if not element.is_visible():
-                        print(f"[FAIL FAST] Still not visible. Skipping further retries.")
-                        return None
+        if action.lower() not in action_map:
+            print(f"Unsupported action: {action}")
+            return
 
-                self.disable_smooth_scrolling()
-                self.wait_for_element_to_appear(element)
-
-                if action.lower() in ["input_text", "type_text", "select_option"] and inputValue is None:
-                    raise ValueError(f"`inputValue` required for action '{action}' but not provided.")
-
-                element.scroll_into_view_if_needed()
-
-                action_map = {
-                    "click": lambda: self._click_element(element),
-                    "check": lambda: self._check_element(element),
-                    "uncheck": lambda: self._uncheck_element(element),
-                    "select_option": lambda: self._select_option(element, inputValue),
-                    "get_options": lambda: self._get_options(element),
-                    "clear": lambda: self._clear_element(element),
-                    "input_text": lambda: self._input_text(element, inputValue),
-                    "type_text": lambda: self._type_text(element, inputValue),
-                    "get_text": lambda: self._get_text(element),
-                    "get_value": lambda: self._get_value(element),
-                    "scroll_to": lambda: self._scroll_to_element(element),
-                    "get_selected_option": lambda: self._get_selected_option(element),
-                }
-
-                if action.lower() not in action_map:
-                    print(f"Unsupported action: {action}")
-                    return
-
-                result = action_map[action.lower()]()
-                return result
-            except TimeoutError:
-                print(f"Timeout waiting for element to perform {action}. Retrying... ({retries+1}/{max_retries})")
-            except Exception as e:
-                print(f"Exception: {e} during {action} on element. Retrying... ({retries+1}/{max_retries})")
-
-            retries += 1
-            time.sleep(retry_delay)
-
-        print(f"Action '{action}' failed after {max_retries} retries.")
+        result = action_map[action.lower()]()
+        return result
 
     def is_element_really_visible(self, element):
         try:
@@ -579,7 +563,7 @@ class BasePlaywrightHelper:
     def _type_text(self, element, inputValue):
         if element.text_content() != '':
             element.clear()
-        element.type(inputValue, delay=50)
+        element.type(inputValue)
         print(f"Typed text '{inputValue}'.")
 
     def _get_text(self, element):

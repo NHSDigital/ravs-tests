@@ -33,41 +33,32 @@ def ensure_to_enter_batch_details_button_is_visible():
         wait_for_element_to_appear(CONTINUE_TO_ENTER_BATCH_DETAILS_BUTTON)
 
 def click_view_product_link(vaccine):
-    ensure_add_vaccine_button_is_visible()
     click_link_in_row(vaccine, 0)
 
 def click_first_available_view_product_link():
-    ensure_add_vaccine_button_is_visible()
     xpath = "(//tr[@role='row']//a[contains(text(),'View product')])[1]"
     find_element_and_perform_action(("xpath", xpath), "click")
 
 def check_add_vaccine_button_exists():
-    ensure_add_vaccine_button_is_visible()
     wait_for_element_to_appear(add_vaccine_button)
     return check_element_exists(add_vaccine_button)
 
 def click_add_vaccine_button():
-    ensure_add_vaccine_button_is_visible()
     find_element_and_perform_action(add_vaccine_button, "click")
 
 def click_continue_to_add_batch_page_button():
-    ensure_to_enter_batch_details_button_is_visible()
     find_element_and_perform_action(continue_to_add_batch_page_button, "click")
 
 def filter_by_site(site):
-    ensure_add_vaccine_button_is_visible()
     find_element_and_perform_action(filter_by_site_dropdown, "select_option", site)
 
 def click_view_vaccine_product_link(vaccine):
-    ensure_add_vaccine_button_is_visible()
     click_link_in_row(vaccine, 0)
 
 def click_add_batch_for_vaccine_link(vaccine):
-    ensure_add_vaccine_button_is_visible()
     click_link_in_row(vaccine, 1)
 
 def click_first_available_add_batch_link():
-    ensure_add_vaccine_button_is_visible()
     element = "(//a[text()='Add batch'])[1]"
     javascript_click(element)
 
@@ -83,17 +74,16 @@ def to_title_case(text):
     return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
 
 def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_expiry_date):
-    time.sleep(1)
     wait_for_element_to_disappear(PAGE_LOADING_ELEMENT)
-    site = to_title_case(site)
+    site = site.lower()
     vaccine = "COVID-19" if vaccine.lower() == "covid-19" else vaccine
 
     vaccine_xpath = (
-        f"//table[caption[normalize-space(text())='{site}']]"
+        f"//table[caption[normalize-space(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'))='{site}']]"
         f"//tr[td[normalize-space(text())='{vaccine}'] and td[normalize-space(text())='{vaccine_type}']]"
     )
 
-    if check_element_exists(vaccine_xpath, True):
+    if check_element_exists_immediate(vaccine_xpath):
         view_xpath = (
             f"{vaccine_xpath}//td[normalize-space(text())='{vaccine_type}']"
             f"/following-sibling::td//a[normalize-space(text())='View']"
@@ -104,12 +94,12 @@ def does_active_batch_exist(site, vaccine, vaccine_type, batch_number, batch_exp
 
         batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
         batch_xpath = (
-            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"//td[text()='{batch_number.upper()}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/following-sibling::td/strong[text()='Active']"
         )
 
         print(f"DEBUG: Checking batch XPath: {batch_xpath}")
-        return check_element_exists(batch_xpath, True)
+        return check_element_exists_immediate(batch_xpath)
 
     print(f"DEBUG: Vaccine row not found: {vaccine_xpath}")
     return False
@@ -121,7 +111,7 @@ def get_pack_size_if_required(shared_data, batch_number, batch_expiry_date, pack
 
     if ("community pharmacy" in care_model or "branch surgery" in care_model) and ("covid" in chosen_vaccine or "flu" in chosen_vaccine):
         pack_size_xpath = (
-            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"//td[text()='{batch_number.upper()}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/preceding-sibling::td[1]"
         )
 
@@ -130,7 +120,7 @@ def get_pack_size_if_required(shared_data, batch_number, batch_expiry_date, pack
             if pack_size_text:
                 return pack_size_text.strip()
         edit_batch_xpath = (
-            f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']"
+            f"//td[text()='{batch_number.upper()}']/following-sibling::td[text()='{batch_expiry_date}']"
             f"/following-sibling::td/strong[text()='Active']/parent::td"
             f"/following-sibling::td[2]//a[contains(@id, 'editBatchId')]"
         )
@@ -189,7 +179,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_pending(s
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
     batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td[text()='{batch_expiry_date}']/following-sibling::td/strong[text()='Pending']"
     print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
-    result = check_element_exists(batch_number_with_expiry_date_element, True)
+    result = check_element_exists_immediate(batch_number_with_expiry_date_element)
     attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
     print(f"DEBUG: Batch element exists -> {result}")
     return result
@@ -199,7 +189,7 @@ def check_vaccine_batch_exists_with_same_number_and_expiry_date_and_is_inactive(
     batch_expiry_date = date_format_with_name_of_month(batch_expiry_date)
     batch_number_with_expiry_date_element = f"//td[text()='{batch_number}']/following-sibling::td/strong[text()='Inactive']"
     print(f"DEBUG: Checking batch element: {batch_number_with_expiry_date_element}")
-    result = check_element_exists(batch_number_with_expiry_date_element, True)
+    result = check_element_exists_immediate(batch_number_with_expiry_date_element)
     attach_screenshot("checked_batch_number_with_expiry_date_element_exists")
     print(f"DEBUG: Batch element exists -> {result}")
     return result

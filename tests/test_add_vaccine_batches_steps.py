@@ -44,18 +44,19 @@ def i_click_confirm_button():
     attach_screenshot("clicked_confirm_choices_button")
 
 @when(parse("I view product for the existing {vaccine_type} in an existing {site}"))
-def view_product_for_site_and_vaccine_type(shared_data, vaccine_type, site):
+def view_product_for_site_and_vaccine_type(shared_data, vaccine_type, site, page):
     click_view_product(site, vaccine_type)
+    page.get_by_role("heading", name=vaccine_type).wait_for(state="visible")
     attach_screenshot("clicked_view_product_link")
 
-@when(parse("I enter {batch_number} that already exists and {expiry_date}"))
-def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date):
+@when(parse("I enter {batch_number} that already exists with {expiry_date} and {pack_size}"))
+def i_enter_batchnumber_and_expirydate(shared_data, batch_number, expiry_date, pack_size):
     click_add_batch_button()
     attach_screenshot("clicked_add_batch_button")
     enter_batch_number(batch_number)
     enter_expiry_date(expiry_date)
     attach_screenshot("entered_batch_number")
-    select_pack_size("10 vials")
+    select_pack_size(pack_size)
     click_continue_to_add_batch_button()
 
 @then("the add batch page should be launched")

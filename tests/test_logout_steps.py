@@ -15,12 +15,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @when('I click the logout button')
-def click_logout():
+def click_logout(shared_data):
     if config["browser"] == "mobile":
         if check_navbar_toggle_exists():
             click_navbar_toggler()
     attach_screenshot("before_clicking_logged_out")
-    click_logout_button()
+    click_logout_button(shared_data)
 
 @then('the user should be logged out successfully')
 def check_logged_out():

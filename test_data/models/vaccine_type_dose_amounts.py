@@ -25,7 +25,14 @@ vaccine_type_dose_amounts = {
     "Adacel vaccine suspension": 0.5,
     "Boostrix-IPV suspension": 0.5,
     "Repevax vaccine suspension": 0.5,
-    "Abrysvo": 0.5,
+    "RSVpreF (Abrysvo)": 0.5,
     "Arexvy": 0.5,
-    "Fluenz (LAIV)": 0.2
+    "Fluenz (LAIV)": 0.2,
+    "Adjuvanted Trivalent Influenza Vaccine (aTIV)": 0.5,
+    "Cell-based Trivalent Influenza Vaccine (TIVc)": 0.5,
+    "Efluelda (TIV-HD)": 0.5,
+    "Fluenz (LAIV)": 0.2,
+    "Influvac (TIVe)": 0.5,
+    "Supemtek (TIVr)": 0.5,
+    "Vaxigrip (TIVe)": 0.5,
 }

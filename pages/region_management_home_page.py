@@ -14,12 +14,9 @@ def ensure_invite_an_organisation_label_exists():
         wait_for_element_to_appear(ONCE_SET_UP_TEXT_ELEMENT)
 
 def click_invite_an_organisation_button():
-    ensure_invite_an_organisation_label_exists()
     find_element_and_perform_action(INVITE_ORG_TEXT_ELEMENT, "click")
 
 def click_invited_organisation_name_link(org):
-    ensure_invite_an_organisation_label_exists()
     element = ("role", "cell", org)
     check_element_exists(element)
     find_element_and_perform_action(element, "click")
-

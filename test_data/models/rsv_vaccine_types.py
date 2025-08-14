@@ -1,4 +1,4 @@
 rsv_vaccine_types = [
-    "Abrysvo",
+    "RSVpreF (Abrysvo)",
     # "Arexvy", # This has been decommissioned on 29th 11 2024
 ]

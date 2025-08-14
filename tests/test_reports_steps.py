@@ -120,7 +120,7 @@ def the_no_vaccination_data_to_report_on_message_should_be_displayed():
 
 @then("the Create report button should be disabled")
 def the_create_report_button_should_be_disabled():
-    assert check_create_report_button_exists() == False
+    assert check_create_report_button_not_exists() == True
     assert check_no_vaccination_data_to_report_message_exists() == True
     attach_screenshot("Create report button should be disabled")
     logging.info("Create report button should be disabled")
@@ -631,11 +631,10 @@ def the_report_is_downloaded_successfully(shared_data):
 
 @then("reports navigation link should not be visible")
 def reports_nav_link_should_not_be_visible_for_recorder():
-    assert check_reports_nav_link_exists() == False
+    assert check_reports_nav_link_not_exists() == True
     attach_screenshot("reports_nav_link_should_not_exist")
 
 @then("reports navigation link should be visible")
 def reports_nav_link_should_not_be_visible_for_administrator():
     assert check_reports_nav_link_exists() == True
     attach_screenshot("reports_nav_link_should_exist")
-
