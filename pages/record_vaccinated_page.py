@@ -103,7 +103,7 @@ def select_vaccination_site(site):
     find_element_and_perform_action(VACCINATION_SITE_DROPDOWN_ELEMENT, "select_option", site)
 
 def select_batch_number(batchNumber):
-    wait_for_element_to_disappear("text", "Loading...")
+    get_element_by_type("xpath", "//select[@id='BatchNumber']/option[.='" + batchNumber + "']").wait_for(state="attached")
     find_element_and_perform_action(BATCH_NUMBER_DROPDOWN_ELEMENT, "select_option", batchNumber)
 
 def get_batch_number_options():
