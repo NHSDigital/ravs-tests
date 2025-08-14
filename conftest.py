@@ -1128,7 +1128,7 @@ def immunisation_history_should_be_updated(shared_data):
     assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
     click_delete_history_link(shared_data["chosen_vaccine"])
     attach_screenshot("click_delete_history_link")
-    click_delete_vaccination_button()
+    click_delete_vaccination_button(shared_data["patient_name"])
     attach_screenshot("click_delete_vaccination_button")
 
 @then("the immunisation history of the patient should be updated in the patient details page and not be deleted")
