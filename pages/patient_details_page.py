@@ -168,7 +168,7 @@ def click_show_all_pertussis_history_button():
 def click_delete_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
         element = f"(//span[text()='Delete'])[{index}]"
-    elif vaccine.lower() == "flu":
+    elif vaccine.lower() == "flu" or vaccine.lower() == "flu (london)":
         element = f"(//span[text()='Delete'])[{index}]"
     elif vaccine.lower() == "respiratory syncytial virus (rsv)":
         element = f"(//span[text()='Delete'])[{index}]"
@@ -189,7 +189,7 @@ def click_delete_history_link(vaccine):
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
         element = f"(//span[text()='Edit'])[{index}]"
-    elif vaccine.lower() == "flu":
+    elif vaccine.lower() == "flu" or vaccine.lower() == "flu (london)":
         element = f"(//span[text()='Edit'])[{index}]"
     elif vaccine.lower() == "respiratory syncytial virus (rsv)":
         element = f"(//span[text()='Edit'])[{index}]"

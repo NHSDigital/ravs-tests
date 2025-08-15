@@ -32,6 +32,7 @@ from test_data.models.no_vaccination_reasons import assessment_vaccine_not_given
 from test_data.models.covid_eligibility_types import covid_eligibility_types
 from test_data.models.covid_new_eligibility_types import covid_new_eligibility_types
 from test_data.models.flu_eligibility_types import flu_eligibility_types
+from test_data.models.london_flu_eligibility_types import london_flu_eligibility_types
 from test_data.models.rsv_eligibility_types import rsv_eligibility_types
 from test_data.models.pertussis_eligibility_types import pertussis_eligibility_types
 from test_data.models.vaccine_type_dose_amounts import vaccine_type_dose_amounts
@@ -81,6 +82,8 @@ def get_eligibility_type(index, vaccine):
         return covid_eligibility_types[index]
     elif vaccine.lower() == "flu":
         return flu_eligibility_types[get_wrapped_index(index, len(flu_eligibility_types))]
+    elif vaccine.lower() == "flu (london)":
+        return london_flu_eligibility_types[get_wrapped_index(index, len(london_flu_eligibility_types))]
     elif "rsv" in vaccine.lower():
         return rsv_eligibility_types[get_wrapped_index(index, len(rsv_eligibility_types))]
     elif vaccine.lower() == "pertussis":
@@ -92,6 +95,8 @@ def get_new_eligibility_type(index, vaccine):
         return covid_new_eligibility_types[index]
     elif vaccine.lower() == "flu":
         return flu_eligibility_types[get_wrapped_index(index, len(flu_eligibility_types))]
+    elif vaccine.lower() == "flu (london)":
+        return london_flu_eligibility_types[get_wrapped_index(index, len(london_flu_eligibility_types))]
     elif "rsv" in vaccine.lower():
         return rsv_eligibility_types[get_wrapped_index(index, len(rsv_eligibility_types))]
     elif vaccine.lower() == "pertussis":
@@ -145,7 +150,7 @@ def get_vaccine_to_choose_from(index):
 def get_vaccination_type(index, vaccine):
     if vaccine.lower() == "covid-19":
         return covid_vaccine_types[get_wrapped_index(index, len(covid_vaccine_types))]
-    elif vaccine.lower() == "flu":
+    elif vaccine.lower() == "flu" or vaccine.lower() == "flu (london)":
         return flu_vaccine_types[get_wrapped_index(index, len(flu_vaccine_types))]
     elif vaccine.lower() == "respiratory syncytial virus (rsv)":
         return rsv_vaccine_types[get_wrapped_index(index, len(rsv_vaccine_types))]
@@ -163,6 +168,8 @@ def get_vaccination_location(index, vaccine):
     if vaccine.lower() == "pertussis":
         return None
     if vaccine.lower() == "mmr":
+        return None
+    if vaccine.lower() == "flu (london)":
         return None
     return vaccination_locations[get_wrapped_index(index, len(vaccination_locations))]
 
