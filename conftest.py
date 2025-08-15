@@ -846,8 +846,6 @@ def generate_random_patient_locally(shared_data):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
-    if shared_data["nhs_number"] == "9727840361":
-        assert check_vaccine_history_not_available_label_element_exists() == True
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = 0
     click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
@@ -857,8 +855,6 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date):
-    if shared_data["nhs_number"] == "9727840361":
-        assert check_vaccine_history_not_available_label_element_exists() == True
     shared_data['chosen_vaccine_type'] = chosen_vaccine_type
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = 0

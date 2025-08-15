@@ -6,6 +6,7 @@ from test_data.models.covid_vaccine_types import covid_vaccine_types
 from test_data.models.flu_vaccine_types import flu_vaccine_types
 from test_data.models.rsv_vaccine_types import rsv_vaccine_types
 from test_data.models.pertussis_vaccine_types import pertussis_vaccine_types
+from test_data.models.mmr_vaccine_types import mmr_vaccine_types
 from test_data.models.job_roles import job_roles
 from test_data.models.consent_decision import consent_decision
 from test_data.models.eligible_decision import eligible_decision
@@ -150,6 +151,8 @@ def get_vaccination_type(index, vaccine):
         return rsv_vaccine_types[get_wrapped_index(index, len(rsv_vaccine_types))]
     elif vaccine.lower() == "pertussis":
         return pertussis_vaccine_types[get_wrapped_index(index, len(pertussis_vaccine_types))]
+    elif vaccine.lower() == "mmr":
+        return mmr_vaccine_types[get_wrapped_index(index, len(mmr_vaccine_types))]
 
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
@@ -158,6 +161,8 @@ def get_vaccination_location(index, vaccine):
     if vaccine.lower() == "respiratory syncytial virus (rsv)":
         return None
     if vaccine.lower() == "pertussis":
+        return None
+    if vaccine.lower() == "mmr":
         return None
     return vaccination_locations[get_wrapped_index(index, len(vaccination_locations))]
 
