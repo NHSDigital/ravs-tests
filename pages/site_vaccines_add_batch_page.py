@@ -92,8 +92,15 @@ def click_add_batch_button():
     find_element_and_perform_action(first_add_batch_button, "click")
 
 def check_batch_already_exists_error_message_is_displayed():
-    time.sleep(3) # You might be tempted to remove this, but it's going to be very hard to get around it
-    return check_element_exists_immediate(ERROR_MESSAGE_BATCH_ALREADY_EXISTS)
+    # It is valid for the error message to display, or for the form to succeed.
+    # We need to handle both cases.
+    # Return true if the error message is displayed, false otherwise.
+    error_message_locator = get_element_by_type(*ERROR_MESSAGE_BATCH_ALREADY_EXISTS)
+    check_and_confirm_locator = get_element_by_type("role", "heading", "Check and confirm")
+    # Wait for either the error message or the confirmation page to appear before returning if the error message exists.
+    error_message_locator.or_(check_and_confirm_locator).wait_for(state="visible")
+
+    return error_message_locator.is_visible()
 
 def check_batch_already_exists_error_message_link_is_displayed():
     wait_for_element_to_appear(ERROR_MESSAGE_LINK_BATCH_ALREADY_EXISTS)
