@@ -38,48 +38,6 @@ fake = Faker('en_GB')
 
 SPINNER_ELEMENT = ("role", "status")
 
-def log_current_stack(exclude_current=True, max_depth=10):
-    """Log the current stack trace in foo()->bar()->baz() format"""
-    stack = inspect.stack()
-
-    # Skip this function if exclude_current is True
-    start_idx = 1 if exclude_current else 0
-
-    filtered_functions = []
-    for frame_info in stack[start_idx:start_idx + max_depth]:
-        # Filter out library code - adjust these conditions for your setup
-        filename = frame_info.filename
-
-        # Skip common library paths
-        if (filename.startswith('/usr/') or
-            filename.startswith('/opt/') or
-            'site-packages' in filename or
-            filename.startswith('<frozen')):
-            continue
-
-        # You can also filter by your project directory
-        # if '/path/to/your/project' not in filename:
-        #     continue
-
-        filtered_functions.append(frame_info.function)
-
-    # Reverse to show call order
-    filtered_functions.reverse()
-    stack_trace = "->".join(filtered_functions)
-    print(f"Stack trace: {stack_trace}")
-
-original_sleep = time.sleep
-sleep_total = 0
-sleep_totals = {}
-def custom_sleep(seconds):
-    global sleep_total
-    sleep_total += seconds
-    print(f"😴 Sleeping for {seconds} seconds. Total={sleep_total}")
-    log_current_stack(max_depth=5)
-    original_sleep(seconds)
-
-time.sleep = custom_sleep
-
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):
     return {
@@ -888,8 +846,6 @@ def generate_random_patient_locally(shared_data):
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_number, batch_expiry_date):
-    if shared_data["nhs_number"] == "9727840361":
-        assert check_vaccine_history_not_available_label_element_exists() == True
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = 0
     click_on_patient_search_result_and_click_choose_vaccine(shared_data['patient_name'], chosen_vaccine)
@@ -899,8 +855,6 @@ def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, batch_numb
 
 @when(parse("I click choose vaccine button and choose the {chosen_vaccine}, {chosen_vaccine_type}, {batch_number} with {batch_expiry_date} and click continue"))
 def step_choose_vaccine_and_vaccine_type(shared_data, chosen_vaccine, chosen_vaccine_type, batch_number, batch_expiry_date):
-    if shared_data["nhs_number"] == "9727840361":
-        assert check_vaccine_history_not_available_label_element_exists() == True
     shared_data['chosen_vaccine_type'] = chosen_vaccine_type
     attach_screenshot("checked_vaccine_history_not_available_label_element_exists")
     immunisation_history_records_count_before_vaccination = 0
@@ -1128,7 +1082,7 @@ def immunisation_history_should_be_updated(shared_data):
     assert int(immunisation_history_records_count_after_vaccination) >= int(shared_data["immunisation_history_records_count_before_vaccination"]) + 1
     click_delete_history_link(shared_data["chosen_vaccine"])
     attach_screenshot("click_delete_history_link")
-    click_delete_vaccination_button()
+    click_delete_vaccination_button(shared_data["patient_name"])
     attach_screenshot("click_delete_vaccination_button")
 
 @then("the immunisation history of the patient should be updated in the patient details page and not be deleted")
