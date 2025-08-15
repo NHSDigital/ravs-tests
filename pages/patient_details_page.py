@@ -181,10 +181,14 @@ def click_delete_history_button(vaccine, index):
     find_element_and_perform_action(element, "click")
 
 def click_delete_history_link(vaccine):
-    showAllElement = ()
-    element = (f"//h2[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
-    if check_element_exists(element):
-        find_element_and_perform_action(element, "click")
+    heading = get_element_by_type("role", "heading", f"{vaccine} vaccination history")
+    heading.wait_for(state="visible")
+    section = heading.locator("..")
+    show_all = section.get_by_role("button", name="Show all")
+    # If there is a show all button. Click it to ensure all records are visible
+    if show_all.is_visible():
+        show_all.click()
+    section.get_by_role("link", name="Delete").first.click()
 
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
