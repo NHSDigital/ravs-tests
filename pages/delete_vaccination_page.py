@@ -12,8 +12,9 @@ def ensure_delete_vaccination_button_exists():
         wait_for_element_to_appear(DELETE_VACCINATION_BUTTON)
 
 def click_delete_vaccination_button(patient_name):
-    # The delete button will fail if it is clicked before the pagfe is fully loaded.
+    # The delete button will fail if it is clicked before the page is fully loaded.
     # so we wait for the patient details to load before clicking the delete button.
+    wait_for_element_to_appear(("role", "heading", "Check and confirm"))
     wait_for_element_to_appear(("text", patient_name, None, { "nth": 0 }))
     find_element_and_perform_action(DELETE_VACCINATION_BUTTON, "click")
     wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
