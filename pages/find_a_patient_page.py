@@ -260,7 +260,7 @@ def check_patient_address_search_result_exists(address, wait):
     parts = address.rsplit(",", 1)
     address = parts[0].strip()
     postcode = parts[1].strip()
-    element = (f"//td[contains(text(), '{address}') and contains(., '{postcode}')]")
+    element = (f'//td[contains(text(), "{address}") and contains(., "{postcode}")]')
     return check_element_exists(element, wait)
 
 def get_patient_added_message(firstName):

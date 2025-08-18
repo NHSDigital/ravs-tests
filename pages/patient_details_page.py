@@ -81,8 +81,7 @@ def get_count_of_immunisation_history_records(chosen_vaccine):
         f"//h2[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{chosen_vaccine.lower()}')]/following-sibling::div/p[contains(text(), 'Displaying')]"
     )
 
-    wait_for_element_to_appear(element)
-    if check_element_exists(element, True):
+    if check_element_exists_immediate(element):
         display_text = find_element_and_perform_action(element, "get_text")
 
         match = re.search(r"Displaying\s1\sof\s(\d+)", display_text)
