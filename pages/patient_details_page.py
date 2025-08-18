@@ -60,10 +60,6 @@ def get_patient_phone_number_value_in_patient_details_screen():
 def get_patient_address_value_in_patient_details_screen():
     return find_element_and_perform_action(PATIENT_ADDRESS_ELEMENT, "get_text")
 
-def check_vaccine_history_not_available_label_element_exists():
-    wait_for_element_to_appear(CHOOSE_VACCINE_BUTTON)
-    return check_element_exists_immediate(VACCINATION_HISTORY_NOT_AVAILABLE)
-
 def check_covid_history_element_exists():
     return check_element_exists_immediate(COVID_HISTORY_ELEMENT)
 
@@ -172,7 +168,7 @@ def click_show_all_pertussis_history_button():
 def click_delete_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
         element = f"(//span[text()='Delete'])[{index}]"
-    elif vaccine.lower() == "flu":
+    elif vaccine.lower() == "flu" or vaccine.lower() == "flu (london)":
         element = f"(//span[text()='Delete'])[{index}]"
     elif vaccine.lower() == "respiratory syncytial virus (rsv)":
         element = f"(//span[text()='Delete'])[{index}]"
@@ -181,15 +177,19 @@ def click_delete_history_button(vaccine, index):
     find_element_and_perform_action(element, "click")
 
 def click_delete_history_link(vaccine):
-    showAllElement = ()
-    element = (f"//h2[contains(text(), '{vaccine}')]/following-sibling::div//a/span[text()='Delete']")
-    if check_element_exists(element):
-        find_element_and_perform_action(element, "click")
+    heading = get_element_by_type("role", "heading", f"{vaccine} vaccination history")
+    heading.wait_for(state="visible")
+    section = heading.locator("..")
+    show_all = section.get_by_role("button", name="Show all")
+    # If there is a show all button. Click it to ensure all records are visible
+    if show_all.is_visible():
+        show_all.click()
+    section.get_by_role("link", name="Delete").first.click()
 
 def click_edit_history_button(vaccine, index):
     if vaccine.lower() == "covid-19":
         element = f"(//span[text()='Edit'])[{index}]"
-    elif vaccine.lower() == "flu":
+    elif vaccine.lower() == "flu" or vaccine.lower() == "flu (london)":
         element = f"(//span[text()='Edit'])[{index}]"
     elif vaccine.lower() == "respiratory syncytial virus (rsv)":
         element = f"(//span[text()='Edit'])[{index}]"

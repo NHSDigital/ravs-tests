@@ -35,4 +35,6 @@ vaccine_type_dose_amounts = {
     "Influvac (TIVe)": 0.5,
     "Supemtek (TIVr)": 0.5,
     "Vaxigrip (TIVe)": 0.5,
+    "MMRvaxpro": 0.5,
+    "Priorix": 0.5,
 }
