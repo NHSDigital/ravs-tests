@@ -109,12 +109,12 @@ def I_should_be_directed_to_patient_history_screen(shared_data, name, nhs_number
     attach_screenshot(f"patient_{name}_details_exist")
     assert get_patient_name_value_in_patient_details_screen().lower() == name.lower()
     shared_data["patient_name"] = name
-    if "nhs_number" == "9449304033":
-        nhs_number = "9734250221"
-        shared_data["patient_nhs_number"] = "9734250221"
-    elif nhs_number == "9467361590":
-        nhs_number = "3508118053"
-        shared_data["patient_nhs_number"] = "3508118053"
+    if "nhs_number" == "9430026054":
+        nhs_number = "9430026046"
+        shared_data["patient_nhs_number"] = "9430026046"
+    elif nhs_number == "9430023373":
+        nhs_number = "9430023365"
+        shared_data["patient_nhs_number"] = "9430023365"
     assert get_patient_nhs_number_value_in_patient_details_screen() == format_nhs_number(nhs_number)
     assert get_patient_date_of_birth_value_in_patient_details_screen() == date_format_with_age_for_streamlining(date_of_birth)
     if address != "None":

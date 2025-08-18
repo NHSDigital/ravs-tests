@@ -48,19 +48,19 @@ Feature: Find a patient
     Then I should be directed to the patient's information page and show <name>, <nhsNumber>, <dateofbirth> and <address> details
 
     Examples:
-      | nhsNumber  | name          | dateofbirth | address                                                    | care_model         | user_role          | site                         |
-      | 9693632109 | Bill GARTON   | 23/6/1946   | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW | Trust site         | lead administrator | Weaverham Surgery            |
-      | 9732743476 | Mike HEESOM   | 24/10/1992  | 2 CHAPEL YARD, BRIGG, S HUMBERSIDE, DN20 8JY               | Community pharmacy | administrator      | Aspire Pharmacy              |
-      | 9650594000 | Archie STRAIN | 30/7/2014   | 1 CONINGSBY DRIVE, GRIMSBY, S HUMBERSIDE, DN34 5HQ         | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon) |
-  # | 9732596996 | Lisa WORTHY      |   30/6/2024 |  10 NORTON PARK VIEW, SHEFFIELD, S8 8GS                       | Trust site         | lead administrator |Weaverham Surgery             |
+      | nhsNumber  | name          | dateofbirth | address                                      | care_model         | user_role          | site                         |
+      | 5997998967 | JACKIE WALKER | 6/12/1953   | 9 Islington High Street Verwood, PA, NN6 6NZ | Trust site         | lead administrator | Weaverham Surgery            |
+      | 5998005341 | ELVIN MANSELL | 6/12/1953   | Ilfracombe 7 Goodge Street Mo, MO, YO26 5JZ  | Community pharmacy | administrator      | Aspire Pharmacy              |
+      | 5998019903 | OAKLEY UDDIN  | 2/6/1953    | 31 Earl'S Court Road Hatfield, MD, YO22 4EG  | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon) |
+  # | 5990365624 | DALLAS KING      |   30/6/2024 |  10 NORTON PARK VIEW, SHEFFIELD, S8 8GS                       | Trust site         | lead administrator |Weaverham Surgery             |
   # | 9449306621 | Not found        |    20110509 |  KT21 1LJ                                                     | Community pharmacy | administrator      |Aspire Pharmacy               |
   # | 9449306605 | Srinivasarao Patel |  03/03/2020 |  4 Calicut Lane2, Line 2, Line 3, SLOUGH, Berkshire, KT21 1EJ | Branch surgery   | recorder           |
   # | 9449306494 | Reynolds Ryan    |   27/3/2001 |  Jamie Street, Jaketown, KDDTG5, SW16 6JR                     | Trust site         | lead administrator |Weaverham Surgery             |
-  # | 9469997956 | SOLOMON DAZLEY   |    20160130 |  10 BROOK STREET, LANCASTER, LA1 1SL                          | Community pharmacy | administrator      |Aspire Pharmacy               |
+  # | 5990378017 | WHITNEY CLARKE   |    20160130 |  10 BROOK STREET, LANCASTER, LA1 1SL                          | Community pharmacy | administrator      |Aspire Pharmacy               |
   # | 9469998626 | JONNY CONOPO     |    20150305 |  1 DAISY BANK, LANCASTER, LA1 3JW                             | Branch surgery     | recorder           |
-  # | 9470004272 | JOJO LANE        |    20150706 |  10 RAKESMOOR LANE, BARROW-IN-FURNESS, LA14 4LG               | Trust site         | lead administrator |Weaverham Surgery             |
-  # | 9470006143 | TABBY FERN       |    20150222 |  CLEAR BECK HOUSE, TATHAM, LANCASTER, LA2 8PJ                 | Community pharmacy | administrator      |Aspire Pharmacy               |
-  # | 9470006739 | JANNETTE ARD     |    20151209 |  1 ST. MARTINS COURT, CONISTON, CUMBRIA, LA21 8HZ             | Branch surgery     | recorder           |
+  # | 5990376766 | KAYABI KERRABI        |    20150706 |  01, Moore, Bishop, Essex, N8 7RE               | Trust site         | lead administrator |Weaverham Surgery             |
+  # | 5990365004 | ALANA MRAZ       |    20150222 |  CAMPUS CITY NEW CAMPUS 41 BERKELEY ROAD, WESTBURY PARK, Manchester, M16 0RA                 | Community pharmacy | administrator      |Aspire Pharmacy               |
+  # | 5990366043 | AINSLEY INGHAM     |    20151209 |  CAMPUS CITY NEW CAMPUS 41 BERKELEY ROAD, WESTBURY PARK, Manchester, M16 0RA             | Branch surgery     | recorder           |
   # | 9470011902 | KATEE TUZZIO     |    20150527 |  BRIDGE END HOUSE, PARK ROAD, MILNTHORPE, CUMBRIA, LA7 7AN    | Trust site         | lead administrator |Weaverham Surgery             |
   # | 9470032640 | SYBIL PELLING    |    20151217 |  50 ST. GEORGES QUAY, LANCASTER, LA1 1SA                      | Community pharmacy | administrator      |Aspire Pharmacy               |
 
@@ -103,7 +103,7 @@ Feature: Find a patient
 
   #   Examples:
   #     | nhsNumber  | name      | dateofbirth | address                                                    |
-  #     | 9693632109 | Bill GARTON |   23/6/1946 | 1 MOUNT AVENUE, BARTON-UPON-HUMBER, S HUMBERSIDE, DN18 5DW |
+  #     | 5997998967 | JACKIE WALKER |   6/12/1953 | 9 Islington High Street Verwood, PA, NN6 6NZ |
 
   @findpatient
   Scenario Outline: Demographics: Existing patients can be found using their mandatory demographic details
@@ -147,13 +147,13 @@ Feature: Find a patient
 
     Examples:
       | scenario    | nhsNumber  | care_model         | user_role          | firstName | lastName | dob        | postcode | gender | site                         |
-      | first name  | 9693632109 | Trust site         | lead administrator | Bob       | Garton   | 23/6/1946  | DN18 5DW | Male   | Weaverham Surgery            |
-      | last name   | 9693632109 | Community pharmacy | administrator      | Bill      | Gartoni  | 23/6/1946  | DN18 5DW | Male   | Aspire Pharmacy              |
-      | dob - day   | 9693632109 | Branch surgery     | recorder           | Bill      | Garton   | 3/6/1946   | DN18 5DW | Male   | Aire Valley Surgery (Rawdon) |
-      | dob - month | 9693632109 | Branch surgery     | recorder           | Bill      | Garton   | 23/12/1946 | DN18 5DW | Male   | Aire Valley Surgery (Rawdon) |
-      | dob - year  | 9693632109 | Branch surgery     | recorder           | Bill      | Garton   | 23/6/1991  | DN18 5DW | Male   | Aire Valley Surgery (Rawdon) |
-      | postcode    | 9693632109 | Branch surgery     | recorder           | Bill      | Garton   | 23/6/1946  | M6 3AA   | Male   | Aire Valley Surgery (Rawdon) |
-      | gender      | 9693632109 | Trust site         | administrator      | Bill      | Garton   | 23/6/1946  | DN18 5DW | Female | Weaverham Surgery            |
+      | first name  | 5997998967 | Trust site         | lead administrator | Bob       | Garton   | 23/6/1946  | DN18 5DW | Male   | Weaverham Surgery            |
+      | last name   | 5997998967 | Community pharmacy | administrator      | Bill      | Gartoni  | 23/6/1946  | DN18 5DW | Male   | Aspire Pharmacy              |
+      | dob - day   | 5997998967 | Branch surgery     | recorder           | Bill      | Garton   | 3/6/1946   | DN18 5DW | Male   | Aire Valley Surgery (Rawdon) |
+      | dob - month | 5997998967 | Branch surgery     | recorder           | Bill      | Garton   | 23/12/1946 | DN18 5DW | Male   | Aire Valley Surgery (Rawdon) |
+      | dob - year  | 5997998967 | Branch surgery     | recorder           | Bill      | Garton   | 23/6/1991  | DN18 5DW | Male   | Aire Valley Surgery (Rawdon) |
+      | postcode    | 5997998967 | Branch surgery     | recorder           | Bill      | Garton   | 23/6/1946  | M6 3AA   | Male   | Aire Valley Surgery (Rawdon) |
+      | gender      | 5997998967 | Trust site         | administrator      | Bill      | Garton   | 23/6/1946  | DN18 5DW | Female | Weaverham Surgery            |
 
 
   @findpatient
@@ -260,5 +260,5 @@ Feature: Find a patient
     Examples:
       | nhsNumber  | name                               | dateofbirth | address | care_model         | user_role          | site                         |
       | 9450127077 | LUDMILLA MCKSN-PDS-ALPHA-SENSITIVE | 2/5/1974    |         | Trust site         | lead administrator | Weaverham Surgery            |
-      | 9733907723 | Sandra Ryan                        | 7/4/1994    |         | Community pharmacy | administrator      | Aspire Pharmacy              |
-      | 9733907723 | Sandra Ryan                        | 7/4/1994    |         | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon) |
+      | 5558785314 | ANDRE SANTOS                       | 1/1/1991    |         | Community pharmacy | administrator      | Aspire Pharmacy              |
+      | 5558785314 | ANDRE SANTOS                       | 1/1/1991    |         | Branch surgery     | recorder           | Aire Valley Surgery (Rawdon) |

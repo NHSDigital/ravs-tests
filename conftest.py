@@ -988,10 +988,10 @@ def step_see_patient_details_on_check_and_confirm_screen(shared_data, name, dob,
     if shared_data["vaccinated_decision"].lower() == "Yes".lower() and shared_data["consent_decision"].lower() == "Yes".lower() and shared_data["eligibility_assessment_outcome"].lower() == "Give vaccine".lower():
         attach_screenshot("check_and_confirm_screen_before_assertion")
         if get_patient_name_value_in_check_and_confirm_screen() is not None:
-            if shared_data["nhs_number"] == "9449304033":
-                shared_data["nhs_number"] = "9734250221"
-            elif shared_data["nhs_number"] == "9467361590":
-                shared_data["nhs_number"] = "3508118053"
+            if shared_data["nhs_number"] == "9430026054":
+                shared_data["nhs_number"] = "9430026046"
+            elif shared_data["nhs_number"] == "9430023373":
+                shared_data["nhs_number"] = "9430023365"
         if "persist_tests" not in shared_data:
             assert get_patient_nhs_number_value_in_check_and_confirm_screen() == format_nhs_number(shared_data["nhs_number"])
         assert get_patient_name_value_in_check_and_confirm_screen().lower() == shared_data["patient_name"].lower()
@@ -1225,11 +1225,11 @@ def step_warning_messages_should_be_displayed(expected_warning_count, shared_dat
         comirnaty_10_omicron_jn1_above_5_to_11 = get_vaccination_type(2, vaccine_name)
         comirnaty_3_omicron_jn1_above_6months_to_4 = get_vaccination_type(3, vaccine_name)
         vaccine_types = [
-        (comirnaty_30_jn1_age_above_12, ["9732091169", "9693865480", "9474335761", "9474335761"]),
-        # (comirnaty_30_omicron_xbb_age_above_12, ["9732091169", "9693865480", "9474335761"]),
-        (comirnaty_10_omicron_jn1_above_5_to_11, ["9693865480", "9732091169", "9450153485", "9470472918", "9473673388"]),
-        (comirnaty_3_omicron_jn1_above_6months_to_4, ["9450153485", "9474335761", "9470472918", "9473673388"]),
-        (spikevax_jn1_age_above_18, ["9732091169", "9693865480", "9474335761", "9450153485", "9470472918"]),
+        (comirnaty_30_jn1_age_above_12, ["9693297318", "9693297911", "5990002130", "5990002130"]),
+        # (comirnaty_30_omicron_xbb_age_above_12, ["9693297318", "9693297911", "5990002130"]),
+        (comirnaty_10_omicron_jn1_above_5_to_11, ["9693297911", "9693297318", "5558557400", "5558569409", "5990393709"]),
+        (comirnaty_3_omicron_jn1_above_6months_to_4, ["5558557400", "5990002130", "5558569409", "5990393709"]),
+        (spikevax_jn1_age_above_18, ["9693297318", "9693297911", "5990002130", "5558557400", "5558569409"]),
     ]
 
     for index, (vaccine, warning_nhs_numbers) in enumerate(vaccine_types):
