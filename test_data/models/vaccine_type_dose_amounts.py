@@ -37,4 +37,5 @@ vaccine_type_dose_amounts = {
     "Vaxigrip (TIVe)": 0.5,
     "MMRvaxpro": 0.5,
     "Priorix": 0.5,
+    "Pneumovax": 0.5,
 }

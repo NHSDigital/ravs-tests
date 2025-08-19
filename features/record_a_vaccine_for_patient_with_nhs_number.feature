@@ -39,7 +39,7 @@ Feature: Record vaccine
       | 3     | 9450134391 | Watling Street Surgery  | Vaccination Centre                    | yes         | today-3     | yes     | yes         | today            | MARIAN PIESSE  | 17/7/1994  | 2 BIRCH STREET, LYTHAM ST. ANNES, LANCS, FY8 5DT                     | Flu (London)   | AUTOMATION-QI   | 19/10/2026        |
       | 4     | 9450140960 | Spire Cheshire Hospital | Hospital hub for staff and patients   | yes         | today-1     | yes     | yes         | today            | DEANA GAMBLES  | 5/9/1993   | 10 GRASMERE ROAD, LYTHAM ST. ANNES, LANCS, FY8 2HZ                   | Flu (London)   | AUTOMATION-SJ1  | 19/10/2026        |
       | 5     | 9450141444 | Weaverham Surgery       | Care home                             | yes         | today-4     | yes     | yes         | today-2          | BRANDIE DYBLE  | 25/8/1992  | 49 BLACKPOOL ROAD NORTH, LYTHAM ST. ANNES, LANCS, FY8 3DF            | Flu (London)   | AUTOMATION-QI   | 19/10/2026        |
-
+      | 0     | 9474376638 | Watling Street Surgery  | Care home                             | yes         | today-32    | yes     | yes         | today-30         | PHYLLIDA ZYLKO | 6/2/1968   | BELL FARM BUNGALOW, CATON GREEN, BROOKHOUSE, LANCASTER, LA2 9JG      | Pneumococcal   | AUTOMATION-QIHD | 19/10/2026        |
   ### This test is no longer needed because of the changes being made to vaccine and batch management ###
   # @recordvaccine
   # Scenario Outline: Record a vaccine with nhs number and auto-select batch number as only one vaccine product

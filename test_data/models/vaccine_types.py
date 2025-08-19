@@ -4,4 +4,5 @@ vaccine_types = [
     "Pertussis",
     "Respiratory syncytial virus (RSV)",
     "MMR",
+    "Pneumococcal",
 ]

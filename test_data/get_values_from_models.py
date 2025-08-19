@@ -7,6 +7,7 @@ from test_data.models.flu_vaccine_types import flu_vaccine_types
 from test_data.models.rsv_vaccine_types import rsv_vaccine_types
 from test_data.models.pertussis_vaccine_types import pertussis_vaccine_types
 from test_data.models.mmr_vaccine_types import mmr_vaccine_types
+from test_data.models.pneumococcal_vaccine_types import pneumococcal_vaccine_types
 from test_data.models.job_roles import job_roles
 from test_data.models.consent_decision import consent_decision
 from test_data.models.eligible_decision import eligible_decision
@@ -33,6 +34,7 @@ from test_data.models.covid_eligibility_types import covid_eligibility_types
 from test_data.models.covid_new_eligibility_types import covid_new_eligibility_types
 from test_data.models.flu_eligibility_types import flu_eligibility_types
 from test_data.models.london_flu_eligibility_types import london_flu_eligibility_types
+from test_data.models.pneumococcal_eligibility_types import pneumococcal_eligibility_types
 from test_data.models.rsv_eligibility_types import rsv_eligibility_types
 from test_data.models.pertussis_eligibility_types import pertussis_eligibility_types
 from test_data.models.vaccine_type_dose_amounts import vaccine_type_dose_amounts
@@ -88,6 +90,8 @@ def get_eligibility_type(index, vaccine):
         return rsv_eligibility_types[get_wrapped_index(index, len(rsv_eligibility_types))]
     elif vaccine.lower() == "pertussis":
         return pertussis_eligibility_types[get_wrapped_index(index, len(pertussis_eligibility_types))]
+    elif vaccine.lower() == "pneumococcal":
+        return pneumococcal_eligibility_types[get_wrapped_index(index, len(pneumococcal_eligibility_types))]
 
 def get_new_eligibility_type(index, vaccine):
     if vaccine.lower() == "covid-19":
@@ -101,6 +105,8 @@ def get_new_eligibility_type(index, vaccine):
         return rsv_eligibility_types[get_wrapped_index(index, len(rsv_eligibility_types))]
     elif vaccine.lower() == "pertussis":
         return pertussis_eligibility_types[get_wrapped_index(index, len(pertussis_eligibility_types))]
+    elif vaccine.lower() == "pneumococcal":
+        return pneumococcal_eligibility_types[get_wrapped_index(index, len(pneumococcal_eligibility_types))]
 
 def get_assessing_clinician(index):
     return assessing_clinicians[get_wrapped_index(index, len(assessing_clinicians))]
@@ -158,6 +164,8 @@ def get_vaccination_type(index, vaccine):
         return pertussis_vaccine_types[get_wrapped_index(index, len(pertussis_vaccine_types))]
     elif vaccine.lower() == "mmr":
         return mmr_vaccine_types[get_wrapped_index(index, len(mmr_vaccine_types))]
+    elif vaccine.lower() == "pneumococcal":
+        return pneumococcal_vaccine_types[get_wrapped_index(index, len(pneumococcal_vaccine_types))]
 
 def get_vaccination_site(index):
     return vaccination_sites[get_wrapped_index(index, len(vaccination_sites))]
@@ -170,6 +178,8 @@ def get_vaccination_location(index, vaccine):
     if vaccine.lower() == "mmr":
         return None
     if vaccine.lower() == "flu (london)":
+        return None
+    if vaccine.lower() == "pneumococcal":
         return None
     return vaccination_locations[get_wrapped_index(index, len(vaccination_locations))]
 
